@@ -6,6 +6,7 @@ include("./ical_parser.php");
 $starttime = "0700";
 $weekstart = 1;
 $gridLength = 30;
+$today_today = date ("Ymd");
 
 if ($getdate == (date("Ymd"))) {
 	$display_date = strftime ($dateFormat_day);
@@ -40,7 +41,7 @@ if ($getdate == (date("Ymd"))) {
 
 <table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
-		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
+		<td align="left" width="5%"><?php echo "<a class=\"psf\" href=\"day.php?getdate=$today_today\">Today</a>"; ?></td>
 		<td align="center" width="90%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
@@ -158,15 +159,17 @@ if ($getdate == (date("Ymd"))) {
 											switch ($event_length[$i]["state"]) {
 												case "begin":
 													$event_length[$i]["state"] = "started";
-													$event_text = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"];
-													$event_text2 = addslashes($master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"]);
-													$event_text2 = str_replace("\"", "&quot;", $event_text2);
-													$event_start = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
-													$event_end = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
-													$event_start = strtotime ("$event_start");
-													$event_start = date ($timeFormat, $event_start);
-													$event_end = strtotime ("$event_end");
-													$event_end = date ($timeFormat, $event_end);
+													$event_text 	= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"];
+													$event_text2 	= addslashes($master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"]);
+													$event_text2 	= str_replace("\"", "&quot;", $event_text2);
+													$event_start 	= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
+													$event_end		= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
+													$description 	= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["description"];
+													$description 	= str_replace("\"", "&quot;", $description);
+													$event_start 	= strtotime ("$event_start");
+													$event_start 	= date ($timeFormat, $event_start);
+													$event_end 		= strtotime ("$event_end");
+													$event_end 		= date ($timeFormat, $event_end);
 													echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg\">\n";
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
 													echo "<tr>\n";
@@ -176,7 +179,7 @@ if ($getdate == (date("Ymd"))) {
 													echo "<td>\n";
 													echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 													echo "<tr>\n";
-													echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
+													echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
 													echo "</tr>\n";
 													echo "</table>\n";
 													echo "</td>\n";           

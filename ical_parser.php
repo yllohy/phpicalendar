@@ -60,7 +60,7 @@ foreach($contents as $line) {
 		// Clean out \n's and other slashes
 		$summary = str_replace("\\n", "<br>", $summary);
 		$summary = stripslashes($summary);
-		
+		$description = str_replace("\\n", "<br>", $description);
 		
 		//echo "<b>Start</b> $start_time <b>End</B> $end_time <b>Summary</b> $summary<br>\n";
 		if ($start_time != "") {
@@ -91,7 +91,7 @@ foreach($contents as $line) {
 				$start_date = date("Ymd", $start);
 //				$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
 // drei 20020921: changed array for allday event
-				$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary");
+				$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
 				$start = ($start + (24*3600));
 			} while ($start != $end);
 		}
@@ -207,7 +207,7 @@ foreach($contents as $line) {
 								$end = $end_of_vevent;
 								do {
 									$start_date = date("Ymd", $start);
-									$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary");
+									$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
 									$start = ($start + (24*3600));
 								} while ($start < $end);
 								$start_of_vevent = DateAdd ($interval,  $number, $start_of_vevent);
@@ -277,7 +277,7 @@ foreach($contents as $line) {
 // check for overlapping events
 												$nbrOfOverlaps = checkOverlap();
 // writes to $master array here
-												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps);
+												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
 											}
 										}
 									} else {
@@ -301,7 +301,7 @@ foreach($contents as $line) {
 // check for overlapping events
 											$nbrOfOverlaps = checkOverlap();
 // writes to $master array here
-											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps);
+											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
 										}
 									} else {
 										$interval = 1;
@@ -326,7 +326,7 @@ foreach($contents as $line) {
 		$nbrOfOverlaps = checkOverlap();
 
 // writes to $master array here
-		$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps);
+		$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
 	}
 		
 
@@ -378,6 +378,9 @@ foreach($contents as $line) {
 			
 		} elseif (strstr($field, "SUMMARY")) {
 			$summary = $data;
+			
+		} elseif (strstr($field, "DESCRIPTION")) {
+			$description = $data;	
 		
 		} elseif (strstr($field, "X-WR-CALNAME")) {
 			$calendar_name = $data;

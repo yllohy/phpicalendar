@@ -33,6 +33,7 @@ $this_months_lang	= "Denne M&aring;nedens Hendelser";
 $date_lang			= "Dato";
 $summary_lang		= "Sammendrag";
 $all_day_lang		= "All day event";
+$notes_lang			= "Notes";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
 setlocale (LC_TIME, 'no_NO');

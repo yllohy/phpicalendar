@@ -34,6 +34,7 @@ $this_months_lang	= "今月の予定";
 $date_lang		= "月日";
 $summary_lang		= "話題";
 $all_day_lang		= "終日イベント";
+$notes_lang			= "Notes";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
 setlocale (LC_TIME, 'ja_JP.SJIS');

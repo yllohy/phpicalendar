@@ -33,6 +33,7 @@ $this_months_lang	= "&Eacute;v&eacute;nements de ce mois";
 $date_lang			= "Date";
 $summary_lang		= "R&eacute;sum&eacute;";
 $all_day_lang		= "All day event";
+$notes_lang			= "Notes";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/fr/function.setlocale.php
 setlocale (LC_TIME,"fr_FR");

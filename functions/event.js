@@ -1,14 +1,15 @@
 <script language="JavaScript">
 <!--
-	function openEventInfo(event, calendarname, start, end)
+	function openEventInfo(event, calendarname, start, end, description)
 	{	
 		var windowW = 450;
-		var windowH = 175;
+		var windowH = 275;
 	
 		var url = "event.php?event="+escape(event)+
 			"&calendar_name="+escape(calendarname)+
 			"&start="+escape(start)+
-			"&end="+escape(end);
+			"&end="+escape(end)+
+			"&description="+escape(description);
 				
 		options = "scrollbars=no"+",width="+windowW+",height="+windowH;
 	

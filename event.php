@@ -2,6 +2,9 @@
 
 include "init.inc.php"; 
 $event = stripslashes($event);
+$event = str_replace("\\", "", $event);
+$description = stripslashes($description);
+$description = str_replace("\\", "", $description);
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -22,16 +25,31 @@ $event = stripslashes($event);
      <td nowrap width="7" height="18"></td>
      <td align="left" valign="top" height="18" class="V12"><?php echo "$event"; ?></td>
     </tr>
+    
+<?php if ($start) { ?> 
     <tr height="18">
      <td align="right" valign="top" width="80" class="V12">&nbsp;<b><?php echo "$event_start_lang"; ?>:</b></td>
      <td width="7" height="18"></td>
      <td align="left" valign="top" height="18" class="V12"><?php echo "$start"; ?></td>
     </tr>
+<?php } ?>    
+    
+<?php if ($end) { ?> 
     <tr height="18">
      <td align="right" valign="top" width="80" class="V12">&nbsp;<b><?php echo "$event_end_lang"; ?>:</b></td>
      <td width="7" height="18"></td>
      <td align="left" valign="top" height="18" class="V12"><?php echo "$end"; ?></td>
     </tr>
+<?php } ?>
+
+<?php if ($description) { ?>    
+    <tr height="18">
+     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><?php echo "$notes_lang"; ?>:</b></td>
+     <td width="7" height="18"></td>
+     <td align="left" valign="top" height="18" class="V12"><?php echo "$description"; ?></td>
+    </tr>
+<?php } ?>
+
    </table>
    </td>
 	</tr>

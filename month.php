@@ -18,6 +18,7 @@
 	$display_month = strftime ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_sunday = sundayOfWeek($this_year, $this_month, "1");
+	$today_today = date ("Ymd");
 
 
 ?>
@@ -34,7 +35,7 @@
 <center>
 <table width="740" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
-		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
+		<td align="left" width="5%"><?php echo "<a class=\"psf\" href=\"day.php?getdate=$today_today\">Today</a>"; ?></td>
 		<td align="center" width="90%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
@@ -127,14 +128,14 @@
 														$event_text = $val["event_text"];
 														$event_text = strip_tags($event_text, '<b><i><u>');
 														if ($event_text != "") {	
-															$event_text2 = addslashes($val["event_text"]);
-															$event_text2 = str_replace("\"", "&quot;", $event_text2);
-															$event_start = $val["event_start"];
-															$event_end = $val["event_end"];
-															$event_start = strtotime ("$event_start");
-															$event_end = strtotime ("$event_end");
-															$event_end = date ($timeFormat, $event_end);
-															$event_start = date ($timeFormat, $event_start);
+															$event_text2 	= addslashes($val["event_text"]);
+															$event_text2 	= str_replace("\"", "&quot;", $event_text2);
+															$description 	= addslashes($val["description"]);
+															$description 	= str_replace("\"", "&quot;", $description);
+															$event_start 	= $val["event_start"];
+															$event_end 		= $val["event_end"];
+															$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+															$event_end 		= date ($timeFormat, strtotime ("$event_end"));
 															if (strlen($event_text) > 12) {
 																$event_text = substr("$event_text", 0, 10);
 																$event_text = $event_text . "...";
@@ -145,9 +146,9 @@
 															echo "<tr>\n";
 															echo "<td>\n";
 															if (!$event_start = $val["event_start"]) {
-																echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a></center>\n";
+																echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center>\n";
 															} else {	
-																echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+																echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 															}
 															echo "</td>\n";
 															echo "</tr>\n";
@@ -263,15 +264,15 @@
 												// Pull out each time
 												foreach ($new_val as $new_key2 => $new_val2) {
 												if ($new_val2["event_text"]) {	
-													$event_text = $new_val2["event_text"];
-													$event_text2 = addslashes($new_val2["event_text"]);
-													$event_text2 = str_replace("\"", "&quot;", $event_text2);
-													$event_start = $new_val2["event_start"];
-													$event_end = $new_val2["event_end"];
-													$event_start = strtotime ("$event_start");
-													$event_end = strtotime ("$event_end");
-													$event_end = date ($timeFormat, $event_end);
-													$event_start = date ($timeFormat, $event_start);
+													$event_text 	= $new_val2["event_text"];
+													$event_text2 	= addslashes($new_val2["event_text"]);
+													$event_text2 	= str_replace("\"", "&quot;", $event_text2);
+													$description 	= addslashes($new_val2["description"]);
+													$description 	= str_replace("\"", "&quot;", $description);
+													$event_start 	= $new_val2["event_start"];
+													$event_end 		= $new_val2["event_end"];
+													$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+													$event_end 		= date ($timeFormat, strtotime ("$event_end"));
 													$event_text = str_replace ("<br>", "", $event_text);
 													if (strlen($event_text) > 70) {
 														$event_text = substr("$event_text", 0, 65);
@@ -285,9 +286,9 @@
 													echo "</td>\n";
 													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
 													if (!$new_val2["event_start"]) {
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">($all_day_lang)</font>\n";
+														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\">$event_text</font></a> <font class=\"V9\">($all_day_lang)</font>\n";
 													} else {	
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
+														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
 													}
 													echo "</td>\n";
 													echo "</tr>\n";

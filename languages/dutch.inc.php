@@ -33,6 +33,7 @@ $this_months_lang	= "Activiteiten Deze Maand";
 $date_lang			= "Datum";
 $summary_lang		= "Overzicht";
 $all_day_lang		= "All day event";
+$notes_lang			= "Notes";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
 setlocale (LC_TIME, 'nl_BE');
