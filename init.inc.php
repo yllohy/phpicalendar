@@ -29,6 +29,9 @@ switch ($language) {
 	case "Italian":
 		include("./languages/italian.inc.php");
 		break;
+	case "Japanese":
+		include("./languages/japanese.inc.php");
+		break;
 	default:
 		include("./languages/english.inc.php");
 }
