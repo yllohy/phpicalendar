@@ -55,10 +55,12 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 	else if (isset($HTTP_POST_VARS['password']))	$password = $HTTP_POST_VARS['password'];
 
 	// Grab the action (login or logout).
-	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
+	if (isset($HTTP_GET_VARS['action']))			$action = $HTTP_GET_VARS['action'];
+	else if (isset($HTTP_POST_VARS['action']))		$action = $HTTP_POST_VARS['action'];
+	else											$action = '';
 
 	// Check to make sure the username and password is valid.
-	if (!key_exists("$username:$password", $locked_map)) {
+	if ($action == 'login' && !key_exists("$username:$password", $locked_map)) {
 		// Don't login, instead logout.
 		$action = 'logout';
 
