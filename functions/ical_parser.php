@@ -472,12 +472,14 @@ if ($parse_file) {
 		// Begin VTODO Support
 		} elseif ($line == 'END:VTODO') {
 			if ((!$vtodo_priority) && ($status == 'COMPLETED')) {
-				$vtodo_priority = 11;
+				$vtodo_status = 11;
 			} elseif (!$vtodo_priority) { 
-				$vtodo_priority = 10;
+				$vtodo_status = 10;
+			} else {
+				$vtodo_status = $vtodo_priority;
 			}
 			if (!$due_date) $due_date = date("Ymd", strtotime("+1 year", strtotime("$start_date")));
-			$master_array['-2']["$vtodo_priority"]["$uid"] = array ('start_date' => $start_date, 'start_time' => $start_time, 'vtodo_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories);
+			$master_array['-2']["$vtodo_status"]["$uid"] = array ('start_date' => $start_date, 'start_time' => $start_time, 'vtodo_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories);
 			unset ($due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary);
 			$vtodo_set = FALSE;
 		} elseif ($line == 'BEGIN:VTODO') {
