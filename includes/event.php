@@ -32,7 +32,7 @@ if ($start == '' && $end == '' && (isset($start) && isset($end))) {
 }
 
 if ($description) $description = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$description);
-if ($organizer) {
+if (is_array($organizer)) {
 	$i=0;
 	$display .= $organizer_lang . ' - ';
 	foreach ($organizer as $val) {	
@@ -41,7 +41,7 @@ if ($organizer) {
 	}
 	$organizer = substr($organizers,0,-2);
 }
-if ($attendee) {
+if (is_array($attendee)) {
 	$i=0;
 	$display .= $attendee_lang . ' - ';
 	foreach ($attendee as $val) {	

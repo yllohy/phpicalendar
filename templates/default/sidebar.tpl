@@ -15,11 +15,11 @@
 	</tr>
 	<!-- switch invalid_login off -->
 	<tr>
-		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-top: 5px;">Username:</div></td>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-top: 5px;">{L_USERNAME}:</div></td>
 		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-top: 5px;"><input type="text" name="username" size="10" /></div></td>
 	</tr>
 	<tr>
-		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">Password:</div></td>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">{L_PASSWORD}:</div></td>
 		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;"><input type="password" name="password" size="10" /></div></td>
 	</tr>
 </table>

@@ -785,7 +785,7 @@ class Page {
 			}
 		} while ($whole_month == TRUE);
 		
-		$return = preg_replace('!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is', $weekday_loop, $template_p);
+		$return = str_replace('<!-- loop weekday on -->'.$match1[1].'<!-- loop weekday off -->', $weekday_loop, $template_p);
 		$return = preg_replace('!<\!-- loop monthweeks on -->(.*)<\!-- loop monthweeks off -->!is', $middle, $return);
 		$return = str_replace('{MONTH_TITLE}', $month_title, $return);
 		$return = str_replace('{CAL}', $cal, $return);
@@ -909,16 +909,11 @@ class Page {
 			}
 		}
 		
-		// Replace any languages
-		foreach ($lang as $tag => $data) {
-			$this->page = str_replace('{' . strtoupper($tag) . '}', $data, $this->page);
-		}
-		
 		$php_ended = @getmicrotime();
 		$generated = number_format(($php_ended-$php_started),3);
 		$this->page = str_replace('{GENERATED}', $generated, $this->page);
 		if ($enable_rss != 'yes') {
-		$this->page = preg_replace('!<\!-- switch rss_powered on -->(.*)<\!-- switch rss_powered off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch rss_powered on -->(.*)<\!-- switch rss_powered off -->!is', '', $this->page);
 		} else {
 			$this->page = str_replace('{BASE}', BASE, $this->page);
 		}

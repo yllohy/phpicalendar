@@ -34,7 +34,14 @@ $page->replace_tags(array(
 	'event_js' 			=> '',
 	'this_year'			=> $this_year,
 	'next_year'			=> $next_year,
-	'prev_year'			=> $prev_year			
+	'prev_year'			=> $prev_year,
+	'l_day'				=> $lang['l_day'],
+	'l_week'			=> $lang['l_week'],
+	'l_month'			=> $lang['l_month'],
+	'l_year'			=> $lang['l_year'],
+	'l_powered_by'		=> $lang['l_powered_by'],
+	'l_this_site_is'	=> $lang['l_this_site_is']
+
 	));
 	
 $page->output();
