@@ -102,6 +102,7 @@
 								<td bgcolor="#FFFFFF" align="left" class="G10BOLD">
 									<?php 
 									
+									if (!isset($query)) $query = '';
 									echo '<b>'.$jump_lang.'</b><br>';
 									echo '<img src="images/spacer.gif" width="1" height="6" alt=" "><br>';
 									echo "<form style=\"margin-bottom:0;\" action=\"month.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
