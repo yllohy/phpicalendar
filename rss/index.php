@@ -2,7 +2,7 @@
 
 define('BASE','../');
 include(BASE.'functions/ical_parser.php');
-include(BASE.'functions/calendar_functions.php');
+include_once(BASE.'functions/calendar_functions.php');
 $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
 if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
 	$back_page = $HTTP_SERVER_VARS['HTTP_REFERER'];
