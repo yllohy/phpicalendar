@@ -14,6 +14,8 @@ if ($language == "German") {
 	include "languages/german.inc.php";
 } elseif ($language == "Polish") {
 	include "languages/polish.inc.php";
+} elseif ($language == "French") {
+	include "languages/french.inc.php";
 } else {
 	include "languages/english.inc.php";
 }
