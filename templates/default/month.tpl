@@ -31,29 +31,58 @@
 		</tr>	
 	</table>
 	{MONTH_LARGE|+0}
+	<table width="735" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+			<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+			<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		</tr>
+	</table>
 	<br>
 	{CALENDAR_NAV}
 	<!-- switch showbottom on -->
 	<br>
-	<table width="737" border="0" cellspacing="0" cellpadding="3" class="calborder">
-		<!-- loop showbottomevents on -->
+	<table width="737" border="0" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
 			<td colspan="3" align="center" class="sideback" nowrap>
-				<div style="height: 16px;" class="G10BOLD">
+				<div style="height: 20px;" class="G10BOLD">
 					{L_THIS_MONTHS_EVENTS}
 				</div>
 			</td>
 		</tr>
-		<tr align="left" valign="top">
-			<td width="155" class="G10B" nowrap>
-				<a class="psf" href="{CAL}&amp;getdate={DAYLINK}">{START_DATE}</a> <font class="V9G">({START_TIME})</font>
-			</td>
-			<td width="5" class="montheventline" {ROWSPAN}></td>
+		<tr>
 			<td>
-				{JS_OPENEVENT}<a class="psf" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;"><font class="G10B">{EVENT_TEXT}</font></a> 
+				<table width="100%" cellspacing="1" cellpadding="4" border="0">
+					<!-- loop showbottomevents_odd on -->
+					<tr align="left" valign="top">
+						<td width="155" class="G10B" nowrap>
+							<a class="psf" href="{CAL}&amp;getdate={DAYLINK}">{START_DATE}</a> <font class="V9G">({START_TIME})</font>
+						</td>
+						<td>
+							{JS_OPENEVENT}<a class="psf" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;"><font class="G10B">{EVENT_TEXT}</font></a> 
+						</td>
+					</tr>
+					<!-- loop showbottomevents_odd off -->
+					<!-- loop showbottomevents_even on -->
+					<tr align="left" valign="top">
+						<td width="155" class="G10B" nowrap bgcolor="#EEEEEE">
+							<a class="psf" href="{CAL}&amp;getdate={DAYLINK}">{START_DATE}</a> <font class="V9G">({START_TIME})</font>
+						</td>
+						<td bgcolor="#EEEEEE">
+							{JS_OPENEVENT}<a class="psf" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;"><font class="G10B">{EVENT_TEXT}</font></a> 
+						</td>
+					</tr>
+					<!-- loop showbottomevents_even off -->
+				</table>
 			</td>
 		</tr>
-		<!-- loop showbottomevents off -->
+	</table>
+	<table width="737" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+			<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+			<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		</tr>
 	</table>
 	<!-- switch showbottom off -->
 </center>

@@ -14,17 +14,17 @@
 				<tr align="center">
 					<!-- switch notthismonth on -->
 					<td>
-						<a class="{CLASS}" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
+						<a class="psf" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="G10G">{DAY}</span></a>
 					</td>
 					<!-- switch notthismonth off -->
 					<!-- switch isevent on -->
 					<td>
-						<a class="{CLASS}" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
+						<a class="ps2" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 					</td>
 					<!-- switch isevent off -->
 					<!-- switch notevent on -->
 					<td>
-						<a class="{CLASS}" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
+						<a class="psf" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 					</td>
 					<!-- switch notevent off -->
 				</tr>

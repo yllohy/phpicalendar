@@ -99,3 +99,8 @@ body			{ background-color: #E5E5E5; }
 .query_style 	{ font-size: 11px; font-family: verdana, geneva, arial, sans-serif; width: 156px; margin-bottom: 0; }
 .search_style 	{ font-size: 12px; font-family: verdana, geneva, arial, sans-serif; width: 134px; margin-bottom: 0; }
 .login_style	{ font-size: 11px; font-family: verdana, geneva, arial, sans-serif; width: 80px; margin-bottom: 0; }
+
+/* Background images for tables */
+.tbll	{background: url(images/shadow_l.gif) no-repeat; width:8px}
+.tblbot	{background: url(images/shadow_m.gif) repeat-x; width:100%}
+.tblr	{background: url(images/shadow_r.gif) no-repeat; width:8px}
