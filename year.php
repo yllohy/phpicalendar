@@ -173,6 +173,9 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 			} while (($m < 3) && ($n < 12)); 
 		?>
 </table>
+<br>
+<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?></center></td>
+<br>
 </center>
 </body>
 </html>
