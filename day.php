@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $current_view = "day";
 include("./ical_parser.php");
@@ -31,9 +31,9 @@ if ($getdate == (date("Ymd"))) {
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><? echo "$calendar_name"; ?></title>
-  	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
-	<? include "functions/event.js"; ?>
+	<title><?php echo "$calendar_name"; ?></title>
+  	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
+	<?php include "functions/event.js"; ?>
 </head>
 <body bgcolor="#FFFFFF">
 <center>
@@ -41,7 +41,7 @@ if ($getdate == (date("Ymd"))) {
 <table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
+		<td align="center" width="90%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
@@ -64,16 +64,16 @@ if ($getdate == (date("Ymd"))) {
 								<td colspan="2">
 									<table width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
-											<td class="G10B" align="left" valign="top" width="100"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\">$last_day_lang</a>"; ?></td>
-											<td class="H20" align="center" valign="middle" width="500"><? echo "$display_date"; ?></td>
-											<td class="G10B" align="right" valign="top" width="100"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\">$next_day_lang</a>"; ?></td>
+											<td class="G10B" align="left" valign="top" width="100"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\">$last_day_lang</a>"; ?></td>
+											<td class="H20" align="center" valign="middle" width="500"><?php echo "$display_date"; ?></td>
+											<td class="G10B" align="right" valign="top" width="100"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\">$next_day_lang</a>"; ?></td>
 										</tr>
 									</table>
 								</td>
 							</tr>
 							<tr>
-								<td align="left" valign="middle" class="G10B" width="50%"><? include('./list_icals.php'); ?></td>
-								<td align="right" valign="middle" class="G10B" width="50%"><? echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
+								<td align="left" valign="middle" class="G10B" width="50%"><?php include('./list_icals.php'); ?></td>
+								<td align="right" valign="middle" class="G10B" width="50%"><?php echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
 							</tr>
 						</table>
       				</td>
@@ -84,14 +84,10 @@ if ($getdate == (date("Ymd"))) {
 							<?php
 							// The all day events returned here.
 							$i = 0;
-//							if ($master_array[($getdate)]["0001"]["event_text"] != "") {
-// drei 20020921: changed format of allday array
 							if (sizeof($master_array[($getdate)]["-1"]) > 0) {
 								echo "<tr height=\"30\">\n";
 								echo "<td colspan=\"15\" height=\"30\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
 								echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";										  
-//								foreach($master_array[($getdate)]["0001"]["event_text"] as $all_day_text) {
-// drei 20020921: changed format of allday array
 								foreach($master_array[($getdate)]["-1"] as $all_day) {
 									$event_text2 = addslashes($all_day["event_text"]); 
 									if ($i > 0) {
@@ -122,14 +118,8 @@ if ($getdate == (date("Ymd"))) {
 								$event_length = array ();
 								
 								foreach ($day_array as $key) {
-//									$k = 0;
 									$cal_time = $key;	
 									$key = strtotime ("$key");
-//									if ($time_format == "24") {
-//										$key = date ("G:i", $key);
-//									} else {
-//										$key = date ("g:i A", $key);
-//									}
 									$key = date ($timeFormat, $key);
 																		
 									// check for eventstart (line 117)
@@ -228,7 +218,7 @@ if ($getdate == (date("Ymd"))) {
 </tr>
 </table>
 <br>
-<? echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
+<?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
 </center>
 </body>
 </html>

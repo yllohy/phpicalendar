@@ -1,4 +1,4 @@
-<?
+<?php
 
 // French language include
 // For version 0.5 PHP iCalendar

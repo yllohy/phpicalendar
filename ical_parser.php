@@ -1,4 +1,4 @@
-<?
+<?php
 // note from Jared: the _time suffix has been applied to all variables 
 // that are timestamps to distinguish between them and Ymd format
 // I did not change other variables to use this convention yet

@@ -1,4 +1,4 @@
-<? 
+<?php 
 // Retain some compatibility backwards like.
 if(phpversion() >= "4.2.0") 
 
@@ -53,3 +53,5 @@ $cal = urlencode($cal_filename);
 if (!isset($filename)) {
 	$filename = $calendar_path."/".$cal_filename.".ics";
 }
+
+?>

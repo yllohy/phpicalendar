@@ -1,4 +1,4 @@
-<? 
+<?php 
 	$current_view = "month";
 	include("./ical_parser.php"); 
 
@@ -26,16 +26,16 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><? echo "$calendar_name"; ?></title>
-	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
-	<? include "functions/event.js"; ?>
+	<title><?php echo "$calendar_name"; ?></title>
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
+	<?php include "functions/event.js"; ?>
 </head>
 <body bgcolor="#FFFFFF">
 <center>
 <table width="740" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
+		<td align="center" width="90%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
@@ -56,9 +56,9 @@
 									<td align="left" valign="middle" bgcolor="white" height="36">
 										<table border="0" cellspacing="0" cellpadding="0" width="100%">
 											<tr>
-												<td align="left" width="100"><font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$last_month_lang</a>"; ?></font></td>
-												<td class="H20" align="center" valign="middle" bgcolor="white" height="24"><? echo "$display_month"; ?></td>
-												<td align="right" width="100"><font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$next_month_lang</a>"; ?></font></td>
+												<td align="left" width="100"><font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$last_month_lang</a>"; ?></font></td>
+												<td class="H20" align="center" valign="middle" bgcolor="white" height="24"><?php echo "$display_month"; ?></td>
+												<td align="right" width="100"><font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$next_month_lang</a>"; ?></font></td>
 											</tr>
 										</table>
 									</td>
@@ -70,8 +70,8 @@
 						<td align="center" valign="middle">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr height="20">
-									<td align="left" valign="middle" height="26"><? include('./list_icals.php'); ?></td>
-									<td align="right" class="G10B"><? echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
+									<td align="left" valign="middle" height="26"><?php include('./list_icals.php'); ?></td>
+									<td align="right" class="G10B"><?php echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
 								</tr>
 							</table>
 						</td>
@@ -103,7 +103,7 @@
 										<center><font class="eventfont"><b>Saturday</b></font></center>
 									</td>
 								</tr>
-								<? 	 
+								<?php 	 
 									$sunday = strtotime("$first_sunday");
 									$i = 0;
 									$whole_month = TRUE;
@@ -195,10 +195,10 @@
 										<table border="0" cellspacing="0" cellpadding="0" width="100%">
 											<tr>
 												<td align="left">
-													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$next_month_lang</a>"; ?></font>
+													<font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$next_month_lang</a>"; ?></font>
 												</td>
 												<td align="right">
-													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$last_month_lang</a>"; ?></font>
+													<font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$last_month_lang</a>"; ?></font>
 												</td>
 											</tr>
 										</table>
@@ -227,24 +227,24 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr height="25">
 									<td colspan="3" align="center" valign="middle" class="eventborder" width="740" height="25">
-										<font class="eventfont" color="#FFFFFF"><b><? echo "$this_months_lang"; ?></b></font>
+										<font class="eventfont" color="#FFFFFF"><b><?php echo "$this_months_lang"; ?></b></font>
 									</td>
 								</tr>
 								<tr height="11">
 									<td valign="middle" width="150" height="11" class="eventbg">
-										<font class="eventfont"><b>&nbsp;<? echo "$date_lang"; ?></b></font>
+										<font class="eventfont"><b>&nbsp;<?php echo "$date_lang"; ?></b></font>
 									</td>
 									<td width="1" height="11" class="eventbg"><img src="images/spacer.gif" height="15" width="1">
 									</td>
 									<td valign="middle" width="551" height="11" class="eventbg">
-										<font class="eventfont"><b>&nbsp;<? echo "$summary_lang"; ?></b></font>
+										<font class="eventfont"><b>&nbsp;<?php echo "$summary_lang"; ?></b></font>
 									</td>
 								</tr>
 								<tr height="1">
 									<td colspan="3" width="825" height="1">
 									</td>
 								</tr>
-								<?	
+								<?php	
 									// Iterate the entire master array
 									foreach($master_array as $key => $val) {
 										
@@ -307,7 +307,7 @@
 		</tr>
 	</table>
 <br>
-<? echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
+<?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
 </center>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 $style_sheet = "default.css";			// Themes support - "default.css", "red.css", "green.css"
 $fullpath = "webcal://";				// what iCal file are we using

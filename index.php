@@ -1,4 +1,4 @@
-<?
+<?php
 
 include "config.inc.php";
 $default_view = "$default_view" . ".php";

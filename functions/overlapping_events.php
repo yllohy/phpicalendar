@@ -1,4 +1,4 @@
-<?
+<?php
 // function to determine the colspan for overlapping events
 // takes 2 parameters: index of event (in regards of column output) and number of overlapping events
 function eventWidth($ind, $overlaps) {

@@ -1,4 +1,4 @@
-<?
+<?php
 
 // start of <select> tag
 if (isset($getdate)) {
