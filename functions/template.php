@@ -176,7 +176,7 @@ class Page {
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
-		$start_day 			= strtotime($week_start_day);
+		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
 		for ($i=0; $i<7; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
