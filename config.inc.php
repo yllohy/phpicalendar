@@ -44,6 +44,13 @@ $allow_preferences		= 'yes';			// Allow visitors to change various preferences v
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 $show_completed			= 'yes';			// Show completed todos on your todo list.
+
+// Administration settings
+$allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password			
+$external_auth			= 'no';				// Set to yes if external authentication (such as HTTP Authentication) is used and no authentican should be performed by PHP iCalendar
+$admin_username			= 'clittle';			// The username for the administrator
+$admin_password			= 'jackhamm3r';		// change this if allow_admin is set to yes
+$confirm_changes		= 'yes';			// Set to no to eliminate the confirmation popup on administration form submits
 										
 $blacklisted_cals[] = '';					// Fill in between the quotes the name of the calendars 
 $blacklisted_cals[] = '';					// you wish to 'blacklist' or that you don't want to show up in your calendar

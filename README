@@ -79,6 +79,9 @@ Changes:
 	-Added support for LOCATION
 	-Added support for ATTENDEE
 	-Added support for STATUS
+	-Added admin.php for administration of calendars (uses cookies). See config.inc.php for configuration.
+		-Add or Update a calendar via a web interface
+		-Delete a calendar via a web interface
 
 0.9.1
 	-Added unset preferences
