@@ -223,7 +223,10 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 												$completed 		= $val['completed_date'];
 												if(isset($completed)) $completed = localizeDate($dateFormat_day, strtotime($completed));
 												$status 		= $val["status"];
-												if ((!isset($status) || $status == "COMPLETED") && isset($completed)) $status = "Completed on " . $completed;
+												if ((!isset($status) || $status == "COMPLETED") && isset($completed)) $status = $completed_lang . $completed;
+
+												$priority 		= $val['priority'];
+												
 												$start_date 	= $val["start_date"];
 												$start_date = localizeDate ($dateFormat_day, strtotime($start_date));
 												if(isset($val['due_date']) && strtotime($val['due_date']) != strtotime("+1 year",strtotime($start_date))) $due_date = localizeDate ($dateFormat_day, strtotime($val['due_date']));
@@ -235,12 +238,12 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 												if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
 													if ($show_completed == 'yes') {
 														$vtodo_text = "<S>$vtodo_text</S>";
-														echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+														echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status', '$priority')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 													}
 												} elseif (isset($val['priority']) && ($val['priority'] != 0) && ($val['priority'] <= 5)) {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status', '$priority')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 												} else {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status', '$priority')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 												}
 											}
 										}

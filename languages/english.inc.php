@@ -74,7 +74,16 @@ $select_view_lang		= 'Select your default view:';
 $select_time_lang		= 'Select your default start time:';
 $select_day_lang		= 'Select your default start day of week:';
 $select_style_lang		= 'Select your default style:';
+
+//To-dos
+$completed_lang			= 'Completed on ';
+$created_lang			= 'Created: ';
+$due_lang				= 'Due: ';
+$no_priority_lang		= 'None';
+$priority_lang			= 'Priority: ';
+$status_lang			= 'Status: ';
 $todo_lang				= 'To do items';
+$unfinished_lang		= 'Unfinished';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'

@@ -1,7 +1,7 @@
 
 <script language="JavaScript">
 <!--
-	function openTodoInfo(vtodo, calendarname, start, due, description, status)
+	function openTodoInfo(vtodo, calendarname, start, due, description, status, priority)
 	{	
 		var windowW = 450;
 		var windowH = 275;
@@ -11,7 +11,8 @@
 			"&start="+start+
 			"&due="+due+
 			"&description="+description+
-			"&status="+status;
+			"&status="+status+
+			"&priority="+priority;
 				
 		options = "scrollbars=no"+",width="+windowW+",height="+windowH;
 	
