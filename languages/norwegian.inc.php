@@ -32,8 +32,8 @@ $event_end_lang		= "Slutt Tid";
 $this_months_lang	= "Denne M&aring;nedens Hendelser";
 $date_lang			= "Dato";
 $summary_lang		= "Sammendrag";
-$all_day_lang		= "All day event";
-$notes_lang			= "Notes";
+$all_day_lang		= "Hele dagen";
+$notes_lang			= "Notater";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
 setlocale (LC_TIME, 'no_NO');
