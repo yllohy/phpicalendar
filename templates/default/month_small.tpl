@@ -15,32 +15,17 @@
 					<!-- loop monthdays on -->
 					<!-- switch notthismonth on -->
 					<td>
-						<!-- switch anyevent on -->
 						<a class="psf" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="G10G">{DAY}</span></a>
-						<!-- switch anyevent off -->
-						<!-- switch noevent on -->
-						<a class="psf" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="G10G">{DAY}</span></a>
-						<!-- switch noevent off -->
 					</td>
 					<!-- switch notthismonth off -->
 					<!-- switch istoday on -->
 					<td>
-						<!-- switch anyevent on -->
 						<a class="ps2" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
-						<!-- switch anyevent off -->
-						<!-- switch noevent on -->
-						<a class="psf" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
-						<!-- switch noevent off -->
 					</td>
 					<!-- switch istoday off -->
 					<!-- switch ismonth on -->
 					<td>
-						<!-- switch anyevent on -->
-						<a class="ps2" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
-						<!-- switch anyevent off -->
-						<!-- switch noevent on -->
 						<a class="psf" href="{MINICAL_VIEW}.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
-						<!-- switch noevent off -->
 					</td>
 					<!-- switch ismonth off -->
 					<!-- loop monthdays off -->

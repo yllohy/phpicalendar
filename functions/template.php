@@ -10,11 +10,18 @@ class Page {
 		global $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
 		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template, $match1);
 		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template, $match2);
+		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template, $match3);
+		preg_match("!<\!-- switch istoday on -->(.*)<\!-- switch istoday off -->!is", $template, $match4);
+		preg_match("!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!is", $template, $match5);
 		preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!is", $template, $match6);
-		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!is", $template, $match7);
+		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!is", $template, $match7);		
 		
 		$loop_wd 			= trim($match1[1]);
 		$loop_md 			= trim($match2[1]);
+		$t_month[0]			= trim($match3[1]);
+		$t_month[1]			= trim($match4[1]);
+		$t_month[2] 		= trim($match5[1]);
+		
 		$startweek 			= trim($match6[1]);
 		$endweek 			= trim($match7[1]);
 		$fake_getdate_time 	= strtotime($this_year.'-'.$this_month.'-15');
@@ -22,16 +29,16 @@ class Page {
 		$start_day 			= strtotime($week_start_day);
 		$month_title 		= localizeDate ($dateFormat_month, $fake_getdate_time);
 		if ($type == 'small') {
-			$type = $daysofweekreallyshort_lang;
+			$langtype = $daysofweekreallyshort_lang;
 		} elseif ($type == 'medium') {
-			$type = $daysofweekshort_lang;
+			$langtype = $daysofweekshort_lang;
 		} elseif ($type == 'large') {
-			$type = $daysofweek_lang;	
+			$langtype = $daysofweek_lang;	
 		}
 		
 		for ($i=0; $i<7; $i++) {
 			$day_num 		= date("w", $start_day);
-			$weekday 		= $type[$day_num];
+			$weekday 		= $langtype[$day_num];
 			$start_day 		= strtotime("+1 day", $start_day);
 			$loop_tmp 		= str_replace('{LOOP_WEEKDAY}', $weekday, $loop_wd);
 			$weekday_loop  .= $loop_tmp;
@@ -41,53 +48,62 @@ class Page {
 		$minical_year 		= date("Y", $fake_getdate_time);
 		$first_of_month 	= $minical_year.$minical_month."01";
 		$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
+		$month_event_lines	= 0;
 		$i 					= 0;
 		$whole_month 		= TRUE;
 		
 		do {
 			if ($i == 0) $middle .= $startweek; $i++;
-			$temp_middle			= $loop_md;
-			$switch					= array('notthismonth' => '', 'istoday' => '', 'ismonth' => '', 'noevent' => '', 'anyevent' => '', 'allday' => '', 'cal' => $cal, 'minical_view' => $minical_view);
+			#$temp_middle			= $loop_md;
+			$switch					= array('ALLDAY' => '', 'CAL' => $cal, 'MINICAL_VIEW' => $minical_view);
 			$check_month 			= date ("m", $start_day);
 			$daylink 				= date ("Ymd", $start_day);
-			$switch['day']	 		= date ("j", $start_day);
-			$switch['daylink'] 		= date ("Ymd", $start_day);
-			$switch['notthismonth'] = ($check_month != $minical_month) ? 'set' : '';
-			$switch['istoday'] 		= ($switch['daylink'] == $getdate) ? 'set' : '';
-			$switch['ismonth'] 		= (($switch['istoday'] == '') && ($switch['notthismonth'] == '')) ? 'set' : '';
+			$switch['DAY']	 		= date ("j", $start_day);
+			$switch['DAYLINK'] 		= date ("Ymd", $start_day);
+			if ($check_month != $minical_month) {
+				$temp = $t_month[0];
+			} elseif ($daylink == $getdate) {
+				$temp = $t_month[1];
+			} else {
+				$temp = $t_month[2];
+			}
 			if ($master_array[$daylink]) {
-				$switch['anyevent'] = 'set';
-				foreach ($master_array[$daylink] as $event_times) {
-					foreach ($event_times as $val) {
-						$event_calno 	= $val['calnumber'];
-						$event_calna 	= $val['calname'];
-						$event_url 		= $val['url'];
-						if (!isset($val['event_start'])) {
-							$switch['allday'] .= '<div align="left" class="V10">';
-							$switch['allday'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
-							$switch['allday'] .= '</div>';
-						} else {	
-							$event_start = $val['start_unixtime'];
-							$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
-							$event_start = date($timeFormat, $val['start_unixtime']);
-							$start2		 = date($timeFormat_small, $val['start_unixtime']);
-							$event_end   = date($timeFormat, @strtotime ($event_end));
-							$switch['event'] .= '<div align="left" class="V9">';
-							$switch['event'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url);
-							$switch['event'] .= '</div>';
+				if ($type != 'small') {
+					foreach ($master_array[$daylink] as $event_times) {
+						foreach ($event_times as $val) {
+							$event_calno 	= $val['calnumber'];
+							$event_calna 	= $val['calname'];
+							$event_url 		= $val['url'];
+							if (!isset($val['event_start'])) {
+								if ($type == 'large') {
+									$switch['ALLDAY'] .= '<div align="left" class="V10">';
+									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+									$switch['ALLDAY'] .= '</div>';
+								}
+							} else {	
+								$event_start = $val['start_unixtime'];
+								$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
+								$event_start = date($timeFormat, $val['start_unixtime']);
+								$start2		 = date($timeFormat_small, $val['start_unixtime']);
+								$event_end   = date($timeFormat, @strtotime ($event_end));
+								if ($type == 'large') {
+									$switch['EVENT'] .= '<div align="left" class="V9">';
+									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url);
+									$switch['EVENT'] .= '</div>';
+								}
+							}
 						}
 					}
 				}
 			}
 			
+			#print_r($switch);
+			
 			foreach ($switch as $tag => $data) {
-				if (!$data) {
-					$temp_middle = ereg_replace('<!-- switch ' . $tag . ' on -->(.*)<!-- switch ' . $tag . ' off -->', '', $temp_middle);
-				} else {
-					$temp_middle = str_replace('{' . strtoupper($tag) . '}', $data, $temp_middle);
-				}
+				#echo $tag.'<br>';
+				$temp = str_replace('{'.$tag.'}', $data, $temp);
 			}
-			$middle .= $temp_middle;
+			$middle .= $temp;
 			
 			$start_day = strtotime("+1 day", $start_day); 
 			if ($i == 7) { 
