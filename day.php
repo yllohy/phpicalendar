@@ -229,6 +229,7 @@ include (BASE.'includes/header.inc.php');
 												  $event_length[$i]['state'] = 'started';
 												  $event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
 												  $event_end	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
+												  if (isset($this_time_arr[($event_length[$i]['key'])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$i]['key'])]['display_end']);
 												  $event_start 	= date ($timeFormat, $event_start);
 												  $event_end	= date ($timeFormat, $event_end);
 												  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];

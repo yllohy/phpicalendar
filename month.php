@@ -126,6 +126,7 @@ include (BASE.'includes/header.inc.php');
 											echo '<div align="left" class="V9">&nbsp;';
 											$event_start = @$val["event_start"];
 											$event_end   = @$val["event_end"];
+											if (isset($val['display_end'])) $event_end = $val['display_end'];
 											$event_start = date($timeFormat, @strtotime ("$event_start"));
 											$start2		 = date($timeFormat_small,@strtotime("$event_start"));
 											$event_end   = date($timeFormat, @strtotime ("$event_end"));
@@ -196,6 +197,7 @@ include (BASE.'includes/header.inc.php');
 									if (isset($new_val2["event_start"])) {
 										$event_start 	= $new_val2["event_start"];
 										$event_end 		= $new_val2["event_end"];
+										if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
 										$event_start 	= date ($timeFormat, strtotime ("$event_start"));
 										$event_end 		= date ($timeFormat, strtotime ("$event_end"));
 										$event_start2	= $event_start;

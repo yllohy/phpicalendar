@@ -11,8 +11,8 @@ $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? =
 $default_cal 			= $ALL_CALENDARS_COMBINED;		// Exact filename of calendar without .ics. Or set to $ALL_CALENDARS_COMBINED to open all calenders combined into one.
 $language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto'
 $week_start_day 		= 'Sunday';			// Day of the week your week starts on
-$day_start 				= '0800';			// Start time for day grid
-$day_end				= '2400';			// End time for day grid
+$day_start 				= '0700';			// Start time for day grid
+$day_end				= '2300';			// End time for day grid
 $gridLength 			= '15';				// Grid distance in minutes for day view, multiples of 15 preferred
 $num_years 				= '3';				// Number of years to display in 'Jump to'
 $month_event_lines 		= '1';				// Number of lines to wrap each event title in month view, 0 means display all lines.
@@ -24,6 +24,7 @@ $default_path			= 'http://www.example.com/phpicalendar'; 	// The HTTP URL to the
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 $calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
 $second_offset			= '0';				// The time in seconds between your time and your server's time.
+$bleed_time				= '0000';			// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359'
 
 // Advanced settings for custom installs, cookies, etc.
 // In most cases these will not need to be set.
@@ -31,7 +32,7 @@ $cookie_uri				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. htt
 $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http://www.example.com/phpicalendar/calendars
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$save_parsed_cals 		= 'yes';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
 $use_sessions 			= 'no';				// This has not yet been implemented.
 $display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.

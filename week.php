@@ -304,7 +304,8 @@ include (BASE.'includes/header.inc.php');
 																	echo "<tr>\n";
 																	echo '<td class="eventbg_'.$event_calno.'">';
 																	$event_end	= $this_time_arr[($event_length[$thisday][$i]["key"])]["end_unixtime"];
-																	$event_end 		= date ($timeFormat, $event_end);
+																	 if (isset($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end']);
+																	$event_end 	= date ($timeFormat, $event_end);
 																	// Todo: keep track of where the event comes from, and indicate that to openevent instead of $ALL_CALENDARS_COMBINED
 																	if ($cal == $ALL_CALENDARS_COMBINED) $calendar_name2=$cal; else $calendar_name2=$calendar_name;
 																	openevent("$calendar_name2",
