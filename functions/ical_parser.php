@@ -96,7 +96,7 @@ foreach ($cal_filelist as $filename) {
 					$start_time, $end_time, $start_date, $end_date, $summary, 
 					$allday_start, $allday_end, $start, $end, $the_duration, 
 					$beginning, $rrule_array, $start_of_vevent, $description, 
-					$valarm_description, $start_unixtime, $end_unixtime,
+					$valarm_description, $start_unixtime, $end_unixtime, $display_end_tmp, $end_time_tmp1, 
 					$recurrence_id, $uid, $class, $location, $rrule, $abs_until, $until_check
 				);
 					
