@@ -20,7 +20,6 @@ $tomorrows_events_lines = '1';				// Number of lines to wrap each event title in
 $allday_week_lines 		= '1';				// Number of lines to wrap each event title in all-day events in week view, 0 means display all lines.
 $week_events_lines 		= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
-$tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 $calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
 $second_offset			= '0';				// The time in seconds between your time and your server's time.
 $bleed_time				= '';				// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359', or '-1' for no bleed time. Is automatically set to $day_start if left blank.
@@ -29,7 +28,6 @@ $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http:
 $default_path			= 'http://www.example.com/phpicalendar'; 						// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$save_parsed_cals 		= 'no';			// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
 $display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
 $allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
@@ -43,10 +41,15 @@ $show_completed			= 'no';				// Show completed todos on your todo list.
 $allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
 $login_cookies			= 'no';			// Set to yes to store authentication information via (unencrypted) cookies. Set to no to use sessions.
 
+// Calendar Caching (decreases page load times)
+$save_parsed_cals 		= 'no';				// Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X). Any php-writable folder works.
+$webcal_hours			= '24';				// Number of hours to cache webcals.
+
 // Webdav style publishing
 $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
 
-// Administration settings
+// Administration settings (admin.php)
 $allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
 $auth_method			= 'ftp';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
 $auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.
