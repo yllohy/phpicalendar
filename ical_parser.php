@@ -239,10 +239,16 @@ foreach($contents as $line) {
 						// again, $parse_to_year is set to January 10 of the upcoming year
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
 						$start_date_time = strtotime($start_date);
+						$this_month_start_time = strtotime("$this_year-$this_month-01");
 						
+						$start_range_time = strtotime("-1 month -2 day", $this_month_start_time);
+						$end_range_time = strtotime("+2 month +2 day", $this_month_start_time);
+						
+						// NOTE: This part not in use for the time being. We are choosing to fill out 3 months time.
 						// depending on which view we're looking at, we do one month or one week
 						// one day is more difficult, I think, so I wrapped that into the week. We'll have to
 						// add another case for "year" once that's added.
+						/*
 						if ($current_view == "month") {
 							$start_range_time = strtotime("$this_year-$this_month-01");
 							$end_range_time = strtotime("+1 month +1 week", $start_range_time);
@@ -250,6 +256,7 @@ foreach($contents as $line) {
 							$start_range_time = strtotime(dateOfWeek($getdate, substr($week_start_day, 0, 2)));
 							$end_range_time = strtotime("+1 week", $start_range_time);
 						}
+						*/
 						
 						// if $until isn't set yet, we set it to the end of our range we're looking at
 						if (!$until) $until = $end_range_time;
