@@ -35,18 +35,10 @@ background-color: #E5E5E5;
 .V9 { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; }
 .G10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #06f; }
 .G10B { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: black; }
-.G12 { font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 12px; }
 .V12 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; }
 .H20 { font-family: Helvetica, sans-serif; font-size: 20px; }
 
 
-
-.bodyline	{ background-color: #FFFFFF; border: 1px #98AAB1 solid; }
-
 .query_style { font-size : 12px; font-family : geneva, arial, sans-serif; width: 135px; }
 .add_style { font-size : 12px; font-family : verdana, geneva, arial, sans-serif; width: 160px; }
 
-td.smaller { width: 60px; border: 1px #98AAB1 solid; }
-td.borders { border-bottom: 1px #98AAB1 dotted; 
-			 border-right: 1px #98AAB1 solid; }
-td.border_all { border: 1px #98AAB1 solid; }
