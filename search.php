@@ -97,6 +97,7 @@ $search_took = number_format(($search_ended-$search_started),3);
   	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
 </head>
 <body bgcolor="#FFFFFF">
+<?php include ('./header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>

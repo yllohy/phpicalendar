@@ -54,6 +54,7 @@ if (is_array($master_array[($getdate)])) {
 	<?php include ('./functions/event.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
+<?php include ('./header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>

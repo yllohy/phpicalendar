@@ -14,6 +14,7 @@ $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_V
   	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
 </head>
 <body bgcolor="#FFFFFF">
+<?php include ('./header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>

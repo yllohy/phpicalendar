@@ -32,6 +32,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 	<meta name="generator" content="BBEdit 6.5.3">
 </head>
 <body>
+<?php include ('./header.inc.php'); ?>
 <center>
 <table width="676" border="0" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>

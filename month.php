@@ -52,6 +52,7 @@
 	<?php include "functions/event.js"; ?>
 </head>
 <body>
+<?php include ('./header.inc.php'); ?>
 <center>
 <table width="735" border="0" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
