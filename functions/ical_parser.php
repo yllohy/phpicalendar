@@ -684,6 +684,7 @@ if ($parse_file) {
 					if (substr($data,-1) == 'Z') $zulu_time = true;
 					$data = ereg_replace('T', '', $data);
 					$data = ereg_replace('Z', '', $data);
+					$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
 					if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
 						$allday_start = $data;
 						$start_date = $allday_start;
@@ -730,6 +731,7 @@ if ($parse_file) {
 					if (substr($data,-1) == 'Z') $zulu_time = true;
 					$data = ereg_replace('T', '', $data);
 					$data = ereg_replace('Z', '', $data);
+					$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
 					if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
 						$allday_end = $data;
 					} else {
