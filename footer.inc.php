@@ -1,0 +1,1 @@
+<?php echo "<center><font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/\">PHP iCalendar $version_lang</a></font></center>";?>
