@@ -1,10 +1,4 @@
 <?php
-// note from Jared: the _time suffix has been applied to all variables 
-// that are timestamps to distinguish between them and Ymd format
-// I did not change other variables to use this convention yet
-
-// I started commenting the line above where $master_array gets written to
-// I did this because I kept scrolling through looking for them so I decided to mark them
 
 include('./functions/init.inc.php');
 include('./functions/date_add.php');
@@ -26,7 +20,6 @@ while ($fillTime != '2400') {
 	}
 	$fillTime = $fill_h . $fill_min;
 }
-
 
 // what date we want to get data for (for day calendar)
 if (!isset($getdate) || $getdate == '') $getdate = date('Ymd');
@@ -55,19 +48,8 @@ if ($is_webcal == false && $save_parsed_cals == 'yes') {
 	}
 }
 
-
 if ($parse_file) {
 
-/*
-	// open the iCal file, read it into a string
-	// Then turn it into an array after we pull every wrapped line up a level.
-
-	$contents = @file($filename);
-	$contents = @implode('', $contents);
-	$contents = ereg_replace("\n ", '', $contents);
-	$contents = split ("\n", $contents);
-	if ($contents[0] != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
-*/
 	// patch to speed up parser
 	
 	$ifile = fopen($filename, "r");
@@ -81,10 +63,6 @@ if ($parse_file) {
 	// auxiliary array for determining overlaps of events
 	$overlap_array = array ();
 	
-/*
-	// parse our new array
-	foreach($contents as $line) {
-*/
 // read file in line by line
 // XXX end line is skipped because of the 1-line readahead
 	while (!feof($ifile)) {
@@ -108,6 +86,7 @@ if ($parse_file) {
 			$except_dates = array();
 			$except_times = array();
 			
+			$allday_written = FALSE;
 			$first_duration = TRUE;
 			$count = 1000000;
 			$valarm_set = FALSE;
@@ -120,10 +99,6 @@ if ($parse_file) {
 			
 		} elseif (stristr($line, 'END:VEVENT')) {
 			
-			// Clean out \n's and other slashes
-			$summary = str_replace('\n', '<br>', $summary);
-			$summary = stripslashes($summary);
-			$description = str_replace('\n', '<br>', $description);
 			$mArray_begin = mktime (0,0,0,1,1,$this_year);
 			$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
 					
@@ -138,9 +113,9 @@ if ($parse_file) {
 				$minute = $time3[2];
 			}
 			
-			
 			// Handling of the all day events
 			if ((isset($allday_start) && $allday_start != '')) {
+				$allday_written = TRUE;
 				$start = strtotime($allday_start);
 				$end = strtotime($allday_end);
 				if (($end > $mArray_begin) && ($end < $mArray_end)) {
@@ -152,10 +127,8 @@ if ($parse_file) {
 				}
 			}
 			
-			
 			// Handling of the recurring events, RRULE
-			// This will be quite a bit of work, thats for sure.
-			if (is_array($rrule_array)) {
+			if ((is_array($rrule_array)) && ($allday_written != TRUE)) {
 				if (isset($allday_start) && $allday_start != '') {
 					$rrule_array['START_DAY'] = $allday_start;
 					$rrule_array['END_DAY'] = $allday_end;
@@ -192,6 +165,7 @@ if ($parse_file) {
 					
 					} elseif ($key == 'UNTIL') 		{
 						$until = ereg_replace('T', '', $val);
+						$until = ereg_replace('Z', '', $val);
 						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $until, $regs);
 						$year = $regs[1];
 						$month = $regs[2];
@@ -217,6 +191,9 @@ if ($parse_file) {
 					} elseif ($key == 'BYDAY') 		{
 						$byday = $val;
 						$byday = split (',', $byday);
+						#echo "<pre>";
+						#print_r ($byday);
+						#echo "</pre>";
 					
 					} elseif ($key == 'BYMONTHDAY') {
 						$bymonthday = $val;
@@ -413,20 +390,29 @@ if ($parse_file) {
 			$field = $line[0];
 			$data = $line[1];
 			
-			// Old style
-			// sscanf($line, "%[^:]:%[^\n]", &$field, &$data);
-			
-			if(stristr($field, 'DTSTART;TZID')) {
+			if (preg_match("/DTSTART/", $field)) {
 				$data = ereg_replace('T', '', $data);
-				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-				$start_date = $regs[1] . $regs[2] . $regs[3];
-				$start_time = $regs[4] . $regs[5];
-	
-			} elseif (stristr($field, 'DTEND;TZID')) {
+				$data = ereg_replace('Z', '', $data);
+				if (preg_match("/DTSTART;VALUE=DATE/", $field))  {
+					$allday_start = $data;
+				} else {
+					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+					$start_date = $regs[1] . $regs[2] . $regs[3];
+					$start_time = $regs[4] . $regs[5];
+					#echo "$field - $start_date, $start_time<br>";
+				}
+				
+			} elseif (preg_match("/DTEND/", $field)) {
 				$data = ereg_replace('T', '', $data);
-				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-				$end_date = $regs[1] . $regs[2] . $regs[3];
-				$end_time = $regs[4] . $regs[5];
+				$data = ereg_replace('Z', '', $data);
+				if (preg_match("/DTEND;VALUE=DATE/", $field))  {
+					$allday_end = $data;
+				} else {
+					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+					$end_date = $regs[1] . $regs[2] . $regs[3];
+					$end_time = $regs[4] . $regs[5];
+					#echo "$field - $end_date, $end_time<br>";
+				}
 				
 			} elseif (stristr($field, 'EXDATE;TZID')) {
 				$data = ereg_replace('T', '', $data);
@@ -451,12 +437,6 @@ if ($parse_file) {
 			} elseif (stristr($field, 'X-WR-CALNAME')) {
 				$calendar_name = $data;
 				$master_array['calendar_name'] = $calendar_name;
-			
-			} elseif (stristr($field, 'DTSTART;VALUE=DATE')) {
-				$allday_start = $data;
-			
-			} elseif (stristr($field, 'DTEND;VALUE=DATE')) {
-				$allday_end = $data;
 				
 			} elseif (stristr($field, 'DURATION')) {
 				
@@ -469,7 +449,6 @@ if ($parse_file) {
 						$days = $duration[1];
 						$weeks = 0;
 					}
-// DOUBLE CHECK THIS, IS SETTING $weeks AND/OR $days EQUAL TO 0 ACCEPTABLE??
 					$hours = ereg_replace('H', '', $duration[3]);
 					$minutes = ereg_replace('M', '', $duration[4]);
 					$seconds = ereg_replace('S', '', $duration[5]);
@@ -486,6 +465,7 @@ if ($parse_file) {
 					ereg ('(.*)=(.*)', $recur, $regs);
 					$rrule_array[$regs[1]] = $regs[2];
 				}	
+				
 			} elseif (stristr($field, 'ATTENDEE')) {
 				$attendee = $data;
 				
