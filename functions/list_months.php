@@ -1,5 +1,5 @@
 <?php
-print "<form action=\"day.php\" method=\"GET\">\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value);\">\n";
+print "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value);\">\n";
 $month_time = strtotime("$this_year-01-01");
 $getdate_month = date("m", strtotime($getdate));
 
@@ -18,5 +18,5 @@ for ($i=0; $i<12; $i++) {
 }
 
 // finish <select>
-print "</select>\n</form>";
+print "</select>";
 ?>

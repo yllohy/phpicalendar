@@ -11,7 +11,7 @@ $check_week = strtotime($getdate);
 $start_week_time = strtotime(dateOfWeek(date("Ymd", strtotime("$this_year-01-01")), $week_start_day));
 $end_week_time = $start_week_time + (6 * 25 * 60 * 60);
 
-print "<form action=\"day.php\" method=\"GET\">\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value);\">\n";
+print "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value);\">\n";
 
 // build the <option> tags
 do {
@@ -29,5 +29,5 @@ do {
 } while (date("Y", $start_week_time) <= $this_year);
 
 // finish <select>
-print "</select>\n</form>";
+print "</select>";
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-// Configuration file for PHP iCalendar 0.9.2
+// Configuration file for PHP iCalendar 0.9.4
 //
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information
@@ -39,7 +39,7 @@ $this_months_events 	= 'yes';			// Display "This month's events" at the bottom o
 $use_color_cals 		= 'yes';			// Display each calendar in the pop-up as a different color.
 $daysofweek_dayview 	= 'no';				// Display the days of the week in day.php view.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
-$show_search			= 'yes';				// Show the search box in the sidebar.
+$show_search			= 'no';				// Show the search box in the sidebar.
 $header_always			= 'yes';			// Set to yes to have header on print.php
 $allow_preferences		= 'yes';			// Allow visitors to change various preferences via cookies.
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).

@@ -53,8 +53,7 @@ if (isset($master_array[($getdate)])) {
   	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
    <?php 
 		// if RSS is enabled, set the RSS auto-discovery link
-		if ($enable_rss == 'yes') 
-		{
+		if ($enable_rss == 'yes') {
     		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=day\">";
 		} 
 	?>
@@ -313,8 +312,8 @@ if (isset($master_array[($getdate)])) {
 	</tr>
 </table>
 </td>
-		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=" "></td>
-		<td width="160" valign="top">
+		<td width="10"><img src="images/spacer.gif" width="10" height="1" alt=" "></td>
+		<td width="170" valign="top">
 			<?php include (BASE.'includes/sidebar.php'); ?>
 			<?php include (BASE.'includes/footer.inc.php'); ?>
 		</td>

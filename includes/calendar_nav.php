@@ -98,44 +98,20 @@
 					<td width="160" valign="top">
 						<table cellpadding="0" cellspacing="0" border="0" width="160">
 							<tr>
-								<td valign="middle" align="center">
-									<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
-										<tr>
-											<td width="4"></td>
-											<td>
-												<?php 
-													include('./functions/list_icals.php');
-													include('./functions/list_years.php');
-													include('./functions/list_months.php');
-													include('./functions/list_weeks.php'); 
-												?>
-											</td>
-										</tr>
-										<?php
-										if ($display_custom_goto == "yes") {
-										?>
-										<tr>
-											<td width="4"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-											<td class="G10B">
-												<form action="day.php" method="GET">
-													<input type="hidden" name="cal" value="<?php print urlencode($cal); ?>">
-													<input type="text" size="15" name="jumpto_day">
-													<input type="submit" value="Go">
-												</form>
-											</td>
-										</tr>
-										<?php
-										}
-										if ($show_search == 'yes') { ?>
-										<tr>
-											<td colspan="2"><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
-										</tr>
-										<tr>
-											<td width="4"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-											<td valign="middle" align="left"><?php echo "$search_box"; ?></td>
-										</tr>
-										<?php } ?>
-									</table>
+								<td bgcolor="#FFFFFF" align="left" class="G10BOLD">
+									<?php 
+									
+									echo '<b>'.$jump_lang.'</b><br>';
+									echo '<img src="images/spacer.gif" width="1" height="6" alt=" "><br>';
+									echo "<form action=\"day.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
+									include('./functions/list_icals.php');
+									include('./functions/list_years.php');
+									include('./functions/list_months.php');
+									include('./functions/list_weeks.php');
+									echo "</form>";
+									echo '<img src="images/spacer.gif" width="1" height="6" alt=" "><br>';
+									
+									?>
 								</td>
 							</tr>
 						</table>

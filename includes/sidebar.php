@@ -13,7 +13,7 @@
 		$cal_displayname2 = $cal_displayname2 . "...";
 	}
 		
-	$search_box = '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" name="submit" value="Search"></form>';
+	$search_box = '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" style="font-size:10px" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" name="submit" value="Search"></form>';
 	
 	?>
 	
@@ -55,58 +55,34 @@
 		</tr>
 	</table>
 	<br>
-	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-		<tr>
-			<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
-			<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
-			<td align="right" valign="top" width="1%" class="sideback"></td>
+	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+		<tr height="20">
+			<td align="center" class="sideback"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
 		</tr>
 		<tr>
-			<td colspan="3" bgcolor="#FFFFFF" align="left">
-				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
-					<tr>
-						<td colspan="2"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>
-					</tr>
-					<tr>
-						<td width="4"></td>
-						<td>
-							<?php 
-								include('./functions/list_icals.php');
-								include('./functions/list_years.php');
-								include('./functions/list_months.php');
-								include('./functions/list_weeks.php'); 
-							?>
-						</td>
-					</tr>
-					<?php
-					if ($display_custom_goto == "yes") {
-					?>
-					<tr>
-						<td width="4"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-						<td class="G10B">
-							<form action="day.php" method="GET">
-								<input type="hidden" name="cal" value="<?php print urlencode($cal); ?>">
-								<input type="text" size="15" name="jumpto_day">
-								<input type="submit" value="Go">
-							</form>
-						</td>
-					</tr>
-					<?php
-					}
-					if ($show_search == 'yes') { ?>
-					<tr>
-						<td colspan="2"><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
-					</tr>
-					<tr>
-						<td width="4"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-						<td valign="middle" align="left"><?php echo "$search_box"; ?></td>
-					</tr>
-					<?php } ?>
-				</table>
+			<td bgcolor="#FFFFFF" align="left">
+				<?php 
+				
+				echo '<img src="images/spacer.gif" width="1" height="6" alt=" "><br>';
+				echo "<form action=\"day.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
+				include('./functions/list_icals.php');
+				include('./functions/list_years.php');
+				include('./functions/list_months.php');
+				include('./functions/list_weeks.php');
+				echo "</form>";
+				if ($show_search == 'yes') {
+					echo $search_box;
+				}
+				if ($display_custom_goto == "yes") {
+					echo '<form action="day.php" method="GET">';
+					echo '<input type="hidden" name="cal" value="'.urlencode($cal).'">';	
+					echo '<input type="text" style="width:160px; font-size:10px" name="jumpto_day">';
+					echo '<input type="submit" value="Go">';
+					echo '</form>';
+				} 
+				
+				?>
 			</td>
-		</tr>
-		<tr>
-			<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 		</tr>
 	</table>
 	<br>
@@ -114,13 +90,11 @@
 	<?php if (isset($master_array[($tomorrows_date)]) && sizeof($master_array[($tomorrows_date)]) > 0) { ?>
 	
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-		<tr>
-			<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
+		<tr height="20">
 			<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$tomorrows_lang"; ?></font></td>
-			<td align="right" valign="top" width="1%" class="sideback"></td>
 		</tr>
 		<tr>
-			<td colspan="3" bgcolor="#FFFFFF" align="center">
+			<td bgcolor="#FFFFFF" align="center">
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 					<tr>
 						<td colspan="7"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>
@@ -178,13 +152,11 @@
 		if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 		
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-		<tr>
-			<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
+		<tr height="20">
 			<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$todo_lang"; ?></font></td>
-			<td align="right" valign="top" width="1%" class="sideback"></td>
 		</tr>
 		<tr>
-			<td colspan="3" bgcolor="#FFFFFF" align="center">
+			<td bgcolor="#FFFFFF" align="center">
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 					<tr>
 						<td colspan="7"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>

@@ -6,9 +6,7 @@ if ($display_ical_list == "yes") {
 		$query="&amp;getdate=$getdate";
 	} else {
 		$query="";
-	}
-	print "<form action=\"day.php\" method=\"GET\">\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">\n";
-	
+	}	
 	// open file
 	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 	
@@ -32,18 +30,18 @@ if ($display_ical_list == "yes") {
 		$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 		if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
 			if ($cal_tmp == $cal) {
-				print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
+				print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>";
 			} else {
-				print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
+				print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>";	
 			}
 		}	
 	}			
 
 	// option to open all (non-web) calenders together
 	if ($cal == 'all_calenders_combined971') {
-		print "<option value=\"$current_view.php?cal=all_calenders_combined971\" selected>$all_cal_comb_lang</option>\n";
+		print "<option value=\"$current_view.php?cal=all_calenders_combined971\" selected>$all_cal_comb_lang</option>";
 	} else {
-		print "<option value=\"$current_view.php?cal=all_calenders_combined971\">$all_cal_comb_lang</option>\n";
+		print "<option value=\"$current_view.php?cal=all_calenders_combined971\">$all_cal_comb_lang</option>";
 	}
 		
 	foreach($list_webcals as $cal_tmp) {
@@ -53,9 +51,9 @@ if ($display_ical_list == "yes") {
 			$cal_displayname_tmp = substr($cal_displayname_tmp,0,-4);
 			$cal_encoded_tmp = urlencode($cal_tmp);
 			if ($cal_tmp == $cal_httpPrefix || $cal_tmp == $cal_webcalPrefix) {
-				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp\" selected>$cal_displayname_tmp Webcal</option>\n";
+				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp\" selected>$cal_displayname_tmp Webcal</option>";
 			} else {
-				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp\">$cal_displayname_tmp Webcal</option>\n";	
+				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp\">$cal_displayname_tmp Webcal</option>";	
 			}		
 		}
 	}
@@ -64,7 +62,9 @@ if ($display_ical_list == "yes") {
 	closedir($dir_handle);
 	
 	// finish <select>
-	print "</select>\n</form>";
+	print "</select>";
 	
 }
+
+
 ?>	
