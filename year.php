@@ -6,9 +6,18 @@ ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day = $day_array2[3]; 
 $this_month = $day_array2[2];
 $this_year = $day_array2[1]. '01'. '01';
+$this_year2 = $day_array2[1];
 
+$unix_time = strtotime($getdate);
 $startYear = strtotime ($this_year);
 $checkad = date ("Ymd", $startYear);
+
+$next_year = strtotime ("+1 year", strtotime("$getdate"));
+$next_year = date ("Ymd", $next_year);
+$prev_year = strtotime ("-1 year", strtotime("$getdate"));
+$prev_year = date ("Ymd", $prev_year);
+
+$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
 
 ?>
@@ -17,12 +26,42 @@ $checkad = date ("Ymd", $startYear);
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title><?php echo $calendar_name; ?></title>
+	<title><?php echo "$calendar_name - $thisday2"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
 	<meta name="generator" content="BBEdit 6.5.3">
 </head>
 <body>
 <center>
+<table width="676" border="0" cellspacing="0" cellpadding="0" class="calborder">
+	<tr>
+		<td align="center" valign="middle" bgcolor="white">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      			<tr>
+      				<td align="left" width="90" class="navback">&nbsp;</td>
+      				<td>
+      					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      						<tr>
+								<td align="right" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$prev_year\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
+								<td align="center" width="10%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $this_year2; ?></font></td>
+      							<td align="left" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$next_year\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
+      						</tr>
+      					</table>
+      				</td>
+      				<td align="right" width="90" class="navback">	
+      					<table width="90" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
+							</tr>
+						</table>
+					</td>
+      			</tr>
+      		</table>
+		</td>
+	</tr>
+</table>
+<br>	
 <table border="0" width="670" cellspacing="0" cellpadding="0">
 	<tr>	
 		<?php
