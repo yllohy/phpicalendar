@@ -4,10 +4,17 @@ define('BASE', '../');
 include(BASE.'functions/ical_parser.php');
 
 if ($enable_rss != 'yes') {
-	die ("RSS feeds are not enabled on this site.");
+	exit(error('RSS is not available for this installation.', $cal, '../'));
 }
 
-$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+if (empty($default_path)) {
+	if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
+		$default_path = 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+	} else {
+		$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+	}
+}
+
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time = $start_week_time + (6 * 25 * 60 * 60);
 $start_week = localizeDate($dateFormat_week, $start_week_time);

@@ -5,12 +5,15 @@ require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$charset");
 
-$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/admin/'));
-
-// Redirect if administration is not allowed
-if ($allow_admin != "yes") {
-	header("Location: index.php");
-	die();
+if (empty($default_path)) {
+	if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
+		$default_path = 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/admin/'));
+	} else {
+		$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/admin/'));
+	}
+}
+if ($allow_admin != 'yes') {
+	exit(error('The administration menu has been turned off.', $cal, '../'));
 }
 
 // Load variables from forms and query strings into local scope

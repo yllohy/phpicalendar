@@ -81,6 +81,13 @@ COPYING for more information about our license.
 
 Changes:
 --------
+2.0
+	-Enhanced error messaging.
+	-Added Afrikaans Language.
+	-Todos can be turned off again.
+	-Todos won't show private todos.
+	-RSS page respects https servers.
+
 2.0 beta
 	-Updated translations:
 		-Japanese

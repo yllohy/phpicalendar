@@ -4,7 +4,17 @@ define('BASE','../');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/calendar_functions.php');
 
-$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+if ($enable_rss != 'yes') {
+	exit(error('RSS is not available for this installation.', $cal, '../'));
+}
+
+if (empty($default_path)) {
+	if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
+		$default_path = 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+	} else {
+		$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+	}
+}
 
 $current_view = "rssindex";
 $display_date = "RSS Info";
@@ -44,6 +54,7 @@ $page->replace_tags(array(
 	'sidebar_date'		=> $sidebar_date,
 	'rss_powered'	 	=> $rss_powered,
 	'rss_list'	 		=> $rss_list,
+	'charset'	 		=> $charset,
 	'rss_available' 	=> '',
 	'rssdisable'	 	=> '',
 	'rss_valid' 		=> '',

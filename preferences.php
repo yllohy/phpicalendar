@@ -6,6 +6,10 @@ require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$charset");
 $display_date = $preferences_lang;
 
+if ($allow_preferences != 'yes') {
+	exit(error('Preferences are not available for this installation.', $cal));
+}
+
 if ($cookie_uri == '') {
 	$cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
 }

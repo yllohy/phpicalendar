@@ -25,7 +25,7 @@ $second_offset			= '';				// The time in seconds between your time and your serv
 $bleed_time				= '';				// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359', or '-1' for no bleed time. Is automatically set to $day_start if left blank.
 $cookie_uri				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar -- AUTO SETTING -- Only set if you are having cookie issues.
 $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http://www.example.com/phpicalendar/calendars -- AUTO SETTING -- Only set if you are having subscribe issues.
-$default_path			= 'http://www.example.com/phpicalendar'; 						// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
+$default_path			= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 $charset				= 'UTF-8';			// Character set your calendar is in, suggested UTF-8, or iso-8859-1 for most languages.
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
@@ -50,7 +50,7 @@ $webcal_hours			= '24';				// Number of hours to cache webcals. Setting to '0' w
 // Webdav style publishing
 $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
 
-// Administration settings (admin.php)
+// Administration settings (/admin/)
 $allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
 $auth_method			= 'ftp';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
 $auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.

@@ -3,8 +3,8 @@ if (!defined('BASE')) define('BASE','./');
 require_once(BASE.'functions/template.php');
 
 
-function error($error_msg='There was an error processing the request.', $file='NONE') {
-	global $template, $language, $enable_rss, $lang;
+function error($error_msg='There was an error processing the request.', $file='NONE', $error_base='./') {
+	global $template, $language, $enable_rss, $lang, $charset, $default_path;
 	if (!isset($template))					$template = 'default';
 	if (!isset($lang['l_powered_by']))		$lang['l_powered_by'] = 'Powered by';
 	if (!isset($lang['l_error_title']))		$lang['l_error_title'] = 'Error!';
@@ -17,7 +17,15 @@ function error($error_msg='There was an error processing the request.', $file='N
 	$error_calendar 	= sprintf($lang['l_error_calendar'], $file);
 	$current_view 		= 'error';
 	$display_date 		= $lang['l_error_title'];
-	$calendar_name 		= $lang['l_error_title'];	
+	$calendar_name 		= $lang['l_error_title'];
+	
+	if (empty($default_path)) {
+		if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
+			$default_path = 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+		} else {
+			$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
+		}
+	}
 	
 	$page = new Page(BASE.'templates/'.$template.'/error.tpl');
 	
@@ -27,10 +35,11 @@ function error($error_msg='There was an error processing the request.', $file='N
 	));
 
 	$page->replace_tags(array(
-		'default_path'		=> '',
+		'default_path'		=> $error_base,
 		'template'			=> $template,
 		'cal'				=> $cal,
 		'getdate'			=> $getdate,
+		'charset'			=> $charset,
 		'calendar_name'		=> $calendar_name,
 		'display_date'		=> $display_date,
 		'rss_powered'	 	=> $rss_powered,
