@@ -147,8 +147,10 @@ foreach ($cal_filelist as $filename) {
 				}
 				
 				if ($uid_valid && isset($processed[$uid]) && isset($recurrence_id['date'])) {
+					
 					$old_start_date = $processed[$uid][0];
 					$old_start_time = $processed[$uid][1];
+					if ($recurrence_id['value'] == 'DATE') $old_start_time = '-1';
 					$start_date_tmp = $recurrence_id['date'];
 					if (!isset($start_date)) $start_date = $old_start_date;
 					if (!isset($start_time)) $start_time = $master_array[$old_start_date][$old_start_time][$uid]['event_start'];
@@ -166,7 +168,11 @@ foreach ($cal_filelist as $filename) {
 					removeOverlap($start_date_tmp, $old_start_time, $uid);
 					if (isset($master_array[$start_date_tmp][$old_start_time][$uid])) {
 						unset($master_array[$start_date_tmp][$old_start_time][$uid]);  // SJBO added $uid twice here
+						if (sizeof($master_array[$start_date_tmp][$old_start_time]) == 0) {
+							unset($master_array[$start_date_tmp][$old_start_time]);
+						}
 					}
+					
 					$write_processed = false;
 				} else {
 					$write_processed = true;
@@ -221,7 +227,7 @@ foreach ($cal_filelist as $filename) {
 				if ($uid_valid && $write_processed) {
 					if (!isset($hour)) $hour = 00;
 					if (!isset($minute)) $minute = 00;
-					$processed[$uid] = array($start_date,($hour.$minute));
+					$processed[$uid] = array($start_date,($hour.$minute), $type);
 				}
 							
 				// Handling of the all day events

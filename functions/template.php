@@ -556,7 +556,7 @@ class Page {
 		$return_adtmp	= '';
 		$return_etmp	= '';
 		
-		if (is_array($master_array[$next_day])) {
+		if (is_array($master_array[$next_day]) && sizeof($master_array[$next_day]) > 0) {
 			foreach ($master_array[$next_day] as $event_times) {
 				foreach ($event_times as $val) {
 					$event_text = stripslashes(urldecode($val["event_text"]));
