@@ -57,7 +57,6 @@ $num_of_events = 0;
     		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=month\">";
 		} 
 	?>
-	<?php include (BASE.'functions/event.js'); ?>
 </head>
 <body>
 <?php include (BASE.'includes/header.inc.php'); ?>
@@ -157,38 +156,33 @@ $num_of_events = 0;
 								foreach ($master_array[("$daylink")] as $event_times) {
 									foreach ($event_times as $val) {
 										$num_of_events++;
-										$event_text = stripslashes(urldecode($val["event_text"]));
-										$event_text = strip_tags($event_text, '<b><i><u>');
-										if ($event_text != "") {	
-											$event_text2 	= addslashes($val["event_text"]);
-											$event_text2 	= urlencode($event_text2);
-											$description 	= addslashes($val["description"]);
-											$description	= urlencode($description);
-											$event_start 	= @$val["event_start"];
-											$event_end 		= @$val["event_end"];
-											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
-											$event_start2 	= date ($timeFormat_small, @strtotime ("$event_start"));
-											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
-											$calendar_name2	= addslashes($calendar_name);
-											$calendar_name2 = urlencode($calendar_name2);
-											$event_text		= word_wrap($event_text, 12, $month_event_lines);
-											$status 		= $val["status"];
-											echo "<tr>\n";
-											echo "<td>\n";
-											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-											echo "<tr>\n";
-											if (!isset($val["event_start"])) {
-												$event_start = '';
-												$event_end = '';
-												echo "<td><font class=\"V10\"><center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description', '$status')\"><i>$event_text</i></a></center></font></td>\n";
-											} else {	
-												echo "<td align=\"left\" valign=\"top\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description', '$status')\"><font class=\"V9\">&nbsp;$event_start2 $event_text</font></a></td>\n";
-											}
-											echo "</tr>\n";
-											echo "</table>\n";
-											echo "</td>\n";
-											echo "</tr>\n";
+										echo "<tr><td>\n";
+										echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">";
+										echo "<tr>\n";
+										if (!isset($val["event_start"])) {
+											 echo "<td align=center>";
+											 openevent("$calendar_name", "", "", $val,
+											"<font class=\"V10\"><i>",
+											"</i></font>");
+										} else {	
+											$event_start = @$val["event_start"];
+											$event_end   = @$val["event_end"];
+											$event_start = date($timeFormat, @strtotime ("$event_start"));
+											$start2	 = date($timeFormat_small,@strtotime("$event_start"));
+											$event_end   = date($timeFormat, @strtotime ("$event_end"));
+											echo "<td align=\"left\" valign=\"top\">";
+											openevent("$calendar_name",
+											"$event_start",
+											"$event_end",
+											$val,
+											$month_event_lines,
+											12,
+											"<font class=\"V9\">&nbsp;$start2 ",
+											"</font>");
 										}
+										echo "</td></tr>\n";
+										echo "</table>\n";
+										echo "</td></tr>\n";
 									}
 								}
 							}
@@ -256,33 +250,30 @@ $num_of_events = 0;
 								// Pull out each time
 								foreach ($new_val as $new_key2 => $new_val2) {
 								if ($new_val2["event_text"]) {	
-									$event_text 	= stripslashes(urldecode($new_val2["event_text"]));
-									$event_text2 	= addslashes($new_val2["event_text"]);
-									$event_text2 	= str_replace("\"", "&quot;", $event_text2);
-									$event_text2 	= urlencode($event_text2);
-									$description 	= addslashes(urlencode($new_val2["description"]));
-									$description 	= str_replace("\"", "&quot;", $description);
-									$status			= $new_val2["status"];
 									if (isset($new_val2["event_start"])) {
 										$event_start 	= $new_val2["event_start"];
 										$event_end 		= $new_val2["event_end"];
 										$event_start 	= date ($timeFormat, strtotime ("$event_start"));
 										$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-										$event_text 	= str_replace ("<br>", "", $event_text);
 										$event_start2	= $event_start;
 									} else {
 										$event_start = "$all_day_lang";
 										$event_start2 = '';
-										$event_end = '';													}
-									if (strlen($event_text) > 70) {
-										$event_text = substr("$event_text", 0, 65);
-										$event_text = $event_text . "...";
+										$event_end = '';													
 									}
-
+		
 									echo "<tr>\n";
 									echo "<td align=\"left\" valign=\"top\" width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
 									echo "<td align=\"left\" valign=\"top\" colspan=\"2\">\n";
-									echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description', '$status')\"><font class=\"G10B\">$event_text</font></a>\n";
+									openevent("$calendar_name",
+									"$event_start",
+									"$event_end",
+									$new_val2,
+									0,
+									65,
+									"<font class=\"G10B\">&nbsp;",
+									"</font>");
+									//echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description', '$status')\"><font class=\"G10B\">$event_text</font></a>\n";
 									echo "</td>\n";
 									echo "</tr>\n";
 								}
