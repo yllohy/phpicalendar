@@ -144,7 +144,7 @@
 											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 											echo "<tr>\n";
 											echo "<td>\n";
-											if (!$event_start = $val["event_start"]) {
+											if (!$event_start == $val["event_start"]) {
 												echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center>\n";
 											} else {	
 												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</a>\n";
