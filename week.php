@@ -51,15 +51,20 @@ $thisday2 = strftime($dateFormat_week_list, $date);
 
 $dayborder = 0;
 
-$nbrGridCols = 1;
-if ($master_array[($getdate)]) {
-	foreach($master_array[($getdate)] as $ovlKey => $ovlValue) {
-		if ($ovlKey != "-1") {
-			foreach($ovlValue as $ovl2Value) {
-				$nbrGridCols = kgv($nbrGridCols, ($ovl2Value["event_overlap"] + 1));
+$thisdate = $start_week_time;
+for ($i=0;$i<7;$i++) {
+	$thisday = date("Ymd", $thisdate);
+	$nbrGridCols[$thisday] = 1;
+	if ($master_array[($thisday)]) {
+		foreach($master_array[($thisday)] as $ovlKey => $ovlValue) {
+			if ($ovlKey != "-1") {
+				foreach($ovlValue as $ovl2Value) {
+					$nbrGridCols[$thisday] = kgv($nbrGridCols[$thisday], ($ovl2Value["event_overlap"] + 1));
+				}
 			}
-		}
-	} 
+		} 
+	}
+	$thisdate = ($thisdate + (25 * 60 * 60));
 }
 ?>
 
@@ -111,7 +116,7 @@ if ($master_array[($getdate)]) {
 							do {
 								$thisday = date("Ymd", $thisdate);
 								$thisday2 = strftime($dateFormat_week_list, $thisdate);
-								echo "<td width=\"70\" colspan=\"" . $nbrGridCols . "\" valign=\"top\" align=\"center\" bgcolor=\"#eeeeee\" class=\"V9\">\n";
+								echo "<td width=\"70\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#eeeeee\" class=\"V9\">\n";
 								echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a>\n";
 								echo "</td>\n";
 								$thisdate = ($thisdate + (25 * 60 * 60));
@@ -127,6 +132,7 @@ if ($master_array[($getdate)]) {
 					//		echo "<td  height=\"11\" width=\"60\" nowrap bgcolor=\"#f5f5f5\">&nbsp;</td>";
 							do {
 								$thisday = date("Ymd", $thisdate);
+
 								if ($master_array[($thisday)]["-1"]) {
 									echo "<td  height=\"24\">\n";
 									echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";
@@ -134,7 +140,7 @@ if ($master_array[($getdate)]) {
 										$all_day_text = $allday["event_text"];
 										$description = $allday["description"];
 										echo "<tr>\n";
-										echo "<td colspan=\"" . $nbrGridCols . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\"><i>$all_day_text</i></font></a></td>\n";
+										echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\"><i>$all_day_text</i></font></a></td>\n";
 										echo "</tr>\n";
 									}
 									echo "</table>\n";
@@ -169,9 +175,10 @@ if ($master_array[($getdate)]) {
 									
 									// loop this part 7 times, one for each day
 									for ($week_loop=0; $week_loop<7; $week_loop++) {
-										$dayborder = 0;
+									$thisday = date("Ymd", $thisdate);
+									$dayborder = 0;
 										$event_length=array();
-										$thisday = date("Ymd", $thisdate);
+										
 										// check for eventstart 
 										if (sizeof($master_array[($thisday)]["$cal_time"]) > 0) {
 											foreach ($master_array[($thisday)]["$cal_time"] as $eventKey => $loopevent) {
@@ -197,14 +204,14 @@ if ($master_array[($getdate)]) {
 												$class = "";
 												$dayborder = 0;
 											}
-											echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols . "\" $class>&nbsp;</td>\n";
+											echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols[$thisday] . "\" $class>&nbsp;</td>\n";
 											
 										} else {
-											$emptyWidth = $nbrGridCols;
+											$emptyWidth = $nbrGridCols[$thisday];
 											for ($i=0;$i<sizeof($event_length);$i++) {
 											
 											//echo $master_array[($thisday)]["$cal_time"][($event_length[$i]["key"])]["event_text"] . " ind: " . $i . " / anz: " . $event_length[$i]["overlap"] . " = " . eventWidth($i,$event_length[$i]["overlap"]) . "<br />";
-												$drawWidth = $nbrGridCols / ($event_length[$i]["overlap"] + 1);
+												$drawWidth = $nbrGridCols[$thisday] / ($event_length[$i]["overlap"] + 1);
 												$emptyWidth = $emptyWidth - $drawWidth;
 												switch ($event_length[$i]["state"]) {
 													case "begin":
