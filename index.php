@@ -11,6 +11,8 @@ if ($printview_default == 'yes') {
 } else {
 	$default_view = "$default_view" . ".php";
 }
-header("Location: $default_view");
+/*header("Location: $default_view");*/
+
+include( $default_view );
 
 ?>
