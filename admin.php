@@ -4,7 +4,6 @@ session_start();
 define('BASE', './');
 include (BASE.'functions/init.inc.php');
 include (BASE.'functions/admin_functions.php');
-include (BASE.'functions/calendar_functions.php');
 
 // Redirect if administration is not allowed
 if ($allow_admin != "yes") {
