@@ -1,21 +1,19 @@
 <?php
 
 define('BASE', '../');
-
-#$getdate = date ("Ymd");
-#$cal = "Jareds32Classes";
 include(BASE.'functions/ical_parser.php');
+$theview = 'Day';
 
 
 $rss = 	"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"."\n";
 $rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">'."\n";
 $rss .= '<rss version="0.91">'."\n";
 $rss .= '<channel>'."\n";
-$rss .= '<title>PHP iCalender</title>'."\n";
-$rss .= '<link>http://www.yoursite.org</link>'."\n";
-$rss .= '<description>Someones PHP iCalendar</description>'."\n";
+$rss .= '<title>'.$cal.' '.$calendar_lang.' - '.$theview.'</title>'."\n";
+$rss .= '<link>'.$default_path.'</link>'."\n";
+$rss .= '<description>'.$cal.' '.$calendar_lang.' - '.$theview.'</description>'."\n";
 $rss .= '<language>us-en</language>'."\n";
-$rss .= '<copyright>Copyright 2002, yoursite.com.</copyright>'."\n";
+$rss .= '<copyright>Copyright 2002, '.$default_path.'</copyright>'."\n";
 
 if (isset($master_array[($getdate)]) && sizeof($master_array[($getdate)]) > 0) {
 	foreach ($master_array[("$getdate")] as $event_times) {
@@ -29,7 +27,7 @@ if (isset($master_array[($getdate)]) && sizeof($master_array[($getdate)]) > 0) {
 			$description 	= strip_tags($description, '<b><i><u>');
 			$rss .= '<item>'."\n";
 			$rss .= '<title>'.$event_start.' '.$event_text.'</title>'."\n";
-			$rss .= '<link>http://localhost/phpicalendar/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
+			$rss .= '<link>'.$default_path.'/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
 			$rss .= '<description>'.$description.'</description>'."\n";
 			$rss .= '</item>'."\n";
 		}

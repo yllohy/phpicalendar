@@ -110,10 +110,12 @@ if (is_array($master_array[($getdate)])) {
 					}
 					if ($daysofweek_dayview == 'yes') {
 				?>
+
 		<tr>	
 			<td>
       			<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<?php
+      				echo '<tr><td colspan="7"><img src="images/spacer.gif" width="70" height="1" alt=""></td></tr>';
 					echo "<tr>";
 					$thisdate = $start_week_time;
 					$start_day = strtotime($week_start_day);
@@ -135,6 +137,7 @@ if (is_array($master_array[($getdate)])) {
       				echo '</tr>';
       				}
       				?>
+      			
       			<tr>
 					<td align="center" valign="top" colspan="3">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">

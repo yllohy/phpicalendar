@@ -44,6 +44,7 @@ $goday_lang			= 'Go to Today';
 $goweek_lang		= 'Go to This Week';
 $gomonth_lang		= 'Go to This Month';
 $goyear_lang		= 'Go to This Year';
+$this_site_is_lang	= 'This site is';
 
 $daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 $daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');

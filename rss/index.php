@@ -18,7 +18,7 @@ include(BASE.'functions/ical_parser.php');
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="520" valign="top" align="center">
-			<table width="520" border="0" cellspacing="0" cellpadding="0" class="calborder">
+			<table width="640" border="0" cellspacing="0" cellpadding="0" class="calborder">
 				<tr>
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
@@ -34,15 +34,19 @@ include(BASE.'functions/ical_parser.php');
 					<td>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 							<tr>
-								<td align="center" valign="top">
+								<td width="2%"></td>
+								<td width="98%" valign="top">
 									<br>
-									<?php echo $error_msg; ?>
+									This website is RSS enabled.<br>
 									<br>
+									<b>Day View:</b><br>
+									<?php echo $default_path.'/rss.php?cal='.$cal.'&rssview=day'; ?><br>
 									<br>
-									<?php echo $error_calendar; ?>
+									<b>Week View:</b><br>
+									<?php echo $default_path.'/rss.php?cal='.$cal.'&rssview=week'; ?><br>
 									<br>
-									<br>
-									<?php echo $error_back_lang; ?>
+									<b>Month View:</b><br>
+									<?php echo $default_path.'/rss.php?cal='.$cal.'&rssview=month'; ?><br>
 									<br>
 									<br>
 								</td>
