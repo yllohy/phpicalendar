@@ -137,7 +137,6 @@ if ($parse_file) {
 			
 			$mArray_begin = mktime (0,0,0,1,1,$this_year);
 			$mArray_end = mktime (0,0,0,1,12,($this_year + 1));
-			//if ((!$allday_end) && (!$end_time)) $allday_end = $mArray_end;	
 			
 			if (isset($start_time) && isset($end_time)) {
 				// Mozilla style all-day events or just really long events
@@ -161,10 +160,14 @@ if ($parse_file) {
 				$minute = $time3[2];
 			}
 
+			// RECURRENCE-ID Support
+			$recurrence_delete = array ("$recurrence_d" => array ("$recurrence_t" => $uid));
+				
 			// handle single changes in recurring events
-			if ($uid_valid && $write_processed) {
-				$processed[$uid] = array($start_date,($hour.$minute));
-			}
+			// Maybe this is no longer need since done at bottom of parser? - CL 11/20/02
+			//if ($uid_valid && $write_processed) {
+			//	$processed[$uid] = array($start_date,($hour.$minute));
+			//}
 						
 			// Handling of the all day events
 			if ((isset($allday_start) && $allday_start != '')) {
@@ -222,8 +225,7 @@ if ($parse_file) {
 					$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
 					$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
 				}
-
-				//print_r($rrule_array);
+				
 				foreach ($rrule_array as $key => $val) {
 					switch($key) {
 						case 'FREQ':
@@ -756,6 +758,8 @@ if ($parse_file) {
 					$recur_unixtime = calcTime($offset_tmp, $server_offset_tmp, $recur_unixtime);
 					$recurrence_id['date'] = date('Ymd', $recur_unixtime);
 					$recurrence_id['time'] = date('Hi', $recur_unixtime);
+					$recurrence_d = date('Ymd', $recur_unixtime);
+					$recurrence_t = date('Hi', $recur_unixtime);
 					unset($server_offset_tmp);
 					break;
 					
@@ -804,6 +808,21 @@ if ($parse_file) {
 		}
 	}
 	
+	// Remove pesky recurrences
+	foreach ($recurrence_delete as $delete => $delete_key) {
+		foreach ($delete_key as $key => $val) {
+			if (is_array($master_array["$delete"]["$key"]["$val"])) {
+				unset($master_array["$delete"]["$key"]["$val"]);
+				if (sizeof($master_array["$delete"]["$key"] < 1)) {
+					unset($master_array["$delete"]["$key"]);
+					if (sizeof($master_array["$delete"] < 1)) {
+						unset($master_array["$delete"]);
+					}
+				}
+			}
+		}
+	}
+	
 	// Sort the array by absolute date.
 	if (isset($master_array) && is_array($master_array)) { 
 		ksort($master_array);
@@ -834,7 +853,8 @@ if ($parse_file) {
 //print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
-//print_r($rrule);	
+//print_r($rrule);
+//print_r($recurrence_delete);	
 //print '</pre>';
 	
 					
