@@ -45,9 +45,7 @@ $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 
 $php_ended = getmicrotime();
-
 $generated = number_format(($php_ended-$php_started),3);
-//$generated = sprintf($search_took_lang,$search_took);
 
 $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 

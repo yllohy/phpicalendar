@@ -1,6 +1,6 @@
 {HEADER}
 <center>
-<table border="0" width="700" cellspacing="0" cellpadding="0">
+<table border="0" width="650" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">

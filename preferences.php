@@ -127,6 +127,9 @@ while ($file = readdir($dir_handle)) {
 }
 closedir($dir_handle);
 
+$php_ended = getmicrotime();
+$generated = number_format(($php_ended-$php_started),3);
+
 $page = new Page(BASE.'templates/'.$template.'/preferences.tpl');
 
 $page->replace_tags(array(
@@ -147,6 +150,8 @@ $page->replace_tags(array(
 	'time_select' 		=> $time_select,
 	'startday_select' 	=> $startday_select,
 	'style_select' 		=> $style_select,
+	'display_date'	 	=> $lang['l_preferences'],
+	'generated'	 		=> $generated,
 	'message'	 		=> $message
 			
 	));
