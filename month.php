@@ -6,40 +6,37 @@ include(BASE.'functions/ical_parser.php');
 if ($minical_view == 'current') $minical_view = 'month';
 
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
-$this_day = $day_array2[3]; 
-$this_month = $day_array2[2];
-$this_year = $day_array2[1];
+$this_day 				= $day_array2[3]; 
+$this_month 			= $day_array2[2];
+$this_year 				= $day_array2[1];
 
-$unix_time = strtotime($getdate);
-$today_today = date('Ymd', strtotime("now + $second_offset seconds")); 
-$tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
-$yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
-$date = mktime(0,0,0,"$this_month","$this_day","$this_year");
+$unix_time 				= strtotime($getdate);
+$today_today 			= date('Ymd', strtotime("now + $second_offset seconds")); 
+$tomorrows_date 		= date( "Ymd", strtotime("+1 day",  $unix_time));
+$yesterdays_date 		= date( "Ymd", strtotime("-1 day",  $unix_time));
 
 // find out next month
-$next_month_month = ($this_month+1 == '13') ? '1' : ($this_month+1);
-$next_month_day = $this_day;
-$next_month_year = ($next_month_month == '1') ? ($this_year+1) : $this_year;
+$next_month_month 		= ($this_month+1 == '13') ? '1' : ($this_month+1);
+$next_month_day 		= $this_day;
+$next_month_year 		= ($next_month_month == '1') ? ($this_year+1) : $this_year;
 while (!checkdate($next_month_month,$next_month_day,$next_month_year)) $next_month_day--;
-$next_month_time = mktime(0,0,0,$next_month_month,$next_month_day,$next_month_year);
+$next_month_time 		= mktime(0,0,0,$next_month_month,$next_month_day,$next_month_year);
 
 // find out last month
-$prev_month_month = ($this_month-1 == '0') ? '12' : ($this_month-1);
-$prev_month_day = $this_day;
-$prev_month_year = ($prev_month_month == '12') ? ($this_year-1) : $this_year;
+$prev_month_month 		= ($this_month-1 == '0') ? '12' : ($this_month-1);
+$prev_month_day 		= $this_day;
+$prev_month_year 		= ($prev_month_month == '12') ? ($this_year-1) : $this_year;
 while (!checkdate($prev_month_month,$prev_month_day,$prev_month_year)) $prev_month_day--;
-$prev_month_time = mktime(0,0,0,$prev_month_month,$prev_month_day,$prev_month_year);
+$prev_month_time 		= mktime(0,0,0,$prev_month_month,$prev_month_day,$prev_month_year);
 
-
-$next_month = date("Ymd", $next_month_time);
-$prev_month = date("Ymd", $prev_month_time);
-
-$display_date = localizeDate ($dateFormat_month, $date);
-$parse_month = date ("Ym", $date);
-$first_of_month = $this_year.$this_month."01";
-$start_month_day = dateOfWeek($first_of_month, $week_start_day);
-$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
-$num_of_events = 0;
+$next_month 			= date("Ymd", $next_month_time);
+$prev_month 			= date("Ymd", $prev_month_time);
+$display_date 			= localizeDate ($dateFormat_month, $unix_time);
+$parse_month 			= date ("Ym", $unix_time);
+$first_of_month 		= $this_year.$this_month."01";
+$start_month_day 		= dateOfWeek($first_of_month, $week_start_day);
+$thisday2 				= localizeDate($dateFormat_week_list, $unix_time);
+$num_of_events2 			= 0;
 
 include (BASE.'includes/header.inc.php'); 
 
@@ -55,7 +52,7 @@ include (BASE.'includes/header.inc.php');
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
 								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$prev_month\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"[$last_month_lang]\" border=\"0\" align=\"right\"></a>"; ?></td>
-								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $display_month; ?></font></td>
+								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $display_date; ?></font></td>
       							<td align="left" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$next_month\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"[$next_month_lang]\" border=\"0\" align=\"left\"></a>"; ?></td>
       						</tr>
       					</table>
@@ -94,7 +91,6 @@ include (BASE.'includes/header.inc.php');
 					$sunday 		= strtotime("$start_month_day");
 					$i 				= 0;
 					$whole_month 	= TRUE;
-					$num_of_events 	= 0;
 					do {
 						$day 			= date ("j", $sunday);
 						$daylink 		= date ("Ymd", $sunday);
@@ -117,14 +113,17 @@ include (BASE.'includes/header.inc.php');
 							if ($master_array[("$daylink")]) {
 								foreach ($master_array[("$daylink")] as $event_times) {
 									foreach ($event_times as $val) {
-										$num_of_events++;
+										$num_of_events2++;
 										if (!isset($val["event_start"])) {
-											 openevent("$calendar_name", "", "", $val, $month_event_lines,
+											echo '<div align="center" class="V10">';
+											openevent("$calendar_name", "", "", $val, $month_event_lines,
 											15,
-											"<div align=\"center\" class=\"V10\"><i>",
-											"</i></div>",
+											"<i>",
+											"</i>",
 											"psf");
+											echo '</div>';
 										} else {	
+											echo '<div align="left" class="V9">&nbsp;';
 											$event_start = @$val["event_start"];
 											$event_end   = @$val["event_end"];
 											$event_start = date($timeFormat, @strtotime ("$event_start"));
@@ -136,9 +135,10 @@ include (BASE.'includes/header.inc.php');
 											$val,
 											$month_event_lines,
 											11,
-											"<div align=\"left\" class=\"V9\">&nbsp;$start2 ",
-											"</div>",
+											"$start2 ",
+											"",
 											"ps3");
+											echo '</div>';
 										}
 									}
 								}
@@ -164,21 +164,14 @@ include (BASE.'includes/header.inc.php');
 	</tr>
 </table>
 <?php include (BASE.'includes/calendar_nav.php'); ?>
-<?php if ($this_months_events == "yes") { ?>	
+<?php if (($this_months_events == "yes") && ($num_of_events2 > 0)) { ?>	
 <br>
-<table border="0" cellspacing="0" cellpadding="0" width="737" bgcolor="#FFFFFF" class="calborder">
-	<tr>
-		<td align="center" valign="top">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table width="737" border="0" cellspacing="0" cellpadding="3" class="calborder">
 				<tr>
-					<td align="left" valign="top" width="160" class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\" \" width=\"16\" height=\"20\" border=\"0\" align=\"left\">"; ?></td>
-					<td align="center" class="sideback" width="417" nowrap><font class="G10BOLD"><?php echo "$this_months_lang"; ?></font></td>
-					<td align="right" valign="top" width="160" class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\" \" width=\"16\" height=\"20\" border=\"0\" align=\"right\">"; ?></td>
-				</tr>
-				<tr>
-					<td colspan="3" height="1"></td>
+					<td colspan="3" align="center" class="sideback" nowrap><div style="height: 16px;" class="G10BOLD"><?php echo "$this_months_lang"; ?></div></td>
 				</tr>
 				<?php	
+					$first_time = TRUE;
 					// Iterate the entire master array
 					foreach($master_array as $key => $val) {
 						
@@ -189,9 +182,9 @@ include (BASE.'includes/header.inc.php');
 							$dayofmonth = localizeDate ($dateFormat_week_list, $dayofmonth);
 							$i = 0;
 							if ($today_today == $key) {
-								$fontclass="class=\"G10BOLD\"";
+								$fontclass="G10BOLD";
 							} else {
-								$fontclass="class=\"G10B\"";
+								$fontclass="G10B";
 							}
 							
 							// Pull out each day
@@ -212,19 +205,22 @@ include (BASE.'includes/header.inc.php');
 										$event_end = '';													
 									}
 		
-									echo "<tr>\n";
-									echo "<td align=\"left\" valign=\"top\" width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
-									echo "<td align=\"left\" valign=\"top\" colspan=\"2\">\n";
+									echo "<tr align=\"left\" valign=\"top\">\n";
+									echo "<td width =\"155\" class=\"$fontclass\" nowrap><a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a> <font class=\"V9G\">($event_start)</font></td>\n";
+									if ($first_time == TRUE) {
+										echo "<td width=\"5\" class=\"montheventline\" rowspan=\"$num_of_events2\"></td>";
+										$first_time = FALSE;
+									}
+									echo "<td>\n";
 									openevent("$calendar_name",
 									"$event_start",
 									"$event_end",
 									$new_val2,
 									0,
 									65,
-									"<font class=\"G10B\">&nbsp;",
+									"<font class=\"G10B\">",
 									"</font>",
 									"psf");
-									//echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description', '$status')\"><font class=\"G10B\">$event_text</font></a>\n";
 									echo "</td>\n";
 									echo "</tr>\n";
 								}
@@ -235,10 +231,7 @@ include (BASE.'includes/header.inc.php');
 					}
 				
 				?>
-			</table>
-		</td>
-	</tr>
-</table>		
+			</table>		
 <?php } ?>
 <?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
