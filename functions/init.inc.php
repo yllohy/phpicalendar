@@ -14,7 +14,7 @@ include(BASE.'functions/error.php');
 if ($HTTP_COOKIE_VARS['phpicalendar']) {
 	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
-	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal	 	= $phpicalendar['cookie_calendar'];
+	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal_check	= $phpicalendar['cookie_calendar'];
 	if (isset($phpicalendar['cookie_view'])) 		$default_view 		= $phpicalendar['cookie_view'];
 	if (isset($phpicalendar['cookie_style'])) 		$style_sheet 		= $phpicalendar['cookie_style'];
 	if (isset($phpicalendar['cookie_startday'])) 	$week_start_day		= $phpicalendar['cookie_startday'];
@@ -61,7 +61,13 @@ if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 		$cal_filename = stripslashes($cal_decoded);
 	}
 } else {
-	$cal_filename = $default_cal;
+	$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
+	$calcheckopen = @fopen($calcheck, "r");
+	if ($calcheckopen == FALSE) {
+		$cal_filename = $default_cal;
+	} else {
+		$cal_filename = $default_cal_check;
+	}
 }
 
 
