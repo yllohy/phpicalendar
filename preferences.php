@@ -6,6 +6,16 @@ include(BASE.'functions/ical_parser.php');
 $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
 $default_view = "$default_view" . ".php";
 if ($allow_preferences == 'no') header("Location: $default_view");
+$action = $HTTP_GET_VARS['action'];
+if ($action == 'setcookie') { 
+	$cookie_language 	= $HTTP_POST_VARS['cookie_language'];
+	$cookie_calendar 	= $HTTP_POST_VARS['cookie_calendar'];
+	$cookie_view 		= $HTTP_POST_VARS['cookie_view'];
+	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view");
+	echo '<pre>'; print_r($the_cookie); echo '</pre>';
+	serialize($the_cookie);
+	#setcookie("the_cookie","$the_cookie",time()+6604800,"/","localhost",0);
+}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -57,7 +67,7 @@ if ($allow_preferences == 'no') header("Location: $default_view");
 							<tr>
 								<td width="2%"></td>
 								<td width="98%" valign="top" align="left">
-								<form action="preferences.php?action=setcookie">
+								<form action="preferences.php?action=setcookie" METHOD="post">
 								<?php 
 								
 								
@@ -72,7 +82,7 @@ if ($allow_preferences == 'no') header("Location: $default_view");
 								while ($file = readdir($dir_handle)) {
 									if (substr($file, -8) == ".inc.php") {
 										$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
-										if ($language_tmp == $tmp_pref_language) {
+										if ($language_tmp == $cookie_language) {
 											print "<option value=\"$language_tmp\" selected>in $language_tmp</option>\n";
 										} else {
 											print "<option value=\"$language_tmp\">in $language_tmp</option>\n";
@@ -94,7 +104,7 @@ if ($allow_preferences == 'no') header("Location: $default_view");
 										$cal_tmp = urlencode($cal_filename_tmp);
 										$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 										if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
-											if ($cal_tmp == $cal) {
+											if ($cal_tmp == $cookie_calendar) {
 												print "<option value=\"$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
 											} else {
 												print "<option value=\"$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
