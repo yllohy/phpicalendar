@@ -8,6 +8,8 @@
 	
 	$next_day = date("Ymd", strtotime("+1 day", $unix_time));
 	$prev_day = date("Ymd", strtotime("-1 day", $unix_time));
+	
+	$fake_getdate_time = strtotime($this_year.'-'.$this_month.'-15');
 	?>
 <br>
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
@@ -27,7 +29,7 @@
 						<table width="160" border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-								<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></font></td>
+								<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", $fake_getdate_time))); ?></font></td>
 								<td align="right" valign="top" width="1"></td>
 							</tr>
 							<tr>
@@ -57,7 +59,7 @@
 											<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
 										</tr>
 										<?php
-											$minical_time = strtotime("-1 month", strtotime($getdate));
+											$minical_time = strtotime("-1 month", $fake_getdate_time);
 											$minical_month = date("m", $minical_time);
 											$minical_year = date("Y", $minical_time);
 											$first_of_month = $minical_year.$minical_month."01";
@@ -254,7 +256,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
+						<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", $fake_getdate_time))); ?></font></td>
 						<td align="right" valign="top" width="1"></td>
 					</tr>
 					<tr>
@@ -284,7 +286,7 @@
 									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
 								</tr>
 								<?php
-									$minical_time = strtotime("+1 month", strtotime($getdate));
+									$minical_time = strtotime("+1 month", $fake_getdate_time);
 									$minical_month = date("m", $minical_time);
 									$minical_year = date("Y", $minical_time);
 									$first_of_month = $minical_year.$minical_month."01";

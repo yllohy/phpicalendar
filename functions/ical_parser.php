@@ -180,10 +180,11 @@ if ($parse_file) {
 				}
 				if (($end > $mArray_begin) && ($end < $mArray_end)) {
 					while ($start != $end) {
-						$start_date = date('Ymd', $start);
-						$master_array[($start_date)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description);
+						$start_date2 = date('Ymd', $start);
+						$master_array[($start_date2)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description);
 						$start = strtotime('+1 day', $start);
 					}
+					if (!$write_processed) $master_array[($start_date)]['-1'][$uid]['exception'] = true;
 				}
 			}
 			
@@ -191,7 +192,7 @@ if ($parse_file) {
 			if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
 				$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
 				$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
-
+				if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
 			}
 			
 			// Handling of the recurring events, RRULE
@@ -201,6 +202,8 @@ if ($parse_file) {
 //			if ((is_array($rrule_array)) && ($allday_written != TRUE)) {
 			if (is_array($rrule_array)) {
 				if (isset($allday_start) && $allday_start != '') {
+					$hour = '-';
+					$minute = '1';
 					$rrule_array['START_DAY'] = $allday_start;
 					$rrule_array['END_DAY'] = $allday_end;
 					$rrule_array['END'] = 'end';
@@ -248,9 +251,11 @@ if ($parse_file) {
 								case 'MINUTELY':	$freq_type = 'minute';	break;
 								case 'SECONDLY':	$freq_type = 'second';	break;
 							}
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = ucfirst($freq_type);
 							break;
 						case 'COUNT':
 							$count = $val;
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $count;
 							break;
 						case 'UNTIL':
 							$until = ereg_replace('T', '', $val);
@@ -274,47 +279,59 @@ if ($parse_file) {
 								if ($regs[4] < 12)
 									$until = strtotime('-1 day', $until);
 							}
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = localizeDate($dateFormat_week,$until);
 							break;
 						case 'INTERVAL':
 							$number = $val;
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $number;
 							break;
 						case 'BYSECOND':
 							$bysecond = $val;
 							$bysecond = split (',', $bysecond);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $bysecond;
 							break;
 						case 'BYMINUTE':
 							$byminute = $val;
 							$byminute = split (',', $byminute);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $byminute;
 							break;
 						case 'BYHOUR':
 							$byhour = $val;
 							$byhour = split (',', $byhour);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $byhour;
 							break;
 						case 'BYDAY':
 							$byday = $val;
 							$byday = split (',', $byday);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $byday;
 							break;
 						case 'BYMONTHDAY':
 							$bymonthday = $val;
 							$bymonthday = split (',', $bymonthday);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $bymonthday;
 							break;					
 						case 'BYYEARDAY':
 							$byyearday = $val;
 							$byyearday = split (',', $byyearday);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $byyearday;
 							break;
 						case 'BYWEEKNO':
 							$byweekno = $val;
 							$byweekno = split (',', $byweekno);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $byweekno;
 							break;
 						case 'BYMONTH':
 							$bymonth = $val;
 							$bymonth = split (',', $bymonth);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $bymonth;
 							break;
 						case 'BYSETPOS':
 							$bysetpos = $val;
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $bysetpos;
 							break;
 						case 'WKST':
 							$wkst = $val;
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $wkst;
 							break;
 						case 'END':
 					
@@ -368,10 +385,10 @@ if ($parse_file) {
 												if (is_array($bymonthday)) {
 													// loop through the days on which this event happens
 													foreach($bymonthday as $day) {
-														if ($day != '0') {
-															$day = str_pad($day, 2, '0', STR_PAD_LEFT);
-															$next_date_time = strtotime(date('Y-m-',$next_range_time).$day);
-															$next_date = date('Ymd', $next_date_time);
+														$year = date('Y', $next_range_time);
+														$month = date('m', $next_range_time);
+														if (checkdate($month,$day,$year)) {
+															$next_date_time = mktime(0,0,0,$month,$day,$year);
 															$recur_data[] = $next_date_time;
 														}
 													}
@@ -379,9 +396,9 @@ if ($parse_file) {
 												} else {
 													// loop through the days on which this event happens
 													foreach($byday as $day) {
-														ereg ('([0-9]{1})([A-Z]{2})', $day, $byday_arr);
-														$nth = $byday_arr[1]-1;
-														$on_day = two2threeCharDays($byday_arr[2]);
+														ereg ('([\-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
+														$nth = $byday_arr[2]-1;
+														$on_day = two2threeCharDays($byday_arr[3]);
 														$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
 														$next_date = date('Ymd', $next_date_time);
 														$recur_data[] = $next_date_time;
@@ -392,18 +409,17 @@ if ($parse_file) {
 												if (!isset($bymonth)) $bymonth[] = date('m', $start_date_time);
 												foreach($bymonth as $month) {
 													$year = date('Y', $next_range_time);
-													$month = str_pad($month, 2, '0', STR_PAD_LEFT);
 													if (is_array($byday)) {
-														$checkdate_time = strtotime($year.$month.'01');
+														$checkdate_time = mktime(0,0,0,$month,1,$year);
 														foreach($byday as $day) {
-															ereg ('([0-9]{1})([A-Z]{2})', $day, $byday_arr);
-															$nth = $byday_arr[1]-1;
-															$on_day = two2threeCharDays($byday_arr[2]);
+															ereg ('([\-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
+															$nth = $byday_arr[2]-1;
+															$on_day = two2threeCharDays($byday_arr[3]);
 															$next_date_time = strtotime($on_day.' +'.$nth.' week', $checkdate_time);
 														}
 													} else {
 														$day = date('d', $start_date_time);
-														$next_date_time = strtotime($year.$month.$day);
+														$next_date_time = mktime(0,0,0,$month,$day,$year);
 													}
 													$recur_data[] = $next_date_time;
 												}

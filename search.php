@@ -39,7 +39,7 @@ $search_box .=
 	'<form action="search.php" method="GET">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
-	'<input type="text" size="15" class="search_style" name="query" value="'.$query.'">'."\n".
+	'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
 	'<INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
 	'</form>';
 
@@ -52,15 +52,24 @@ if ($search_valid) {
 			if (is_array($date_tmp)) {
 				foreach($date_tmp as $time_tmp) {
 					if (is_array($time_tmp)) {
-						foreach ($time_tmp as $event_tmp) {
+						foreach ($time_tmp as $uid_tmp => $event_tmp) {
 							if (is_array($event_tmp)) {
-								$results1 = search_boolean($format_search_arr,$event_tmp['event_text']);
-								if (!$results1) {
-									$results2 = search_boolean($format_search_arr,$event_tmp['description']);
-								}
-								if ($results1 || $results2) {
-									$event_tmp['date'] = $date_key_tmp;
-									$the_arr[] = $event_tmp;
+								if (!isset($the_arr[$uid_tmp]) || isset($event_tmp['exception'])) {
+									$results1 = search_boolean($format_search_arr,$event_tmp['event_text']);
+									if (!$results1) {
+										$results2 = search_boolean($format_search_arr,$event_tmp['description']);
+									}
+									if ($results1 || $results2) {
+										$event_tmp['date'] = $date_key_tmp;
+										if (isset($event_tmp['recur'])) {
+											$event_tmp['recur'] = format_recur($event_tmp['recur']);
+										}
+										if (isset($the_arr[$uid_tmp])) {
+											$the_arr[$uid_tmp]['exceptions'][] = $event_tmp;
+										} else {
+											$the_arr[$uid_tmp] = $event_tmp;
+										}
+									}
 								}
 							}
 						}
@@ -168,6 +177,13 @@ $search_took = number_format(($search_ended-$search_started),3);
 												echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$summary_lang:</td>\n";
 												echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$event_text</td>\n";
 												echo "</tr>\n";
+												if (isset($val['recur'])) {
+													$recur = $val['recur'];
+													echo "<tr>\n";
+													echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">Recurring event:</td>\n";
+													echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$recur</td>\n";
+													echo "</tr>\n";
+												}
 												if ($val["description"]) {
 													echo "<tr>\n";
 													echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$description_lang:</td>\n";
@@ -178,6 +194,61 @@ $search_took = number_format(($search_ended-$search_started),3);
 												echo "</td>\n";
 												echo "</tr>\n";			
 												echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\"></td></tr>\n";
+												if (isset($val['exceptions'])) {
+													foreach($val['exceptions'] as $val2) {
+														$key = $val2['date'];
+														$dayofmonth = strtotime ($key);
+														$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
+														echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
+														echo "<td align=\"left\" colspan=\"2\"><font class=\"V10\"><i>Exception:</i> <a class=\"ps3\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font></td></tr>";
+														echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\"></td></tr>\n";
+														
+														if ($val2["event_text"]) {	
+															$event_text 	= stripslashes(urldecode($val2["event_text"]));
+															$description 	= stripslashes(urldecode($val2["description"]));
+															$event_start 	= $val2["event_start"];
+															$event_end 		= $val2["event_end"];
+															$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+															$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+															$event_start 	= "$event_start - $event_end";
+															if (!$val2["event_start"]) { 
+																$event_start = "$all_day_lang";
+																$event_start2 = '';
+																$event_end = '';
+															}
+															echo "<tr>\n";
+															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
+															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
+															echo "<td align=\"left\">\n";
+															echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
+															echo "<tr>\n";
+															echo "<td width=\"100\" class=\"G10BOLD\">$time_lang:</td>\n";
+															echo "<td align=\"left\" class=\"G10B\">$event_start</td>\n";
+															echo "</tr>\n";
+															echo "<tr>\n";
+															echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$summary_lang:</td>\n";
+															echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$event_text</td>\n";
+															echo "</tr>\n";
+															if (isset($val2['recur'])) {
+																$recur = $val2['recur'];
+																echo "<tr>\n";
+																echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">Recurring event:</td>\n";
+																echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$recur</td>\n";
+																echo "</tr>\n";
+															}
+															if ($val2["description"]) {
+																echo "<tr>\n";
+																echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$description_lang:</td>\n";
+																echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$description</td>\n";
+																echo "</tr>\n";
+															}
+															echo "</table>\n";
+															echo "</td>\n";
+															echo "</tr>\n";			
+															echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\"></td></tr>\n";
+														}
+													}
+												}
 											}
 										}
 									} else {
@@ -337,6 +408,74 @@ function search_boolean($needle_arr, $haystack) {
 	
 	// if we haven't returned false, then we return true
 	return true;
+}
+
+function format_recur($arr) {
+	global $monthsofyearshort_lang, $daysofweekshort_lang;
+	$freq = $arr['FREQ'].(($arr['INTERVAL'] == 1) ? ' ' : 's ');
+	$int = $arr['INTERVAL'];
+	if (isset($arr['COUNT'])) $times = $arr['COUNT'].' time'.(($arr['COUNT'] == 1) ? ' ' : 's ');
+	if (isset($arr['UNTIL'])) $until = 'until '.$arr['UNTIL'].' ';
+	$by = '';
+	if (isset($arr['BYMONTH'])) {
+		$by .= 'on ';
+		$count = count($arr['BYMONTH']);
+		$last = $count - 1;
+		if ($count == 1) {
+			$month = $arr['BYMONTH'][0];
+			$by .= $monthsofyearshort_lang[($month-1)];
+		} else {
+			foreach ($arr['BYMONTH'] as $key => $month) {
+				if ($key == $last) $by .= $monthsofyearshort_lang[($month-1)];
+				else $by .= $monthsofyearshort_lang[($month-1)].', ';
+			}
+		}
+		$by .= ' ';
+	}
+	
+	if (isset($arr['BYMONTHDAY'])) {
+		$by .= 'on ';
+		$last = count($arr['BYMONTHDAY']) - 1;
+		if ($arr['BYMONTHDAY'][$last] == '0') unset($arr['BYMONTHDAY'][$last]);
+		$count = count($arr['BYMONTHDAY']);
+		$last = $count - 1;
+		if ($count == 1) {
+			ereg('([\-]{0,1})([0-9]{1,2})',$arr['BYMONTHDAY'][0],$regs);
+			list($junk,$sign,$day) = $regs;
+			$by .= $day;
+		} else {
+			foreach ($arr['BYMONTHDAY'] as $key => $day) {
+				ereg('([\-]{0,1})([0-9]{1,2})',$day,$regs);
+				list($junk,$sign,$day) = $regs;
+				if ($key == $last) $by .= $day;
+				else $by .= $day.', ';
+			}
+		}
+		$by .= ' ';
+	}
+	if (isset($arr['BYDAY'])) {
+		$by .= 'on ';
+		$count = count($arr['BYDAY']);
+		$last = $count-1;
+		if ($count == 1) {
+			ereg('([\-]{0,1})([0-9]{0,1})([A-Z]{2})',$arr['BYDAY'][0],$regs);
+			list($junk,$sign,$day_num,$day_txt) = $regs;
+			$num = two2threeCharDays($day_txt,false);
+			if ($day_num != '') $by .= $day_num.' ';
+			$by .= $daysofweekshort_lang[$num];
+		} else {
+			foreach ($arr['BYDAY'] as $key => $day) {
+				ereg('([\-]{0,1})([0-9]{0,1})([A-Z]{2})',$day,$regs);
+				list($junk,$sign,$day_num,$day_txt) = $regs;
+				$num = two2threeCharDays($day_txt,false);
+				if ($day_num != '') $by .= $day_num.' ';
+				if ($key == $last) $by .= $daysofweekshort_lang[$num];
+				else $by .= $daysofweekshort_lang[$num].', ';
+			}
+		}
+		$by .= ' ';
+	}
+	return 'Every '.$int.' '.$freq.$times.$until.$by;
 }
 
 function getmicrotime() { 
