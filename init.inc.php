@@ -9,9 +9,18 @@ if(phpversion() >= "4.2.0")
 
 include('./config.inc.php');
 
-// define supported languages
-include("./languages/$language.inc.php");
+// language support
+$language = strtolower($language);
+$lang_file = "./languages/$language.inc.php";
 
+if (file_exists($lang_file)) {
+	include($lang_file);
+} else {
+//	Not sure if we should print this warning or not. It would inform the user
+//	why the language isn't working.
+	print "File \"$lang_file\" does not exist, defaulting to English<br><br>";
+	include("./languages/english.inc.php");
+}
 
 // $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
 // $cal_filename should always be the filename of the calendar without .ics
