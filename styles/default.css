@@ -1,8 +1,8 @@
 /* Style sheet for the blue calendar (default) */
 
-.eventborder { background-color: #0065DB; border: 1px #0033CC solid; }
-.eventbg { background-color: #68AAEF; }
-.eventbg2 { background-color: #68AAEF; border-right: 1px solid #FFFFFF; }
+.eventborder { background-color: #336699; border: 1px #006699 solid; }
+.eventbg { background-color: #6699CC; }
+.eventbg2 { background-color: #6699CC; border-right: 1px solid #FFFFFF; }
 .eventfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; }
 .calborder { background-color: #FFFFFF; border: 1px #A1A5A9 solid; }
 .dayborder { border-top: 1px dashed #A1A5A9; }

@@ -182,7 +182,6 @@ if ($master_array[($getdate)]) {
 													echo "<tr>\n";
 													echo "<td>\n";
 													echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
-													echo "<tr>\n";
 													echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
 													echo "</tr>\n";
 													echo "</table>\n";
