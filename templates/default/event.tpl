@@ -2,7 +2,7 @@
 		"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<meta http-equiv="content-type" content="text/html;charset={CHARSET}">
 	<title>{CAL}</title>
 	<link rel="stylesheet" type="text/css" href="../templates/{TEMPLATE}/default.css">
 </head>
