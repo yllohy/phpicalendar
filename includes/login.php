@@ -37,7 +37,7 @@ echo <<<END
 					</tr>
 					<tr>
 						<td>{$password_lang}:</td>
-						<td><input class="login_style" type="$password" size="8" name="password"></td>
+						<td><input class="login_style" type="password" size="8" name="password"></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
