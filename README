@@ -38,6 +38,16 @@ them. If you have difficulty with your configuration, you can ask the
 developers and other PHP iCalendar users at the PHP iCalendar forums: 
 http://phpicalendar.sourceforge.net/phpBB2
 
+Supported Calendar Applications:
+--------------------------------
+PHP iCalendar supports any calendar application that can generate
+valid IETF 2445 files (.ics). Some of the supported applications are:
+	
+	-Apple iCal
+	-Mozilla Calendar
+	-Ximian Evolution
+	-KOrganizer
+
 Bugs:
 -----
 If you find a bug, please let us know. The easiest way for you to do this
