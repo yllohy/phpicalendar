@@ -33,7 +33,7 @@
 <table width="760" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><a class="psf" href="day.php">Day</a> | <a class="psf" href="week.php">Week</a> | <a class="psf" href="month.php">Month</a></td>
+		<td align="center" width="90%"><a class="psf" href="day.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Day</a> | <a class="psf" href="week.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Week</a> | <a class="psf" href="month.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Month</a></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
@@ -55,13 +55,13 @@
 										<table border="0" cellspacing="0" cellpadding="0" width="100%">
 											<tr>
 												<td align="left">
-													<font class="G10B"><a class="psf" href="month.php?getdate=<? echo "$prev_month"; ?>">Last Month</a></font>
+													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">Last Month</a>"; ?></font>
 												</td>
 												<td class="H20" align="center" valign="middle" bgcolor="white" height="36">
 													<? echo "$display_month"; ?>
 												</td>
 												<td align="right">
-													<font class="G10B"><a class="psf" href="month.php?getdate=<? echo "$next_month"; ?>">Next Month</a></font>
+													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">Next Month</a>"; ?></font>
 												</td>
 											</tr>
 										</table>
@@ -75,9 +75,7 @@
 							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr height="28">
-									<td align="left" valign="middle" height="26">
-										<b><font class="V12"><? echo "$calendar_name"; ?> Calendar</font></b>
-									</td>
+									<td align="left" valign="middle" height="26"><? include('./list_icals.php'); ?></td>
 									<td align="right" class="G10B">
 										&nbsp;<a class="psf" href="<? echo "$fullpath"; ?>">Subscribe</a>&nbsp;|&nbsp;<a class="psf" href="<? echo "$filename"; ?>">Download</a>&nbsp;
 									</td>
@@ -127,7 +125,7 @@
 											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
 											echo "<tr>\n";
 											echo "<td align=\"right\" valign=\"top\">\n";
-											echo "<a class=\"psf\" href=\"day.php?getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 											echo "</tr>\n";
 											if ($master_array[("$daylink")]["0001"]["event_text"]) {
@@ -138,7 +136,7 @@
 													}
 													echo "<tr height=\"15\">\n";
 													echo "<td height=\"15\" valign=\"middle\" align=\"center\" bgcolor=\"#ffffff\">\n";
-													echo "<a class=\"psf\" href=\"day.php?getdate=$daylink\"><i>$event_text</i></a>\n";
+													echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}
@@ -155,7 +153,7 @@
 														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 														echo "<tr>\n";
 														echo "<td class=\"label\">\n";
-														echo "<a class=\"psf\" href=\"day.php?getdate=$daylink\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+														echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
 														echo "</table>\n";
@@ -171,7 +169,7 @@
 											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
 											echo "<tr>\n";
 											echo "<td align=\"right\" valign=\"top\">\n";
-											echo "<a class=\"psf\" href=\"day.php?getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 											echo "</tr>\n";
 											echo "</table>\n";
@@ -203,10 +201,10 @@
 										<table border="0" cellspacing="0" cellpadding="0" width="100%">
 											<tr>
 												<td align="left">
-													<font class="G10B"><a class="psf" href="month.php?getdate=<? echo "$prev_month"; ?>">&nbsp;Last Month</a></font>
+													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">Last Month</a>"; ?></font>
 												</td>
 												<td align="right">
-													<font class="G10B"><a class="psf" href="month.php?getdate=<? echo "$next_month"; ?>">Next Month&nbsp;</a></font>
+													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">Next Month</a>"; ?></font>
 												</td>
 											</tr>
 										</table>
@@ -322,7 +320,7 @@
 <table width="760" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><a class="psf" href="day.php">Day</a> | <a class="psf" href="week.php">Week</a> | <a class="psf" href="month.php">Month</a></td>
+		<td align="center" width="90%"><a class="psf" href="day.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Day</a> | <a class="psf" href="week.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Week</a> | <a class="psf" href="month.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Month</a></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>

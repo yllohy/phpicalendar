@@ -20,6 +20,7 @@ $prev_week2 = ($date - (7 * 24.4 * 60 * 60));
 $next_week = date("Ymd", $next_week2);
 $prev_week = date("Ymd", $prev_week2);
 
+if (!$cal) $cal = "$default_cal";
 
 
 ?>
@@ -29,25 +30,24 @@ $prev_week = date("Ymd", $prev_week2);
 <html lang="en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-	<title>Home</title> 
+	<title><? echo "$calendar_name"; ?></title> 
 	<link rel="stylesheet" type="text/css" href="styles/default.css">
 </head>
 <body bgcolor="#FFFFFF">
 <center>
-<? include('./list_icals.php'); ?>
 	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><a class="psf" href="day.php">Day</a> | <a class="psf" href="week.php">Week</a> | <a class="psf" href="month.php">Month</a></td>
+		<td align="center" width="90%"><a class="psf" href="day.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Day</a> | <a class="psf" href="week.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Week</a> | <a class="psf" href="month.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Month</a></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" height="24" width="1"></td>
 	</tr>
 		<tr>
-			<td class="V12" align="left" valign="top" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$prev_week"; ?>">Previous Week</a></td>
+			<td class="V12" align="left" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\">Previous Week</a>"; ?></td>
 			<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$start_week - $end_week"; ?></td>
-			<td class="V12" align="right" valign="top" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$next_week"; ?>">Next Week</a></td>
+			<td class="V12" align="right" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\">Next Week</a>"; ?></td>
 		</tr>
 			<tr>
 		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
@@ -67,8 +67,8 @@ $prev_week = date("Ymd", $prev_week2);
 								<td colspan="3" bgcolor="white" nowrap>
 									<table width="100%" border="0" cellspacing="4" cellpadding="0">
 										<tr>
-											<td align="left" valign="middle"><b><font class="V12">Home Calendar</font></b></td>
-											<td align="right" valign="middle" class="V12"><a class="psf" href="webcal://chadsdomain.com/ical/Home.ics">Subscribe</a> | <a class="psf" href="http://chadsdomain.com/ical/Home.ics">Download</a></td>
+											<td align="left" valign="middle"><? include('./list_icals.php'); ?></td>
+											<td align="right" valign="middle" class="V12"><a class="psf" href="<? echo "$fullpath"; ?>">Subscribe</a>&nbsp;|&nbsp;<a class="psf" href="<? echo "$filename"; ?>">Download</a></td>
 										</tr>
 									</table>
 								</td>
@@ -88,7 +88,7 @@ $prev_week = date("Ymd", $prev_week2);
 											$thisday = date("Ymd", $thisdate);
 											$thisday2 = date("D, M j", $thisdate);
 											echo "<td height=\"12\" width=\"101\" colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#f5f5f5\" class=\"V9\">\n";
-											echo "<a class=\"psf\" href=\"day.php?getdate=$thisday\">$thisday2</a>\n";
+											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a>\n";
 											echo "</td>\n";
 											$thisdate = ($thisdate + (25 * 60 * 60));
 											$i++;
@@ -227,7 +227,7 @@ $prev_week = date("Ymd", $prev_week2);
 													$event_text = substr("$event_text", 0, 11);
 													$event_text = $event_text . "...";
 												}
-												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">$event_text</a></td>\n";
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$event_text</a></td>\n";
 											} else {
 												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
 											}
@@ -256,7 +256,7 @@ $prev_week = date("Ymd", $prev_week2);
 													$event_text = substr("$event_text", 0, 11);
 													$event_text = $event_text . "...";
 												}
-												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">$event_text</a></td>\n";
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$event_text</a></td>\n";
 											} else {
 												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
 											}
@@ -306,9 +306,9 @@ $prev_week = date("Ymd", $prev_week2);
 		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
 	</tr>
 	<tr>
-		<td class="V12" align="left" valign="middle" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$prev_week"; ?>">Previous Week</a></td>
+		<td class="V12" align="left" valign="middle" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\">Previous Week</a>"; ?></td>
 		<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$today"; ?></td>
-		<td class="V12" align="right" valign="middle" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$next_week"; ?>">Next Week</a></td>
+		<td class="V12" align="right" valign="middle" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\">Next Week</a>"; ?></td>
 	</tr>
 <!--
 	[[tr]]
