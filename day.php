@@ -11,12 +11,23 @@ include("./ical_parser.php");
 
 $starttime = "0700";
 $weekstart = 1;
-$gridLength = 30;
+// dpr 20020926: moved variable gridLength to config.inc.php
+//$gridLength = 30;
 $unix_time = strtotime($getdate);
 $today_today = date ("Ymd");
 $tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
 $yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 $display_date = strftime($dateFormat_day, $unix_time);
+$nbrGridCols = 1;
+if ($master_array[($getdate)]) {
+	foreach($master_array[($getdate)] as $ovlKey => $ovlValue) {
+		if ($ovlKey != "-1") {
+			foreach($ovlValue as $ovl2Value) {
+				$nbrGridCols = kgv($nbrGridCols, ($ovl2Value["event_overlap"] + 1));
+			}
+		}
+	} 
+}
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -103,9 +114,9 @@ $display_date = strftime($dateFormat_day, $unix_time);
 							<tr>
 								<td nowrap bgcolor="#a1a5a9" width="60"></td>
 								<td nowrap bgcolor="#a1a5a9" width="1"></td>
-								<?php for ($m=0;$m < 12;$m++) { ?>
-									<td nowrap bgcolor="#a1a5a9"><img src="images/spacer.gif" width="55" height="1" alt=""></td>
-								<?php } ?>
+								<?php for ($m=0;$m < $nbrGridCols;$m++) { 
+									echo "<td nowrap bgcolor=\"#a1a5a9\"><img src=\"images/spacer.gif\" width=\"" . (700 / $nbrGridCols) . "\" height=\"1\" alt=\"\"></td>";
+								} ?>
 							</tr>
 							<?php
 								// $master_array[($getdate)]["$day_time"]
@@ -116,37 +127,38 @@ $display_date = strftime($dateFormat_day, $unix_time);
 									$key = strtotime ("$key");
 									$key = date ($timeFormat, $key);
 																		
-									// check for eventstart (line 117)
+									// check for eventstart 
 									if (sizeof($master_array[($getdate)]["$cal_time"]) > 0) {
 										foreach ($master_array[($getdate)]["$cal_time"] as $eventKey => $loopevent) {
+											$drawEvent = drawEventTimes ($loopevent["event_start"], $loopevent["event_end"]);
 											$j = 0;
 											while ($event_length[$j]) {
 												if ($event_length[$j]["state"] == "ended") {
-													$event_length[$j] = array ("length" => (round($loopevent["event_length"] / $gridLength)), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+													$event_length[$j] = array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
 													break;
 												}
 												$j++;
 											}
 											if ($j == sizeof($event_length)) {
-												array_push ($event_length, array ("length" => (round($loopevent["event_length"] / $gridLength)), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
+												array_push ($event_length, array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
 											}
 										}
 									}
 									if (ereg("([0-9]{1,2}):00", $key)) {
-										echo "<tr height=\"30\">\n";
-										echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
-										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
+										echo "<tr height=\"" . $gridLength . "\">\n";
+										echo "<td rowspan=\"" . (60 / $gridLength) . "\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
+										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 									} else {
-										echo "<tr height=\"30\">\n";
-										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
+										echo "<tr height=\"" . $gridLength . "\">\n";
+										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 									}
 									if (sizeof($event_length) == 0) {
-										echo "<td bgcolor=\"#ffffff\" colspan=\"12\">&nbsp;</td>\n";
+										echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols . "\">&nbsp;</td>\n";
 									} else {
-										$emptyWidth = 12;
+										$emptyWidth = $nbrGridCols;
 										for ($i=0;$i<sizeof($event_length);$i++) {
 								//echo $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"] . " ind: " . $i . " / anz: " . $event_length[$i]["overlap"] . " = " . eventWidth($i,$event_length[$i]["overlap"]) . "<br />";
-											$drawWidth = eventWidth($i,$event_length[$i]["overlap"]);
+											$drawWidth = $nbrGridCols / ($event_length[$i]["overlap"] + 1);
 											$emptyWidth = $emptyWidth - $drawWidth;
 											switch ($event_length[$i]["state"]) {
 												case "begin":

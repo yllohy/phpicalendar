@@ -9,11 +9,27 @@
 include("./init.inc.php");
 include("./functions/date_add.php");
 include("./functions/date_functions.php");
+include("./functions/draw_functions.php");
 include("./functions/overlapping_events.php");
 
 
 
-$day_array = array ("0700", "0730", "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930", "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330");
+//$day_array = array ("0700", "0730", "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930", "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330");
+$fillTime = $day_start;
+$day_array = array ();
+while ($fillTime != "2400") {
+	array_push ($day_array, $fillTime);
+	ereg ("([0-9]{2})([0-9]{2})", $fillTime, $dTime);
+	$fill_h = $dTime[1];
+	$fill_min = $dTime[2];
+	$fill_min = sprintf("%02d", $fill_min + $gridLength);
+	if ($fill_min == 60) {
+		$fill_h = sprintf("%02d", ($fill_h + 1));
+		$fill_min = "00";
+	}
+	$fillTime = $fill_h . $fill_min;
+}
+
 
 // what date we want to get data for (for day calendar)
 if (!$getdate) $getdate = date("Ymd");
@@ -74,18 +90,13 @@ foreach($contents as $line) {
 				
 		if ($start_time != "") {
 			ereg ("([0-9]{2})([0-9]{2})", $start_time, $time);
-			$hour = $time[1];
-			$minute = $time[2];
-			if ($minute <= 15) {
-				$minute = "00";
-			} elseif ($minute >15 && $minute <= 45) {
-				$minute = "30";
-			} elseif ($minute > 45) {
-				$hour = sprintf("%.02d", ($hour + 1));
-				$minute = "00";
-			}
 			ereg ("([0-9]{2})([0-9]{2})", $end_time, $time2);
 			$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
+			
+			$drawKey = drawEventTimes($start_time, $end_time);
+			ereg ("([0-9]{2})([0-9]{2})", $drawKey["draw_start"], $time3);
+			$hour = $time3[1];
+			$minute = $time3[2];
 		}
 		
 		
