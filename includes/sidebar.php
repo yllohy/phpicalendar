@@ -51,7 +51,9 @@ $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><
 			
 			echo '<div style="padding: 5px;">';
 			echo '<form style="margin-bottom:0;" action="day.php" method="GET">';
-			echo "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
+			echo "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'";
+			if (isset($query)) echo $query;
+			echo "');\">";
 			include('./functions/list_icals.php');
 			include('./functions/list_years.php');
 			include('./functions/list_months.php');
