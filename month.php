@@ -195,10 +195,10 @@
 										<table border="0" cellspacing="0" cellpadding="0" width="100%">
 											<tr>
 												<td align="left">
-													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">Last Month</a>"; ?></font>
+													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$next_month_lang</a>"; ?></font>
 												</td>
 												<td align="right">
-													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">Next Month</a>"; ?></font>
+													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$last_month_lang</a>"; ?></font>
 												</td>
 											</tr>
 										</table>
