@@ -1,8 +1,8 @@
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={YESTERDAYS_DATE}"><img src="templates/{TEMPLATE}/images/left_arrows.gif" alt="{PREV_LANG}" width="16" height="20" border="0" align="left"></a></td>
-		<td align="center" width="112" class="sideback"><font class="G10BOLD">{DISPLAY_DATE}</font></td>
-		<td align="right" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={TOMORROWS_DATE}"><img src="templates/{TEMPLATE}/images/right_arrows.gif" alt="{NEXT_LANG}" width="16" height="20" border="0" align="right"></a></td>
+		<td align="left" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={PREV_DAY}"><img src="templates/{TEMPLATE}/images/left_arrows.gif" alt="{L_PREV}" width="16" height="20" border="0" align="left"></a></td>
+		<td align="center" width="112" class="sideback"><font class="G10BOLD">{SIDEBAR_DATE}</font></td>
+		<td align="right" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={NEXT_DAY}"><img src="templates/{TEMPLATE}/images/right_arrows.gif" alt="{L_NEXT}" width="16" height="20" border="0" align="right"></a></td>
 	</tr>
 	<tr>
 		<td colspan="3" bgcolor="#FFFFFF" align="left">
@@ -79,10 +79,10 @@
 		<td bgcolor="#FFFFFF" align="left">
 			<div style="padding: 5px;">
 				<!-- switch t_allday on -->
-				<i>{T_ALLDAY}</i><br>
+				{T_ALLDAY}<br />
 				<!-- switch t_allday off -->
 				<!-- switch t_event on -->
-				&#149; {T_EVENT}<br>
+				&#149; {T_EVENT}<br />
 				<!-- switch t_event off -->
 			</div>
 		</td>

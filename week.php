@@ -10,7 +10,6 @@ if ($minical_view == "current") $minical_view = "week";
 $starttime 			= "0500";
 $weekstart 			= 1;
 $unix_time 			= strtotime($getdate);
-$thisday2 			= localizeDate($dateFormat_week_list, $unix_time);
 $today_today 		= date('Ymd', strtotime("now + $second_offset seconds")); 
 $next_week 			= date("Ymd", strtotime("+1 week",  $unix_time));
 $prev_week 			= date("Ymd", strtotime("-1 week",  $unix_time));
@@ -21,6 +20,7 @@ $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $start_week 		= localizeDate($dateFormat_week, $start_week_time);
 $end_week 			= localizeDate($dateFormat_week, $end_week_time);
 $display_date 		= "$start_week - $end_week";
+$sidebar_date 		= localizeDate($dateFormat_week_list, $unix_time);
 
 // For the side months
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
@@ -48,6 +48,7 @@ $page->replace_tags(array(
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
 	'display_date'		=> $display_date,
+	'sidebar_date'		=> $sidebar_date,
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',

@@ -21,6 +21,7 @@ $next_day		= date('Ymd', strtotime("+1 day",  $unix_time));
 $prev_day 		= date('Ymd', strtotime("-1 day",  $unix_time));
 
 $display_date = localizeDate($dateFormat_day, $unix_time);
+$sidebar_date = localizeDate($dateFormat_week_list, $unix_time);
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 
 
@@ -44,6 +45,7 @@ $page->replace_tags(array(
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
 	'display_date'		=> $display_date,
+	'sidebar_date'		=> $sidebar_date,
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
@@ -63,6 +65,7 @@ $page->replace_tags(array(
 	));
 	
 $page->draw_day($this->page);
+$page->tomorrows_events($this->page);
 
 $page->output();
 

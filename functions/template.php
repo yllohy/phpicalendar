@@ -18,7 +18,7 @@ class Page {
 				$event_url	   	= $allday['url'];
 				if ($event_calno < 1) $event_calno=1;
 				if ($event_calno > 7) $event_calno=7;
-				$event 			= openevent($event_calna, '', '', $allday, 0, '', '<span class="V10WB">', '</span>', 'psf', $url);
+				$event 			= openevent($event_calna, '', '', $allday, 0, '', '<span class="V10WB">', '</span>', 'psf', $event_url);
 				$loop_tmp 		= str_replace('{EVENT}', $event, $loop_ad);
 				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 				$replace		.= $loop_tmp;
@@ -43,6 +43,46 @@ class Page {
 		}
 		$this->page = ereg_replace('<!-- loop daysofweek on -->(.*)<!-- loop daysofweek off -->', $weekday_loop, $this->page);
 	
+	}
+	
+	function tomorrows_events() {
+		global $template, $getdate, $master_array, $next_day, $timeFormat;
+		
+		preg_match("!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!is", $this->page, $match1);
+		preg_match("!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!is", $this->page, $match2);
+		$loop_t_ad 	= trim($match1[1]);
+		$loop_t_e 	= trim($match2[1]);
+		$return_adtmp	= '';
+		$return_etmp	= '';
+		
+		if (is_array($master_array[$next_day])) {
+			foreach ($master_array[$next_day] as $event_times) {
+				foreach ($event_times as $val) {
+					$event_text = stripslashes(urldecode($val["event_text"]));
+					$event_text = strip_tags($event_text, '<b><i><u>');
+					if ($event_text != "") {	
+						$event_start 	= $val["event_start"];
+						$event_end 		= $val["event_end"];
+						$event_calna 	= $val["calname"];
+						$event_url 		= $val["url"];
+						$event_start 	= date ($timeFormat, @strtotime ($event_start));
+						$event_end 		= date ($timeFormat, @strtotime ($event_end));
+						if (!isset($val["event_start"])) { 
+							$event_start = $lang['l_all_day']; 
+							$event_end = ''; 
+							$return_adtmp = openevent($event_calna, $event_start, $event_end, $val, $tomorrows_events_lines, 21, '', '', 'psf', $event_url); 
+							$replace_ad 	.= str_replace('{T_ALLDAY}', $return_adtmp, $loop_t_ad);
+						} else { 
+							$return_etmp 	= openevent($event_calna, $event_start, $event_end, $val, $tomorrows_events_lines, 21, '', '', 'ps3', $event_url); 
+							$replace_e 		.= str_replace('{T_EVENT}', $return_etmp, $loop_t_e);
+						}
+					}
+				}
+			}
+		}
+		
+		$this->page = ereg_replace('<!-- switch t_allday on -->(.*)<!-- switch t_allday off -->', $replace_ad, $this->page);
+		$this->page = ereg_replace('<!-- switch t_event on -->(.*)<!-- switch t_event off -->', $replace_e, $this->page);		
 	}
 	
 	function draw_month($template_p, $offset = '+0', $type) {
