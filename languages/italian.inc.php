@@ -1,4 +1,4 @@
-<?
+<?php
 
 // Italian language include
 // For version 0.6 PHP iCalendar
