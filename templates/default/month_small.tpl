@@ -1,6 +1,6 @@
 <table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
 	<tr>
-		<td align="center" class="sideback"><div style="height:20px;"><b>{MONTH_TITLE}</b></div></td>
+		<td align="center" class="sideback"><div style="height:16px;"><b>{MONTH_TITLE}</b></div></td>
 	</tr>
 	<tr>
 		<td align="center">
