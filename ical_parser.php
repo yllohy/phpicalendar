@@ -61,7 +61,7 @@ foreach($contents as $line) {
 		$number = "";
 		$except_dates = array();
 		$except_times = array();
-		$the_duration = TRUE;
+		$first_duration = TRUE;
 	} elseif (strstr($line, "END:VEVENT")) {
 		
 		// Clean out \n's and other slashes
@@ -400,7 +400,8 @@ foreach($contents as $line) {
 			$allday_end = $data;
 			
 		} elseif (strstr($field, "DURATION")) {
-			if ($first_duration = TRUE) {
+			
+			if (($first_duration = TRUE) && (!strstr($field, "=DURATION"))) {
 				ereg ("^P([0-9]{1,2})?([W,D]{0,1})?(T)?([0-9]{1,2})?(H)?([0-9]{1,2})?(M)?([0-9]{1,2})?(S)?", $data, $duration);
 				if ($duration[2] = "W") {
 					$weeks = $duration[1];
