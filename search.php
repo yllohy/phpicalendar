@@ -18,21 +18,7 @@ if (isset($HTTP_GET_VARS['query']) && $HTTP_GET_VARS['query'] != '') {
 }
 
 $search_box = '';
-// yet to be implemented
-switch($HTTP_GET_VARS['mode']) {
-	case 'advanced_search':
-		// display advanced search stuff
-		break;
-	case 'search':
-		// display simple search stuff
-		break;
-	case 'results':
-		// display results of either simple or advanced search
-		break;
-	default:
-		// some generic thing, maybe same as search
-}
-
+s
 $search_box .= 
 	'<form action="search.php" method="GET">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
