@@ -95,7 +95,7 @@ foreach ($cal_filelist as $filename) {
 				unset (
 					$start_time, $end_time, $start_date, $end_date, $summary, 
 					$allday_start, $allday_end, $start, $end, $the_duration, 
-					$beginning, $rrule_array, $start_of_vevent, $description, 
+					$beginning, $rrule_array, $start_of_vevent, $description, $bd, 
 					$valarm_description, $start_unixtime, $end_unixtime, $display_end_tmp, $end_time_tmp1, 
 					$recurrence_id, $uid, $class, $location, $rrule, $abs_until, $until_check
 				);
@@ -393,14 +393,18 @@ foreach ($cal_filelist as $filename) {
 						
 							if (!isset($number)) $number = 1;
 							// if $until isn't set yet, we set it to the end of our range we're looking at
-							// The FREQ switch array will always kick our early, so lets try this workaround.
-							// if (isset($until)) $until = strtotime('+'.$interval.' '.$freq_type, $until);;
 							
 							if (!isset($until)) $until = $end_range_time;
 							if (!isset($abs_until)) $abs_until = date('YmdHis', $end_range_time);
 							$end_date_time = $until;
 							$start_range_time_tmp = $start_range_time;
 							$end_range_time_tmp = $end_range_time;
+							
+							// For weekly's without a byday
+							if ((!isset($byday)) && ($rrule_array['FREQ'] == 'WEEKLY')) {
+								ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $start_date, $startregs);
+								$bd = strtolower(date ("l", mktime($hour,$minute,0,$startregs[2],$startregs[3],$startregs[1])));
+							}
 							
 							// If the $end_range_time is less than the $start_date_time, or $start_range_time is greater
 							// than $end_date_time, we may as well forget the whole thing
@@ -433,14 +437,12 @@ foreach ($cal_filelist as $filename) {
 													break;
 												case 'WEEKLY':
 													if (!isset($byday)) {
-														$next_date = date('Ymd', $next_range_time);
+														$next_date = dateOfWeek(date('Ymd', $next_range_time),$bd);
 														$next_date_time = strtotime($next_date);
 														$recur_data[] = $next_date_time;
 													} elseif (is_array($byday)) {
-														// loop through the days on which this event happens
 														foreach($byday as $day) {
-															// use my fancy little function to get the date of each day
-															$day = two2threeCharDays($day);														
+															$day = two2threeCharDays($day);	
 															$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
 															$next_date_time = strtotime($next_date);
 															$recur_data[] = $next_date_time;
@@ -450,9 +452,7 @@ foreach ($cal_filelist as $filename) {
 												case 'MONTHLY':
 													if (!isset($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
 													$next_range_time = strtotime(date('Y-m-01', $next_range_time));
-													// month has two cases, either $bymonthday or $byday
 													if ((isset($bymonthday)) && (!isset($byday))) {
-														// loop through the days on which this event happens
 														foreach($bymonthday as $day) {
 															$year = date('Y', $next_range_time);
 															$month = date('m', $next_range_time);
@@ -461,9 +461,7 @@ foreach ($cal_filelist as $filename) {
 																$recur_data[] = $next_date_time;
 															}
 														}
-													// our other case
 													} else {
-														// loop through the days on which this event happens
 														foreach($byday as $day) {
 															ereg ('([-\+]{0,1})?([0-9]{1})?([A-Z]{2})', $day, $byday_arr);
 															$nth = $byday_arr[2]-1;
