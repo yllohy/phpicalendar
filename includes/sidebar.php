@@ -44,7 +44,7 @@
 	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
-			<td align="center" class="sideback"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
+			<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD"><?php echo "$jump_lang"; ?></div></td>
 		</tr>
 		<tr>
 			<td bgcolor="#FFFFFF" align="left">
@@ -78,7 +78,7 @@
 	
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
-			<td align="center" class="sideback"><font class="G10BOLD"><?php echo "$tomorrows_lang"; ?></font></td>
+			<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD"><?php echo "$tomorrows_lang"; ?></div></td>
 		</tr>
 		<tr>
 			<td bgcolor="#FFFFFF" align="center">
@@ -140,7 +140,7 @@
 		
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
-			<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$todo_lang"; ?></font></td>
+			<td align="center" width="98%" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD"><?php echo "$todo_lang"; ?></div></td>
 		</tr>
 		<tr>
 			<td bgcolor="#FFFFFF" align="center">
