@@ -35,11 +35,8 @@
 				<tr>
 					<td>
 						<!-- loop allday on -->
-						<div class="alldaybg_1">
-							<span class="V10WB">Call at some place</span>
-						</div>
-						<div class="alldaybg_1">
-							<span class="V10WB">Some Holiday</span>
+						<div class="alldaybg_{CALNO}">
+							{EVENT}
 						</div>
 						<!-- loop allday off -->
 					</td>

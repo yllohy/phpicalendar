@@ -32,7 +32,7 @@ $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
 
-$page = new Page(BASE.'templates/'.$template.'/DAY.tpl');
+$page = new Page(BASE.'templates/'.$template.'/day.tpl');
 
 $page->replace_tags(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
@@ -62,7 +62,7 @@ $page->replace_tags(array(
 	'style_select' 		=> $style_select			
 	));
 	
-$page->monthbottom($this->page);
+$page->draw_day($this->page);
 
 $page->output();
 

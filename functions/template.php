@@ -4,6 +4,27 @@
 
 class Page {
 	var $page;
+	function draw_day($template_p) {
+		global $template, $getdate, $cal, $master_array ;
+		$replace = '';
+		if (is_array($master_array[$getdate]['-1'])) {
+			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
+			$loop_ad = trim($match1[1]);
+			foreach ($master_array[$getdate]['-1'] as $allday) {
+				$event_calno  	= $allday['calnumber'];
+				$event_calna  	= $allday['calname'];
+				$event_url	   	= $allday['url'];
+				if ($event_calno < 1) $event_calno=1;
+				if ($event_calno > 7) $event_calno=7;
+				$event 			= openevent($event_calna, '', '', $allday, 0, '', '<span class="V10WB">', '</span>', 'psf', $url);
+				$loop_tmp 		= str_replace('{EVENT}', $event, $loop_ad);
+				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
+				$replace		.= $loop_tmp;
+			}
+		}
+		$this->page = ereg_replace('<!-- loop allday on -->(.*)<!-- loop allday off -->', $replace, $this->page);
+	}
+	
 	function draw_month($template_p, $offset = '+0', $type) {
 		global $template, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
 		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template_p, $match1);
