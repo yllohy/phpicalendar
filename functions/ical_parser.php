@@ -57,7 +57,7 @@ if ($parse_file) {
 	$ifile = fopen($filename, "r");
 	if ($ifile == FALSE) exit(error($error_invalidcal_lang, $filename));
 	$nextline = fgets($ifile, 1024);
-	if ($nextline != "BEGIN:VCALENDAR\n") exit(error($error_invalidcal_lang, $filename));
+	if (!preg_match("/^BEGIN:VCALENDAR/i", $nextline)) exit(error($error_invalidcal_lang, $filename));
 	
 	// Set a value so we can check to make sure $master_array contains valid data
 	$master_array['-1'] = 'valid cal file';
