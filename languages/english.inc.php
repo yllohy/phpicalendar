@@ -120,6 +120,9 @@ $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
 
 
+// ----- New after 0.9.2
+$all_cal_comb_lang		= 'All calendars combined';
+
 
 // - navigation
 $back_lang = 'Back';
