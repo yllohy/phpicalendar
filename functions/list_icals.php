@@ -30,18 +30,18 @@ if ($display_ical_list == "yes") {
 		$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 		if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
 			if ($cal_tmp == $cal) {
-				print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>";
+				print "<option value=\"$current_view.php?cal=$cal_tmp&amp;getdate=$getdate\" selected>$cal_displayname_tmp $calendar_lang</option>";
 			} else {
-				print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>";	
+				print "<option value=\"$current_view.php?cal=$cal_tmp&amp;getdate=$getdate\">$cal_displayname_tmp $calendar_lang</option>";	
 			}
 		}	
 	}			
 
 	// option to open all (non-web) calenders together
 	if ($cal == $ALL_CALENDARS_COMBINED) {
-		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED\" selected>$all_cal_comb_lang</option>";
+		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\" selected>$all_cal_comb_lang</option>";
 	} else {
-		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
+		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\">$all_cal_comb_lang</option>";
 	}
 		
 	foreach($list_webcals as $cal_tmp) {
@@ -51,9 +51,9 @@ if ($display_ical_list == "yes") {
 			$cal_displayname_tmp = substr($cal_displayname_tmp,0,-4);
 			$cal_encoded_tmp = urlencode($cal_tmp);
 			if ($cal_tmp == $cal_httpPrefix || $cal_tmp == $cal_webcalPrefix) {
-				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp\" selected>$cal_displayname_tmp Webcal</option>";
+				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\" selected>$cal_displayname_tmp Webcal</option>";
 			} else {
-				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp\">$cal_displayname_tmp Webcal</option>";	
+				print "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\">$cal_displayname_tmp Webcal</option>";	
 			}		
 		}
 	}

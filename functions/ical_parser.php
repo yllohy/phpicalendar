@@ -209,10 +209,13 @@ foreach ($cal_filelist as $filename) {
 							
 				// Handling of the all day events
 				if ((isset($allday_start) && $allday_start != '')) {
-					$start = strtotime($allday_start);
-					if (isset($allday_end)) {
-						$end = strtotime($allday_end);
-					} else {
+  					$start = strtotime($allday_start);
+ 					if ($spans_day) {
+ 						$allday_end = date('Ymd',$end_unixtime);
+ 					}
+  					if (isset($allday_end)) {
+  						$end = strtotime($allday_end);
+  					} else {
 						$end = strtotime('+1 day', $start);
 					}
 					if (($end > $mArray_begin) && ($end < $mArray_end)) {
@@ -505,6 +508,19 @@ foreach ($cal_filelist as $filename) {
 														}
 														$recur_data[] = $next_date_time;
 													}
+													foreach ($byyearday as $yearday) {
+														ereg ('([-\+]{0,1})?([0-9]{1,3})', $yearday, $byyearday_arr);
+														if ($byyearday_arr[1] == '-') {
+															$ydtime = mktime(0,0,0,12,31,$this_year);
+															$yearnum = $byyearday_arr[2] - 1;
+															$next_date_time = strtotime('-'.$yearnum.' days', $ydtime);
+														} else {
+															$ydtime = mktime(0,0,0,1,1,$this_year);
+															$yearnum = $byyearday_arr[2] - 1;
+															$next_date_time = strtotime('+'.$yearnum.' days', $ydtime);
+														}
+														$recur_data[] = $next_date_time;
+													}
 													break;
 												default:
 													// anything else we need to end the loop
@@ -740,6 +756,7 @@ foreach ($cal_filelist as $filename) {
 						if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
 							$allday_start = $data;
 							$start_date = $allday_start;
+							$start_unixtime = strtotime($data);
 						} else {
 							if (preg_match("/^DTSTART;TZID=/i", $field)) {
 								$tz_tmp = explode('=', $field);
