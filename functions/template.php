@@ -565,6 +565,7 @@ class Page {
 		$completed 	= trim($match1[1]);
 		$important 	= trim($match2[1]);
 		$normal 	= trim($match3[1]);
+		$nugget2	= '';
 		
 		if (is_array($master_array['-2'])) {
 			foreach ($master_array['-2'] as $vtodo_times) {
@@ -597,6 +598,8 @@ class Page {
 						$data 			= array ('{VTODO_TEXT}', '{VTODO_ARRAY}');
 						$rep			= array ($vtodo_text, $vtodo_array);
 						
+						// Reset this TODO's category.
+						$temp = '';
 						if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
 							if ($show_completed == 'yes') {
 								$temp = $completed;
@@ -606,12 +609,26 @@ class Page {
 						} else {
 							$temp = $normal;
 						}
-						$nugget1 = str_replace($data, $rep, $temp);
-						$nugget2 .= $nugget1;
+						
+						// Do not include TODOs which do not have the
+						// category set.
+						if ($temp != '') {
+							$nugget1 = str_replace($data, $rep, $temp);
+							$nugget2 .= $nugget1;
+						}
 					}
 				}
-			$this->page = preg_replace('!<\!-- switch show_completed on -->(.*)<\!-- switch show_normal off -->!is', $nugget2, $this->page);
 			}	
+		}
+		
+		// If there are no TODO items, completely hide the TODO list.
+		if ($nugget2 == '') {
+			$this->page = preg_replace('!<\!-- switch vtodo on -->(.*)<\!-- switch vtodo off -->!is', '', $this->page);
+		}
+		
+		// Otherwise display the list of TODOs.
+		else {
+			$this->page = preg_replace('!<\!-- switch show_completed on -->(.*)<\!-- switch show_normal off -->!is', $nugget2, $this->page);
 		}
 	}
 	
