@@ -40,6 +40,8 @@ else {
 		$is_loged_in = login ($username, $password);
 	}
 }
+
+$calendar_name = $admin_header_lang;
 include (BASE.'includes/header.inc.php'); 
 
 ?>

@@ -29,8 +29,7 @@ $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http:
 $default_path			= 'http://www.example.com/phpicalendar'; 						// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$save_parsed_cals 		= 'yes';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
-$use_sessions 			= 'no';				// This has not yet been implemented.
+$save_parsed_cals 		= 'yes';			// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
 $display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
 $allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
@@ -43,13 +42,13 @@ $allow_preferences		= 'yes';			// Allow visitors to change various preferences v
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 $show_completed			= 'no';				// Show completed todos on your todo list.
-$allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
+$allow_login			= 'n0';				// Set to yes to prompt for login to unlock calendars.
 
 // Webdav style publishing
 $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
 
 // Administration settings
-$allow_admin			= 'no';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
+$allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
 $auth_method			= 'ftp';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
 $auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.
 $auth_internal_password	= 'default';		// Only used if $auth_method='internal'. The password for the administrator.
