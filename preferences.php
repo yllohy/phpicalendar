@@ -13,12 +13,16 @@ if ($action == 'setcookie') {
 	$cookie_view 		= $HTTP_POST_VARS['cookie_view'];
 	$cookie_style 		= $HTTP_POST_VARS['cookie_style'];
 	$cookie_startday	= $HTTP_POST_VARS['cookie_startday'];
-	$cookie_time	= $HTTP_POST_VARS['cookie_time'];
+	$cookie_time		= $HTTP_POST_VARS['cookie_time'];
+	$cookie_unset		= $HTTP_POST_VARS['unset'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time");
 	$the_cookie 		= serialize($the_cookie);
-	setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
+	if ($cookie_unset) { 
+		setcookie("phpicalendar","$the_cookie",time()-(60*60*24*7) ,"/","$cookie_uri",0);
+	} else {
+		setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
+	}
 	$HTTP_COOKIE_VARS['phpicalendar'] = $the_cookie;
-	#unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
 }
 
 if ($HTTP_COOKIE_VARS['phpicalendar']) {
@@ -29,13 +33,16 @@ if ($HTTP_COOKIE_VARS['phpicalendar']) {
 	$cookie_style 		= $phpicalendar['cookie_style'];
 	$cookie_startday	= $phpicalendar['cookie_startday'];
 	$cookie_time		= $phpicalendar['cookie_time'];
+	if ($cookie_unset) { 
+		unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
+	}
 }
 #echo "$cookie_uri";
 #print_r(unserialize($HTTP_COOKIE_VARS['phpicalendar']));
 #print_r($phpicalendar);
 include(BASE.'functions/ical_parser.php');
 
-if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
+if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 	# No cookie set -> use defaults from config file.
 	$cookie_language = ucfirst($language);
 	$cookie_calendar = $default_cal;
@@ -93,13 +100,17 @@ if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 					<td>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 							<?php
-							
-							if ($action == 'setcookie') { ?>
+							if ($action == 'setcookie') { 
+								if (!$cookie_unset) {
+									$message = $prefs_set_lang;
+								} else {
+									$message = $prefs_unset_lang;
+								}
+							?>
 							<tr>
-								<td colspan="2" align="center"><font class="G10BOLD"><?php echo "$prefs_set_lang"; ?></font></td>
+								<td colspan="2" align="center"><font class="G10BOLD"><?php echo "$message"; ?></font></td>
 							</tr>
 							<?php } ?>
-							
 							<tr>
 								<td width="2%"></td>
 								<td width="98%" valign="top" align="left">
@@ -273,6 +284,13 @@ if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 											?>
 										</td>
 									</tr>
+									<?php if ($HTTP_COOKIE_VARS['phpicalendar']) { ?>
+									<tr>
+										<td align="left" valign="top" nowrap><?php echo "$unset_prefs_lang"; ?></td>
+										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
+										<td align="left" valign="top"><INPUT TYPE="checkbox" NAME="unset" VALUE="true"></td>
+									</tr>
+									<?php } ?>
 									<tr>
 										<td align="left" valign="top" nowrap>&nbsp;</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
