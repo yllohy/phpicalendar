@@ -24,7 +24,7 @@ $last_week_lang		= 'Zeszły tydzień';
 $last_year_lang		= 'Zeszły rok';
 $subscribe_lang		= 'Subskrybuj';
 $download_lang		= 'Pobierz';
-$powered_by_lang 	= 'Powered by';
+$powered_by_lang 	= 'Wspierane przez';
 $event_lang			= 'Zadanie';
 $event_start_lang	= 'Początek';
 $event_end_lang		= 'Koniec';
@@ -62,50 +62,59 @@ $rss_language			= 'en-us';
 
 // new in 0.9 ----------------------
 
-$search_took_lang		= 'Search took %s seconds';
-$recurring_event_lang	= 'Recurring event';
-$exception_lang			= 'Exception';
-$no_query_lang			= 'No query given';
-$preferences_lang		= 'Preferences';
-$printer_lang			= 'Printer';
-$select_lang_lang		= 'Select your default language:';
-$select_cal_lang		= 'Select your default calendar:';
-$select_view_lang		= 'Select your default view:';
-$select_time_lang		= 'Select your default start time:';
-$select_day_lang		= 'Select your default start day of week:';
-$select_style_lang		= 'Select your default style:';
-$set_prefs_lang			= 'Set preferences';
-$completed_date_lang	= 'Completed on';
-$completed_lang			= 'Completed';
-$created_lang			= 'Created:';
-$due_lang				= 'Due:';
-$priority_lang			= 'Priority:';
-$priority_high_lang		= 'High';
-$priority_low_lang		= 'Low';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'None';
+$search_took_lang		= 'Szukanie zajęło %s sekund';
+$recurring_event_lang	= 'Zadanie rekurencyjne';
+$exception_lang			= 'Wyjątek';
+$no_query_lang			= 'Brak pytania';
+$preferences_lang		= 'Preferencje';
+$printer_lang			= 'Drukarka';
+$select_lang_lang		= 'Wybierz domyślny język:';
+$select_cal_lang		= 'Wybierz domyślny kalendarz:';
+$select_view_lang		= 'Wybierz domyślny podgląd:';
+$select_time_lang		= 'Wybierz domyślny czas rozpoczęcia dnia:';
+$select_day_lang		= 'Wybierz domyślny dzień rozpoczynający tydzień:';
+$select_style_lang		= 'Wybierz domyślny styl:';
+$set_prefs_lang			= 'Ustaw preferencje';
+$completed_date_lang	= 'Zakończono';
+$completed_lang			= 'Zakończono';
+$created_lang			= 'Utworzono:';
+$due_lang				= 'Stosowany:';
+$priority_lang			= 'Priorytet:';
+$priority_high_lang		= 'Wysoki';
+$priority_low_lang		= 'Niski';
+$priority_medium_lang	= 'Średni';
+$priority_none_lang		= 'Żaden';
 $status_lang			= 'Status:';
-$todo_lang				= 'To do items';
-$unfinished_lang		= 'Unfinished';
+$todo_lang				= 'Do zrobienia';
+$unfinished_lang		= 'Niewykonane';
+
+// - navigation
+$back_lang = 'Back';
+$next_lang = 'Next';
+$prev_lang = 'Prev';
+$day_view_lang = 'Day View';
+$week_view_lang = 'Week View';
+$month_view_lang = 'Month View';
+$year_view_lang = 'Year View';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 
-$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
-$format_recur_lang['monthly']		= array('month','months');		// and plural forms
-$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
-$format_recur_lang['daily']			= array('day','days');			// in the replacement below
-$format_recur_lang['hourly']		= array('hour','hours');
-$format_recur_lang['minutely']		= array('minute','minutes');
-$format_recur_lang['secondly']		= array('second','seconds');
+$format_recur_lang['yearly']		= array('rok','lat');		// for these, put singular
+$format_recur_lang['monthly']		= array('miesiąc','miesięcy');		// and plural forms
+$format_recur_lang['weekly']		= array('tydzień','tygodni');		// these will be %freq%
+$format_recur_lang['daily']			= array('dzień','dni');			// in the replacement below
+$format_recur_lang['hourly']		= array('godzina','godzin');
+$format_recur_lang['minutely']		= array('minuta','minut');
+$format_recur_lang['secondly']		= array('sekunda','sekund');
 
-$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
-$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+$format_recur_lang['start']			= 'Każdego %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'do %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= '%int% razy';		// ie, 'for 5 times'
 
-$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
-$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
-$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+$format_recur_lang['bymonth']		= 'określonego miesiąca: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'określonego dnia: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'określonego dnia tygodnia: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
 
 // ---------------------------------
 
