@@ -36,6 +36,13 @@ a.ps2:link		{ color: #0066FF; background-color: transparent; }
 a.ps2:visited	{ color: #0066FF; background-color: transparent; }
 a.ps2:active	{ color: #3366CC; background-color: transparent; }
 a.ps2:hover		{ color: #000099; background-color: transparent; }
+
+/* This is the link style for year months */	
+a.ps3			{ text-decoration:	none; }
+a.ps3:link		{ color: #000000; background-color: transparent; }
+a.ps3:visited	{ color: #000000; background-color: transparent; }
+a.ps3:active	{ color: #000000; background-color: transparent; }
+a.ps3:hover		{ color: #000000; background-color: transparent; text-decoration:	underline;}
 	
 /* Body attributes */
 
