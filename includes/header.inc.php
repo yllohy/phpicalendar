@@ -12,7 +12,19 @@
 			echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=week\">";
 		} 
 		if (isset($master_array['-2'])) include (BASE.'functions/todo.js'); 
+		include (BASE.'functions/event.js'); 
 		
 	?>
 </head>
 <body bgcolor="#FFFFFF">
+<form name="eventPopupForm" id="eventPopupForm" method="post" action="includes/event.php" style="display: none;">
+  <input type="hidden" name="event" id="event" value="">
+  <input type="hidden" name="cal" id="cal" value="">
+  <input type="hidden" name="start" id="start" value="">
+  <input type="hidden" name="end" id="end" value="">
+  <input type="hidden" name="description" id="description" value="">
+  <input type="hidden" name="status" id="status" value="">
+  <input type="hidden" name="location" id="location" value="">
+  <input type="hidden" name="organizer" id="organizer" value="">
+  <input type="hidden" name="attendee" id="attendee" value="">
+</form>

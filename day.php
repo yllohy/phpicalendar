@@ -90,10 +90,11 @@ include (BASE.'includes/header.inc.php');
 					   foreach($master_array[($getdate)]['-1'] as $allday) {
 						 echo "<tr>\n";
 						 $event_calno  = $allday['calnumber'];
+						 $event_calna  = $allday['calname'];
 						 if ($event_calno < 1) $event_calno=1;
 						 if ($event_calno > 7) $event_calno=7;
 						 echo '<td valign="top" align="center" class="eventbg_'.$event_calno.'">';
-						 openevent("$calendar_name",
+						 openevent("$event_calna",
 							   "",
 							   "",
 							   $allday,
@@ -252,9 +253,8 @@ include (BASE.'includes/header.inc.php');
 												  echo '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
 												  echo '<tr>'."\n";
 												  echo '<td class="eventbg_'.$event_calno.'">';
-												  // Todo: keep track of where the event comes from, and indicate that to openevent instead of $ALL_CALENDARS_COMBINED
-												  if ($cal == $ALL_CALENDARS_COMBINED) $calendar_name2=$cal; else $calendar_name2=$calendar_name;
-										  		  openevent("$calendar_name2",
+												  $event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
+										  		  openevent("$event_calna",
 												  "$event_start",
 												  "$event_end",
 												  $this_time_arr[($event_length[$i]['key'])],

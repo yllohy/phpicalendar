@@ -102,20 +102,19 @@ $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><
 								$description 	= addslashes(urlencode($val["description"]));
 								$event_start 	= @$val["event_start"];
 								$event_end 		= @$val["event_end"];
+								$event_calna 	= @$val["calname"];
 								$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
 								$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
-								$calendar_name2	= addslashes($calendar_name);
-								$calendar_name2 = urlencode($calendar_name2);
 								$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
 								
 								if (!isset($val["event_start"])) { 
 									$event_start = $all_day_lang; 
 									$event_end = ''; 
-									openevent($calendar_name2, $event_start, 
+									openevent($event_calna, $event_start, 
 									$event_end, $val, $tomorrows_events_lines, 21, '<i>', '</i>', 'psf'); 
 									echo "<br>\n"; 
 								} else { 
-									openevent($calendar_name2, $event_start, 
+									openevent($event_calna, $event_start, 
 									$event_end, $val, $tomorrows_events_lines, 21, '<font class="G10B">&#149; ', '</font>', 'psf'); 
 									echo "<br>\n"; 
 								}

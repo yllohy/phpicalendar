@@ -3,48 +3,48 @@ define('BASE', '../');
 include (BASE.'functions/init.inc.php'); 
 
 // Load vars
-if (isset($HTTP_GET_VARS['event']) && ($HTTP_GET_VARS['event'] !== '') ) {
-	$event=$HTTP_GET_VARS['event'];
+if (isset($HTTP_POST_VARS['event']) && ($HTTP_POST_VARS['event'] !== '') ) {
+	$event=$HTTP_POST_VARS['event'];
 } else {
 	$event='';
 }
-if (isset($HTTP_GET_VARS['description']) && ($HTTP_GET_VARS['description'] !== '') ) {
-	$description=$HTTP_GET_VARS['description'];
+if (isset($HTTP_POST_VARS['description']) && ($HTTP_POST_VARS['description'] !== '') ) {
+	$description=$HTTP_POST_VARS['description'];
 } else {
 	$description='';
 }
-if (isset($HTTP_GET_VARS['cal']) && ($HTTP_GET_VARS['cal'] !== '') ) {
-	$calendar_name=$HTTP_GET_VARS['cal'];
+if (isset($HTTP_POST_VARS['cal']) && ($HTTP_POST_VARS['cal'] !== '') ) {
+	$calendar_name=$HTTP_POST_VARS['cal'];
 } else {
 	$calendar_name='';
 }
-if (isset($HTTP_GET_VARS['start']) && ($HTTP_GET_VARS['start'] !== '') ) {
-	$start=$HTTP_GET_VARS['start'];
+if (isset($HTTP_POST_VARS['start']) && ($HTTP_POST_VARS['start'] !== '') ) {
+	$start=$HTTP_POST_VARS['start'];
 } else {
 	$start='';
 }
-if (isset($HTTP_GET_VARS['end']) && ($HTTP_GET_VARS['end'] !== '') ) {
-	$end=$HTTP_GET_VARS['end'];
+if (isset($HTTP_POST_VARS['end']) && ($HTTP_POST_VARS['end'] !== '') ) {
+	$end=$HTTP_POST_VARS['end'];
 } else {
 	$end='';
 }
-if (isset($HTTP_GET_VARS['status']) && ($HTTP_GET_VARS['status'] !== '') ) {
-	$status=$HTTP_GET_VARS['status'];
+if (isset($HTTP_POST_VARS['status']) && ($HTTP_POST_VARS['status'] !== '') ) {
+	$status=$HTTP_POST_VARS['status'];
 } else {
 	$status='';
 }
-if (isset($HTTP_GET_VARS['location']) && ($HTTP_GET_VARS['location'] !== '') ) {
-	$location=$HTTP_GET_VARS['location'];
+if (isset($HTTP_POST_VARS['location']) && ($HTTP_POST_VARS['location'] !== '') ) {
+	$location=$HTTP_POST_VARS['location'];
 } else {
 	$location='';
 }
-if (isset($HTTP_GET_VARS['organizer']) && ($HTTP_GET_VARS['organizer'] !== '') ) {
-	$organizer=$HTTP_GET_VARS['organizer'];
+if (isset($HTTP_POST_VARS['organizer']) && ($HTTP_POST_VARS['organizer'] !== '') ) {
+	$organizer=$HTTP_POST_VARS['organizer'];
 } else {
 	$organizer='';
 }
-if (isset($HTTP_GET_VARS['attendee']) && ($HTTP_GET_VARS['attendee'] !== '') ) {
-	$attendee=$HTTP_GET_VARS['attendee'];
+if (isset($HTTP_POST_VARS['attendee']) && ($HTTP_POST_VARS['attendee'] !== '') ) {
+	$attendee=$HTTP_POST_VARS['attendee'];
 } else {
 	$attendee='';
 }

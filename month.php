@@ -114,9 +114,11 @@ include (BASE.'includes/header.inc.php');
 								foreach ($master_array[("$daylink")] as $event_times) {
 									foreach ($event_times as $val) {
 										$num_of_events2++;
+										$event_calno = $val['calnumber'];
+										$event_calna = $val['calname'];
 										if (!isset($val["event_start"])) {
 											echo '<div align="center" class="V10">';
-											openevent("$calendar_name", "", "", $val, $month_event_lines,
+											openevent("$event_calna", "", "", $val, $month_event_lines,
 											15,
 											"<i>",
 											"</i>",
@@ -130,7 +132,7 @@ include (BASE.'includes/header.inc.php');
 											$event_start = date($timeFormat, @strtotime ("$event_start"));
 											$start2		 = date($timeFormat_small,@strtotime("$event_start"));
 											$event_end   = date($timeFormat, @strtotime ("$event_end"));
-											@openevent("$calendar_name",
+											@openevent("$event_calna",
 											"$event_start",
 											"$event_end",
 											$val,
@@ -194,6 +196,9 @@ include (BASE.'includes/header.inc.php');
 								
 								// Pull out each time
 								foreach ($new_val as $new_key2 => $new_val2) {
+								$event_calno = $new_val2['calnumber'];
+								$event_calna = $new_val2['calname'];
+
 								if ($new_val2["event_text"]) {	
 									if (isset($new_val2["event_start"])) {
 										$event_start 	= $new_val2["event_start"];
@@ -215,7 +220,7 @@ include (BASE.'includes/header.inc.php');
 										$first_time = FALSE;
 									}
 									echo "<td>\n";
-									openevent("$calendar_name",
+									openevent("$event_calna",
 									"$event_start",
 									"$event_end",
 									$new_val2,

@@ -160,54 +160,63 @@ function chooseOffset($time) {
 	return $offset;
 }
 
-function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic, $class) { 
+function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text, $post_text, $link_class) { 
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	# for iCal pseudo tag <http> comptability
-	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$reg)) { 
-		$ev = $reg[1] . $reg[2]; 
-		$event_text = $reg[2];
+	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) { 
+		$full_event_text = $matches[1] . $matches[2]; 
+		$event_text = $matches[2];
 	} else { 
-		$ev = $arr["event_text"];
+		$full_event_text = $event_text;
 		$event_text = strip_tags($event_text, '<b><i><u>');
 	}
+
 	if (isset($arr["organizer"])) {
-		$organizer = urlencode(addslashes($arr["organizer"]));
-	} else {
-		$organizer = '';
+		$organizer = addslashes($arr["organizer"]);
 	}
+
 	if (isset($arr["attendee"])) {
-		$attendee = urlencode(addslashes($arr["attendee"]));
-	} else {
-		$attendee = '';
+		$attendee = addslashes($arr["attendee"]);
 	}
+
 	if (isset($arr["location"])) {
-		$location = $arr["location"];
-	} else {
-		$location = '';
+		$location = addslashes($arr["location"]);
 	}
+
 	if (isset($arr["status"])) {
-		$status = $arr["status"];
-	} else {
-		$status = '';
+		$status = addslashes($arr["status"]);
 	}
-	if ($event_text != "") {	
-		if ($lines) $event_text = word_wrap($event_text, $wrap, $lines);
-		$dsc  = urlencode(addslashes($arr["description"]));
-		echo '<a class="'.$class.'" href="';
-		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $ev, $res))) || ($dsc)) {
-			echo "javascript:w=window.open('";
-			echo "includes/event.php?event=";
-			echo urlencode(addslashes($ev));
-			echo "&cal=";
-			echo urlencode(addslashes($cal));
-			echo "&start=$st&end=$end&description=$dsc&status=$status&location=$location&organizer=$organizer&attendee=$attendee";
-			echo "','Popup','";
-			echo "scrollbars=yes,width=460,height=275";
-			echo "');w.focus()";
-		} else {
-			echo $res[1];
+
+	if (isset($arr["description"])) {
+		$description  = addslashes(stripslashes(urldecode($arr["description"])));
+    }
+
+	if (!empty($event_text)) {	
+		if ($lines > 0) {
+			$event_text = word_wrap($event_text, $wrap, $lines);
 		}
-	echo '">'.$clic.$event_text.$fclic.'</a>';
+
+		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $full_event_text, $res))) || ($description)) {
+			$escaped_event = addslashes($full_event_text);
+			$escaped_calendar = addslashes($calendar_name);
+			$escaped_start = addslashes($start);
+			$escaped_end = addslashes($end);
+			// fix for URL-length bug in IE: populate and submit a hidden form on click
+			static $popup_data_index = 0;
+echo <<<END
+
+    <script language="Javascript" type="text/javascript"><!--
+    var eventData = new EventData('$escaped_event', '$escaped_calendar', '$escaped_start', '$escaped_end', '$description', '$status', '$location', '$organizer', '$attendee');
+    document.popup_data[$popup_data_index] = eventData;
+    // --></script>
+
+END;
+			echo "<a class=\"$link_class\" href=\"#\" onclick=\"openEventWindow($popup_data_index);\">";
+			$popup_data_index++;
+		} else {
+			echo "<a class=\"$link_class\" href=\"{$res[1]}\">";
+		}
+		echo "{$pre_text}{$event_text}{$post_text}</a>\n";
 	}
 }
 

@@ -163,10 +163,11 @@ include (BASE.'includes/header.inc.php');
 												  	foreach($master_array[($thisday)]["-1"] as $allday) {
 														echo "<tr>\n";
 														$event_calno  = $allday['calnumber'];
+														$event_calna  = $allday['calname'];
 						 								if ($event_calno < 1) $event_calno=1;
 														if ($event_calno > 7) $event_calno=7;
 						 								echo '<td valign="top" align="center" class="eventbg_'.$event_calno.'">';
-														openevent("$calendar_name",
+														openevent("$event_calna",
 														"",
 													  	"",
 													  	$allday,
@@ -306,9 +307,9 @@ include (BASE.'includes/header.inc.php');
 																	$event_end	= $this_time_arr[($event_length[$thisday][$i]["key"])]["end_unixtime"];
 																	 if (isset($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end']);
 																	$event_end 	= date ($timeFormat, $event_end);
-																	// Todo: keep track of where the event comes from, and indicate that to openevent instead of $ALL_CALENDARS_COMBINED
-																	if ($cal == $ALL_CALENDARS_COMBINED) $calendar_name2=$cal; else $calendar_name2=$calendar_name;
-																	openevent("$calendar_name2",
+
+																	$event_calna = $this_time_arr[($event_length[$thisday][$i]["key"])]['calname'];
+																	openevent("$event_calna",
 																		  "$event_start",
 																		  "$event_end",
 																		  $this_time_arr[($event_length[$thisday][$i]["key"])],
