@@ -9,7 +9,7 @@ $style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, gr
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal 			= $ALL_CALENDARS_COMBINED;		// Exact filename of calendar without .ics. Or set to $ALL_CALENDARS_COMBINED to open all calenders combined into one.
-$language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto'
+$language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto', 'Korean'
 $week_start_day 		= 'Sunday';			// Day of the week your week starts on
 $day_start 				= '0700';			// Start time for day grid
 $day_end				= '2300';			// End time for day grid

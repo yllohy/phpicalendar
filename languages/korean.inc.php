@@ -1,7 +1,7 @@
-<?php
+﻿<?php
 
 // Korean language include
-// For version 0.9.1 PHP iCalendar
+// For version 0.9.5 PHP iCalendar
 //
 // Translation by TaeYoung Oh (spier@hybird.net)
 //
@@ -114,8 +114,8 @@ $action_success_lang	= '성공했습니다.';
 $submit_lang			= '제출';
 $delete_lang			= '삭제';
 
-// ----- New for 0.9.5
-$all_cal_comb_lang		= '모든 달력이 통합되었습니다';
+// ----- New for 0.9.4
+$all_cal_comb_lang		= '모든 달력 합쳐보기';
 
 // - navigation
 $back_lang = '뒤로';
@@ -132,13 +132,13 @@ $year_view_lang = '연간 보기';
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 
-$format_recur_lang['yearly']		= array('년','년');		// for these, put singular
-$format_recur_lang['monthly']		= array('월','월');		// and plural forms
-$format_recur_lang['weekly']		= array('주','주');		// these will be %freq%
-$format_recur_lang['daily']			= array('일','일');			// in the replacement below
-$format_recur_lang['hourly']		= array('시간','시간');
-$format_recur_lang['minutely']		= array('분','분');
-$format_recur_lang['secondly']		= array('초','초');
+$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
+$format_recur_lang['monthly']		= array('month','months');		// and plural forms
+$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
+$format_recur_lang['daily']			= array('day','days');			// in the replacement below
+$format_recur_lang['hourly']		= array('hour','hours');
+$format_recur_lang['minutely']		= array('minute','minutes');
+$format_recur_lang['secondly']		= array('second','seconds');
 
 $format_recur_lang['start']			= '매 %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
 $format_recur_lang['until']			= '%date% 까지';				// ie, 'until January 4'
