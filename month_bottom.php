@@ -216,7 +216,7 @@
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$today_today&printview=$current_view\">$goprint_lang</a>"; ?></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$getdate&printview=$current_view\">$goprint_lang</a>"; ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>

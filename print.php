@@ -13,7 +13,7 @@ $end_week_time = $start_week_time + (6 * 25 * 60 * 60);
 $start_week = localizeDate($dateFormat_week, $start_week_time);
 $end_week =  localizeDate($dateFormat_week, $end_week_time);
 $parse_month = date ("Ym", strtotime($getdate));
-$rssview = $HTTP_GET_VARS['rssview'];
+$printview = $HTTP_GET_VARS['printview'];
 $cal_displayname = str_replace("32", " ", $cal);
 $events_week = 0;
 
@@ -51,7 +51,7 @@ $events_week = 0;
 										
 										// Pull out only this months
 										ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
-										if ($regs[1] == $parse_month) {
+										if ((($regs[1] == $parse_month) && ($printview == "month")) || (($key == $getdate) && ($printview == "day"))) {
 											$dayofmonth = strtotime ($key);
 											$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
