@@ -81,7 +81,7 @@
 							$day_num = date("w", $start_day);
 							$day = $daysofweek_lang[$day_num];
 							print "<td valign=\"top\" width=\"105\" height=\"12\" class=\"dateback\"><center><font class=\"V9BOLD\">$day</font></center></td>";
-							$start_day = ($start_day + (24.5 * 60 * 60));
+							$start_day = strtotime("+1 day", $start_day);
 						}
 					?>	
 				</tr>
