@@ -40,7 +40,7 @@ $page = new Page(BASE.'templates/'.$template.'/rss_index.tpl');
 $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-	'event_js'			=> BASE.'functions/event.js'
+	'event_js'			=> ''
 	));
 
 $page->replace_tags(array(
