@@ -2,6 +2,11 @@
 
 define('BASE', '../');
 include(BASE.'functions/ical_parser.php');
+
+if ($enable_rss != 'yes') {
+	die ("RSS feeds are not enabled on this site.");
+}
+
 $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].':'.$HTTP_SERVER_VARS['SERVER_PORT'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'],'/rss/'));
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time = $start_week_time + (6 * 25 * 60 * 60);

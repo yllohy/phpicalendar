@@ -55,6 +55,7 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 				<tr>
 					<td class="dayborder"><img src="images/spacer.gif" width="1" height="5"></td>
 				</tr>
+				<?php if ($enable_rss == "yes") { ?>
 				<tr>
 					<td>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
@@ -95,6 +96,11 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 						</table>
 					</td>
 				</tr>
+				<?php } else { ?>
+				<tr>
+					<td align="center" class="navback" nowrap valign="middle"><font class="H20">RSS is not enabled on this site.</font></td>
+				</tr>
+				<?php } ?>
 			</table>
 		</td>
 	</tr>
