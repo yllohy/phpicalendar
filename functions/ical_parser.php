@@ -562,12 +562,12 @@ foreach ($cal_filelist as $filename) {
 																$end_time_tmp = '2400';
 															}
 															$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
-															$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'calnumber' => $calnumber);
+															$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber);
 															$start_tmp = strtotime('+1 day',$start_tmp);
 														}
 													} else {
 														$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
-														$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'calnumber' => $calnumber);
+														$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber);
 													}
 												}
 											}
@@ -579,6 +579,9 @@ foreach ($cal_filelist as $filename) {
 						}	
 					}
 				}
+
+                               // Clear event data now that it's been saved.
+                               unset($start_time, $start_time_tmp, $end_time, $end_time_tmp, $start_unixtime, $start_unixtime_tmp, $end_unixtime, $end_unixtime_tmp, $summary, $length, $nbrOfOverlaps, $description, $status, $class, $location, $organizer, $attendee);
 			
 			// Begin VTODO Support
 			} elseif ($line == 'END:VTODO') {
