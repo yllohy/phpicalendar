@@ -1,7 +1,7 @@
 <?php
 
-function draw_month($template, $offset = '+0') {
-	global $getdate, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang;
+function draw_month($template, $offset = '+0', $type) {
+	global $getdate, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang, $daysofweek_lang;
 	ob_start();
 	include($template);
 	$template = ob_get_contents();
@@ -25,10 +25,17 @@ function draw_month($template, $offset = '+0') {
 	$fake_getdate_time	= strtotime("$offset month", $fake_getdate_time);
 	$start_day 			= strtotime($week_start_day);
 	$month_title 		= localizeDate ($dateFormat_month, $fake_getdate_time);
+	if ($type == 'small') {
+		$type = $daysofweekreallyshort_lang;
+	} elseif ($type == 'medium') {
+		$type = $daysofweekshort_lang;
+	} elseif ($type == 'large') {
+		$type = $daysofweek_lang;	
+	}
 	
 	for ($i=0; $i<7; $i++) {
 		$day_num 		= date("w", $start_day);
-		$weekday 		= $daysofweekreallyshort_lang[$day_num];
+		$weekday 		= $type[$day_num];
 		$start_day 		= strtotime("+1 day", $start_day);
 		$loop_tmp 		= str_replace('{LOOP_WEEKDAY}', $weekday, $loop_wd);
 		$weekday_loop  .= $loop_tmp;
@@ -120,13 +127,26 @@ class Page {
 	
 	function output() {
 		global $template;
+		// Small month builder
 		preg_match_all ('!(\{MONTH_SMALL\|[+|-][0-9]\})!is', $this->page, $match);
 		if (sizeof($match) > 0) {
 			foreach ($match[1] as $key => $val) {
 				$template_file = 'templates/'.$template.'/month_small.tpl';
 				$offset = str_replace('}', '', $val);
 				$offset = str_replace('{MONTH_SMALL|', '', $offset);
-				$data = draw_month($template_file, $offset);
+				$data = draw_month($template_file, $offset, 'small');
+				$this->page = str_replace($val, $data, $this->page);
+			}
+		}
+		
+		// Small month builder
+		preg_match_all ('!(\{MONTH_LARGE\|[+|-][0-9]\})!is', $this->page, $match);
+		if (sizeof($match) > 0) {
+			foreach ($match[1] as $key => $val) {
+				$template_file = 'templates/'.$template.'/month_large.tpl';
+				$offset = str_replace('}', '', $val);
+				$offset = str_replace('{MONTH_LARGE|', '', $offset);
+				$data = draw_month($template_file, $offset, 'large');
 				$this->page = str_replace($val, $data, $this->page);
 			}
 		}

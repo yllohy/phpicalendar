@@ -7,25 +7,33 @@
 			<table border="0" width="330" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="160" valign="top">
-						<div style="padding: 5px;">
-							<form style="margin-bottom:0;" action="day.php" method="GET">
-								<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_ICALS}</select><br>
-								{LIST_YEARS}<br>
-								{LIST_MONTHS}<br>
-								{LIST_WEEKS}<br>
-								<br>
-							</form>
-							<!-- switch show_search on -->
-							{SEARCH_BOX}
-							<!-- switch show_search off -->
-							<!-- switch show_goto on -->
-							<form style="margin-bottom:0;" action="day.php" method="GET">
-								<input type="hidden" name="cal" value="{URL_CAL}">
-								<input type="text" style="width:160px; font-size:10px" name="jumpto_day">
-								<input type="submit" value="Go">
-							</form>
-							<!-- switch show_goto off -->
-						</div>
+						<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+							<tr height="20">
+								<td align="center" class="sideback"><b>{L_JUMP_TO}</b></td>
+							</tr>
+							<tr>
+								<td>
+									<div style="padding: 5px;">
+										<form style="margin-bottom:0;" action="day.php" method="GET">
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_ICALS}</select><br>
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_YEARS}</select><br>
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_MONTHS}</select><br>
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_WEEKS}</select><br>
+										</form>
+										<!-- switch show_search on -->
+										{SEARCH_BOX}
+										<!-- switch show_search off -->
+										<!-- switch show_goto on -->
+										<form style="margin-bottom:0;" action="day.php" method="GET">
+											<input type="hidden" name="cal" value="{URL_CAL}">
+											<input type="text" style="width:160px; font-size:10px" name="jumpto_day">
+											<input type="submit" value="Go">
+										</form>
+										<!-- switch show_goto off -->
+									</div>
+								</td>
+							</tr>
+						</table>
 					</td>
 					<td>
 						<img src="images/spacer.gif" width="20" height="1" alt=" ">

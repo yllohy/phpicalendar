@@ -1,5 +1,7 @@
 /* Style sheet for the silver calendar (default) */
 
+table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
+
 .eventborder	{ background-image: url(images/day_title.gif); border: 1px #006699 solid; }
 .eventbg	 	{ background-color: #6699CC; }
 
