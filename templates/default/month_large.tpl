@@ -7,10 +7,10 @@
 		<!-- loop weekday off -->
 	</tr>
 	<!-- loop monthweeks on -->
-	<tr height="105">
+	<tr>
 		<!-- loop monthdays on -->
 		<!-- switch notthismonth on -->
-		<td valign="top" align="left" class="monthoff" width="105" height="105">
+		<td class="monthoff">
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="G10G">{DAY}</font></a>
 			</div>
@@ -19,7 +19,7 @@
 		</td>
 		<!-- switch notthismonth off -->
 		<!-- switch istoday on -->
-		<td valign="top" align="left" class="monthon" width="105" height="105">
+		<td class="monthon">
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
@@ -28,7 +28,7 @@
 		</td>
 		<!-- switch istoday off -->
 		<!-- switch ismonth on -->
-		<td valign="top" align="left" class="monthreg" width="105" height="105">
+		<td class="monthreg">
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>

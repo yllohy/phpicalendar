@@ -15,13 +15,13 @@
 				<tr>
 					<td width="160" valign="top">
 						<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
-							<tr height="20">
-								<td align="center" class="sideback"><b>{L_JUMP}</b></td>
+							<tr>
+								<td align="center" class="sideback"><div style="height:20px;"><b>{L_JUMP}</b></div></td>
 							</tr>
 							<tr>
 								<td>
 									<div style="padding: 5px;">
-										<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="GET">
+										<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
 											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_JUMPS}</select><br />
 											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br />
 											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br />
@@ -32,7 +32,7 @@
 										{SEARCH_BOX}
 										<!-- switch show_search off -->
 										<!-- switch show_goto on -->
-										<form style="margin-bottom:0;" action="day.php" method="GET">
+										<form style="margin-bottom:0;" action="day.php" method="get">
 											<input type="hidden" name="cal" value="{URL_CAL}">
 											<input type="text" style="width:160px; font-size:10px" name="jumpto_day">
 											<input type="submit" value="Go">
@@ -55,8 +55,8 @@
 					</td>
 					<td width="160" valign="top">
 						<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
-							<tr height="20">
-								<td align="center" class="sideback"><b>{CALENDAR_NAME}</b></td>
+							<tr>
+								<td align="center" class="sideback"><div style="height:20px;"><b>{CALENDAR_NAME}</b></div></td>
 							</tr>
 							<tr>
 								<td>
