@@ -1,7 +1,7 @@
 <?php
 
-// English language include
-// For version 0.8 PHP iCalendar
+// Japanese language include
+// For version 0.9 PHP iCalendar
 //
 // Translation by Jared Wangen (jared@silter.org)
 // With the help of Eri Hayashiguchi
@@ -74,26 +74,26 @@ $recurring_event_lang	= '引き続く予定';
 $exception_lang			= '特例';
 $no_query_lang			= '検索キーワードがありませんでした。';
 $preferences_lang		= '環境設定';
-$printer_lang			= 'プリンタ';
-$select_lang_lang		= 'Select your default language:';
-$select_cal_lang		= 'Select your default calendar:';
-$select_view_lang		= 'Select your default view:';
-$select_time_lang		= 'Select your default start time:';
-$select_day_lang		= 'Select your default start day of week:';
-$select_style_lang		= 'Select your default style:';
+$printer_lang			= 'プリンター';
+$select_lang_lang		= 'デフォルト言語を選択して下さい:';
+$select_cal_lang		= 'デフォルトカレンダーを選択して下さい:';
+$select_view_lang		= 'デフォルト見解を選択して下さい:';
+$select_time_lang		= 'デフォルト開始時刻を選択して下さい:';
+$select_day_lang		= 'デフォルト開始曜日を選択して下さい:';
+$select_style_lang		= 'デフォルト形式を選択して下さい:';
 $set_prefs_lang			= '環境を設定する';
-$completed_date_lang	= '%sに完成しました。';
-$completed_lang			= 'Completed';
-$created_lang			= 'Created:';
-$due_lang				= 'Due:';
+$completed_date_lang	= '%sに完成された。';
+$completed_lang			= '完了';
+$created_lang			= '作成日:';
+$due_lang				= '期限:';
 $priority_lang			= '優先順位:';
 $priority_high_lang		= '高い';
 $priority_low_lang		= '低い';
 $priority_medium_lang	= '普通';
 $priority_none_lang		= 'なし';
-$status_lang			= 'Status:';
-$todo_lang				= 'To do items';
-$unfinished_lang		= 'Unfinished';
+$status_lang			= '状態:';
+$todo_lang				= '備忘録';
+$unfinished_lang		= '完成されていない';
 
 // - navigation
 $back_lang = '戻る';
@@ -161,7 +161,7 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
+$error_title_lang = 'エラー!';
 $error_window_lang = 'エラーが発生しました!';
 $error_calendar_lang = 'エラーがおきたとき、「%s」カレンダーを処理していました。';
 $error_path_lang = '「%s」ディレクトリを開けることはできません。';
