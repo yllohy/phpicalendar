@@ -145,13 +145,19 @@
 									$calendar_name2 = urlencode($calendar_name2);
 									$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
 									
-									if (!isset($val["event_start"])) {
-										$event_start = $all_day_lang;
-										$event_end = '';
-										echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a><br>\n";
-									} else {	
-										echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a><br>\n";
+									if (!isset($val["event_start"])) { 
+										$event_start = $all_day_lang; 
+										$event_end = ''; 
+										openevent($calendar_name2, $event_start, 
+										$event_end, $val, $tomorrows_events_lines, 21, '<i>', '</i>', 'psf'); 
+										echo "<br>\n"; 
+									} else { 
+										openevent($calendar_name2, $event_start, 
+										$event_end, $val, $tomorrows_events_lines, 21, '<font class="G10B">&#149; ', '</font>', 'psf'); 
+										echo "<br>\n"; 
 									}
+
+
 									
 								}
 							}
