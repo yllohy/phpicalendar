@@ -1,3 +1,7 @@
+<?php 
+// Version Info:
+// 21-jan-03, Marook: Removed Scrollbar param, to allow browser to auto-disply when needed.
+?>
 <script language="JavaScript" type="text/javascript">
 <!--
 	function openEventInfo(event, calendarname, start, end, description)
@@ -11,7 +15,7 @@
 			"&end="+end+
 			"&description="+description;
 				
-		options = "scrollbars=no"+",width="+windowW+",height="+windowH;
+		options = "width="+windowW+",height="+windowH; //"scrollbars=no"+",
 	
 		info = window.open(url, "Popup", options);
 		
