@@ -81,7 +81,7 @@ if ($parse_file) {
 			unset (
 				$start_time, $start_time, $start_date, $end_date, $summary, 
 				$allday_start, $allday_end, $start, $end, $the_duration, 
-				$beginning, $rrule_array, $start_of_vevent, $description
+				$beginning, $rrule_array, $start_of_vevent, $description, $valarm_description
 			);
 	
 			$except_dates = array();
@@ -467,7 +467,7 @@ if ($parse_file) {
 				if ($valarm_set = FALSE) { 
 					$description = $data;
 				} else {
-					$alarm_description = $data;
+					$valarm_description = $data;
 				}
 			
 			} elseif (stristr($field, 'X-WR-CALNAME')) {
