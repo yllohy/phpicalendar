@@ -40,7 +40,7 @@ $search_box .=
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
 	'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
-	'<input type="submit" value="Search">'."\n".
+	'<INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
 	'</form>';
 
 $search_started = getmicrotime();
@@ -125,10 +125,7 @@ $search_took = number_format(($search_ended-$search_started),3);
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td colspan="3" height="1"></td>
-								</tr>
-								<tr>
-									<td colspan="3" class="G10B" align="center"><?php echo $search_box; ?></td>
-								</tr>								
+								</tr>							
 								<tr>
 									<td colspan="3" class="G10B" align="center"><?php echo $query_lang.$formatted_search; ?></td>
 								</tr>
@@ -192,6 +189,9 @@ $search_took = number_format(($search_ended-$search_started),3);
 									
 								
 								?>
+								<tr>
+									<td colspan="3" class="G10B" align="center"><?php echo $search_box; ?></td>
+								</tr>	
 								<tr>
 									<td colspan="3" class="G10B" align="center">
 									<?php 
