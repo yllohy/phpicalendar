@@ -1,7 +1,7 @@
 <?php
 
 // Trad. Chinese language include
-// For version 0.9.1 PHP iCalendar
+// For version 0.9.2 PHP iCalendar
 //
 // Translation by Kevin Fyure (digdog@mac.com)
 //
@@ -84,12 +84,40 @@ $priority_none_lang		= '無';
 $status_lang			= '狀態:';
 $todo_lang				= '待辦事項';
 $unfinished_lang		= '尚未完成';
+$prefs_set_lang 		= '您的偏好設定已設定。';
+$prefs_unset_lang 		= '設定已還原。更動的部份會在讀取下一頁時生效。';
+$unset_prefs_lang 		= '還原設定:';
 
-// ----- New for 0.9.1
+// ----- New for 0.9.2
 
-$prefs_set_lang = '您的偏好設定已設定。';
-$prefs_unset_lang = '設定已還原。更動的部份會在讀取下一頁時生效。';
-$unset_prefs_lang = '還原設定:';
+$organizer_lang			= 'Organizer';
+$attendee_lang			= 'Attendee';
+$status_lang			= 'Status';
+$location_lang			= 'Location';
+$admin_header_lang		= 'PHP iCalendar Administration';
+$username_lang			= 'Username';
+$password_lang			= 'Password';
+$login_lang				= 'Login';
+$invalid_login_lang		= 'Wrong username or password.';
+$addupdate_cal_lang		= 'Add or Update a Calendar';
+$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
+$delete_cal_lang		= 'Delete a Calendar';
+$logout_lang			= 'Logout';
+$cal_file_lang			= 'Calendar File';
+$php_error_lang			= 'PHP Error';
+$upload_error_gen_lang	= 'There was a problem with your upload.';
+$upload_error_lang[0]	= 'There was a problem with your upload.';
+$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
+$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
+$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
+$upload_error_lang[4]	= 'You must select a file for upload.';
+$upload_error_type_lang = 'Only .ics files may be uploaded.';
+$copy_error_lang		= 'Failed to copy file';
+$delete_error_lang		= 'Failed to delete file';
+$delete_success_lang	= 'was deleted successfully.';
+$action_success_lang	= 'Your action was successful.';
+$submit_lang			= 'Submit';
+$delete_lang			= 'Delete';
 
 // - navigation
 $back_lang = '回去';

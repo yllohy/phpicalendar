@@ -1,7 +1,7 @@
 <?php
 
 // Polish language include
-// For version 0.9.1 PHP iCalendar
+// For version 0.9.2 PHP iCalendar
 //
 // Translation by Stanisław Cieślicki (stahoo@poczta.onet.pl)
 //
@@ -84,12 +84,40 @@ $priority_none_lang		= 'Żaden';
 $status_lang			= 'Status:';
 $todo_lang				= 'Do zrobienia';
 $unfinished_lang		= 'Niewykonane';
+$prefs_set_lang 		= 'Twoje preferencje zostały ustawione.';
+$prefs_unset_lang 		= 'Preferencje przywrócone. Zmiany będą widoczne po ponownym załadowaniu strony.';
+$unset_prefs_lang 		= 'Przywróć preferencje:';
 
-// ----- New for 0.9.1
+// ----- New for 0.9.2
 
-$prefs_set_lang = 'Twoje preferencje zostały ustawione.';
-$prefs_unset_lang = 'Preferencje przywrócone. Zmiany będą widoczne po ponownym załadowaniu strony.';
-$unset_prefs_lang = 'Przywróć preferencje:';
+$organizer_lang			= 'Organizer';
+$attendee_lang			= 'Attendee';
+$status_lang			= 'Status';
+$location_lang			= 'Location';
+$admin_header_lang		= 'PHP iCalendar Administration';
+$username_lang			= 'Username';
+$password_lang			= 'Password';
+$login_lang				= 'Login';
+$invalid_login_lang		= 'Wrong username or password.';
+$addupdate_cal_lang		= 'Add or Update a Calendar';
+$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
+$delete_cal_lang		= 'Delete a Calendar';
+$logout_lang			= 'Logout';
+$cal_file_lang			= 'Calendar File';
+$php_error_lang			= 'PHP Error';
+$upload_error_gen_lang	= 'There was a problem with your upload.';
+$upload_error_lang[0]	= 'There was a problem with your upload.';
+$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
+$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
+$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
+$upload_error_lang[4]	= 'You must select a file for upload.';
+$upload_error_type_lang = 'Only .ics files may be uploaded.';
+$copy_error_lang		= 'Failed to copy file';
+$delete_error_lang		= 'Failed to delete file';
+$delete_success_lang	= 'was deleted successfully.';
+$action_success_lang	= 'Your action was successful.';
+$submit_lang			= 'Submit';
+$delete_lang			= 'Delete';
 
 // - navigation
 $back_lang = 'Back';
