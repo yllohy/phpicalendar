@@ -108,6 +108,7 @@
 									$sunday = strtotime("$first_sunday");
 									$i = 0;
 									$whole_month = TRUE;
+									$num_of_events = 0;
 									do {
 										$day = date ("j", $sunday);
 										$daylink = date ("Ymd", $sunday);
@@ -155,6 +156,7 @@
 															echo "</table>\n";
 															echo "</td>\n";
 															echo "</tr>\n";
+															$num_of_events++;
 														}
 													}
 												}
@@ -218,6 +220,12 @@
 		</tr>
 	</table>
 	<br>
+<?php
+
+if ($num_of_events != 0) { 
+
+?>	
+	
 	<table width="740" border="0" cellspacing="1" cellpadding="2" class="calborder">
 <tr>
 <td>
@@ -311,6 +319,8 @@
 		</tr>
 	</table>
 <br>
+
+<?php } ?>	
 <?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
 </center>
 </body>
