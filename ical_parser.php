@@ -25,6 +25,21 @@ function dateOfWeek($Ymd, $day) {
 	return date("Ymd",strtotime($day_longer,$sunday));
 }
 
+// function to compare to dates in Ymd and return the number of weeks that differ between them
+// requires dateOfWeek()
+function weekCompare($now, $then) {
+	$sun_now = dateOfWeek($now, "SU");
+	$sun_then = dateOfWeek($then, "SU");
+	$seconds_now = strtotime($sun_now);
+	$seconds_then =  strtotime($sun_then);
+	$diff_seconds = $seconds_now - $seconds_then;
+	$diff_minutes = $diff_seconds/60;
+	$diff_hours = $diff_minutes/60;
+	$diff_days = round($diff_hours/24);
+	$diff_weeks = $diff_days/7;
+	return $diff_weeks;
+}
+
 $day_array = array ("0700", "0730", "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930", "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330");
 
 
@@ -240,10 +255,10 @@ foreach($contents as $line) {
 							// add another case for "year" once that's added.
 							if ($current_view == "month") {
 								$start_range_time = strtotime("$this_year-$this_month-01");
-								$end_range_time = strtotime("+1 month", $start_range_time);
+								$end_range_time = strtotime("+1 month +1 week", $start_range_time);
 							} else {
 								$start_range_time = strtotime("$this_year-$this_month-$this_day");
-								$end_range_time = strtotime("+1 weeks", $start_range_time);
+								$end_range_time = strtotime("+1 week", $start_range_time);
 							}
 							
 							// If the $end_range_time is less than the $start_date_time, we may as well forget the whole thing
@@ -260,22 +275,29 @@ foreach($contents as $line) {
 								// start at the $start_range and go week by week until we hit the end of our range.
 								while ($next_range_time >= $start_range_time && $next_range_time <= $end_range_time) {
 								
-									// loop through the days on which this event happens
-									foreach($byday as $day) {
-									
-										// use my fancy little function to get the date of each day
-										$next_date = dateOfWeek(date("Ymd", $next_range_time),$day);
-										if (strtotime($next_date) > $start_date_time && !in_array($next_date, $except_dates)) {
-											// add it to the array if it passes inspection, it allows the first time to be
-											// written by the master data writer (hence the > instead of >=) otherwise we can special case these
-											// before, the first one would get entered twice and show up twice
-											// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
-// writes to $master array here				// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
-											// on days that have been deleted by the user
-											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+									// use weekCompare to see if we even have this event this week
+									if (weekCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
+										$interval = $number;
+										// loop through the days on which this event happens
+										foreach($byday as $day) {
+										
+											// use my fancy little function to get the date of each day
+											$next_date = dateOfWeek(date("Ymd", $next_range_time),$day);
+											
+											if (strtotime($next_date) > $start_date_time && !in_array($next_date, $except_dates)) {
+												// add it to the array if it passes inspection, it allows the first time to be
+												// written by the master data writer (hence the > instead of >=) otherwise we can special case these
+												// before, the first one would get entered twice and show up twice
+												// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
+// writes to $master array here					// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
+												// on days that have been deleted by the user
+												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+											}
 										}
+									} else {
+										$interval = 1;
 									}
-									$next_range_time = strtotime("+1 week", $next_range_time);
+									$next_range_time = strtotime("+$interval week", $next_range_time);
 								}
 							}
 	
@@ -391,7 +413,7 @@ ksort($master_array);
 reset($master_array);
 //If you want to see the values in the arrays, uncomment below.
 //print "<pre>";
-//print_r($master_array);
+print_r($master_array);
 //print_r($day_array);
 //print_r($rrule);			
 //print "</pre>";
