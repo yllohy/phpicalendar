@@ -58,7 +58,6 @@ for ($i=0;$i<7;$i++) {
     		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=week\">";
 		} 
 	?>
-	<?php include (BASE.'functions/event.js'); ?>
 	<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
@@ -177,24 +176,25 @@ for ($i=0;$i<7;$i++) {
 												echo "<td class=\"dateback\" height=\"20\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"bottom\">\n";
 												if (isset($master_array[($thisday)]["-1"])) {
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
-													foreach($master_array[($thisday)]["-1"] as $allday) {
-														$all_day_text 	= stripslashes(urldecode($allday["event_text"]));
-														$event_text2 	= urlencode(addslashes($all_day_text));
-														$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
-														$description 	= addslashes(urlencode($allday["description"]));
-														$status			= $allday["status"];
-														$event_start 	= '';
-														$event_end		= '';
+												  	foreach($master_array[($thisday)]["-1"] as $allday) {
 														echo "<tr>\n";
-														echo "<td valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description', '$status')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
-														echo "</tr>\n";
-													}
-													echo "</table>\n";
-													}
+														echo "<td valign=\"top\" align=\"center\" class=\"eventbg\">";
+														openevent("$calendar_name",
+														"",
+													  	"",
+													  	$allday,
+													  	$allday_week_lines,
+													  	12,
+													  	'<font color="#ffffff">',
+													  	"</font>");
+														echo "</td></tr>\n";
+												  	}
+												  echo "</table>\n";
+												}
 												echo "</td>\n";
 												$thisdate = ($thisdate + (25 * 60 * 60));
 												$i++;
-											} while ($i < 7);
+											  } while ($i < 7);
 											echo "</tr>\n";
 										}
 											// $master_array[($getdate)]["$day_time"]
@@ -293,18 +293,9 @@ for ($i=0;$i<7;$i++) {
 															$emptyWidth = $emptyWidth - $drawWidth;
 															switch ($event_length[$thisday][$i]["state"]) {
 																case "begin":
-																
 																	$event_length[$thisday][$i]["state"] = "started";
-																	$event_text 	= stripslashes(urldecode($this_time_arr[($event_length[$thisday][$i]["key"])]["event_text"]));
-																	$event_text 	= word_wrap($event_text, 25, $week_events_lines);
-																	$event_text2 	= urlencode(addslashes($this_time_arr[($event_length[$thisday][$i]["key"])]["event_text"]));
 																	$event_start 	= $this_time_arr[($event_length[$thisday][$i]["key"])]["start_unixtime"];
-																	$event_end		= $this_time_arr[($event_length[$thisday][$i]["key"])]["end_unixtime"];
-																	$description 	= urlencode(addslashes($this_time_arr[($event_length[$thisday][$i]["key"])]["description"]));
 																	$event_start 	= date ($timeFormat, $event_start);
-																	$event_end 		= date ($timeFormat, $event_end);
-																	$calendar_name2	= urlencode(addslashes($calendar_name));
-																	$status			= $this_time_arr[($event_length[$thisday][$i]["key"])]["status"];
 																	echo "<td rowspan=\"" . $event_length[$thisday][$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2week\">\n";
 																	echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 																	echo "<tr>\n";
@@ -314,8 +305,18 @@ for ($i=0;$i<7;$i++) {
 																	echo "<td>\n";
 																	echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 																	echo "<tr>\n";
-																	echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description', '$status')\"><font class=\"V10W\">$event_text</font></a></td>\n";
-																	echo "</tr>\n";
+																	echo "<td class=\"eventbg\">";
+																	$event_end	= $this_time_arr[($event_length[$thisday][$i]["key"])]["end_unixtime"];
+																	$event_end 		= date ($timeFormat, $event_end);
+																	openevent("$calendar_name2",
+																		  "$event_start",
+																		  "$event_end",
+																		  $this_time_arr[($event_length[$thisday][$i]["key"])],
+																		  $week_events_lines,
+																		  25,
+																		  "<font class=\"V10W\">",
+																		  "</font>");
+																	echo "</td></tr>\n";
 																	echo "</table>\n";
 																	echo "</td>\n";           
 																	echo "</tr>\n";

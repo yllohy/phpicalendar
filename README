@@ -78,7 +78,9 @@ Changes:
 	-Added support for CLASS (public, private, and confidential).
 	-Added support for LOCATION
 	-Added support for ATTENDEE
+	-Added support for ORGANIZER
 	-Added support for STATUS
+	-New javascript functions provide additional information.
 	-Added the ability to correct the servers time display
 	-Added admin.php for administration of calendars (uses cookies). See config.inc.php for configuration.
 		-Add or Update a calendar via a web interface
