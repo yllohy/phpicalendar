@@ -9,7 +9,7 @@ include("./ical_parser.php");
 //	echo "using sessions";
 //}
 
-$starttime = "0700";
+$starttime = "0500";
 $weekstart = 1;
 // dpr 20020926: moved variable gridLength to config.inc.php
 //$gridLength = 30;
@@ -18,6 +18,29 @@ $today_today = date ("Ymd");
 $tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
 $yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 $display_date = strftime($dateFormat_day, $unix_time);
+
+// For the side months
+ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
+$this_day = $day_array2[3]; 
+$this_month = $day_array2[2];
+$this_year = $day_array2[1];
+
+$date = strtotime($getdate);
+$month1 = date("m", DateAdd ("m", "-1", $date));
+$month2 = date("m", $date);
+$month3 = date("m", DateAdd ("m", "+1", $date));
+$year1 = date("Y", DateAdd ("m", "-1", $date));
+$year2 = date("Y", $date);
+$year3 = date("Y", DateAdd ("m", "+1", $date));
+$first_sunday1 = sundayOfWeek($year1, $month1, "1");
+$first_sunday2 = sundayOfWeek($year2, $month2, "1");
+$first_sunday3 = sundayOfWeek($year3, $month3, "1");
+$display_month1 = strftime ($dateFormat_month, strtotime("-1 month", $date));
+$display_month2 = strftime ($dateFormat_month, $date);
+$display_month3 = strftime ($dateFormat_month, strtotime("+1 month", $date));
+$parse_month = date ("Ym", $date);
+$thisday2 = strftime($dateFormat_week_list, $date);
+
 $nbrGridCols = 1;
 if ($master_array[($getdate)]) {
 	foreach($master_array[($getdate)] as $ovlKey => $ovlValue) {
@@ -41,87 +64,30 @@ if ($master_array[($getdate)]) {
 </head>
 <body bgcolor="#FFFFFF">
 <center>
-
-<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
+<table border="0" width="720" cellspacing="0" cellpadding="0">
 	<tr>
-		<td align="left" width="100"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$today_lang</a>"; ?></td>
-		<td align="center" width="600"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
-		<td align="right" width="100"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
-	</tr>
-	<tr>
-		<td colspan="3"><img src="images/spacer.gif" height="10" width="1" alt=""></td>
-	</tr>
-</table>
-
-<table width="700" border="0" cellspacing="1" cellpadding="2" class="calborder">
-<tr>
-<td>
-
-<table width="700" border="0" cellspacing="0" cellpadding="0">
+		<td width="540" valign="top">
+<table width="540" border="0" cellspacing="0" cellpadding="0" class="calborder">
     <tr>
      	<td align="center" valign="middle">
-      		<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#a1a5a9" class="G10B">
+      		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
       			<tr>
-      				<td bgcolor="#ffffff">
-      					<table width="100%" border="0" cellspacing="1" cellpadding="2">
-							<tr>
-								<td colspan="2">
-									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td class="G10B" align="left" valign="top" width="100"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\">$last_day_lang</a>"; ?></td>
-											<td class="H20" align="center" valign="middle" width="500"><?php echo "$display_date"; ?></td>
-											<td class="G10B" align="right" valign="top" width="100"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\">$next_day_lang</a>"; ?></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td align="left" valign="middle" class="G10B" width="50%"><?php include('./functions/list_icals.php'); ?></td>
-								<td align="right" valign="middle" class="G10B" width="50%"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
-							</tr>
-						</table>
-      				</td>
+					<td class="H20" align="center" bgcolor="#DDDDDD" background="images/time_bg.gif"><img src="images/spacer.gif" width="1" height="6" alt=""><br><?php echo "$display_date"; ?><br><img src="images/spacer.gif" width="1" height="3" alt=""></td>
       			</tr>
       			<tr>
 					<td align="center" valign="top">
-						<table width="100%" border="0" cellspacing="1" cellpadding="0">
-							<?php
-							// The all day events returned here.
-							$i = 0;
-							if (sizeof($master_array[($getdate)]["-1"]) > 0) {
-								echo "<tr height=\"30\">\n";
-								echo "<td colspan=\"15\" height=\"30\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
-								echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";										  
-								foreach($master_array[($getdate)]["-1"] as $all_day) {
-									$event_text2 = addslashes($all_day["event_text"]);
-									$event_text2 = str_replace("\"", "&quot;", $event_text2);
-									if ($i > 0) {
-										echo "<tr>\n";
-										echo "<td bgcolor=\"#eeeeee\" height=\"1\"></td>\n";
-										echo "</tr>\n";
-									}
-									echo "<tr>\n";
-									echo "<td valign=\"top\" align=\"center\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\"><i>" . $all_day["event_text"] . "</i></font></a></td>\n";
-									echo "</tr>\n";
-									$i++;
-								}
-								echo "</table>\n";
-								echo "</td>\n";
-								echo "</tr>\n";
-							}
-							?>
-
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td nowrap bgcolor="#a1a5a9" width="60"></td>
-								<td nowrap bgcolor="#a1a5a9" width="1"></td>
+								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>
+								<td width="1"></td>
 								<?php for ($m=0;$m < $nbrGridCols;$m++) { 
-									echo "<td nowrap bgcolor=\"#a1a5a9\"><img src=\"images/spacer.gif\" width=\"" . (700 / $nbrGridCols) . "\" height=\"1\" alt=\"\"></td>";
+									echo "<td><img src=\"images/spacer.gif\" width=\"" . (540 / $nbrGridCols) . "\" height=\"1\" alt=\"\"></td>";
 								} ?>
 							</tr>
 							<?php
 								// $master_array[($getdate)]["$day_time"]
 								$event_length = array ();
-								
+								$border = 0;
 								foreach ($day_array as $key) {
 									$cal_time = $key;	
 									$key = strtotime ("$key");
@@ -146,14 +112,15 @@ if ($master_array[($getdate)]) {
 									}
 									if (ereg("([0-9]{1,2}):00", $key)) {
 										echo "<tr height=\"" . $gridLength . "\">\n";
-										echo "<td rowspan=\"" . (60 / $gridLength) . "\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
-										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"" . $gridLength . "\"></td>\n";
+										echo "<td rowspan=\"" . (60 / $gridLength) . "\" align=\"center\" valign=\"top\" background=\"images/time_bg.gif\" width=\"60\" class=\"timeborder\">$key</td>\n";
+										echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 									} else {
+
 										echo "<tr height=\"" . $gridLength . "\">\n";
-										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"" . $gridLength . "\"></td>\n";
+										echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 									}
 									if (sizeof($event_length) == 0) {
-										echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols . "\">&nbsp;</td>\n";
+										echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols . "\" class=\"dayborder\">&nbsp;</td>\n";
 									} else {
 										$emptyWidth = $nbrGridCols;
 										for ($i=0;$i<sizeof($event_length);$i++) {
@@ -168,16 +135,16 @@ if ($master_array[($getdate)]) {
 													$event_text2 	= str_replace("\"", "&quot;", $event_text2);
 													$event_start 	= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
 													$event_end		= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
-													$description 	= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["description"];
+													$description 	= addslashes($master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["description"]);
 													$description 	= str_replace("\"", "&quot;", $description);
 													$event_start 	= strtotime ("$event_start");
 													$event_start 	= date ($timeFormat, $event_start);
 													$event_end 		= strtotime ("$event_end");
 													$event_end 		= date ($timeFormat, $event_end);
-													echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg\">\n";
+													echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2\">\n";
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
 													echo "<tr>\n";
-													echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b> - $event_end</font></td>\n";
+													echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b></font></td>\n";
 													echo "</tr>\n";
 													echo "<tr>\n";
 													echo "<td>\n";
@@ -222,12 +189,12 @@ if ($master_array[($getdate)]) {
     	</td>
 	</tr>
 </table>
-
 </td>
-</tr>
+		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
+		<td width="160" valign="top"><?php include('./sidebar.php'); ?><center>
+		<?php echo "<font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?></center></td>
+	</tr>
 </table>
-<br>
-<?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
 </center>
 </body>
 </html>

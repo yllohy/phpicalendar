@@ -2,8 +2,11 @@
 
 .eventborder { background-color: #0065DB; border: 1px #0033CC solid; }
 .eventbg { background-color: #68AAEF; }
+.eventbg2 { background-color: #68AAEF; border-right: 1px solid #FFFFFF; }
 .eventfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; }
 .calborder { background-color: #FFFFFF; border: 1px #A1A5A9 solid; }
+.dayborder { border-top: 1px dashed #A1A5A9; }
+.timeborder { border-right: 2px solid #A1A5A9; border-top: 1px dashed #A1A5A9; }
 
 a.psf	{
 	text-decoration:	none;
@@ -25,6 +28,26 @@ a.psf:hover	{
 	background-color: transparent;
 	}
 	
+a.ps2	{
+	text-decoration:	underline;
+	}
+a.ps2:link	{
+	color:	#06f;
+	background-color: transparent;
+	}
+a.ps2:visited	{
+	color:	#06f;
+	background-color: transparent;
+	}
+a.ps2:active	{
+	color:	#36c;
+	background-color: transparent;
+	}
+a.ps2:hover	{
+	color:	#009;
+	background-color: transparent;
+	}
+	
 	
 body	{
 background-color: #E5E5E5;
@@ -35,10 +58,11 @@ background-color: #E5E5E5;
 .V9 { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; }
 .G10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #06f; }
 .G10B { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: black; }
+.G10G { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #666; }
 .V12 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; }
 .H20 { font-family: Helvetica, sans-serif; font-size: 20px; }
 
 
-.query_style { font-size : 12px; font-family : geneva, arial, sans-serif; width: 135px; }
+.query_style { font-size : 11px; font-family : verdana, geneva, arial, sans-serif; width: 146px; margin-bottom:0; }
 .add_style { font-size : 12px; font-family : verdana, geneva, arial, sans-serif; width: 160px; }
 
