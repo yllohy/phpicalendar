@@ -625,7 +625,7 @@ class Page {
 	}
 	
 	function get_vtodo() {
-		global $template, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines, $show_completed;
+		global $template, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines, $show_completed, $show_todos;
 		
 		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!is", $this->page, $match2);
@@ -690,7 +690,7 @@ class Page {
 		}
 		
 		// If there are no TODO items, completely hide the TODO list.
-		if ($nugget2 == '') {
+		if (($nugget2 == '') || ($show_todos != 'yes')) {
 			$this->page = preg_replace('!<\!-- switch vtodo on -->(.*)<\!-- switch vtodo off -->!is', '', $this->page);
 		}
 		
