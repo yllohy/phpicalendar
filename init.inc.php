@@ -9,6 +9,10 @@ if(phpversion() >= "4.2.0")
 
 include('./config.inc.php');
 
+// subscribe link prefix, doesn't need to be user configureable
+$fullpath = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'.$calendar_path.'/';
+
+
 // language support
 $language = strtolower($language);
 $lang_file = "./languages/$language.inc.php";
