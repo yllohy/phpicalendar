@@ -29,9 +29,8 @@ $default_path			= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. ht
 $charset				= 'UTF-8';			// Character set your calendar is in, suggested UTF-8, or iso-8859-1 for most languages.
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
 $allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
-$this_months_events 	= 'ys';			// Display "This month's events" at the bottom off the month page.
+$this_months_events 	= 'yes';			// Display "This month's events" at the bottom off the month page.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
 $show_search			= 'yes';			// Show the search box in the sidebar.
 $allow_preferences		= 'yes';			// Allow visitors to change various preferences via cookies.

@@ -82,9 +82,11 @@ COPYING for more information about our license.
 Changes:
 --------
 2.0
-	-Enhanced error messaging.
+	-Enhanced error messaging system.
 	-Added Afrikaans Language.
 	-Todos can be turned off again.
+	-Month bottom can be turned off again.
+	-Preferences page can be turned off.
 	-Todos won't show private todos.
 	-RSS page respects https servers.
 
