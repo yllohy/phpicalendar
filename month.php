@@ -33,7 +33,7 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$calendar_name"; ?></title>
+	<title><?php echo "$calendar_name - $display_month"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
 	<?php include "functions/event.js"; ?>
 </head>

@@ -26,7 +26,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title><?php echo "$calendar_name - $thisday2"; ?></title>
+	<title><?php echo "$calendar_name - $this_year2"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
 	<meta name="generator" content="BBEdit 6.5.3">
 </head>
