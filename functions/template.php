@@ -627,7 +627,7 @@ class Page {
 	}
 	
 	function get_vtodo() {
-		global $template, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
+		global $template, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines, $show_completed;
 		
 		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!is", $this->page, $match2);
