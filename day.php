@@ -3,21 +3,12 @@
 $current_view = "day";
 include("./ical_parser.php");
 
-//might not need this, depending on implimentation, doesn't work correctly in current form anyway
-//setcookie("last_view", "day");
-
-// drei 20020921: added formats for localization
-// something that will have to go to the user's preferences
-$timeFormat = "H:i";
-$dateFormat = "%a, %d. %B %Y";
-setlocale (LC_TIME, 'de_CH');
 $starttime = "0700";
 $weekstart = 1;
 $gridLength = 30;
 
 if ($getdate == (date("Ymd"))) {
-//	$display_date = date ("l, F d");
-	$display_date = strftime ($dateFormat);
+	$display_date = strftime ($dateFormat_day);
 	$tomorrows_date = date( "Ymd", (time() + (24 * 3600)));
 	$yesterdays_date = date( "Ymd", (time() - (24 * 3600)));
 } else {
@@ -26,8 +17,7 @@ if ($getdate == (date("Ymd"))) {
 	$this_month = $day_array2[2];
 	$this_year = $day_array2[1];
 	$unix_time = mktime(0,0,0,"$this_month","$this_day","$this_year");
-//	$display_date = date ("l, F d", $unix_time);
-	$display_date = strftime($dateFormat, $unix_time);
+	$display_date = strftime($dateFormat_day, $unix_time);
 	$tomorrow = $unix_time + (24 * 3600);
 	$yesterday = $unix_time - (24 * 3600);
 	$tomorrows_date = date( "Ymd", ($tomorrow));
@@ -182,10 +172,8 @@ if ($getdate == (date("Ymd"))) {
 													$event_start = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
 													$event_end = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
 													$event_start = strtotime ("$event_start");
-			// drei 20020921							$event_start = date ("g:i a", $event_start);
 													$event_start = date ($timeFormat, $event_start);
 													$event_end = strtotime ("$event_end");
-			// drei 20020921							$event_end = date ("g:i a", $event_end);
 													$event_end = date ($timeFormat, $event_end);
 													echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg\">\n";
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";

@@ -25,7 +25,6 @@ $last_year_lang		= "去年";
 $subscribe_lang		= "追加";
 $download_lang		= "ダウンロド";
 $powered_by_lang 	= "Powered by";
-$version_lang		= "0.4";
 
 $month_jan_lang		= "1月";
 $month_feb_lang		= "2月";
@@ -56,5 +55,26 @@ $day_wed_lang		= "水曜日";
 $day_thu_lang		= "木曜日";
 $day_fri_lang		= "金曜日";
 $day_sat_lang		= "土曜日";
+
+$version_lang		= "0.5";
+$event_lang			= "Event";
+$event_start_lang	= "Start Time";
+$event_end_lang		= "End Time";
+$this_months_lang	= "This Month's Events";
+$date_lang			= "Date";
+$summary_lang		= "Summary";
+
+// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
+setlocale (LC_TIME, 'en_EN');
+
+// For time formatting, check out: http://www.php.net/manual/en/function.date.php
+$timeFormat = "g:i A";
+
+// For date formatting, cehck out: http://www.php.net/manual/en/function.strftime.php
+$dateFormat_day = "%A, %B %e";
+$dateFormat_week = "%B %e";
+$dateFormat_week_list = "%a, %b %e";
+$dateFormat_month = "%B %Y";
+$dateFormat_month_list = "%A, %B %e";
 
 ?>

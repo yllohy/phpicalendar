@@ -1,7 +1,7 @@
 <?
 
 // French language include
-// For version 0.4 PHP iCalendar
+// For version 0.5 PHP iCalendar
 //
 // Translation by La Shampouineuse (info@lashampoo.com)
 //
@@ -25,7 +25,25 @@ $last_year_lang		= "Ann&eacute;e pr&eacute;c&eacute;dente";
 $subscribe_lang		= "Souscrire";
 $download_lang		= "T&eacute;l&eacute;charger";
 $powered_by_lang 	= "Produit avec";
-$version_lang		= "0.4";
+$version_lang		= "0.5";
+$event_lang			= "Event";
+$event_start_lang	= "Start Time";
+$event_end_lang		= "End Time";
+$this_months_lang	= "This Month's Events";
+$date_lang			= "Date";
+$summary_lang		= "Summary";
 
+// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
+setlocale (LC_TIME, 'en_EN');
+
+// For time formatting, check out: http://www.php.net/manual/en/function.date.php
+$timeFormat = "g:i A";
+
+// For date formatting, cehck out: http://www.php.net/manual/en/function.strftime.php
+$dateFormat_day = "%A, %B %e";
+$dateFormat_week = "%B %e";
+$dateFormat_week_list = "%a, %b %e";
+$dateFormat_month = "%B %Y";
+$dateFormat_month_list = "%A, %B %e";
 
 ?>

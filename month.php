@@ -15,7 +15,7 @@
 	$prev_date = DateAdd ("m", "-1", $date);
 	$next_month = date( "Ym01", $next_date);
 	$prev_month = date( "Ym01", $prev_date);
-	$display_month = date ("F Y", $date);
+	$display_month = strftime ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_sunday = sundayOfWeek($this_year, $this_month, "1");
 
@@ -122,21 +122,6 @@
 											echo "</td>\n";
 											echo "</tr>\n";
 											if ($master_array[("$daylink")]) {
-												if ($master_array[("$daylink")]["0001"]["event_text"]) {
-													foreach ($master_array[("$daylink")]["0001"]["event_text"] as $event_text) {
-														$event_text2 = addslashes($event_text);
-														if (strlen($event_text) > 15) {
-															$event_text = substr("$event_text", 0, 12);
-															$event_text = $event_text . "...";
-														}
-														echo "<tr height=\"15\">\n";
-														echo "<td height=\"15\" valign=\"middle\" align=\"center\" bgcolor=\"#ffffff\">\n";
-														//echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
-														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a>\n";
-														echo "</td>\n";
-														echo "</tr>\n";
-													}
-												}
 												foreach ($master_array[("$daylink")] as $event_times) {
 													foreach ($event_times as $val) {
 														$event_text = $val["event_text"];
@@ -146,13 +131,8 @@
 															$event_end = $val["event_end"];
 															$event_start = strtotime ("$event_start");
 															$event_end = strtotime ("$event_end");
-															if ($time_format == "24") {
-																$event_start = date ("G:i", $event_start);
-																$event_end = date ("G:i", $event_end);
-															} else {
-																$event_start = date ("g:i a", $event_start);
-																$event_end = date ("g:i a", $event_end);
-															}
+															$event_end = date ($timeFormat, $event_end);
+															$event_start = date ($timeFormat, $event_start);
 															if (strlen($event_text) > 12) {
 																$event_text = substr("$event_text", 0, 10);
 																$event_text = $event_text . "...";
@@ -162,7 +142,11 @@
 															echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 															echo "<tr>\n";
 															echo "<td>\n";
-															echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+															if (!$event_start = $val["event_start"]) {
+																echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a></center>\n";
+															} else {	
+																echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+															}
 															echo "</td>\n";
 															echo "</tr>\n";
 															echo "</table>\n";
@@ -243,17 +227,17 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr height="25">
 									<td colspan="3" align="center" valign="middle" class="eventborder" width="740" height="25">
-										<font class="eventfont" color="#FFFFFF"><b>This Month's Events</b></font>
+										<font class="eventfont" color="#FFFFFF"><b><? echo "$this_months_lang"; ?></b></font>
 									</td>
 								</tr>
 								<tr height="11">
 									<td valign="middle" width="150" height="11" class="eventbg">
-										<font class="eventfont"><b>&nbsp;Date</b></font>
+										<font class="eventfont"><b>&nbsp;<? echo "$date_lang"; ?></b></font>
 									</td>
 									<td width="1" height="11" class="eventbg"><img src="images/spacer.gif" height="15" width="1">
 									</td>
 									<td valign="middle" width="551" height="11" class="eventbg">
-										<font class="eventfont"><b>&nbsp;Summary</b></font>
+										<font class="eventfont"><b>&nbsp;<? echo "$summary_lang"; ?></b></font>
 									</td>
 								</tr>
 								<tr height="1">
@@ -268,7 +252,7 @@
 										ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
 										if ($regs[1] == $parse_month) {
 											$dayofmonth = strtotime ($key);
-											$dayofmonth = date ("l, F jS", $dayofmonth);
+											$dayofmonth = strftime ($dateFormat_month_list, $dayofmonth);
 											$i = 0;
 											
 											// Pull out each day
@@ -276,40 +260,15 @@
 												
 												// Pull out each time
 												foreach ($new_val as $new_key2 => $new_val2) {
-												if (!$new_val2["event_text"]) {
-													foreach ($new_val2 as $all_day) {
-														$event_text = $all_day;
-														$event_text2 = addslashes($all_day);
-														$event_text = str_replace ("<br>", "", $event_text);
-														if (strlen($event_text) > 70) {
-															$event_text = substr("$event_text", 0, 65);
-															$event_text = $event_text . "...";
-														}
-														echo "<tr height=\"20\">\n";
-														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"200\" height=\"20\">\n";
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$dayofmonth</font></a>\n";
-														echo "</td>\n";
-														echo "<td width=\"1\" height=\"20\">\n";
-														echo "</td>\n";
-														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
-														echo "</td>\n";
-														echo "</tr>\n";
-													}
-												} elseif ($new_val2["event_text"]) {	
+												if ($new_val2["event_text"]) {	
 													$event_text = $new_val2["event_text"];
 													$event_text2 = addslashes($new_val2["event_text"]);
 													$event_start = $new_val2["event_start"];
 													$event_end = $new_val2["event_end"];
 													$event_start = strtotime ("$event_start");
 													$event_end = strtotime ("$event_end");
-													if ($time_format == "24") {
-														$event_start = date ("G:i", $event_start);
-														$event_end = date ("G:i", $event_end);
-													} else {
-														$event_start = date ("g:i a", $event_start);
-														$event_end = date ("g:i a", $event_end);
-													}
+													$event_end = date ($timeFormat, $event_end);
+													$event_start = date ($timeFormat, $event_start);
 													$event_text = str_replace ("<br>", "", $event_text);
 													if (strlen($event_text) > 70) {
 														$event_text = substr("$event_text", 0, 65);
@@ -322,7 +281,11 @@
 													echo "<td width=\"1\" height=\"20\">\n";
 													echo "</td>\n";
 													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
-													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
+													if (!$new_val2["event_start"]) {
+														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
+													} else {	
+														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
+													}
 													echo "</td>\n";
 													echo "</tr>\n";
 												}

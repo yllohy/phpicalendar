@@ -18,17 +18,17 @@ $event = stripslashes($event);
 		<td>  
    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="calborder">
     <tr height="18">
-     <td align="right" valign="top" width="80" class="V12">&nbsp;<b>Event:</b></td>
+     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><? echo "$event_lang"; ?>:</b></td>
      <td nowrap width="7" height="18"></td>
      <td align="left" valign="top" height="18" class="V12"><? echo "$event"; ?></td>
     </tr>
     <tr height="18">
-     <td align="right" valign="top" width="80" class="V12">&nbsp;<b>Start Time:</b></td>
+     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><? echo "$event_start_lang"; ?>:</b></td>
      <td width="7" height="18"></td>
      <td align="left" valign="top" height="18" class="V12"><? echo "$start"; ?></td>
     </tr>
     <tr height="18">
-     <td align="right" valign="top" width="80" class="V12">&nbsp;<b>End Time:</b></td>
+     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><? echo "$event_end_lang"; ?>:</b></td>
      <td width="7" height="18"></td>
      <td align="left" valign="top" height="18" class="V12"><? echo "$end"; ?></td>
     </tr>
