@@ -48,7 +48,7 @@ if ($save_parsed_cals == 'yes') {
 					$mtime = $master_array['-4'][$z]['mtime'];
 					$fname = $master_array['-4'][$z]['filename'];
 					$wcalc = $master_array['-4'][$z]['webcal'];	
-					$realcal_mtime = filemtime($fname);
+					if ($wcalc == 'no') $realcal_mtime = filemtime($fname);
 					$webcal_mtime = strtotime("now -$webcal_hours hours");
 					if (($mtime == $realcal_mtime) && ($wcalc == 'no')) {
 						$y++;
