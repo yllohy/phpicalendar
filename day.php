@@ -250,8 +250,8 @@ include (BASE.'includes/header.inc.php');
 												  echo '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
 												  echo '<tr>'."\n";
 												  echo '<td class="eventbg_'.$event_calno.'">';
-												  // Todo: keep track of where the event comes from, and indicate that to openevent instead of "all_calenders_combined971"
-												  if ($cal == 'all_calenders_combined971') $calendar_name2=$cal; else $calendar_name2=$calendar_name;
+												  // Todo: keep track of where the event comes from, and indicate that to openevent instead of $ALL_CALENDARS_COMBINED
+												  if ($cal == $ALL_CALENDARS_COMBINED) $calendar_name2=$cal; else $calendar_name2=$calendar_name;
 										  		  openevent("$calendar_name2",
 												  "$event_start",
 												  "$event_end",

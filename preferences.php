@@ -178,10 +178,10 @@ include (BASE.'includes/header.inc.php');
 												}
 												// add option to open all (non-web) calenders together
 												// Todo: add $all_calenders_combined_lang (plural) in the language-specific files and use it here
-												if ($cookie_calendar == 'all_calenders_combined971') {
-													print "<option value=\"all_calenders_combined971\" selected>$all_cal_comb_lang</option>\n";
+												if ($cookie_calendar == $ALL_CALENDARS_COMBINED) {
+													print "<option value=\"$ALL_CALENDARS_COMBINED\" selected>$all_cal_comb_lang</option>\n";
 												} else {
-													print "<option value=\"all_calenders_combined971\">$all_cal_comb_lang</option>\n";
+													print "<option value=\"$ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>\n";
 												}
 			
 												foreach($list_webcals as $cal_tmp) {
