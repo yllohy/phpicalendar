@@ -34,12 +34,12 @@ $date_lang			= "Date";
 $summary_lang		= "Summary";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-setlocale (LC_TIME, 'en_EN');
+setlocale (LC_TIME, 'fr_CA');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = "g:i A";
 
-// For date formatting, cehck out: http://www.php.net/manual/en/function.strftime.php
+// For date formatting, check out: http://www.php.net/manual/en/function.strftime.php
 $dateFormat_day = "%A, %B %e";
 $dateFormat_week = "%B %e";
 $dateFormat_week_list = "%a, %b %e";
