@@ -1,7 +1,6 @@
 <?php
 
 define('BASE','../');
-$current_view = "rssindex";
 include(BASE.'functions/ical_parser.php');
 $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
 if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
@@ -9,18 +8,9 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 } else {
 	$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
 }
-
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$cal $calendar_lang - RSS Info"; ?></title>
-  	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
-</head>
-<body bgcolor="#FFFFFF">
-<?php include (BASE.'includes/header.inc.php'); ?>
+$current_view = "rssindex";
+$display_date = "$calendar_lang - RSS Info";
+include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
@@ -105,7 +95,5 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 		</td>
 	</tr>
 </table>
-<?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
-</body>
-</html>
+<?php include (BASE.'includes/footer.inc.php'); ?>
