@@ -1,26 +1,28 @@
 <?php
 
+define('BASE','./');
+$current_view = 'search';
 include('./functions/ical_parser.php');
 
-// takes a boolean search and a string. Returns an array with
-// [0] = True/False and [1] = formatted search string
-function search_boolean($needle,$haystack) {
+// takes a boolean search and formats it into an array
+// use with sister function search_boolean()
+function format_search($search_str) {
 	// init arrays
 	$and_arr = array();
 	$or_arr = array();
 	$not_arr = array();
 	$or_str_arr = array();
 
-	// compare lowercase versions of the strings
-	$haystack = strtolower($haystack);
-	$needle = strtolower($needle);
+	$search_str = strtolower($search_str);
 	
 	// clean up search string
-	$needle = str_replace(' and ', ' ', $needle);
-	$needle = ereg_replace('[[:space:]]+',' ', $needle);
+	$search_str = trim($search_str);
+	$search_str = str_replace(' and ', ' ', $search_str);
+	$search_str = ereg_replace('[[:space:]]+',' ', $search_str);
+	$search_str = str_replace(' not ', ' -', $search_str);
 	
 	// start out with an AND array of all the items
-	$and_arr = explode(' ', $needle);
+	$and_arr = explode(' ', $search_str);
 	$count = count($and_arr);
 	$j = 0;
 	
@@ -76,18 +78,32 @@ function search_boolean($needle,$haystack) {
 	} else {
 		$formatted_search = '<b>'.$final_str_arr[0].'</b>';
 	}
-		
+	
+	return array($formatted_search, $and_arr, $or_arr, $not_arr);
+}
+
+// takes an array made by format_search() and checks to see if it 
+// it matches against a string
+function search_boolean($needle_arr, $haystack) {
+	// init arrays
+	$and_arr = $needle_arr[1];
+	$or_arr = $needle_arr[2];
+	$not_arr = $needle_arr[3];
+	
+	// compare lowercase versions of the strings
+	$haystack = strtolower($haystack);
+
 	// check against the NOT
 	foreach($not_arr as $s) {
 		if (ereg($s, $haystack) == true) {
-			return array(false,$formatted_search);
+			return false;
 		}
 	}
 	
 	// check against the AND
 	foreach($and_arr as $s) {
 		if (ereg($s,$haystack) == false) {
-			return array(false,$formatted_search);
+			return false;
 		}
 	}
 	
@@ -95,19 +111,27 @@ function search_boolean($needle,$haystack) {
 	foreach($or_arr as $or) {
 		$is_false = true;
 		foreach($or as $s) {
-			if (ereg($s,$haystack) == true) {
+			if (substr($s,0,1) == '-') {
+				if (ereg(substr($s,1),$haystack) == false) {
+					$is_false = false;
+					break;
+				}			
+			} elseif (ereg($s,$haystack) == true) {
 				$is_false = false;
 				break;
 			}
 		}
-		if ($is_false) return array(false,$formatted_search);	
+		if ($is_false) return false;	
 	}
 	
 	// if we haven't returned false, then we return true
-	return array(true,$formatted_search);
+	return true;
 }
 
-$search_string = 'final japan';
+$search_string = 'final';
+
+$format_search_arr = format_search($search_string);
+$formatted_search = $format_search_arr[0];
 
 if (isset($master_array) && is_array($master_array)) {
 	foreach($master_array as $date_key_tmp => $date_tmp) {
@@ -116,12 +140,11 @@ if (isset($master_array) && is_array($master_array)) {
 				if (is_array($time_tmp)) {
 					foreach ($time_tmp as $event_tmp) {
 						if (is_array($event_tmp)) {
-							$results1 = search_boolean($search_string,$event_tmp['event_text']);
-							$formatted_search = $results1[1];
-							if (!$results1[0]) {
-								$results2 = search_boolean($search_string,$event_tmp['description']);
+							$results1 = search_boolean($format_search_arr,$event_tmp['event_text']);
+							if (!$results1) {
+								$results2 = search_boolean($format_search_arr,$event_tmp['description']);
 							}
-							if ($results1[0] || $results2[0]) {
+							if ($results1 || $results2) {
 								$event_tmp['date'] = $date_key_tmp;
 								$the_arr[] = $event_tmp;
 							}
@@ -140,17 +163,20 @@ if (isset($master_array) && is_array($master_array)) {
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$calendar_name - $display_month"; ?></title>
+	<title><?php echo "$calendar_name - Search Results"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
 	<?php include "functions/event.js"; ?>
 </head>
 <body>
 <center>
-<table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
+<table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
-		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_day\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" border=\"0\" align=\"left\"></a>"; ?></td>
+		<td width="520" valign="top">
+<table border="0" width="520" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
+	<tr>
+		<td align="left" valign="top" width="1"  class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"1\" height=\"20\" border=\"0\" align=\"left\">"; ?></td>
 		<td align="center" class="sideback"><font class="G10BOLD"><?php print "Search Results" ?></font></td>
-		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_day\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" border=\"0\" align=\"right\"></a>"; ?></td>
+		<td align="right" valign="top" width="1"  class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"1\" height=\"20\" border=\"0\" align=\"right\">"; ?></td>
 	</tr>
 	<tr>
 		<td colspan="3">
@@ -159,9 +185,9 @@ if (isset($master_array) && is_array($master_array)) {
 						<td align="center" valign="top">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td align="left" valign="top" width="160" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
-									<td align="center" class="montheventtop" width="417" nowrap><font class="G10B"><?php echo 'Search: '.$formatted_search; ?></font></td>
-									<td align="right" valign="top" width="160" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+									<td align="left" valign="top" width="1" height="20" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"1\" height=\"20\" border=\"0\" align=\"left\">"; ?></td>
+									<td align="center" class="montheventtop" height="20" width="320" nowrap><font class="G10B"><?php echo 'Search: '.$formatted_search; ?></font></td>
+									<td align="right" valign="top" width="1" height="20" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"1\" height=\"20\" border=\"0\" align=\"right\">"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="3" height="1"></td>
@@ -169,11 +195,14 @@ if (isset($master_array) && is_array($master_array)) {
 								<?php	
 									// Iterate the search results
 									if (is_array($the_arr)) {
+												echo "<tr>\n";
+												echo "<td colspan=\"3\"><table width=\"100%\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\">\n";
 										foreach($the_arr as $val) {
-											$dayofmonth = strtotime ($val['date']);
+											$thedate = $val['date'];
+											$dayofmonth = strtotime ($thedate);
 											$dayofmonth = localizeDate ($dateFormat_week_list, $dayofmonth);
 											$i = 0;
-											if ($getdate == $val['date']) {
+											if ($getdate == $thedate) {
 												$fontclass="class=\"G10BOLD\"";
 											} else {
 												$fontclass="class=\"G10B\"";
@@ -200,17 +229,21 @@ if (isset($master_array) && is_array($master_array)) {
 													$event_start2 = '';
 													$event_end = '';
 												}
-												echo "<tr>\n";
-												echo "<td width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
-												echo "<td colspan=\"2\">\n";
+												echo "<tr><td width=\"30%\" class=\"montheventline\" nowrap align=\"left\" valign=\"top\"><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thedate\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
+												echo "<td width=\"30%\" class=\"montheventline\" nowrap align=\"left\" valign=\"top\">\n";
 												echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a>\n";
 												echo "</td>\n";
-												echo "</tr>\n";
+												echo "<td align=\"left\" valign=\"top\" nowrap>\n";
+												echo '<font class="G10B">'.htmlspecialchars(urldecode($val["description"])).'</font>';
+												echo "</td></tr>\n";
 											}
 										}
+												echo "</table></td>\n";
+												echo "</tr>\n";
+
 									} else {
 										echo "<tr>\n";
-										echo "<td colspan=\"3\" align=\"center\">No results found</td>\n";
+										echo "<td colspan=\"3\" align=\"center\"><font class=\"G10B\">No results found</font></td>\n";
 										echo "</tr>\n";
 									}
 								
@@ -224,9 +257,12 @@ if (isset($master_array) && is_array($master_array)) {
 		</td>
 	</tr>
 </table>
-
-<br>
-<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?>
+</td>
+		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
+		<td width="160" valign="top"><?php include('./sidebar.php'); ?><center>
+		<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?></center></td>
+	</tr>
+</table>
 </center>
 </body>
 </html>
