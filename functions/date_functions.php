@@ -171,29 +171,12 @@ function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text,
 		$event_text = strip_tags($event_text, '<b><i><u>');
 	}
 
-	if (isset($arr["organizer"])) {
-		$organizer = addslashes($arr["organizer"]);
-	}
-
-	if (isset($arr["attendee"])) {
-		$attendee = addslashes($arr["attendee"]);
-	}
-
-	if (isset($arr["location"])) {
-		$location = addslashes($arr["location"]);
-	}
-
-	if (isset($arr["status"])) {
-		$status = addslashes($arr["status"]);
-	}
-
-	if (isset($arr["description"])) {
-		$description  = addslashes(stripslashes(urldecode($arr["description"])));
-    }
-    
-    if (isset($arr["url"])) {
-		$url  = addslashes(stripslashes(urldecode($arr["url"])));
-    }
+	if (isset($arr["organizer"])) $organizer = addslashes($arr["organizer"]);
+	if (isset($arr["attendee"])) $attendee = addslashes($arr["attendee"]);
+	if (isset($arr["location"])) $location = addslashes($arr["location"]);
+	if (isset($arr["status"])) $status = addslashes($arr["status"]);
+	if (isset($arr["description"])) $description = addslashes(stripslashes(urldecode($arr["description"])));
+    if (isset($arr["url"])) $url = addslashes(stripslashes(urldecode($arr["url"])));
 
 	if (!empty($event_text)) {	
 		if ($lines > 0) {
@@ -215,12 +198,12 @@ echo <<<END
     // --></script>
 
 END;
-			echo "<a class=\"$link_class\" href=\"#\" onclick=\"openEventWindow($popup_data_index);\">";
+			echo '<a class="'.$link_class.'" href="#" onclick="openEventWindow('.$popup_data_index.');">';
 			$popup_data_index++;
 		} else {
-			echo "<a class=\"$link_class\" href=\"{$res[1]}\">";
+			echo '<a class="'.$link_class.'" href="'.$res[1].'">';
 		}
-		echo "{$pre_text}{$event_text}{$post_text}</a>\n";
+		echo $pre_text.$event_text.$post_text.'</a>'."\n";
 	}
 }
 
