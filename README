@@ -88,7 +88,7 @@ Changes:
 --------
 1.0 RC-1
 	-Fixed all reported bugs.
-	-Event popup now displays calendar name.
+	-Event and Todo popup now displays calendar name.
 	-Event popup now supports more than 1024 characters.
 	-Subscribe and download links now work again.
 	-URL support added for popups.

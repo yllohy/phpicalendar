@@ -2,7 +2,6 @@
 
 define('BASE','./');
 include(BASE.'functions/ical_parser.php');
-include(BASE.'functions/calendar_functions.php');
 $display_date = $preferences_lang;
 
 if ($cookie_uri == '') {
@@ -158,7 +157,14 @@ include (BASE.'includes/header.inc.php');
 												// Begin Calendar Selection
 												//
 												print "<select name=\"cookie_calendar\" class=\"query_style\">\n";
-												$filelist = availableCalendarNames($username, $password, $ALL_CALENDARS_COMBINED);
+												$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
+												$filelist = array();
+												while ($file = readdir($dir_handle)) {
+													if (preg_match("/^[^.].+\.ics$/", $file)) {
+														array_push($filelist, $file);
+													}
+												}
+												natcasesort($filelist);
 												foreach ($filelist as $file) {
 													$cal_filename_tmp = substr($file,0,-4);
 													$cal_tmp = urlencode($cal_filename_tmp);

@@ -29,7 +29,7 @@ $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http:
 $default_path			= 'http://www.example.com/phpicalendar'; 						// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$save_parsed_cals 		= 'yes';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
 $use_sessions 			= 'no';				// This has not yet been implemented.
 $display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
@@ -38,13 +38,14 @@ $this_months_events 	= 'yes';			// Display "This month's events" at the bottom o
 $use_color_cals 		= 'yes';			// Display each calendar in the pop-up as a different color.
 $daysofweek_dayview 	= 'no';				// Display the days of the week in day.php view.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
-$enable_publishing		= 'no';				// Enable webdav style publishing to your calendar's folder. READ calendars/publish.php before using!
 $show_search			= 'yes';			// Show the search box in the sidebar.
 $allow_preferences		= 'yes';			// Allow visitors to change various preferences via cookies.
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 $show_completed			= 'no';				// Show completed todos on your todo list.
 $show_login				= 'no';				// Set to yes to prompt for login to unlock calendars.
+
+// Webdav style publishing
 $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
 
 // Administration settings
