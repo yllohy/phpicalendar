@@ -86,11 +86,13 @@ functions folder.
 
 Changes:
 --------
-1.0
+1.0 RC-1
 	-Fixed all reported bugs.
 	-Event popup now displays calendar name.
 	-Event popup now supports more than 1024 characters.
-	-URL support added.
+	-Subscribe and download links now work again.
+	-URL support added for popups.
+	-Added config based calendar authentication.
 
 0.9.5
 	-Fixed all reported bugs.
