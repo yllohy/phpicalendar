@@ -30,6 +30,7 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'todo_available' 	=> '',
+	'todo_js' 			=> '',
 	'event_js' 			=> '',
 	'this_year'			=> $this_year,
 	'next_year'			=> $next_year,

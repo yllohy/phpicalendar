@@ -14,7 +14,7 @@
 									<td align="right" width="45%" class="navback">
 										<a class="psf" href="year.php?cal={CAL}&amp;getdate={PREV_YEAR}"><img src="styles/silver/left_day.gif" alt="[Previous Year]" border="0" align="right" /></a>
 									</td>
-									<td align="center" width="10%" class="navback" nowrap valign="middle">
+									<td align="center" width="10%" class="navback" nowrap="nowrap" valign="middle">
 										<font class="H20">{THIS_YEAR}</font>
 									</td>
 									<td align="left" width="45%" class="navback">

@@ -61,6 +61,9 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .monthreg		{ background-color: #fff; height: 105px; width: 105px; text-align: left; vertical-align: top; }
 .monthoff		{ background-color: #F2F2F2; height: 105px; width: 105px; text-align: left;  vertical-align: top; }
 .monthon		{ background-color: #F2F9FF; height: 105px; width: 105px; text-align: left;  vertical-align: top; }
+.yearreg		{ background-color: #fff; height: 30px; width: 30px; text-align: left; vertical-align: top; }
+.yearoff		{ background-color: #F2F2F2; height: 30px; width: 30px; text-align: left;  vertical-align: top; }
+.yearon			{ background-color: #F2F9FF; height: 30px; width: 30px; text-align: left;  vertical-align: top; }
 .montheventtop	{ background-image: url(images/side_bg.gif); border-top: 1px solid #A1A5A9; }
 .montheventline	{ border-right: 1px dotted #A1A5A9; }
 .yearmonth		{ background: #CCCCCC; }
