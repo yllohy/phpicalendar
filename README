@@ -1,10 +1,11 @@
 PHP iCalendar
-http://sourceforge.net/projects/phpicalendar
+http://phpicalendar.sourceforge.net/
 
 Introduction:
 -------------
-This suite of PHP scripts was written to allow every day users to display
-their iCal files on the Web by themselves.
+PHP iCalendar is a PHP-based iCal file parser to display iCals in a Web browser. 
+Its based on v2.0 of the IETF spec. It displays iCal files in a nice logical, 
+clean manner with day, week, and month navigation.
 
 Contact:
 --------
@@ -21,3 +22,52 @@ Licensing:
 ----------
 This product is distributed under the GPL.  Please read through the file
 COPYING for more information about our license.
+
+Changes:
+--------
+
+0.5
+	-Improved recurring event support
+		-All-day and Regular recurring events now obey ending dates and counts
+		-Regular recurring events for monthly
+	-New UI
+		-Mini-calendars in all views
+		-Jump-to pop-ups for Weeks and Months
+		-Subsribe works properly
+		-Color coding on month view
+		-Week view colors the length of the time like day
+	-Support for event notes/descriptions
+	-More language support
+		-Danish
+		-Dutch
+		-Italian
+		-Japanese
+		-Norwegian
+	-Bug fixes
+	
+0.4
+	-Improved recurring event support
+		-All-day recurring for all types
+		-Regular recurring events for daily, weekly
+	-Event pop-ups
+	-More style sheets
+	-Multiple language support
+		-English
+		-French
+		-German
+		-Polish
+	-24-hour clock support
+	-Bug fixes
+
+0.3
+	-Calendar list popup
+	-All-day yearly recurring support
+	-Bug fixes
+	
+0.2
+	-All-day event support
+	-Added month and week views
+	-Bug fixes
+
+0.1
+	-Initial Release
