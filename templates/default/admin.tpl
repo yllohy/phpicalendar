@@ -28,7 +28,7 @@
 	<tr>
 		<td align="right">
 			<!-- switch logged_in2 on -->
-			<a href="admin.php?action=logout\">{L_LOGOUT}</a>&nbsp;
+			<a href="admin.php?action=logout">{L_LOGOUT}</a>&nbsp;
 			<!-- switch logged_in2 off -->
 		</td>
 	</tr>
@@ -38,13 +38,12 @@
 				<tr>
 					<td width="2%"></td>
 					<td width="98%" valign="top" align="left">
-
 						<!-- switch login_error on -->
-						<font color="red">{L_INVALID_LOGIN}</font>
+						<font color="red">{L_INVALID_LOGIN}</font><br /><br />
 						<!-- switch login_error off -->
 	
 						<!-- switch display_login on -->
-						<form action="admin.php" method="post">
+						<form action="admin.php?action=login" method="post">
 							<table cellspacing="0" cellpadding="0">
 								<tr>
 									<td nowrap>{L_USERNAME}: </td>
@@ -58,21 +57,19 @@
 									<td>&nbsp;</td>
 									<td align="left"><input type="submit" value="{L_LOGIN}"></td>
 								</tr>
+								<!--
 								<tr>
 									<td align="center" colspan="3">{LOGIN_ERROR}&nbsp;</td>
 								</tr>
+								-->
 							</table>
 						</form>
 						<!-- switch display_login off -->
 						
 						
 						<!-- switch logged_in on -->
-						
-						<!-- switch action_message on -->
-						<font color="green">{L_CAL_FILE} {FILENUMBER}: {ACTION_MSG}</font><br />
-						<!-- switch action_message off -->
-						<b>{L_ADDUPDATE_CAL}</b>
-						<p>{L_ADDUPDATE_DESC}</p>
+						<b>{L_ADDUPDATE_CAL}</b><br />
+						{L_ADDUPDATE_DESC}<br /><br />
 						<form action="admin.php" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="action" value="addupdate">
 							<table width="100%" border="0" cellspacing="0" cellpadding="2" class="G10B">

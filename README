@@ -86,6 +86,7 @@ Changes:
 	-Added iCal specific publish.php.
 	-Fixed stat bug.
 	-PHP5 support added.
+	-Admin page works again.
 	-Requires PHP 4.1.0 or greater now.
 	-Various Bug fixes.
 

@@ -15,10 +15,8 @@ if ($allow_admin != "yes") {
 if($_POST) 	{extract($_POST, EXTR_PREFIX_SAME, "post_");}
 if($_GET)  	{extract($_GET, EXTR_PREFIX_SAME, "get_");}
 
-if (!isset($action)) $action = '';
-
 // Logout by clearing session variables
-if ((isset($action)) && ($action == "logout")) {
+if ((isset($_GET['action'])) && ($_GET['action'] == 'logout')) {
 	$_SESSION['phpical_loggedin'] = FALSE;
 	unset($_SESSION['phpical_username']);
 	unset($_SESSION['phpical_password']);
@@ -26,7 +24,10 @@ if ((isset($action)) && ($action == "logout")) {
 
 
 // if $auth_method == 'none', don't do any authentication
-if ($auth_method == "none") {
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+if ($auth_method == 'none') {
 	$is_loged_in = TRUE;
 } else {
 	$is_loged_in = FALSE;
@@ -34,8 +35,50 @@ if ($auth_method == "none") {
 	if (is_loggedin()) {
 		$is_loged_in = TRUE;
 	}
-	if (isset($username) && $action != "logout") {
+	
+	if (isset($username) && $_GET['action'] != 'logout') {
 		$is_loged_in = login ($username, $password);
+	}
+}
+
+$login_good = ($is_loged_in) ? '' : 'oops';
+$login_bad	= ((!$is_loged_in) && ($_GET['action'] == 'login')) ? 'oops' : '';
+
+// Delete a calendar
+// Not at all secure - need to strip out path info if used by users besides admin in the future
+$delete_msg = '';
+if ($_POST['action'] == 'delete') {
+	foreach ($delete_calendar as $filename) {
+		if (!delete_cal(urldecode($filename))) {
+			$delete_msg = $delete_msg . '<font color="red">' . $lang['l_delete_error'] . ' ' . urldecode(substr($filename,0,-4)) . '</font><br />';
+		} else {
+			$delete_msg = $delete_msg . '<font color="green">' . urldecode(substr($filename,0,-4)) . ' ' . $lang['l_delete_success'] . '</font><br />';
+		}
+	}
+}
+
+// Add or Update a calendar
+$addupdate_msg 	= '';
+if ((isset($_POST['action']))  && ($_POST['action'] == 'addupdate')) {
+	for ($filenumber = 1; $filenumber < 6; $filenumber++) {
+		$file = $HTTP_POST_FILES['calfile'];
+		$addupdate_success = FALSE;
+
+		if (!is_uploaded_file_v4($file['tmp_name'][$filenumber])) {
+			$upload_error = get_upload_error($file['error'][$filenumber]);
+		} elseif (!is_uploaded_ics($file['name'][$filenumber])) {
+			$upload_error = $upload_error_type_lang;
+		} elseif (!copy_cal($file['tmp_name'][$filenumber], $file['name'][$filenumber])) {
+			$upload_error = $copy_error_lang . " " . $file['tmp_name'][$filenumber] . " - " . $calendar_path . "/" . $file['name'][$filenumber];
+		} else {
+			$addupdate_success = TRUE;
+		}
+		
+		if ($addupdate_success == TRUE) {
+			$addupdate_msg = $addupdate_msg . '<font color="green">'.$lang['l_cal_file'].' #'.$filenumber.': '.$lang['l_action_success'].'</font><br />';
+		} else {
+			$addupdate_msg = $addupdate_msg . '<font color="red">'.$lang['l_cal_file'].' #'.$filenumber.': '.$lang['l_upload_error'].'</font><br />';
+		}
 	}
 }
 
@@ -63,6 +106,10 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'show_search' 		=> '',
+	'login_error'		=> $login_bad,
+	'display_login'		=> $login_good,
+	'delete_msg'		=> $delete_msg,
+	'addupdate_msg'	=> $addupdate_msg,
 	'l_day'				=> $lang['l_day'],
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],
