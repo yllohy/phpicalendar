@@ -135,13 +135,19 @@ for ($i=0;$i<7;$i++) {
 										<tr>
 											<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>
 											<td width="1"></td>
-											<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-											<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-											<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-											<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-											<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-											<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-											<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+											<?php
+											$thisdate = $start_week_time;
+											$i = 0;
+											do {
+												$thisday = date("Ymd", $thisdate);
+												$colWidth = round(70 / $nbrGridCols[$thisday]);
+												for ($j=0;$j < $nbrGridCols[$thisday];$j++) {
+													echo "<td width=\"" . $colWidth . "\"><img src=\"images/spacer.gif\" width=\"" . $colWidth . "\" height=\"1\" alt=\"\"></td>\n";
+												}
+												$thisdate = ($thisdate + (25 * 60 * 60));
+												$i++;
+											} while ($i < 7);
+											?>
 										</tr>
 										<?php
 										// The all day events returned here.
