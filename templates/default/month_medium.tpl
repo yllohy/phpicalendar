@@ -12,37 +12,26 @@
 				</tr>
 				<!-- loop monthweeks on -->
 				<tr height="30">
+					<!-- loop monthdays on -->
 					<!-- switch notthismonth on -->
 					<td width="30" height="30" align="right" valign="top" class="monthoff" onmouseover="this.style.backgroundColor="#DDDDDD"" onmouseout="this.style.backgroundColor="#F2F2F2"" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20031228'">
 						<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="V9G">28</font></a>
 					</td>
 					<!-- switch notthismonth off -->
-					<!-- switch isevent on -->
+					<!-- switch ismonth on -->
 					<td width="30" height="30" align="right" valign="top" class="monthreg" onmouseover="this.style.backgroundColor="#DDDDDD"" onmouseout="this.style.backgroundColor="#FFFFFF"" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20040101'">
-						<table width="100%" border="0" cellspacing="0" cellpadding="1">
-							<tr>
-								<td align="right" valign="top" class="V9">
-									<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a> 
-								</td>
-							</tr>
-							<tr>
-								<td align="center" valign="top">
-									<!-- switch allday on -->
-									<img src="styles/silver/allday_dot.gif" alt=" " width="11" height="10" border="0">
-									<!-- switch allday off -->
-									<!-- switch normal on -->
-									<img src="styles/silver/event_dot.gif" alt=" " width="11" height="10" border="0">
-									<!-- switch normal off -->
-								</td>
-							</tr>
-						</table>
+						<div align="right" valign="top" class="V9">
+						<div align="center" valign="top">
+							<!-- switch allday on -->
+							<img src="styles/silver/allday_dot.gif" alt=" " width="11" height="10" border="0">
+							<!-- switch allday off -->
+							<!-- switch event on -->
+							<img src="styles/silver/event_dot.gif" alt=" " width="11" height="10" border="0">
+							<!-- switch event off -->
+						</div>
 					</td>
-					<!-- switch isevent on -->
-					<!-- switch notevent on -->
-					<td width="30" height="30" align="right" valign="top" class="monthreg" onmouseover="this.style.backgroundColor="#DDDDDD"" onmouseout="this.style.backgroundColor="#FFFFFF"" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20041120'">
-						<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a></font>
-					</td>
-					<!-- switch notevent off -->
+					<!-- switch ismonth on -->
+					<!-- loop monthdays off -->
 				</tr>
 				<!-- loop monthweeks off -->	
 			</table>
