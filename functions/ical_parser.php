@@ -89,6 +89,7 @@ if ($parse_file) {
 			
 			$first_duration = TRUE;
 			$count = 1000000;
+			$valarm_set = FALSE;
 			
 			unset(
 				$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
@@ -463,7 +464,11 @@ if ($parse_file) {
 				$summary = $data;
 				
 			} elseif (stristr($field, 'DESCRIPTION')) {
-				$description = $data;	
+				if ($valarm_set = FALSE) { 
+					$description = $data;
+				} else {
+					$alarm_description = $data;
+				}
 			
 			} elseif (stristr($field, 'X-WR-CALNAME')) {
 				$calendar_name = $data;
@@ -506,8 +511,9 @@ if ($parse_file) {
 				}	
 			} elseif (stristr($field, 'ATTENDEE')) {
 				$attendee = $data;
-				// echo $attendee;
 				
+			} elseif (stristr($field, 'BEGIN:VALARM')) {
+				$valarm_set = TRUE;
 			}
 		}
 	}
