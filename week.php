@@ -6,8 +6,6 @@ if ($minical_view == "current") $minical_view = "week";
 
 $starttime = "0500";
 $weekstart = 1;
-// dpr 20020926: moved variable gridLength to config.inc.php
-//$gridLength = 30;
 $unix_time = strtotime($getdate);
 $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 $today_today = date ("Ymd");

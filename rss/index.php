@@ -37,7 +37,7 @@ include(BASE.'functions/ical_parser.php');
 								<td width="2%"></td>
 								<td width="98%" valign="top">
 									<br>
-									This website is RSS enabled.<br>
+									This website is <a class="psf" href="http://www.oreillynet.com/rss/">RSS 0.91</a> enabled.<br>
 									<br>
 									<?php 
 									
