@@ -74,12 +74,18 @@ for ($i=0;$i<7;$i++) {
      	<td align="center" valign="middle">
       		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
       			<tr>
-      				<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
+      				<td align="left" width="75" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
 					<td align="center" class="navback"><font class="H20"><?php echo "$display_date"; ?></font></td>
-      				<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
+      				<td align="right" width="75" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
       			</tr>
+      		</table>
+      	</td>
+	</tr>
+	<tr>
+		<td>
+      		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">      			
       			<tr>
-					<td align="center" valign="top" colspan="3">
+					<td align="center" valign="top">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>

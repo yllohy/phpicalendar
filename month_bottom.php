@@ -50,9 +50,8 @@
 											}
 										?>
 										</tr>
-										<tr>
-											<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
-											</td>
+										<tr height="3">
+											<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
 										</tr>
 										<?php
 											$minical_time = strtotime("-1 month", strtotime($getdate));
@@ -108,7 +107,7 @@
 								<td valign="center" align="center">
 									<table width="160" border="0" cellpadding="0" cellspacing="0">
 										<tr>
-											<td colspan="3" bgcolor="#FFFFFF" align="center">
+											<td colspan="3" bgcolor="#FFFFFF" align="left">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
@@ -169,7 +168,7 @@
 								<td valign="center" align="left" valign="top">
 									<table width="160" border="0" cellpadding="0" cellspacing="0">
 										<tr>
-											<td colspan="3" bgcolor="#FFFFFF" align="center" valign="top">
+											<td colspan="3" bgcolor="#FFFFFF" align="left" valign="top">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
@@ -239,13 +238,13 @@
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
+									<td><img src="images/spacer.gif" width="21" height="3" alt=""></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
 								</tr>
 								<tr>
 								<?php
@@ -257,9 +256,8 @@
 									}
 								?>
 								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
-									</td>
+								<tr height="3">
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("+1 month", strtotime($getdate));
@@ -299,7 +297,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=""></td>
 					</tr>
 				</table>
 			</td>

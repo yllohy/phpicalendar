@@ -83,11 +83,16 @@ if ($master_array[($getdate)]) {
      	<td align="center" valign="middle">
       		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
       			<tr>
-      				<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
+      				<td align="left" width="75" class="navback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
 					<td align="center" class="navback"><font class="H20"><?php echo "$display_date"; ?></font></td>
-      				<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
+      				<td align="right" width="75" class="navback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
       			</tr>
-      			
+      		</table>
+      	</td>
+	</tr>
+	<tr>
+		<td>
+      		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 				<?php
 					// The all day events returned here.
 					if ($master_array[($getdate)]["-1"]) {

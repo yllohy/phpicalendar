@@ -13,12 +13,12 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
-						<td bgcolor="#DDDDDD" align="center" width="98%" class="sideback"><font class="G10B"><b><?php echo "$thisday2"; ?></b></font></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+						<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+						<td align="center" width="112" class="sideback"><font class="G10B"><b><?php echo "$thisday2"; ?></b></font></td>
+						<td align="right" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF" align="center">
+						<td colspan="3" bgcolor="#FFFFFF" align="left">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
@@ -67,7 +67,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3"><img src="images/spacer.gif" width="1" height="6"></td>
 					</tr>
 				</table>
 			</td>
@@ -79,12 +79,12 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" width="98%" class="sideback"><font class="G10B"><b><?php echo "$jump_lang"; ?></b></font></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" class="sideback"></td>
+						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="center" width="98%" class="sideback"><font class="G10B"><b><?php echo "$jump_lang"; ?></b></font></td>
+						<td align="right" valign="top" width="1%" class="sideback"></td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF" align="center">
+						<td colspan="3" bgcolor="#FFFFFF" align="left">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
@@ -140,9 +140,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" width="98%" class="sideback"><font class="G10B"><b><?php echo "$tomorrows_lang"; ?></b></font></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" class="sideback"></td>
+						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="center" width="98%" class="sideback"><font class="G10B"><b><?php echo "$tomorrows_lang"; ?></b></font></td>
+						<td align="right" valign="top" width="1%" class="sideback"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -204,9 +204,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="sideback"><b><font class="G10B"><?php print (strftime ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></font></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" class="sideback"></td>
+						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="center" class="sideback"><b><font class="G10B"><?php print (strftime ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></font></td>
+						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -230,9 +230,8 @@
 									}
 								?>
 								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
-									</td>
+								<tr height="3">
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("-1 month", strtotime($getdate));
@@ -284,9 +283,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="sideback"><font class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime($getdate))); ?></b></font></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" class="sideback"></td>
+						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="center" class="sideback"><font class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime($getdate))); ?></b></font></td>
+						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -310,9 +309,8 @@
 									}
 								?>
 								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
-									</td>
+								<tr height="3">
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
 								</tr>
 								<?php
 									$minical_time = strtotime($getdate);
@@ -364,9 +362,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="sideback"><font class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></font></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" class="sideback"></td>
+						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="center" class="sideback"><font class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></font></td>
+						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -390,9 +388,8 @@
 									}
 								?>
 								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
-									</td>
+								<tr height="3">
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("+1 month", strtotime($getdate));
