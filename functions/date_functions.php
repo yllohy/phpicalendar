@@ -198,7 +198,7 @@ echo <<<END
     // --></script>
 
 END;
-			echo '<a class="'.$link_class.'" href="#" onclick="openEventWindow('.$popup_data_index.');">';
+			echo '<a class="'.$link_class.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
 			$popup_data_index++;
 		} else {
 			echo '<a class="'.$link_class.'" href="'.$res[1].'">';
