@@ -68,7 +68,7 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time, $ol_uid) {
 					if ($newOverlapRange) {
 						foreach ($loopBlock["events"] as $blockEvents) {
 							$eventDrawTimes = drawEventTimes($master_array[($ol_start_date)][($blockEvents["time"])][($blockEvents["key"])]["event_start"], $master_array[($ol_start_date)][($blockEvents["time"])][($blockEvents["key"])]["event_end"]);
-							if (isset($eventDrawTimes["draw_start"], $eventDrawTimes["draw_end"], $drawTimes["draw_end"], $drawTimes["draw_start"]) && ($eventDrawTimes["draw_start"] < $drawTimes["draw_end"]) and ($eventDrawTimes["draw_end"] > $drawTimes["draw_start"])) {
+							if ((isset($eventDrawTimes["draw_start"]) && isset($eventDrawTimes["draw_end"]) && isset($drawTimes["draw_end"]) && isset($drawTimes["draw_start"])) && ($eventDrawTimes["draw_start"] < $drawTimes["draw_end"]) and ($eventDrawTimes["draw_end"] > $drawTimes["draw_start"])) {
 								// define start time of overlap range and overlap block
 								if ($eventDrawTimes["draw_start"] < $drawTimes["draw_start"]) $overlap_start = $drawTimes["draw_start"];
 								else $overlap_start = $eventDrawTimes["draw_start"];
@@ -113,7 +113,7 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time, $ol_uid) {
 				foreach ($master_array[($ol_start_date)] as $keyTime => $eventTime) {
 					foreach ($eventTime as $keyEvent => $event) {
 						if ($keyTime != '-1') $entryDrawTimes =  drawEventTimes($event["event_start"], $event["event_end"]);
-						if (isset($entryDrawTimes["draw_start"], $entryDrawTimes["draw_end"], $drawTimes["draw_end"], $drawTimes["draw_start"]) && ($entryDrawTimes["draw_start"] < $drawTimes["draw_end"]) and ($entryDrawTimes["draw_end"] > $drawTimes["draw_start"])) {
+						if ((isset($entryDrawTimes["draw_start"]) && isset($entryDrawTimes["draw_end"]) && isset($drawTimes["draw_end"]) && isset($drawTimes["draw_start"])) && ($entryDrawTimes["draw_start"] < $drawTimes["draw_end"]) and ($entryDrawTimes["draw_end"] > $drawTimes["draw_start"])) {
 							// define start time of overlap range and overlap block
 							if ($entryDrawTimes["draw_start"] < $drawTimes["draw_start"]) {
 								$overlap_start = $drawTimes["draw_start"];
