@@ -13,7 +13,7 @@ if ($allow_admin != "yes") {
 
 // Load variables from forms and query strings into local scope
 if($_POST) 	{extract($_POST, EXTR_PREFIX_SAME, "post_");}
-if($HTTP_GET_VARS)  	{extract($HTTP_GET_VARS, EXTR_PREFIX_SAME, "get_");}
+if($_GET)  	{extract($_GET, EXTR_PREFIX_SAME, "get_");}
 
 if (!isset($action)) $action = '';
 

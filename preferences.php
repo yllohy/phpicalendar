@@ -14,8 +14,8 @@ $current_view = "preferences";
 $back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
 if ($allow_preferences == 'no') header("Location: $back_page");
 
-if (isset($HTTP_GET_VARS['action'])) {
-	$action = $HTTP_GET_VARS['action'];
+if (isset($_GET['action'])) {
+	$action = $_GET['action'];
 } else {
 	$action = '';
 } 

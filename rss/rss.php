@@ -13,7 +13,7 @@ $end_week_time = $start_week_time + (6 * 25 * 60 * 60);
 $start_week = localizeDate($dateFormat_week, $start_week_time);
 $end_week =  localizeDate($dateFormat_week, $end_week_time);
 $parse_month = date ("Ym", strtotime($getdate));
-$rssview = $HTTP_GET_VARS['rssview'];
+$rssview = $_GET['rssview'];
 $cal_displayname = str_replace("32", " ", $cal);
 $events_week = 0;
 

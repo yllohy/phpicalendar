@@ -35,7 +35,7 @@ if ($cookie_uri == '') {
 if ($bleed_time == '') $bleed_time = $day_start;
 
 // Grab the action (login or logout).
-if (isset($HTTP_GET_VARS['action']))			$action = $HTTP_GET_VARS['action'];
+if (isset($_GET['action']))			$action = $_GET['action'];
 else if (isset($_POST['action']))		$action = $_POST['action'];
 else											$action = '';
 	
@@ -58,8 +58,8 @@ if (file_exists(realpath($lang_file))) {
 }
 
 if (!isset($getdate)) {
-	if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
-		$getdate = $HTTP_GET_VARS['getdate'];
+	if (isset($_GET['getdate']) && ($_GET['getdate'] !== '')) {
+		$getdate = $_GET['getdate'];
 	} else {
 		$getdate = date('Ymd', strtotime("now + $second_offset seconds"));
 	}
@@ -76,8 +76,8 @@ if ($calendar_path == '') {
 }
 
 $is_webcal = FALSE;
-if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
-	$cal_filename = urldecode($HTTP_GET_VARS['cal']);
+if (isset($_GET['cal']) && $_GET['cal'] != '') {
+	$cal_filename = urldecode($_GET['cal']);
 } else {
 	if (isset($default_cal_check)) {
 		if ($default_cal_check != $ALL_CALENDARS_COMBINED) {
@@ -115,7 +115,7 @@ if ($is_webcal == TRUE) {
 		$cal_filelist = array();
 		array_push($cal_filelist,$filename);
 	} else {
-		exit(error($lang['l_error_remotecal'], $HTTP_GET_VARS['cal']));
+		exit(error($lang['l_error_remotecal'], $_GET['cal']));
 	}
 } else {
 	$cal_displayname = str_replace('32', ' ', $cal_filename);

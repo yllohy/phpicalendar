@@ -15,8 +15,8 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 }
 
 $search_valid = false;
-if (isset($HTTP_GET_VARS['query']) && $HTTP_GET_VARS['query'] != '') {
-	$query = $HTTP_GET_VARS['query'];
+if (isset($_GET['query']) && $_GET['query'] != '') {
+	$query = $_GET['query'];
 	$search_valid = true;
 }
 

@@ -10,11 +10,11 @@
 
 		echo '<form style="margin-bottom:0;" action="'.$form_action.'" method="POST">';
 		echo '<input type="hidden" name="action" value="login">';
-		foreach (array_keys($HTTP_GET_VARS) as $key) {
+		foreach (array_keys($_GET) as $key) {
 			if ($key == 'action' || $key == 'username' || $key == 'password') {
 				continue;
 			}
-			echo '<input type="hidden" name="'.$key.'" value="'.$HTTP_GET_VARS[$key].'">';
+			echo '<input type="hidden" name="'.$key.'" value="'.$_GET[$key].'">';
 		}
 		
 		// If the attempted login was invalid, change the box title.
