@@ -154,7 +154,7 @@
 												$event_end = '';
 												echo "<td><font class=\"V10\"><center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center></font></td>\n";
 											} else {	
-												echo "<td><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"V9\">&nbsp;$event_start2 $event_text</font></a></td>\n";
+												echo "<td align=\"left\" valign=\"top\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"V9\">&nbsp;$event_start2 $event_text</font></a></td>\n";
 											}
 											echo "</tr>\n";
 											echo "</table>\n";

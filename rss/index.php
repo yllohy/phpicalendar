@@ -35,7 +35,7 @@ include(BASE.'functions/ical_parser.php');
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 							<tr>
 								<td width="2%"></td>
-								<td width="98%" valign="top">
+								<td width="98%" valign="top" align="left">
 									<br>
 									<?php echo "$this_site_is_lang "; ?><a class="psf" href="http://www.oreillynet.com/rss/">RSS 0.91 enabled</a>.<br>
 									<br>

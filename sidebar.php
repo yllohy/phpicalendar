@@ -189,7 +189,7 @@
 											$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
 											echo "<tr>\n";
 											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
-											echo "<td colspan=\"6\" class=\"G10B\">\n";
+											echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
 											if (!isset($val["event_start"])) {
 												$event_start = $all_day_lang;
 												$event_end = '';

@@ -45,12 +45,12 @@ if ($printview == 'day') {
 </head>
 <body bgcolor="#FFFFFF">
 <center>
-<table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
+<table border="0" width="700" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
-      				<td align="left" width="90" class="navback">&nbsp;</td>
+      				<td align="left" width="90" class="navback"><?php echo '<a href="'.$printview.'.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/back.gif" alt="" border="0" align="left"></a>'; ?></td>
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
@@ -95,7 +95,7 @@ if ($printview == 'day') {
 											$dayofmonth = strtotime ($key);
 											$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
-											echo "<td colspan=\"2\"><font class=\"V12\"><b>$dayofmonth</b></font></td></tr>";
+											echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><b>$dayofmonth</b></font></td></tr>";
 											echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\"></td></tr>\n";
 											
 											// Pull out each day
