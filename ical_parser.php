@@ -79,6 +79,7 @@ foreach($contents as $line) {
 		$except_times = array();
 		$first_duration = TRUE;
 		$bymonthday = "";
+		$count = 1000000;
 	} elseif (strstr($line, "END:VEVENT")) {
 		
 		// Clean out \n's and other slashes
@@ -242,11 +243,6 @@ foreach($contents as $line) {
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
 						$start_date_time = strtotime($start_date);
 						
-						// initializing my range. it takes noticeable time to process the entire year so lets only process
-						// what we're looking at. We start out initializing for the year, but hopefully we won't do that.
-						$start_range_time = $start_date_time;
-						$end_range_time = $parse_to_year_time;
-						
 						// depending on which view we're looking at, we do one month or one week
 						// one day is more difficult, I think, so I wrapped that into the week. We'll have to
 						// add another case for "year" once that's added.
@@ -258,86 +254,131 @@ foreach($contents as $line) {
 							$end_range_time = strtotime("+1 week", $start_range_time);
 						}
 						
-						// If the $end_range_time is less than the $start_date_time, we may as well forget the whole thing
+						// if $until isn't set yet, we set it to the end of our range we're looking at
+						if (!$until) $until = $end_range_time;
+						$end_date_time = $until;
+						
+						// If the $end_range_time is less than the $start_date_time, or $start_range_time is greater
+						// than $end_date_time, we may as well forget the whole thing
 						// It doesn't do us any good to spend time adding data we aren't even looking at
 						// this will prevent the year view from taking way longer than it needs to
-						if ($end_range_time >= $start_date_time) {
+						if ($end_range_time >= $start_date_time && $start_range_time <= $end_date_time) {
 						
 							// if the beginning of our range is less than the start of the item, we may as well set it equal to it
 							if ($start_range_time < $start_date_time) $start_range_time = $start_date_time;
+							if ($end_range_time > $end_date_time) $end_range_time = $end_date_time;
 				
 							// initialze the time we will increment
 							$next_range_time = $start_range_time;
-							$i=0;
+							
+							$count_to = 0;
 							// start at the $start_range and go until we hit the end of our range.
-							while ($next_range_time >= $start_range_time && $next_range_time <= $end_range_time) {
-								$i++;
+							while (($next_range_time >= $start_range_time) && ($next_range_time <= $end_range_time) && ($count_to != $count)) {
+								
 								// handling WEEKLY events here
 								if ($rrule_array["FREQ"] == "WEEKLY") {
 
 									// use weekCompare to see if we even have this event this week
-									if (weekCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
-										$interval = $number;
-										// loop through the days on which this event happens
-										foreach($byday as $day) {
-										
-											// use my fancy little function to get the date of each day
-											$next_date = dateOfWeek(date("Ymd", $next_range_time),$day);
+									$diff_weeks = weekCompare(date("Ymd",$next_range_time), $start_date);
+									if ($diff_weeks < $count) {
+										if ($week_diff % $number == 0) {
+											$interval = $number;
+											// loop through the days on which this event happens
+											foreach($byday as $day) {
 											
-											if (strtotime($next_date) > $start_date_time && !in_array($next_date, $except_dates)) {
-												// add it to the array if it passes inspection, it allows the first time to be
-												// written by the master data writer (hence the > instead of >=) otherwise we can special case these
-												// before, the first one would get entered twice and show up twice
-												// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
-												// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
-												// on days that have been deleted by the user
+												// use my fancy little function to get the date of each day
+												$next_date = dateOfWeek(date("Ymd", $next_range_time),$day);
+												$next_date_time = strtotime($next_date);
+												
+												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
+													// add it to the array if it passes inspection, it allows the first time to be
+													// written by the master data writer (hence the > instead of >=) otherwise we can special case these
+													// before, the first one would get entered twice and show up twice
+													// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
+													// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
+													// on days that have been deleted by the user
 // check for overlapping events
-												$nbrOfOverlaps = checkOverlap();
+													$nbrOfOverlaps = checkOverlap();
 // writes to $master array here
-												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+													$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+												}
 											}
+										} else {
+											$interval = 1;
 										}
+										$next_range_time = strtotime("+$interval week", $next_range_time);
 									} else {
-										$interval = 1;
+										// end the loop because we aren't going to write this event anyway
+										$count_to = $count;
 									}
-									$next_range_time = strtotime("+$interval week", $next_range_time);
+									
 								
 								// handling DAILY events here
 								} elseif ($rrule_array["FREQ"] == "DAILY") {
 
 									// use dayCompare to see if we even have this event this day
-									if (dayCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
-										$interval = $number;
-										$next_date = date("Ymd", $next_range_time);
-										
-										if (strtotime($next_date) > $start_date_time && !in_array($next_date, $except_dates)) {
-											// same general concept as the WEEKLY recurrence
+									$diff_days = dayCompare(date("Ymd",$next_range_time), $start_date);
+									if ($diff_days < $count) {
+										if ($diff_days % $number == 0) {
+											$interval = $number;
+											$next_date = date("Ymd", $next_range_time);
+											$next_date_time = strtotime($next_date);
+											
+											if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
+												// same general concept as the WEEKLY recurrence
 // check for overlapping events
-											$nbrOfOverlaps = checkOverlap();
+												$nbrOfOverlaps = checkOverlap();
 // writes to $master array here
-											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+											}
+										} else {
+											$interval = 1;
 										}
+										$next_range_time = strtotime("+$interval day", $next_range_time);
 									} else {
-										$interval = 1;
+										// end the loop because we aren't going to write this event anyway
+										$count_to = $count;
 									}
-									$next_range_time = strtotime("+$interval day", $next_range_time);
+									
 									
 								// handling MONTHLY events here
 								} elseif ($rrule_array["FREQ"] == "MONTHLY") {
 									$next_range_time = strtotime(date("Y-m-01", $next_range_time));
 									// use monthCompare to see if we even have this event this month
-									if (monthCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
-										$interval = $number;
-										
-										// month has two cases, either $bymonthday or $byday
-										if (is_array($bymonthday)) {
-										
-											// loop through the days on which this event happens
-											foreach($bymonthday as $day) {
-												if ($day != "0") {
-													$next_date_time = strtotime(date("Y-m-",$next_range_time).$day);
+									
+									$diff_months = monthCompare(date("Ymd",$next_range_time), $start_date);
+									if ($diff_months < $count) {
+										if ($diff_months % $number == 0) {
+											$interval = $number;
+											
+											// month has two cases, either $bymonthday or $byday
+											if (is_array($bymonthday)) {
+											
+												// loop through the days on which this event happens
+												foreach($bymonthday as $day) {
+													if ($day != "0") {
+														$next_date_time = strtotime(date("Y-m-",$next_range_time).$day);
+														$next_date = date("Ymd", $next_date_time);
+														if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
+															// same general concept as the WEEKLY recurrence
+// check for overlapping events	
+															$nbrOfOverlaps = checkOverlap();
+// writes to $master array here
+															$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+														}
+													}
+												}
+												
+											// our other case
+											} else {
+												// loop through the days on which this event happens
+												foreach($byday as $day) {
+													ereg ("([0-9]{1})([A-Z]{2})", $day, $byday_arr);
+													$nth = $byday_arr[1]-1;
+													$on_day = two2threeCharDays($byday_arr[2]);
+													$next_date_time = strtotime("$on_day +$nth week", $next_range_time);
 													$next_date = date("Ymd", $next_date_time);
-													if ($next_date_time > $start_date_time && !in_array($next_date, $except_dates)) {
+													if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
 														// same general concept as the WEEKLY recurrence
 // check for overlapping events	
 														$nbrOfOverlaps = checkOverlap();
@@ -346,35 +387,21 @@ foreach($contents as $line) {
 													}
 												}
 											}
-											
-										// our other case
 										} else {
-											// loop through the days on which this event happens
-											foreach($byday as $day) {
-												ereg ("([0-9]{1})([A-Z]{2})", $day, $byday_arr);
-												$nth = $byday_arr[1]-1;
-												$on_day = two2threeCharDays($byday_arr[2]);
-												$next_date_time = strtotime("$on_day +$nth week", $next_range_time);
-												$next_date = date("Ymd", $next_date_time);
-												if ($next_date_time > $start_date_time && !in_array($next_date, $except_dates)) {
-													// same general concept as the WEEKLY recurrence
-// check for overlapping events	
-													$nbrOfOverlaps = checkOverlap();
-// writes to $master array here
-													$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
-												}
-											}
-																					}
+											$interval = 1;
+										}
+										$next_range_time = strtotime("+$interval month", $next_range_time);
 									} else {
-										$interval = 1;
+										// end the loop because we aren't going to write this event anyway
+										$count_to = $count;
 									}
-									$next_range_time = strtotime("+$interval month", $next_range_time);
+									
 									
 								// anything else we need to end the loop
 								} else {
 									$next_range_time = $end_range_time + 100;
+									$count_to = $count;
 								}
-
 							}
 						}
 					}
