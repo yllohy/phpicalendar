@@ -1,7 +1,7 @@
 <?php
 
-// English language include
-// For version 0.7 PHP iCalendar
+// Portuguese language include
+// For version 0.8 PHP iCalendar
 //
 // Translation by Rui Costa (ruicosta@ubi.pt)
 //
@@ -44,6 +44,27 @@ $goday_lang                        = 'Ir para Hoje';
 $goweek_lang                = 'Ir para este semana';
 $gomonth_lang                = 'Ir para este mes';
 $goyear_lang                = 'Ir para este ano';
+
+// new in 0.8 -------------
+$search_lang		= 'Search'; // the verb
+$results_lang		= 'Search Results';
+$query_lang			= 'Query: '; // will be followed by the search query
+$no_results_lang	= 'No events found';
+
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+// -------------------------
 
 $daysofweek_lang                        = array ('Domingo','Segunda','Terca','Quarta','Quinta','Sexta','Sabado');
 $daysofweekshort_lang                = array ('Dom','Seg','Ter','Qua','Qui','Sex','Sab');

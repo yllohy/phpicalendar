@@ -164,3 +164,6 @@ if ($printview == 'day') {
 	</tr>
 </table>
 <?php include (BASE.'footer.inc.php'); ?>
+</center>
+</body>
+</html>

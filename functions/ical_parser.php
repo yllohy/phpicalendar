@@ -73,6 +73,14 @@ if ($parse_file) {
 	// .ics file, we need to have some unique place in the array
 	$uid_counter = 0;
 	
+	// for custom search ranges of recurring events
+	$search_range = false;
+	if (isset($HTTP_GET_VARS['start']) && isset($HTTP_GET_VARS['end']) && $HTTP_GET_VARS['start'] != '' && $HTTP_GET_VARS['end'] != '') {
+		$search_range_start = strtotime($HTTP_GET_VARS['start']);
+		$search_range_end = strtotime($HTTP_GET_VARS['end']);
+		$search_range = true;
+	}
+	
 // read file in line by line
 // XXX end line is skipped because of the 1-line readahead
 	while (!feof($ifile)) {
@@ -209,6 +217,24 @@ if ($parse_file) {
 					$rrule_array['END_TIME'] = $end_time;
 					$rrule_array['END'] = 'end';
 				}
+				
+				$start_date_time = strtotime($start_date);
+				$this_month_start_time = strtotime($this_year.$this_month.'01');
+				if ($save_parsed_cals == 'yes' && !$is_webcal) {
+					$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
+					$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
+					if ($search_range) {
+						if ($start_range_time > $search_range_start) $start_range_time = $search_range_start;
+						if ($end_range_time < $search_range_end) $end_range_time = $search_range_end;
+					}
+				} elseif ($search_range) {
+					$start_range_time = $search_range_start;
+					$end_range_time = $search_range_end;
+				} else {
+					$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
+					$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
+				}
+
 				//print_r($rrule_array);
 				foreach ($rrule_array as $key => $val) {
 					switch($key) {
@@ -292,39 +318,28 @@ if ($parse_file) {
 							break;
 						case 'END':
 					
-						// again, $parse_to_year is set to January 10 of the upcoming year
-						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
-						$start_date_time = strtotime($start_date);
-						$this_month_start_time = strtotime($this_year.$this_month.'01');
-						
-						if ($save_parsed_cals == 'yes' && !$is_webcal) {
-							$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
-							$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
-						} else {
-							$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
-							$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
-						}
-						
 						// if $until isn't set yet, we set it to the end of our range we're looking at
 						if (!isset($until)) $until = $end_range_time;
 						$end_date_time = $until;
+						$start_range_time_tmp = $start_range_time;
+						$end_range_time_tmp = $end_range_time;
 						
 						// If the $end_range_time is less than the $start_date_time, or $start_range_time is greater
 						// than $end_date_time, we may as well forget the whole thing
 						// It doesn't do us any good to spend time adding data we aren't even looking at
 						// this will prevent the year view from taking way longer than it needs to
-						if ($end_range_time >= $start_date_time && $start_range_time <= $end_date_time) {
+						if ($end_range_time_tmp >= $start_date_time && $start_range_time_tmp <= $end_date_time) {
 						
 							// if the beginning of our range is less than the start of the item, we may as well set it equal to it
-							if ($start_range_time < $start_date_time) $start_range_time = $start_date_time;
-							if ($end_range_time > $end_date_time) $end_range_time = $end_date_time;
+							if ($start_range_time_tmp < $start_date_time) $start_range_time_tmp = $start_date_time;
+							if ($end_range_time_tmp > $end_date_time) $end_range_time_tmp = $end_date_time;
 				
 							// initialze the time we will increment
-							$next_range_time = $start_range_time;
+							$next_range_time = $start_range_time_tmp;
 							
 							$count_to = 0;
 							// start at the $start_range and go until we hit the end of our range.
-							while (($next_range_time >= $start_range_time) && ($next_range_time <= $end_range_time) && ($count_to != $count)) {
+							while (($next_range_time >= $start_range_time_tmp) && ($next_range_time <= $end_range_time_tmp) && ($count_to != $count)) {
 								$func = $freq_type.'Compare';
 								$diff = $func(date('Ymd',$next_range_time), $start_date);
 								if ($diff < $count) {
@@ -395,7 +410,7 @@ if ($parse_file) {
 												break;
 											default:
 												// anything else we need to end the loop
-												$next_range_time = $end_range_time + 100;
+												$next_range_time = $end_range_time_tmp + 100;
 												$count_to = $count;
 										}
 									} else {

@@ -45,24 +45,24 @@ $gomonth_lang		= 'Gehe zum aktuellen Monat';
 $goyear_lang		= 'Gehe zum aktuellen Jahr';
 
 // new in 0.8 -------------
-$search_lang		= 'Search'; // the verb
-$results_lang		= 'Search Results';
-$query_lang			= 'Query: '; // will be followed by the search query
-$no_results_lang	= 'No events found';
+$search_lang		= 'Suchen'; // the verb
+$results_lang		= 'Suchresultate';
+$query_lang			= 'Suche: '; // will be followed by the search query
+$no_results_lang	= 'Keine Einträge gefunden';
 
-$goprint_lang		= 'Printer Friendly';
-$time_lang			= 'Time';
-$summary_lang		= 'Summary';
-$description_lang	= 'Description';
+$goprint_lang		= 'Druckversion';
+$time_lang			= 'Zeit';
+$summary_lang		= 'Zusammenfassung';
+$description_lang	= 'Beschreibung';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'This site is';
-$no_events_day_lang		= 'No events today.';
-$no_events_week_lang	= 'No events this week.';
-$no_events_month_lang	= 'No events this month.';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e';  // Lists just the day
-$rss_month_date			= '%b %e';  // Lists just the day
+$this_site_is_lang		= 'Diese Site ist';
+$no_events_day_lang		= 'Keine Einträge für heute.';
+$no_events_week_lang	= 'Keine Einträge in dieser Woche.';
+$no_events_month_lang	= 'Keine Einträge in diesem Monat.';
+$rss_day_date			= 'H:i';  // Lists just the time
+$rss_week_date			= '%e. %b';  // Lists just the day
+$rss_month_date			= '%e. %b';  // Lists just the day
 // -------------------------
 
 $daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
