@@ -110,11 +110,10 @@ $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><
 							if ($event_text != "") {	
 								$event_text2 	= rawurlencode(addslashes($val['event_text']));
 								$description 	= addslashes(urlencode($val['description']));
-								$event_start 	= @$val["event_start"];
 								$event_end 		= @$val["event_end"];
 								$event_calna 	= @$val["calname"];
 								$event_url 		= @$val["url"];
-								$event_start 	= date ($timeFormat, @strtotime ($event_start));
+								$event_start 	= date ($timeFormat, $val['start_unixtime']);
 								$event_end 		= date ($timeFormat, @strtotime ($event_end));
 								$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
 								

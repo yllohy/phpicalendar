@@ -86,6 +86,11 @@ functions folder.
 
 Changes:
 --------
+1.2
+	-Workaround for events starting between 0000 and 0100
+	-Started templating system
+	-Removed all styles except for defualt
+	
 1.1
 	-Fixed a bug with HTTP authentication.
 	-Fixed a bug with multiple timezones in the same calendar.

@@ -221,7 +221,7 @@ include (BASE.'includes/header.inc.php');
 											switch ($event_length[$i]['state']) {
 												case 'begin':
 												  $event_length[$i]['state'] = 'started';
-												  $event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
+												  $event_start 	= $this_time_arr[($event_length[$i]['key'])]['start_unixtime'];
 												  $event_end	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
 												  if (isset($this_time_arr[($event_length[$i]['key'])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$i]['key'])]['display_end']);
 												  $event_start 	= date ($timeFormat, $event_start);

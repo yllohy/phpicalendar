@@ -123,13 +123,13 @@ include (BASE.'includes/header.inc.php');
 											echo '</div>';
 										} else {	
 											echo '<div align="left" class="V9">&nbsp;';
-											$event_start = @$val["event_start"];
+											$event_start = @$val["start_unixtime"];
 											$event_end   = @$val["event_end"];
 											if (isset($val['display_end'])) $event_end = $val['display_end'];
-											$event_start = date($timeFormat, @strtotime ("$event_start"));
-											$start2		 = date($timeFormat_small,@strtotime("$event_start"));
+											$event_star  = date($timeFormat, $event_start);
+											$start2		 = date($timeFormat_small, $event_start);
 											$event_end   = date($timeFormat, @strtotime ("$event_end"));
-											openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url);
+											openevent($event_calna, $event_star, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url);
 											echo '</div>';
 										}
 									}
@@ -191,10 +191,10 @@ include (BASE.'includes/header.inc.php');
 
 								if ($new_val2["event_text"]) {	
 									if (isset($new_val2["event_start"])) {
-										$event_start 	= $new_val2["event_start"];
+										$event_start 	= $new_val2["start_unixtime"];
 										$event_end 		= $new_val2["event_end"];
 										if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
-										$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+										$event_start 	= date ($timeFormat, $event_start);
 										$event_end 		= date ($timeFormat, strtotime ("$event_end"));
 										$event_start2	= $event_start;
 									} else {
