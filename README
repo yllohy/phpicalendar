@@ -44,7 +44,7 @@ Changes:
 --------
 
 0.6
-    -Better CSS support, coloring not hard-coded
+    -Greatly improved CSS for "themes"
     -HTML bug fixes specific to Windows browsers
     -All-day and Regular recurring event both support all types
     -Bottom of month view updated
@@ -59,6 +59,7 @@ Changes:
          up in your popup
         -Allow any URL of a calendar to be parsed by your server
     -Added custom error page for user-friendly error messages.
+    -Added saving of parsed files to separate files for faster processing
     -Bug fixes
 
 0.5

@@ -10,7 +10,7 @@ if ($display_ical_list == "yes") {
 	print "<form>\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">\n";
 	
 	// open file
-	$dir_handle = @opendir($calendar_path) or die(error($error_path_lang, $calendar_path));
+	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 	
 	// build the <option> tags
 	while ($file = readdir($dir_handle)) {
