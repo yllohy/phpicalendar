@@ -51,6 +51,7 @@ $language = strtolower($language);
 $lang_file = BASE.'/languages/'.$language.'.inc.php';
 
 if (file_exists(realpath($lang_file))) {
+	unset($lang);
 	include($lang_file);
 } else {
 	exit(error('The requested language "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
