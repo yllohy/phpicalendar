@@ -459,6 +459,8 @@ if ($parse_file) {
 			$data = $line[2];
 			
 			if (preg_match("/^DTSTART/i", $field)) {
+				$zulu_time = false;
+				if (substr($data,-1) == 'Z') $zulu_time = true;
 				$data = ereg_replace('T', '', $data);
 				$data = ereg_replace('Z', '', $data);
 				if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
@@ -469,7 +471,9 @@ if ($parse_file) {
 						$tz_tmp = explode('=', $field);
 						$tz_dtstart = $tz_tmp[1];
 						unset($tz_tmp);
-					}	
+					} elseif ($zulu_time) {
+						$tz_dtstart = 'GMT';
+					}
 
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$start_date = $regs[1] . $regs[2] . $regs[3];
@@ -500,6 +504,8 @@ if ($parse_file) {
 				}
 				
 			} elseif (preg_match("/^DTEND/i", $field)) {
+				$zulu_time = false;
+				if (substr($data,-1) == 'Z') $zulu_time = true;
 				$data = ereg_replace('T', '', $data);
 				$data = ereg_replace('Z', '', $data);
 				if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
@@ -509,7 +515,10 @@ if ($parse_file) {
 						$tz_tmp = explode('=', $field);
 						$tz_dtend = $tz_tmp[1];
 						unset($tz_tmp);
+					} elseif ($zulu_time) {
+						$tz_dtend = 'GMT';
 					}
+					
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$end_date = $regs[1] . $regs[2] . $regs[3];
 					$end_time = $regs[4] . $regs[5];

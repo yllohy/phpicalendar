@@ -10,7 +10,7 @@ $calendar_path 			= './calendars';	// Path to directory with calendars
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal 			= 'School';			// Exact filename of calendar without .ics
-$language 				= 'english';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese'
+$language 				= 'japanese';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese'
 $week_start_day 		= 'Sunday';			// Day of the week your week starts on
 $day_start 				= '0700';			// Start time for day grid
 $gridLength 			= '15';				// Grid distance in minutes for day view, multiples of 15 preferred
@@ -19,7 +19,7 @@ $month_event_lines 		= '1';				// Number of lines to wrap each event title in mo
 $tomorrows_events_lines = '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 $allday_week_lines 		= '1';				// Number of lines to wrap each event title in all-day events in week view, 0 means display all lines.
 $week_events_lines 		= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
-$timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
+$timezone 				= 'Same as Server';				// Set timezone. Read TIMEZONES file for more information
 $default_path			= 'http://www.example.com/phpicalendar'; // The HTTP URL to the PHP iCalendar directory
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 
@@ -41,7 +41,7 @@ $blacklisted_cals[] = '';					// list. This should be the exact calendar filenam
 $blacklisted_cals[] = '';					// the parser will *not* parse any cal that is in this list (it will not be Web accessible)
 // add more lines as necessary
 
-$list_webcals[] = '';						// Fill in between the quotes exact URL of a calendar that you wish
+$list_webcals[] = 'http://icalx.com/public/carlos/Halloween.ics';						// Fill in between the quotes exact URL of a calendar that you wish
 $list_webcals[] = '';						// to show up in your calendar list. You must prefix the URL with http://
 $list_webcals[] = '';						// or webcal:// and the filename should contain the .ics suffix
 $list_webcals[] = '';						// $allow_webcals does *not* need to be "yes" for these to show up and work
