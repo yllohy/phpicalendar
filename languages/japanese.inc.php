@@ -8,8 +8,6 @@
 //
 // Submit new translations to chad@chadsdomain.com
 
-
-
 $day_lang			= '日';
 $week_lang			= '週';
 $month_lang			= '月';
