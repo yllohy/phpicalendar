@@ -467,7 +467,6 @@ foreach($contents as $line) {
 												} else {
 													$next_date_time = strtotime("$this_year-$month-$the_month_day", $next_range_time);
 												}
-												print date("Y-m-d     ", $next_date_time);
 												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
 													if ($allday_start != "") {
 														
