@@ -43,6 +43,9 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .dayborder 		{ background-color: #fff; border-top: 1px solid #A1A5A9; }
 .dayborder2 	{ background-color: #fff; border-top: 1px dashed #ccc; }
 
+.title  		{ background-image: url(images/time_bg.gif); padding: 5px; }
+.title h1 		{ font-family: Helvetica, sans-serif; font-size: 18px; color: #000; margin: 0px;}
+
 
 /* older styles */
 
@@ -115,7 +118,7 @@ body			{ background-color: #E5E5E5; }
 .G10BOLD 		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: 900; }
 .G10G 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #A1A5A9; }
 .V12 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;  color: #000000; }
-.H20 			{ font-family: Helvetica, sans-serif; font-size: 18px; color: #000000; }
+/*h1 				{ font-family: Helvetica, sans-serif; font-size: 18px; color: #000000; }*/
 .eventfont 		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; }
 
 

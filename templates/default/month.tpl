@@ -5,8 +5,8 @@
 			<td align="center" valign="middle">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr valign="top">
-						<td align="left" width="400" class="navback"><div style="padding: 5px;"><span class="H20">{DISPLAY_DATE}</span><br /><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></div></td>
-						<td valign="top" align="right" width="120" class="navback">	
+						<td align="left" width="400" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></td>
+						<td align="right" width="120" class="navback">	
 							<div style="padding-top: 3px;">
 							<table width="120" border="0" cellpadding="0" cellspacing="0">
 								<tr valign="top">
@@ -41,7 +41,7 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td align="right" width="40%" class="navback"><a class="psf" href="month.php?cal={CAL}&amp;getdate={PREV_MONTH}"><img src="templates/{TEMPLATE}/images/left_day.gif" alt="{L_PREV}" border="0" align="right" /></a></td>
-						<td align="center" width="20%" class="navback" nowrap="nowrap" valign="middle"><font class="H20">{L_THIS_MONTHS}</font></td>
+						<td align="center" width="20%" class="title" nowrap="nowrap" valign="middle"><h1>{L_THIS_MONTHS}</h1></td>
 						<td align="left" width="40%" class="navback"><a class="psf" href="month.php?cal={CAL}&amp;getdate={NEXT_MONTH}"><img src="templates/{TEMPLATE}/images/right_day.gif" alt="{L_NEXT}" border="0" align="left" /></a></td>
 					</tr>
 				</table>

@@ -8,7 +8,7 @@
 						<td align="center" valign="middle">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr valign="top">
-								<td align="left" width="400" class="navback"><div style="padding: 5px;"><span class="H20">{DISPLAY_DATE}</span><br /><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></div></td>
+								<td align="left" width="400" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></td>
 								<td valign="top" align="right" width="120" class="navback">	
 									<div style="padding-top: 3px;">
 									<table width="120" border="0" cellpadding="0" cellspacing="0">

@@ -5,8 +5,8 @@
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr valign="top">
-					<td align="left" width="400" class="navback"><div style="padding: 5px;"><span class="H20">{L_ADMIN_HEADER}</span><br /><span class="V9G">{L_ADMIN_SUBHEAD}</span></div></td>
-					<td valign="top" align="right" width="120" class="navback">	
+					<td align="left" width="400" class="title"><h1>{L_ADMIN_HEADER}</h1><span class="V9G">{L_ADMIN_SUBHEAD}</span></td>
+					<td align="right" width="120" class="navback">	
 						<div style="padding-top: 3px;">
 						<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr valign="top">

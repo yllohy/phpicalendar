@@ -14,8 +14,8 @@
 									<td align="right" width="45%" class="navback">
 										<a class="psf" href="year.php?cal={CAL}&amp;getdate={PREV_YEAR}"><img src="styles/silver/left_day.gif" alt="[Previous Year]" border="0" align="right" /></a>
 									</td>
-									<td align="center" width="10%" class="navback" nowrap="nowrap" valign="middle">
-										<font class="H20">{THIS_YEAR}</font>
+									<td align="center" width="10%" class="title" nowrap="nowrap" valign="middle">
+										<h1>{THIS_YEAR}</h1>
 									</td>
 									<td align="left" width="45%" class="navback">
 										<a class="psf" href="year.php?cal={CAL}&amp;getdate={NEXT_YEAR}"><img src="styles/silver/right_day.gif" alt="[Next Year]" border="0" align="left" /></a>
