@@ -1,6 +1,6 @@
 <?php 
 define('BASE', '../');
-include (BASE.'functions/init.inc.php'); 
+include_once(BASE.'functions/init.inc.php'); 
 
 function decode_popup ($item) {
 	$item = stripslashes(rawurldecode($item));

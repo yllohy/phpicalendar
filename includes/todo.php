@@ -1,8 +1,8 @@
 <?php 
 
 define('BASE', '../');
-include (BASE.'functions/init.inc.php');
-include (BASE.'functions/date_functions.php');
+include_once(BASE.'functions/init.inc.php');
+include_once(BASE.'functions/date_functions.php');
 
 $vtodo_array = unserialize(base64_decode($HTTP_GET_VARS['vtodo_array']));
 

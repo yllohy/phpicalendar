@@ -6,7 +6,7 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-error_reporting (E_ERROR | E_WARNING);
+error_reporting (E_ERROR | E_WARNING | E_PARSE);
 
 // Older versions of PHP do not define $_SERVER. Define it here instead.
 if (!isset($_SERVER) && isset($HTTP_SERVER_VARS)) {
@@ -18,9 +18,9 @@ $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 
 // Pull in the configuration and some functions.
 if (!defined('BASE')) define('BASE', './');
-include(BASE.'config.inc.php');
-include(BASE.'functions/error.php');
-include(BASE.'functions/calendar_functions.php');
+include_once(BASE.'config.inc.php');
+include_once(BASE.'functions/error.php');
+include_once(BASE.'functions/calendar_functions.php');
 if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
@@ -54,8 +54,22 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 	if (isset($HTTP_GET_VARS['password']))			$password = $HTTP_GET_VARS['password'];
 	else if (isset($HTTP_POST_VARS['password']))	$password = $HTTP_POST_VARS['password'];
 
-	// Set the login cookie if logging in. Clear it if logging out.
+	// Grab the action (login or logout).
 	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
+
+	// Check to make sure the username and password is valid.
+	if (!key_exists("$username:$password", $locked_map)) {
+		// Don't login, instead logout.
+		$action = 'logout';
+
+		// Remember the invalid login, because we may want to
+		// display a message elsewhere.
+		$invalid_login = true;
+	} else {
+		$invalid_login = false;
+	}
+
+	// Set the login cookie if logging in. Clear it if logging out.
 	if ($action == 'login') {
 		$the_cookie = serialize(array('username' => $username, 'password' => $password));
 		setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
