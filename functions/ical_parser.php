@@ -438,6 +438,7 @@ foreach ($cal_filelist as $filename) {
 													}
 													break;
 												case 'MONTHLY':
+													if (!isset($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
 													$next_range_time = strtotime(date('Y-m-01', $next_range_time));
 													// month has two cases, either $bymonthday or $byday
 													if ((is_array($bymonthday)) && (!is_array($byday))) {
@@ -463,9 +464,12 @@ foreach ($cal_filelist as $filename) {
 																$next_range_time = strtotime(date('Y-m-'.$last_day_tmp, $next_range_time));
 																$last_tmp = (date('w',$next_range_time) == $on_day_num) ? '' : 'last ';
 																$next_date_time = strtotime($last_tmp.$on_day.' -'.$nth.' week', $next_range_time);
+																$month = date('m', $next_date_time);
+																if (in_array($month, $bymonth)) {
+																	$recur_data[] = $next_date_time;
+																}
 															} elseif (is_array($bymonthday)) {
 																// This supports MONTHLY where BYDAY and BYMONTH are both set
-																if (!isset($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
 																foreach($bymonthday as $day) {
 																	$year 	= date('Y', $next_range_time);
 																	$month 	= date('m', $next_range_time);
@@ -477,9 +481,12 @@ foreach ($cal_filelist as $filename) {
 																		}
 																	}
 																}
-															} elseif (isset($byday_arr[1])) {
+															} elseif ((isset($byday_arr[1])) && ($byday_arr[1] != '-')) {
 																$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
-																$recur_data[] = $next_date_time;
+																$month = date('m', $next_date_time);
+																if (in_array($month, $bymonth)) {
+																	$recur_data[] = $next_date_time;
+																}
 															}
 															$next_date = date('Ymd', $next_date_time);
 															//$recur_data[] = $next_date_time;
