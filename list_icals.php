@@ -17,11 +17,13 @@ while ($file = readdir($dir_handle)) {
 	if (strstr ($file, ".ics")) {
 		// $cal_filename is the filename of the calendar without .ics
 		// $cal is a urlencoded version of $cal_filename
+		// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
 		$cal_filename = substr($file,0,-4);
 		$cal_tmp = urlencode($cal_filename);
+		$cal_displayname = str_replace("32", " ", $cal_filename);
 		
 		if ($cal_tmp == $cal) {
-			print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_filename Calendar</option>\n";
+			print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname Calendar</option>\n";
 		} else {
 			print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_filename Calendar</option>\n";	
 		}

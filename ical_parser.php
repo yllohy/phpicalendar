@@ -13,8 +13,9 @@ include("./functions/date_add.php");
 // and returns the date of that day. This function may be specific to WEEKLY recurring events.
 
 function dateOfWeek($Ymd, $day) {
+	global $week_start_day;
 	$timestamp = strtotime($Ymd);
-	$sunday = strtotime((date("w",$timestamp)==0 ? "sun" : "last sun"), $timestamp);
+	$sunday = strtotime((date("w",$timestamp)==0 ? "$week_start_day" : "last $week_start_day"), $timestamp);
 	if ($day == "SU") $day_longer = "sun";
 	elseif ($day == "MO") $day_longer = "mon";
 	elseif ($day == "TU") $day_longer = "tue";
@@ -28,8 +29,10 @@ function dateOfWeek($Ymd, $day) {
 // function to compare to dates in Ymd and return the number of weeks that differ between them
 // requires dateOfWeek()
 function weekCompare($now, $then) {
-	$sun_now = dateOfWeek($now, "SU");
-	$sun_then = dateOfWeek($then, "SU");
+	global $week_start_day;
+	$day = substr($week_start_day, 0, 2);
+	$sun_now = dateOfWeek($now, $day);
+	$sun_then = dateOfWeek($then, $day);
 	$seconds_now = strtotime($sun_now);
 	$seconds_then =  strtotime($sun_then);
 	$diff_seconds = $seconds_now - $seconds_then;
@@ -41,7 +44,6 @@ function weekCompare($now, $then) {
 }
 
 $day_array = array ("0700", "0730", "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930", "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330");
-
 
 // what date we want to get data for (for day calendar)
 if (!$getdate) $getdate = date("Ymd");
