@@ -291,16 +291,18 @@ if ($parse_file) {
 												$recur_data[] = $next_date_time;
 											break;
 											case 'WEEKLY':
-												// loop through the days on which this event happens
-												foreach($byday as $day) {
-													// use my fancy little function to get the date of each day
-													$day = two2threeCharDays($day);
-													#$thedate = date ("r", $next_range_time);
-													$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
-													#echo "$day -- $summary -- $thedate -- $next_date<br>";
-													$next_date_time = strtotime($next_date);
-													//print date('Y-m-d  ', $next_date_time);
-													$recur_data[] = $next_date_time;
+												if (is_array($byday)) {
+													// loop through the days on which this event happens
+													foreach($byday as $day) {
+														// use my fancy little function to get the date of each day
+														$day = two2threeCharDays($day);
+														#$thedate = date ("r", $next_range_time);
+														$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
+														#echo "$day -- $summary -- $thedate -- $next_date<br>";
+														$next_date_time = strtotime($next_date);
+														//print date('Y-m-d  ', $next_date_time);
+														$recur_data[] = $next_date_time;
+													}
 												}
 											break;
 											case 'MONTHLY':
