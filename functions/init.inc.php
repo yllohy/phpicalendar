@@ -35,7 +35,7 @@ if (!isset($getdate)) {
 	if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
 		$getdate = $HTTP_GET_VARS['getdate'];
 	} else {
-		$getdate = date('Ymd');
+		$getdate = date('Ymd', strtotime("now + $second_offset seconds"));
 	}
 }
 

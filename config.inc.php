@@ -1,6 +1,6 @@
 <?php
 
-// Configuration file for PHP iCalendar 0.9.1
+// Configuration file for PHP iCalendar 0.9.2
 //
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information
@@ -22,6 +22,7 @@ $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
 $default_path			= 'http://www.example.com/phpicalendar'; 	// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 $calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
+$second_offset			= '0';				// The time in seconds between your time and your server's time.
 
 // Advanced settings for custom installs, cookies, etc.
 // In most cases these will not need to be set.

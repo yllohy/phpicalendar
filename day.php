@@ -2,7 +2,7 @@
 if (isset($HTTP_GET_VARS['jumpto_day'])) {
 	$jumpto_day_time = strtotime($HTTP_GET_VARS['jumpto_day']);
 	if ($jumpto_day_time == -1) {
-		$getdate = date('Ymd');
+		$getdate = date('Ymd', strtotime("now + $second_offset seconds"));
 	} else {
 		$getdate = date('Ymd', $jumpto_day_time);
 	}
@@ -15,7 +15,7 @@ if ($minical_view == 'current') $minical_view = 'day';
 $starttime = '0500';
 $weekstart = 1;
 $unix_time = strtotime($getdate);
-$today_today = date ('Ymd');
+$today_today = date ('Ymd', $unix_time);
 $tomorrows_date = date( 'Ymd', strtotime('+1 day',  $unix_time));
 $yesterdays_date = date( 'Ymd', strtotime('-1 day',  $unix_time));
 $display_date = localizeDate($dateFormat_day, $unix_time);
