@@ -253,7 +253,7 @@ foreach ($cal_filelist as $filename) {
 						$allday_end = ($start_date + 1);
 					}
 				}
-				if (isset($start_unixtime,$end_unixtime) && date('d',$start_unixtime) != date('d',$end_unixtime)) {
+				if (isset($start_unixtime,$end_unixtime) && date('Ymd',$start_unixtime) != date('Ymd',$end_unixtime)) {
 					$spans_day = true;
 					$bleed_check = (($start_unixtime - $end_unixtime) < (60*60*24)) ? '-1' : '0';
 				} else {
