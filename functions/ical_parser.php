@@ -6,7 +6,7 @@
 // I started commenting the line above where $master_array gets written to
 // I did this because I kept scrolling through looking for them so I decided to mark them
 
-include("./init.inc.php");
+include("./functions/init.inc.php");
 include("./functions/date_add.php");
 include("./functions/date_functions.php");
 include("./functions/draw_functions.php");

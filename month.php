@@ -1,6 +1,6 @@
 <?php 
 	$current_view = "month";
-	include("./ical_parser.php"); 
+	include("./functions/ical_parser.php"); 
 
 	//might not need this, depending on implimentation, doesn't work correctly in current form anyway
 	//setcookie("last_view", "month");

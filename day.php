@@ -8,7 +8,7 @@ if (isset($HTTP_GET_VARS["jumpto_day"])) {
 	}
 }
 $current_view = "day";
-include("./ical_parser.php");
+include("./functions/ical_parser.php");
 
 
 

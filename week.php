@@ -1,7 +1,7 @@
 <?php
 
 $current_view = "week";
-include("./ical_parser.php");
+include("./functions/ical_parser.php");
 
 //if ($use_sessions == "yes") {
 //	session_start();

@@ -23,7 +23,7 @@ if (file_exists($lang_file)) {
 //	Not sure if we should print this warning or not. It would inform the user
 //	why the language isn't working.
 	print "File \"$lang_file\" does not exist, defaulting to English<br><br>";
-	include("./languages/english.inc.php");
+	include("../languages/english.inc.php");
 }
 
 // $cal_displayname is $cal_filename with occurrences of "32" replaced with " "

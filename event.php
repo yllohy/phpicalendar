@@ -1,6 +1,6 @@
 <?php 
 
-include "init.inc.php"; 
+include ("./functions/init.inc.php"); 
 $event = urldecode($event);
 $event = stripslashes($event);
 $event = str_replace("\\", "", $event);
