@@ -52,12 +52,12 @@ $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 
 $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
+	'event_js'			=> BASE.'functions/event.js',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'calendar_nav'		=> BASE.'templates/'.$template.'/calendar_nav.tpl'
 	));
 
 $page->replace_tags(array(
-	'event_js'			=> BASE.'functions/event.js',
 	'charset'			=> $charset,
 	'template'			=> $template,
 	'cal'				=> $cal,

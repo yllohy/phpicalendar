@@ -45,7 +45,7 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
-	'event_js'			=> BASE.'functions/event.js',
+	'event_js'			=> '',
 	'charset'			=> $charset,
 	'default_path'		=> '',
 	'template'			=> $template,

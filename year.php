@@ -23,6 +23,7 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
+	'event_js'			=> '',
 	'template'			=> $template,
 	'charset'			=> $charset,
 	'default_path'		=> '',

@@ -45,12 +45,12 @@ $page = new Page(BASE.'templates/'.$template.'/day.tpl');
 
 $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
+	'event_js'			=> BASE.'functions/event.js',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl'
 	));
 
 $page->replace_tags(array(
-	'event_js'			=> BASE.'functions/event.js',
 	'charset'			=> $charset,
 	'default_path'		=> '',
 	'template'			=> $template,
