@@ -17,6 +17,8 @@ $unix_time = strtotime($getdate);
 $today_today = date ("Ymd");
 $next_week = date("Ymd", strtotime("+1 week",  $unix_time));
 $prev_week = date("Ymd", strtotime("-1 week",  $unix_time));
+$tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
+$yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time = $start_week_time + (6 * 25 * 60 * 60);

@@ -10,13 +10,17 @@
 	$this_day = $day_array2[3]; 
 	$this_month = $day_array2[2];
 	$this_year = $day_array2[1];
+	
+	$unix_time = strtotime($getdate);
+	$today_today = date ("Ymd");
+	$tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
+	$yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 	$date = mktime(0,0,0,"$this_month","$this_day","$this_year");
 	$next_month = date("Ymd", DateAdd ("m", "1", $date));
 	$prev_month = date("Ymd", DateAdd ("m", "-1", $date));
 	$display_month = strftime ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_sunday = sundayOfWeek($this_year, $this_month, "1");
-	$today_today = date ("Ymd");
 
 
 ?>
