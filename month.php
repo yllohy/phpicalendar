@@ -31,7 +31,7 @@
 </head>
 <body>
 <center>
-<table width="735" border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9" class="calborder">
+<table width="735" border="0" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td align="center" valign="middle" bgcolor="white">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -44,32 +44,50 @@
 		</td>
 	</tr>
 	<tr>
-		
 		<td align="center" valign="top">
-			<table width="100%" border="0" cellspacing="1" cellpadding="0" class="G10B" bgcolor="#A1A5A9">
-				<tr height="11">
-					<td valign="top" width="105" height="13" class="eventbg">
-						<center><font class="eventfont"><b>Sunday</b></font></center>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="7" width="735"><img src="images/spacer.gif" width="735" height="1" alt=""></td>
+				</tr>
+				<tr>
+					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
+						<center><b>Sunday</b></center>
 					</td>
-					<td valign="top" width="105" height="13" class="eventbg">
-						<center><font class="eventfont"><b>Monday</b></font></center>
+					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
+						<center><b>Monday</b></center>
 					</td>
-					<td valign="top" width="105" height="13" class="eventbg">
-						<center><font class="eventfont"><b>Tuesday</b></font></center>
+					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
+						<center><b>Tuesday</b></center>
 					</td>
-					<td valign="top" width="105" height="13" class="eventbg">
-						<center><font class="eventfont"><b>Wednesday</b></font></center>
+					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
+						<center><b>Wednesday</b></center>
 					</td>
-					<td valign="top" width="105" height="13" class="eventbg">
-						<center><font class="eventfont"><b>Thursday</b></font></center>
+					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
+						<center><b>Thursday</b></center>
 					</td>
-					<td valign="top" width="105" height="13" class="eventbg">
-						<center><font class="eventfont"><b>Friday</b></font></center>
+					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
+						<center><b>Friday</b></center>
 					</td>
-					<td valign="top" width="105" height="13" class="eventbg">
-						<center><font class="eventfont"><b>Saturday</b></font></center>
+					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
+						<center><b>Saturday</b></center>
 					</td>
 				</tr>
+				<tr>
+					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>
+					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>
+					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>
+					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>
+					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>
+					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>
+					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+			<td align="center" valign="top">
+			<table width="100%" border="0" cellspacing="1" cellpadding="0" class="G10B" bgcolor="#A1A5A9">
+				<tr>	
 				<?php 	 
 					$sunday = strtotime("$first_sunday");
 					$i = 0;
@@ -80,7 +98,7 @@
 						$daylink = date ("Ymd", $sunday);
 						$check_month = date ("m", $sunday);
 						if ($check_month != $this_month) {
-							$day= "<font color=\"#666666\">$day</font>";
+							$day= "<font color=\"#666666\">$day";
 							$bgcolor="#F2F2F2";
 						} else {
 							if ($getdate == $daylink) {
@@ -124,7 +142,7 @@
 											if (!$event_start = $val["event_start"]) {
 												echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center>\n";
 											} else {	
-												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</a>\n";
 											}
 											echo "</td>\n";
 											echo "</tr>\n";
@@ -157,13 +175,8 @@
 							$checkagain = date ("m", $sunday);
 							if ($checkagain != $this_month) $whole_month = FALSE;	
 						}
-						
-						
 					} while ($whole_month == TRUE);
-					
-					
 				?>
-
 			</table>
 		</td>
 	</tr>
@@ -171,7 +184,7 @@
 
 
 <br>
-<?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
+<?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a>"; ?>
 </center>
 </body>
 </html>

@@ -129,18 +129,17 @@ for ($i=0;$i<7;$i++) {
 							$i = 0;
 							echo "<tr>\n";
 							echo "<td bgcolor=\"#f5f5f5\" colspan=\"2\"></td>";
-					//		echo "<td  height=\"11\" width=\"60\" nowrap bgcolor=\"#f5f5f5\">&nbsp;</td>";
 							do {
 								$thisday = date("Ymd", $thisdate);
 
 								if ($master_array[($thisday)]["-1"]) {
-									echo "<td  height=\"24\">\n";
-									echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";
+									echo "<td bgcolor=\"#f5f5f5\" height=\"24\">\n";
+									echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
 									foreach($master_array[($thisday)]["-1"] as $allday) {
 										$all_day_text = $allday["event_text"];
 										$description = $allday["description"];
 										echo "<tr>\n";
-										echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\"><i>$all_day_text</i></font></a></td>\n";
+										echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
 										echo "</tr>\n";
 									}
 									echo "</table>\n";
