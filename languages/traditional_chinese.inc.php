@@ -194,4 +194,3 @@ $error_restrictedcal_lang = '您試圖存取被本伺服器所限制使用的行
 $error_invalidcal_lang = '錯誤的行事曆檔案。請換一個行事曆試試。';
 
 ?>
-

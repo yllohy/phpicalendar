@@ -3,8 +3,8 @@
 //
 // returns boolean is the user logged in
 function is_loggedin () {
-	global $HTTP_SESSION_VARS;
-	if (!isset($HTTP_SESSION_VARS['phpical_loggedin']) || $HTTP_SESSION_VARS['phpical_loggedin'] == FALSE) {
+	global $_SESSION;
+	if (!isset($_SESSION['phpical_loggedin']) || $_SESSION['phpical_loggedin'] == FALSE) {
 		return FALSE;
 	}
 	else
@@ -17,7 +17,7 @@ function is_loggedin () {
 // arg1: string password
 // returns boolean was the login successful
 function login ($username, $password) {
-	global $HTTP_SESSION_VARS;
+	global $_SESSION;
 	global $auth_method;
 	
 	switch ($auth_method) {
@@ -31,10 +31,10 @@ function login ($username, $password) {
 			$loggedin = FALSE;
 	}
 	
-	$HTTP_SESSION_VARS['phpical_loggedin'] = $loggedin;
+	$_SESSION['phpical_loggedin'] = $loggedin;
 	if ($loggedin) {
-		$HTTP_SESSION_VARS['phpical_username'] = $username;
-		$HTTP_SESSION_VARS['phpical_password'] = $password;
+		$_SESSION['phpical_username'] = $username;
+		$_SESSION['phpical_password'] = $password;
 	}
 	
 	return $loggedin;
@@ -86,7 +86,7 @@ function login_internal ($username, $password) {
 // arg0: string calendar file - not the full path
 // returns boolean was delete successful
 function delete_cal ($filename) {
-	global $HTTP_SESSION_VARS;
+	global $_SESSION;
 	global $auth_method;
 	global $ftp_server;
 	global $calendar_path;
@@ -99,7 +99,7 @@ function delete_cal ($filename) {
 		$conn_id = @ftp_connect($ftp_server); 
 		
 		// login with username and password
-		$login_result = @ftp_login($conn_id, $HTTP_SESSION_VARS['phpical_username'], $HTTP_SESSION_VARS['phpical_password']); 
+		$login_result = @ftp_login($conn_id, $_SESSION['phpical_username'], $_SESSION['phpical_password']); 
 		
 		// check connection
 		if ((!$conn_id) || (!$login_result))
@@ -116,8 +116,7 @@ function delete_cal ($filename) {
 		@ftp_close($conn_id);
 		
 		return TRUE;
-	}
-	else {
+	} else {
 		$filename = $calendar_path . "/" . $filename;
 	
 		$delete = @unlink($filename); 
@@ -150,7 +149,7 @@ function delete_cal ($filename) {
 // arg1: string destination filename
 // returns boolean was copy successful
 function copy_cal ($source, $destination) {
-	global $HTTP_SESSION_VARS;
+	global $_SESSION;
 	global $auth_method;
 	global $ftp_server;
 	global $calendar_path;
@@ -163,7 +162,7 @@ function copy_cal ($source, $destination) {
 		$conn_id = ftp_connect($ftp_server); 
 		
 		// login with username and password
-		$login_result = ftp_login($conn_id, $HTTP_SESSION_VARS['phpical_username'], $HTTP_SESSION_VARS['phpical_password']); 
+		$login_result = ftp_login($conn_id, $_SESSION['phpical_username'], $_SESSION['phpical_password']); 
 		
 		// check connection
 		if ((!$conn_id) || (!$login_result))
