@@ -1,3 +1,4 @@
+<? include "init.inc.php"; ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
@@ -8,24 +9,24 @@
 </head>
  <body bgcolor="#eeeeee">
    <br>
-   <table border="0" cellspacing="0" cellpadding="0">
+   <table border="0" cellspacing="0" cellpadding="0" class="V12">
     <tr height="18">
      <td nowrap width="7" height="18"></td>
      <td align="right" valign="top" height="18"><b>Event:</b></td>
      <td nowrap width="7" height="18"></td>
-     <td align="left" valign="top" height="18">Recurring Daily</td>
+     <td align="left" valign="top" height="18"><? echo "$event"; ?></td>
     </tr>
     <tr height="18">
      <td nowrap width="7" height="18"></td>
      <td align="right" valign="top" height="18"><b>Start Date:</b></td>
      <td width="7" height="18"></td>
-     <td align="left" valign="top" height="18">Tuesday, September 24 10:00AM</td>
+     <td align="left" valign="top" height="18"><? echo "$start"; ?></td>
     </tr>
     <tr height="18">
      <td nowrap width="7" height="18"></td>
      <td align="right" valign="top" height="18"><b>End Date:</b></td>
      <td width="7" height="18"></td>
-     <td align="left" valign="top" height="18">Tuesday, September 24 11:30AM</td>
+     <td align="left" valign="top" height="18"><? echo "$end"; ?></td>
     </tr>
    </table>
  </body>

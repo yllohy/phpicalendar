@@ -28,28 +28,7 @@
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><? echo "$calendar_name"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
-	<script language="JavaScript">
-  	<!--
-		function openEventInfo(event, start, end)
-		{	
-			var windowW = 500;
-			var windowH = 450;
-		
-			var url = "event.php?event="+escape(event)+
-				"&start="+escape(start)+
-				"&end="+escape(end);
-				
-			alert(url);
-		
-			options = "scrollbars=no"+",width="+windowW+",height="+windowH;
-		
-			info = window.open(url, "Popup", options);
-			
-			info.focus();
-		}
-
-	//-->
-  	</script>
+	<? include "functions/event.js"; ?>
 </head>
 <body bgcolor="#FFFFFF">
 <center>
@@ -151,7 +130,7 @@
 													echo "<tr height=\"15\">\n";
 													echo "<td height=\"15\" valign=\"middle\" align=\"center\" bgcolor=\"#ffffff\">\n";
 													//echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
-													echo "<a class=\"psf\" href=\"javascript:openEventInfo('event', 'start', 'end')\"><i>$event_text</i></a>\n";
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}
@@ -164,10 +143,10 @@
 															$event_text = $event_text . "...";
 														}	
 														echo "<tr>\n";
-														echo "<td class=\"label\">\n";
+														echo "<td>\n";
 														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 														echo "<tr>\n";
-														echo "<td class=\"label\">\n";
+														echo "<td>\n";
 														echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
@@ -296,7 +275,7 @@
 														echo "<td width=\"1\" height=\"20\">\n";
 														echo "</td>\n";
 														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
+														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
 													}
@@ -325,7 +304,7 @@
 													echo "<td width=\"1\" height=\"20\">\n";
 													echo "</td>\n";
 													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
-													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
+													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}
