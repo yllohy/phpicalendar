@@ -1,4 +1,4 @@
-<? 
+<?php 
 
 $current_view = "day";
 include("./ical_parser.php");
@@ -6,9 +6,18 @@ include("./ical_parser.php");
 //might not need this, depending on implimentation, doesn't work correctly in current form anyway
 //setcookie("last_view", "day");
 
+// drei 20020921: added formats for localization
+// something that will have to go to the user's preferences
+$timeFormat = "H:i";
+$dateFormat = "%a, %d. %B %Y";
+setlocale (LC_TIME, 'de_CH');
+$starttime = "0700";
+$weekstart = 1;
+$gridLength = 30;
 
 if ($getdate == (date("Ymd"))) {
-	$display_date = date ("l, F d");
+//	$display_date = date ("l, F d");
+	$display_date = strftime ($dateFormat);
 	$tomorrows_date = date( "Ymd", (time() + (24 * 3600)));
 	$yesterdays_date = date( "Ymd", (time() - (24 * 3600)));
 } else {
@@ -17,7 +26,8 @@ if ($getdate == (date("Ymd"))) {
 	$this_month = $day_array2[2];
 	$this_year = $day_array2[1];
 	$unix_time = mktime(0,0,0,"$this_month","$this_day","$this_year");
-	$display_date = date ("l, F d", $unix_time);
+//	$display_date = date ("l, F d", $unix_time);
+	$display_date = strftime($dateFormat, $unix_time);
 	$tomorrow = $unix_time + (24 * 3600);
 	$yesterday = $unix_time - (24 * 3600);
 	$tomorrows_date = date( "Ymd", ($tomorrow));
@@ -81,22 +91,26 @@ if ($getdate == (date("Ymd"))) {
       			<tr>
 					<td align="center" valign="top">
 						<table width="100%" border="0" cellspacing="1" cellpadding="0">
-							<?
+							<?php
 							// The all day events returned here.
 							$i = 0;
-							if ($master_array[($getdate)]["0001"]["event_text"] != "") {
+//							if ($master_array[($getdate)]["0001"]["event_text"] != "") {
+// drei 20020921: changed format of allday array
+							if (sizeof($master_array[($getdate)]["-1"]) > 0) {
 								echo "<tr height=\"30\">\n";
-								echo "<td colspan=\"3\" height=\"30\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
+								echo "<td colspan=\"15\" height=\"30\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
 								echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";										  
-								foreach($master_array[($getdate)]["0001"]["event_text"] as $all_day_text) {
-									$event_text2 = addslashes($all_day_text); 
+//								foreach($master_array[($getdate)]["0001"]["event_text"] as $all_day_text) {
+// drei 20020921: changed format of allday array
+								foreach($master_array[($getdate)]["-1"] as $all_day) {
+									$event_text2 = addslashes($all_day["event_text"]); 
 									if ($i > 0) {
 										echo "<tr>\n";
 										echo "<td bgcolor=\"#eeeeee\" height=\"1\"></td>\n";
 										echo "</tr>\n";
 									}
 									echo "<tr>\n";
-									echo "<td valign=\"top\" align=\"center\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\"><i>$all_day_text</i></font></a></td>\n";
+									echo "<td valign=\"top\" align=\"center\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\"><i>" . $all_day["event_text"] . "</i></font></a></td>\n";
 									echo "</tr>\n";
 									$i++;
 								}
@@ -107,139 +121,110 @@ if ($getdate == (date("Ymd"))) {
 							?>
 
 							<tr>
-								 <td nowrap bgcolor="#a1a5a9" width="60"></td>
-								 <td nowrap bgcolor="#a1a5a9" width="1"></td>
-								 <td colspan="3" nowrap bgcolor="#a1a5a9"><img src="images/spacer.gif" width="649" height="1" alt=""></td>
+								<td nowrap bgcolor="#a1a5a9" width="60"></td>
+								<td nowrap bgcolor="#a1a5a9" width="1"></td>
+								<?php for ($m=0;$m < 12;$m++) { ?>
+									<td nowrap bgcolor="#a1a5a9"><img src="images/spacer.gif" width="55" height="1" alt=""></td>
+								<?php } ?>
 							</tr>
-							<?
+							<?php
 								// $master_array[($getdate)]["$day_time"]
-								$event_length = 0;
+								$event_length = array ();
 								
 								foreach ($day_array as $key) {
-									// The first <TR>
-									$k = 0;
+//									$k = 0;
 									$cal_time = $key;	
 									$key = strtotime ("$key");
-									if ($time_format == "24") {
-										$key = date ("G:i", $key);
-									} else {
-										$key = date ("g:i A", $key);
-									}
+//									if ($time_format == "24") {
+//										$key = date ("G:i", $key);
+//									} else {
+//										$key = date ("g:i A", $key);
+//									}
+									$key = date ($timeFormat, $key);
 																		
-									if (ereg("^([0-9]{1,2}):00", $key)) {
-										if ($master_array[($getdate)]["$cal_time"] == "") {	
-											echo "<tr height=\"30\">\n";
-											echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
-											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
-											if ($event_length > 0) {
-												$event_length--;
-											} else {
-												echo "<td bgcolor=\"#ffffff\">&nbsp;</td>\n";
+									// check for eventstart (line 117)
+									if (sizeof($master_array[($getdate)]["$cal_time"]) > 0) {
+										foreach ($master_array[($getdate)]["$cal_time"] as $eventKey => $loopevent) {
+											$j = 0;
+											while ($event_length[$j]) {
+												if ($event_length[$j]["state"] == "ended") {
+													$event_length[$j] = array ("length" => (round($loopevent["event_length"] / $gridLength)), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+													break;
+												}
+												$j++;
 											}
-											echo "</tr>\n";
-										} elseif ($event_started != TRUE) {
-											$event_started = TRUE;
-											$event_text = $master_array[($getdate)]["$cal_time"][$k]["event_text"];
-											$event_text2 = addslashes($master_array[($getdate)]["$cal_time"][$k]["event_text"]);
-											$event_start = $master_array[($getdate)]["$cal_time"][$k]["event_start"];
-											$event_end = $master_array[($getdate)]["$cal_time"][$k]["event_end"];
-											$event_length = $master_array[($getdate)]["$cal_time"][$k]["event_length"];
-											$event_start = strtotime ("$event_start");
-											$event_end = strtotime ("$event_end");
-											if ($time_format == "24") {
-												$event_start = date ("G:i", $event_start);
-												$event_end = date ("G:i", $event_end);
-											} else {
-												$event_start = date ("g:i a", $event_start);
-												$event_end = date ("g:i a", $event_end);
+											if ($j == sizeof($event_length)) {
+												array_push ($event_length, array ("length" => (round($loopevent["event_length"] / $gridLength)), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
 											}
-											echo "<tr height=\"30\">\n";
-											echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
-											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
-											echo "<td rowspan=\"$event_length\" align=\"left\" valign=\"top\" class=\"eventbg\">\n";
-											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
-											echo "<tr>\n";
-											echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b> - $event_end</font></td>\n";
-											echo "</tr>\n";
-											echo "<tr>\n";              
-											echo "<td>\n";
-											echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
-											echo "<tr>\n";
-											echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
-											echo "</tr>\n";
-											echo "</table>\n";
-											echo "</td>\n";           
-											echo "</tr>\n";
-											echo "</table>\n";
-											echo "</td>\n";
-											echo "</tr>\n";
-											$event_length--;								
-										} else {
-											echo "<tr height=\"30\">\n";
-											echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
-											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
-											if ($event_length > 0) {
-												$event_length--;
-											} else {
-												echo "<td bgcolor=\"#ffffff\"><img src=\"images/spacer.gif\" width=\"1\" height=\"30\"></td>\n";
-											}
-											echo "</tr>\n";										
 										}
 									}
-									
-									if ($event_length == 0) $event_started = FALSE;
-									
-									
-									// The second <TR>
-									if (ereg("([0-9]{1,2}):30", $key)) {
-										if (($master_array[($getdate)]["$cal_time"] == "") && ($event_started != TRUE)) {
-											echo "<tr height=\"30\">\n";
-											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
-											echo "<td bgcolor=\"#ffffff\">&nbsp;</td>\n";
-											echo "</tr>\n";
-										} elseif ($event_length > 0) {
-											echo "<tr height=\"30\">\n";
-											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"</td>\n";
-											echo "</tr>\n";
-											$event_length--;
-										} else {
-											$event_started = TRUE;
-											$event_text = $master_array[($getdate)]["$cal_time"][$k]["event_text"];
-											$event_text2 = addslashes($master_array[($getdate)]["$cal_time"][$k]["event_text"]);
-											$event_start = $master_array[($getdate)]["$cal_time"][$k]["event_start"];
-											$event_end = $master_array[($getdate)]["$cal_time"][$k]["event_end"];
-											$event_length = $master_array[($getdate)]["$cal_time"][$k]["event_length"];
-											$event_start = strtotime ("$event_start");
-											$event_end = strtotime ("$event_end");
-											if ($time_format == "24") {
-												$event_start = date ("G:i", $event_start);
-												$event_end = date ("G:i", $event_end);
-											} else {
-												$event_start = date ("g:i a", $event_start);
-												$event_end = date ("g:i a", $event_end);
+									if (ereg("([0-9]{1,2}):00", $key)) {
+										echo "<tr height=\"30\">\n";
+										echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
+										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
+									} else {
+										echo "<tr height=\"30\">\n";
+										echo "<td  align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
+									}
+									if (sizeof($event_length) == 0) {
+										echo "<td bgcolor=\"#ffffff\" colspan=\"12\">&nbsp;</td>\n";
+									} else {
+										$emptyWidth = 12;
+										for ($i=0;$i<sizeof($event_length);$i++) {
+								//echo $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"] . " ind: " . $i . " / anz: " . $event_length[$i]["overlap"] . " = " . eventWidth($i,$event_length[$i]["overlap"]) . "<br />";
+											$drawWidth = eventWidth($i,$event_length[$i]["overlap"]);
+											$emptyWidth = $emptyWidth - $drawWidth;
+											switch ($event_length[$i]["state"]) {
+												case "begin":
+													$event_length[$i]["state"] = "started";
+													$event_text = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"];
+													$event_text2 = addslashes($master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"]);
+													$event_start = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
+													$event_end = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
+													$event_start = strtotime ("$event_start");
+			// drei 20020921							$event_start = date ("g:i a", $event_start);
+													$event_start = date ($timeFormat, $event_start);
+													$event_end = strtotime ("$event_end");
+			// drei 20020921							$event_end = date ("g:i a", $event_end);
+													$event_end = date ($timeFormat, $event_end);
+													echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg\">\n";
+													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
+													echo "<tr>\n";
+													echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b> - $event_end</font></td>\n";
+													echo "</tr>\n";
+													echo "<tr>\n";
+													echo "<td>\n";
+													echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
+													echo "<tr>\n";
+													echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
+													echo "</tr>\n";
+													echo "</table>\n";
+													echo "</td>\n";           
+													echo "</tr>\n";
+													echo "</table>\n";
+													echo "</td>\n";
+													break;
+												case "started":
+													break;
+												case "ended":
+													echo "<td bgcolor=\"#ffffff\" colspan=\"" . $drawWidth . "\">&nbsp;</td>\n";
+													break;
 											}
-											echo "<tr>\n";
-											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
-											echo "<td rowspan=\"$event_length\" align=\"left\" valign=\"top\" class=\"eventbg\">\n";
-											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
-											echo "<tr>\n";
-											echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b></font></td>\n";
-											echo "</tr>\n";
-											echo "<tr>\n";              
-											echo "<td>\n";
-											echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
-											echo "<tr>\n";
-											echo "<td bgcolor=\"#68aaef\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
-											echo "</tr>\n";
-											echo "</table>\n";
-											echo "</td>\n";           
-											echo "</tr>\n";
-											echo "</table>\n";
-											echo "</td>\n";
-											echo "</tr>\n";
-											$event_length--;
-										}																										
-									}	
+											$event_length[$i]["length"]--;
+											if ($event_length[$i]["length"] == 0) {
+												$event_length[$i]["state"] = "ended";
+											}
+										}
+										//fill emtpy space on the right
+										if ($emptyWidth > 0) {
+											echo "<td bgcolor=\"#ffffff\" colspan=\"" . $emptyWidth . "\">&nbsp;</td>\n";
+										}
+										while ($event_length[(sizeof($event_length) - 1)]["state"] == "ended") {
+											array_pop($event_length);
+										}
+										
+									}
+									echo "</tr>\n";
 								}
 								
 							?>

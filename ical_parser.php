@@ -10,6 +10,159 @@ include("./init.inc.php");
 include("./functions/date_add.php");
 include("./functions/date_functions.php");
 
+// function to determine the colspan for overlapping events
+// takes 2 parameters: index of event (in regards of column output) and number of overlapping events
+function eventWidth($ind, $overlaps) {
+	switch ($overlaps) {
+	// case 1 means 1 overlap -> two concurrent events etc.
+		case 0:
+			return 12;
+			break;
+		case 1:
+			return 6;
+			break;
+		case 2:
+			return 4;
+			break;
+		case 3:
+			return 3;
+			break;
+		case 4:
+			switch ($ind) {
+				case 0:
+					return 3;
+					break;
+				case 2:
+					return 3;
+					break;
+				default:
+					return 2;
+			}
+			break;
+		case 5:
+			return 2;
+			break;
+		case 6:
+			switch ($ind) {
+				case 0:
+					return 1;
+					break;
+				case 3:
+					return 1;
+					break;
+				default:
+					return 2;
+			}
+			break;
+		case 7:
+			switch ($ind) {
+				case 0:
+					return 2;
+					break;
+				case 2:
+					return 2;
+					break;
+				case 4:
+					return 2;
+					break;
+				case 6:
+					return 2;
+					break;
+				default:
+					return 1;
+			}
+			break;
+		case 8:
+			switch ($ind) {
+				case 0:
+					return 2;
+					break;
+				case 3:
+					return 2;
+					break;
+				case 6:
+					return 2;
+					break;
+				default:
+					return 1;
+			}
+			break;
+		case 9:
+			switch ($ind) {
+				case 0:
+					return 2;
+					break;
+				case 7:
+					return 2;
+					break;
+				default:
+					return 1;
+			}
+			break;
+		case 10:
+			switch ($ind) {
+				case 5:
+					return 2;
+					break;
+				default:
+					return 1;
+			}
+			break;
+		case 11:
+			return 1;
+			break;
+	}
+} 
+
+// drei 20020921: function for checking and counting overlapping events
+function checkOverlap() {
+	global $master_array, $overlap_array, $start_date, $start_time, $end_time;
+
+		$maxOverlaps = 0;
+		if (sizeof($master_array[($start_date)]) > 0) {
+			foreach ($master_array[($start_date)] as $keyTime => $eventTime) {
+				foreach ($eventTime as $keyEvent => $event) {
+					if (($event["event_start"] < $end_time) and ($event["event_end"] > $start_time)) {
+
+						if ($event["event_start"] < $start_time) $overlap_start = $start_time;
+						else $overlap_start = $event["event_start"];
+						if ($event["event_end"] < $end_time) $overlap_end = $event["event_end"];
+						else $overlap_end = $end_time;
+						
+						if (sizeof($overlap_array[($start_date)][($keyTime)][($keyEvent)]) > 0) {
+							$newOverlapEntry = TRUE;
+							foreach ($overlap_array[($start_date)][($keyTime)][($keyEvent)] as $keyOverlap => $overlapEntry) {
+								if (($overlapEntry["start"] < $overlap_end) and ($overlapEntry["end"] > $overlap_start)) {
+									$overlap_array[($start_date)][($keyTime)][($keyEvent)][($keyOverlap)]["count"]++;
+									if ($overlapEntry["start"] < $overlap_start) {
+										$overlap_array[($start_date)][($keyTime)][($keyEvent)][($keyOverlap)]["start"] = $overlap_start;
+									}
+									if ($overlapEntry["end"] > $overlap_end) {
+										$overlap_array[($start_date)][($keyTime)][($keyEvent)][($keyOverlap)]["end"] = $overlap_end;
+									}
+									$newOverlapEntry = FALSE;
+									break;
+								}
+							}
+							if ($newOverlapEntry) {
+								array_push($overlap_array[($start_date)][($keyTime)][($keyEvent)], array ("count" => 1,"start" => $overlap_start, "end" => $overlap_end));
+							}
+						} else {
+							$overlap_array[($start_date)][($keyTime)][($keyEvent)][] = array ("count" => 1,"start" => $overlap_start, "end" => $overlap_end);
+						}
+						foreach ($overlap_array[($start_date)][($keyTime)][($keyEvent)] as $keyOverlap => $overlapEntry) {
+							if ($overlapEntry["count"] > $maxOverlaps) $maxOverlaps = $overlapEntry["count"];
+						}
+						$master_array[($start_date)][($keyTime)][($keyEvent)]["event_overlap"] = $maxOverlaps;
+					}
+				}
+			}
+		}	
+
+	return $maxOverlaps;
+}
+
+
 $day_array = array ("0700", "0730", "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930", "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330");
 
 // what date we want to get data for (for day calendar)
@@ -29,6 +182,8 @@ $contents = @fread ($fp, filesize ($filename));
 $contents = ereg_replace("\n ", "", $contents);
 $contents = split ("\n", $contents);
 
+// auxiliary array for determining overlaps of events
+$overlap_array = array ();
 
 // parse our new array
 foreach($contents as $line) {
@@ -63,16 +218,18 @@ foreach($contents as $line) {
 			$hour = $time[1];
 			$minute = $time[2];
 						
-			if ($minute < 15) {
+			if ($minute <= 15) {
 				$minute = "00";
-			} elseif ($minute >=15 && $minute < 45) {
+			} elseif ($minute >15 && $minute <= 45) {
 				$minute = "30";
-			} elseif ($minute >= 45) {
+			} elseif ($minute > 45) {
 				$hour = sprintf("%.02d", ($hour + 1));
 				$minute = "00";
 			}
 			ereg ("([0-9]{2})([0-9]{2})", $end_time, $time2);
-			$length = round((($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]))/30);
+//			$length = round((($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]))/30);
+// drei 20020921: changed length to be duration in minutes (for overlapping events)
+			$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
 		}
 		
 		
@@ -82,7 +239,9 @@ foreach($contents as $line) {
 			$end = strtotime("$allday_end");
 			do {
 				$start_date = date("Ymd", $start);
-				$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
+//				$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
+// drei 20020921: changed array for allday event
+				$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary");
 				$start = ($start + (24*3600));
 			} while ($start != $end);
 		}
@@ -192,8 +351,9 @@ foreach($contents as $line) {
 								$end = $end_of_vevent;
 								do {
 									$start_date = date("Ymd", $start);
-// writes to $master array here
-									$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
+//									$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
+// drei 20020921: changed array for allday event
+									$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary");
 									$start = ($start + (24*3600));
 								} while ($start < $end);
 								$start_of_vevent = DateAdd ($interval,  $number, $start_of_vevent);
@@ -258,8 +418,11 @@ foreach($contents as $line) {
 												// before, the first one would get entered twice and show up twice
 												// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
 												// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
-// writes to $master array here					// on days that have been deleted by the user
-												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+												// on days that have been deleted by the user
+// check for overlapping events
+												$nbrOfOverlaps = checkOverlap();
+// writes to $master array here
+												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps);
 											}
 										}
 									} else {
@@ -279,8 +442,11 @@ foreach($contents as $line) {
 										$next_date = date("Ymd", $next_range_time);
 										
 										if (strtotime($next_date) > $start_date_time && !in_array($next_date, $except_dates)) {
-// writes to $master array here				// same general concept as the WEEKLY recurrence
-											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+											// same general concept as the WEEKLY recurrence
+// check for overlapping events
+											$nbrOfOverlaps = checkOverlap();
+// writes to $master array here
+											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps);
 										}
 									} else {
 										$interval = 1;
@@ -301,8 +467,11 @@ foreach($contents as $line) {
 	
 	// Let's write all the data to the master array
 	if ($start_time != "") {
+// check for overlapping events
+		$nbrOfOverlaps = checkOverlap();
+
 // writes to $master array here
-		$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+		$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps);
 	}
 		
 
@@ -405,6 +574,7 @@ if (is_array($master_array)) {
 //If you want to see the values in the arrays, uncomment below.
 //print "<pre>";
 //print_r($master_array);
+//print_r($overlap_array);
 //print_r($day_array);
 //print_r($rrule);			
 //print "</pre>";
