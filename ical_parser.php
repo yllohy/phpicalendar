@@ -61,6 +61,7 @@ foreach($contents as $line) {
 		$number = "";
 		$except_dates = array();
 		$except_times = array();
+		$the_duration = TRUE;
 	} elseif (strstr($line, "END:VEVENT")) {
 		
 		// Clean out \n's and other slashes
@@ -399,21 +400,21 @@ foreach($contents as $line) {
 			$allday_end = $data;
 			
 		} elseif (strstr($field, "DURATION")) {
-			ereg ("^P([0-9]{1,2})?([W,D]{0,1})?(T)?([0-9]{1,2})?(H)?([0-9]{1,2})?(M)?([0-9]{1,2})?(S)?", $data, $duration);
-			
-			if ($duration[2] = "W") {
-				$weeks = $duration[1];
-			} else {
-				$days = $duration[1];
-			}
-			
-			$hours = $duration[4];
-			$minutes = $duration[6];
-		 	$seconds = $duration[8];
-		 	
-			$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
-			$beginning = (strtotime($start_time) + $the_duration);
-			$end_time = date ("Hi", $beginning);	
+			if ($first_duration = TRUE) {
+				ereg ("^P([0-9]{1,2})?([W,D]{0,1})?(T)?([0-9]{1,2})?(H)?([0-9]{1,2})?(M)?([0-9]{1,2})?(S)?", $data, $duration);
+				if ($duration[2] = "W") {
+					$weeks = $duration[1];
+				} else {
+					$days = $duration[1];
+				}
+				$hours = $duration[4];
+				$minutes = $duration[6];
+				$seconds = $duration[8];
+				$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
+				$beginning = (strtotime($start_time) + $the_duration);
+				$end_time = date ("Hi", $beginning);
+				$first_duration = FALSE;
+			}	
 			
 		} elseif (strstr($field, "RRULE")) {
 			// $data = "RRULE:FREQ=YEARLY;INTERVAL=2;BYMONTH=1;BYDAY=SU;BYHOUR=8,9;BYMINUTE=30";
