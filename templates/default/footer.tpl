@@ -8,7 +8,8 @@
 <!-- switch rss_powered on -->
 {L_THIS_SITE_IS} <a class="psf" href="{BASE}rss/index.php?cal={CAL}&amp;getdate={GETDATE}">RSS-Enabled</a><br />
 <!-- switch rss_powered off -->
-Page generated in {GENERATED} seconds.
+Page generated in {GENERATED1} seconds.<br />
+Template generated in {GENERATED2} seconds.
 </center>
 </body>
 </html>

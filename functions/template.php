@@ -881,7 +881,7 @@ class Page {
 		}
 	
 	function output() {
-		global $template, $php_started, $lang, $enable_rss;
+		global $template, $php_started, $lang, $enable_rss, $template_started;
 		
 		// Looks for {MONTH} before sending page out
 		preg_match_all ('!\{MONTH_([A-Z]*)\|?([+|-])([0-9]{1,2})\}!is', $this->page, $match);
@@ -908,8 +908,10 @@ class Page {
 		}
 		
 		$php_ended = @getmicrotime();
-		$generated = number_format(($php_ended-$php_started),3);
-		$this->page = str_replace('{GENERATED}', $generated, $this->page);
+		$generated1 = number_format(($php_ended-$php_started),3);
+		$generated2 = number_format(($php_ended-$template_started),3);
+		$this->page = str_replace('{GENERATED1}', $generated1, $this->page);
+		$this->page = str_replace('{GENERATED2}', $generated2, $this->page);
 		if ($enable_rss != 'yes') {
 			$this->page = preg_replace('!<\!-- switch rss_powered on -->(.*)<\!-- switch rss_powered off -->!is', '', $this->page);
 		} else {

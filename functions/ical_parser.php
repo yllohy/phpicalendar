@@ -1109,5 +1109,7 @@ if ($parse_file) {
 if ($cal == $ALL_CALENDARS_COMBINED) {
 	$calendar_name = $all_cal_comb_lang;
 }
+
+$template_started = getmicrotime();
 					
 ?>
