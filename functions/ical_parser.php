@@ -566,11 +566,15 @@ foreach($contents as $line) {
 		
 		
 	} else {
+
+		unset ($field, $data);
+		$line = explode (":", $line);
+		$field = $line[0];
+		$data = $line[1];
 		
-		$field = '';
-		$data = '';
-		
-		sscanf($line, "%[^:]:%[^\n]", &$field, &$data);
+		// Old style
+		// sscanf($line, "%[^:]:%[^\n]", &$field, &$data);
+		// echo "$field, $data<br>";
 		
 		if(strstr($field, 'DTSTART;TZID')) {
 			$data = ereg_replace('T', '', $data);
