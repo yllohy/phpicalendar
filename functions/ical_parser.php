@@ -188,10 +188,6 @@ if ($parse_file) {
 			}
 			
 			// Handling of the recurring events, RRULE
-// jared-2002.10.17, Commented this line out, replacing it with another. Not sure why the $allday_written var was
-// implemented. This var in this "if" broke all recurring all-day event support (ie, only the first occurrence would show up)
-// let's chat about why and figure out a better solution
-//			if ((is_array($rrule_array)) && ($allday_written != TRUE)) {
 			if (is_array($rrule_array)) {
 				if (isset($allday_start) && $allday_start != '') {
 					$hour = '-';
@@ -547,11 +543,13 @@ if ($parse_file) {
 				
 			} elseif (preg_match("/^SUMMARY/i", $field)) {
 				$data = str_replace("\\n", "<br>", $data);
+				$data = str_replace("\\r", "<br>", $data);
 				$data = htmlentities(urlencode($data));
 				$summary = $data;
 				
 			} elseif (preg_match("/^DESCRIPTION/i", $field)) {
 				$data = str_replace("\\n", "<br>", $data);
+				$data = str_replace("\\r", "<br>", $data);
 				$data = htmlentities(urlencode($data));
 				if ($valarm_set == FALSE) { 
 					$description = $data;
