@@ -14,9 +14,14 @@ phpicalendar-devel@lists.sourceforge.net
 
 Installation:
 -------------
-Edit the file "config.inc.php"
-Put your iCal files into the directory you specify in config.inc.php
+- Put PHP iCalendar into your Sites folder (or another web directory)
+- Edit the file "config.inc.php"
+- Put your iCal files into the directory you specify in config.inc.php
   (default is "calendars")
+- Turn on Web sharing (if not already on)
+- View calendars in your web browser
+  If it is in your Sites folder, the URL would be:
+     http://localhost/~username/phpicalendar
 
 Licensing: 
 ----------
@@ -25,6 +30,14 @@ COPYING for more information about our license.
 
 Changes:
 --------
+
+0.6
+	-Better CSS support, coloring not hard-coded
+	-HTML bug fixes specific to Windows browsers
+	-All-day and Regular recurring event both support all types
+	-Bottom of month view updated
+	-Localization update
+	-Bug fixes
 
 0.5
 	-Improved recurring event support
