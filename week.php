@@ -108,13 +108,20 @@ for ($i=0;$i<7;$i++) {
 							<tr>
 								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>
 								<td width="1"></td>
-								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
-								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<?php
+								$thisdate = $start_week_time;
+								$i = 0;
+								do {
+									$thisday = date("Ymd", $thisdate);
+									$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
+									$colWidth = round(120 / $nbrGridCols[$thisday]);
+									for ($j=0;$j < $nbrGridCols[$thisday];$j++) {
+										echo "<td width=\"" . $colWidth . "\"><img src=\"images/spacer.gif\" width=\"" . $colWidth . "\" height=\"1\" alt=\"\"></td>\n";
+									}
+									$thisdate = ($thisdate + (25 * 60 * 60));
+									$i++;
+								} while ($i < 7);
+								?>
 							</tr>
 							<?php
 							
@@ -127,7 +134,7 @@ for ($i=0;$i<7;$i++) {
 							do {
 								$thisday = date("Ymd", $thisdate);
 								$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
-								echo "<td width=\"70\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
+								echo "<td width=\"120\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
 								echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a></font>\n";
 								echo "</td>\n";
 								$thisdate = ($thisdate + (25 * 60 * 60));
