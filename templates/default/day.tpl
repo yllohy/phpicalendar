@@ -8,7 +8,7 @@
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td class="navback"><font class="H20">&nbsp;{DISPLAY_DATE}</font></td>
+								<td class="navback"><div style="padding: 5px;" class="H20">&nbsp;{DISPLAY_DATE}</div></td>
 								<td align="right" width="120" class="navback">	
 									<table width="120" border="0" cellpadding="0" cellspacing="0">
 										<tr>
