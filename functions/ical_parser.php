@@ -102,6 +102,8 @@ foreach ($cal_filelist as $filename) {
 					
 				$except_dates 	= array();
 				$except_times 	= array();
+				$bymonth	 	= array();
+				$bymonthday 	= array();
 				$first_duration = TRUE;
 				$count 			= 1000000;
 				$valarm_set 	= FALSE;
@@ -439,7 +441,7 @@ foreach ($cal_filelist as $filename) {
 													if (!isset($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
 													$next_range_time = strtotime(date('Y-m-01', $next_range_time));
 													// month has two cases, either $bymonthday or $byday
-													if ((is_array($bymonthday)) && (!is_array($byday))) {
+													if ((isset($bymonthday)) && (!isset($byday))) {
 														// loop through the days on which this event happens
 														foreach($bymonthday as $day) {
 															$year = date('Y', $next_range_time);
