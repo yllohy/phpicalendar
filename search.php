@@ -8,8 +8,8 @@ require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$charset");
 
-if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
-	$back_page = $HTTP_SERVER_VARS['HTTP_REFERER'];
+if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '') {
+	$back_page = $_SERVER['HTTP_REFERER'];
 } else {
 	$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
 }

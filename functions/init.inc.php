@@ -4,8 +4,8 @@
 error_reporting (E_ERROR | E_WARNING | E_PARSE);
 
 // Older versions of PHP do not define $_SERVER. Define it here instead.
-if (!isset($_SERVER) && isset($HTTP_SERVER_VARS)) {
-	$_SERVER = &$HTTP_SERVER_VARS;
+if (!isset($_SERVER) && isset($_SERVER)) {
+	$_SERVER = &$_SERVER;
 }
 
 // Define some magic strings.
@@ -29,7 +29,7 @@ if (isset($_COOKIE['phpicalendar'])) {
 
 // Set the cookie URI.
 if ($cookie_uri == '') {
-	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
+	$cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
 }
 
 if ($bleed_time == '') $bleed_time = $day_start;
@@ -131,7 +131,7 @@ if ($is_webcal == TRUE) {
 		// Sets the download and subscribe paths from the config if present.
 		if (isset($filename)) {
 			if (($download_uri == '') && (preg_match('/(^\/|\.\.\/)/', $filename) == 0)) {
-				$subscribe_path = 'webcal://'.$HTTP_SERVER_VARS['SERVER_NAME'].dirname($HTTP_SERVER_VARS['PHP_SELF']).'/'.$filename;
+				$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'.$filename;
 				$download_filename = $filename;
 			} elseif ($download_uri != '') {
 				$newurl = eregi_replace("^(http://)", "", $download_uri); 

@@ -7,7 +7,7 @@ header("Content-Type: text/html; charset=$charset");
 $display_date = $preferences_lang;
 
 if ($cookie_uri == '') {
-	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
+	$cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
 }
 
 $current_view = "preferences";
