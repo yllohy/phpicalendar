@@ -10,10 +10,10 @@
 						<div style="padding-top: 3px;">
 						<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr valign="top">
-								<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
-								<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
-								<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
-								<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
+								<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="../templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
+								<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="../templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
+								<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="../templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
+								<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="../templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
 							</tr>
 						</table>
 						</div>
@@ -28,7 +28,7 @@
 	<tr>
 		<td align="right">
 			<!-- switch logged_in2 on -->
-			<a href="admin.php?action=logout">{L_LOGOUT}</a>&nbsp;
+			<a href="index.php?action=logout">{L_LOGOUT}</a>&nbsp;
 			<!-- switch logged_in2 off -->
 		</td>
 	</tr>
@@ -43,7 +43,7 @@
 						<!-- switch login_error off -->
 	
 						<!-- switch display_login on -->
-						<form action="admin.php?action=login" method="post">
+						<form action="index.php?action=login" method="post">
 							<table cellspacing="0" cellpadding="0">
 								<tr>
 									<td nowrap>{L_USERNAME}: </td>
@@ -70,7 +70,7 @@
 						<!-- switch logged_in on -->
 						<b>{L_ADDUPDATE_CAL}</b><br />
 						{L_ADDUPDATE_DESC}<br /><br />
-						<form action="admin.php" method="post" enctype="multipart/form-data">
+						<form action="index.php" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="action" value="addupdate">
 							<table width="100%" border="0" cellspacing="0" cellpadding="2" class="G10B">
 								<tr>
@@ -104,7 +104,7 @@
 						</form>
 						
 						<b>{L_DELETE_CAL}</b>
-						<form action="admin.php" method="post">
+						<form action="index.php" method="post">
 							<table width="100%" border="0" cellspacing="0" cellpadding="2" class="G10B">
 								{DELETE_TABLE}
 							</table>
