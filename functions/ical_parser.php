@@ -1066,7 +1066,6 @@ _time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'c
 	$calnumber = $calnumber + 1;
 }
 
-
 if ($parse_file) {	
 	// Sort the array by absolute date.
 	if (isset($master_array) && is_array($master_array)) { 
@@ -1091,8 +1090,6 @@ if ($parse_file) {
 		touch($parsedcal, $realcal_mtime);
 	}
 }
-
-
 
 //If you want to see the values in the arrays, uncomment below.
 
