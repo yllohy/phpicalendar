@@ -68,8 +68,9 @@ Changes:
 		-Select default calendar
 		-Select default view
 		-Select default theme
-		-Select default start time, start day
+		-Select default start day
 		-Upload new calendars (ftp)
+	-Calendars folder can now be outside your web space.	
 	-Print view can now be set for your default view.
 	-Minor bug fixes
 

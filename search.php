@@ -172,7 +172,7 @@ $search_took = number_format(($search_ended-$search_started),3);
 												echo "<td align=\"left\">\n";
 												echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
 												echo "<tr>\n";
-												echo "<td width=\"100\" class=\"G10BOLD\">$time_lang:</td>\n";
+												echo "<td width=\"120\" class=\"G10BOLD\">$time_lang:</td>\n";
 												echo "<td align=\"left\" class=\"G10B\">$event_start</td>\n";
 												echo "</tr>\n";
 												echo "<tr>\n";

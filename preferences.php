@@ -119,13 +119,26 @@ if ($allow_preferences == 'no') header("Location: $default_view");
 								print "</select>\n";
 								echo '<br><br>';
 								
-								// Begin Style Selection
+								// Begin View Selection
 								//
 								echo 'Select your default view:<br><br>';
 								print "<select name=\"cookie_view\" class=\"query_style\">\n";
 								print "<option value=\"day\">$day_lang</option>\n";
 								print "<option value=\"week\">$week_lang</option>\n";
 								print "<option value=\"month\">$month_lang</option>\n";
+								print "<option value=\"print\">$printer_lang</option>\n";
+								print "</select>\n";
+								echo '<br><br>';
+								
+								// Begin Day Start Selection
+								//
+								echo 'Select your start day of week:<br><br>';
+								print "<select name=\"cookie_view\" class=\"query_style\">\n";
+								$i=1;
+								foreach ($daysofweek_lang as $daysofweek) {
+									print "<option value=\"$i\">$daysofweek</option>\n";
+									$i++;
+								}
 								print "</select>\n";
 								echo '<br><br>';
 								
@@ -133,15 +146,12 @@ if ($allow_preferences == 'no') header("Location: $default_view");
 								//
 								echo 'Select your default style:<br><br>';
 								print "<select name=\"cookie_style\" class=\"query_style\">\n";
-								$dir_handle = @opendir(BASE.'languages/');
-								$tmp_pref_language = urlencode(ucfirst($language));
+								$dir_handle = @opendir(BASE.'styles/');
 								while ($file = readdir($dir_handle)) {
-									if (substr($file, -8) == ".inc.php") {
-										$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
-										if ($language_tmp == $tmp_pref_language) {
-											print "<option value=\"$language_tmp\" selected>in $language_tmp</option>\n";
-										} else {
-											print "<option value=\"$language_tmp\">in $language_tmp</option>\n";
+									if (($file != ".") && ($file != "..") && ($file != "CVS")) {
+										if (!is_file($file)) {
+											$file = ucfirst($file);
+											print "<option value=\"$file\">$file</option>\n";
 										}
 									}
 								}
