@@ -172,7 +172,7 @@
 											echo "</table>\n";
 											echo "</td>\n";
 										}
-										$sunday = ($sunday + (25 * 60 * 60));
+										$sunday = ($sunday + (24.5 * 60 * 60));
 										$i++;
 										if ($i == 7) { 
 											echo "</tr>\n";

@@ -239,9 +239,9 @@ foreach($contents as $line) {
 			ereg ("^P([0-9]{1,2})?([W,D]{0,1})?(T)?([0-9]{1,2})?(H)?([0-9]{1,2})?(M)?([0-9]{1,2})?(S)?", $data, $duration);
 			
 			if ($durartion[2] = "W") {
-				$weeks = $durartion[1];
+				$weeks = $duration[1];
 			} else {
-				$days = $durartion[1];
+				$days = $duration[1];
 			}
 			
 			$hours = $duration[4];

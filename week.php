@@ -195,10 +195,10 @@ $prev_week = date("Ymd", $prev_week2);
 								<?
 								
 								$event_length = 0;
+								$k = 0;
 								
 								foreach ($day_array as $key) {
-									$thisdate = strtotime ("$sunday");
-									$thisday = date("Ymd", $thisdate);
+									$count = 0;
 									$k = 0;
 									$cal_time = $key;	
 									$key = strtotime ("$key");
@@ -209,144 +209,52 @@ $prev_week = date("Ymd", $prev_week2);
 										echo "<tr height=\"30\">\n";
 										echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
 										echo "<td height=\"30\" width=\"1\"><img src=\"images/spacer.gif\" width=\"1\" height=\"1\"></td>\n";
-										
-										// Sunday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisdate = strtotime ("$sunday");
 										$thisday = date("Ymd", $thisdate);
-											
-										// Monday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-										
-										// Tuesday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-																				
-										// Wednesday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-																				
-										// Thursday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-										
-										// Friday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-										
-										// Saturday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
+										do {
+											if ($master_array["$thisday"]["$cal_time"]) {
+												$event_text = $master_array["$thisday"]["$cal_time"][$k]["event_text"];
+												if (strlen($event_text) > 14) {
+													$event_text = substr("$event_text", 0, 11);
+													$event_text = $event_text . "...";
+												}
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">$event_text</a></td>\n";
+											} else {
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+											}
+											$thisdate = ($thisdate + (25 * 60 * 60));
+											$thisday = date("Ymd", $thisdate);
+											$count++;
+										} while ($count != 7);
 										
 										// End Week
 										echo "</tr>\n";
+										$count = 0;
 									}
 									
 									
 									// The second <TR> (on the half hour)
-									$thisdate = strtotime ("$sunday");
-									$thisday = date("Ymd", $thisdate);
+									
 									if (ereg("([0-9]{1,2}):30", $key)) {
 										echo "<tr height=\"30\">\n";
 										echo "<td height=\"30\" width=\"1\"><img src=\"images/spacer.gif\" width=\"1\" height=\"1\"></td>\n";
-										
-										// Sunday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisdate = strtotime ("$sunday");
 										$thisday = date("Ymd", $thisdate);
-											
-										// Monday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-										
-										// Tuesday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-																				
-										// Wednesday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-																				
-										// Thursday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-										
-										// Friday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
-										
-										// Saturday
-										if ($master_array[("$thisday")]["$cal_time"]) {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
-										} else {
-											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
-										}
-										$thisdate = ($thisdate + (25 * 60 * 60));
-										$thisday = date("Ymd", $thisdate);
+										do {
+											if ($master_array["$thisday"]["$cal_time"]) {
+												$event_text = $master_array["$thisday"]["$cal_time"][$k]["event_text"];
+												if (strlen($event_text) > 14) {
+													$event_text = substr("$event_text", 0, 11);
+													$event_text = $event_text . "...";
+												}
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">$event_text</a></td>\n";
+											} else {
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+											}
+											$thisdate = ($thisdate + (25 * 60 * 60));
+											$thisday = date("Ymd", $thisdate);
+											$count++;
+										} while ($count != 7);
 										echo "</tr>\n";
 									}
 									
