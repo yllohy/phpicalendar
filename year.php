@@ -39,7 +39,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
       				<td align="left" width="90" class="navback">&nbsp;</td>
-      				<td>
+      				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
 								<td align="right" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$prev_year\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>

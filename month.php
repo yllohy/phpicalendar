@@ -42,7 +42,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
       				<td align="left" width="90" class="navback">&nbsp;</td>
-      				<td>
+      				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
 								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
