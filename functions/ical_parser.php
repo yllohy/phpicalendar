@@ -107,17 +107,6 @@ foreach ($cal_filelist as $filename) {
 				$valarm_set 	= FALSE;
 				$attendee		= array();
 				$organizer		= array();
-				$url			= '';
-				$display_end_tmp = '';
-				$status			= '';
-				$class			= '';
-				$vtodo_priority	= '';
-				$completed_date	= '';
-				$completed_time	= '';
-				$description	= '';
-				$due_date		= '';
-				$due_time		= '';
-				$allday_end		= '';
 				
 				unset(
 					$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
