@@ -5,20 +5,20 @@ define('BASE', './');
 include(BASE.'functions/ical_parser.php');
 if ($minical_view == "current") $minical_view = "week";
 
-$starttime = "0500";
-$weekstart = 1;
-$unix_time = strtotime($getdate);
-$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
-$today_today = date('Ymd', strtotime("now + $second_offset seconds")); 
-$next_week = date("Ymd", strtotime("+1 week",  $unix_time));
-$prev_week = date("Ymd", strtotime("-1 week",  $unix_time));
-$tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
-$yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
-$start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
-$end_week_time = $start_week_time + (6 * 25 * 60 * 60);
-$start_week = localizeDate($dateFormat_week, $start_week_time);
-$end_week =  localizeDate($dateFormat_week, $end_week_time);
-$display_date = "$start_week - $end_week";
+$starttime 			= "0500";
+$weekstart 			= 1;
+$unix_time 			= strtotime($getdate);
+$thisday2 			= localizeDate($dateFormat_week_list, $unix_time);
+$today_today 		= date('Ymd', strtotime("now + $second_offset seconds")); 
+$next_week 			= date("Ymd", strtotime("+1 week",  $unix_time));
+$prev_week 			= date("Ymd", strtotime("-1 week",  $unix_time));
+$tomorrows_date 	= date( "Ymd", strtotime("+1 day",  $unix_time));
+$yesterdays_date 	= date( "Ymd", strtotime("-1 day",  $unix_time));
+$start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
+$end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
+$start_week 		= localizeDate($dateFormat_week, $start_week_time);
+$end_week 			=  ocalizeDate($dateFormat_week, $end_week_time);
+$display_date 		= "$start_week - $end_week";
 
 // For the side months
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
@@ -50,11 +50,10 @@ for ($i=0;$i<7;$i++) {
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo "$calendar_name - $display_date"; ?></title>
-  	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
+  	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
    <?php 
 		// if RSS is enabled, set the RSS auto-discovery link
-		if ($enable_rss == 'yes') 
-		{
+		if ($enable_rss == 'yes') {
     		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=week\">";
 		} 
 	?>
@@ -366,8 +365,8 @@ for ($i=0;$i<7;$i++) {
 				</tr>
 			</table>
 		</td>
-		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=" "></td>
-		<td width="160" valign="top">
+		<td width="10"><img src="images/spacer.gif" width="10" height="1" alt=" "></td>
+		<td width="170" valign="top">
 			<?php include (BASE.'includes/sidebar.php'); ?>
 			<?php include (BASE.'includes/footer.inc.php'); ?>
 		</td>

@@ -25,37 +25,24 @@
 		</tr>
 		<tr>
 			<td colspan="3" bgcolor="#FFFFFF" align="left">
-				<table border="0" cellspacing="0" cellpadding="1" bgcolor="#FFFFFF" width="100%">
-					<tr>
-						<td colspan="7"><img src="images/spacer.gif" width="21" height="2" alt=" "></td>
-					</tr>
-					<tr>
-						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-						<td colspan="6"><font class="G10BOLD"><?php echo "$cal_displayname2"; ?></font></td>
-					</tr>
-					<tr>
-						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-						<td colspan="6" class="G10B">
-						<?php 
-							echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$really_today_today\">$goday_lang</a><br>\n";
-							echo "<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$really_today_today\">$goweek_lang</a><br>\n";
-							echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$really_today_today\">$gomonth_lang</a><br>\n";
-							echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$really_today_today\">$goyear_lang</a><br>\n";
-							echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
-							if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
-							if ($cal != 'all_calenders_combined971') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
-						 ?>
-						</td>
-					</tr>
-				</table>
+				<?php 
+					echo '<div style="padding: 5px;">';
+					echo '<font class="G10BOLD">'.$cal_displayname2.'</font><br>';
+					echo '<span class="G10">';
+					echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$really_today_today\">$goday_lang</a><br>\n";
+					echo "<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$really_today_today\">$goweek_lang</a><br>\n";
+					echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$really_today_today\">$gomonth_lang</a><br>\n";
+					echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$really_today_today\">$goyear_lang</a><br>\n";
+					echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
+					if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
+					if ($cal != 'all_calenders_combined971') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+					echo '</span></div>';
+				 ?>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="3"><img src="images/spacer.gif" width="1" height="6" alt=" "></td>
-		</tr>
 	</table>
-	<br>
-	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
 		</tr>
@@ -63,13 +50,13 @@
 			<td bgcolor="#FFFFFF" align="left">
 				<?php 
 				
-				echo '<img src="images/spacer.gif" width="1" height="6" alt=" "><br>';
+				echo '<div style="padding: 5px;">';
 				echo "<form action=\"day.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
 				include('./functions/list_icals.php');
 				include('./functions/list_years.php');
 				include('./functions/list_months.php');
 				include('./functions/list_weeks.php');
-				echo "</form>";
+				//echo "</form>";
 				if ($show_search == 'yes') {
 					echo $search_box;
 				}
@@ -80,18 +67,18 @@
 					echo '<input type="submit" value="Go">';
 					echo '</form>';
 				} 
-				
+				echo '</div>';
 				?>
 			</td>
 		</tr>
 	</table>
-	<br>
+	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 	
 	<?php if (isset($master_array[($tomorrows_date)]) && sizeof($master_array[($tomorrows_date)]) > 0) { ?>
 	
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
-			<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$tomorrows_lang"; ?></font></td>
+			<td align="center" class="sideback"><font class="G10BOLD"><?php echo "$tomorrows_lang"; ?></font></td>
 		</tr>
 		<tr>
 			<td bgcolor="#FFFFFF" align="center">
@@ -146,7 +133,7 @@
 			<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 		</tr>
 	</table>
-	<br>
+	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 <?php 
 	}
 		if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
@@ -224,7 +211,7 @@
 		</tr>
 	</table>
 
-	<br>
+	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 <?php } 
 		$fake_getdate_time = strtotime($this_year.'-'.$this_month.'-15');
 ?>	
@@ -283,7 +270,7 @@
 			</td>
 		</tr>
 	</table>
-	<br>
+	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime($getdate))); ?></font></td>
@@ -338,7 +325,7 @@
 			</td>
 		</tr>
 	</table>
-	<br>
+	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
