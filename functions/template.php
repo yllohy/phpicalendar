@@ -860,7 +860,7 @@ class Page {
 							$event_start = date($timeFormat, $val['start_unixtime']);
 							$event_end   = date($timeFormat, @strtotime ($event_end));
 							$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
-							$switch['EVENT_TEXT'] 	= openevent($switch['CALNAME'], '', '', $val, 0, 15, '', '', 'psf', $switch['URL']);
+							$switch['EVENT_TEXT'] 	= openevent($switch['CALNAME'], $event_start, $event_end, $val, 0, 15, '', '', 'psf', $switch['URL']);
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						}
 						if ($switch['EVENT_TEXT'] != '') {
