@@ -73,7 +73,7 @@ if ($getdate == (date("Ymd"))) {
 							</tr>
 							<tr>
 								<td align="left" valign="middle" class="G10B" width="50%"><?php include('./list_icals.php'); ?></td>
-								<td align="right" valign="middle" class="G10B" width="50%"><?php echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
+								<td align="right" valign="middle" class="G10B" width="50%"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
 							</tr>
 						</table>
       				</td>
@@ -89,7 +89,8 @@ if ($getdate == (date("Ymd"))) {
 								echo "<td colspan=\"15\" height=\"30\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
 								echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";										  
 								foreach($master_array[($getdate)]["-1"] as $all_day) {
-									$event_text2 = addslashes($all_day["event_text"]); 
+									$event_text2 = addslashes($all_day["event_text"]);
+									$event_text2 = str_replace("\"", "&quot;", $event_text2);
 									if ($i > 0) {
 										echo "<tr>\n";
 										echo "<td bgcolor=\"#eeeeee\" height=\"1\"></td>\n";
@@ -159,6 +160,7 @@ if ($getdate == (date("Ymd"))) {
 													$event_length[$i]["state"] = "started";
 													$event_text = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"];
 													$event_text2 = addslashes($master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"]);
+													$event_text2 = str_replace("\"", "&quot;", $event_text2);
 													$event_start = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
 													$event_end = $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
 													$event_start = strtotime ("$event_start");

@@ -71,7 +71,7 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr height="20">
 									<td align="left" valign="middle" height="26"><?php include('./list_icals.php'); ?></td>
-									<td align="right" class="G10B"><?php echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
+									<td align="right" class="G10B"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
 								</tr>
 							</table>
 						</td>
@@ -125,8 +125,10 @@
 												foreach ($master_array[("$daylink")] as $event_times) {
 													foreach ($event_times as $val) {
 														$event_text = $val["event_text"];
+														$event_text = strip_tags($event_text, '<b><i><u>');
 														if ($event_text != "") {	
 															$event_text2 = addslashes($val["event_text"]);
+															$event_text2 = str_replace("\"", "&quot;", $event_text2);
 															$event_start = $val["event_start"];
 															$event_end = $val["event_end"];
 															$event_start = strtotime ("$event_start");
@@ -263,6 +265,7 @@
 												if ($new_val2["event_text"]) {	
 													$event_text = $new_val2["event_text"];
 													$event_text2 = addslashes($new_val2["event_text"]);
+													$event_text2 = str_replace("\"", "&quot;", $event_text2);
 													$event_start = $new_val2["event_start"];
 													$event_end = $new_val2["event_end"];
 													$event_start = strtotime ("$event_start");
