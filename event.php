@@ -75,7 +75,9 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 				<?php if ($description) { ?>    
 					<tr>
 					 <td width="1%"><img src="images/spacer.gif" width="6" height="1"></td>
-					 <td align="left" colspan="2" class="V12"><?php echo $description; ?></td>
+					 <td align="left" colspan="2" class="V12">
+					 <?php echo ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",
+							'<a target="_new" href="\0">\0</a>', $description); ?></td>
 					</tr>
 				<?php } ?>
 	
