@@ -283,7 +283,7 @@ foreach ($cal_filelist as $filename) {
 						$end = strtotime('+1 day', $start);
 					}
 					// Changed for 1.0, basically write out the entire event if it starts while the array is written.
-					if ($start < $mArray_end) {
+					if (($start < $mArray_end) && ($start < $end)) {
 						while (($start != $end) && ($start < $mArray_end)) {
 							$start_date2 = date('Ymd', $start);
 							$master_array[($start_date2)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'status' => $status, 'class' => $class );
@@ -572,8 +572,7 @@ foreach ($cal_filelist as $filename) {
 													}
 													break;
 												case 'YEARLY':
-												
-													if (!isset($bymonth)) {
+													if ((!isset($bymonth)) || (sizeof($bymonth) == 0)) {
 														$m = date('m', $start_date_time);
 														$bymonth = array("$m");
 													}	
@@ -606,7 +605,7 @@ foreach ($cal_filelist as $filename) {
 														} else {
 															$day 	= date('d', $start_date_time);
 															$next_date_time = mktime(0,0,0,$month,$day,$year);
-															//echo date('Ymd',$next_range_time).$summary.'<br>';
+															//echo date('Ymd',$next_date_time).$summary.'<br>';
 														}
 														$recur_data[] = $next_date_time;
 													}

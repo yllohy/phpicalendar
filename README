@@ -101,6 +101,7 @@ Changes:
 	-RSS respects $calendar_path.
 	-YEARLY repeating events display better.
 	-All Calendars Combined can now be cached for greater performance.
+	-Parsing engine now twice as fast.
 	-Various bug fixes.
 	
 1.1
