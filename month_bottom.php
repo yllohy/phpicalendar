@@ -375,21 +375,22 @@
 													$event_text2 	= urlencode($event_text2);
 													$description 	= addslashes(urlencode($new_val2["description"]));
 													$description 	= str_replace("\"", "&quot;", $description);
-													$event_start 	= $new_val2["event_start"];
-													$event_end 		= $new_val2["event_end"];
-													$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-													$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-													$event_text 	= str_replace ("<br>", "", $event_text);
-													$event_start2	= $event_start;
+													if (isset($new_val2["event_start"])) {
+														$event_start 	= $new_val2["event_start"];
+														$event_end 		= $new_val2["event_end"];
+														$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+														$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+														$event_text 	= str_replace ("<br>", "", $event_text);
+														$event_start2	= $event_start;
+													} else {
+														$event_start = "$all_day_lang";
+														$event_start2 = '';
+														$event_end = '';													}
 													if (strlen($event_text) > 70) {
 														$event_text = substr("$event_text", 0, 65);
 														$event_text = $event_text . "...";
 													}
-													if (!$new_val2["event_start"]) { 
-														$event_start = "$all_day_lang";
-														$event_start2 = '';
-														$event_end = '';
-													}
+
 													echo "<tr>\n";
 													echo "<td align=\"left\" valign=\"top\" width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
 													echo "<td align=\"left\" valign=\"top\" colspan=\"2\">\n";

@@ -1,7 +1,8 @@
 <?php
-define('BASE','../');
+if (!defined('BASE')) define('BASE','../');
+
 function error($error_msg='There was an error processing the request.', $file='NONE') {
-	global $style_sheet, $powered_by_lang, $version_lang, $error_title_lang, $error_window_lang, $error_calendar_lang, $error_back_lang;
+	global $style_sheet, $powered_by_lang, $version_lang, $error_title_lang, $error_window_lang, $error_calendar_lang, $error_back_lang, $enable_rss, $this_site_is_lang;
 	if (!isset($style_sheet))			$style_sheet = 'silver';
 	if (!isset($powered_by_lang))		$powered_by_lang = 'Powered by';
 	if (!isset($version_lang))			$version_lang = '0.8';
@@ -9,7 +10,9 @@ function error($error_msg='There was an error processing the request.', $file='N
 	if (!isset($error_window_lang))		$error_window_lang = 'There was an error!';
 	if (!isset($error_calendar_lang))	$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
 	if (!isset($error_back_lang))		$error_back_lang = 'Please use the "Back" button to return.';
-	
+	if (!isset($enable_rss))			$enable_rss = 'no';
+	if (!isset($this_site_is_lang))		$this_site_is_lang = 'This site is';
+		
 	$error_calendar = sprintf($error_calendar_lang, $file);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"

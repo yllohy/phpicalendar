@@ -109,7 +109,7 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time) {
 			if (isset($master_array[($ol_start_date)])) {
 				foreach ($master_array[($ol_start_date)] as $keyTime => $eventTime) {
 					foreach ($eventTime as $keyEvent => $event) {
-						$entryDrawTimes =  drawEventTimes($event["event_start"], $event["event_end"]);
+						if ($keyTime != '-1') $entryDrawTimes =  drawEventTimes($event["event_start"], $event["event_end"]);
 						if (isset($entryDrawTimes["draw_start"], $entryDrawTimes["draw_end"], $drawTimes["draw_end"], $drawTimes["draw_start"]) && ($entryDrawTimes["draw_start"] < $drawTimes["draw_end"]) and ($entryDrawTimes["draw_end"] > $drawTimes["draw_start"])) {
 							// define start time of overlap range and overlap block
 							if ($entryDrawTimes["draw_start"] < $drawTimes["draw_start"]) {

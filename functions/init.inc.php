@@ -6,7 +6,7 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-//error_reporting (E_ALL);
+// error_reporting (E_ALL);
 
 // Retain some compatibility backwards like.
 //jared.20021003 I think we're always going to make sure these are extracted by hand
@@ -25,7 +25,7 @@ if(phpversion() >= '4.2.0')
 	}
 */
 
-define('BASE', './');
+if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
 

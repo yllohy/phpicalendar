@@ -1,6 +1,6 @@
 <?php
 
-define('BASE', './');
+if (!defined('BASE')) define('BASE', './');
 include(BASE.'functions/init.inc.php');
 include(BASE.'functions/date_functions.php');
 include(BASE.'functions/draw_functions.php');
@@ -132,18 +132,23 @@ if ($parse_file) {
 				$write_processed = true;
 			}
 			
+			if (!isset($summary)) $summary = '';
+			if (!isset($description)) $description = '';
+			
 			$mArray_begin = mktime (0,0,0,1,1,$this_year);
 			$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
 			//if ((!$allday_end) && (!$end_time)) $allday_end = $mArray_end;	
 			
-			// Mozilla style all-day events or just really long events
-			if (($end_time - $start_time) > 2345) {
-				$allday_start = $start_date;
-				$allday_end = ($start_date + 1);
+			if (isset($start_time) && isset($end_time)) {
+				// Mozilla style all-day events or just really long events
+				if (($end_time - $start_time) > 2345) {
+					$allday_start = $start_date;
+					$allday_end = ($start_date + 1);
+				}
+				
+				// If the events go past midnight
+				if ($end_time < $start_time) $end_time = 2359;
 			}
-			
-			// If the events go past midnight
-			if ($end_time < $start_time) $end_time = 2359;
 			
 			if (isset($start_time) && $start_time != '') {
 				ereg ('([0-9]{2})([0-9]{2})', $start_time, $time);
@@ -155,7 +160,7 @@ if ($parse_file) {
 				$hour = $time3[1];
 				$minute = $time3[2];
 			}
-			
+
 			// handle single changes in recurring events
 			if ($uid_valid && $write_processed) {
 				$processed[$uid] = array($start_date,($hour.$minute));
@@ -187,7 +192,7 @@ if ($parse_file) {
 			}
 			
 			// Handling of the recurring events, RRULE
-			if (is_array($rrule_array)) {
+			if (isset($rrule_array) && is_array($rrule_array)) {
 				if (isset($allday_start) && $allday_start != '') {
 					$hour = '-';
 					$minute = '1';
@@ -484,6 +489,7 @@ if ($parse_file) {
 					$data = ereg_replace('Z', '', $data);
 					if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
 						$allday_start = $data;
+						$start_date = $allday_start;
 						//echo "$summary - $allday_start<br>";
 					} else {
 						if (preg_match("/^DTSTART;TZID=/i", $field)) {
@@ -594,7 +600,9 @@ if ($parse_file) {
 					$parts = explode(';', $field);
 					foreach($parts as $part) {
 						$eachval = split('=',$part);
-						if ($eachval[0] == 'TZID') {
+						if ($eachval[0] == 'RECURRENCE-ID') {
+							// do nothing
+						} elseif ($eachval[0] == 'TZID') {
 							$recurrence_id['tzid'] = $eachval[1];
 						} elseif ($eachval[0] == 'RANGE') {
 							$recurrence_id['range'] = $eachval[1];

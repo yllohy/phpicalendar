@@ -452,8 +452,9 @@ function format_recur($arr) {
 		if ($arr['BYMONTHDAY'][(count($arr['BYMONTHDAY']) - 1)] == '0') unset($arr['BYMONTHDAY'][$last]);
 		$last = count($arr['BYMONTHDAY']) - 1;
 		foreach ($arr['BYMONTHDAY'] as $key => $day) {
-			ereg('([\-]{0,1})([0-9]{1,2})',$day,$regs);
+			ereg('(-{0,1})([0-9]{1,2})',$day,$regs);
 			list($junk,$sign,$day) = $regs;
+			if ($sign != '')	$list .= $sign;
 			if ($key == $last)	$list .= $day;
 			else				$list .= $day.$d;
 		}
@@ -465,9 +466,10 @@ function format_recur($arr) {
 		$list = '';
 		$last = count($arr['BYDAY']) - 1;
 		foreach ($arr['BYDAY'] as $key => $day) {
-			ereg('([\-]{0,1})([0-9]{0,1})([A-Z]{2})',$day,$regs);
+			ereg('([-\+]{0,1})([0-9]{0,1})([A-Z]{2})',$day,$regs);
 			list($junk,$sign,$day_num,$day_txt) = $regs;
 			$num = two2threeCharDays($day_txt,false);
+			if ($sign != '')	$list .= $sign;
 			if ($day_num != '')	$list .= $day_num.' ';
 			if ($key == $last)	$list .= $daysofweek_lang[$num];
 			else				$list .= $daysofweek_lang[$num].$d;

@@ -26,7 +26,7 @@ $this_day = $day_array2[3];
 $this_month = $day_array2[2];
 $this_year = $day_array2[1];
 
-$parse_month = date ('Ym', $date);
+$parse_month = date ('Ym', $unix_time);
 $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 
@@ -99,7 +99,8 @@ if (is_array($master_array[($getdate)])) {
 							$event_text = stripslashes(urldecode($allday['event_text']));
 							$description = addslashes(urlencode($allday['description']));
 							$event_text2 = rawurlencode(addslashes($allday['event_text']));
-					
+							$event_start 	= '';
+							$event_end		= '';					
 							echo '<tr>'."\n";
 							echo '<td valign="top" align="center" class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\')"><font color="#ffffff"><i>'.$event_text.'</i></font></a></td>'."\n";
 							echo '</tr>'."\n";
@@ -167,7 +168,7 @@ if (is_array($master_array[($getdate)])) {
 									// add events that overlap $day_start instead of cutting them out completely
 									if ("$day_start" == "$cal_time" && is_array($master_array[$getdate])) {
 										foreach($master_array[$getdate] as $time_key => $time_arr) {
-											if ((int)$time_key < (int)$cal_time && is_array($time_arr)) {
+											if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
 												foreach($time_arr as $event_tmp) {
 													if ((int)$event_tmp['event_end'] > (int)$cal_time) {
 														$this_time_arr[] = $event_tmp;
@@ -184,7 +185,7 @@ if (is_array($master_array[($getdate)])) {
 										foreach ($this_time_arr as $eventKey => $loopevent) {
 											$drawEvent = drawEventTimes ($cal_time, $loopevent['event_end']);
 											$j = 0;
-											while ($event_length[$j]) {
+											while (isset($event_length[$j])) {
 												if ($event_length[$j]['state'] == 'ended') {
 													$event_length[$j] = array ('length' => ($drawEvent['draw_length'] / $gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin');
 													break;
@@ -269,7 +270,7 @@ if (is_array($master_array[($getdate)])) {
 										if ($emptyWidth > 0) {
 											echo '<td bgcolor="#ffffff" colspan="' . $emptyWidth . '" ' . $class . '>&nbsp;</td>'."\n";
 										}
-										while ($event_length[(sizeof($event_length) - 1)]['state'] == 'ended') {
+										while (isset($event_length[(sizeof($event_length) - 1)]) && $event_length[(sizeof($event_length) - 1)]['state'] == 'ended') {
 											array_pop($event_length);
 										}
 										

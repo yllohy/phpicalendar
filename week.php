@@ -169,6 +169,8 @@ for ($i=0;$i<7;$i++) {
 											$event_text2 	= urlencode(addslashes($all_day_text));
 											$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
 											$description 	= addslashes(urlencode($allday["description"]));
+											$event_start 	= '';
+											$event_end		= '';
 											echo "<tr>\n";
 											echo "<td valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
 											echo "</tr>\n";
@@ -224,9 +226,9 @@ for ($i=0;$i<7;$i++) {
 											$this_time_arr = $master_array[$thisday][$cal_time];
 										}
 											
-										if ("$day_start" == "$cal_time" && is_array($master_array[$thisday])) {
+										if ("$day_start" == "$cal_time" && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
 											foreach($master_array[$thisday] as $time_key => $time_arr) {
-												if ((int)$time_key < (int)$cal_time && is_array($time_arr)) {
+												if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
 													foreach($time_arr as $event_tmp) {
 														if ((int)$event_tmp['event_end'] > (int)$cal_time) {
 															$this_time_arr[] = $event_tmp;
