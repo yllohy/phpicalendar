@@ -138,6 +138,7 @@
 												foreach ($master_array[("$daylink")] as $event_times) {
 													foreach ($event_times as $val) {
 														$event_text = $val["event_text"];
+														$event_text2 = $val["event_text"];
 														if (strlen($event_text) > 12) {
 															$event_text = substr("$event_text", 0, 10);
 															$event_text = $event_text . "...";
@@ -147,7 +148,7 @@
 														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 														echo "<tr>\n";
 														echo "<td>\n";
-														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
 														echo "</table>\n";
@@ -263,6 +264,7 @@
 												if (!$new_val2["event_text"]) {
 													foreach ($new_val2 as $all_day) {
 														$event_text = $all_day;
+														$event_text2 = $all_day;
 														$event_text = str_replace ("<br>", "", $event_text);
 														if (strlen($event_text) > 70) {
 															$event_text = substr("$event_text", 0, 65);
@@ -275,12 +277,13 @@
 														echo "<td width=\"1\" height=\"20\">\n";
 														echo "</td>\n";
 														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
+														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
 													}
 												} elseif ($new_val2["event_text"]) {	
 													$event_text = $new_val2["event_text"];
+													$event_text2 = $new_val2["event_text"];
 													$event_start = $new_val2["event_start"];
 													$event_end = $new_val2["event_end"];
 													$event_start = strtotime ("$event_start");
@@ -304,7 +307,7 @@
 													echo "<td width=\"1\" height=\"20\">\n";
 													echo "</td>\n";
 													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
-													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
+													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}
