@@ -192,13 +192,26 @@ if ($parse_file) {
 							break;
 						case 'UNTIL':
 							$until = ereg_replace('T', '', $val);
-							$until = ereg_replace('Z', '', $val);
+							$until = ereg_replace('Z', '', $until);
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $until, $regs);
 							$year = $regs[1];
 							$month = $regs[2];
 							$day = $regs[3];
 							$until = mktime(0,0,0,$month,$day,$year);
-							$until = strtotime('-1 day', $until);
+							if (ereg('^([0-9]{4})([0-9]{2})([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2})$', $val)) {
+								// RFC 2445 says that if an UNTIL has a date-time value,
+								// it MUST be in UTC (i.e. trailing Z).  iCal tends to
+								// put an end date on the next day early in the morning,
+								// not in UTC time, so we try to correct for it.
+								//
+								// Bill's guess: iCal stores the UNTIL internally as
+								// 23:59:59 UTC, then accidentally converts that to local
+								// time when exporting the event.  Thus, if the UNTIL time
+								// is before noon, it is a day ahead; if it's after noon
+								// it's the right day.
+								if ($regs[4] < 12)
+									$until = strtotime('-1 day', $until);
+							}
 							break;
 						case 'INTERVAL':
 							$number = $val;
