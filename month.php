@@ -21,15 +21,15 @@
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html lang="en">
+<html>
 <head>
-		<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><? echo "$calendar_name"; ?></title>
 		<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
 </head>
 <body bgcolor="#FFFFFF">
 <center>
-<table width="750" border="0" cellspacing="0" cellpadding="0" class="V12">
+<table width="740" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
 		<td align="center" width="90%"><a class="psf" href="day.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Day</a> | <a class="psf" href="week.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Week</a> | <a class="psf" href="month.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Month</a></td>
@@ -39,10 +39,10 @@
 		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
 	</tr>
 </table>
-<table width="750" border="0" cellspacing="1" cellpadding="2" class="calborder">
+<table width="740" border="0" cellspacing="1" cellpadding="2" class="calborder">
 <tr>
 <td>
-	<table width="750" border="0" cellspacing="0" cellpadding="0" class="calborder">
+	<table width="740" border="0" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
 			<td align="center" valign="middle">
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9">
@@ -220,10 +220,10 @@
 		</tr>
 	</table>
 	<br>
-	<table width="750" border="0" cellspacing="1" cellpadding="2" class="calborder">
+	<table width="740" border="0" cellspacing="1" cellpadding="2" class="calborder">
 <tr>
 <td>
-	<table width="750" border="0" cellspacing="0" cellpadding="0" class="calborder">
+	<table width="740" border="0" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
 			<td align="center" valign="middle">
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9">
@@ -231,7 +231,7 @@
 						<td align="center" valign="top">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr height="25">
-									<td colspan="3" align="center" valign="middle" class="eventborder" width="750" height="25">
+									<td colspan="3" align="center" valign="middle" class="eventborder" width="740" height="25">
 										<font class="V12" color="#FFFFFF"><b>This Month's Events</b></font>
 									</td>
 								</tr>
@@ -279,7 +279,7 @@
 														echo "</td>\n";
 														echo "<td width=\"1\" height=\"20\">\n";
 														echo "</td>\n";
-														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"525\" height=\"20\">\n";
+														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
 														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
@@ -303,7 +303,7 @@
 													echo "</td>\n";
 													echo "<td width=\"1\" height=\"20\">\n";
 													echo "</td>\n";
-													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"525\" height=\"20\">\n";
+													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
 													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
 													echo "</td>\n";
 													echo "</tr>\n";

@@ -27,9 +27,9 @@ if ($getdate == (date("Ymd"))) {
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html lang="en">
+<html>
 <head>
- <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <title><? echo "$calendar_name"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
 </head>
@@ -43,17 +43,10 @@ if ($getdate == (date("Ymd"))) {
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
-		<td colspan="3"><img src="images/spacer.gif" height="24" width="1"></td>
-	</tr>
-	<tr>
-		<td class="V12" align="left" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\">Previous Day</a>"; ?></td>
-		<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$display_date"; ?></td>
-		<td class="V12" align="right" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\">Next Day</a>"; ?></td>
-	</tr>
-	<tr>
 		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
 	</tr>
 </table>
+
 <table width="700" border="0" cellspacing="1" cellpadding="2" class="calborder">
 <tr>
 <td>
@@ -61,20 +54,31 @@ if ($getdate == (date("Ymd"))) {
 <table width="700" border="0" cellspacing="0" cellpadding="0">
     <tr>
      	<td align="center" valign="middle">
-      		<table border="0" cellspacing="0" cellpadding="0" bgcolor="#a1a5a9" class="G10B">
+      		<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#a1a5a9" class="G10B">
       			<tr>
-					<td align="center" valign="top">
-						<table border="0" cellspacing="1" cellpadding="0">
+      				<td bgcolor="#ffffff">
+      					<table width="100%" border="0" cellspacing="1" cellpadding="2">
 							<tr>
-								<td colspan="3" bgcolor="white" nowrap>
+								<td colspan="2">
 									<table width="100%" border="0" cellspacing="4" cellpadding="0">
 										<tr>
-											<td align="left" valign="middle"><? include('./list_icals.php'); ?></td>
-											<td align="right" valign="middle" class="V12"><a class="psf" href="<? echo "$fullpath"; ?>">Subscribe</a>&nbsp;|&nbsp;<a class="psf" href="<? echo "$filename"; ?>">Download</a></td>
+											<td class="V12" align="left" valign="top" width="100"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\">Previous Day</a>"; ?></td>
+											<td class="H20" align="center" valign="middle" width="500"><? echo "$display_date"; ?></td>
+											<td class="V12" align="right" valign="top" width="100"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\">Next Day</a>"; ?></td>
 										</tr>
 									</table>
 								</td>
 							</tr>
+							<tr>
+								<td align="left" valign="middle" class="V12" width="50%"><? include('./list_icals.php'); ?></td>
+								<td align="right" valign="middle" class="V12" width="50%"><a class="psf" href="<? echo " $fullpath"; ?>">Subscribe</a>&nbsp;|&nbsp;<a class="psf" href="<? echo " $filename"; ?>">Download</a></td>
+							</tr>
+						</table>
+      				</td>
+      			</tr>
+      			<tr>
+					<td align="center" valign="top">
+						<table width="100%" border="0" cellspacing="1" cellpadding="0">
 							<?
 							// The all day events returned here.
 							$i = 0;
@@ -100,9 +104,9 @@ if ($getdate == (date("Ymd"))) {
 							?>
 
 							<tr>
-								 <td nowrap bgcolor="#a1a5a9" width="60"><img src="images/spacer.gif" width="60" height="1"></td>
-								 <td nowrap bgcolor="#a1a5a9" width="1"><img src="images/spacer.gif" width="1" height="1"></td>
-								 <td colspan="3" nowrap bgcolor="#a1a5a9"><img src="images/spacer.gif" width="649" height="1"></td>
+								 <td nowrap bgcolor="#a1a5a9" width="60"></td>
+								 <td nowrap bgcolor="#a1a5a9" width="1"></td>
+								 <td colspan="3" nowrap bgcolor="#a1a5a9"><img src="images/spacer.gif" width="649" height="1" alt=""></td>
 							</tr>
 							<?
 								// $master_array[($getdate)]["$day_time"]
@@ -227,25 +231,6 @@ if ($getdate == (date("Ymd"))) {
 </td>
 </tr>
 </table>
-<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
-	<tr>
-		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
-	</tr>
-	<tr>
-		<td class="V12" align="left" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\">Previous Day</a>"; ?></td>
-		<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$display_date"; ?></td>
-		<td class="V12" align="right" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\">Next Day</a>"; ?></td>
-	</tr>
-	<tr>
-		<td colspan="3"><img src="images/spacer.gif" height="24" width="1"></td>
-	</tr>
-	<tr>
-		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><a class="psf" href="day.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Day</a> | <a class="psf" href="week.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Week</a> | <a class="psf" href="month.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Month</a></td>
-		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
-	</tr>
-</table>
-
 
 </center>
 </body>
