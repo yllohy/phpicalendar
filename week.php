@@ -131,7 +131,7 @@ for ($i=0;$i<7;$i++) {
 							do {
 								$thisday = date("Ymd", $thisdate);
 								$thisday3 = localizeDate($dateFormat_week_list, $thisdate);
-								echo "<td width=\"120\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
+								echo "<td width=\"70\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
 								echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday3</a></font>\n";
 								echo "</td>\n";
 								$thisdate = ($thisdate + (25 * 60 * 60));
@@ -173,9 +173,10 @@ for ($i=0;$i<7;$i++) {
 									if (isset($master_array[($thisday)]["-1"])) {
 										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
 										foreach($master_array[($thisday)]["-1"] as $allday) {
-											$all_day_text = $allday["event_text"];
-											$event_text2 = urlencode(addslashes($all_day_text));
-											$description = $allday["description"];
+											$all_day_text 	= $allday["event_text"];
+											$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
+											$event_text2 	= urlencode(addslashes($all_day_text));
+											$description 	= $allday["description"];
 											echo "<tr>\n";
 											echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
 											echo "</tr>\n";
@@ -239,22 +240,7 @@ for ($i=0;$i<7;$i++) {
 												}
 											}
 										}
-										
-										/*if (sizeof($event_length[$thisday]) == 0) {
-											if ($dayborder < 7) {
-												$class = " class=\"weekborder\"";
-												$dayborder++;
-											} elseif ($dayborder2 < 7) {
-												$class = " class=\"weekborder2\"";
-												$dayborder2++;
-											} else {
-												$class = " class=\"weekborder\"";
-												$dayborder = 1;
-												$dayborder2 = 0;
-											}*/
-										
-										
-										
+
 										if (sizeof($event_length[$thisday]) == 0) {
 											if ($dayborder == 0) {
 												$class = " class=\"weekborder\"";
@@ -263,8 +249,6 @@ for ($i=0;$i<7;$i++) {
 												$class = "";
 												$dayborder = 0;
 											}
-										
-										
 											
 											echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols[$thisday] . "\" $class>&nbsp;</td>\n";
 											
@@ -280,6 +264,7 @@ for ($i=0;$i<7;$i++) {
 													
 														$event_length[$thisday][$i]["state"] = "started";
 														$event_text 	= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"];
+														$event_text 	= word_wrap($event_text, 25, $week_events_lines);
 														$event_text2 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]);
 														$event_text2 	= urlencode($event_text2);
 														$event_start 	= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_start"];
@@ -293,15 +278,15 @@ for ($i=0;$i<7;$i++) {
 														$calendar_name2	= addslashes($calendar_name);
 														$calendar_name2 = urlencode($calendar_name2);
 														echo "<td rowspan=\"" . $event_length[$thisday][$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2week\">\n";
-														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
+														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 														echo "<tr>\n";
-														echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b></font></td>\n";
+														echo "<td class=\"eventborder\"><font class=\"V10WB\"><b>$event_start</b></font></td>\n";
 														echo "</tr>\n";
 														echo "<tr>\n";
 														echo "<td>\n";
 														echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 														echo "<tr>\n";
-														echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
+														echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"V10W\">$event_text</font></a></td>\n";
 														echo "</tr>\n";
 														echo "</table>\n";
 														echo "</td>\n";           

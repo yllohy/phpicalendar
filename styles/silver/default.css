@@ -44,6 +44,8 @@ body			{ background-color: #E5E5E5; }
 /* CSS definitions for fonts */
 
 .V9 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; color: #000000; }
+.V10W 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF; }
+.V10WB 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF; font-weight: 900; }
 .V9G 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; color: #666666; }
 .V10 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
 .V9BOLD 		{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; font-weight: 900; }

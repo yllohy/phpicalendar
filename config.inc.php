@@ -16,6 +16,8 @@ $day_start = '0700';					// Start time for day grid
 $gridLength = '15';						// Grid distance in minutes for day view, multiples of 15 preferred
 $month_event_lines = '1';				// Number of lines to wrap each event title in month view, 0 means display all lines.
 $tomorrows_events_lines = '1';			// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
+$allday_week_lines = '1';				// Number of lines to wrap each event title in all-day events in week view, 0 means display all lines.
+$week_events_lines = '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $save_parsed_cals = 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.

@@ -323,6 +323,7 @@ foreach($contents as $line) {
 								if ($rrule_array['FREQ'] == 'WEEKLY') {
 
 									// use weekCompare to see if we even have this event this week
+									
 									$diff_weeks = weekCompare(date('Ymd',$next_range_time), $start_date);
 									if ($diff_weeks < $count) {
 										if ($diff_weeks % $number == 0) {
@@ -332,7 +333,9 @@ foreach($contents as $line) {
 											
 												// use my fancy little function to get the date of each day
 												$day = two2threeCharDays($day);
+												#$thedate = date ("r", $next_range_time);
 												$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
+												#echo "$day -- $summary -- $thedate -- $next_date<br>";
 												$next_date_time = strtotime($next_date);
 												
 												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
