@@ -318,6 +318,8 @@
 				</td>
 		</tr>
 	</table>
+<br>
+<? echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
 </center>
 </body>
 </html>

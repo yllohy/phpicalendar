@@ -273,26 +273,7 @@ $prev_week = date("Ymd", $prev_week2);
 								}
 								
 								?>
-									<!--
-									[[td rowspan="2" colspan="2" valign="top" align="left" bgcolor="#68aaef"]]
-										[[table width="100%" border="0" cellpadding="2" cellspacing="0"]]
-											[[tr]]
-												[[td bgcolor="#0065DB"]][[font style="color:#ffffff; font-weight: bold"]]12:00pm[[/font]]
-												[[/td]]
-											[[/tr]]
-											[[tr]]
-												[[td]]
-													[[table width="100%" border="0" cellpadding="1" cellspacing="0"]]
-														[[tr]]
-															[[td bgcolor="#68aaef"]][[font style="font-size: 11px; color:#ffffff"]]Lunch with Stef's mom and sis[[/font]]
-															[[/td]]
-														[[/tr]]
-													[[/table]]
-												[[/td]]
-											[[/tr]]
-										[[/table]]
-									[[/td]]
-									-->
+
 							</table>
 						</td>
 					</tr>
@@ -303,6 +284,11 @@ $prev_week = date("Ymd", $prev_week2);
 	</td>
 </tr>
 </table>
+</td>
+</tr>
+</table>
+<br>
+<? echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
 </center>
 </body>
 </html>
