@@ -1,132 +1,139 @@
 <?php
 
-// Dutch language include
-// For version 1.0 PHP iCalendar
+// English language include
+// For version 2.0 PHP iCalendar
 //
-// Translation by Lieven Gekiere (Lieven@gekiere.com)
-//
+// Translation version 1.0 by Lieven Gekiere (Lieven@gekiere.com)
+// Translation version 2.0 by John Treffer (john@roem.org)
 // Submit new translations to chad@chadsdomain.com
 
-$day_lang			= 'Dag';
-$week_lang			= 'Week';
-$month_lang			= 'Maand';
-$year_lang			= 'Jaar';
-$calendar_lang		= 'Kalender';
-$next_day_lang		= 'Volgende Dag';
-$next_month_lang	= 'Volgende Maand';
-$next_week_lang		= 'Volgende Week';
-$next_year_lang		= 'Volgend Jaar';
-$last_day_lang		= 'Vorige Dag';
-$last_month_lang	= 'Vorige Maand';
-$last_week_lang		= 'Vorige Week';
-$last_year_lang		= 'Vorig Jaar';
-$subscribe_lang		= 'Abonneer';
-$download_lang		= 'Download';
-$powered_by_lang 	= 'Gemaakt met';
-$event_lang			= 'Activiteit';
-$event_start_lang	= 'Start Tijd';
-$event_end_lang		= 'Eind Tijd';
-$this_months_lang	= 'Activiteiten Deze Maand';
-$date_lang			= 'Datum';
-$summary_lang		= 'Overzicht';
-$all_day_lang		= 'Dag Activiteit';
-$notes_lang			= 'Opmerkingen';
-$this_years_lang	= 'Activiteiten Dit Jaar';
-$today_lang			= 'Vandaag';
-$this_week_lang		= 'Deze Week';
-$this_month_lang	= 'Deze Maand';
-$jump_lang			= 'Ga naar';
-$tomorrows_lang		= 'Activiteiten voor morgen';
-$goday_lang			= 'Ga Naar Vandaag';
-$goweek_lang		= 'Ga Naar Deze Week';
-$gomonth_lang		= 'Ga Naar Deze Maand';
-$goyear_lang		= 'Ga Naar Dit Jaar';
-$search_lang		= 'Zoeken'; // the verb
-$results_lang		= 'Zoekresultaten';
-$query_lang			= 'Zoekopdracht: '; // will be followed by the search query
-$no_results_lang	= 'Geen activiteiten gevonden';
-$goprint_lang		= 'Makkelijk Printbaar';
-$time_lang			= 'Tijd';
-$summary_lang		= 'Overzicht';
-$description_lang	= 'Omschrijving';
-$this_site_is_lang		= 'Deze site is';
-$no_events_day_lang		= 'Geen activiteiten vandaag.';
-$no_events_week_lang	= 'Geen activiteiten deze week.';
-$no_events_month_lang	= 'Geen activiteiten deze maand.';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e';  // Lists just the day
-$rss_month_date			= '%b %e';  // Lists just the day
-$rss_language			= 'en-us';
-$search_took_lang		= 'Zoeken duurde %s seconden';
-$recurring_event_lang	= 'Terugkerend evenement';
-$exception_lang			= 'Uitzondering';
-$no_query_lang			= 'Geen opdracht gegeven';
-$preferences_lang		= 'Voorkeuren';
-$printer_lang			= 'Printer';
-$select_lang_lang		= 'Selecteer jouw standaard taal:';
-$select_cal_lang		= 'Selecteer jouw standaard kalender:';
-$select_view_lang		= 'Selecteer jouw standaard view:';
-$select_time_lang		= 'Selecteer jouw standaard start tijd:';
-$select_day_lang		= 'Selecteer jouw standaard start weekdag:';
-$select_style_lang		= 'Selecteer jouw standaard stijl:';
-$set_prefs_lang			= 'Zet voorkeuren';
-$completed_date_lang	= 'Volbracht op';
-$completed_lang			= 'Volbracht';
-$created_lang			= 'Gemaakt:';
-$due_lang				= 'Op:';
-$priority_lang			= 'Prioriteit:';
-$priority_high_lang		= 'Hoog';
-$priority_low_lang		= 'Laag';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'Geen';
-$status_lang			= 'Status:';
-$todo_lang				= 'Nog af te werken items';
-$unfinished_lang		= 'Niet afgewerkt';
-$prefs_set_lang 		= 'Uw voorkeuren zijn bewaard.';
-$prefs_unset_lang 		= 'Voorkeuren niet bewaard. Aanpassingen zijn actief de volgende keer u de pagina laadt.';
-$unset_prefs_lang 		= 'Niet bewaarde voorkeuren:';
-$organizer_lang			= 'Organisator';
-$attendee_lang			= 'Aanwezige';
-$status_lang			= 'Status';
-$location_lang			= 'Locatie';
-$admin_header_lang		= 'PHP iCalender Administratie';
-$username_lang			= 'Gebruikersnaam';
-$password_lang			= 'Paswoord';
-$login_lang				= 'Login';
-$invalid_login_lang		= 'Foute gebruikersnaam of paswoord.';
-$addupdate_cal_lang		= 'Voeg een kalender toe of pas hem aan';
-$addupdate_desc_lang	= 'Voeg een kalender toe door hem up te loaden. Update een kalender door hem te uploaden met dezelfde naam.';
-$delete_cal_lang		= 'Verwijder een Kalender';
-$logout_lang			= 'Log uit';
-$cal_file_lang			= 'Calender File';
-$php_error_lang			= 'PHP Fout';
-$upload_error_gen_lang	= 'Er was een probleem met uw upload';
-$upload_error_lang[0]	= 'Er was een probleem met uw upload.';
-$upload_error_lang[1]	= 'De file die je probeert up te loaden is te groot.';
-$upload_error_lang[2]	= 'De file die je probeert up te loaden is te groot.';
-$upload_error_lang[3]	= 'De file die je probeert up te loaden is maar gedeeltelijk geuploaded.';
-$upload_error_lang[4]	= 'Je moet een file aanduiden om te uploaden.';
-$upload_error_type_lang = 'Enkel .ics files mogen geuploaded worden.';
-$copy_error_lang		= 'Kopieren van de file mislukt';
-$delete_error_lang		= 'Verwijderen van de file mislukt';
-$delete_success_lang	= 'is succesvol verwijderd.';
-$action_success_lang	= 'uw actie was succesvol.';
-$submit_lang			= 'Verzenden';
-$delete_lang			= 'Verwijder';
+$lang['l_day'] 				= 'Dag';
+$lang['l_week'] 			= 'Week';
+$lang['l_month'] 			= 'Maand';
+$lang['l_year'] 			= 'Jaar';
+$lang['l_calendar'] 		= 'Kalendar';
+$lang['l_next_day'] 		= 'Volgende Dag';
+$lang['l_next_month'] 		= 'Volgende Maand';
+$lang['l_next_week'] 		= 'Volgende Week';
+$lang['l_next_year'] 		= 'Volgend Jaar';
+$lang['l_last_day'] 		= 'Vorige Dag';
+$lang['l_last_month'] 		= 'Vorige Maand';
+$lang['l_last_week'] 		= 'Vorige Week';
+$lang['l_last_year'] 		= 'Vorig Jaar';
+$lang['l_subscribe'] 		= 'Abonneer';
+$lang['l_download'] 		= 'Download';
+$lang['l_powered_by'] 		= 'Gemaakt met';
+$lang['l_event'] 			= 'Activiteit';
+$lang['l_event_start'] 		= 'Start Tijd';
+$lang['l_event_end'] 		= 'Eind Tijd';
+$lang['l_this_months'] 		= 'Activiteiten Deze Maand';
+$lang['l_date'] 			= 'Datum';
+$lang['l_summary'] 			= 'Overzicht';
+$lang['l_all_day'] 			= 'Dag Activiteit';
+$lang['l_notes'] 			= 'Opmerkingen';
+$lang['l_this_years'] 		= 'Activiteiten Dit Jaar';
+$lang['l_today'] 			= 'Vandaag';
+$lang['l_this_week'] 		= 'Deze Week';
+$lang['l_this_month'] 		= 'Deze Maand';
+$lang['l_jump'] 			= 'Ga naar';
+$lang['l_tomorrows'] 		= 'Activiteiten voor morgen';
+$lang['l_goday'] 			= 'Ga naar Vandaag';
+$lang['l_goweek'] 			= 'Ga naar Deze Week';
+$lang['l_gomonth'] 			= 'Ga naar Deze Maand';
+$lang['l_goyear'] 			= 'Ga naar Dit Jaar';
+$lang['l_search'] 			= 'Zoeken'; // the verb
+$lang['l_results'] 			= 'Zoekresultaten';
+$lang['l_query'] 			= 'Zoekopdracht'; // will be followed by the search query
+$lang['l_no_results'] 		= 'Geen activiteiten gevonden';
+$lang['l_goprint'] 			= 'Makkelijk Printbaar';
+$lang['l_time'] 			= 'Tijd';
+$lang['l_summary'] 			= 'Overzicht';
+$lang['l_description'] 		= 'Omschrijving';
+$lang['l_this_site_is']		= 'Deze site is';
+$lang['l_no_events_day']	= 'Geen activiteiten vandaag.';
+$lang['l_no_events_week']	= 'Geen activiteiten deze week.';
+$lang['l_no_events_month']	= 'Geen activiteiten deze Maand.';
+$lang['l_rss_day_date']		= 'H:i';  // Lists just the time
+$lang['l_rss_week_date	']	= '%e %b';  // Lists just the day
+$lang['l_rss_month_date	']	= '%e %b';  // Lists just the day
+$lang['l_rss_language']		= 'nl';
+$lang['l_search_took']		= 'Zoeken duurde %s seconden';
+$lang['l_recurring_event']	= 'Terugkerende activiteit';
+$lang['l_exception']		= 'Uitzondering';
+$lang['l_no_query']			= 'Geen zoekopdracht gegeven';
+$lang['l_preferences']		= 'Voorkeuren';
+$lang['l_printer']			= 'Printer';
+$lang['l_select_lang']		= 'Selecteer jouw standaard taal';
+$lang['l_select_cal']		= 'Selecteer jouw standaard kalendar';
+$lang['l_select_view']		= 'Selecteer jouw standaard view';
+$lang['l_select_time']		= 'Selecteer jouw standaard start tijd';
+$lang['l_select_day']		= 'Selecteer jouw standaard start weekdag';
+$lang['l_select_style']		= 'Selecteer jouw standaard stijl';
+$lang['l_set_prefs']		= 'Stel voorkeuren in';
+$lang['l_completed_date']	= 'Volbracht op';
+$lang['l_completed']		= 'Volbracht';
+$lang['l_created']			= 'Gemaakt';
+$lang['l_due']				= 'op';
+$lang['l_priority']			= 'Prioriteit';
+$lang['l_priority_high']	= 'Hoog';
+$lang['l_priority_low']		= 'Laag';
+$lang['l_priority_medium']	= 'Gemiddeld';
+$lang['l_priority_none']	= 'Geen';
+$lang['l_status']			= 'Status';
+$lang['l_todo']				= 'Nog af te werken items';
+$lang['l_unfinished']		= 'Onaf';
+$lang['l_prefs_set'] 		= 'Uw voorkeuren zijn bewaard.';
+$lang['l_prefs_unset'] 		= 'Voorkeuren niet bewaard. Aanpassingen zijn actief bij de volgende pagina die u laadt.';
+$lang['l_unset_prefs'] 		= 'Niet bewaarde voorkeuren';
+$lang['l_organizer']		= 'Organisator';
+$lang['l_attendee']			= 'Aanwezige';
+$lang['l_status']			= 'Status';
+$lang['l_location']			= 'Locatie';
+$lang['l_admin_header']		= 'PHP iCalendar Administratie';
+$lang['l_username']			= 'Gebruikersnaam';
+$lang['l_password']			= 'Wachtwoord';
+$lang['l_login']			= 'Login';
+$lang['l_invalid_login']	= 'Foute gebruikersnaam of wachtwoord.';
+$lang['l_addupdate_cal']	= 'Voeg een kalender toe of pas hem aan';
+$lang['l_addupdate_desc']	= 'Voeg een kalender toe door een bestand up te loaden. Update een kalender door hem te uploaden met dezelfde naam.';
+$lang['l_delete_cal']		= 'Verwijder een Kalender';
+$lang['l_logout']			= 'Log uit';
+$lang['l_cal_file']			= 'Kalendar Bestand';
+$lang['l_php_error']		= 'PHP Fout';
+$upload_error_gen_lang		= 'Er was een probleem met uw upload.';
+$upload_error_lang[0]		= 'Er was een probleem met uw upload.';
+$upload_error_lang[1]		= 'Het bestand dat je probeert up te loaden is te groot.';
+$upload_error_lang[2]		= 'Het bestand dat je probeert up te loaden is te groot.';
+$upload_error_lang[3]		= 'Het bestand dat je probeert up te loaden is maar gedeeltelijk geuploaded.';
+$upload_error_lang[4]		= 'U moet een bestand selecteren om te uploaden.';
+$lang['l_upload_error_type'] = 'Enkel .ics bestanden mogen geuploaded worden.';
+$lang['l_copy_error']			= 'Kopieren bestand mislukt';
+$lang['l_delete_error']			= 'Verwijderen bestand mislukt';
+$lang['l_delete_success']		= 'is succesvol verwijderd.';
+$lang['l_action_success']		= 'Uw handeling was succesvol.';
+$lang['l_submit']				= 'Verzenden';
+$lang['l_delete']				= 'Verwijder';
+$all_cal_comb_lang			= 'Allen tezamen';
 
-// ----- New for 0.9.5
-$all_cal_comb_lang		= 'Alle Kalenders samen';
+// New for 2.0
+$lang['l_legend']			= 'Legenda';
+$lang['l_admin_subhead']	= 'Beheer je kalenders van deze pagina';
+$lang['l_prefs_subhead']	= 'Plaatst een cookie voor het bezoekn van deze site';
+$lang['l_rss_info']			= 'RSS Informatie';
+$lang['l_rss_subhead']		= 'Basis RSS feeds beschikbaar voor iedere Kalender';
+$lang['l_rss_notenabled']	= 'RSS is niet ingesteld op deze site';
 
 // - navigation
-$back_lang = 'Terug';
-$next_lang = 'Volgende';
-$prev_lang = 'Vorige';
-$day_view_lang = 'Dagoverzicht';
-$week_view_lang = 'Weekoverzicht';
-$month_view_lang = 'Maandoverzicht';
-$year_view_lang = 'Jaaroverzicht';
+$lang['l_back'] 		= 'Terug';
+$lang['l_next'] 		= 'Volgende';
+$lang['l_prev'] 		= 'Vorige';
+$lang['l_day_view'] 	= 'Dagoverzicht';
+$lang['l_week_view'] 	= 'Weekoverzicht';
+$lang['l_month_view'] 	= 'Maandoverzicht';
+$lang['l_year_view'] 	= 'Jaaroverzicht';
 
 // ---------------------------------
+
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
@@ -137,7 +144,7 @@ $format_recur_lang['weekly']		= array('week','weken');		// these will be %freq%
 $format_recur_lang['daily']			= array('dag','dagen');			// in the replacement below
 $format_recur_lang['hourly']		= array('uur','uren');
 $format_recur_lang['minutely']		= array('minuut','minuten');
-$format_recur_lang['secondly']		= array('second','seconden');
+$format_recur_lang['secondly']		= array('seconde','seconden');
 
 $format_recur_lang['start']			= 'Iedere %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
 $format_recur_lang['until']			= 'tot %date%';				// ie, 'until January 4'
@@ -150,22 +157,22 @@ $format_recur_lang['byday']			= 'Op dagen: %list%';			// ie, 'On days: Mon, Tues
 // ---------------------------------
 
 $daysofweek_lang			= array ('Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag');
-$daysofweekshort_lang		= array ('Zon','Maa','Din','Woe','Don','Vrij','Zat');
+$daysofweekshort_lang		= array ('Zo','Ma','Di','Wo','Do','Vr','Za');
 $daysofweekreallyshort_lang	= array ('Z','M','D','W','D','V','Z');
 $monthsofyear_lang			= array ('Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December');
 $monthsofyearshort_lang		= array ('Jan','Feb','Maa','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
-$timeFormat = 'G:i';
+$timeFormat = 'H:i';
 $timeFormat_small = 'G:i';
 
 // For date formatting, see note below
-$dateFormat_day = '%A %e %B';
+$dateFormat_day = '%A, %e %B';
 $dateFormat_week = '%e %B';
-$dateFormat_week_list = '%a %e %b';
-$dateFormat_week_jump = '%e %b';// new since last translation
+$dateFormat_week_list = '%a, %e %b';
+$dateFormat_week_jump = '%e %b';
 $dateFormat_month = '%B %Y';
-$dateFormat_month_list = '%A %e %B';
+$dateFormat_month_list = '%A, %e %B';
 
 /*
 Notes about dateFormat_*
@@ -184,14 +191,15 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Fout!';
-$error_window_lang = 'Er is een fout opgetreden!';
-$error_calendar_lang = 'De kalender "%s" was aan het processen toen de fout gebeurde.';
-$error_path_lang = 'Onmogelijk om de directory te openen: "%s"';
-$error_back_lang = 'Gebruik de knop "Vorige" om terug te keren.';
-$error_remotecal_lang = 'Deze server blokt alle niet-geaccepteerde kalenders.';
-$error_restrictedcal_lang = 'Je probeerde een beveiligde kalender te bekijken.';
-$error_invalidcal_lang = 'Ongeldig kalender bestand. Probeer een andere kalender aub.';
-
+$lang['l_error_title'] 			= 'Fout!';
+$lang['l_error_window'] 		= 'Er is een fout opgetreden!';
+$lang['l_error_calendar'] 		= 'De kalender "%s" was aan een proces onderhevig toen de fout optrad.';
+$lang['l_error_path'] 			= 'Onmogelijk om de directory te openen: "%s"';
+$lang['l_error_back'] 			= 'Gebruik de knop "Vorige" om terug te keren.';
+$lang['l_error_remotecal'] 		= 'Deze server blokkeert niet-geaccepteerde kalenders.';
+$lang['l_error_restrictedcal'] 	= 'U probeerde toegang te verwerven tot een beveiligde kalender.';
+$lang['l_error_invalidcal'] 	= 'Ongeldig kalender bestand. Probeer een andere kalender aub.';
+$lang['l_error_cantopen'] 		= 'Onmogelijk kalender te openen.';
+$lang['l_error_cache']			= 'Onmogelijk om naar cache directory te schrijven. Controleer uw configuratie.';
 
 ?>

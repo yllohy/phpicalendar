@@ -82,7 +82,7 @@ COPYING for more information about our license.
 Changes:
 --------
 2.0 beta
-	-Swedish and French translations added.
+	-Swedish, French, Dutch and Lithuanian translations added.
 	-Added iCal specific publish.php.
 	-Fixed stat bug.
 	-PHP5 support added.
