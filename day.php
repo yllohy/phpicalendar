@@ -3,6 +3,13 @@
 $current_view = "day";
 include("./ical_parser.php");
 
+//if ($use_sessions == "yes") {
+//	session_start();
+//	if (is_array($aArray)) $master_array = $aArray;
+//	echo "using sessions";
+//}
+
+
 $starttime = "0700";
 $weekstart = 1;
 $gridLength = 30;

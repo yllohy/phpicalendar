@@ -22,6 +22,12 @@ $this_day = $day_array2[3];
 $this_month = $day_array2[2];
 $this_year = $day_array2[1];
 
+// Start the session
+//session_start();
+//if (($aYear != $this_year) || ($use_sessions != "yes") || (!is_array($aArray))) {
+//echo "not using sessions";
+
+
 // open the iCal file, read it into a string
 $fp = @fopen($filename, "r");
 $contents = @fread ($fp, filesize ($filename));
@@ -429,6 +435,21 @@ if (is_array($master_array)) {
 	ksort($master_array);
 	reset($master_array);
 }
+
+// Store information in the session
+if ($use_sessions == "yes") {
+	session_start();
+	session_register( "aArray", "aYear", "aLanguage", "aCalendar" );
+	$aArray = $master_array;
+	$aYear = $this_year;
+	$aLanguage = $language;
+	$aCalendar = $cal;
+}
+
+
+// End the session
+//}
+
 //If you want to see the values in the arrays, uncomment below.
 //print "<pre>";
 //print_r($master_array);
