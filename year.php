@@ -77,7 +77,8 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 						<table border="0" width="210" cellspacing="0" cellpadding="0">
 							<tr>
 								<td width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=""></td>
-								<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, $startYear)); ?></font></td>
+								<?php $monthlink = date("Ymd", $startYear); ?>
+								<td align="center" class="sideback" <?php echo 'onclick="window.location.href=\'month.php?cal=' . $cal . '&getdate=' . $monthlink . '\'">'; ?><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, $startYear)); ?></font></td>
 								<td width="1" class="sideback"></td>
 							</tr>
 						</table>

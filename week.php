@@ -169,7 +169,7 @@ for ($i=0;$i<7;$i++) {
 								echo "<td class=\"dateback\" colspan=\"2\"></td>";
 								do {
 									$thisday = date("Ymd", $thisdate);
-									echo "<td class=\"dateback\" height=\"20\" valign=\"bottom\">\n";
+									echo "<td class=\"dateback\" height=\"20\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"bottom\">\n";
 									if (isset($master_array[($thisday)]["-1"])) {
 										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
 										foreach($master_array[($thisday)]["-1"] as $allday) {
@@ -178,7 +178,7 @@ for ($i=0;$i<7;$i++) {
 											$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
 											$description 	= $allday["description"];
 											echo "<tr>\n";
-											echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
+											echo "<td valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
 											echo "</tr>\n";
 										}
 										echo "</table>\n";

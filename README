@@ -60,7 +60,7 @@ Changes:
 	-Fixed bug not letting notes to fully display.
 	-Fixed bug in recurring all-day events.
 	-Fixed a bug for showing &'s and #'s in the javascript.
-	-Basic Mozilla Calendar support started.
+	-Greatly improved Mozilla Calendar support.
 	-Overlapping events now display better.
 	-Other various bug fixes.
 
