@@ -35,9 +35,17 @@ if ($display_ical_list == "yes") {
 				print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
 			} else {
 				print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
-			}		
+			}
 		}	
 	}			
+
+	// option to open all (non-web) calenders together
+	if ($cal == 'all_calenders_combined971') {
+		print "<option value=\"$current_view.php?cal=all_calenders_combined971\" selected>$all_cal_comb_lang</option>\n";
+	} else {
+		print "<option value=\"$current_view.php?cal=all_calenders_combined971\">$all_cal_comb_lang</option>\n";
+	}
+		
 	foreach($list_webcals as $cal_tmp) {
 		if ($cal_tmp != '') {
 			$cal_displayname_tmp = basename($cal_tmp);
@@ -51,8 +59,7 @@ if ($display_ical_list == "yes") {
 			}		
 		}
 	}
-	
-	
+
 	// close file
 	closedir($dir_handle);
 	

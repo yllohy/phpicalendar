@@ -160,23 +160,27 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time, $ol_uid) {
 }
 
 // drei 20021126: function for checking and removing overlapping events
-function removeOverlap($ol_start_date, $ol_start_time, $ol_key = 0) {
+//function removeOverlap($ol_start_date, $ol_start_time, $ol_key = 0) {
+function removeOverlap($ol_start_date, $ol_start_time, $ol_key) {
 	global $master_array, $overlap_array;
 	if (isset($overlap_array[$ol_start_date])) {
 		if (sizeof($overlap_array[$ol_start_date]) > 0) {
 			$ol_end_time = $master_array[$ol_start_date][$ol_start_time][$ol_key]["event_end"];
 			foreach ($overlap_array[$ol_start_date] as $keyBlock => $blockId) {
-				if (($blockId["blockStart"] <= $ol_start_time) or ($blockId["blockEnd"] >= $ol_start_time)) {
+//				if (($blockId["blockStart"] <= $ol_start_time) or ($blockId["blockEnd"] >= $ol_start_time)) {
+				if (($blockId["blockStart"] <= $ol_start_time) and ($blockId["blockEnd"] > $ol_start_time)) {
 					foreach ($blockId["events"] as $keyEvent => $ol_event) {
 						$master_array[$ol_start_date][$ol_event["time"]][$ol_event["key"]]["event_overlap"] -= 1;
 						if (($ol_event["time"] == $ol_start_time) and ($ol_event["key"] == $ol_key)) {
 							unset ($overlap_array[$ol_start_date][$keyBlock]["events"][$keyEvent]);
 						}
 					}
-					if ($blockId["maxOverlaps"] = 1) {
+					if ($blockId["maxOverlaps"] == 1) {
 						unset ($overlap_array[$ol_start_date][$keyBlock]);
 					} else {
-						$blockId["maxOverlaps"] -= 1;
+						$overlap_array[$ol_start_date][$keyBlock]["maxOverlaps"] -= 1;
+						//$blockId["maxOverlaps"] -= 1;
+						// SJBO: Shouldn't something be done with [overlapRanges] as well?
 					}
 				}
 			}

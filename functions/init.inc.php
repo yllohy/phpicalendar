@@ -62,12 +62,16 @@ if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 	}
 } else {
 	if (isset($default_cal_check)) {
-		$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
-		$calcheckopen = @fopen($calcheck, "r");
-		if ($calcheckopen == FALSE) {
-			$cal_filename = $default_cal;
+		if ($default_cal_check != 'all_calenders_combined971') {
+			$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
+			$calcheckopen = @fopen($calcheck, "r");
+			if ($calcheckopen == FALSE) {
+				$cal_filename = $default_cal;
+			} else {
+				$cal_filename = $default_cal_check;
+			}
 		} else {
-			$cal_filename = $default_cal_check;
+			$cal_filename = 'all_calenders_combined971';
 		}
 	} else {
 		$cal_filename = $default_cal;
@@ -91,16 +95,35 @@ if ($is_webcal) {
 		exit(error($error_restrictedcal_lang, $cal_filename));
 	} else {
 		if (!isset($filename)) {
-			$filename = $calendar_path.'/'.$cal_filename.'.ics';
-			if (true == false) {
+			// empty the filelist array
+			$cal_filelist = array();
+			if ($cal == 'all_calenders_combined971') { // Create an array with the paths to all files to be combined
+				// Note: code here is similar to code in list_icals.php
+				// open directory
 				$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
-				while ($file = readdir($dir_handle)) {
-					if (substr($file, -4) == '.ics') {
-						$cal = urlencode(substr($file, 0, -4));
-						$filename = $calendar_path.'/'.$file;
-						break;
+	
+
+				// build the array
+				while (false != ($file = readdir($dir_handle))) {
+					if (substr($file, -4) == ".ics") {
+						$file = $calendar_path.'/'.$file;
+						array_push($cal_filelist, $file);
 					}
 				}
+				natcasesort($cal_filelist);
+			} else { // Handle a single file
+				$filename = $calendar_path.'/'.$cal_filename.'.ics';
+				if (true == false) {
+					$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
+					while ($file = readdir($dir_handle)) {
+						if (substr($file, -4) == '.ics') {
+							$cal = urlencode(substr($file, 0, -4));
+							$filename = $calendar_path.'/'.$file;
+							break;
+						}
+					}
+				}
+				array_push($cal_filelist, $filename);
 			}
 		}
 		
