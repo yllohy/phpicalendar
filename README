@@ -67,7 +67,7 @@ Changes:
 	-Added STATUS support for VEVENT and VTODO.
 	-Added RSS auto-detection on day, week, month, and year pages.
 	-Added year view icon.
-	-Added Finnish language support.
+	-Added Finnish and Czech language support.
 	-Added Preferences page (uses cookies).
 		-Select defualt language
 		-Select default calendar
