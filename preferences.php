@@ -1,9 +1,7 @@
 <?php
-
+$cookie_uri = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 define('BASE','./');
 $current_view = "preferences";
-include(BASE.'functions/ical_parser.php');
-$cookie_uri = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 $default_view = "$default_view" . ".php";
 if ($allow_preferences == 'no') header("Location: $default_view");
 $action = $HTTP_GET_VARS['action'];
@@ -14,10 +12,10 @@ if ($action == 'setcookie') {
 	$cookie_style 		= $HTTP_POST_VARS['cookie_style'];
 	$cookie_startday	= $HTTP_POST_VARS['cookie_startday'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style");
-	//echo '<pre>'; print_r($the_cookie); echo '</pre>';
 	$the_cookie 		= serialize($the_cookie);
 	setcookie("phpicalendar","$the_cookie",time()+6604800,"/","$cookie_uri",0);
-} else {
+	unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
+} elseif ($HTTP_COOKIE_VARS['phpicalendar']) {
 	$phpicalendar 		= $HTTP_COOKIE_VARS['phpicalendar'];
 	$phpicalendar 		= explode($phpicalendar);
 	$cookie_language 	= $phpicalendar['cookie_language'];
@@ -25,8 +23,10 @@ if ($action == 'setcookie') {
 	$cookie_view 		= $phpicalendar['cookie_view'];
 	$cookie_style 		= $phpicalendar['cookie_style'];
 	$cookie_startday	= $phpicalendar['cookie_startday'];
+	echo "Cookie read";
 }
-echo "$cookie_uri";
+#echo "$cookie_uri";
+include(BASE.'functions/ical_parser.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
