@@ -47,7 +47,7 @@ $allow_preferences		= 'yes';			// Allow visitors to change various preferences v
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 $show_completed			= 'no';			// Show completed todos on your todo list.
-$show_login				= 'yes';				// Set to yes to prompt for login to unlock calendars.
+$show_login				= 'no';				// Set to yes to prompt for login to unlock calendars.
 
 // Administration settings
 $allow_admin			= 'no';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
@@ -69,13 +69,13 @@ $list_webcals[] = '';						// or webcal:// and the filename should contain the .
 $list_webcals[] = '';						// $allow_webcals does *not* need to be "yes" for these to show up and work
 // add more lines as necessary
 
-$locked_cals[] = 'Home';						// Fill in-between the quotes the names of the calendars you wish to hide
+$locked_cals[] = '';						// Fill in-between the quotes the names of the calendars you wish to hide
 $locked_cals[] = '';						// unless unlocked by a username/password login. This should be the
 $locked_cals[] = '';						// exact calendar filename without the .ics suffix.
 $locked_cals[] = '';						//
 // add more lines as necessary
 
-$locked_map['celittle:simboo2'] = array('Home');							// Map username:password accounts to locked calendars that should be
+$locked_map[] = '';							// Map username:password accounts to locked calendars that should be
 $locked_map[] = '';							// unlocked if logged in. Calendar names should be the same as what is
 $locked_map[] = '';							// listed in the $locked_cals, again without the .ics suffix.
 $locked_map[] = '';							// Example: $locked_map['username:password'] = array('Locked1', 'Locked2');
