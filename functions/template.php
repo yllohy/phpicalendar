@@ -5,7 +5,7 @@
 class Page {
 	var $page;
 	function draw_month($template_p, $offset = '+0', $type) {
-		global $template, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
+		global $template, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
 		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template_p, $match1);
 		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template_p, $match2);
 		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template_p, $match3);
@@ -13,7 +13,7 @@ class Page {
 		preg_match("!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!is", $template_p, $match5);
 		preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!is", $template_p, $match6);
 		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!is", $template_p, $match7);		
-		
+				
 		$loop_wd 			= trim($match1[1]);
 		$loop_md 			= trim($match2[1]);
 		$t_month[0]			= trim($match3[1]);
@@ -74,12 +74,14 @@ class Page {
 				if ($type != 'small') {
 					foreach ($master_array[$daylink] as $event_times) {
 						foreach ($event_times as $val) {
-							$event_calno 	= $val['calnumber'];
+							$calno 			= $val['calnumber'];
 							$event_calna 	= $val['calname'];
 							$event_url 		= $val['url'];
 							if (!isset($val['event_start'])) {
 								if ($type == 'large') {
-									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url).'<br>';
+									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0">';
+									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+									$switch['ALLDAY'] .= '</span></div>';
 								} else {
 									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0">';
 								}
@@ -90,7 +92,9 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								$event_end   = date($timeFormat, @strtotime ($event_end));
 								if ($type == 'large') {
+									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0">';
 									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url).'<br>';
+									$switch['EVENT'] .= '</span></div>';
 								} else {
 									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0">';
 								}
@@ -139,34 +143,35 @@ class Page {
 		$u_start = strtotime($m_start);
 		$i=0;
 		do {
-			foreach ($master_array[$m_start] as $event_times) {
-				$switch['CAL'] 			= $cal;
-				$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
-				foreach ($event_times as $val) {
-					$event_calno 	= $val['calnumber'];
-					$event_calna 	= $val['calname'];
-					$event_url 		= $val['url'];
-					if (!isset($val['event_start'])) {
-						$switch['START_TIME'] 	= $lang['l_all_day'];
-						$switch['DESCRIPTION'] 	= urldecode($val['description']);
-						$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
-					} else {	
-						$event_start = $val['start_unixtime'];
-						$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
-						$event_start = date($timeFormat, $val['start_unixtime']);
-						$event_end   = date($timeFormat, @strtotime ($event_end));
-						$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
-						$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
-						$switch['DESCRIPTION'] 	= urldecode($val['description']);
-					}
-					if ($switch['EVENT_TEXT'] != '') {
-						$switch['DAYLINK'] = $m_start;
-						$temp = $loop[$i];
-						foreach ($switch as $tag => $data) {
-							$temp = str_replace('{'.$tag.'}', $data, $temp);
+			if (isset($master_array[$m_start])) {
+				foreach ($master_array[$m_start] as $event_times) {
+					$switch['CAL'] 			= $cal;
+					$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
+					foreach ($event_times as $val) {
+						$switch['CALNAME'] 	= $val['calname'];
+						$switch['URL'] 		= $val['url'];
+						if (!isset($val['event_start'])) {
+							$switch['START_TIME'] 	= $lang['l_all_day'];
+							$switch['DESCRIPTION'] 	= urldecode($val['description']);
+							$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+						} else {	
+							$event_start = $val['start_unixtime'];
+							$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
+							$event_start = date($timeFormat, $val['start_unixtime']);
+							$event_end   = date($timeFormat, @strtotime ($event_end));
+							$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
+							$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						}
-						$middle .= $temp;
-						$i = ($i == 1) ? 0 : 1;
+						if ($switch['EVENT_TEXT'] != '') {
+							$switch['DAYLINK'] = $m_start;
+							$temp = $loop[$i];
+							foreach ($switch as $tag => $data) {
+								$temp = str_replace('{'.$tag.'}', $data, $temp);
+							}
+							$middle .= $temp;
+							$i = ($i == 1) ? 0 : 1;
+						}
 					}
 				}
 			}

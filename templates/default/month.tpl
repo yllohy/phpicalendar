@@ -64,7 +64,7 @@
 							<span class="V9G">{START_TIME}</span>
 						</td>
 						<td>
-							{EVENT_TEXT}<br><span class="V9G">{DESCRIPTION}</span>
+							{EVENT_TEXT}<br><span class="V9G">{CALNAME}</span>
 						</td>
 					</tr>
 					<!-- loop showbottomevents_odd off -->
@@ -75,7 +75,7 @@
 							<span class="V9G">{START_TIME}</span>
 						</td>
 						<td bgcolor="#EEEEEE">
-							{EVENT_TEXT}<br><span class="V9G">{DESCRIPTION}</span>
+							{EVENT_TEXT}<br><span class="V9G">{CALNAME}</span>
 						</td>
 					</tr>
 					<!-- loop showbottomevents_even off -->

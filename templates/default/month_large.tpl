@@ -2,9 +2,7 @@
 	<tr>
 		<!-- loop weekday on -->
 		<td valign="top" width="105" height="12" class="dateback">
-			<center class="V9BOLD">
-				{LOOP_WEEKDAY}
-			</center>
+			<center class="V9BOLD">{LOOP_WEEKDAY}</center>
 		</td>
 		<!-- loop weekday off -->
 	</tr>
@@ -16,8 +14,8 @@
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="G10G">{DAY}</font></a>
 			</div>
-			<div align="left" class="V10">{ALLDAY}</div>
-			<div align="left" class="V9">{EVENT}</div>	
+			{ALLDAY}
+			{EVENT}	
 		</td>
 		<!-- switch notthismonth off -->
 		<!-- switch istoday on -->
@@ -25,8 +23,8 @@
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
-			<div align="left" class="V10">{ALLDAY}</div>
-			<div align="left" class="V9">{EVENT}</div>
+			{ALLDAY}
+			{EVENT}	
 		</td>
 		<!-- switch istoday off -->
 		<!-- switch ismonth on -->
@@ -34,8 +32,8 @@
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
-			<div align="left" class="V10">{ALLDAY}</div>
-			<div align="left" class="V9">{EVENT}</div>
+			{ALLDAY}
+			{EVENT}	
 		</td>
 		<!-- switch ismonth off -->
 		<!-- loop monthdays off -->

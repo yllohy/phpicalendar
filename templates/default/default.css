@@ -2,6 +2,19 @@
 
 table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 
+/* Background images for tables */
+.tbll	{background: url(images/shadow_l.gif) no-repeat; width:8px}
+.tblbot	{background: url(images/shadow_m.gif) repeat-x; width:100%}
+.tblr	{background: url(images/shadow_r.gif) no-repeat; width:8px}
+
+
+
+
+
+
+
+/* older styles */
+
 .eventborder	{ background-image: url(images/day_title.gif); border: 1px #006699 solid; }
 .eventbg	 	{ background-color: #6699CC; }
 
@@ -80,7 +93,8 @@ body			{ background-color: #E5E5E5; }
 /* CSS definitions for fonts */
 
 .V9 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; color: #000000; }
-.V10W 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF; }
+.V10W 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF; text-decoration:	none;}
+.V9W 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; color: #FFFFFF; text-decoration:	none;}
 .V10WB 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF; font-weight: 900; }
 .V9G 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; color: #666666; }
 .V10 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
@@ -99,8 +113,3 @@ body			{ background-color: #E5E5E5; }
 .query_style 	{ font-size: 11px; font-family: verdana, geneva, arial, sans-serif; width: 156px; margin-bottom: 0; }
 .search_style 	{ font-size: 12px; font-family: verdana, geneva, arial, sans-serif; width: 134px; margin-bottom: 0; }
 .login_style	{ font-size: 11px; font-family: verdana, geneva, arial, sans-serif; width: 80px; margin-bottom: 0; }
-
-/* Background images for tables */
-.tbll	{background: url(images/shadow_l.gif) no-repeat; width:8px}
-.tblbot	{background: url(images/shadow_m.gif) repeat-x; width:100%}
-.tblr	{background: url(images/shadow_r.gif) no-repeat; width:8px}
