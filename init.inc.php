@@ -10,8 +10,8 @@ if(phpversion() >= "4.2.0")
 include('./config.inc.php');
 
 // define supported languages
-if ($language == "English") { 	
-	include "languages/english.inc.php";
+if ($language == "German") { 	
+	include "languages/german.inc.php";
 } elseif ($language == "Polish") {
 	include "languages/polish.inc.php";
 } else {
