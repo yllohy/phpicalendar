@@ -51,7 +51,7 @@ if ($attendee) {
 		$attendees .= $attendee[$i]["name"] . ', ';
 		$i++;
 	}
-	$attendees = substr($attendees,0,-2);
+	$display .= substr($attendees,0,-2);
 	$display .= '<br>';
 }
 if ($status) {

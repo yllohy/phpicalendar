@@ -86,6 +86,10 @@ functions folder.
 
 Changes:
 --------
+1.0
+	-Added return false to popups
+	-Added workaround for improperly set DTSTART dates.
+
 1.0 RC-2
 	-Fixed all reported bugs.
 	-Added failed login dialog for config authentication.
