@@ -82,6 +82,7 @@ $page->replace_tags(array(
 	'style_select' 		=> $style_select,
 	'l_time'			=> $lang['l_time'],
 	'l_summary'			=> $lang['l_summary'],
+	'l_description'		=> $lang['l_description'],
 	'l_calendar'		=> $lang['l_calendar'],
 	'l_day'				=> $lang['l_day'],
 	'l_week'			=> $lang['l_week'],

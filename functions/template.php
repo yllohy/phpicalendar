@@ -18,8 +18,9 @@ class Page {
 		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
 		preg_match("!<\!-- loop events on -->(.*)<\!-- loop events off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch some_events on -->(.*)<\!-- loop events on -->!is", $this->page, $match3);
-		$loop_event	= trim($match1[1]);
-		$loop_day 	= trim($match3[1]);
+		$loop_event		= trim($match1[1]);
+		$loop_day 		= trim($match3[1]);
+		$parse_month 	= date ("Ym", strtotime($getdate));
 		
 		foreach($master_array as $key => $val) {
 			preg_match ('/([0-9]{6})([0-9]{2})/', $key, $regs);
@@ -29,7 +30,6 @@ class Page {
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 				$events_tmp = $loop_event;
 				$day_tmp	= $loop_day;
-				//echo $dayofmonth;
 				
 				// Pull out each day
 				foreach ($val as $new_val) {
