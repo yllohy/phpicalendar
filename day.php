@@ -91,18 +91,11 @@ include (BASE.'includes/header.inc.php');
 						 echo "<tr>\n";
 						 $event_calno  = $allday['calnumber'];
 						 $event_calna  = $allday['calname'];
+						 $event_url	   = $allday['url'];
 						 if ($event_calno < 1) $event_calno=1;
 						 if ($event_calno > 7) $event_calno=7;
 						 echo '<td valign="top" align="center" class="eventbg_'.$event_calno.'">';
-						 openevent("$event_calna",
-							   "",
-							   "",
-							   $allday,
-							   0,
-							   "",
-							   '<font color="#ffffff"><i>',
-							   "</i></font>",
-							   "psf");
+						 openevent($event_calna, '', '', $allday, 0, '', '<font color="#ffffff"><i>', '</i></font>', 'psf', $url);
 						 echo "</td>\n</tr>\n";
 					   }
 					   echo '</table>'."\n";
@@ -253,16 +246,9 @@ include (BASE.'includes/header.inc.php');
 												  echo '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
 												  echo '<tr>'."\n";
 												  echo '<td class="eventbg_'.$event_calno.'">';
-												  $event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
-										  		  openevent("$event_calna",
-												  "$event_start",
-												  "$event_end",
-												  $this_time_arr[($event_length[$i]['key'])],
-												  "",
-												  0,
-												  "<font class=\"eventfont\">",
-												  "</font>",
-												  "psf");
+												  $event_calna 	= $this_time_arr[($event_length[$i]['key'])]['calname'];
+												  $event_url 	= $this_time_arr[($event_length[$i]['key'])]['url'];
+										  		  openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$i]['key'])], '', 0, '<font class="eventfont">', '</font>', 'psf', $event_url);
 												  echo '</td></tr>'."\n";
 												  echo '</table>'."\n";
 												  echo '</td>'."\n";           

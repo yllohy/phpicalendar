@@ -13,6 +13,7 @@ function openEventWindow(num) {
 	form.elements.location.value = data.location;
 	form.elements.organizer.value = data.organizer;
 	form.elements.attendee.value = data.attendee;    
+	form.elements.url.value = data.url;    
 	
 	// open a new window
 	var w = window.open('', 'Popup', 'scrollbars=yes,width=460,height=275');
@@ -20,7 +21,7 @@ function openEventWindow(num) {
 	form.submit();
 }
 
-function EventData(event, cal, start, end, description, status, location, organizer, attendee) {
+function EventData(event, cal, start, end, description, status, location, organizer, attendee, url) {
 	this.event = event;
 	this.cal = cal;
 	this.start = start;
@@ -30,6 +31,7 @@ function EventData(event, cal, start, end, description, status, location, organi
 	this.location = location;
 	this.organizer = organizer;
 	this.attendee = attendee;
+	this.url = url;
 }
 
 document.popup_data = new Array();

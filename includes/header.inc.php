@@ -27,4 +27,5 @@
   <input type="hidden" name="location" id="location" value="">
   <input type="hidden" name="organizer" id="organizer" value="">
   <input type="hidden" name="attendee" id="attendee" value="">
+  <input type="hidden" name="url" id="url" value="">
 </form>

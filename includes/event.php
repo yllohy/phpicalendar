@@ -2,76 +2,25 @@
 define('BASE', '../');
 include (BASE.'functions/init.inc.php'); 
 
-// Load vars
-if (isset($HTTP_POST_VARS['event']) && ($HTTP_POST_VARS['event'] !== '') ) {
-	$event=$HTTP_POST_VARS['event'];
-} else {
-	$event='';
-}
-if (isset($HTTP_POST_VARS['description']) && ($HTTP_POST_VARS['description'] !== '') ) {
-	$description=$HTTP_POST_VARS['description'];
-} else {
-	$description='';
-}
-if (isset($HTTP_POST_VARS['cal']) && ($HTTP_POST_VARS['cal'] !== '') ) {
-	$calendar_name=$HTTP_POST_VARS['cal'];
-} else {
-	$calendar_name='';
-}
-if (isset($HTTP_POST_VARS['start']) && ($HTTP_POST_VARS['start'] !== '') ) {
-	$start=$HTTP_POST_VARS['start'];
-} else {
-	$start='';
-}
-if (isset($HTTP_POST_VARS['end']) && ($HTTP_POST_VARS['end'] !== '') ) {
-	$end=$HTTP_POST_VARS['end'];
-} else {
-	$end='';
-}
-if (isset($HTTP_POST_VARS['status']) && ($HTTP_POST_VARS['status'] !== '') ) {
-	$status=$HTTP_POST_VARS['status'];
-} else {
-	$status='';
-}
-if (isset($HTTP_POST_VARS['location']) && ($HTTP_POST_VARS['location'] !== '') ) {
-	$location=$HTTP_POST_VARS['location'];
-} else {
-	$location='';
-}
-if (isset($HTTP_POST_VARS['organizer']) && ($HTTP_POST_VARS['organizer'] !== '') ) {
-	$organizer=$HTTP_POST_VARS['organizer'];
-} else {
-	$organizer='';
-}
-if (isset($HTTP_POST_VARS['attendee']) && ($HTTP_POST_VARS['attendee'] !== '') ) {
-	$attendee=$HTTP_POST_VARS['attendee'];
-} else {
-	$attendee='';
+function decode_popup ($item) {
+	$item = stripslashes(rawurldecode($item));
+	$item = str_replace('\\','',$item);
+	return $item;
 }
 
-// Prep vars for HTML display
-$event=stripslashes(rawurldecode($event));
-$event=str_replace('\\','',$event);
-$description=stripslashes(rawurldecode($description));
-$description=str_replace('\\','',$description);
-$organizer=stripslashes(rawurldecode($organizer));
-$organizer=str_replace('\\','',$organizer);
-$organizer=unserialize($organizer);
-$attendee=str_replace('\\','',$attendee);
-$attendee=unserialize ($attendee);
-$location=stripslashes(rawurldecode($location));
-$location=str_replace('\\','',$location);
-$calendar_name=stripslashes(rawurldecode($calendar_name));
-$calendar_name=str_replace('\\','',$calendar_name);
-
-// Format calendar title
-if ($calendar_name == $ALL_CALENDARS_COMBINED) {
-	$cal_title=$all_cal_comb_lang;
-	$cal_title_full=$all_cal_comb_lang;
-} else {
-	$cal_title=$calendar_name;
-	$cal_title_full=$calendar_name . ' ' . $calendar_lang;
-}
+$event			= (isset($_REQUEST['event'])) ? decode_popup($_REQUEST['event']) : ('unset');
+$description	= (isset($_REQUEST['description'])) ? decode_popup($_REQUEST['description']) : ('unset');
+$cal			= (isset($_REQUEST['cal'])) ? decode_popup($_REQUEST['cal']) : ('unset');
+$start			= (isset($_REQUEST['start'])) ? decode_popup($_REQUEST['start']) : ('unset');
+$end			= (isset($_REQUEST['end'])) ? decode_popup($_REQUEST['end']) : ('unset');
+$status			= (isset($_REQUEST['status'])) ? decode_popup($_REQUEST['status']) : ('unset');
+$location		= (isset($_REQUEST['location'])) ? decode_popup($_REQUEST['location']) : ('unset');
+$url			= (isset($_REQUEST['url'])) ? decode_popup($_REQUEST['url']) : ('unset');
+$organizer		= (isset($_REQUEST['organizer'])) ? ($_REQUEST['organizer']) : ('unset');
+$organizer 		= unserialize (decode_popup ($organizer));
+$attendee		= (isset($_REQUEST['attendee'])) ? ($_REQUEST['attendee']) : ('unset');
+$attendee 		= unserialize (decode_popup ($attendee));
+$cal_title_full	= $cal.' '.$calendar_lang;
 
 // Format event time
 if (($start) && ($end)) {
@@ -129,6 +78,7 @@ if ($status) {
 	$display.='</tr>';
 }
 if ($location) {
+	if (isset($url)) $location = '<a href="'.$url.'" target="_blank">'.$location.'</a>';
 	$display.="<!-- Location -->\n";
 	$display.='<tr>' . "\n";
 	$display.='<td width="1%"><img src="images/spacer.gif" width="6" height="1" alt=" "></td>' . "\n";
@@ -142,7 +92,7 @@ if ($location) {
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo $cal_title; ?></title>
+	<title><?php echo $cal; ?></title>
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
 </head>
 
@@ -170,6 +120,11 @@ if ($location) {
 <td align="left" colspan="2" class="V12"><?php echo $event . ' ' . $event_times; ?><br><br></td>
 </tr>
 <?php echo $display; ?>
+
+</tr>
+<tr>
+<td colspan="3"><img src="../images/spacer.gif" width="1" height="6" alt=" "></td>
+</tr>
 </table>
 </td>
 </tr>

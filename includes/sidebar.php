@@ -98,24 +98,23 @@ $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><
 							$event_text = stripslashes(urldecode($val["event_text"]));
 							$event_text = strip_tags($event_text, '<b><i><u>');
 							if ($event_text != "") {	
-								$event_text2 	= rawurlencode(addslashes($val["event_text"]));
-								$description 	= addslashes(urlencode($val["description"]));
+								$event_text2 	= rawurlencode(addslashes($val['event_text']));
+								$description 	= addslashes(urlencode($val['description']));
 								$event_start 	= @$val["event_start"];
 								$event_end 		= @$val["event_end"];
 								$event_calna 	= @$val["calname"];
-								$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
-								$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
+								$event_url 		= @$val["url"];
+								$event_start 	= date ($timeFormat, @strtotime ($event_start));
+								$event_end 		= date ($timeFormat, @strtotime ($event_end));
 								$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
 								
 								if (!isset($val["event_start"])) { 
 									$event_start = $all_day_lang; 
 									$event_end = ''; 
-									openevent($event_calna, $event_start, 
-									$event_end, $val, $tomorrows_events_lines, 21, '<i>', '</i>', 'psf'); 
+									openevent($event_calna, $event_start, $event_end, $val, $tomorrows_events_lines, 21, '<i>', '</i>', 'psf', $event_url); 
 									echo "<br>\n"; 
 								} else { 
-									openevent($event_calna, $event_start, 
-									$event_end, $val, $tomorrows_events_lines, 21, '<font class="G10B">&#149; ', '</font>', 'psf'); 
+									openevent($event_calna, $event_start, $event_end, $val, $tomorrows_events_lines, 21, '<font class="G10B">&#149; ', '</font>', 'psf', $event_url); 
 									echo "<br>\n"; 
 								}
 

@@ -114,15 +114,17 @@ include (BASE.'includes/header.inc.php');
 								foreach ($master_array[("$daylink")] as $event_times) {
 									foreach ($event_times as $val) {
 										$num_of_events2++;
-										$event_calno = $val['calnumber'];
-										$event_calna = $val['calname'];
+										$event_calno 	= $val['calnumber'];
+										$event_calna 	= $val['calname'];
+										$event_url 		= $val['url'];
 										if (!isset($val["event_start"])) {
 											echo '<div align="center" class="V10">';
 											openevent("$event_calna", "", "", $val, $month_event_lines,
 											15,
 											"<i>",
 											"</i>",
-											"psf");
+											"psf",
+											$event_url);
 											echo '</div>';
 										} else {	
 											echo '<div align="left" class="V9">&nbsp;';
@@ -140,7 +142,8 @@ include (BASE.'includes/header.inc.php');
 											11,
 											"$start2 ",
 											"",
-											"ps3");
+											"ps3",
+											$event_url);
 											echo '</div>';
 										}
 									}
@@ -196,8 +199,9 @@ include (BASE.'includes/header.inc.php');
 								
 								// Pull out each time
 								foreach ($new_val as $new_key2 => $new_val2) {
-								$event_calno = $new_val2['calnumber'];
-								$event_calna = $new_val2['calname'];
+								$event_calno 	= $new_val2['calnumber'];
+								$event_calna 	= $new_val2['calname'];
+								$event_url 		= $new_val2['url'];
 
 								if ($new_val2["event_text"]) {	
 									if (isset($new_val2["event_start"])) {
@@ -228,7 +232,8 @@ include (BASE.'includes/header.inc.php');
 									65,
 									"<font class=\"G10B\">",
 									"</font>",
-									"psf");
+									"psf",
+									$event_url);
 									echo "</td>\n";
 									echo "</tr>\n";
 								}

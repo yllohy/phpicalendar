@@ -164,6 +164,7 @@ include (BASE.'includes/header.inc.php');
 														echo "<tr>\n";
 														$event_calno  = $allday['calnumber'];
 														$event_calna  = $allday['calname'];
+														$event_url    = $allday['url'];
 						 								if ($event_calno < 1) $event_calno=1;
 														if ($event_calno > 7) $event_calno=7;
 						 								echo '<td valign="top" align="center" class="eventbg_'.$event_calno.'">';
@@ -175,7 +176,8 @@ include (BASE.'includes/header.inc.php');
 													  	12,
 													  	'<font color="#ffffff">',
 													  	"</font>",
-													  	"psf");
+													  	"psf",
+													  	$event_url);
 														echo "</td></tr>\n";
 												  	}
 												  echo "</table>\n";
@@ -185,9 +187,7 @@ include (BASE.'includes/header.inc.php');
 												$i++;
 											  } while ($i < 7);
 											echo "</tr>\n";
-										}
-											// $master_array[($getdate)]["$day_time"]
-											
+										}											
 											$thisdate = $start_week_time;
 											for ($i=0;$i<7;$i++) {
 												$thisday = date("Ymd", $thisdate);
@@ -308,7 +308,8 @@ include (BASE.'includes/header.inc.php');
 																	 if (isset($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end']);
 																	$event_end 	= date ($timeFormat, $event_end);
 
-																	$event_calna = $this_time_arr[($event_length[$thisday][$i]["key"])]['calname'];
+																	$event_calna 	= $this_time_arr[($event_length[$thisday][$i]["key"])]['calname'];
+																	$event_url 		= $this_time_arr[($event_length[$thisday][$i]["key"])]['url'];
 																	openevent("$event_calna",
 																		  "$event_start",
 																		  "$event_end",
@@ -317,7 +318,8 @@ include (BASE.'includes/header.inc.php');
 																		  25,
 																		  "<font class=\"V10W\">",
 																		  "</font>",
-																		  "psf");
+																		  "psf",
+																		  $event_url);
 																	echo "</td></tr>\n";
 																	echo "</table>\n";
 																	echo "</td>\n";           

@@ -160,7 +160,7 @@ function chooseOffset($time) {
 	return $offset;
 }
 
-function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text, $post_text, $link_class) { 
+function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text, $post_text, $link_class, $url) { 
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	# for iCal pseudo tag <http> comptability
 	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) { 
@@ -190,6 +190,10 @@ function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text,
 	if (isset($arr["description"])) {
 		$description  = addslashes(stripslashes(urldecode($arr["description"])));
     }
+    
+    if (isset($arr["url"])) {
+		$url  = addslashes(stripslashes(urldecode($arr["url"])));
+    }
 
 	if (!empty($event_text)) {	
 		if ($lines > 0) {
@@ -206,7 +210,7 @@ function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text,
 echo <<<END
 
     <script language="Javascript" type="text/javascript"><!--
-    var eventData = new EventData('$escaped_event', '$escaped_calendar', '$escaped_start', '$escaped_end', '$description', '$status', '$location', '$organizer', '$attendee');
+    var eventData = new EventData('$escaped_event', '$escaped_calendar', '$escaped_start', '$escaped_end', '$description', '$status', '$location', '$organizer', '$attendee', '$url');
     document.popup_data[$popup_data_index] = eventData;
     // --></script>
 
