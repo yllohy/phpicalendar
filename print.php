@@ -10,12 +10,22 @@ if (strlen($cal_displayname2) > 24) {
 
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time = $start_week_time + (6 * 25 * 60 * 60);
-$start_week = localizeDate($dateFormat_week, $start_week_time);
-$end_week =  localizeDate($dateFormat_week, $end_week_time);
 $parse_month = date ("Ym", strtotime($getdate));
 $printview = $HTTP_GET_VARS['printview'];
 $cal_displayname = str_replace("32", " ", $cal);
 $events_week = 0;
+
+if ($printview == 'day') {
+	$print_title = localizeDate ($dateFormat_day, strtotime($getdate));
+} elseif ($printview == 'week') {
+	$start_week = localizeDate($dateFormat_week, $start_week_time);
+	$end_week =  localizeDate($dateFormat_week, $end_week_time);
+	$print_title = "$start_week - $end_week";
+	$week_start = date("Ymd", $start_week_time);
+	$week_end = date("Ymd", $end_week_time);
+} elseif ($printview == 'month') {
+	$print_title = localizeDate ($dateFormat_month, strtotime($getdate));
+}
 
 	?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -30,8 +40,8 @@ $events_week = 0;
 <center><table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" height=\"22\" border=\"0\" align=\"left\">"; ?></td>
-		<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_day, strtotime($getdate))); ?></font></td>
-		<td align="right" valign="top" width="1%"  class="sideback"></td>
+		<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo $print_title; ?></font></td>
+		<td align="right" valign="top" width="1%"  class="sideback">&nbsp;</td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
@@ -51,7 +61,7 @@ $events_week = 0;
 										
 										// Pull out only this months
 										ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
-										if ((($regs[1] == $parse_month) && ($printview == "month")) || (($key == $getdate) && ($printview == "day"))) {
+										if ((($regs[1] == $parse_month) && ($printview == "month")) || (($key == $getdate) && ($printview == "day")) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == "week"))) {
 											$dayofmonth = strtotime ($key);
 											$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
@@ -70,6 +80,7 @@ $events_week = 0;
 													$event_end 		= $new_val2["event_end"];
 													$event_start 	= date ($timeFormat, strtotime ("$event_start"));
 													$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+													$event_start 	= "$event_start - $event_end";
 													if (!$new_val2["event_start"]) { 
 														$event_start = "$all_day_lang";
 														$event_start2 = '';
@@ -82,7 +93,7 @@ $events_week = 0;
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
 													echo "<tr>\n";
 													echo "<td width=\"100\" class=\"G10BOLD\">$time_lang:</td>\n";
-													echo "<td align=\"left\" class=\"G10B\">$event_start - $event_end</td>\n";
+													echo "<td align=\"left\" class=\"G10B\">$event_start</td>\n";
 													echo "</tr>\n";
 													echo "<tr>\n";
 													echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$summary_lang:</td>\n";
