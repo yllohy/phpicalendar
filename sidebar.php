@@ -1,3 +1,13 @@
+	<?php
+	
+	$cal_displayname2 = urldecode($cal) . " $calendar_lang";
+	if (strlen($cal_displayname2) > 24) {
+		$cal_displayname2 = substr("$cal_displayname2", 0, 21);
+		$cal_displayname2 = $cal_displayname2 . "...";
+	}
+	
+	?>
+	
 	<table cellpadding="0" cellspacing="0" border="0" width="160">
 		<tr>
 			<td valign="center" align="center">
@@ -15,7 +25,7 @@
 								</tr>
 								<tr>
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "$cal $calendar_lang"; ?></td>
+									<td colspan="6" class="G10B"><?php echo "$cal_displayname2"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>

@@ -41,6 +41,8 @@ $display_month3 = strftime ($dateFormat_month, strtotime("+1 month", $date));
 $parse_month = date ("Ym", $date);
 $thisday2 = strftime($dateFormat_week_list, $date);
 
+$dayborder = 0;
+
 $nbrGridCols = 1;
 if ($master_array[($getdate)]) {
 	foreach($master_array[($getdate)] as $ovlKey => $ovlValue) {
@@ -120,7 +122,15 @@ if ($master_array[($getdate)]) {
 										echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 									}
 									if (sizeof($event_length) == 0) {
-										echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols . "\" class=\"dayborder\">&nbsp;</td>\n";
+										if ($dayborder == 0) {
+											$class = " class=\"dayborder\"";
+											$dayborder++;
+										} else {
+											$class = "";
+											$dayborder = 0;
+										}
+										echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols . "\" $class>&nbsp;</td>\n";
+										
 									} else {
 										$emptyWidth = $nbrGridCols;
 										for ($i=0;$i<sizeof($event_length);$i++) {
