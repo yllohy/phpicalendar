@@ -37,7 +37,7 @@ if ($printview == 'day') {
 	$print_next_nav = $next_week_lang;
 	$print_prev_nav = $last_week_lang;
 } elseif ($printview == 'month') {
-	$print_title 	= localizeDate ($dateFormat_month, strtotime($getdate));
+	$display_date 	= localizeDate ($dateFormat_month, strtotime($getdate));
 	$next 			= date("Ymd", strtotime("+1 month", $unix_time));
 	$prev 			= date("Ymd", strtotime("-1 month", $unix_time));
 	$zero_events 	= $no_events_month_lang;
