@@ -16,6 +16,7 @@ function list_calcolors() {
 	$i = 1;
 	foreach ($master_array['-3'] as $key => $val) {
 		if ($i > $unique_colors) $i = 1;
+		$val = str_replace ("\,", ",", $val);
 		$return .= '<img src="templates/'.$template.'/images/monthdot_'.$i.'.gif" alt="" /> '.$val.'<br />';
 		$i++;
 	}
