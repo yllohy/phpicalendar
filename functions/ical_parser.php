@@ -226,8 +226,9 @@ foreach ($cal_filelist as $filename) {
   					} else {
 						$end = strtotime('+1 day', $start);
 					}
-					if (($end > $mArray_begin) && ($end < $mArray_end)) {
-						while ($start != $end) {
+					// Changed for 1.0, basically write out the entire event if it starts while the array is written.
+					if ($start < $mArray_end) {
+						while (($start != $end) && ($start < $mArray_end)) {
 							$start_date2 = date('Ymd', $start);
 							$master_array[($start_date2)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description, 'calnumber' => $calnumber, 'calname' => $actual_calname );
 							$start = strtotime('+1 day', $start);
