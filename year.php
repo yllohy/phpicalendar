@@ -96,7 +96,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 					for ($i=0; $i<7; $i++) {
 						$day_num = date("w", $start_day);
 						$day = $daysofweekshort_lang[$day_num];
-						print '<td width="30" height="14" class="dateback" align="center"><font class="V9BOLD">' . $day . '</td>' . "\n";
+						print '<td width="30" height="14" class="dateback" align="center"><font class="V9BOLD">' . $day . '</font></td>' . "\n";
 						$start_day = strtotime("+1 day", $start_day); 
 					}
 				?>
@@ -169,12 +169,13 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 				$n++;
 				if (($m == 3) && ($n < 12)) {
 					$m = 0;
-					echo '<tr>';
+					echo '</tr><tr>';
 					echo '<td colspan="5"><img src="images/spacer.gif" width="1" height="20" alt=""></td>';
-					echo '</tr>';
+					echo '</tr><tr>';
 				}
 			} while (($m < 3) && ($n < 12)); 
 		?>
+</tr>
 </table>
 <?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
