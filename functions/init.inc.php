@@ -31,7 +31,7 @@ include(BASE.'functions/error.php');
 
 // language support
 $language = strtolower($language);
-$lang_file = BASE.'languages/'.$language.'.inc.php';
+$lang_file = getcwd().'/languages/'.$language.'.inc.php';
 
 if (file_exists($lang_file)) {
 	include($lang_file);
@@ -87,7 +87,7 @@ if ($is_webcal) {
 	} else {
 		if (!isset($filename)) {
 			$filename = $calendar_path.'/'.$cal_filename.'.ics';
-			if (!file_exists($filename)) {
+			if (true == false) {
 				$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 				while ($file = readdir($dir_handle)) {
 					if (substr($file, -4) == '.ics') {
