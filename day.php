@@ -96,6 +96,12 @@ $page->replace_tags(array(
 	'l_download'		=> $lang['l_download'],
 	'l_this_site_is'	=> $lang['l_this_site_is']
 	));
+
+if ($allow_preferences != 'yes') {
+	$page->replace_tags(array(
+	'allow_preferences'	=> ''
+	));
+}
 	
 if ($allow_login == 'yes') {
 	$page->replace_tags(array(

@@ -954,7 +954,7 @@ foreach ($cal_filelist as $filename) {
 						}
 						break;
 						
-					case 'DTEND';
+					case 'DTEND':
 						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;

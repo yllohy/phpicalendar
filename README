@@ -82,11 +82,19 @@ COPYING for more information about our license.
 Changes:
 --------
 2.0 beta
-	-Swedish, French, Dutch and Lithuanian translations added.
+	-Updated translations:
+		-Japanese
+		-Swedish
+		-French
+		-Dutch
+		-Traditional Chinese
+		-Lithuanian
 	-Added iCal specific publish.php.
 	-Fixed stat bug.
 	-PHP5 support added.
 	-Admin page works again.
+	-Oct. to Nov. transition more reliable.
+	-RSS handles files with spaces.
 	-Requires PHP 4.1.0 or greater now.
 	-Various Bug fixes.
 

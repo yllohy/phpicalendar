@@ -1,154 +1,161 @@
 <?php
 
-// Japanese language include
-// For version 0.9.2 PHP iCalendar
+// English language include
+// For version 2.0 PHP iCalendar
 //
 // Translation by Jared Wangen (jared@silter.org)
 // With the help of Eri Hayashiguchi
 //
 // Submit new translations to chad@chadsdomain.com
 
-$day_lang			= '日';
-$week_lang			= '週';
-$month_lang			= '月';
-$year_lang			= '年';
-$calendar_lang		= 'カレンダー';
-$next_day_lang		= '翌日';
-$next_month_lang	= '来月';
-$next_week_lang		= '来週';
-$next_year_lang		= '来年';
-$last_day_lang		= '前日';
-$last_month_lang	= '先月';
-$last_week_lang		= '先週';
-$last_year_lang		= '去年';
-$subscribe_lang		= '追加';
-$download_lang		= 'ダウンロード';
-$published_lang		= '公開日：';
-$powered_by_lang 	= 'Powered by';
-$event_lang			= '件名';
-$event_start_lang	= '開始日';
-$event_end_lang		= '終了日';
-$date_lang			= '日付';
-$summary_lang		= '件名';
-$all_day_lang		= '終日イベント';
-$notes_lang			= '注釈';
-$todays_lang		= '今日の予定';
-$this_weeks_lang	= '今週の予定';
-$this_months_lang	= '今月の予定';
-$this_years_lang	= '今年の予定';
-$today_lang			= '今日';
-$this_week_lang		= '今週';
-$this_month_lang	= '今月';
-$this_year_lang		= '今年';
-$jump_lang			= '移動';
-$tomorrows_lang		= '翌日の予定';
-$goday_lang			= '今日に移動';
-$goweek_lang		= '今週に移動';
-$gomonth_lang		= '今月に移動';
-$goyear_lang		= '今年に移動';
-$search_lang		= '検索'; // the verb
-$results_lang		= '検索結果';
-$query_lang			= '検索キーワード'; // will be followed by the search query
-$no_results_lang	= '一致する予定はありませんでした。';
-$goprint_lang		= '印刷できる';
-$time_lang			= '時間';
-$summary_lang		= '結言';
-$description_lang	= 'メモ';
-$this_site_is_lang		= 'このウェブサイトは%sです。';
-$no_events_day_lang		= '今日は予定がありません。';
-$no_events_week_lang	= '今週は予定がありません。';
-$no_events_month_lang	= '今月は予定がありません';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e日';  // Lists just the day
-$rss_month_date			= '%b %e日';  // Lists just the day
-$rss_language			= 'ja';
-$search_took_lang		= '検索に%s秒かかりました。';
-$recurring_event_lang	= '引き続く予定';
-$exception_lang			= '特例';
-$no_query_lang			= '検索キーワードがありませんでした。';
-$preferences_lang		= '環境設定';
-$printer_lang			= 'プリンター';
-$select_lang_lang		= 'デフォルト言語を選択して下さい:';
-$select_cal_lang		= 'デフォルトカレンダーを選択して下さい:';
-$select_view_lang		= 'デフォルト見解を選択して下さい:';
-$select_time_lang		= 'デフォルト開始時刻を選択して下さい:';
-$select_day_lang		= 'デフォルト開始曜日を選択して下さい:';
-$select_style_lang		= 'デフォルト形式を選択して下さい:';
-$set_prefs_lang			= '環境を設定する';
-$completed_date_lang	= '%sに完成された。';
-$completed_lang			= '完了';
-$created_lang			= '作成日:';
-$due_lang				= '期限:';
-$priority_lang			= '優先順位:';
-$priority_high_lang		= '高い';
-$priority_low_lang		= '低い';
-$priority_medium_lang	= '普通';
-$priority_none_lang		= 'なし';
-$status_lang			= '状態:';
-$todo_lang				= '備忘録';
-$unfinished_lang		= '完成されていない';
-$prefs_set_lang 		= 'Your preferences have been set.';
-$prefs_unset_lang 		= 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang 		= 'Unset preferences:';
-$organizer_lang			= 'Organizer';
-$attendee_lang			= 'Attendee';
-$status_lang			= 'Status';
-$location_lang			= 'Location';
-$admin_header_lang		= 'PHP iCalendar Administration';
-$username_lang			= 'Username';
-$password_lang			= 'Password';
-$login_lang				= 'Login';
-$invalid_login_lang		= 'Wrong username or password.';
-$addupdate_cal_lang		= 'Add or Update a Calendar';
-$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
-$delete_cal_lang		= 'Delete a Calendar';
-$logout_lang			= 'Logout';
-$cal_file_lang			= 'Calendar File';
-$php_error_lang			= 'PHP Error';
-$upload_error_gen_lang	= 'There was a problem with your upload.';
-$upload_error_lang[0]	= 'There was a problem with your upload.';
-$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
-$upload_error_lang[4]	= 'You must select a file for upload.';
-$upload_error_type_lang = 'Only .ics files may be uploaded.';
-$copy_error_lang		= 'Failed to copy file';
-$delete_error_lang		= 'Failed to delete file';
-$delete_success_lang	= 'was deleted successfully.';
-$action_success_lang	= 'Your action was successful.';
-$submit_lang			= 'Submit';
-$delete_lang			= 'Delete';
+$lang['l_day'] 				= '日';
+$lang['l_week'] 			= '週';
+$lang['l_month'] 			= '月';
+$lang['l_year'] 			= '年';
+$lang['l_calendar'] 		= 'カレンダー';
+$lang['l_next_day'] 		= '翌日';
+$lang['l_next_month'] 		= '来月';
+$lang['l_next_week'] 		= '来週';
+$lang['l_next_year'] 		= '来年';
+$lang['l_last_day'] 		= '前日';
+$lang['l_last_month'] 		= '先月';
+$lang['l_last_week'] 		= '先週';
+$lang['l_last_year'] 		= '去年';
+$lang['l_subscribe'] 		= '追加';
+$lang['l_download'] 		= 'ダウンロード';
+$lang['l_powered_by'] 		= 'Powered by';
+$lang['l_event'] 			= '件名';
+$lang['l_event_start'] 		= '開始日';
+$lang['l_event_end'] 		= '終了日';
+$lang['l_this_months'] 		= '今月の予定';
+$lang['l_date'] 			= '日付';
+$lang['l_summary'] 			= '件名';
+$lang['l_all_day'] 			= '終日イベント';
+$lang['l_notes'] 			= '注釈';
+$lang['l_this_years'] 		= '今年の予定';
+$lang['l_today'] 			= '今日';
+$lang['l_this_week'] 		= '今週';
+$lang['l_this_month'] 		= '今月';
+$lang['l_jump'] 			= '移動';
+$lang['l_tomorrows'] 		= '明日の予定';
+$lang['l_goday'] 			= '今日に移動';
+$lang['l_goweek'] 			= '今週に移動';
+$lang['l_gomonth'] 			= '今月に移動';
+$lang['l_goyear'] 			= '今年に移動';
+$lang['l_search'] 			= '検索'; // the verb
+$lang['l_results'] 			= '検索結果';
+$lang['l_query'] 			= '検索キーワード'; // will be followed by the search query
+$lang['l_no_results'] 		= '一致する予定はありませんでした。';
+$lang['l_goprint'] 			= '印刷用表示';
+$lang['l_time'] 			= '時間';
+$lang['l_summary'] 			= '要約';
+$lang['l_description'] 		= 'メモ';
+$lang['l_this_site_is']		= 'This site is';
+$lang['l_no_events_day']	= '今日は予定がありません。';
+$lang['l_no_events_week']	= '今週は予定がありません。';
+$lang['l_no_events_month']	= '今月は予定がありません。';
+$lang['l_rss_day_date']		= 'g:i A';  // Lists just the time
+$lang['l_rss_week_date	']	= '%b %e日';  // Lists just the day
+$lang['l_rss_month_date	']	= '%b %e日';  // Lists just the day
+$lang['l_rss_language']		= 'ja';
+$lang['l_search_took']		= '検索に%s秒かかりました。';
+$lang['l_recurring_event']	= '引き続く予定';
+$lang['l_exception']		= '特例';
+$lang['l_no_query']			= '検索キーワードがありませんでした。';
+$lang['l_preferences']		= '環境設定';
+$lang['l_printer']			= 'プリンター';
+$lang['l_select_lang']		= 'デフォルト言語を選択して下さい';
+$lang['l_select_cal']		= 'デフォルトカレンダーを選択して下さい';
+$lang['l_select_view']		= 'デフォルト見解を選択して下さい';
+$lang['l_select_time']		= 'デフォルト開始時刻を選択して下さい';
+$lang['l_select_day']		= 'デフォルト開始曜日を選択して下さい';
+$lang['l_select_style']		= 'デフォルト形式を選択して下さい';
+$lang['l_set_prefs']		= '環境設定を保存する';
+$lang['l_completed_date']	= '%sに完成された。';
+$lang['l_completed']		= '完了';
+$lang['l_created']			= '作成日:';
+$lang['l_due']				= '期限:';
+$lang['l_priority']			= '優先順位:';
+$lang['l_priority_high']	= '高い';
+$lang['l_priority_low']		= '低い';
+$lang['l_priority_medium']	= '普通';
+$lang['l_priority_none']	= 'なし';
+$lang['l_status']			= '状態:';
+$lang['l_todo']				= '備忘録';
+$lang['l_unfinished']		= '完成されていない';
+$lang['l_prefs_set'] 		= 'Your preferences have been set.';
+$lang['l_prefs_unset'] 		= 'Preferences unset. Changes will take place next page load.';
+$lang['l_unset_prefs'] 		= '保存された設定を削除する';
+$lang['l_organizer']		= 'Organizer';
+$lang['l_attendee']			= 'Attendee';
+$lang['l_status']			= 'Status';
+$lang['l_location']			= 'Location';
+$lang['l_admin_header']		= 'PHP iCalendar Administration';
+$lang['l_username']			= 'Username';
+$lang['l_password']			= 'Password';
+$lang['l_login']			= 'Login';
+$lang['l_invalid_login']	= 'Wrong username or password.';
+$lang['l_addupdate_cal']	= 'Add or Update a Calendar';
+$lang['l_addupdate_desc']	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
+$lang['l_delete_cal']		= 'Delete a Calendar';
+$lang['l_logout']			= 'Logout';
+$lang['l_cal_file']			= 'Calendar File';
+$lang['l_php_error']		= 'PHP Error';
+$upload_error_gen_lang		= 'There was a problem with your upload.';
+$upload_error_lang[0]		= 'There was a problem with your upload.';
+$upload_error_lang[1]		= 'The file you are trying to upload is too big.';
+$upload_error_lang[2]		= 'The file you are trying to upload is too big.';
+$upload_error_lang[3]		= 'The file you are trying upload was only partially uploaded.';
+$upload_error_lang[4]		= 'You must select a file for upload.';
+$lang['l_upload_error_type'] = 'Only .ics files may be uploaded.';
+$lang['l_copy_error']			= 'Failed to copy file';
+$lang['l_delete_error']			= 'Failed to delete file';
+$lang['l_delete_success']		= 'was deleted successfully.';
+$lang['l_action_success']		= 'Your action was successful.';
+$lang['l_submit']				= 'Submit';
+$lang['l_delete']				= 'Delete';
+$all_cal_comb_lang			= 'All Combined';
 
-// ----- New for 1.0
-$all_cal_comb_lang		= 'All calendars combined';
+// New for 2.0
+$lang['l_legend']			= '凡例';
+$lang['l_admin_subhead']	= 'Manage your calendars from this page';
+$lang['l_prefs_subhead']	= 'このサイトを見るためのクッキーを設定します';
+$lang['l_rss_info']			= 'RSS Information';
+$lang['l_rss_subhead']		= 'Basic RSS feeds available for each calendar';
+$lang['l_rss_notenabled']	= 'RSS is not enabled on this site';
 
 // - navigation
-$back_lang = '戻る';
-$next_lang = '次';
-$prev_lang = '前';
-$day_view_lang = '日';
-$week_view_lang = '週';
-$month_view_lang = '月';
-$year_view_lang = '年';
+$lang['l_back'] 		= '戻る';
+$lang['l_next'] 		= '次';
+$lang['l_prev'] 		= '前';
+$lang['l_day_view'] 	= '日';
+$lang['l_week_view'] 	= '週';
+$lang['l_month_view'] 	= '月';
+$lang['l_year_view'] 	= '年';
+
+// ---------------------------------
+
 
 // $format_recur, items enclosed in % will be substituted with variables
-$format_recur_lang['delimiter']	= '、';								// ie, 'one, two, three'
-// 第
+$format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
+
 $format_recur_lang['yearly']		= array('年','年');		// for these, put singular
 $format_recur_lang['monthly']		= array('か月','か月');		// and plural forms
 $format_recur_lang['weekly']		= array('週','週');		// these will be %freq%
-$format_recur_lang['daily']		= array('日','日');			// in the replacement below
+$format_recur_lang['daily']			= array('日','日');			// in the replacement below
 $format_recur_lang['hourly']		= array('時間','時間');
 $format_recur_lang['minutely']		= array('分','分');
 $format_recur_lang['secondly']		= array('秒','秒');
 
-$format_recur_lang['start']		= '%int%%freq%ごとに%for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']		= '%date%まで';				// ie, 'until January 4'
-$format_recur_lang['count']		= '%int%回';		// ie, 'for a count of 5'
+$format_recur_lang['start']			= '%int%%freq%ごとに%for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= '%date%まで';				// ie, 'until January 4'
+$format_recur_lang['count']			= '%int%回';		// ie, 'for 5 times'
 
 $format_recur_lang['bymonth']		= '月：%list%';			// ie, 'In months: January, February, March'
 $format_recur_lang['bymonthday']	= '日：%list%';			// ie, 'On dates: 1, 2, 3, 4'
 $format_recur_lang['byday']			= '曜日：%list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+
+// ---------------------------------
 
 $daysofweek_lang			= array ('日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日');
 $daysofweekshort_lang		= array ('日','月','火','水','木','金','土');
@@ -185,13 +192,15 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'エラー!';
-$error_window_lang = 'エラーが発生しました!';
-$error_calendar_lang = 'エラーがおきたとき、「%s」カレンダーを処理していました。';
-$error_path_lang = '「%s」ディレクトリを開けることはできません。';
-$error_back_lang = '前のページに戻るには「戻る」ボタンをクリックして下さい。';
-$error_remotecal_lang = 'このサーバは承認されていないリモートカレンダーを拒否しています。';
-$error_restrictedcal_lang = 'このサーバで 限られているカレンダーにアクセスしようとしました。';
-$error_invalidcal_lang = 'このカレンダーはサーバ側で制限されているため、アクセスできません。';
+$lang['l_error_title'] 			= 'エラー!';
+$lang['l_error_window'] 		= 'エラーが発生しました!';
+$lang['l_error_calendar'] 		= 'エラーがおきたとき、「%s」カレンダーを処理していました。';
+$lang['l_error_path'] 			= '「%s」ディレクトリを開けることはできません。';
+$lang['l_error_back'] 			= '前のページに戻るには「戻る」ボタンをクリックして下さい。';
+$lang['l_error_remotecal'] 		= 'このサーバは承認されていないリモートカレンダーを拒否しています。';
+$lang['l_error_restrictedcal'] 	= 'このサーバで 限られているカレンダーにアクセスしようとしました。';
+$lang['l_error_invalidcal'] 	= 'Invalid calendar file. Please try a different calendar.';
+$lang['l_error_cantopen'] 		= 'Unable to open calendar.';
+$lang['l_error_cache']			= 'Unable to write to cache directory. Please check your config.';
 
 ?>
