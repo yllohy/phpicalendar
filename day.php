@@ -123,7 +123,7 @@ if ($getdate == (date("Ymd"))) {
 											if ($event_length > 0) {
 												$event_length--;
 											} else {
-												echo "<td bgcolor=\"#ffffff\"><img src=\"images/spacer.gif\" width=\"1\" height=\"30\"></td>\n";
+												echo "<td bgcolor=\"#ffffff\">&nbsp;</td>\n";
 											}
 											echo "</tr>\n";
 										} elseif ($event_started != TRUE) {

@@ -41,6 +41,10 @@ foreach($contents as $line) {
 		$rrule_array = "";
 	} elseif (strstr($line, "END:VEVENT")) {
 		
+		// Clean out \n's
+		$summary = str_replace("\\n", "<br>", $summary);
+		
+		
 		//echo "<b>Start</b> $start_time <b>End</B> $end_time <b>Summary</b> $summary<br>\n";
 		if ($start_time != "") {
 			ereg ("([0-9]{2})([0-9]{2})", $start_time, $time);
