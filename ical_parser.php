@@ -618,6 +618,15 @@ if (is_array($master_array)) {
 	reset($master_array);
 }
 
+// sort the sub (day) arrays so the times are in order
+foreach (array_keys($master_array) as $k) {
+	if (is_array($master_array[$k])) {
+		ksort($master_array[$k]);
+		reset($master_array[$k]);
+	}
+}
+
+
 // Store information in the session
 /*if ($use_sessions == "yes") {
 	session_start();

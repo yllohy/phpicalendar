@@ -75,10 +75,10 @@ if ($master_array[($getdate)]) {
 </head>
 <body bgcolor="#FFFFFF">
 <center>
-<table border="0" width="720" cellspacing="0" cellpadding="0">
+<table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="540" valign="top">
-<table width="540" border="0" cellspacing="0" cellpadding="0" class="calborder">
+		<td width="520" valign="top">
+<table width="520" border="0" cellspacing="0" cellpadding="0" class="calborder">
     <tr>
      	<td align="center" valign="middle">
       		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
@@ -115,7 +115,7 @@ if ($master_array[($getdate)]) {
 								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>
 								<td width="1"></td>
 								<?php for ($m=0;$m < $nbrGridCols;$m++) { 
-									echo "<td><img src=\"images/spacer.gif\" width=\"" . (540 / $nbrGridCols) . "\" height=\"1\" alt=\"\"></td>";
+									echo "<td><img src=\"images/spacer.gif\" width=\"" . (520 / $nbrGridCols) . "\" height=\"1\" alt=\"\"></td>";
 								} ?>
 							</tr>
 							<?php
