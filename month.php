@@ -11,10 +11,8 @@
 	$this_month = $day_array2[2];
 	$this_year = $day_array2[1];
 	$date = mktime(0,0,0,"$this_month","$this_day","$this_year");
-	$next_date = DateAdd ("m", "1", $date);
-	$prev_date = DateAdd ("m", "-1", $date);
-	$next_month = date( "Ym01", $next_date);
-	$prev_month = date( "Ym01", $prev_date);
+	$next_month = date("Ymd", DateAdd ("m", "1", $date));
+	$prev_month = date("Ymd", DateAdd ("m", "-1", $date));
 	$display_month = strftime ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_sunday = sundayOfWeek($this_year, $this_month, "1");
@@ -31,253 +29,148 @@
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
 	<?php include "functions/event.js"; ?>
 </head>
-<body bgcolor="#FFFFFF">
+<body>
 <center>
-
-				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9">
-					<tr>
-						<td align="center" valign="middle" bgcolor="white">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tr height="36">
-									<td align="left" valign="middle" bgcolor="white" height="36">
-										<table border="0" cellspacing="0" cellpadding="0" width="100%">
-											<tr>
-												<td align="left" width="100"><font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$last_month_lang</a>"; ?></font></td>
-												<td class="H20" align="center" valign="middle" bgcolor="white" height="24"><?php echo "$display_month"; ?></td>
-												<td align="right" width="100"><font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$next_month_lang</a>"; ?></font></td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td align="center" valign="middle">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
-								<tr height="20">
-									<td align="left" valign="middle" height="26"><?php include('./functions/list_icals.php'); ?></td>
-									<td align="right" class="G10B"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						
-						<td align="center" valign="top">
-							<table width="100%" border="0" cellspacing="1" cellpadding="0" class="G10B">
-								<tr height="11">
-									<td valign="top" width="99" height="13" class="eventbg">
-										<center><font class="eventfont"><b>Sunday</b></font></center>
-									</td>
-									<td valign="top" width="99" height="13" class="eventbg">
-										<center><font class="eventfont"><b>Monday</b></font></center>
-									</td>
-									<td valign="top" width="99" height="13" class="eventbg">
-										<center><font class="eventfont"><b>Tuesday</b></font></center>
-									</td>
-									<td valign="top" width="99" height="13" class="eventbg">
-										<center><font class="eventfont"><b>Wednesday</b></font></center>
-									</td>
-									<td valign="top" width="99" height="13" class="eventbg">
-										<center><font class="eventfont"><b>Thursday</b></font></center>
-									</td>
-									<td valign="top" width="99" height="13" class="eventbg">
-										<center><font class="eventfont"><b>Friday</b></font></center>
-									</td>
-									<td valign="top" width="99" height="13" class="eventbg">
-										<center><font class="eventfont"><b>Saturday</b></font></center>
-									</td>
-								</tr>
-								<?php 	 
-									$sunday = strtotime("$first_sunday");
-									$i = 0;
-									$whole_month = TRUE;
-									$num_of_events = 0;
-									do {
-										$day = date ("j", $sunday);
-										$daylink = date ("Ymd", $sunday);
-										$check_month = date ("m", $sunday);
-										if ($check_month != $this_month) $day= "<font style=\"color: #D6D6D6\">$day</font>";
-										if ($i == 0) echo "<tr height=\"99\">\n";
-										if (($master_array[("$daylink")]) && ($check_month == $this_month)) {
-											echo "<td align=\"center\" valign=\"top\" bgcolor=\"#ffffff\" width=\"99\" height=\"99\">\n";
-											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
+<table border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9" class="calborder">
+	<tr>
+		<td align="center" valign="middle" bgcolor="white">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\"><img src=\"images/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
+					<td class="H20" align="center" bgcolor="#DDDDDD" background="images/time_bg.gif"><?php echo "$display_month"; ?></td>
+					<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\"><img src=\"images/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		
+		<td align="center" valign="top">
+			<table width="100%" border="0" cellspacing="1" cellpadding="0" class="G10B" bgcolor="#A1A5A9">
+				<tr height="11">
+					<td valign="top" width="105" height="13" class="eventbg">
+						<center><font class="eventfont"><b>Sunday</b></font></center>
+					</td>
+					<td valign="top" width="105" height="13" class="eventbg">
+						<center><font class="eventfont"><b>Monday</b></font></center>
+					</td>
+					<td valign="top" width="105" height="13" class="eventbg">
+						<center><font class="eventfont"><b>Tuesday</b></font></center>
+					</td>
+					<td valign="top" width="105" height="13" class="eventbg">
+						<center><font class="eventfont"><b>Wednesday</b></font></center>
+					</td>
+					<td valign="top" width="105" height="13" class="eventbg">
+						<center><font class="eventfont"><b>Thursday</b></font></center>
+					</td>
+					<td valign="top" width="105" height="13" class="eventbg">
+						<center><font class="eventfont"><b>Friday</b></font></center>
+					</td>
+					<td valign="top" width="105" height="13" class="eventbg">
+						<center><font class="eventfont"><b>Saturday</b></font></center>
+					</td>
+				</tr>
+				<?php 	 
+					$sunday = strtotime("$first_sunday");
+					$i = 0;
+					$whole_month = TRUE;
+					$num_of_events = 0;
+					do {
+						$day = date ("j", $sunday);
+						$daylink = date ("Ymd", $sunday);
+						$check_month = date ("m", $sunday);
+						if ($check_month != $this_month) {
+							$day= "<font color=\"#666666\">$day</font>";
+							$bgcolor="#F2F2F2";
+						} else {
+							if ($getdate == $daylink) {
+								$bgcolor="#F2F9FF";
+							} else {
+								$bgcolor="#FFFFFF";
+							}
+						}
+						if ($i == 0) echo "<tr height=\"105\">\n";
+						if (($master_array[("$daylink")]) && ($check_month == $this_month)) {
+							echo "<td align=\"center\" valign=\"top\" bgcolor=\"$bgcolor\" width=\"105\" height=\"105\">\n";
+							echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
+							echo "<tr>\n";
+							echo "<td align=\"right\" valign=\"top\">\n";
+							echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+							echo "</td>\n";
+							echo "</tr>\n";
+							if ($master_array[("$daylink")]) {
+								foreach ($master_array[("$daylink")] as $event_times) {
+									foreach ($event_times as $val) {
+										$event_text = $val["event_text"];
+										$event_text = strip_tags($event_text, '<b><i><u>');
+										if ($event_text != "") {	
+											$event_text2 	= addslashes($val["event_text"]);
+											$event_text2 	= str_replace("\"", "&quot;", $event_text2);
+											$description 	= addslashes($val["description"]);
+											$description 	= str_replace("\"", "&quot;", $description);
+											$event_start 	= $val["event_start"];
+											$event_end 		= $val["event_end"];
+											$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+											$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+											if (strlen($event_text) > 12) {
+												$event_text = substr("$event_text", 0, 10);
+												$event_text = $event_text . "...";
+											}	
 											echo "<tr>\n";
-											echo "<td align=\"right\" valign=\"top\">\n";
-											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
-											echo "</td>\n";
-											echo "</tr>\n";
-											if ($master_array[("$daylink")]) {
-												foreach ($master_array[("$daylink")] as $event_times) {
-													foreach ($event_times as $val) {
-														$event_text = $val["event_text"];
-														$event_text = strip_tags($event_text, '<b><i><u>');
-														if ($event_text != "") {	
-															$event_text2 	= addslashes($val["event_text"]);
-															$event_text2 	= str_replace("\"", "&quot;", $event_text2);
-															$description 	= addslashes($val["description"]);
-															$description 	= str_replace("\"", "&quot;", $description);
-															$event_start 	= $val["event_start"];
-															$event_end 		= $val["event_end"];
-															$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-															$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-															if (strlen($event_text) > 12) {
-																$event_text = substr("$event_text", 0, 10);
-																$event_text = $event_text . "...";
-															}	
-															echo "<tr>\n";
-															echo "<td>\n";
-															echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-															echo "<tr>\n";
-															echo "<td>\n";
-															if (!$event_start = $val["event_start"]) {
-																echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center>\n";
-															} else {	
-																echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
-															}
-															echo "</td>\n";
-															echo "</tr>\n";
-															echo "</table>\n";
-															echo "</td>\n";
-															echo "</tr>\n";
-															$num_of_events++;
-														}
-													}
-												}
+											echo "<td>\n";
+											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+											echo "<tr>\n";
+											echo "<td>\n";
+											if (!$event_start = $val["event_start"]) {
+												echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center>\n";
+											} else {	
+												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 											}
-											echo "</table>\n";
-											echo "</td>\n";
-										} else {
-											echo "<td align=\"center\" valign=\"top\" bgcolor=\"#ffffff\" width=\"99\" height=\"99\">\n";
-											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
-											echo "<tr>\n";
-											echo "<td align=\"right\" valign=\"top\">\n";
-											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 											echo "</tr>\n";
 											echo "</table>\n";
 											echo "</td>\n";
-										}
-										$sunday = ($sunday + (24.5 * 60 * 60));
-										$i++;
-										if ($i == 7) { 
 											echo "</tr>\n";
-											$i = 0;
-											$checkagain = date ("m", $sunday);
-											if ($checkagain != $this_month) $whole_month = FALSE;	
-										}
-										
-										
-									} while ($whole_month == TRUE);
-									
-									
-								?>
-
-							</table>
-						</td>
-					</tr>
-				</table>
-
-
-	<br>
-<?php
-
-if ($num_of_events != 0) { 
-
-?>	
-	
-
-	<table width="740" border="0" cellspacing="0" cellpadding="0" class="calborder">
-		<tr>
-			<td align="center" valign="middle">
-				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9">
-					<tr>
-						<td align="center" valign="top">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tr height="25">
-									<td colspan="3" align="center" valign="middle" class="eventborder" width="740" height="25">
-										<font class="eventfont" color="#FFFFFF"><b><?php echo "$this_months_lang"; ?></b></font>
-									</td>
-								</tr>
-								<tr height="11">
-									<td valign="middle" width="150" height="11" class="eventbg">
-										<font class="eventfont"><b>&nbsp;<?php echo "$date_lang"; ?></b></font>
-									</td>
-									<td width="1" height="11" class="eventbg"><img src="images/spacer.gif" height="15" width="1">
-									</td>
-									<td valign="middle" width="551" height="11" class="eventbg">
-										<font class="eventfont"><b>&nbsp;<?php echo "$summary_lang"; ?></b></font>
-									</td>
-								</tr>
-								<tr height="1">
-									<td colspan="3" width="825" height="1">
-									</td>
-								</tr>
-								<?php	
-									// Iterate the entire master array
-									foreach($master_array as $key => $val) {
-										
-										// Pull out only this months
-										ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
-										if ($regs[1] == $parse_month) {
-											$dayofmonth = strtotime ($key);
-											$dayofmonth = strftime ($dateFormat_month_list, $dayofmonth);
-											$i = 0;
-											
-											// Pull out each day
-											foreach ($val as $new_val) {
-												
-												// Pull out each time
-												foreach ($new_val as $new_key2 => $new_val2) {
-												if ($new_val2["event_text"]) {	
-													$event_text 	= $new_val2["event_text"];
-													$event_text2 	= addslashes($new_val2["event_text"]);
-													$event_text2 	= str_replace("\"", "&quot;", $event_text2);
-													$description 	= addslashes($new_val2["description"]);
-													$description 	= str_replace("\"", "&quot;", $description);
-													$event_start 	= $new_val2["event_start"];
-													$event_end 		= $new_val2["event_end"];
-													$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-													$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-													$event_text = str_replace ("<br>", "", $event_text);
-													if (strlen($event_text) > 70) {
-														$event_text = substr("$event_text", 0, 65);
-														$event_text = $event_text . "...";
-													}
-													echo "<tr height=\"20\">\n";
-													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"200\" height=\"20\">\n";
-													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$dayofmonth</font></a>\n";
-													echo "</td>\n";
-													echo "<td width=\"1\" height=\"20\">\n";
-													echo "</td>\n";
-													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
-													if (!$new_val2["event_start"]) {
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\">$event_text</font></a> <font class=\"V9\">($all_day_lang)</font>\n";
-													} else {	
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
-													}
-													echo "</td>\n";
-													echo "</tr>\n";
-												}
-
-												}
-											}
+											$num_of_events++;
 										}
 									}
-								
-								?>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
+								}
+							}
+							echo "</table>\n";
+							echo "</td>\n";
+						} else {
+							echo "<td align=\"center\" valign=\"top\" bgcolor=\"$bgcolor\" width=\"105\" height=\"105\">\n";
+							echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
+							echo "<tr>\n";
+							echo "<td align=\"right\" valign=\"top\">\n";
+							echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+							echo "</td>\n";
+							echo "</tr>\n";
+							echo "</table>\n";
+							echo "</td>\n";
+						}
+						$sunday = ($sunday + (24.5 * 60 * 60));
+						$i++;
+						if ($i == 7) { 
+							echo "</tr>\n";
+							$i = 0;
+							$checkagain = date ("m", $sunday);
+							if ($checkagain != $this_month) $whole_month = FALSE;	
+						}
+						
+						
+					} while ($whole_month == TRUE);
+					
+					
+				?>
+
+			</table>
+		</td>
+	</tr>
+</table>
+
 
 <br>
-
-<?php } ?>	
 <?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?>
 </center>
 </body>
