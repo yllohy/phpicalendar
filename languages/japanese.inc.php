@@ -33,7 +33,7 @@ $event_lang			= '件名';
 $event_start_lang	= '開始日';
 $event_end_lang		= '終了日';
 $date_lang			= '日付';
-$summary_lang		= '一覧';
+$summary_lang		= '件名';
 $all_day_lang		= '終日イベント';
 $notes_lang			= '注釈';
 
@@ -53,18 +53,18 @@ $goweek_lang		= '今週に移動';
 $gomonth_lang		= '今月に移動';
 $goyear_lang		= '今年に移動';
 
-$search_lang		= '探す'; // the verb
-$results_lang		= 'サーチリザルト';
-$query_lang			= '問い'; // will be followed by the search query
-$no_results_lang	= '予定を見つけません。';
+$search_lang		= '検索'; // the verb
+$results_lang		= '検索結果';
+$query_lang			= '検索キーワード'; // will be followed by the search query
+$no_results_lang	= '一致する予定はありませんでした。';
 
 $goprint_lang		= '印刷できる';
 $time_lang			= '時間';
-$summary_lang		= '結言';
-$description_lang	= 'デスクリプション';
+//$summary_lang		= '結言';
+$description_lang	= 'メモ';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'このウェブサイト：';
+$this_site_is_lang		= 'このウェブサイトはです。';
 $no_events_day_lang		= '今日は予定がありません。';
 $no_events_week_lang	= '今週は予定がありません。';
 $no_events_month_lang	= '今月は予定がありません';
@@ -75,28 +75,28 @@ $rss_language			= 'ja';
 
 // new in 0.9 ----------------------
 
-$search_took_lang		= 'Search took %s seconds';
-$recurring_event_lang	= 'Recurring event';
+$search_took_lang		= '検索に%s秒かかりました。';
+$recurring_event_lang	= '引き続く予定';
 $exception_lang			= '特例';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= '、';								// ie, 'one, two, three'
-
+// 第
 $format_recur_lang['yearly']		= array('年','年');		// for these, put singular
 $format_recur_lang['monthly']		= array('か月','か月');		// and plural forms
 $format_recur_lang['weekly']		= array('週','週');		// these will be %freq%
-$format_recur_lang['daily']			= array('日','日');			// in the replacement below
+$format_recur_lang['daily']		= array('日','日');			// in the replacement below
 $format_recur_lang['hourly']		= array('時間','時間');
 $format_recur_lang['minutely']		= array('分','分');
 $format_recur_lang['secondly']		= array('秒','秒');
 
-$format_recur_lang['start']			= '%int%%freq%毎に%for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= '%date%まで';				// ie, 'until January 4'
-$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+$format_recur_lang['start']		= '%int%%freq%ごとに%for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']		= '%date%まで';				// ie, 'until January 4'
+$format_recur_lang['count']		= '%int%回';		// ie, 'for a count of 5'
 
 $format_recur_lang['bymonth']		= '月：%list%';			// ie, 'In months: January, February, March'
-$format_recur_lang['bymonthday']	= '幾日：%list%';			// ie, 'On dates: 1, 2, 3, 4'
-$format_recur_lang['byday']			= '週の日：%list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+$format_recur_lang['bymonthday']	= '日：%list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= '曜日：%list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
 
 // ---------------------------------
 
