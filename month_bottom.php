@@ -196,6 +196,22 @@
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
 														<td colspan="6" class="G10B"><?php include('./functions/list_weeks.php'); ?></td>
 													</tr>
+													<?php
+													if ($display_custom_goto == "yes" {
+													?>
+													<tr>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td colspan="6" class="G10B">
+															<form action="day.php" method="GET">
+																<input type="hidden" name="cal" value="<?php print urlencode($cal); ?>">
+																<input type="text" size="15" name="jumpto_day">
+																<input type="submit" value="Go">
+															</form>
+														</td>
+													</tr>
+													<?php
+													}
+													?>
 												</table>
 											</td>
 										</tr>
