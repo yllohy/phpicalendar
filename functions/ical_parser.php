@@ -346,8 +346,8 @@ foreach ($cal_filelist as $filename) {
 								$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $count;
 								break;
 							case 'UNTIL':
-								$until = ereg_replace('T', '', $val);
-								$until = ereg_replace('Z', '', $until);
+								$until = str_replace('T', '', $val);
+								$until = str_replace('Z', '', $until);
 								if (strlen($until) == 8) $until = $until.'235959';
 								$abs_until = $until;
 								ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})', $until, $regs);
@@ -721,8 +721,8 @@ foreach ($cal_filelist as $filename) {
 						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = ereg_replace('T', '', $data);
-						$data = ereg_replace('Z', '', $data);
+						$data = str_replace('T', '', $data);
+						$data = str_replace('Z', '', $data);
 						if (preg_match("/^DUE;VALUE=DATE/i", $field))  {
 							$allday_start = $data;
 							$start_date = $allday_start;
@@ -770,8 +770,8 @@ foreach ($cal_filelist as $filename) {
 						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = ereg_replace('T', '', $data);
-						$data = ereg_replace('Z', '', $data);
+						$data = str_replace('T', '', $data);
+						$data = str_replace('Z', '', $data);
 						if (preg_match("/^COMPLETED;VALUE=DATE/i", $field))  {
 							$allday_start = $data;
 							$start_date = $allday_start;
@@ -835,9 +835,9 @@ foreach ($cal_filelist as $filename) {
 						$field = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $field);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = ereg_replace('T', '', $data);
-						$data = ereg_replace('Z', '', $data);
-						$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
+						$data = str_replace('T', '', $data);
+						$data = str_replace('Z', '', $data);
+						$field = str_replace(';VALUE=DATE-TIME', '', $field); 
 						if ((preg_match("/^DTSTART;VALUE=DATE/i", $field)) || (ereg ('^([0-9]{4})([0-9]{2})([0-9]{2})$', $data)))  {
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtstart_check);
 							if ($dtstart_check[1] < 1970) { 
@@ -888,9 +888,9 @@ foreach ($cal_filelist as $filename) {
 						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = ereg_replace('T', '', $data);
-						$data = ereg_replace('Z', '', $data);
-						$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
+						$data = str_replace('T', '', $data);
+						$data = str_replace('Z', '', $data);
+						$field = str_replace(';VALUE=DATE-TIME', '', $field); 
 						if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtend_check);
 							if ($dtend_check[1] < 1970) { 
@@ -931,8 +931,8 @@ foreach ($cal_filelist as $filename) {
 					case 'EXDATE':
 						$data = split(",", $data);
 						foreach ($data as $exdata) {
-							$exdata = ereg_replace('T', '', $exdata);
-							$exdata = ereg_replace('Z', '', $exdata);
+							$exdata = str_replace('T', '', $exdata);
+							$exdata = str_replace('Z', '', $exdata);
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $exdata, $regs);
 							$except_dates[] = $regs[1] . $regs[2] . $regs[3];
 							$except_times[] = $regs[4] . $regs[5];
@@ -979,8 +979,8 @@ foreach ($cal_filelist as $filename) {
 						}
 						unset($parts, $part, $eachval);
 						
-						$data = ereg_replace('T', '', $data);
-						$data = ereg_replace('Z', '', $data);
+						$data = str_replace('T', '', $data);
+						$data = str_replace('Z', '', $data);
 						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 						$recurrence_id['date'] = $regs[1] . $regs[2] . $regs[3];
 						$recurrence_id['time'] = $regs[4] . $regs[5];
@@ -1019,17 +1019,17 @@ foreach ($cal_filelist as $filename) {
 					case 'DURATION':
 						if (($first_duration == TRUE) && (!stristr($field, '=DURATION'))) {
 							ereg ('^P([0-9]{1,2}[W])?([0-9]{1,2}[D])?([T]{0,1})?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration); 
-							$weeks 			= ereg_replace('W', '', $duration[1]); 
-							$days 			= ereg_replace('D', '', $duration[2]); 
-							$hours 			= ereg_replace('H', '', $duration[4]); 
-							$minutes 		= ereg_replace('M', '', $duration[5]); 
-							$seconds 		= ereg_replace('S', '', $duration[6]); 
+							$weeks 			= str_replace('W', '', $duration[1]); 
+							$days 			= str_replace('D', '', $duration[2]); 
+							$hours 			= str_replace('H', '', $duration[4]); 
+							$minutes 		= str_replace('M', '', $duration[5]); 
+							$seconds 		= str_replace('S', '', $duration[6]); 
 							$the_duration 	= ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
 							$first_duration = FALSE;
 						}	
 						break;
 					case 'RRULE':
-						$data = ereg_replace ('RRULE:', '', $data);
+						$data = str_replace ('RRULE:', '', $data);
 						$rrule = split (';', $data);
 						foreach ($rrule as $recur) {
 							ereg ('(.*)=(.*)', $recur, $regs);
@@ -1037,13 +1037,13 @@ foreach ($cal_filelist as $filename) {
 						}
 						break;
 					case 'ATTENDEE':
-						$field 		= ereg_replace("ATTENDEE;CN=", "", $field);
-						$data 		= ereg_replace ("mailto:", "", $data);
+						$field 		= str_replace("ATTENDEE;CN=", "", $field);
+						$data 		= str_replace ("mailto:", "", $data);
 						$attendee[] = array ('name' => $field, 'email' => $data);
 						break;
 					case 'ORGANIZER':
-						$field 		 = ereg_replace("ORGANIZER;CN=", "", $field);
-						$data 		 = ereg_replace ("mailto:", "", $data);
+						$field 		 = str_replace("ORGANIZER;CN=", "", $field);
+						$data 		 = str_replace ("mailto:", "", $data);
 						$organizer[] = array ('name' => $field, 'email' => $data);
 						break;
 					case 'LOCATION':
