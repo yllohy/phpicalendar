@@ -63,6 +63,7 @@ COPYING for more information about our license.
 Changes:
 --------
 0.9
+	-Added VTODO support
 	-Added Preferences page (uses cookies).
 		-Select defualt language
 		-Select default calendar
