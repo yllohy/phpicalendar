@@ -72,6 +72,37 @@ $rss_language			= 'ja';
 $search_took_lang		= '検索に%s秒かかりました。';
 $recurring_event_lang	= '引き続く予定';
 $exception_lang			= '特例';
+$no_query_lang			= 'No query given';
+$preferences_lang		= 'Preferences';
+$printer_lang			= 'Printer';
+$select_lang_lang		= 'Select your default language:';
+$select_cal_lang		= 'Select your default calendar:';
+$select_view_lang		= 'Select your default view:';
+$select_time_lang		= 'Select your default start time:';
+$select_day_lang		= 'Select your default start day of week:';
+$select_style_lang		= 'Select your default style:';
+$set_prefs_lang			= 'Set preferences';
+$completed_date_lang	= 'Completed on';
+$completed_lang			= 'Completed';
+$created_lang			= 'Created:';
+$due_lang				= 'Due:';
+$priority_lang			= 'Priority:';
+$priority_high_lang		= 'High';
+$priority_low_lang		= 'Low';
+$priority_medium_lang	= 'Medium';
+$priority_none_lang		= 'None';
+$status_lang			= 'Status:';
+$todo_lang				= 'To do items';
+$unfinished_lang		= 'Unfinished';
+
+// - navigation
+$back_lang = 'Back';
+$next_lang = 'Next';
+$prev_lang = 'Prev';
+$day_view_lang = 'Day View';
+$week_view_lang = 'Week View';
+$month_view_lang = 'Month View';
+$year_view_lang = 'Year View';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= '、';								// ie, 'one, two, three'
