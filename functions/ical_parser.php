@@ -479,7 +479,7 @@ foreach ($cal_filelist as $filename) {
 																$recur_data[] = $next_date_time;
 															}
 														}
-													} else {
+													} elseif (is_array($byday)) {
 														foreach($byday as $day) {
 															ereg ('([-\+]{0,1})?([0-9]{1})?([A-Z]{2})', $day, $byday_arr);
 															//Added for 2.0 when no modifier is set
