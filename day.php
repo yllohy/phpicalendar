@@ -156,11 +156,32 @@ if (is_array($master_array[($getdate)])) {
 									$cal_time = $key;	
 									$key = strtotime ($key);
 									$key = date ($timeFormat, $key);
-																		
+									unset($this_time_arr);
+									
+									// add events that overlap the start time
+									if (isset($master_array[$getdate][$cal_time]) && sizeof($master_array[$getdate][$cal_time]) > 0) {
+										$this_time_arr = $master_array[$getdate][$cal_time];
+									}
+									
+									// add events that overlap $day_start instead of cutting them out completely
+									if ("$day_start" == "$cal_time" && is_array($master_array[$getdate])) {
+										foreach($master_array[$getdate] as $time_key => $time_arr) {
+											if ((int)$time_key < (int)$cal_time && is_array($time_arr)) {
+												foreach($time_arr as $event_tmp) {
+													if ((int)$event_tmp['event_end'] > (int)$cal_time) {
+														$this_time_arr[] = $event_tmp;
+													}
+												}
+											} else {
+												break;
+											}
+										}
+									}																		
+									
 									// check for eventstart 
-									if (isset($master_array[($getdate)][$cal_time]) && sizeof($master_array[($getdate)][$cal_time]) > 0) {
-										foreach ($master_array[($getdate)][$cal_time] as $eventKey => $loopevent) {
-											$drawEvent = drawEventTimes ($loopevent['event_start'], $loopevent['event_end']);
+									if (isset($this_time_arr) && sizeof($this_time_arr) > 0) {
+										foreach ($this_time_arr as $eventKey => $loopevent) {
+											$drawEvent = drawEventTimes ($cal_time, $loopevent['event_end']);
 											$j = 0;
 											while ($event_length[$j]) {
 												if ($event_length[$j]['state'] == 'ended') {
@@ -178,8 +199,12 @@ if (is_array($master_array[($getdate)])) {
 										echo '<tr height="' . $gridLength . '">'."\n";
 										echo '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'."\n";
 										echo '<td width="1" height="' . $gridLength . '"></td>'."\n";
+									} elseif("$cal_time" == "$day_start") {
+										$size_tmp = 60 - (int)substr($cal_time,2,2);
+										echo "<tr height=\"" . $gridLength . "\">\n";
+										echo "<td rowspan=\"" . ($size_tmp / $gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
+										echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 									} else {
-
 										echo '<tr height="' . $gridLength . '">'."\n";
 										echo '<td width="1" height="' . $gridLength . '"></td>'."\n";
 									}
@@ -196,7 +221,7 @@ if (is_array($master_array[($getdate)])) {
 									} else {
 										$emptyWidth = $nbrGridCols;
 										for ($i=0;$i<sizeof($event_length);$i++) {
-								//echo $master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text'] . ' ind: ' . $i . ' / anz: ' . $event_length[$i]['overlap'] . ' = ' . eventWidth($i,$event_length[$i]['overlap']) . '<br />';
+								//echo $this_time_arr[($event_length[$i]['key'])]['event_text'] . ' ind: ' . $i . ' / anz: ' . $event_length[$i]['overlap'] . ' = ' . eventWidth($i,$event_length[$i]['overlap']) . '<br />';
 											$drawWidth = $nbrGridCols / ($event_length[$i]['overlap'] + 1);
 											//print $nbrGridCols.' -- ';
 											//print $drawWidth;
@@ -204,11 +229,11 @@ if (is_array($master_array[($getdate)])) {
 											switch ($event_length[$i]['state']) {
 												case 'begin':
 													$event_length[$i]['state'] = 'started';
-													$event_text 	= stripslashes(urldecode($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']));
-													$event_text2 	= rawurlencode(addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']));
-													$event_start 	= strtotime ($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_start']);
-													$event_end		= strtotime ($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_end']);
-													$description 	= addslashes(urlencode($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['description']));
+													$event_text 	= stripslashes(urldecode($this_time_arr[($event_length[$i]['key'])]['event_text']));
+													$event_text2 	= rawurlencode(addslashes($this_time_arr[($event_length[$i]['key'])]['event_text']));
+													$event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
+													$event_end		= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
+													$description 	= addslashes(urlencode($this_time_arr[($event_length[$i]['key'])]['description']));
 													$event_start 	= date ($timeFormat, $event_start);
 													$event_end 		= date ($timeFormat, $event_end);
 													$calendar_name2	= rawurlencode(addslashes($calendar_name));

@@ -24,7 +24,7 @@ $default_path			= 'http://ical.silter.org/phpicalendar';
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
-$use_sessions 			= 'yes';			// This has not yet been implemented.
+$use_sessions 			= 'no';				// This has not yet been implemented.
 $display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
 $allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
