@@ -282,9 +282,14 @@
 													$event_start = $new_val2["event_start"];
 													$event_end = $new_val2["event_end"];
 													$event_start = strtotime ("$event_start");
-													$event_start = date ("g:i a", $event_start);
 													$event_end = strtotime ("$event_end");
-													$event_end = date ("g:i a", $event_end);
+													if ($time_format == "24") {
+														$event_start = date ("G:i", $event_start);
+														$event_end = date ("G:i", $event_end);
+													} else {
+														$event_start = date ("g:i a", $event_start);
+														$event_end = date ("g:i a", $event_end);
+													}
 													$event_text = str_replace ("<br>", "", $event_text);
 													if (strlen($event_text) > 70) {
 														$event_text = substr("$event_text", 0, 65);

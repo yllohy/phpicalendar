@@ -118,7 +118,11 @@ if ($getdate == (date("Ymd"))) {
 									$k = 0;
 									$cal_time = $key;	
 									$key = strtotime ("$key");
-									$key = date ("g:i A", $key);
+									if ($time_format == "24") {
+										$key = date ("G:i", $key);
+									} else {
+										$key = date ("g:i A", $key);
+									}
 																		
 									if (ereg("^([0-9]{1,2}):00", $key)) {
 										if ($master_array[($getdate)]["$cal_time"] == "") {	
@@ -138,9 +142,14 @@ if ($getdate == (date("Ymd"))) {
 											$event_end = $master_array[($getdate)]["$cal_time"][$k]["event_end"];
 											$event_length = $master_array[($getdate)]["$cal_time"][$k]["event_length"];
 											$event_start = strtotime ("$event_start");
-											$event_start = date ("g:i a", $event_start);
 											$event_end = strtotime ("$event_end");
-											$event_end = date ("g:i a", $event_end);
+											if ($time_format == "24") {
+												$event_start = date ("G:i", $event_start);
+												$event_end = date ("G:i", $event_end);
+											} else {
+												$event_start = date ("g:i a", $event_start);
+												$event_end = date ("g:i a", $event_end);
+											}
 											echo "<tr height=\"30\">\n";
 											echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
 											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
@@ -196,6 +205,15 @@ if ($getdate == (date("Ymd"))) {
 											$event_start = $master_array[($getdate)]["$cal_time"][$k]["event_start"];
 											$event_end = $master_array[($getdate)]["$cal_time"][$k]["event_end"];
 											$event_length = $master_array[($getdate)]["$cal_time"][$k]["event_length"];
+											$event_start = strtotime ("$event_start");
+											$event_end = strtotime ("$event_end");
+											if ($time_format == "24") {
+												$event_start = date ("G:i", $event_start);
+												$event_end = date ("G:i", $event_end);
+											} else {
+												$event_start = date ("g:i a", $event_start);
+												$event_end = date ("g:i a", $event_end);
+											}
 											echo "<tr>\n";
 											echo "<td align=\"center\" valign=\"top\" nowrap bgcolor=\"#a1a5a9\" width=\"1\" height=\"30\"></td>\n";
 											echo "<td rowspan=\"$event_length\" align=\"left\" valign=\"top\" class=\"eventbg\">\n";

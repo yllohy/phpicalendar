@@ -213,7 +213,11 @@ $prev_week = date("Ymd", $prev_week2);
 									$k = 0;
 									$cal_time = $key;	
 									$key = strtotime ("$key");
-									$key = date ("g:i A", $key);
+									if ($time_format == "24") {
+										$key = date ("G:i", $key);
+									} else {
+										$key = date ("g:i A", $key);
+									}
 									
 									// The first <TR> (on the hour)
 									if (ereg("^([0-9]{1,2}):00", $key)) {
