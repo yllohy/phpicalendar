@@ -35,11 +35,11 @@
 				<tr>
 					<td>
 						<!-- loop allday on -->
-						<div style="height: 18px; padding-top: 4px; border: 1px solid #fff;" class="eventbg_1">
-							<center><font class="V10W">{ALLDAY}</font></center>
+						<div class="alldaybg_1">
+							<span class="V10WB">Call at some place</span>
 						</div>
-						<div style="height: 18px; padding-top: 4px; border: 1px solid #fff;" class="eventbg_1">
-							<center><font class="V10W">{ALLDAY}</font></center>
+						<div class="alldaybg_1">
+							<span class="V10WB">Some Holiday</span>
 						</div>
 						<!-- loop allday off -->
 					</td>
