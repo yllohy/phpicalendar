@@ -19,7 +19,7 @@ foreach ($filelist as $file) {
 	$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 	$rss_list .= '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br />';
 	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;rssview=day<br />';
-	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amplrssview=week<br />';
+	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;rssview=week<br />';
 	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;rssview=month<br /><br />';
 	$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&amp;rssview='.$default_view;
 }
