@@ -57,216 +57,171 @@ if ($is_webcal == false && $save_parsed_cals == 'yes') {
 
 
 if ($parse_file) {
-
-// open the iCal file, read it into a string
-// Then turn it into an array after we pull every wrapped line up a level.
-
-$contents = @file($filename);
-$contents = @implode('', $contents);
-$contents = ereg_replace("\n ", '', $contents);
-$contents = split ("\n", $contents);
-if ($contents[0] != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
-// echo "$contents[0]";
-
-// Set a value so we can check to make sure $master_array contains valid data
-$master_array['-1'] = 'valid cal file';
-
-// auxiliary array for determining overlaps of events
-$overlap_array = array ();
-
-// parse our new array
-foreach($contents as $line) {
-	$line = trim($line);
-	if (strstr($line, 'BEGIN:VEVENT')) {
-		$start_time = '';
-		$end_time = '';
-		$start_date = '';
-		$end_date = '';
-		$summary = '';
-		$allday_start = '';
-		$allday_end = '';
-		$start = '';
-		$end = '';
-		$the_duration = '';
-		$beginning = '';
-		$rrule_array = '';
-		$start_of_vevent = '';
-		$end_of_vevent = '';
-		$interval = '';
-		$number = '';
-		$except_dates = array();
-		$except_times = array();
-		$first_duration = TRUE;
-		$bymonthday = '';
-		$byday = '';
-		$count = 1000000;
-		$description = '';
-		unset($until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, $byminute, $byhour, $bysecond, $byyearday, $bysetpos, $wkst);
-		
-	} elseif (strstr($line, 'END:VEVENT')) {
-		
-		// Clean out \n's and other slashes
-		$summary = str_replace('\n', '<br>', $summary);
-		$summary = stripslashes($summary);
-		$description = str_replace('\n', '<br>', $description);
-		$mArray_begin = mktime (0,0,0,1,1,$this_year);
-		$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
-				
-		if ($start_time != '') {
-			ereg ('([0-9]{2})([0-9]{2})', $start_time, $time);
-			ereg ('([0-9]{2})([0-9]{2})', $end_time, $time2);
-			$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
+	
+	// open the iCal file, read it into a string
+	// Then turn it into an array after we pull every wrapped line up a level.
+	
+	$contents = @file($filename);
+	$contents = @implode('', $contents);
+	$contents = ereg_replace("\n ", '', $contents);
+	$contents = split ("\n", $contents);
+	if ($contents[0] != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
+	// echo "$contents[0]";
+	
+	// Set a value so we can check to make sure $master_array contains valid data
+	$master_array['-1'] = 'valid cal file';
+	
+	// auxiliary array for determining overlaps of events
+	$overlap_array = array ();
+	
+	// parse our new array
+	foreach($contents as $line) {
+		$line = trim($line);
+		if (stristr($line, 'BEGIN:VEVENT')) {
+			// each of these vars were being set to an empty string
+			unset (
+				$start_time, $start_time, $start_date, $end_date, $summary, 
+				$allday_start, $allday_end, $start, $end, $the_duration, 
+				$beginning, $rrule_array, $start_of_vevent, $description
+			);
+	
+			$except_dates = array();
+			$except_times = array();
 			
-			$drawKey = drawEventTimes($start_time, $end_time);
-			ereg ('([0-9]{2})([0-9]{2})', $drawKey['draw_start'], $time3);
-			$hour = $time3[1];
-			$minute = $time3[2];
-		}
-		
-		
-		// Handling of the all day events
-// to go back to old allday way, add to this if--> && ($rrule_array == '')
-		if (($allday_start != '')) {
-			$start = strtotime($allday_start);
-			$end = strtotime($allday_end);
-			if (($end > $mArray_begin) && ($end < $mArray_end)) {
-				while ($start != $end) {
-					$start_date = date('Ymd', $start);
-					$master_array[($start_date)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
-					$start = strtotime('+1 day', $start);
+			$first_duration = TRUE;
+			$count = 1000000;
+			
+			unset(
+				$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
+				$byminute, $byhour, $bysecond, $byyearday, $bysetpos, $wkst,
+				$interval, $number
+			);
+			
+		} elseif (stristr($line, 'END:VEVENT')) {
+			
+			// Clean out \n's and other slashes
+			$summary = str_replace('\n', '<br>', $summary);
+			$summary = stripslashes($summary);
+			$description = str_replace('\n', '<br>', $description);
+			$mArray_begin = mktime (0,0,0,1,1,$this_year);
+			$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
+					
+			if (isset($start_time) && $start_time != '') {
+				ereg ('([0-9]{2})([0-9]{2})', $start_time, $time);
+				ereg ('([0-9]{2})([0-9]{2})', $end_time, $time2);
+				$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
+				
+				$drawKey = drawEventTimes($start_time, $end_time);
+				ereg ('([0-9]{2})([0-9]{2})', $drawKey['draw_start'], $time3);
+				$hour = $time3[1];
+				$minute = $time3[2];
+			}
+			
+			
+			// Handling of the all day events
+			if ((isset($allday_start) && $allday_start != '')) {
+				$start = strtotime($allday_start);
+				$end = strtotime($allday_end);
+				if (($end > $mArray_begin) && ($end < $mArray_end)) {
+					while ($start != $end) {
+						$start_date = date('Ymd', $start);
+						$master_array[($start_date)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
+						$start = strtotime('+1 day', $start);
+					}
 				}
 			}
-		}
-		
-		
-		// Handling of the recurring events, RRULE
-		// This will be quite a bit of work, thats for sure.
-		if (is_array($rrule_array)) {
-			if ($allday_start != '') {
-				$rrule_array['START_DAY'] = $allday_start;
-				$rrule_array['END_DAY'] = $allday_end;
-				$rrule_array['END'] = 'end';
-				$recur_start = $allday_start;
-				$start_date = $allday_start;
-				$diff_allday_days = dayCompare($allday_end, $allday_start);
-			} else {
-				$rrule_array['START_DATE'] = $start_date;
-				$rrule_array['START_TIME'] = $start_time;
-				$rrule_array['END_TIME'] = $end_time;
-				$rrule_array['END'] = 'end';
-			}
-			//print_r($rrule_array);
-			foreach ($rrule_array as $key => $val) {
-				if ($key == 'FREQ') {
-					if ($val == 'YEARLY') {
-						$interval = 'yyyy';
-					} elseif ($val == 'MONTHLY') {
-						$interval = 'm';
-					} elseif ($val == 'WEEKLY') {
-						$interval = 'ww';
-					} elseif ($val == 'DAILY') {
-						$interval = 'd';
-					} elseif ($val == 'HOURLY') {
-						$interval = 'h';
-					} elseif ($val == 'MINUTELY') {
-						$interval = 'n';
-					} elseif ($val == 'SECONDLY') {
-						$interval = 's';
-					}		
-				} elseif ($key == 'COUNT') 		{
-					$count = $val;
-				
-				} elseif ($key == 'UNTIL') 		{
-					$until = ereg_replace('T', '', $val);
-					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $until, $regs);
-					$year = $regs[1];
-					$month = $regs[2];
-					$day = $regs[3];
-					$until = strtotime($year.$month.$day);
-					$until = strtotime('+12 hours', $until);
+			
+			
+			// Handling of the recurring events, RRULE
+			// This will be quite a bit of work, thats for sure.
+			if (is_array($rrule_array)) {
+				if (isset($allday_start) && $allday_start != '') {
+					$rrule_array['START_DAY'] = $allday_start;
+					$rrule_array['END_DAY'] = $allday_end;
+					$rrule_array['END'] = 'end';
+					$recur_start = $allday_start;
+					$start_date = $allday_start;
+					$diff_allday_days = dayCompare($allday_end, $allday_start);
+				} else {
+					$rrule_array['START_DATE'] = $start_date;
+					$rrule_array['START_TIME'] = $start_time;
+					$rrule_array['END_TIME'] = $end_time;
+					$rrule_array['END'] = 'end';
+				}
+				//print_r($rrule_array);
+				foreach ($rrule_array as $key => $val) {
+					if ($key == 'FREQ') {
+						if ($val == 'YEARLY') {
+							$interval = 'yyyy';
+						} elseif ($val == 'MONTHLY') {
+							$interval = 'm';
+						} elseif ($val == 'WEEKLY') {
+							$interval = 'ww';
+						} elseif ($val == 'DAILY') {
+							$interval = 'd';
+						} elseif ($val == 'HOURLY') {
+							$interval = 'h';
+						} elseif ($val == 'MINUTELY') {
+							$interval = 'n';
+						} elseif ($val == 'SECONDLY') {
+							$interval = 's';
+						}		
+					} elseif ($key == 'COUNT') 		{
+						$count = $val;
 					
-				} elseif ($key == 'INTERVAL')	{
-					$number = $val;
-				
-				} elseif ($key == 'BYSECOND') 	{
-					$bysecond = $val;
-					$bysecond = split (',', $bysecond);
-				
-				} elseif ($key == 'BYMINUTE') 	{
-					$byminute = $val;
-					$byminute = split (',', $byminute);
-				
-				} elseif ($key == 'BYHOUR')		{
-					$byhour = $val;
-					$byhour = split (',', $byhour);
-				
-				} elseif ($key == 'BYDAY') 		{
-					$byday = $val;
-					$byday = split (',', $byday);
-				
-				} elseif ($key == 'BYMONTHDAY') {
-					$bymonthday = $val;
-					$bymonthday = split (',', $bymonthday);
-					//print_r ($bymonthday);
-				
-				} elseif ($key == 'BYYEARDAY') 	{
-					$byyearday = $val;
-					$byyearday = split (',', $byyearday);
-				
-				} elseif ($key == 'BYWEEKNO') 	{
-					$byweekno = $val;
-					$byweekno = split (',', $byweekno);
-				
-				} elseif ($key == 'BYMONTH') 	{
-					$bymonth = $val;
-					$bymonth = split (',', $bymonth);
-				
-				} elseif ($key == 'BYSETPOS') 	{
-					$bysetpos = $val;
-				
-				} elseif ($key == 'WKST') 		{
-					$wkst = $val;
-				
-				} elseif ($key == 'END')		{
-// to go back to old allday way, uncomment this set
-					/*
-					if ($allday_start != '') {
+					} elseif ($key == 'UNTIL') 		{
+						$until = ereg_replace('T', '', $val);
+						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $until, $regs);
+						$year = $regs[1];
+						$month = $regs[2];
+						$day = $regs[3];
+						$until = strtotime($year.$month.$day);
+						$until = strtotime('+12 hours', $until);
 						
-						// Since we hit the end of the RRULE array, lets do something.
-						// Below handles yearly, montly, weekly, daily all-day events.
-						// $start_of_vevent is the date the recurring event starts.
-						// $end_of_vevent is the date the recurring event stops.
-						// $count and $count_to check for the COUNT feature
-						// $until checks for the UNTIL feature, makes sure we don't recur past it.
-						 
-						$start_of_vevent = strtotime($allday_start);
-						$end_of_vevent = strtotime($allday_end);
-						$count_to = 0;
-						if (!$until) $until = $mArray_end;
-						if ($start_of_vevent < $mArray_end) {
-							do {
-								// This steps through each day of a multiple all-day event and adds to master array
-								// Every all day event should pass through here at least once if its recurring.
-								$start = $start_of_vevent;
-								$end = $end_of_vevent;
-								while ($start != $end) {
-									$start_date = date('Ymd', $start);
-									if (($end > $mArray_begin) && ($end < $mArray_end)) {
-										$master_array[($start_date)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
-									}
-									$start = strtotime('+1 day', $start);
-								}
-								$start_of_vevent = DateAdd ($interval,  $number, $start_of_vevent);
-								$end_of_vevent = DateAdd ($interval,  $number, $end_of_vevent);
-								$count_to++;
-							} while (($start_of_vevent < $mArray_end) && ($count != $count_to) && ($start_of_vevent < $until)); 
-						}
+					} elseif ($key == 'INTERVAL')	{
+						$number = $val;
 					
-					// Let's take care of recurring events that are not all day events
-					// DAILY and WEEKLY recurrences seem to work fine. Need feedback.
-					// Known bug, doesn't look at UNTIL or COUNT yet.
-					} else {
-					*/
+					} elseif ($key == 'BYSECOND') 	{
+						$bysecond = $val;
+						$bysecond = split (',', $bysecond);
+					
+					} elseif ($key == 'BYMINUTE') 	{
+						$byminute = $val;
+						$byminute = split (',', $byminute);
+					
+					} elseif ($key == 'BYHOUR')		{
+						$byhour = $val;
+						$byhour = split (',', $byhour);
+					
+					} elseif ($key == 'BYDAY') 		{
+						$byday = $val;
+						$byday = split (',', $byday);
+					
+					} elseif ($key == 'BYMONTHDAY') {
+						$bymonthday = $val;
+						$bymonthday = split (',', $bymonthday);
+						//print_r ($bymonthday);
+					
+					} elseif ($key == 'BYYEARDAY') 	{
+						$byyearday = $val;
+						$byyearday = split (',', $byyearday);
+					
+					} elseif ($key == 'BYWEEKNO') 	{
+						$byweekno = $val;
+						$byweekno = split (',', $byweekno);
+					
+					} elseif ($key == 'BYMONTH') 	{
+						$bymonth = $val;
+						$bymonth = split (',', $bymonth);
+					
+					} elseif ($key == 'BYSETPOS') 	{
+						$bysetpos = $val;
+					
+					} elseif ($key == 'WKST') 		{
+						$wkst = $val;
+					
+					} elseif ($key == 'END')		{
+					
 						// again, $parse_to_year is set to January 10 of the upcoming year
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
 						$start_date_time = strtotime($start_date);
@@ -283,22 +238,6 @@ foreach($contents as $line) {
 							$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
 							$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
 						}
-
-						
-						
-						// NOTE: This part not in use for the time being. We are choosing to fill out 3 months time.
-						// depending on which view we're looking at, we do one month or one week
-						// one day is more difficult, I think, so I wrapped that into the week. We'll have to
-						// add another case for 'year' once that's added.
-						/*
-						if ($current_view == 'month') {
-							$start_range_time = strtotime($this_year.$this_month.'01');
-							$end_range_time = strtotime('+1 month +1 week', $start_range_time);
-						} else {
-							$start_range_time = strtotime(dateOfWeek($getdate, $week_start_day));
-							$end_range_time = strtotime('+1 week', $start_range_time);
-						}
-						*/
 						
 						// if $until isn't set yet, we set it to the end of our range we're looking at
 						if (!isset($until)) $until = $end_range_time;
@@ -322,7 +261,6 @@ foreach($contents as $line) {
 							while (($next_range_time >= $start_range_time) && ($next_range_time <= $end_range_time) && ($count_to != $count)) {
 								// handling WEEKLY events here
 								if ($rrule_array['FREQ'] == 'WEEKLY') {
-
 									// use weekCompare to see if we even have this event this week
 									
 									$diff_weeks = weekCompare(date('Ymd',$next_range_time), $start_date);
@@ -334,37 +272,12 @@ foreach($contents as $line) {
 											
 												// use my fancy little function to get the date of each day
 												$day = two2threeCharDays($day);
-
 												#$thedate = date ("r", $next_range_time);
-
 												$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
 												#echo "$day -- $summary -- $thedate -- $next_date<br>";
 												$next_date_time = strtotime($next_date);
 												//print date('Y-m-d  ', $next_date_time);
-												
-												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-													// add it to the array if it passes inspection, it allows the first time to be
-													// written by the master data writer (hence the > instead of >=) otherwise we can special case these
-													// before, the first one would get entered twice and show up twice
-													// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
-													// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
-													// on days that have been deleted by the user
-													if ($allday_start != '') {
-														
-														$start_time = $next_date_time;
-														$end_time = strtotime('+'.$diff_allday_days.' days', $next_date_time);
-														while ($start_time < $end_time) {
-															$start_date2 = date('Ymd', $start_time);
-															$master_array[($start_date2)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
-															$start_time = strtotime('+1 day', $start_time);
-														}
-													} else {
-// check for overlapping events
-													$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
-// writes to $master array here
-													$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
-													}
-												}
+												$recur_data[] = $next_date_time;
 											}
 										} else {
 											$interval = 1;
@@ -374,11 +287,8 @@ foreach($contents as $line) {
 										// end the loop because we aren't going to write this event anyway
 										$count_to = $count;
 									}
-									
-								
 								// handling DAILY events here
 								} elseif ($rrule_array['FREQ'] == 'DAILY') {
-
 									// use dayCompare to see if we even have this event this day
 									$diff_days = dayCompare(date('Ymd',$next_range_time), $start_date);
 									if ($diff_days < $count) {
@@ -386,24 +296,7 @@ foreach($contents as $line) {
 											$interval = $number;
 											$next_date = date('Ymd', $next_range_time);
 											$next_date_time = strtotime($next_date);
-											
-											if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-												if ($allday_start != '') {
-													
-													$start_time = $next_date_time;
-													$end_time = strtotime('+'.$diff_allday_days.' days', $next_date_time);
-													while ($start_time < $end_time) {
-														$start_date2 = date('Ymd', $start_time);
-														$master_array[($start_date2)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
-														$start_time = strtotime('+1 day', $start_time);
-													}
-												} else {
-// check for overlapping events
-													$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
-// writes to $master array here
-													$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
-												}
-											}
+											$recur_data[] = $next_date_time;
 										} else {
 											$interval = 1;
 										}
@@ -418,7 +311,7 @@ foreach($contents as $line) {
 								} elseif ($rrule_array['FREQ'] == 'MONTHLY') {
 									$next_range_time = strtotime(date('Y-m-01', $next_range_time));
 									// use monthCompare to see if we even have this event this month
-									
+								
 									$diff_months = monthCompare(date('Ymd',$next_range_time), $start_date);
 									if ($diff_months < $count) {
 										if ($diff_months % $number == 0) {
@@ -433,22 +326,7 @@ foreach($contents as $line) {
 														$day = str_pad($day, 2, '0', STR_PAD_LEFT);
 														$next_date_time = strtotime(date('Y-m-',$next_range_time).$day);
 														$next_date = date('Ymd', $next_date_time);
-														if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-															if ($allday_start != '') {
-																$start_time = $next_date_time;
-																$end_time = strtotime('+'.$diff_allday_days.' days', $next_date_time);
-																while ($start_time < $end_time) {
-																	$start_date2 = date('Ymd', $start_time);
-																	$master_array[($start_date2)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
-																	$start_time = strtotime('+1 day', $start_time);
-																}
-															} else {
-// check for overlapping events	
-																$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
-// writes to $master array here
-																$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
-															}
-														}
+														$recur_data[] = $next_date_time;
 													}
 												}
 												
@@ -461,24 +339,7 @@ foreach($contents as $line) {
 													$on_day = two2threeCharDays($byday_arr[2]);
 													$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
 													$next_date = date('Ymd', $next_date_time);
-													if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-
-														if ($allday_start != '') {
-															
-															$start_time = $next_date_time;
-															$end_time = strtotime('+'.$diff_allday_days.' days', $next_date_time);
-															while ($start_time < $end_time) {
-																$start_date2 = date('Ymd', $start_time);
-																$master_array[($start_date2)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
-																$start_time = strtotime('+1 day', $start_time);
-															}
-														} else {
-// check for overlapping events		
-															$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
-// writes to $master array here	
-															$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
-														}
-													}
+													$recur_data[] = $next_date_time;
 												}
 											}
 										} else {
@@ -498,7 +359,7 @@ foreach($contents as $line) {
 									if ($diff_years < $count) {
 										if ($diff_years % $number == 0) {
 											foreach($bymonth as $month) {
-											$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+												$month = str_pad($month, 2, '0', STR_PAD_LEFT);
 												if (is_array($byday)) {
 													
 													$next_range_time = strtotime($this_year.$month.'01');
@@ -512,23 +373,7 @@ foreach($contents as $line) {
 												} else {
 													$next_date_time = strtotime($this_year.$month.$the_month_day, $next_range_time);
 												}
-												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-													if ($allday_start != '') {
-														
-														$start_time = $next_date_time;
-														$end_time = strtotime('+'.$diff_allday_days.' days', $next_date_time);
-														while ($start_time < $end_time) {
-															$start_date2 = date('Ymd', $start_time);
-															$master_array[($start_date2)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
-															$start_time = strtotime('+1 day', $start_time);
-														}
-													} else {
-// check for overlapping events		
-														$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
-// writes to $master array here	
-														$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
-													}
-												}
+												$recur_data[] = $next_date_time;
 											}
 										} else {
 											$interval = 1;
@@ -544,152 +389,172 @@ foreach($contents as $line) {
 									$next_range_time = $end_range_time + 100;
 									$count_to = $count;
 								}
+								// use the same code to write the data instead of always changing it 5 times						
+								if (isset($recur_data) && is_array($recur_data)) {
+									foreach($recur_data as $recur_data_time) {
+										$recur_data_date = date('Ymd', $recur_data_time);	
+										if (($recur_data_time > $start_date_time) && ($recur_data_time <= $end_date_time) && ($count_to != $count) && !in_array($recur_data_date, $except_dates)) {
+											if (isset($allday_start) && $allday_start != '') {
+												
+												$start_time2 = $recur_data_time;
+												$end_time2 = strtotime('+'.$diff_allday_days.' days', $recur_data_time);
+												while ($start_time2 < $end_time2) {
+													$start_date2 = date('Ymd', $start_time2);
+													$master_array[($start_date2)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
+													$start_time2 = strtotime('+1 day', $start_time2);
+												}
+											} else {
+// check for overlapping events		
+												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time);
+// writes to $master array here	
+												$master_array[($recur_data_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+											}
+										}
+									}
+									unset($recur_data);
+								}
 							}
-// to go back to old allday way, uncomment this bracket
-					//	}
+						}
+					}	
+				}
+			}
+		
+		// Let's write all the data to the master array
+		if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
+// check for overlapping events
+			$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
+	
+// writes to $master array here
+			$master_array[($start_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+		}
+			
+	
+			
+			
+			
+		} else {
+	
+			unset ($field, $data);
+			$line = explode (":", $line);
+			$field = $line[0];
+			$data = $line[1];
+			
+			// Old style
+			// sscanf($line, "%[^:]:%[^\n]", &$field, &$data);
+			// echo "$field, $data<br>";
+			
+			if(stristr($field, 'DTSTART;TZID')) {
+				$data = ereg_replace('T', '', $data);
+				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+				$year = $regs[1];
+				$month = $regs[2];
+				$day = $regs[3];
+				$hour = $regs[4];
+				$minute = $regs[5];
+				
+				$start_date = $year . $month . $day;
+				$start_time = $hour . $minute;
+	
+			} elseif (stristr($field, 'DTEND;TZID')) {
+				$data = ereg_replace('T', '', $data);
+				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+				$year = $regs[1];
+				$month = $regs[2];
+				$day = $regs[3];
+				$hour = $regs[4];
+				$minute = $regs[5];
+			
+				$end_date = $year . $month . $day;
+				$end_time = $hour . $minute;
+				
+			} elseif (stristr($field, 'EXDATE;TZID')) {
+				$data = ereg_replace('T', '', $data);
+				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+				$year = $regs[1];
+				$month = $regs[2];
+				$day = $regs[3];
+				$hour = $regs[4];
+				$minute = $regs[5];
+			
+				$except_dates[] = $year . $month . $day;
+				$except_times[] = $hour . $minute;
+				
+			} elseif (stristr($field, 'SUMMARY')) {
+				$summary = $data;
+				
+			} elseif (stristr($field, 'DESCRIPTION')) {
+				$description = $data;	
+			
+			} elseif (stristr($field, 'X-WR-CALNAME')) {
+				$calendar_name = $data;
+				$master_array['calendar_name'] = $calendar_name;
+			
+			} elseif (stristr($field, 'DTSTART;VALUE=DATE')) {
+				$allday_start = $data;
+				// echo $allday_start;
+			
+			} elseif (stristr($field, 'DTEND;VALUE=DATE')) {
+				$allday_end = $data;
+				
+			} elseif (stristr($field, 'DURATION')) {
+				
+				if (($first_duration = TRUE) && (!stristr($field, '=DURATION'))) {
+					ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
+					if ($duration[2] = 'W') {
+						$weeks = $duration[1];
+						$days = 0;
+					} else {
+						$days = $duration[1];
+						$weeks = 0;
 					}
+// DOUBLE CHECK THIS, IS SETTING $weeks AND/OR $days EQUAL TO 0 ACCEPTABLE??
+					$hours = ereg_replace('H', '', $duration[3]);
+					$minutes = ereg_replace('M', '', $duration[4]);
+					$seconds = ereg_replace('S', '', $duration[5]);
+					$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
+					$beginning = (strtotime($start_time) + $the_duration);
+					$end_time = date ('Hi', $beginning);
+					$first_duration = FALSE;
 				}	
+				
+			} elseif (stristr($field, 'RRULE')) {
+				// $data = 'RRULE:FREQ=YEARLY;INTERVAL=2;BYMONTH=1;BYDAY=SU;BYHOUR=8,9;BYMINUTE=30';
+				$data = ereg_replace ('RRULE:', '', $data);
+				$rrule = split (';', $data);
+				foreach ($rrule as $recur) {
+					ereg ('(.*)=(.*)', $recur, $regs);
+					$rrule_array[$regs[1]] = $regs[2];
+				}	
+			} elseif (stristr($field, 'ATTENDEE')) {
+				$attendee = $data;
+				// echo $attendee;
+				
 			}
 		}
-	
-	// Let's write all the data to the master array
-	if (($start_time != '') && ($allday_start == '')) {
-// check for overlapping events
-		$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
-
-// writes to $master array here
-		$master_array[($start_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 	}
+	
+	// Sort the array by absolute date.
+	if (is_array($master_array)) { 
+		ksort($master_array);
+		reset($master_array);
 		
-
-		
-		
-		
-	} else {
-
-		unset ($field, $data);
-		$line = explode (":", $line);
-		$field = $line[0];
-		$data = $line[1];
-		
-		// Old style
-		// sscanf($line, "%[^:]:%[^\n]", &$field, &$data);
-		// echo "$field, $data<br>";
-		
-		if(strstr($field, 'DTSTART;TZID')) {
-			$data = ereg_replace('T', '', $data);
-			ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-			$year = $regs[1];
-			$month = $regs[2];
-			$day = $regs[3];
-			$hour = $regs[4];
-			$minute = $regs[5];
-			
-			$start_date = $year . $month . $day;
-			$start_time = $hour . $minute;
-
-		} elseif (strstr($field, 'DTEND;TZID')) {
-			$data = ereg_replace('T', '', $data);
-			ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-			$year = $regs[1];
-			$month = $regs[2];
-			$day = $regs[3];
-			$hour = $regs[4];
-			$minute = $regs[5];
-		
-			$end_date = $year . $month . $day;
-			$end_time = $hour . $minute;
-			
-		} elseif (strstr($field, 'EXDATE;TZID')) {
-			$data = ereg_replace('T', '', $data);
-			ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-			$year = $regs[1];
-			$month = $regs[2];
-			$day = $regs[3];
-			$hour = $regs[4];
-			$minute = $regs[5];
-		
-			$except_dates[] = $year . $month . $day;
-			$except_times[] = $hour . $minute;
-			
-		} elseif (strstr($field, 'SUMMARY')) {
-			$summary = $data;
-			
-		} elseif (strstr($field, 'DESCRIPTION')) {
-			$description = $data;	
-		
-		} elseif (strstr($field, 'X-WR-CALNAME')) {
-			$calendar_name = $data;
-			$master_array['calendar_name'] = $calendar_name;
-		
-		} elseif (strstr($field, 'DTSTART;VALUE=DATE')) {
-			$allday_start = $data;
-			// echo $allday_start;
-		
-		} elseif (strstr($field, 'DTEND;VALUE=DATE')) {
-			$allday_end = $data;
-			
-		} elseif (strstr($field, 'DURATION')) {
-			
-			if (($first_duration = TRUE) && (!strstr($field, '=DURATION'))) {
-				ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
-				if ($duration[2] = 'W') {
-					$weeks = $duration[1];
-					$days = 0;
-				} else {
-					$days = $duration[1];
-					$weeks = 0;
-				}
-// DOUBLE CHECK THIS, IS SETTING $weeks OR $days EQUAL TO 0 ACCEPTABLE??
-				$hours = ereg_replace('H', '', $duration[3]);
-				$minutes = ereg_replace('M', '', $duration[4]);
-				$seconds = ereg_replace('S', '', $duration[5]);
-				$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
-				$beginning = (strtotime($start_time) + $the_duration);
-				$end_time = date ('Hi', $beginning);
-				$first_duration = FALSE;
-			}	
-			
-		} elseif (strstr($field, 'RRULE')) {
-			// $data = 'RRULE:FREQ=YEARLY;INTERVAL=2;BYMONTH=1;BYDAY=SU;BYHOUR=8,9;BYMINUTE=30';
-			$data = ereg_replace ('RRULE:', '', $data);
-			$rrule = split (';', $data);
-			foreach ($rrule as $recur) {
-				ereg ('(.*)=(.*)', $recur, $regs);
-				$rrule_array[$regs[1]] = $regs[2];
-			}	
-		} elseif (strstr($field, 'ATTENDEE')) {
-			$attendee = $data;
-			// echo $attendee;
-			
+		// sort the sub (day) arrays so the times are in order
+		foreach (array_keys($master_array) as $k) {
+			if (is_array($master_array[$k])) {
+				ksort($master_array[$k]);
+				reset($master_array[$k]);
+			}
 		}
 	}
-}
-
-// Sort the array by absolute date.
-if (is_array($master_array)) { 
-	ksort($master_array);
-	reset($master_array);
 	
-	// sort the sub (day) arrays so the times are in order
-	foreach (array_keys($master_array) as $k) {
-		if (is_array($master_array[$k])) {
-			ksort($master_array[$k]);
-			reset($master_array[$k]);
-		}
+	// write the new master array to the file
+	if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE) {
+		$write_me = serialize($master_array);
+		$fd = fopen($parsedcal, 'w');
+		fwrite($fd, $write_me);
+		fclose($fd);
+		touch($parsedcal, $realcal_mtime);
 	}
-}
-
-// write the new master array to the file
-if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE) {
-	$write_me = serialize($master_array);
-	$fd = fopen($parsedcal, 'w');
-	fwrite($fd, $write_me);
-	fclose($fd);
-	touch($parsedcal, $realcal_mtime);
-}
-
-// this bracket is the end of the if ($parse_file) statment
 }
 
 
