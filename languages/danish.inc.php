@@ -1,7 +1,7 @@
 <?php
 
 // Danish language include
-// For version 0.9 PHP iCalendar
+// For version 0.9.1 PHP iCalendar
 //
 // Translation by Henrik H¿jmark (styxx@worldonline.dk)
 //            and Jakob PeterhŠnsel (marook@creepers.org)
@@ -59,9 +59,6 @@ $no_events_month_lang	= 'Ingen aftaler i denne m&aring;ned.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
-
-// new in 0.9 ----------------------
-
 $search_took_lang		= 'S&oslash;gningen tog %s sekunder';
 $recurring_event_lang	= 'Gentagen aftale';
 $exception_lang			= 'Undtagelse';
@@ -87,6 +84,23 @@ $priority_none_lang		= 'Ingen';
 $status_lang			= 'Status:';
 $todo_lang				= 'Ting der skal g&oslash;res';
 $unfinished_lang		= 'Uafsluttet';
+
+// ----- New for 0.9.1
+
+$prefs_set_lang = 'Your preferences have been set.';
+$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
+$unset_prefs_lang = 'Unset preferences:';
+
+// - navigation
+$back_lang = 'Back';
+$next_lang = 'Next';
+$prev_lang = 'Prev';
+$day_view_lang = 'Day View';
+$week_view_lang = 'Week View';
+$month_view_lang = 'Month View';
+$year_view_lang = 'Year View';
+
+// ---------------------------------
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']		= ', ';							// ie, 'one, two, three'

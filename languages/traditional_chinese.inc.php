@@ -1,7 +1,7 @@
 <?php
 
 // Trad. Chinese language include
-// For version 0.9 PHP iCalendar
+// For version 0.9.1 PHP iCalendar
 //
 // Translation by Kevin Fyure (digdog@mac.com)
 //
@@ -59,9 +59,6 @@ $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e 日';  // Lists just the day
 $rss_month_date			= '%b %e 日';  // Lists just the day
 $rss_language			= 'zh-tw';
-
-// new in 0.9 ----------------------
-
 $search_took_lang		= '本次搜尋花廢 %s 秒';
 $recurring_event_lang	= '重複事件';
 $exception_lang			= '例外';
@@ -87,6 +84,12 @@ $priority_none_lang		= '無';
 $status_lang			= '狀態:';
 $todo_lang				= '待辦事項';
 $unfinished_lang		= '尚未完成';
+
+// ----- New for 0.9.1
+
+$prefs_set_lang = 'Your preferences have been set.';
+$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
+$unset_prefs_lang = 'Unset preferences:';
 
 // - navigation
 $back_lang = '回去';

@@ -1,7 +1,7 @@
 <?php
 
 // French language include
-// For version 0.9 PHP iCalendar
+// For version 0.9.1 PHP iCalendar
 //
 // Translation by La Shampouineuse (info@lashampoo.com)
 //
@@ -59,9 +59,6 @@ $rss_day_date			= 'H:i';  // Lists just the time
 $rss_week_date			= '%e %b';  // Lists just the day
 $rss_month_date			= '%e %b';  // Lists just the day
 $rss_language			= 'en-us';
-
-// new in 0.9 ----------------------
-
 $search_took_lang		= 'La recherche a pris %s secondes';
 $recurring_event_lang	= '&Eacute;v&eacute;nement r&eacute;curent';
 $exception_lang			= 'Exception';
@@ -87,6 +84,23 @@ $priority_none_lang		= 'Aucune';
 $status_lang			= 'Status:';
 $todo_lang				= 'T&acirc;ches &agrave; faire';
 $unfinished_lang		= 'Non faites';
+
+// ----- New for 0.9.1
+
+$prefs_set_lang = 'Your preferences have been set.';
+$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
+$unset_prefs_lang = 'Unset preferences:';
+
+// - navigation
+$back_lang = 'Back';
+$next_lang = 'Next';
+$prev_lang = 'Prev';
+$day_view_lang = 'Day View';
+$week_view_lang = 'Week View';
+$month_view_lang = 'Month View';
+$year_view_lang = 'Year View';
+
+// ---------------------------------
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'

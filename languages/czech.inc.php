@@ -1,7 +1,7 @@
 <?php
 
 // Czech language include
-// For version 0.9 PHP iCalendar
+// For version 0.9.1 PHP iCalendar
 //
 // Translation by Whit, studio jižák (whit@studio.jizak.cz)
 //
@@ -59,9 +59,6 @@ $rss_day_date			= 'G:i A';  // Lists just the time
 $rss_week_date			= '%A, %e %B';  // Lists just the day
 $rss_month_date			= '%A, %e %B';  // Lists just the day
 $rss_language			= 'cs-cz';
-
-// new in 0.9 ----------------------
-
 $search_took_lang		= 'Hledání trvalo %s vteřin';
 $recurring_event_lang	= 'Opakující se událost';
 $exception_lang			= 'Výjimka';
@@ -87,6 +84,12 @@ $priority_none_lang		= 'Žádná';
 $status_lang			= 'Status:';
 $todo_lang				= 'Seznam úkolů';
 $unfinished_lang		= 'Nedokončeno';
+
+// ----- New for 0.9.1
+
+$prefs_set_lang = 'Your preferences have been set.';
+$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
+$unset_prefs_lang = 'Unset preferences:';
 
 // - navigation
 $back_lang = 'Zpět';

@@ -1,7 +1,7 @@
 <?php
 
 // Japanese language include
-// For version 0.9 PHP iCalendar
+// For version 0.9.1 PHP iCalendar
 //
 // Translation by Jared Wangen (jared@silter.org)
 // With the help of Eri Hayashiguchi
@@ -54,8 +54,6 @@ $goprint_lang		= '印刷できる';
 $time_lang			= '時間';
 $summary_lang		= '結言';
 $description_lang	= 'メモ';
-
-// RSS text for 0.8
 $this_site_is_lang		= 'このウェブサイトは%sです。';
 $no_events_day_lang		= '今日は予定がありません。';
 $no_events_week_lang	= '今週は予定がありません。';
@@ -64,7 +62,6 @@ $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e日';  // Lists just the day
 $rss_month_date			= '%b %e日';  // Lists just the day
 $rss_language			= 'ja';
-
 $search_took_lang		= '検索に%s秒かかりました。';
 $recurring_event_lang	= '引き続く予定';
 $exception_lang			= '特例';
@@ -90,6 +87,12 @@ $priority_none_lang		= 'なし';
 $status_lang			= '状態:';
 $todo_lang				= '備忘録';
 $unfinished_lang		= '完成されていない';
+
+// ----- New for 0.9.1
+
+$prefs_set_lang = 'Your preferences have been set.';
+$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
+$unset_prefs_lang = 'Unset preferences:';
 
 // - navigation
 $back_lang = '戻る';
