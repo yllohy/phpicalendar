@@ -51,15 +51,7 @@ if ($calendar_path == '') {
 
 $is_webcal = FALSE;
 if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
-	$cal_decoded = urldecode($HTTP_GET_VARS['cal']);
-	if (substr($cal_decoded, 0, 7) == 'http://' || substr($cal_decoded, 0, 9) == 'webcal://') {
-		$is_webcal = TRUE;
-		$cal_webcalPrefix = str_replace('http://','webcal://',$cal_decoded);
-		$cal_httpPrefix = str_replace('webcal://','http://',$cal_decoded);
-		$cal_filename = $cal_httpPrefix;
-	} else {
-		$cal_filename = stripslashes($cal_decoded);
-	}
+	$cal_filename = urldecode($HTTP_GET_VARS['cal']);
 } else {
 	if (isset($default_cal_check)) {
 		if ($default_cal_check != 'all_calenders_combined971') {
@@ -78,6 +70,12 @@ if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 	}
 }
 
+if (substr($cal_filename, 0, 7) == 'http://' || substr($cal_filename, 0, 9) == 'webcal://') {
+	$is_webcal = TRUE;
+	$cal_webcalPrefix = str_replace('http://','webcal://',$cal_filename);
+	$cal_httpPrefix = str_replace('webcal://','http://',$cal_filename);
+	$cal_filename = $cal_httpPrefix;
+}
 
 if ($is_webcal) {
 	if ($allow_webcals == 'yes' || in_array($cal_webcalPrefix, $list_webcals) || in_array($cal_httpPrefix, $list_webcals)) {
@@ -85,6 +83,9 @@ if ($is_webcal) {
 		$cal = urlencode($cal_filename);
 		$filename = $cal_filename;
 		$subscribe_path = $cal_webcalPrefix;
+		// empty the filelist array
+		$cal_filelist = array();
+		array_push($cal_filelist,$filename);
 	} else {
 		exit(error($error_remotecal_lang, $HTTP_GET_VARS['cal']));
 	}
@@ -107,6 +108,12 @@ if ($is_webcal) {
 				while (false != ($file = readdir($dir_handle))) {
 					if (substr($file, -4) == ".ics") {
 						$file = $calendar_path.'/'.$file;
+						array_push($cal_filelist, $file);
+					}
+				}
+				// add webcals
+				foreach ($list_webcals as $file) {
+					if (substr($file, -4) == ".ics") {
 						array_push($cal_filelist, $file);
 					}
 				}

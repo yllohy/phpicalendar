@@ -570,7 +570,7 @@ foreach ($cal_filelist as $filename) {
 					$vtodo_sort = $vtodo_priority;
 				}
 				$master_array['-2']["$vtodo_sort"]["$uid"] = array ('start_date' => $start_date, 'start_time' => $start_time, 'vtodo_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories);
-				unset ($due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary);
+				unset ($start_date, $start_time, $due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary);
 				$vtodo_set = FALSE;
 			} elseif ($line == 'BEGIN:VTODO') {
 				$vtodo_set = TRUE;
@@ -921,7 +921,7 @@ foreach ($cal_filelist as $filename) {
 						$organizer[] = array ('name' => $field, 'email' => $data);
 						break;
 					case 'LOCATION':
-						$data = $location;
+						$location = $data;
 						break;
 				}
 			}

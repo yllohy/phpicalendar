@@ -55,7 +55,6 @@ if (isset($HTTP_GET_VARS['attendee']) && ($HTTP_GET_VARS['attendee'] !== '') ) {
 $event = rawurldecode($event);
 $event = stripslashes($event);
 $event = str_replace('\\', '', $event);
-$event = htmlspecialchars($event);
 $description = rawurldecode($description);
 $description = stripslashes($description);
 $description = str_replace('\\', '', $description);
@@ -70,11 +69,9 @@ $attendee = unserialize ($attendee);
 $location = rawurldecode($location);
 $location = stripslashes($location);
 $location = str_replace('\\', '', $location);
-//$description = htmlspecialchars($description);
 $calendar_name2 = rawurldecode($calendar_name);
 $calendar_name2 = stripslashes($calendar_name2);
 $calendar_name2 = str_replace('\\', '', $calendar_name2);
-//$calendar_name2 = htmlspecialchars($calendar_name2);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
