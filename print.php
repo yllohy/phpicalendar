@@ -77,7 +77,7 @@ if ($printview == 'day') {
       	</td>
     </tr>
 	<tr>
-		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
+		<td colspan="3" class="dayborder"><img src="images/spacer.gif" width="1" height="5"></td>
 	</tr>
 	<tr>
 		<td colspan="3">
