@@ -19,18 +19,20 @@
 					<!-- switch description on -->
 					<p>{DESCRIPTION}</p>
 					<!-- switch description off -->
+					<p>
 					<!-- switch organizer on -->
-					<p><b>{ORGANIZER_LANG}</b>: {ORGANIZER}</p>
+					<b>{ORGANIZER_LANG}</b>: {ORGANIZER}<br>
 					<!-- switch organizer off -->
 					<!-- switch attendee on -->
-					<p><b>{ATTENDEE_LANG}</b>: {ATTENDEE}</p>
+					<b>{ATTENDEE_LANG}</b>: {ATTENDEE}<br>
 					<!-- switch attendee off -->
 					<!-- switch status on -->
-					<p><b>{STATUS_LANG}</b>: {STATUS}</p>
+					<b>{STATUS_LANG}</b>: {STATUS}<br>
 					<!-- switch status off -->
 					<!-- switch location on -->
-					<p><b>{LOCATIon_LANG}</b>: {LOCATIon}</p>
+					<b>{LOCATION_LANG}</b>: {LOCATION}<br>
 					<!-- switch location off -->
+					</p>
 				</div>
 			</td>
 		</tr>

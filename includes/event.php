@@ -2,7 +2,6 @@
 define('BASE', '../');
 include_once(BASE.'functions/init.inc.php'); 
 require_once(BASE.'functions/template.php');
-error_reporting(E_ALL);
 
 function decode_popup ($item) {
 	$item = stripslashes(rawurldecode($item));
@@ -76,8 +75,7 @@ $page->replace_tags(array(
 	'location' 			=> $location,
 	'sheet_href'		=> $sheet_href,
 	'cal_title_full'	=> $cal_title_full,
-	'base'				=> BASE,
-	'template'			=> $template
+	'template'			=> $template,
 		
 	));
 

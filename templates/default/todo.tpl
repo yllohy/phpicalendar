@@ -3,8 +3,8 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title>{CALENDAR_NAME}</title>
-	<link rel="stylesheet" type="text/css" href="{SHEET_HREF}">
+	<title>{CAL}</title>
+	<link rel="stylesheet" type="text/css" href="../templates/{TEMPLATE}/default.css">
 </head>
 <body>
 <center>
@@ -16,21 +16,23 @@
 			<td align="left" class="V12">
 				<div style="margin-left: 10px; margin-bottom:10px;">
 					<p>{VTODO_TEXT}</p>
-					<!-- Switch Description On -->
+					<!-- switch description on -->
 					<p>{DESCRIPTION}</p>
-					<!-- Switch Description Off -->
-					<!-- Switch Status On -->
-					<p>{STATUS_LANG}: {STATUS}</p>
-					<!-- Switch Status Off -->
-					<!-- Switch Priority On -->
-					<p>{PRIORITY_LANG}: {PRIORITY}</p>
-					<!-- Switch Priority Off -->
-					<!-- Switch Created On -->
-					<p>{CREATED_LANG}: {START_DATE}</p>
-					<!-- Switch Created Off -->
-					<!-- Switch Due On -->
-					<p>{DUE_LANG}: {DUE_DATE}</p>
-					<!-- Switch Due Off -->
+					<!-- switch description off -->
+					<p>
+					<!-- switch status on -->
+					<b>{STATUS_LANG}</b>: {STATUS}<br>
+					<!-- switch status off -->
+					<!-- switch priority on -->
+					<b>{PRIORITY_LANG}</b>: {PRIORITY}<br>
+					<!-- switch priority off -->
+					<!-- switch start_date on -->
+					<b>{CREATED_LANG}</b>: {START_DATE}<br>
+					<!-- switch start_date off -->
+					<!-- switch due_date on -->
+					<b>{DUE_LANG}</b>: {DUE_DATE}<br>
+					<!-- switch due_date off -->
+					</p>
 				</div>
 			</td>
 		</tr>

@@ -3,6 +3,7 @@
 define('BASE', '../');
 include_once(BASE.'functions/init.inc.php');
 include_once(BASE.'functions/date_functions.php');
+require_once(BASE.'functions/template.php');
 
 $vtodo_array = unserialize(base64_decode($HTTP_GET_VARS['vtodo_array']));
 
@@ -19,7 +20,6 @@ $priority 		= (isset($vtodo_array['priority'])) ? $vtodo_array['priority'] : (''
 $cal_title_full = $calendar_name.' '.$calendar_lang;
 $description	= ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", '<a target="_new" href="\0">\0</a>', $description);
 $vtodo_text		= ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$vtodo_text);
-$sheet_href 	= BASE.'styles/'.$style_sheet.'/default.css';
 
 
 if ((!isset($status) || $status == "COMPLETED") && isset($completed_date)) {
@@ -48,34 +48,25 @@ if ($priority != '')  		$display .= $priority_lang.' '.$priority.'<br>';
 if ($start_date != '')  	$display .= $created_lang.' '.$start_date.'<br>';
 if ($due_date != '')  		$display .= $due_lang.' '.$due_date.'<br>';
 
-echo <<<END
+$page = new Page(BASE.'templates/'.$template.'/todo.tpl');
 
-	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-			"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-	<html>
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-		<title>{$calendar_name}</title>
-		<link rel="stylesheet" type="text/css" href="{$sheet_href}">
-	</head>
-	<body>
-	<center>
-		<table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
-			<tr>
-				<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{$cal_title_full}</div></td>
-			</tr>
-			<tr>
-				<td align="left" class="V12">
-					<div style="margin-left: 10px; margin-bottom:10px;">
-						<p>{$display}</p>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</center>
-	</body>
-	</html>
+$page->replace_tags(array(
+	'cal' 				=> $cal_title_full,
+	'vtodo_text' 		=> $vtodo_text,
+	'description' 		=> $description,
+	'priority_lang' 	=> $priority_lang,
+	'priority'	 		=> $priority,
+	'created_lang'	 	=> $created_lang,
+	'start_date' 		=> $start_date,
+	'status_lang' 		=> $status_lang,
+	'status'	 		=> $status,
+	'due_lang'		 	=> $due_lang,
+	'due_date' 			=> $due_date,
+	'cal_title_full'	=> $cal_title_full,
+	'template'			=> $template
+		
+	));
 
-END;
+$page->output();
 
 ?>
