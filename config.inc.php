@@ -49,7 +49,7 @@ $allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
 $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
 
 // Administration settings
-$allow_admin			= 'no';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
+$allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
 $auth_method			= 'ftp';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
 $auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.
 $auth_internal_password	= 'default';		// Only used if $auth_method='internal'. The password for the administrator.

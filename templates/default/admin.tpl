@@ -1,29 +1,24 @@
 {HEADER}
 <center>
-<table border="0" width="700" cellspacing="0" cellpadding="0">
+<table border="0" width="520" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td align="left" width="120" class="navback"><a href="{BACK_PAGE}"><img src="templates/{TEMPLATE}/images/back.gif" alt="{L_BACK}" border="0" align="left"></a></td>
-					<td class="navback">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td align="center" class="navback" nowrap valign="middle"><font class="H20">{L_ADMIN_HEADER}</font></td>
-							</tr>
-						</table>
-					</td>
-					<td align="right" width="120" class="navback">	
+				<tr valign="top">
+					<td align="left" width="400" class="navback"><div style="padding: 5px;"><span class="H20">{L_ADMIN_HEADER}</span><br /><span class="V9G">{L_ADMIN_SUBHEAD}</span></div></td>
+					<td valign="top" align="right" width="120" class="navback">	
+						<div style="padding-top: 3px;">
 						<table width="120" border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0"></a></td>
-								<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0"></a></td>
-								<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0"></a></td>
-								<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0"></a></td>
+							<tr valign="top">
+								<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
+								<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
+								<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
+								<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
 							</tr>
 						</table>
+						</div>
 					</td>
-				</tr>
+				</tr>  			
 			</table>
 		</td>
 	</tr>
@@ -31,9 +26,9 @@
 		<td class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
 	</tr>
 	<tr>
-		<td class="G10" align="right">
+		<td align="right">
 			<!-- switch logged_in on -->
-			<a href="admin.php?action=logout\">{LOGOUT_LANG}</a>&nbsp;
+			<a href="admin.php?action=logout\">{L_LOGOUT}</a>&nbsp;
 			<!-- switch logged_in off -->
 		</td>
 	</tr>
@@ -45,23 +40,23 @@
 					<td width="98%" valign="top" align="left">
 
 						<!-- switch login_error on -->
-						<font color="red">{INVALID_LOGIN_LANG}</font>
+						<font color="red">{L_INVALID_LOGIN}</font>
 						<!-- switch login_error off -->
 	
 						<!-- switch display_login on -->
 						<form action="admin.php" method="post">
 							<table cellspacing="0" cellpadding="0">
 								<tr>
-									<td nowrap>{USERNAME_LANG}: </td>
+									<td nowrap>{L_USERNAME}: </td>
 									<td align="left"><input type="text" name="username"></td>
 								</tr>
 								<tr>
-									<td>{PASSWORD_LANG}: </td>
+									<td>{L_PASSWORD}: </td>
 									<td align="left"><input type="password" name="password"></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
-									<td align="left"><input type="submit" value="{$login_lang}"></td>
+									<td align="left"><input type="submit" value="{L_LOGIN}"></td>
 								</tr>
 								<tr>
 									<td align="center" colspan="3">{LOGIN_ERROR}&nbsp;</td>
@@ -74,36 +69,36 @@
 						<!-- switch logged_in on -->
 						
 						<!-- switch action_message on -->
-						<font color="green">{CAL_FILE_LANG} {FILENUMBER}: {ACTION_MSG}</font><br>
+						<font color="green">{L_CAL_FILE} {FILENUMBER}: {ACTION_MSG}</font><br>
 						<!-- switch action_message off -->
-						<h2>{ADDUPDATE_CAL_LANG}</h2>
-						<p>{ADDUPDATE_DESC_LANG}</p>
+						<b>{L_ADDUPDATE_CAL}</b>
+						<p>{L_ADDUPDATE_DESC}</p>
 						<form action="admin.php" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="action" value="addupdate">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
 								<tr>
-									<td nowrap>{CAL_FILE_LANG} 1: </td>
+									<td nowrap>{L_CAL_FILE} 1: </td>
 									<td><input type="file" name="calfile[1]"></td>
 								</tr>
 								<tr>
-									<td nowrap>{CAL_FILE_LANG} 2: </td>
+									<td nowrap>{L_CAL_FILE} 2: </td>
 									<td><input type="file" name="calfile[2]"></td>
 								</tr>
 								<tr>
-									<td nowrap>{CAL_FILE_LANG} 3: </td>
+									<td nowrap>{L_CAL_FILE} 3: </td>
 									<td><input type="file" name="calfile[3]"></td>
 								</tr>
 								<tr>
-									<td nowrap>{CAL_FILE_LANG} 4: </td>
+									<td nowrap>{L_CAL_FILE} 4: </td>
 									<td><input type="file" name="calfile[4]"></td>
 								</tr>
 								<tr>
-									<td nowrap>{CAL_FILE_LANG} 5: </td>
+									<td nowrap>{L_CAL_FILE} 5: </td>
 									<td><input type="file" name="calfile[5]"></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
-									<td><input type="submit" value="{SUBMIT_LANG}"></td>
+									<td><input type="submit" value="{L_SUBMIT}"></td>
 								</tr>
 								<tr>
 									<td align="center" colspan="2">{ADDUPDATE_MSG} &nbsp;</td>
@@ -111,11 +106,11 @@
 							</table>
 						</form>
 						
-						<h2>{DELETE_CAL_LANG}</h2>
+						<b>{L_DELETE_CAL}</b>
 						<form action="admin.php" method="post">
 							{DELETE_TABLE}
 							<input type="hidden" name="action" value="delete">
-							<p><input type="submit" value="{DELETE_LANG}"></p>
+							<p><input type="submit" value="{L_DELETE}"></p>
 							<p>{DELETE_MSG} &nbsp;</p>
 						</form>
 						
@@ -124,6 +119,13 @@
 				</tr>
 			</table>
 		</td>
+	</tr>
+</table>
+<table width="520" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
 {FOOTER}

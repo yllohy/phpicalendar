@@ -100,23 +100,25 @@ $lang['l_delete_cal']		= 'Delete a Calendar';
 $lang['l_logout']			= 'Logout';
 $lang['l_cal_file']			= 'Calendar File';
 $lang['l_php_error']		= 'PHP Error';
-$upload_error_gen_lang	= 'There was a problem with your upload.';
-$upload_error_lang[0]	= 'There was a problem with your upload.';
-$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
-$upload_error_lang[4]	= 'You must select a file for upload.';
-$upload_error_type_lang = 'Only .ics files may be uploaded.';
-$copy_error_lang		= 'Failed to copy file';
-$delete_error_lang		= 'Failed to delete file';
-$delete_success_lang	= 'was deleted successfully.';
-$action_success_lang	= 'Your action was successful.';
-$submit_lang			= 'Submit';
-$delete_lang			= 'Delete';
+$upload_error_gen_lang		= 'There was a problem with your upload.';
+$upload_error_lang[0]		= 'There was a problem with your upload.';
+$upload_error_lang[1]		= 'The file you are trying to upload is too big.';
+$upload_error_lang[2]		= 'The file you are trying to upload is too big.';
+$upload_error_lang[3]			= 'The file you are trying upload was only partially uploaded.';
+$upload_error_lang[4]			= 'You must select a file for upload.';
+$lang['l_upload_error_type'] 	= 'Only .ics files may be uploaded.';
+$lang['l_copy_error']			= 'Failed to copy file';
+$lang['l_delete_error']			= 'Failed to delete file';
+$lang['l_delete_success']		= 'was deleted successfully.';
+$lang['l_action_success']		= 'Your action was successful.';
+$lang['l_submit']				= 'Submit';
+$lang['l_delete']				= 'Delete';
 $all_cal_comb_lang		= 'All calendars combined';
 
 // New for 2.0
-$lang['l_legend']		= 'Legend';
+$lang['l_legend']			= 'Legend';
+$lang['l_admin_subhead']	= 'Manage your calendars from this page';
+$lang['l_prefs_subhead']	= 'Sets a cookie for visiting this site';
 
 // - navigation
 $back_lang = 'Back';
