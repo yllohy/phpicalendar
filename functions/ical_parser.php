@@ -57,15 +57,23 @@ if ($is_webcal == false && $save_parsed_cals == 'yes') {
 
 
 if ($parse_file) {
-	
+
+/*
 	// open the iCal file, read it into a string
 	// Then turn it into an array after we pull every wrapped line up a level.
-	
+
 	$contents = @file($filename);
 	$contents = @implode('', $contents);
 	$contents = ereg_replace("\n ", '', $contents);
 	$contents = split ("\n", $contents);
 	if ($contents[0] != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
+*/
+	// patch to speed up parser
+	
+	$ifile = fopen($filename, "r");
+	if ($ifile == FALSE) exit(error($error_invalidcal_lang, $filename));
+	$nextline = fgets($ifile, 1024);
+	if ($nextline != "BEGIN:VCALENDAR\n") exit(error($error_invalidcal_lang, $filename));
 	
 	// Set a value so we can check to make sure $master_array contains valid data
 	$master_array['-1'] = 'valid cal file';
@@ -73,8 +81,21 @@ if ($parse_file) {
 	// auxiliary array for determining overlaps of events
 	$overlap_array = array ();
 	
+/*
 	// parse our new array
 	foreach($contents as $line) {
+*/
+// read file in line by line
+// XXX end line is skipped because of the 1-line readahead
+	while (!feof($ifile)) {
+		$line = $nextline;
+		$nextline = fgets($ifile, 1024);
+		$nextline = rtrim($nextline, "\r\n");
+		while (substr($nextline, 0, 1) == " ") {
+			$line = $line . substr($nextline, 1);
+			$nextline = fgets($ifile, 1024);
+			$nextline = rtrim($nextline, "\r\n");
+		}
 		$line = trim($line);
 		if (stristr($line, 'BEGIN:VEVENT')) {
 			// each of these vars were being set to an empty string
@@ -265,6 +286,10 @@ if ($parse_file) {
 									if ($diff % $number == 0) {
 										$interval = $number;
 										switch ($rrule_array['FREQ']) {
+											case 'DAILY':
+												$next_date_time = $next_range_time;
+												$recur_data[] = $next_date_time;
+											break;
 											case 'WEEKLY':
 												// loop through the days on which this event happens
 												foreach($byday as $day) {
@@ -277,10 +302,6 @@ if ($parse_file) {
 													//print date('Y-m-d  ', $next_date_time);
 													$recur_data[] = $next_date_time;
 												}
-											break;
-											case 'DAILY':
-												$next_date_time = $next_range_time;
-												$recur_data[] = $next_date_time;
 											break;
 											case 'MONTHLY':
 												$next_range_time = strtotime(date('Y-m-01', $next_range_time));
