@@ -71,15 +71,17 @@ if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 	}
 }
 
-if (substr($cal_filename, 0, 7) == 'http://' || substr($cal_filename, 0, 9) == 'webcal://') {
+if (substr($cal_filename, 0, 7) == 'http://' || substr($cal_filename, 0, 8) == 'https://' || substr($cal_filename, 0, 9) == 'webcal://') {
 	$is_webcal = TRUE;
 	$cal_webcalPrefix = str_replace('http://','webcal://',$cal_filename);
 	$cal_httpPrefix = str_replace('webcal://','http://',$cal_filename);
+	$cal_httpsPrefix = str_replace('webcal://','https://',$cal_filename);
+	$cal_httpsPrefix = str_replace('http://','https://',$cal_httpsPrefix);
 	$cal_filename = $cal_httpPrefix;
 }
 
 if ($is_webcal) {
-	if ($allow_webcals == 'yes' || in_array($cal_webcalPrefix, $list_webcals) || in_array($cal_httpPrefix, $list_webcals)) {
+	if ($allow_webcals == 'yes' || in_array($cal_webcalPrefix, $list_webcals) || in_array($cal_httpPrefix, $list_webcals) || in_array($cal_httpsPrefix, $list_webcals)) {
 		$cal_displayname = substr(str_replace('32', ' ', basename($cal_filename)), 0, -4);
 		$cal = urlencode($cal_filename);
 		$filename = $cal_filename;
