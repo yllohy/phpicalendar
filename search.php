@@ -4,6 +4,21 @@ define('BASE','./');
 $current_view = 'search';
 include('./functions/ical_parser.php');
 
+// yet to be implemented
+switch($HTTP_GET_VARS['mode']) {
+	case 'advanced_search':
+		// display advanced search stuff
+		break;
+	case 'search':
+		// display simple search stuff
+		break;
+	case 'results':
+		// display results of either simple or advanced search
+		break;
+	default:
+		// some generic thing, maybe same as search
+}
+
 // takes a boolean search and formats it into an array
 // use with sister function search_boolean()
 function format_search($search_str) {
