@@ -48,6 +48,7 @@ Changes:
     -HTML bug fixes specific to Windows browsers
     -All-day and Regular recurring event both support all types
     -Bottom of month view updated
+    -Day, Week, Month navigation brought back.
     -Localization update
     	-Localized dates and times work with Mac OS X as well as
     	 other *nixes.
