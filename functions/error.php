@@ -40,7 +40,6 @@ function error($error_msg='There was an error processing the request.', $file='N
 		<td>
       		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 				<tr>
-					<td height="300"><img height="300" width="1" src="images/spacer.gif"></td>
 					<td align="center" valign="top">
 						<br>
 						<?php echo $error_msg; ?>
@@ -50,8 +49,9 @@ function error($error_msg='There was an error processing the request.', $file='N
 						<br>
 						<br>
 						<?php echo $error_back_lang; ?>
+						<br>
+						<br>
 					</td>
-					<td height="300"><img height="300" width="1" src="images/spacer.gif"></td>
 				</tr>
         	</table>
     	</td>

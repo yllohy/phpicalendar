@@ -55,16 +55,18 @@ if ($is_webcal == false && $save_parsed_cals == 'yes') {
 	}
 }
 
-// Start the session
-//session_start();
-//if (($aYear != $this_year) || ($use_sessions != 'yes') || (!is_array($aArray))) {
-//echo 'not using sessions';
 
 if ($parse_file) {
 
 // open the iCal file, read it into a string
+// Then turn it into an array after we pull every wrapped line up a level.
+// Error thingy doens't seem to work now though.
 $contents = @file($filename);
-if ($contents[0] != 'BEGIN:VCALENDAR'."\n") exit(error($error_invalidcal_lang, $filename));
+$contents = implode("", $contents);
+$contents = ereg_replace("\n ", "", $contents);
+$contents = split ("\n", $contents);
+// if ($contents[0] != 'BEGIN:VCALENDAR'."\n") exit(error($error_invalidcal_lang, $filename));
+// echo "$contents[0]";
 
 // Set a value so we can check to make sure $master_array contains valid data
 $master_array['-1'] = 'valid cal file';
@@ -676,19 +678,6 @@ if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes
 // this bracket is the end of the if ($parse_file) statment
 }
 
-// Store information in the session
-/*if ($use_sessions == 'yes') {
-	session_start();
-	session_register( 'aArray', 'aYear', 'aLanguage', 'aCalendar' );
-	$aArray = $master_array;
-	$aYear = $this_year;
-	$aLanguage = $language;
-	$aCalendar = $cal;
-}*/
-
-
-// End the session
-//}
 
 //If you want to see the values in the arrays, uncomment below.
 //print '<pre>';

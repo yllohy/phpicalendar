@@ -6,23 +6,25 @@
 		$cal_displayname2 = $cal_displayname2 . "...";
 	}
 	
+	$next_day = date("Ymd", strtotime("+1 day", $unix_time));
+	$prev_day = date("Ymd", strtotime("-1 day", $unix_time));
 	?>
 <br>
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$prev_month\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" border=\"0\" align=\"left\"></a>"; ?></td>
+		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_day\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" border=\"0\" align=\"left\"></a>"; ?></td>
 		<td align="center" class="sideback"><font class="G10B"><b><?php print (localizeDate ($dateFormat_day, strtotime($getdate))); ?></b></font></td>
-		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$next_month\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" border=\"0\" align=\"right\"></a>"; ?></td>
+		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_day\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" border=\"0\" align=\"right\"></a>"; ?></td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
 	</tr>
 	<tr>
 		<td width="1%" valign="top" align="right">
-			<table cellpadding="0" cellspacing="0" border="0" width="175">
+			<table cellpadding="0" cellspacing="0" border="0" width="160">
 				<tr>
 					<td valign="center" align="center">
-						<table width="175" border="0" cellpadding="0" cellspacing="0">
+						<table width="160" border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
 								<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></font></td>
@@ -101,11 +103,11 @@
 		<td width="98%" valign="top" align="center">
 			<table border="0" width="330" cellspacing="0" cellpadding="0">
 				<tr>
-					<td width="175" valign="top">
-						<table cellpadding="0" cellspacing="0" border="0" width="175">
+					<td width="160" valign="top">
+						<table cellpadding="0" cellspacing="0" border="0" width="160">
 							<tr>
 								<td valign="center" align="center">
-									<table width="175" border="0" cellpadding="0" cellspacing="0">
+									<table width="160" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td colspan="3" bgcolor="#FFFFFF" align="left">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
@@ -162,11 +164,11 @@
 						</table>
 					</td>
 					<td><img src="images/spacer.gif" width="10" height="1"></td>
-					<td width="175" valign="top">
-						<table cellpadding="0" cellspacing="0" border="0" width="175">
+					<td width="160" valign="top">
+						<table cellpadding="0" cellspacing="0" border="0" width="160">
 							<tr>
 								<td valign="center" align="left" valign="top">
-									<table width="175" border="0" cellpadding="0" cellspacing="0">
+									<table width="160" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td colspan="3" bgcolor="#FFFFFF" align="left" valign="top">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
@@ -225,10 +227,10 @@
 			</table>
 		</td>
 		<td width="1%" valign="top" align="left">
-	<table cellpadding="0" cellspacing="0" border="0" width="175">
+	<table cellpadding="0" cellspacing="0" border="0" width="160">
 		<tr>
 			<td valign="center" align="center">
-				<table width="175" border="0" cellpadding="0" cellspacing="0">
+				<table width="160" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
 						<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
@@ -307,7 +309,7 @@
 </td>
 	</tr>
 	
-<?php if ($num_of_events != 0) { ?>	
+<?php if (($num_of_events != 0) && ($this_months_events == "yes")) { ?>	
 	<tr>
 		<td colspan="3">
 				<table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -315,9 +317,9 @@
 						<td align="center" valign="top">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td align="left" valign="top" width="150" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
-									<td align="center" class="montheventtop" width="437" nowrap><font class="G10BOLD"><?php echo "$this_months_lang"; ?></font></td>
-									<td align="right" valign="top" width="150" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+									<td align="left" valign="top" width="160" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+									<td align="center" class="montheventtop" width="417" nowrap><font class="G10BOLD"><?php echo "$this_months_lang"; ?></font></td>
+									<td align="right" valign="top" width="160" class="montheventtop"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="3" height="1"></td>
@@ -358,14 +360,11 @@
 														$event_text = substr("$event_text", 0, 65);
 														$event_text = $event_text . "...";
 													}
+													if (!$new_val2["event_start"]) $event_start = "$all_day_lang";
 													echo "<tr>\n";
-													echo "<td class=\"montheventline\"><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
+													echo "<td width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
 													echo "<td colspan=\"2\">\n";
-													if (!$new_val2["event_start"]) {
-														echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a> <font class=\"V9G\">($all_day_lang)</font>\n";
-													} else {	
-														echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a>\n";
-													}
+													echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}
