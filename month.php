@@ -21,6 +21,7 @@
 	$display_month = strftime ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_sunday = sundayOfWeek($this_year, $this_month, "1");
+	$thisday2 = strftime($dateFormat_week_list, $unix_time);
 
 
 ?>
@@ -185,7 +186,7 @@
 		</td>
 	</tr>
 </table>
-
+<?php include "./month_bottom.php"; ?>
 
 <br>
 <?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a>"; ?>
