@@ -28,7 +28,7 @@ if (($start) && ($end)) {
 	$event_times = $start . ' - ' . $end; 
 }
 if ($start == '' && $end == '' && (isset($start) && isset($end))) {
-	$event_times = $all_day_lang;
+	$event_times = $lang['l_all_day'];
 }
 
 if ($description) $description = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$description);

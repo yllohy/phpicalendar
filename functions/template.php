@@ -697,7 +697,6 @@ class Page {
 		$minical_year 		= date("Y", $fake_getdate_time);
 		$first_of_month 	= $minical_year.$minical_month."01";
 		$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
-		$month_event_lines	= 0;
 		$i 					= 0;
 		$whole_month 		= TRUE;
 		
@@ -799,14 +798,14 @@ class Page {
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
-							$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+							$switch['EVENT_TEXT'] 	= openevent($switch['CALNAME'], '', '', $val, $month_event_lines, 15, '', '', 'psf', $switch['URL']);
 						} else {	
 							$event_start = $val['start_unixtime'];
 							$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
 							$event_start = date($timeFormat, $val['start_unixtime']);
 							$event_end   = date($timeFormat, @strtotime ($event_end));
 							$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
-							$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+							$switch['EVENT_TEXT'] 	= openevent($switch['CALNAME'], '', '', $val, 0, 15, '', '', 'psf', $switch['URL']);
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						}
 						if ($switch['EVENT_TEXT'] != '') {
