@@ -23,7 +23,7 @@ $last_month_lang	= 'Zeszły Miesiąc';
 $last_week_lang		= 'Zeszły tydzień';
 $last_year_lang		= 'Zeszły rok';
 $subscribe_lang		= 'Subskrybuj';
-$download_lang		= 'Pobież';
+$download_lang		= 'Pobierz';
 $powered_by_lang 	= 'Powered by';
 $version_lang		= '0.6';
 $event_lang			= 'Zadanie';
@@ -34,24 +34,24 @@ $date_lang			= 'Data';
 $summary_lang		= 'Info';
 
 // new since last translation
-$all_day_lang		= 'All day event';
+$all_day_lang		= 'Zadanie na cały dzień';
 $notes_lang			= 'Notes';
-$this_years_lang	= 'This Year\'s Events';
-$today_lang			= 'Today';
-$this_week_lang		= 'This Week';
-$this_month_lang	= 'This Month';
-$jump_lang			= 'Jump to';
-$tomorrows_lang		= 'Tomorrow\'s Events';
-$goday_lang			= 'Go to Today';
-$goweek_lang		= 'Go to This Week';
-$gomonth_lang		= 'Go to This Month';
-$goyear_lang		= 'Go to This Year';
+$this_years_lang	= 'Zadania tego roku';
+$today_lang			= 'Dzisiaj';
+$this_week_lang		= 'Bieżący tydzień';
+$this_month_lang	= 'Bieżący miesiąc';
+$jump_lang			= 'Idź do';
+$tomorrows_lang		= 'Zadania jutra';
+$goday_lang			= 'Idź do dnia dzisiejszego';
+$goweek_lang		= 'Idź do bieżącego tygodnia';
+$gomonth_lang		= 'Idź do bieżącego miesiąca';
+$goyear_lang		= 'Idź do bieżącego roku';
 
-$daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-$daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
-$daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
-$monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
-$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+$daysofweek_lang			= array ('Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota');
+$daysofweekshort_lang		= array ('Nie','Pon','Wt','Śr','Czw','Pt','Sob');
+$daysofweekreallyshort_lang	= array ('N','P','W','Ś','C','P','S');
+$monthsofyear_lang			= array ('Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień');
+$monthsofyearshort_lang		= array ('Sty','Luty','Marz','Kwie','Maj','Czer','Lip','Sier','Wrz','Paź','List','Gru');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'G:i';
@@ -60,7 +60,7 @@ $timeFormat = 'G:i';
 $dateFormat_day = '%A, %e %B';
 $dateFormat_week = '%e %B';
 $dateFormat_week_list = '%a, %e %b';
-$dateFormat_week_jump = '%b %e';// new since last translation
+$dateFormat_week_jump = '%e %b';// new since last translation
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A, %e %B';
 
@@ -81,13 +81,13 @@ Notes about $dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$error_title_lang = 'Błąd!';
+$error_window_lang = 'Wystąpił błąd!';
+$error_calendar_lang = 'Podczas przetwarzania kalendarza „%s”, wystąpił błąd.';
+$error_path_lang = 'Nie mogę otworzyć ścieżki: "%s"';
+$error_back_lang = 'Proszę użyć przycisku „Wstecz” aby wrócić.';
+$error_remotecal_lang = 'Ten serwer blokuje dostęp do niezatwierdzonych zdalnych kalendarzy.';
+$error_restrictedcal_lang = 'Dostęp do kalendarza, który próbujesz otworzyć, jest zabroniony przez serwer.';
+$error_invalidcal_lang = 'Zły plik kalendarza. Spróbuj innego.';
 
-?>
+?>)

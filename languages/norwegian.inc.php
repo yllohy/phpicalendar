@@ -13,22 +13,22 @@ $day_lang			= 'Dag';
 $week_lang			= 'Uke';
 $month_lang			= 'M&aring;ned';
 $year_lang			= '&aring;r';
-$calendar_lang		= 'Kalender';
-$next_day_lang		= 'Neste Dag';
-$next_month_lang	= 'Neste M&aring;ned';
-$next_week_lang		= 'Neste Uke';
-$next_year_lang		= 'Neste &Aring;r';
-$last_day_lang		= 'Forrige Dag';
+$calendar_lang		= 'kalender';
+$next_day_lang		= 'Neste dag';
+$next_month_lang	= 'Neste m&aring;ned';
+$next_week_lang		= 'Neste uke';
+$next_year_lang		= 'Neste &aring;r';
+$last_day_lang		= 'Forrige dag';
 $last_month_lang	= 'Forrige M&aring;ned';
 $last_week_lang		= 'Forrige Uke';
-$last_year_lang		= 'Forrige &Aring;r';
+$last_year_lang		= 'Forrige &aring;r';
 $subscribe_lang		= 'Abonn&eacute;r';
-$download_lang		= 'Last Ned';
+$download_lang		= 'Last ned';
 $powered_by_lang 	= 'Powered by';
 $version_lang		= '0.6';
 $event_lang			= 'Hendelse';
-$event_start_lang	= 'Start Tid';
-$event_end_lang		= 'Slutt Tid';
+$event_start_lang	= 'Start tid';
+$event_end_lang		= 'Slutt tid';
 $this_months_lang	= 'Denne M&aring;nedens Hendelser';
 $date_lang			= 'Dato';
 $summary_lang		= 'Sammendrag';
@@ -39,7 +39,7 @@ $today_lang			= 'I dag';
 $this_week_lang		= 'Denne uken';
 $this_month_lang	= 'Denne m&aring;neden';
 $jump_lang			= 'Hopp til';
-$tomorrows_lang		= 'Morgendagens hendelser';
+$tomorrows_lang		= 'I morgen';
 $goday_lang			= 'G&aring; til i dag';
 $goweek_lang		= 'G&aring; til denne uken';
 $gomonth_lang		= 'G&aring; til denne m&aring;neden';
@@ -80,14 +80,15 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$error_title_lang = 'Feil!';
+$error_window_lang = 'Det skjedde en feil!';
+$error_calendar_lang = 'Kalenderen "%s" ble aksessert n&aring;r denne feilen oppstod.';
+$error_path_lang = 'Kunne ikke &aring;pne adressen: "%s"';
+$error_back_lang = 'Vennligst bruk "Tilbake" knappen for &aring; returnere.';
+$error_remotecal_lang = 'Denne tjenermaskinen blokkerer ikke-lokale kalendere uten godkjenning.';
+$error_restrictedcal_lang = 'Du har pr&oslash;vd &aring; &aring;pne en kalender som er begrenset p&aring; denne tjenermaskinen.';
+$error_invalidcal_lang = 'Ugyldig kalenderfil. Vennligst pr&oslash;v en annen kalenderfil.';
 
 
 ?>
+)

@@ -34,25 +34,25 @@ $date_lang			= 'Datum';
 $summary_lang		= 'Overzicht';
 
 // new since last translation
-$all_day_lang		= 'All day event';
-$notes_lang			= 'Notes';
-$this_years_lang	= 'This Year\'s Events';
-$today_lang			= 'Today';
-$this_week_lang		= 'This Week';
-$this_month_lang	= 'This Month';
-$jump_lang			= 'Jump to';
-$tomorrows_lang		= 'Tomorrow\'s Events';
-$goday_lang			= 'Go to Today';
-$goweek_lang		= 'Go to This Week';
-$gomonth_lang		= 'Go to This Month';
-$goyear_lang		= 'Go to This Year';
+$all_day_lang		= 'Dag Activiteit';
+$notes_lang			= 'Opmerkingen';
+$this_years_lang	= 'Activiteiten Dit Jaar';
+$today_lang			= 'Vandaag';
+$this_week_lang		= 'Deze Week';
+$this_month_lang	= 'Deze Maand';
+$jump_lang			= 'Ga naar';
+$tomorrows_lang		= 'Activiteiten van morgen';
+$goday_lang			= 'Ga Naar Vandaag';
+$goweek_lang		= 'Ga Naar Deze Week';
+$gomonth_lang		= 'Ga Naar Deze Maand';
+$goyear_lang		= 'Ga Naar Dit Jaar';
 
 // new since last translation
-$daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-$daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
-$daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
-$monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
-$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+$daysofweek_lang			= array ('Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag');
+$daysofweekshort_lang		= array ('Zon','Ma','Din','Woe','Do','Vrij','Zat');
+$daysofweekreallyshort_lang	= array ('Z','M','D','W','D','V','Z');
+$monthsofyear_lang			= array ('Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December');
+$monthsofyearshort_lang		= array ('Jan','Feb','Maa','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'G:i';
@@ -61,7 +61,7 @@ $timeFormat = 'G:i';
 $dateFormat_day = '%A %e %B';
 $dateFormat_week = '%e %B';
 $dateFormat_week_list = '%a %e %b';
-$dateFormat_week_jump = '%b %e';// new since last translation
+$dateFormat_week_jump = '%e %b';// new since last translation
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A %e %B';
 
@@ -82,14 +82,14 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$error_title_lang = 'Fout!';
+$error_window_lang = 'Er is een fout opgetreden!';
+$error_calendar_lang = 'De kalender "%s" was aan het processen toen de fout gebeurde.';
+$error_path_lang = 'Onmogelijk om het path te openen: "%s"';
+$error_back_lang = 'Gebruik de "Back" knop om terug te keren.';
+$error_remotecal_lang = 'Deze server blokt alle niet-geaccepteerde kalenders.';
+$error_restrictedcal_lang = 'Je probeerde een beveiligde kalender te bekijken.';
+$error_invalidcal_lang = 'Ongeldige Kalender file. Probeer een andere kalender aub.';
 
 
 ?>

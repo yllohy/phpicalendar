@@ -3,7 +3,7 @@
 // Danish language include
 // For version 0.6 PHP iCalendar
 //
-// Translation by Henrik H¿jmark (styxx@worldonline.dk)
+// Translation by Henrik HÃ¸jmark (styxx@worldonline.dk)
 //
 // Submit new translations to chad@chadsdomain.com
 

@@ -173,8 +173,8 @@
 											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
 											echo "<td colspan=\"6\" class=\"G10B\">\n";
 											if (!isset($val["event_start"])) {
-												$event_start = 'All';
-												$event_end = 'Day';
+												$event_start = $all_day_lang;
+												$event_end = '';
 												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a>\n";
 											} else {	
 												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";

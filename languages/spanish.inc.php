@@ -3,10 +3,7 @@
 // Spanish language include
 // For version 0.6 PHP iCalendar
 //
-// Translation by XIPS (buzon@xips.es)
-//
-// Submit new translations to chad@chadsdomain.com
-
+// Translation by Javier Navarro from XIPS (jnavarro@xips.es)
 
 
 $day_lang			= "D&iacute;a";
@@ -28,41 +25,41 @@ $powered_by_lang 	= "Powered by";
 $version_lang		= "0.6";
 
 // from here down, translate
-$event_lang			= 'Event';
-$event_start_lang	= 'Start Time';
-$event_end_lang		= 'End Time';
-$this_months_lang	= 'This Month\'s Events';
-$date_lang			= 'Date';
-$summary_lang		= 'Summary';
-$all_day_lang		= 'All day event';
-$notes_lang			= 'Notes';
-$this_years_lang	= 'This Year\'s Events';
-$today_lang			= 'Today';
-$this_week_lang		= 'This Week';
-$this_month_lang	= 'This Month';
-$jump_lang			= 'Jump to';
-$tomorrows_lang		= 'Tomorrow\'s Events';
-$goday_lang			= 'Go to Today';
-$goweek_lang		= 'Go to This Week';
-$gomonth_lang		= 'Go to This Month';
-$goyear_lang		= 'Go to This Year';
+$event_lang			= 'Evento';
+$event_start_lang	= 'Inicio';
+$event_end_lang		= 'Fin';
+$this_months_lang	= 'Eventos de este mes';
+$date_lang			= 'Fecha';
+$summary_lang		= 'Descripci&oacute;n';
+$all_day_lang		= 'Evento diario';
+$notes_lang			= 'Notas';
+$this_years_lang	= 'Eventos de este a&ntilde;o';
+$today_lang			= 'Hoy';
+$this_week_lang		= 'Esta semana';
+$this_month_lang	= 'Este mes';
+$jump_lang			= 'Ir a';
+$tomorrows_lang		= 'Eventos de ma&ntilde;ana';
+$goday_lang			= 'Ir a Hoy';
+$goweek_lang		= 'Ir a Esta semana';
+$gomonth_lang		= 'Ir a Este Mes';
+$goyear_lang		= 'Ir a Este A&ntilde;o';
 
-$daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-$daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
-$daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
-$monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
-$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+$daysofweek_lang			= array ('Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado');
+$daysofweekshort_lang		= array ('Dom','Lun','Mar','Mie','Jue','Vie','Sab');
+$daysofweekreallyshort_lang	= array ('D','L','M','X','J','V','S');
+$monthsofyear_lang			= array ('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+$monthsofyearshort_lang		= array ('Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'g:i A';
 
 // For date formatting, see note below
-$dateFormat_day = '%A, %B %e';
-$dateFormat_week = '%B %e';
-$dateFormat_week_list = '%a, %b %e';
-$dateFormat_week_jump = '%b %e';
-$dateFormat_month = '%B %Y';
-$dateFormat_month_list = '%A, %B %e';
+$dateFormat_day = '%A, %e de %B';
+$dateFormat_week = '%e de %B';
+$dateFormat_week_list = '%a, %e de %b';
+$dateFormat_week_jump = '%e de %e';
+$dateFormat_month = '%B de %Y';
+$dateFormat_month_list = '%A, %e de %B';
 
 /*
 Notes about dateFormat_*
@@ -81,14 +78,14 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$error_title_lang = '&iexcl;Error!';
+$error_window_lang = '&iexcl;Hubo un error!';
+$error_calendar_lang = 'Cuando se produjo este error, se procesaba "%s" del calendario.';
+$error_path_lang = 'Incapaz de abrir: "%s"';
+$error_back_lang = 'Por favor, use el bot&oacute;n "Atr&aacute;s" para volver.';
+$error_remotecal_lang = 'Este servidor bloquea calendarios remotos que no han sido aceptados.';
+$error_restrictedcal_lang = 'Ha intentado llegar a un calendario que tiene el acceso restringido.';
+$error_invalidcal_lang = 'Fichero de calendario inv&aacute;lido. Por favor, pruebe con otro calendario.';
 
 
 ?>
