@@ -1,25 +1,32 @@
 <?php 
 
 include "init.inc.php"; 
+$event = urldecode($event);
 $event = stripslashes($event);
 $event = str_replace("\\", "", $event);
+$event = htmlspecialchars($event);
+$description = urldecode($description);
 $description = stripslashes($description);
 $description = str_replace("\\", "", $description);
-
+$description = htmlspecialchars($description);
+$calendar_name2 = urldecode($calendar_name);
+$calendar_name2 = stripslashes($calendar_name2);
+$calendar_name2 = str_replace("\\", "", $calendar_name2);
+$calendar_name2 = htmlspecialchars($calendar_name2);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-  <title><?php echo "$calendar_name"; ?></title>
+  <title><?php echo "$calendar_name2"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
 </head>
 <body bgcolor="#eeeeee"><center>
 <table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-		<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "$calendar_name $calendar_lang"; ?></b></td>
+		<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "$calendar_name2 $calendar_lang"; ?></b></td>
 		<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
 	</tr>
 	<tr>

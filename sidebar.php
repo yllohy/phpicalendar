@@ -158,13 +158,16 @@
 										$event_text = strip_tags($event_text, '<b><i><u>');
 										if ($event_text != "") {	
 											$event_text2 	= addslashes($val["event_text"]);
-											$event_text2 	= str_replace("\"", "&quot;", $event_text2);
+											$event_text2 	= urlencode($event_text2);
+											$description 	= $val["description"];
 											$description 	= addslashes($val["description"]);
-											$description 	= str_replace("\"", "&quot;", $description);
+											$description	= urlencode($description);
 											$event_start 	= $val["event_start"];
 											$event_end 		= $val["event_end"];
 											$event_start 	= date ($timeFormat, strtotime ("$event_start"));
 											$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+											$calendar_name2	= addslashes($calendar_name);
+											$calendar_name2 = urlencode($calendar_name2);
 											if (strlen($event_text) > 21) {
 												$event_text = substr("$event_text", 0, 18);
 												$event_text = $event_text . "...";
@@ -173,9 +176,9 @@
 											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
 											echo "<td colspan=\"6\" class=\"G10B\">\n";
 											if (!$event_start == $val["event_start"]) {
-												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a>\n";
+												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a>\n";
 											} else {	
-												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 											}
 											echo "</td>\n";
 											echo "</tr>\n";

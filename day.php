@@ -174,15 +174,17 @@ if ($master_array[($getdate)]) {
 													$event_length[$i]["state"] = "started";
 													$event_text 	= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"];
 													$event_text2 	= addslashes($master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_text"]);
-													$event_text2 	= str_replace("\"", "&quot;", $event_text2);
+													$event_text2 	= urlencode($event_text2);
 													$event_start 	= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
 													$event_end		= $master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
 													$description 	= addslashes($master_array[($getdate)]["$cal_time"][($event_length[$i]["key"])]["description"]);
-													$description 	= str_replace("\"", "&quot;", $description);
+													$description	= urlencode($description);
 													$event_start 	= strtotime ("$event_start");
 													$event_start 	= date ($timeFormat, $event_start);
 													$event_end 		= strtotime ("$event_end");
 													$event_end 		= date ($timeFormat, $event_end);
+													$calendar_name2	= addslashes($calendar_name);
+													$calendar_name2 = urlencode($calendar_name2);
 													echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2\">\n";
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
 													echo "<tr>\n";
@@ -191,7 +193,7 @@ if ($master_array[($getdate)]) {
 													echo "<tr>\n";
 													echo "<td>\n";
 													echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
-													echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
+													echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
 													echo "</tr>\n";
 													echo "</table>\n";
 													echo "</td>\n";           

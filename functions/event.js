@@ -5,11 +5,11 @@
 		var windowW = 450;
 		var windowH = 275;
 	
-		var url = "event.php?event="+escape(event)+
-			"&calendar_name="+escape(calendarname)+
-			"&start="+escape(start)+
-			"&end="+escape(end)+
-			"&description="+escape(description);
+		var url = "event.php?event="+event+
+			"&calendar_name="+calendarname+
+			"&start="+start+
+			"&end="+end+
+			"&description="+description;
 				
 		options = "scrollbars=no"+",width="+windowW+",height="+windowH;
 	
