@@ -86,6 +86,11 @@ functions folder.
 
 Changes:
 --------
+1.0 RC-2
+	-Fixed all reported bugs.
+	-Added failed login dialog for config authentication.
+	-RSS and Admin pages do not fail parsing.
+
 1.0 RC-1
 	-Fixed all reported bugs.
 	-Event and Todo popup now displays calendar name.
