@@ -53,7 +53,7 @@ $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-	'sidebar'			=> BASE.'templates/'.$template.'/calendar_nav.tpl'
+	'calendar_nav'		=> BASE.'templates/'.$template.'/calendar_nav.tpl'
 	));
 
 $page->replace_tags(array(
