@@ -62,6 +62,13 @@ COPYING for more information about our license.
 
 Changes:
 --------
+0.9.2
+	-Fixed an extra .php on the preferences page.
+	-Increased validations on many pages.y
+	-Added support for CLASS (public, private, and confidential).
+	-Added support for LOCATION
+	-Added support for ATTENDEE
+
 0.9.1
 	-Added unset preferences
 	-Cookies now fall back to defaults if data is bad.
