@@ -66,6 +66,8 @@ Changes:
 	-Added unset preferences
 	-Cookies now fall back to defaults if data is bad.
 	-Fixed a bug with the latest version of Ximian.
+	-Added the ability to hard-set cookie-uri and download-uri.
+	-Back button on preferences page now works.
 
 0.9
 	-Added complete VTODO support.
