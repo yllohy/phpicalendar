@@ -47,7 +47,7 @@ if ($rssview == 'day') {
 				$description 	= strip_tags($description, '<b><i><u>');
 				$rss_title		= htmlspecialchars ("$event_start $event_text");
 				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-				$rss_decription	= htmlspecialchars ("$description");
+				$rss_description	= htmlspecialchars ("$description");
 				$rss .= '<item>'."\n";
 				$rss .= '<title>'.$rss_title.'</title>'."\n";
 				$rss .= '<link>'.$rss_link.'</link>'."\n";
@@ -84,7 +84,7 @@ if ($rssview == "week") {
 					$description 	= strip_tags($description, '<b><i><u>');
 					$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
 					$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-					$rss_decription	= htmlspecialchars ("$dayofweek $event_start: $description");
+					$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 					$rss .= '<item>'."\n";
 					$rss .= '<title>'.$rss_title.'</title>'."\n";
 					$rss .= '<link>'.$rss_link.'</link>'."\n";
@@ -130,7 +130,7 @@ if ($rssview == "month") {
 						$description 	= strip_tags($description, '<b><i><u>');
 						$rss_title		= htmlspecialchars ("$dayofmonth: $event_text");
 						$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-						$rss_decription	= htmlspecialchars ("$dayofmonth $event_start: $description");
+						$rss_description	= htmlspecialchars ("$dayofmonth $event_start: $description");
 						$rss .= '<item>'."\n";
 						$rss .= '<title>'.$rss_title.'</title>'."\n";
 						$rss .= '<link>'.$rss_link.'</link>'."\n";
