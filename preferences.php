@@ -232,11 +232,11 @@ include(BASE.'functions/ical_parser.php');
 												while ($file = readdir($dir_handle)) {
 													if (($file != ".") && ($file != "..") && ($file != "CVS")) {
 														if (!is_file($file)) {
-															$file = ucfirst($file);
+															$file_disp = ucfirst($file);
 															if ($file == "$cookie_style") {
-																print "<option value=\"$file\" selected>$file</option>\n";
+																print "<option value=\"$file\" selected>$file_disp</option>\n";
 															} else {
-																print "<option value=\"$file\">$file</option>\n";
+																print "<option value=\"$file\">$file_disp</option>\n";
 															}
 														}
 													}
