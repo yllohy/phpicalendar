@@ -99,6 +99,7 @@ Changes:
 	-Mozilla calendar support added to publish.php.
 	-RSS supports ports other than 80.
 	-RSS respects $calendar_path.
+	-YEARLY repeating events display better.
 	-Various bug fixes.
 	
 1.1

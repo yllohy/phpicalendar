@@ -153,6 +153,9 @@ $format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
 $format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
 $format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
 $format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+
+// ---------------------------------
+
 $daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 $daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 $daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
