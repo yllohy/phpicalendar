@@ -421,11 +421,19 @@ if ($parse_file) {
 					$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
 
 					$dlst = date('I', $start_unixtime);
-					$server_offset_tmp = date('O', $start_unixtime);
+					$server_offset_tmp = chooseOffset($start_unixtime);
 					if (isset($tz_dtstart)) {
-						$offset_tmp = $tz_array[$tz_dtstart][$dlst];
+						if (array_key_exists($tz_dtstart, $tz_array)) {
+							$offset_tmp = $tz_array[$tz_dtstart][$dlst];
+						} else {
+							$offset_tmp = '+0000';
+						}
 					} elseif (isset($calendar_tz)) {
-						$offset_tmp = $tz_array[$calendar_tz][$dlst];
+						if (array_key_exists($calendar_tz, $tz_array)) {
+							$offset_tmp = $tz_array[$calendar_tz][$dlst];
+						} else {
+							$offset_tmp = '+0000';
+						}
 					} else {
 						$offset_tmp = $server_offset_tmp;
 					}
@@ -452,7 +460,7 @@ if ($parse_file) {
 					$end_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
 
 					$dlst = date('I', $end_unixtime);
-					$server_offset_tmp = date('O', $start_unixtime);
+					$server_offset_tmp = chooseOffset($end_unixtime);
 					if (isset($tz_dtend)) {
 						$offset_tmp = $tz_array[$tz_dtend][$dlst];
 					} elseif (isset($calendar_tz)) {
