@@ -44,6 +44,7 @@ $goday_lang			= 'Go to Today';
 $goweek_lang		= 'Go to This Week';
 $gomonth_lang		= 'Go to This Month';
 $goyear_lang		= 'Go to This Year';
+$goprint_lang		= 'Printer Friendly';
 
 // RSS text for 0.8
 $this_site_is_lang		= 'This site is';

@@ -30,7 +30,7 @@ $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu
 $allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
 $this_months_events 	= 'yes';			// Display "This month's events" at the bottom off the month page.
 $use_color_cals 		= 'yes';			// Display each calendar in the pop-up as a different color.
-$daysofweek_dayview 	= 'yes';			// Display the days of the week in day.php view.
+$daysofweek_dayview 	= 'no';			// Display the days of the week in day.php view.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
 										
 $blacklisted_cals[] = '';					// Fill in between the quotes the name of the calendars 
