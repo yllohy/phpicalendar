@@ -107,6 +107,7 @@ foreach ($cal_filelist as $filename) {
 				$first_duration = TRUE;
 				$count 			= 1000000;
 				$valarm_set 	= FALSE;
+				$firstday		= FALSE;
 				$attendee		= array();
 				$organizer		= array();
 				
@@ -246,15 +247,13 @@ foreach ($cal_filelist as $filename) {
 							if ($start_date_tmp == $start_date) {
 								$time_tmp = $hour.$minute;
 								$start_time_tmp = $start_time;
+								$end_time_tmp = '0000';
 							} else {
 								$time_tmp = '0000';
 								$start_time_tmp = '0000';
-							}
-							if ($start_date_tmp == $end_date_tmp) {
 								$end_time_tmp = $end_time;
-							} else {
-								$end_time_tmp = '2400';
 							}
+
 							$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
 							$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee) );
 							$start_tmp = strtotime('+1 day',$start_tmp);
@@ -580,23 +579,24 @@ foreach ($cal_filelist as $filename) {
 														$end_date_tmp = date('Ymd',$end_unixtime_tmp);
 														while ($start_tmp < $end_unixtime_tmp) {
 															$start_date_tmp = date('Ymd',$start_tmp);
-															if ($start_date_tmp == $start_date) {
+															if (($start_date_tmp == $start_date) || ($firstday == FALSE)) {
 																$time_tmp = $hour.$minute;
 																$start_time_tmp = $start_time;
+																$end_time_tmp = '0000';
+																$firstday = TRUE;
 															} else {
 																$time_tmp = '0000';
 																$start_time_tmp = '0000';
-															}
-															if ($start_date_tmp == $end_date_tmp) {
 																$end_time_tmp = $end_time;
-															} else {
-																$end_time_tmp = '2400';
+																$firstday = FALSE;
 															}
+														
 															$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
 															$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber);
 															$start_tmp = strtotime('+1 day',$start_tmp);
 														}
 													} else {
+														
 														// Let's double check the until to not write past it
 														$until_check = $recur_data_date.$hour.$minute.'00';
 														if ($abs_until > $until_check) {
@@ -631,7 +631,7 @@ foreach ($cal_filelist as $filename) {
 				}
 				
 			   // Clear event data now that it's been saved.
-			   unset($start_time, $start_time_tmp, $end_time, $end_time_tmp, $start_unixtime, $start_unixtime_tmp, $end_unixtime, $end_unixtime_tmp, $summary, $length, $nbrOfOverlaps, $description, $status, $class, $location, $organizer, $attendee);
+			   unset($time_tmp, $start_time, $start_time_tmp, $end_time, $end_time_tmp, $start_unixtime, $start_unixtime_tmp, $end_unixtime, $end_unixtime_tmp, $summary, $length, $nbrOfOverlaps, $description, $status, $class, $location, $organizer, $attendee);
 
 
 			// Begin VTODO Support
