@@ -35,7 +35,7 @@
 <center>
 <table width="740" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
-		<td align="left" width="5%"><?php echo "<a class=\"psf\" href=\"day.php?getdate=$today_today\">Today</a>"; ?></td>
+		<td align="left" width="5%"><?php echo "<a class=\"psf\" href=\"month.php?getdate=$today_today\">This&nbsp;Month</a>"; ?></td>
 		<td align="center" width="90%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>

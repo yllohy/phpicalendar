@@ -62,6 +62,7 @@ foreach($contents as $line) {
 		$except_dates = array();
 		$except_times = array();
 		$first_duration = TRUE;
+		$bymonthday = "";
 	} elseif (strstr($line, "END:VEVENT")) {
 		
 		// Clean out \n's and other slashes
@@ -256,10 +257,10 @@ foreach($contents as $line) {
 				
 							// initialze the time we will increment
 							$next_range_time = $start_range_time;
-							
+							$i=0;
 							// start at the $start_range and go until we hit the end of our range.
 							while ($next_range_time >= $start_range_time && $next_range_time <= $end_range_time) {
-							
+								$i++;
 								// handling WEEKLY events here
 								if ($rrule_array["FREQ"] == "WEEKLY") {
 
@@ -292,10 +293,7 @@ foreach($contents as $line) {
 								
 								// handling DAILY events here
 								} elseif ($rrule_array["FREQ"] == "DAILY") {
-									
-									//print dayCompare(date("Ymd",$next_range_time), $start_date)."<br>";
-									//print $next_range_time." - ".date("Y-m-d",$next_range_time)."<br>";
-									
+
 									// use dayCompare to see if we even have this event this day
 									if (dayCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
 										$interval = $number;
@@ -312,6 +310,54 @@ foreach($contents as $line) {
 										$interval = 1;
 									}
 									$next_range_time = strtotime("+$interval day", $next_range_time);
+									
+								// handling MONTHLY events here
+								} elseif ($rrule_array["FREQ"] == "MONTHLY") {
+									$next_range_time = strtotime(date("Y-m-01", $next_range_time));
+									// use monthCompare to see if we even have this event this month
+									if (monthCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
+										$interval = $number;
+										
+										// month has two cases, either $bymonthday or $byday
+										if (is_array($bymonthday)) {
+										
+											// loop through the days on which this event happens
+											foreach($bymonthday as $day) {
+												if ($day != "0") {
+													$next_date_time = strtotime(date("Y-m-",$next_range_time).$day);
+													$next_date = date("Ymd", $next_date_time);
+													if ($next_date_time > $start_date_time && !in_array($next_date, $except_dates)) {
+														// same general concept as the WEEKLY recurrence
+// check for overlapping events	
+														$nbrOfOverlaps = checkOverlap();
+// writes to $master array here
+														$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+													}
+												}
+											}
+											
+										// our other case
+										} else {
+											// loop through the days on which this event happens
+											foreach($byday as $day) {
+												ereg ("([0-9]{1})([A-Z]{2})", $day, $byday_arr);
+												$nth = $byday_arr[1]-1;
+												$on_day = two2threeCharDays($byday_arr[2]);
+												$next_date_time = strtotime("$on_day +$nth week", $next_range_time);
+												$next_date = date("Ymd", $next_date_time);
+												if ($next_date_time > $start_date_time && !in_array($next_date, $except_dates)) {
+													// same general concept as the WEEKLY recurrence
+// check for overlapping events	
+													$nbrOfOverlaps = checkOverlap();
+// writes to $master array here
+													$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+												}
+											}
+																					}
+									} else {
+										$interval = 1;
+									}
+									$next_range_time = strtotime("+$interval month", $next_range_time);
 									
 								// anything else we need to end the loop
 								} else {
