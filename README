@@ -43,10 +43,16 @@ Supported Calendar Applications:
 PHP iCalendar supports any calendar application that can generate
 valid IETF 2445 files (.ics). Some of the supported applications are:
 	
-	-Apple iCal
-	-Mozilla Calendar
-	-Ximian Evolution
-	-KOrganizer
+	- Apple iCal
+		- http://www.apple.com/ical/
+	- Mozilla Calendar
+		- http://www.mozilla.org/projects/calendar/
+	- Ximian Evolution
+		- http://www.ximian.com/products/evolution/
+	- KOrganizer
+		- http://korganizer.kde.org/
+	- WinDates 5.0
+		- http://www.rockinsoftware.com/windates.htm
 
 Bugs:
 -----
@@ -70,6 +76,14 @@ Licensing:
 This product is distributed under the GPL.  Please read through the file
 COPYING for more information about our license.
 
+Older Browser Support:
+----------------------
+Starting with 0.9.4, PHP iCalendar is moving away from supporting 4.x browsers.
+If you still need support for these browers, 0.9.3 is still available for
+download. To get the latest ical support, simply download the latest version
+of PHP iCalendar and replace the file called 'ical_parser.php' in the 
+functions folder.
+
 Changes:
 --------
 0.9.4
@@ -82,12 +96,15 @@ Changes:
 	-Fixed a bug not listing blacklisted calendars.
 	-Moved HTML head into header.inc.php to better support embedding of calendar.
 	-Moved HTML foot into footer.inc.php to better support embedding of calendar.
+	-Specify the name of 'All Calendars Combined' in language files.
 
 0.9.3	
 	-Multiple calendar support (up to 8).
 	-Fixed pesky <BR> tags in event popup.
 	-Added Esperanto language.
 	-Major bug fixes.
+	-Last to support Netscape 4.x
+	
 0.9.2
 	-Fixed an extra .php on the preferences page.
 	-Increased validations on many pages.
