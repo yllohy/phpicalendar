@@ -104,7 +104,7 @@ if (substr($cal_filename, 0, 7) == 'http://' || substr($cal_filename, 0, 8) == '
 	$cal_filename = $cal_httpPrefix;
 }
 
-if ($is_webcal) {
+if ($is_webcal == TRUE) {
 	if ($allow_webcals == 'yes' || in_array($cal_webcalPrefix, $list_webcals) || in_array($cal_httpPrefix, $list_webcals) || in_array($cal_httpsPrefix, $list_webcals)) {
 		$cal_displayname = substr(str_replace('32', ' ', basename($cal_filename)), 0, -4);
 		$cal = urlencode($cal_filename);
@@ -114,13 +114,13 @@ if ($is_webcal) {
 		$cal_filelist = array();
 		array_push($cal_filelist,$filename);
 	} else {
-		exit(error($error_remotecal_lang, $HTTP_GET_VARS['cal']));
+		exit(error($lang['l_error_remotecal'], $HTTP_GET_VARS['cal']));
 	}
 } else {
 	$cal_displayname = str_replace('32', ' ', $cal_filename);
 	$cal = urlencode($cal_filename);
 	if (in_array($cal_filename, $blacklisted_cals)) {
-		exit(error($error_restrictedcal_lang, $cal_filename));
+		exit(error($lang['l_error_restrictedcal'], $cal_filename));
 	} else {
 		if (!isset($filename)) {
 			$cal_filelist = availableCalendars($username, $password, $cal_filename);
