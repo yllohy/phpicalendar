@@ -4,6 +4,7 @@
 // For version 0.6 PHP iCalendar
 //
 // Translation by Henrik Højmark (styxx@worldonline.dk)
+//            and Jakob Peterhänsel (marook@creepers.org)
 //
 // Submit new translations to chad@chadsdomain.com
 
@@ -58,10 +59,10 @@ $monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug
 $timeFormat = 'H:i';
 
 // For date formatting, see note below
-$dateFormat_day = '%A, %B %e';
-$dateFormat_week = '%B %e';
-$dateFormat_week_list = '%a, %b %e';
-$dateFormat_week_jump = '%b %e';
+$dateFormat_day = '%A, %e %B';
+$dateFormat_week = '%e %B';
+$dateFormat_week_list = '%a, %e %b';
+$dateFormat_week_jump = '%e %b';
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A, %e %B';
 
@@ -87,9 +88,9 @@ $error_window_lang = 'Der opstod en fejl!';
 $error_calendar_lang = 'Kalenderen "%s" blev benyttet da fejlen opstod.';
 $error_path_lang = 'Kan ikke &aring;bne stien : "%s"';
 $error_back_lang = 'Brug venligst "Tilbage" knappen for at g&aring; tilbage.';
-$error_remotecal_lang = 'Denne server blokerer for kalendere der ikke er blevet godkendt';
+$error_remotecal_lang = 'Denne server blokerer for eksterne kalendere der ikke er blevet godkendt';
 $error_restrictedcal_lang = 'Du har fors&oslash;gt at f&aring; adgang til en beskyttet kalender p&aring; denne server.';
-$error_invalidcal_lang = 'Kalenderen er muligvis i stykker. Pr&oslash;v en anden kalender.';
+$error_invalidcal_lang = 'Ugyldig kalender fil. Pr&oslash;v en anden kalender.';
 
 
 ?>

@@ -39,7 +39,7 @@ $this_year = $day_array2[1];
 $parse_file = true;
 if ($is_webcal == false && $save_parsed_cals == 'yes') {	
 	$realcal_mtime = filemtime($filename);
-	$parsedcal = '/tmp/parsedcal-'.$cal_filename.'-'.$this_year.'-'.$realcal_mtime;
+	$parsedcal = '/tmp/parsedcal-'.$cal_filename.'-'.$this_year;
 	if (file_exists($parsedcal)) {
 		$parsedcal_mtime = filemtime($parsedcal);
 		if ($realcal_mtime == $parsedcal_mtime) {

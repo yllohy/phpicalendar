@@ -38,7 +38,7 @@ $all_day_lang		= '終日イベント';
 $notes_lang			= '注釈';
 
 $todays_lang		= '今日今週の予定';
-$this_weeks_lang		= '今週の予定';
+$this_weeks_lang	= '今週の予定';
 $this_months_lang	= '今月の予定';
 $this_years_lang	= '今年の予定';
 $today_lang			= '今日';
@@ -46,7 +46,7 @@ $this_week_lang		= '今週';
 $this_month_lang	= '今月';
 $this_year_lang		= '今年';
 
-$jump_lang			= 'Jump to';
+$jump_lang			= '行く';
 $tomorrows_lang		= '翌日の予定';
 $goday_lang			= '今日に行く';
 $goweek_lang		= '今週に行く';
@@ -58,9 +58,6 @@ $daysofweekshort_lang		= array ('日曜','月曜','火曜','水曜','木曜','�
 $daysofweekreallyshort_lang	= array ('日','月','火','水','木','金','土');
 $monthsofyear_lang			= array ('1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月');
 $monthsofyearshort_lang		= $monthsofyear_lang;
-
-// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-setlocale (LC_TIME, 'ja_JP');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'g:i A';
@@ -91,10 +88,10 @@ Notes about dateFormat_*
 
 // Error messages - %s will be replaced with a variable
 $error_title_lang = 'Error!';
-$error_window_lang = '間違いがあった!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
+$error_window_lang = '間違いがありました!';
+$error_calendar_lang = 'この間違いが起こましたきない、「%s」カレンダーを処理て居ました。';
+$error_path_lang = 'ディレクトリを開けることない:「%s」';
+$error_back_lang = '戻るに「Back」ボタンを用いて下さい。';
 $error_remotecal_lang = 'このサーバーは遠隔カレンダーを妨げる承認されなかった。';
 $error_restrictedcal_lang = 'あなたはカレンダーにアクセスすることを試みたこのサーバーで 限られている';
 $error_invalidcal_lang = 'カレンダーファイルは無効であること。 別のカレンダーを試みなさい。';

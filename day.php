@@ -40,7 +40,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 $dayborder = 0;
 
 $nbrGridCols = 1;
-if ($master_array[($getdate)]) {
+if (is_array($master_array[($getdate)])) {
 	foreach($master_array[($getdate)] as $ovlKey => $ovlValue) {
 		if ($ovlKey != '-1') {
 			foreach($ovlValue as $ovl2Value) {
@@ -179,6 +179,8 @@ if ($master_array[($getdate)]) {
 										for ($i=0;$i<sizeof($event_length);$i++) {
 								//echo $master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text'] . ' ind: ' . $i . ' / anz: ' . $event_length[$i]['overlap'] . ' = ' . eventWidth($i,$event_length[$i]['overlap']) . '<br />';
 											$drawWidth = $nbrGridCols / ($event_length[$i]['overlap'] + 1);
+											//print $nbrGridCols.' -- ';
+											//print $drawWidth;
 											$emptyWidth = $emptyWidth - $drawWidth;
 											switch ($event_length[$i]['state']) {
 												case 'begin':

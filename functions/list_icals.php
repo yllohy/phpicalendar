@@ -24,9 +24,9 @@ if ($display_ical_list == "yes") {
 			$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 			if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
 				if ($cal_tmp == $cal) {
-					print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp Calendar</option>\n";
+					print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
 				} else {
-					print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp Calendar</option>\n";	
+					print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
 				}		
 			}	
 		}

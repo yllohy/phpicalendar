@@ -330,7 +330,7 @@
 										ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
 										if ($regs[1] == $parse_month) {
 											$dayofmonth = strtotime ($key);
-											$dayofmonth = strftime ($dateFormat_week_list, $dayofmonth);
+											$dayofmonth = localizeDate ($dateFormat_week_list, $dayofmonth);
 											$i = 0;
 											if ($getdate == $key) {
 												$fontclass="class=\"G10BOLD\"";
