@@ -612,19 +612,21 @@ foreach($contents as $line) {
 		}
 	}
 }
+
 // Sort the array by absolute date.
 if (is_array($master_array)) { 
 	ksort($master_array);
 	reset($master_array);
-}
-
-// sort the sub (day) arrays so the times are in order
-foreach (array_keys($master_array) as $k) {
-	if (is_array($master_array[$k])) {
-		ksort($master_array[$k]);
-		reset($master_array[$k]);
+	
+	// sort the sub (day) arrays so the times are in order
+	foreach (array_keys($master_array) as $k) {
+		if (is_array($master_array[$k])) {
+			ksort($master_array[$k]);
+			reset($master_array[$k]);
+		}
 	}
 }
+
 
 
 // Store information in the session
