@@ -112,6 +112,8 @@ $thisdate = $fromdate; 	#	start at beginning of date range,
 $i = 0;  #day counter
 
 	do {
+	$thisdate=date('Ymd', strtotime($thisdate));
+	#echo "Date: $thisdate\n";
 	$dayofweek = localizeDate ("%a %b %e %Y", strtotime($thisdate));
 	if (isset($master_array[($thisdate)]) && sizeof($master_array[($thisdate)]) > 0) {
 		foreach ($master_array[("$thisdate")] as $event_times) {
