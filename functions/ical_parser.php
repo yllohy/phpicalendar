@@ -435,7 +435,11 @@ foreach ($cal_filelist as $filename) {
 													$recur_data[] = $next_date_time;
 													break;
 												case 'WEEKLY':
-													if (is_array($byday)) {
+													if (!isset($byday)) {
+														$next_date = date('Ymd', $next_range_time);
+														$next_date_time = strtotime($next_date);
+														$recur_data[] = $next_date_time;
+													} elseif (is_array($byday)) {
 														// loop through the days on which this event happens
 														foreach($byday as $day) {
 															// use my fancy little function to get the date of each day
