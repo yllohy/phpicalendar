@@ -17,6 +17,9 @@
 .monthreg		{ background-color: #FFFFFF; }
 .monthoff		{ background-color: #F2F2F2; }
 .monthon		{ background-color: #F2F9FF; }
+.montheventtop	{ background-image: url(side_bg.gif); border-top: 1px solid #A1A5A9; }
+.montheventline	{ border-right: 1px dotted #A1A5A9; }
+.montheventlin2	{ border-right: 1px dotted #A1A5A9; background-color: #F2F9FF; }
 
 /* Link colors and attributes */
 /* This is the main link style */
@@ -40,6 +43,7 @@ body			{ background-color: #E5E5E5; }
 /* CSS definitions for fonts */
 
 .V9 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; color: #000000; }
+.V9G 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; color: #666666; }
 .V10 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; color: #000000; }
 .V9BOLD 		{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; font-weight: 900; }
 .G10 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #0066FF; }

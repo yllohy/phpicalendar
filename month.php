@@ -23,6 +23,7 @@
 	$first_of_month = $this_year.$this_month."01";
 	$start_month_day = dateOfWeek($first_of_month, $week_start_day);
 	$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
+	$num_of_events = 0;
 
 
 ?>
@@ -130,6 +131,7 @@
 							if ($master_array[("$daylink")]) {
 								foreach ($master_array[("$daylink")] as $event_times) {
 									foreach ($event_times as $val) {
+										$num_of_events++;
 										$event_text = $val["event_text"];
 										$event_text = strip_tags($event_text, '<b><i><u>');
 										if ($event_text != "") {	
@@ -160,7 +162,6 @@
 											echo "</table>\n";
 											echo "</td>\n";
 											echo "</tr>\n";
-											$num_of_events++;
 										}
 									}
 								}
