@@ -1,6 +1,7 @@
 <?php 
 	$current_view = "month";
-	include("./functions/ical_parser.php"); 
+	include("./functions/ical_parser.php");
+	if ($minical_view == "current") $minical_view = "month";
 
 	//might not need this, depending on implimentation, doesn't work correctly in current form anyway
 	//setcookie("last_view", "month");

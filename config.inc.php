@@ -8,6 +8,7 @@
 $style_sheet = 'silver';				// Themes support
 $calendar_path = './calendars';			// Path to directory with calendars
 $default_view = 'day';					// Default view for calendars = 'day', 'week', 'month'
+$minical_view = 'current';				// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal = 'Home';					// Exact filename of calendar without .ics
 $language = 'english';					// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish'
 $week_start_day = 'sunday';				// Day of the week your week starts on

@@ -251,11 +251,11 @@
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										} else {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
 										$start_day = ($start_day + (24.5 * 60 * 60));
@@ -331,11 +331,11 @@
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										} else {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
 										$start_day = ($start_day + (24.5 * 60 * 60));
@@ -411,11 +411,11 @@
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										} else {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
 										$start_day = ($start_day + (24.5 * 60 * 60));

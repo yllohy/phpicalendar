@@ -9,6 +9,7 @@ if (isset($HTTP_GET_VARS['jumpto_day'])) {
 }
 $current_view = 'day';
 include('./functions/ical_parser.php');
+if ($minical_view == "current") $minical_view = "day";
 
 
 

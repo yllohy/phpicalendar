@@ -33,7 +33,7 @@ marks to change the setting of that variable. If there are restrictions
 as to what that variable can be set to, the comment behind will specify
 them. If you have difficulty with your configuration, you can ask the 
 developers and other PHP iCalendar users at the PHP iCalendar forums 
-(get the link from our home page).
+http://phpicalendar.sourceforge.net/phpBB2/
 
 Licensing: 
 ----------
@@ -53,6 +53,7 @@ Changes:
     	-Localized dates and times work with Mac OS X as well as
     	 other *nixes.
     	-Almost all text has been translated for supported languages
+    	-Added Spanish and Swedish
     -Added ability to turn off the pop-up menu calendar list
     -Added "black-listing" of specific local calendars
     -Added remote calendar support
@@ -61,6 +62,7 @@ Changes:
         -Allow any URL of a calendar to be parsed by your server
     -Added custom error page for user-friendly error messages.
     -Added saving of parsed files to separate files for faster processing
+    -Custom options for mini-calendars, this months, events
     -Bug fixes
 
 0.5

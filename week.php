@@ -2,6 +2,7 @@
 
 $current_view = "week";
 include("./functions/ical_parser.php");
+if ($minical_view == "current") $minical_view = "week";
 
 //if ($use_sessions == "yes") {
 //	session_start();
