@@ -101,6 +101,8 @@ foreach($contents as $line) {
 		$byday = '';
 		$count = 1000000;
 		$description = '';
+		unset($until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, $byminute, $byhour, $bysecond, $byyearday, $bysetpos, $wkst);
+		
 	} elseif (strstr($line, 'END:VEVENT')) {
 		
 		// Clean out \n's and other slashes
