@@ -1,0 +1,38 @@
+AUTHORS
+-------
+This file is a list of all people who have contributed their time to the
+PHP iCalendar project. Each section is sorted alphabetically. Thanks to 
+all who are listed here.
+
+PROJECT ADMINS
+--------------
+Chad Little    <chad@chadsdomain.com>
+Jared Wangen   <jared@silter.org>
+
+DEVELOPERS
+----------
+Patrick Berry  <pberry@users.sourceforge.net>
+Bill Fenner    <fenner@research.att.com>
+David Reindl   <dre@andare.ch>
+
+CODE CONTRIBUTORS
+-----------------
+Greg Westin    <greg@gregwestin.com>
+
+TRANSLATORS
+-----------
+Braz. Port.    Bennet Wilton        <suporte@bennetworks.com.br>
+Danish         Henrik Højmark       <styxx@worldonline.dk>
+               Jakob Peterhänsel    <marook@creepers.org>
+Dutch          Lieven Gekiere       <Lieven@gekiere.com>
+English        Chad Little          <chad@chadsdomain.com>
+Finnish        Kari Somby           <kari.somby@ramk.fi>
+French         La Shampouineuse     <info@lashampoo.com>
+German         David Reindl         <dre@andare.ch>
+Italian        Luca Cacciagrano     <clooka@clac.it>
+Japanese       Jared Wangen         <jared@silter.org>
+Norwegian      Geir Kielland        <geir.kielland@jus.uio.no>
+Polish         Stanislaw Cieslicki  <stahoo@poczta.onet.pl>
+Portuguese     Rui Costa            <ruicosta@ubi.pt>
+Spanish        Javier Navarro       <jnavarro@xips.es>
+Swedish        Jonas Hjelm          <jonas@hnet.se>
