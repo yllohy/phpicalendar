@@ -64,7 +64,7 @@ if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td align="left" width="120" class="navback"><?php echo '<a href="'.$back_page.'"><img src="'.BASE.'/styles/'.$style_sheet.'/back.gif" alt="'.$back_lang.'" border="0" align="left"></a>'; ?></td>
+								<td align="left" width="120" class="navback">&nbsp;</td>
 								<td class="navback">
 									<table width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
