@@ -401,7 +401,7 @@ if ($parse_file) {
 				$data = ereg_replace('Z', '', $data);
 				if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
 					$allday_start = $data;
-					echo "$summary - $allday_start<br>";
+					//echo "$summary - $allday_start<br>";
 				} else {
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$start_date = $regs[1] . $regs[2] . $regs[3];
