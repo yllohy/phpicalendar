@@ -43,6 +43,7 @@ $login_cookies			= 'no';			// Set to yes to store authentication information via
 
 // Calendar Caching (decreases page load times)
 $save_parsed_cals 		= 'no';				// Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$save_parsed_webcals 	= 'no';				// Saves a copy of the webcal in /tmp after it's been parsed. Improves performence.
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X). Any php-writable folder works.
 $webcal_hours			= '24';				// Number of hours to cache webcals.
 
