@@ -46,6 +46,7 @@ foreach($contents as $line) {
 	if (strstr($line, "BEGIN:VEVENT")) {
 		$start_time = "";
 		$end_time = "";
+		$end_day = "";
 		$summary = "";
 		$allday_start = "";
 		$allday_end = "";
@@ -54,7 +55,6 @@ foreach($contents as $line) {
 		$the_duration = "";
 		$beginning = "";
 		$rrule_array = "";
-		$parse_to_year = "";
 		$start_of_vevent = "";
 		$end_of_vevent = "";
 		$interval = "";
@@ -68,13 +68,13 @@ foreach($contents as $line) {
 		$summary = str_replace("\\n", "<br>", $summary);
 		$summary = stripslashes($summary);
 		$description = str_replace("\\n", "<br>", $description);
-		
-		//echo "<b>Start</b> $start_time <b>End</B> $end_time <b>Summary</b> $summary<br>\n";
+		$mArray_begin = mktime (0,0,0,1,1,$this_year);
+		$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
+				
 		if ($start_time != "") {
 			ereg ("([0-9]{2})([0-9]{2})", $start_time, $time);
 			$hour = $time[1];
 			$minute = $time[2];
-						
 			if ($minute <= 15) {
 				$minute = "00";
 			} elseif ($minute >15 && $minute <= 45) {
@@ -84,8 +84,6 @@ foreach($contents as $line) {
 				$minute = "00";
 			}
 			ereg ("([0-9]{2})([0-9]{2})", $end_time, $time2);
-//			$length = round((($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]))/30);
-// drei 20020921: changed length to be duration in minutes (for overlapping events)
 			$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
 		}
 		
@@ -94,13 +92,13 @@ foreach($contents as $line) {
 		if (($allday_start != "") && ($rrule_array == "")) {
 			$start = strtotime("$allday_start");
 			$end = strtotime("$allday_end");
-			do {
-				$start_date = date("Ymd", $start);
-//				$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
-// drei 20020921: changed array for allday event
-				$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
-				$start = ($start + (24*3600));
-			} while ($start != $end);
+			if (($end > $mArray_begin) && ($end < $mArray_end)) {
+				while ($start != $end) {
+					$start_date = date("Ymd", $start);
+					$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
+					$start = strtotime("+1 day", $start);
+				}
+			}
 		}
 		
 		
@@ -195,32 +193,32 @@ foreach($contents as $line) {
 						
 						// Since we hit the end of the RRULE array, lets do something.
 						// Below handles yearly, montly, weekly, daily all-day events.
-						// $parse_to_year is the year we are parsing, January 10th, next year.
 						// $start_of_vevent is the date the recurring event starts.
 						// $end_of_vevent is the date the recurring event stops.
 						// $count and $count_to check for the COUNT feature
 						// $until checks for the UNTIL feature, makes sure we don't recur past it.
 						 
-						$parse_to_year = $this_year + 1;
-						$parse_to_year  = mktime(0,0,0,1,10,$parse_to_year);						
 						$start_of_vevent = strtotime("$allday_start");
 						$end_of_vevent = strtotime("$allday_end");
 						$count_to = 0;
-						if ($start_of_vevent < $parse_to_year) {
+						if (!$until) $until = $mArray_end;
+						if ($start_of_vevent < $mArray_end) {
 							do {
 								// This steps through each day of a multiple all-day event and adds to master array
-								// Every all day event should pass through here at least once.
+								// Every all day event should pass through here at least once if its recurring.
 								$start = $start_of_vevent;
 								$end = $end_of_vevent;
-								do {
+								while ($start != $end) {
 									$start_date = date("Ymd", $start);
-									$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
-									$start = ($start + (24*3600));
-								} while ($start < $end);
+									if (($end > $mArray_begin) && ($end < $mArray_end)) {
+										$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
+									}
+									$start = strtotime("+1 day", $start);
+								}
 								$start_of_vevent = DateAdd ($interval,  $number, $start_of_vevent);
 								$end_of_vevent = DateAdd ($interval,  $number, $end_of_vevent);
 								$count_to++;
-							} while (($start_of_vevent < $parse_to_year) && ($count != $count_to) && ($start_of_vevent < $until)); 
+							} while (($start_of_vevent < $mArray_end) && ($count != $count_to) && ($start_of_vevent < $until)); 
 						}
 					
 					// Let's take care of recurring events that are not all day events
@@ -439,14 +437,14 @@ if (is_array($master_array)) {
 }
 
 // Store information in the session
-if ($use_sessions == "yes") {
+/*if ($use_sessions == "yes") {
 	session_start();
 	session_register( "aArray", "aYear", "aLanguage", "aCalendar" );
 	$aArray = $master_array;
 	$aYear = $this_year;
 	$aLanguage = $language;
 	$aCalendar = $cal;
-}
+}*/
 
 
 // End the session
