@@ -162,7 +162,9 @@ if ($parse_file) {
 			}
 
 			// RECURRENCE-ID Support
-			$recurrence_delete = array ("$recurrence_d" => array ("$recurrence_t" => $uid));
+			if ($recurrence_d) {
+				$recurrence_delete["$recurrence_d"]["$recurrence_t"] = $uid;
+			}
 				
 			// handle single changes in recurring events
 			// Maybe this is no longer need since done at bottom of parser? - CL 11/20/02
@@ -812,12 +814,29 @@ if ($parse_file) {
 	// Remove pesky recurrences
 	foreach ($recurrence_delete as $delete => $delete_key) {
 		foreach ($delete_key as $key => $val) {
-			if (is_array($master_array["$delete"]["$key"]["$val"])) {
+			if (is_array($master_array[($delete)][($key)][($val)])) {
 				unset($master_array["$delete"]["$key"]["$val"]);
-				if (sizeof($master_array["$delete"]["$key"] < 1)) {
+				// Remove date from array if no events
+				if (sizeof($master_array["$delete"]["$key"] = 1)) {
+					#echo "deleting  $delete  $key  $val<br>";
 					unset($master_array["$delete"]["$key"]);
-					if (sizeof($master_array["$delete"] < 1)) {
+					if (!sizeof($master_array["$delete"] > 1)) {
+						#echo "deleting  $delete  $key  $val<br>";
 						unset($master_array["$delete"]);
+					}
+				}
+				// print_r($master_array["$delete"]);
+				// Check for overlaps and rewrite them
+				foreach($master_array["$delete"] as $overlap_time => $overlap_val) {
+					$recur_data_date = $delete;
+					foreach ($overlap_val as $uid => $val) {
+						$start_time = $val['event_start'];
+						$end_time = $val['event_end'];
+						reset($master_array);
+						#$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time);
+						$master_array[($recur_data_date)][($start_time)][($uid)]['event_overlap'] = $nbrOfOverlaps;
+						#echo "$recur_data_date - $uid - $start_time - $end_time - $nbrOfOverlaps<br>";
+						#print_r($val);
 					}
 				}
 			}
