@@ -11,7 +11,7 @@ $this_month = $day_array2[2];
 $this_year = $day_array2[1];
 
 $unix_time = strtotime($getdate);
-$today_today = date ('Ymd', $unix_time);
+$today_today = date('Ymd', strtotime("now + $second_offset seconds"));
 $tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
 $yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 $date = mktime(0,0,0,"$this_month","$this_day","$this_year");

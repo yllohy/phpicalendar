@@ -15,7 +15,7 @@ if ($minical_view == 'current') $minical_view = 'day';
 $starttime = '0500';
 $weekstart = 1;
 $unix_time = strtotime($getdate);
-$today_today = date ('Ymd', $unix_time);
+$today_today = date('Ymd', strtotime("now + $second_offset seconds"));
 $tomorrows_date = date( 'Ymd', strtotime('+1 day',  $unix_time));
 $yesterdays_date = date( 'Ymd', strtotime('-1 day',  $unix_time));
 $display_date = localizeDate($dateFormat_day, $unix_time);
