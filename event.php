@@ -15,44 +15,36 @@ $description = str_replace("\\", "", $description);
   <title><?php echo "$calendar_name"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
 </head>
- <body bgcolor="#eeeeee">
-<table border="0" width="430" cellspacing="2" cellpadding="4">
+<body bgcolor="#eeeeee"><center>
+<table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
-		<td>  
-   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="calborder">
-    <tr height="18">
-     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><?php echo "$event_lang"; ?>:</b></td>
-     <td nowrap width="7" height="18"></td>
-     <td align="left" valign="top" height="18" class="V12"><?php echo "$event"; ?></td>
-    </tr>
-    
-<?php if ($start) { ?> 
-    <tr height="18">
-     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><?php echo "$event_start_lang"; ?>:</b></td>
-     <td width="7" height="18"></td>
-     <td align="left" valign="top" height="18" class="V12"><?php echo "$start"; ?></td>
-    </tr>
-<?php } ?>    
-    
-<?php if ($end) { ?> 
-    <tr height="18">
-     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><?php echo "$event_end_lang"; ?>:</b></td>
-     <td width="7" height="18"></td>
-     <td align="left" valign="top" height="18" class="V12"><?php echo "$end"; ?></td>
-    </tr>
-<?php } ?>
-
-<?php if ($description) { ?>    
-    <tr height="18">
-     <td align="right" valign="top" width="80" class="V12">&nbsp;<b><?php echo "$notes_lang"; ?>:</b></td>
-     <td width="7" height="18"></td>
-     <td align="left" valign="top" height="18" class="V12"><?php echo "$description"; ?></td>
-    </tr>
-<?php } ?>
-
-   </table>
+		<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
+		<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "$calendar_name $calendar_lang"; ?></b></td>
+		<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
+	</tr>
+	<tr>
+		<td colspan="3"><img src="images/spacer.gif" width="1" height="6"></td>
+	</tr>
+	<tr>
+		<td colspan="3">  
+	   		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<?php if (($start) && ($end)) $event_times = " - <font class=\"V9\">(<i>$start - $end</i>)</font>"; ?>
+				<tr>
+					 <td width="1%"><img src="images/spacer.gif" width="6" height="1"></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo "$event $event_times<br><br>"; ?></td>
+				</tr>
+				
+				<?php if ($description) { ?>    
+					<tr>
+					 <td width="1%"><img src="images/spacer.gif" width="6" height="1"></td>
+					 <td align="left" colspan="2" class="V12"><?php echo "$description"; ?></td>
+					</tr>
+				<?php } ?>
+	
+	   </table>
    </td>
 	</tr>
 </table> 
- </body>
+</center>
+</body>
 </html>
