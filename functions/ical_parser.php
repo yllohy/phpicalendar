@@ -778,7 +778,11 @@ if ($parse_file) {
 					$data = str_replace("\\n", "<br>", $data);
 					$data = str_replace("\\r", "<br>", $data);
 					$data = htmlentities(urlencode($data));
-					$summary = $data;
+					if ($valarm_set == FALSE) { 
+						$summary = $data;
+					} else {
+						$valarm_summary = $data;
+					}
 					break;
 					
 				case 'DESCRIPTION':
