@@ -9,65 +9,65 @@
 
 
 
-$day_lang			= "Giorno";
-$week_lang			= "Settimana";
-$month_lang			= "Mese";
-$year_lang			= "Anno";
-$calendar_lang		= "Calendario";
-$next_day_lang		= "Giorno Successivo";
-$next_month_lang	= "Mese Successivo";
-$next_week_lang		= "Settimana Successiva";
-$next_year_lang		= "Anno Successivo";
-$last_day_lang		= "Giorno Precedente";
-$last_month_lang	= "Mese Precedente";
-$last_week_lang		= "Settimana Precedente";
-$last_year_lang		= "Anno Precedente";
-$subscribe_lang		= "Sottoscrivi";
-$download_lang		= "Scarica";
-$powered_by_lang 	= "Powered by";
-$version_lang		= "0.5";
-$event_lang			= "Evento";
-$event_start_lang	= "Inizio";
-$event_end_lang		= "Fine";
-$this_months_lang	= "Eventi di questo mese";
-$date_lang			= "Data";
-$summary_lang		= "Sommario";
+$day_lang			= 'Giorno';
+$week_lang			= 'Settimana';
+$month_lang			= 'Mese';
+$year_lang			= 'Anno';
+$calendar_lang		= 'Calendario';
+$next_day_lang		= 'Giorno Successivo';
+$next_month_lang	= 'Mese Successivo';
+$next_week_lang		= 'Settimana Successiva';
+$next_year_lang		= 'Anno Successivo';
+$last_day_lang		= 'Giorno Precedente';
+$last_month_lang	= 'Mese Precedente';
+$last_week_lang		= 'Settimana Precedente';
+$last_year_lang		= 'Anno Precedente';
+$subscribe_lang		= 'Sottoscrivi';
+$download_lang		= 'Scarica';
+$powered_by_lang 	= 'Powered by';
+$version_lang		= '0.5';
+$event_lang			= 'Evento';
+$event_start_lang	= 'Inizio';
+$event_end_lang		= 'Fine';
+$this_months_lang	= 'Eventi di questo mese';
+$date_lang			= 'Data';
+$summary_lang		= 'Sommario';
 
 // new since last translation
-$all_day_lang		= "All day event";
-$notes_lang			= "Notes";
-$this_years_lang	= "This Year's Events";
-$today_lang			= "Today";
-$this_week_lang		= "This Week";
-$this_month_lang	= "This Month";
-$jump_lang			= "Jump to";
-$tomorrows_lang		= "Tomorrow's Events";
-$goday_lang			= "Go to Today";
-$goweek_lang		= "Go to This Week";
-$gomonth_lang		= "Go to This Month";
-$goyear_lang		= "Go to This Year";
+$all_day_lang		= 'All day event';
+$notes_lang			= 'Notes';
+$this_years_lang	= 'This Year\'s Events';
+$today_lang			= 'Today';
+$this_week_lang		= 'This Week';
+$this_month_lang	= 'This Month';
+$jump_lang			= 'Jump to';
+$tomorrows_lang		= 'Tomorrow\'s Events';
+$goday_lang			= 'Go to Today';
+$goweek_lang		= 'Go to This Week';
+$gomonth_lang		= 'Go to This Month';
+$goyear_lang		= 'Go to This Year';
 
 // Date display since setlocale isnt perfect. // new since last translation
-$daysofweek_lang			= array ("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
-$daysofweekshort_lang		= array ("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
-$daysofweekreallyshort_lang	= array ("S","M","T","W","T","F","S");
-$monthsofyear_lang			= array ("January","February","March","April","May","June","July","August","September","October","November","December");
-$monthsofyearshort_lang		= array ("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec");
+$daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+$daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
+$daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
+$monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
+$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
 setlocale (LC_TIME, 'it_IT');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
-$timeFormat = "G:i";
+$timeFormat = 'G:i';
 
 // For date formatting, see note below
-$dateFormat_day = "%A, %e %B";
-$dateFormat_week = "%e %B";
-$dateFormat_week_list = "%a, %e %b";
-$dateFormat_week_jump = "%b %e";// new since last translation
-$dateFormat_month = "%B %Y";
-$dateFormat_month_list = "%A, %e %B";
+$dateFormat_day = '%A, %e %B';
+$dateFormat_week = '%e %B';
+$dateFormat_week_list = '%a, %e %b';
+$dateFormat_week_jump = '%b %e';// new since last translation
+$dateFormat_month = '%B %Y';
+$dateFormat_month_list = '%A, %e %B';
 
 /*
 Notes about dateFormat_*

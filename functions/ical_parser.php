@@ -42,20 +42,15 @@ $this_year = $day_array2[1];
 
 
 // open the iCal file, read it into a string
-$fp = @fopen($filename, "r");
-$contents = @fread ($fp, filesize ($filename));
-@fclose ($fp);
-
-
-// turn that string into an array
-$contents = ereg_replace("\n ", "", $contents);
-$contents = split ("\n", $contents);
+$contents = @file($filename);
+if ($contents[0] != "BEGIN:VCALENDAR\n") exit(error("Calendar $filename is invalid. Please try a different calendar"));
 
 // auxiliary array for determining overlaps of events
 $overlap_array = array ();
 
 // parse our new array
 foreach($contents as $line) {
+	$line = trim($line);
 	if (strstr($line, "BEGIN:VEVENT")) {
 		$start_time = "";
 		$end_time = "";
