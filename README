@@ -44,7 +44,7 @@ Changes:
 --------
 
 0.6
-    -Greatly improved CSS for "themes"
+    -Greatly improved CSS for "themes", theme SDK avaiable.
     -HTML bug fixes specific to Windows browsers
     -All-day and Regular recurring event both support all types
     -Bottom of month view updated

@@ -5,6 +5,7 @@
 .eventbg2 	 	{ background-color: #6699CC; border-right: 1px solid #FFFFFF; }
 .eventbg2week 	{ background-color: #6699CC; border-right: 1px solid #A1A5A9; }
 .calborder 		{ background-color: #FFFFFF; border: 1px #A1A5A9 solid; }
+.dateback		{ background-color: #EEEEEE; }
 .dayborder 		{ border-top: 1px solid #A1A5A9; }
 .dayborder2 	{ border-top: 1px dashed #CCCCCC; }
 .weekborder 	{ border-top: 1px dashed #A1A5A9; border-right: 1px solid #A1A5A9; }
@@ -23,16 +24,16 @@
 /* Link colors and attributes */
 /* This is the main link style */
 a.psf			{ text-decoration:	none; }
-a.psf:link		{ color: #0066ff; background-color: transparent; }
-a.psf:visited	{ color: #0066ff; background-color: transparent; }
-a.psf:active	{ color: #3366cc; background-color: transparent; }
+a.psf:link		{ color: #0066FF; background-color: transparent; }
+a.psf:visited	{ color: #0066FF; background-color: transparent; }
+a.psf:active	{ color: #3366CC; background-color: transparent; }
 a.psf:hover		{ color: #000099; background-color: transparent; }
 
 /* This is the link style for the mini-cals */	
 a.ps2			{ text-decoration:	underline; }
-a.ps2:link		{ color: #0066ff; background-color: transparent; }
-a.ps2:visited	{ color: #0066ff; background-color: transparent; }
-a.ps2:active	{ color: #3366cc; background-color: transparent; }
+a.ps2:link		{ color: #0066FF; background-color: transparent; }
+a.ps2:visited	{ color: #0066FF; background-color: transparent; }
+a.ps2:active	{ color: #3366CC; background-color: transparent; }
 a.ps2:hover		{ color: #000099; background-color: transparent; }
 	
 /* Body attributes */

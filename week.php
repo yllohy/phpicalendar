@@ -127,8 +127,8 @@ for ($i=0;$i<7;$i++) {
 							do {
 								$thisday = date("Ymd", $thisdate);
 								$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
-								echo "<td width=\"70\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#eeeeee\" class=\"V9\">\n";
-								echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a>\n";
+								echo "<td width=\"70\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
+								echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a></font>\n";
 								echo "</td>\n";
 								$thisdate = ($thisdate + (25 * 60 * 60));
 								$i++;
@@ -150,10 +150,10 @@ for ($i=0;$i<7;$i++) {
 								$thisdate = $start_week_time;
 								$i = 0;
 								echo "<tr>\n";
-								echo "<td bgcolor=\"#f5f5f5\" colspan=\"2\"></td>";
+								echo "<td class=\"dateback\" colspan=\"2\"></td>";
 								do {
 									$thisday = date("Ymd", $thisdate);
-									echo "<td bgcolor=\"#f5f5f5\" height=\"24\">\n";
+									echo "<td class=\"dateback\" height=\"20\" valign=\"bottom\">\n";
 									if (isset($master_array[($thisday)]["-1"])) {
 										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
 										foreach($master_array[($thisday)]["-1"] as $allday) {
