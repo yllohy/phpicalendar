@@ -584,15 +584,15 @@ foreach($contents as $line) {
 		} elseif (strstr($field, "DURATION")) {
 			
 			if (($first_duration = TRUE) && (!strstr($field, "=DURATION"))) {
-				ereg ("^P([0-9]{1,2})?([W,D]{0,1})?(T)?([0-9]{1,2})?(H)?([0-9]{1,2})?(M)?([0-9]{1,2})?(S)?", $data, $duration);
+				ereg ("^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?", $data, $duration);
 				if ($duration[2] = "W") {
 					$weeks = $duration[1];
 				} else {
 					$days = $duration[1];
 				}
-				$hours = $duration[4];
-				$minutes = $duration[6];
-				$seconds = $duration[8];
+				$hours = ereg_replace("H", "", $duration[3]);
+				$minutes = ereg_replace("M", "", $duration[4]);
+				$seconds = ereg_replace("S", "", $duration[5]);
 				$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
 				$beginning = (strtotime($start_time) + $the_duration);
 				$end_time = date ("Hi", $beginning);
