@@ -23,7 +23,7 @@ include(BASE.'functions/ical_parser.php');
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
 							<tr>
-								<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+								<td align="left" valign="top" width="1%" class="sideback"><img src="../images/spacer.gif" width="1" height="20"></td>
 								<td align="center" valign="center" width="98%" class="sideback"><b><?php echo 'RSS information'; ?></b></td>
 								<td class="sideback" width="1%"></td>
 							</tr>
@@ -39,16 +39,31 @@ include(BASE.'functions/ical_parser.php');
 									<br>
 									This website is RSS enabled.<br>
 									<br>
-									<b>Day View:</b><br>
-									<?php echo $default_path.'/rss.php?cal='.$cal.'&rssview=day'; ?><br>
-									<br>
-									<b>Week View:</b><br>
-									<?php echo $default_path.'/rss.php?cal='.$cal.'&rssview=week'; ?><br>
-									<br>
-									<b>Month View:</b><br>
-									<?php echo $default_path.'/rss.php?cal='.$cal.'&rssview=month'; ?><br>
-									<br>
-									<br>
+									<?php 
+									
+									// open file
+									$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
+									
+									// build the <option> tags
+									while ($file = readdir($dir_handle)) {
+										if (substr($file, -4) == ".ics") {
+											
+											// $cal_filename is the filename of the calendar without .ics
+											// $cal is a urlencoded version of $cal_filename
+											// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
+											$cal_filename_tmp = substr($file,0,-4);
+											$cal_tmp = urlencode($cal_filename_tmp);
+											$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+											if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
+												echo '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br>';
+												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=day<br>';
+												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=week<br>';
+												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=month<br>';
+												echo '<br><br>';		
+											}	
+										}
+									}
+									?>
 								</td>
 							</tr>
 						</table>

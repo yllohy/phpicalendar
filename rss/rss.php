@@ -3,7 +3,7 @@
 define('BASE', '../');
 include(BASE.'functions/ical_parser.php');
 $theview = 'Day';
-
+	
 
 $rss = 	"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"."\n";
 $rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">'."\n";
