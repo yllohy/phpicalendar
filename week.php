@@ -92,18 +92,26 @@ if ($master_array[($getdate)]) {
 							<tr>
 								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>
 								<td width="1"></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
 							</tr>
 							<?php
 							
 							// print out the day names here
-							echo "<tr height=\"12\">";
+							echo "<tr>";
 							$thisdate = $start_week_time;
 							$i = 0;
-							echo "<td bgcolor=\"#f5f5f5\" colspan=\"2\"></td>";
+							echo "<td bgcolor=\"#eeeeee\" width=\"60\"><img src=\"images/spacer.gif\" width=\"1\" height=\"12\" alt=\"\"></td>";
+							echo "<td bgcolor=\"#eeeeee\" width=\"1\"></td>";
 							do {
 								$thisday = date("Ymd", $thisdate);
 								$thisday2 = strftime($dateFormat_week_list, $thisdate);
-								echo "<td height=\"12\" width=\"101\" colspan=\"" . $nbrGridCols . "\" valign=\"top\" align=\"center\" bgcolor=\"#f5f5f5\" class=\"V9\">\n";
+								echo "<td width=\"70\" colspan=\"" . $nbrGridCols . "\" valign=\"top\" align=\"center\" bgcolor=\"#eeeeee\" class=\"V9\">\n";
 								echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a>\n";
 								echo "</td>\n";
 								$thisdate = ($thisdate + (25 * 60 * 60));
@@ -138,7 +146,7 @@ if ($master_array[($getdate)]) {
 							echo "</tr>\n";
 							
 								// $master_array[($getdate)]["$day_time"]
-								$border = 0;
+								
 
 								foreach ($day_array as $key) {
 									$cal_time = $key;	
@@ -161,6 +169,7 @@ if ($master_array[($getdate)]) {
 									
 									// loop this part 7 times, one for each day
 									for ($week_loop=0; $week_loop<7; $week_loop++) {
+										$dayborder = 0;
 										$event_length=array();
 										$thisday = date("Ymd", $thisdate);
 										// check for eventstart 
@@ -182,7 +191,7 @@ if ($master_array[($getdate)]) {
 										}
 										if (sizeof($event_length) == 0) {
 											if ($dayborder == 0) {
-												$class = " class=\"dayborder\"";
+												$class = " class=\"weekborder\"";
 												$dayborder++;
 											} else {
 												$class = "";
