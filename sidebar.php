@@ -231,6 +231,67 @@
 		</tr>
 	</table>
 	<br>
+<?php 
+	}
+if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
+	<table cellpadding="0" cellspacing="0" border="0" width="170">
+		<tr>
+			<td valign="center" align="center">
+				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+					<tr>
+						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$todo_lang"; ?></font></td>
+						<td align="right" valign="top" width="1%" class="sideback"></td>
+					</tr>
+					<tr>
+						<td colspan="3" bgcolor="#FFFFFF" align="center">
+							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
+								<tr>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
+								</tr>
+								
+								<?php
+								foreach ($master_array['-2'] as $event_times) {
+									foreach ($event_times as $val) {
+										$event_text = stripslashes(urldecode($val["event_text"]));
+										$event_text = strip_tags($event_text, '<b><i><u>');
+										if ($event_text != "") {	
+											$event_text2 	= rawurlencode(addslashes($val["event_text"]));
+											$description 	= addslashes(urlencode($val["description"]));
+											$event_start 	= @$val["event_start"];
+											$event_end 		= @$val["event_end"];
+											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
+											$calendar_name2	= addslashes($calendar_name);
+											$calendar_name2 = urlencode($calendar_name2);
+											$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
+											echo "<tr>\n";
+											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
+											echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
+											if (!isset($val["event_start"])) {
+												$event_start = $all_day_lang;
+												$event_end = '';
+												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a>\n";
+											} else {	
+												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+											}
+											echo "</td>\n";
+											echo "</tr>\n";
+										}
+									}
+								}
+								?>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br>
 <?php } 
 		$fake_getdate_time = strtotime($this_year.'-'.$this_month.'-15');
 ?>	

@@ -12,13 +12,13 @@ if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
 if ($HTTP_COOKIE_VARS['phpicalendar']) {
-	$phpicalendar 		= unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
-	$language 			= $phpicalendar['cookie_language'];
-	$default_cal	 	= $phpicalendar['cookie_calendar'];
-	$default_view 		= $phpicalendar['cookie_view'];
-	$style_sheet 		= $phpicalendar['cookie_style'];
-	$week_start_day		= $phpicalendar['cookie_startday'];
-	$day_start			= $phpicalendar['cookie_time'];
+	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
+	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
+	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal	 	= $phpicalendar['cookie_calendar'];
+	if (isset($phpicalendar['cookie_view'])) 		$default_view 		= $phpicalendar['cookie_view'];
+	if (isset($phpicalendar['cookie_style'])) 		$style_sheet 		= $phpicalendar['cookie_style'];
+	if (isset($phpicalendar['cookie_startday'])) 	$week_start_day		= $phpicalendar['cookie_startday'];
+	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
 }
 
 // language support

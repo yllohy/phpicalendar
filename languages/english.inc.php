@@ -74,6 +74,7 @@ $select_view_lang		= 'Select your default view:';
 $select_time_lang		= 'Select your default start time:';
 $select_day_lang		= 'Select your default start day of week:';
 $select_style_lang		= 'Select your default style:';
+$todo_lang				= 'Todo list';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
