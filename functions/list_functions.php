@@ -14,11 +14,13 @@ function list_jumps() {
 function list_calcolors() {
 	global $template, $master_array, $unique_colors;
 	$i = 1;
-	foreach ($master_array['-3'] as $key => $val) {
-		if ($i > $unique_colors) $i = 1;
-		$val = str_replace ("\,", ",", $val);
-		$return .= '<img src="templates/'.$template.'/images/monthdot_'.$i.'.gif" alt="" /> '.$val.'<br />';
-		$i++;
+	if (is_array($master_array['-3'])) {
+		foreach ($master_array['-3'] as $key => $val) {
+			if ($i > $unique_colors) $i = 1;
+			$val = str_replace ("\,", ",", $val);
+			$return .= '<img src="templates/'.$template.'/images/monthdot_'.$i.'.gif" alt="" /> '.$val.'<br />';
+			$i++;
+		}
 	}
 	return $return;
 }
