@@ -47,21 +47,21 @@ $gomonth_lang		= 'G&aring; til denne m&aring;ned';
 $goyear_lang		= 'G&aring; til dette &aring;r';
 
 // new in 0.8 -------------
-$search_lang		= 'Search'; // the verb
-$results_lang		= 'Search Results';
-$query_lang			= 'Query: '; // will be followed by the search query
-$no_results_lang	= 'No events found';
+$search_lang		= 'S&oslash;g'; // the verb
+$results_lang		= 'S&oskash;ge resultater';
+$query_lang			= 'S&oslash;gekriterier: '; // will be followed by the search query
+$no_results_lang	= 'Der er ikke fundet nogen aftaler';
 
-$goprint_lang		= 'Printer Friendly';
-$time_lang			= 'Time';
-$summary_lang		= 'Summary';
-$description_lang	= 'Description';
+$goprint_lang		= 'Udskriftsvenligt';
+$time_lang			= 'Tid';
+$summary_lang		= 'Opsummering';
+$description_lang	= 'Beskrivelse';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'This site is';
-$no_events_day_lang		= 'No events today.';
-$no_events_week_lang	= 'No events this week.';
-$no_events_month_lang	= 'No events this month.';
+$this_site_is_lang		= 'Denne webadresse er';
+$no_events_day_lang		= 'Ingen aftaler i dag.';
+$no_events_week_lang	= 'Ingen aftaler i denne uge.';
+$no_events_month_lang	= 'Ingen aftaler i denne m&aring;ned.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
@@ -108,7 +108,7 @@ $error_path_lang = 'Kan ikke &aring;bne stien : "%s"';
 $error_back_lang = 'Brug venligst "Tilbage" knappen for at g&aring; tilbage.';
 $error_remotecal_lang = 'Denne server blokerer for eksterne kalendere der ikke er blevet godkendt';
 $error_restrictedcal_lang = 'Du har fors&oslash;gt at f&aring; adgang til en beskyttet kalender p&aring; denne server.';
-$error_invalidcal_lang = 'Ugyldig kalender fil. Pr&oslash;v en anden kalender.';
+$error_invalidcal_lang = 'Kalenderen kan ikke l&aelig;ses. Pr&oslash;v en anden kalender.';
 
 
 ?>

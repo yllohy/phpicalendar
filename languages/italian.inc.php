@@ -47,24 +47,24 @@ $gomonth_lang		= 'Vai a questo mese';
 $goyear_lang		= 'Vai a quest\'anno';
 
 // new in 0.8 -------------
-$search_lang		= 'Search'; // the verb
-$results_lang		= 'Search Results';
-$query_lang			= 'Query: '; // will be followed by the search query
-$no_results_lang	= 'No events found';
+$search_lang		= 'Ricerca'; // the verb
+$results_lang		= 'Risultati ricerca';
+$query_lang			= 'Cerca: '; // will be followed by the search query
+$no_results_lang	= 'Nessun evento trovato';
 
 $goprint_lang		= 'Printer Friendly';
-$time_lang			= 'Time';
-$summary_lang		= 'Summary';
-$description_lang	= 'Description';
+$time_lang			= 'Ora';
+$summary_lang		= 'Sommario';
+$description_lang	= 'Descrizione';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'This site is';
-$no_events_day_lang		= 'No events today.';
-$no_events_week_lang	= 'No events this week.';
-$no_events_month_lang	= 'No events this month.';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e';  // Lists just the day
-$rss_month_date			= '%b %e';  // Lists just the day
+$this_site_is_lang		= 'Questo sito &egrave;';
+$no_events_day_lang		= 'Nessun evento per oggi.';
+$no_events_week_lang	= 'Nessun evento per questa settimana.';
+$no_events_month_lang	= 'Nessun evento per questo mese.';
+$rss_day_date			= 'G:i';  // Lists just the time
+$rss_week_date			= '%e %B';  // Lists just the day
+$rss_month_date			= '%e %B';  // Lists just the day
 // -------------------------
 
 // Date display since setlocale isnt perfect. // new since last translation
@@ -104,12 +104,12 @@ Notes about dateFormat_*
 // Error messages - %s will be replaced with a variable
 $error_title_lang = 'Errore!';
 $error_window_lang = 'C\'&egrave; un errore!';
-$error_calendar_lang = 'L\'erore si &egrave; verificato con Il calendario "%s" in esecuzione.';
+$error_calendar_lang = 'L\'errore si &egrave; verificato con il calendario "%s" in esecuzione.';
 $error_path_lang = 'Impossibile aprire il percorso: "%s"';
-$error_back_lang = 'Usa il tasto "Indietro" per tornare.';
+$error_back_lang = 'Usa il tasto "Indietro" per tornare alla pagina precedente.';
 $error_remotecal_lang = 'Questo server blocca calendari che non sono stati approvati.';
 $error_restrictedcal_lang = 'Hai tentato di accedere ad un calendario protetto su questo server.';
-$error_invalidcal_lang = 'File di calendario non valido. Prova un calendario diverso.';
+$error_invalidcal_lang = 'File di calendario non valido. Prova un altro calendario.';
 
 
 ?>

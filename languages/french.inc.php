@@ -46,24 +46,24 @@ $gomonth_lang		= 'Voir ce mois';
 $goyear_lang		= 'Voir cette ann&eacute;e';
 
 // new in 0.8 -------------
-$search_lang		= 'Search'; // the verb
-$results_lang		= 'Search Results';
-$query_lang			= 'Query: '; // will be followed by the search query
-$no_results_lang	= 'No events found';
+$search_lang		= 'Recherche'; // the verb
+$results_lang		= 'R&eacute;sultats de la recherche';
+$query_lang			= 'Requ&ecirc;te: '; // will be followed by the search query
+$no_results_lang	= 'Aucun &eacute;v&eacute;nement trouv&eacute;';
 
-$goprint_lang		= 'Printer Friendly';
-$time_lang			= 'Time';
-$summary_lang		= 'Summary';
+$goprint_lang		= 'Version imprimable';
+$time_lang			= 'Heure';
+$summary_lang		= 'R&eacute;sum&eacute;';
 $description_lang	= 'Description';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'This site is';
-$no_events_day_lang		= 'No events today.';
-$no_events_week_lang	= 'No events this week.';
-$no_events_month_lang	= 'No events this month.';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e';  // Lists just the day
-$rss_month_date			= '%b %e';  // Lists just the day
+$this_site_is_lang		= 'Ce site est';
+$no_events_day_lang		= 'Pas d\'&eacute;v&eacute;nement aujourd\'hui.';
+$no_events_week_lang	= 'Pas d\'&eacute;v&eacute;nement cette semaine.';
+$no_events_month_lang	= 'Pas d\'&eacute;v&eacute;nement ce mois-ci.';
+$rss_day_date			= 'H:i';  // Lists just the time
+$rss_week_date			= '%e %b';  // Lists just the day
+$rss_month_date			= '%e %b';  // Lists just the day
 // -------------------------
 
 // Date display since setlocale isnt perfect. // new since last translation
