@@ -33,7 +33,7 @@ $this_year = $day_array2[1];
 
 // reading the file if it's allowed
 $parse_file = true;
-if (($is_webcal == false) && ($save_parsed_cals == 'yes')) {	
+if ($save_parsed_cals == 'yes') {	
 	if (sizeof ($cal_filelist) > 1) {
 		$parsedcal = $tmp_dir.'/parsedcal-'.$cal_filename.'-'.$this_year;
 		if (file_exists($parsedcal)) {
@@ -47,8 +47,13 @@ if (($is_webcal == false) && ($save_parsed_cals == 'yes')) {
 				foreach ($master_array['-4'] as $temp_array) {
 					$mtime = $master_array['-4'][$z]['mtime'];
 					$fname = $master_array['-4'][$z]['filename'];
+					$wcalc = $master_array['-4'][$z]['webcal'];	
 					$realcal_mtime = filemtime($fname);
-					if ($mtime == $realcal_mtime) {
+					$webcal_mtime = strtotime("now -$webcal_hours hours");
+					if (($mtime == $realcal_mtime) && ($wcalc == 'no')) {
+						$y++;
+					} elseif (($wcalc == 'yes') && ($mtime > $webcal_mtime)) {
+						//echo date('H:i',$mtime). ' > '. date('H:i',$webcal_mtime);
 						$y++;
 					}
 					$z++;
@@ -99,15 +104,25 @@ foreach ($cal_filelist as $filename) {
 	
 	if ($parse_file) {	
 		
+		// Let's see if we're doing a webcal
+		$is_webcal == FALSE;
+		if (substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://') {
+			$is_webcal == TRUE;
+			$cal_webcalPrefix = str_replace('http://','webcal://',$filename);
+			$cal_httpPrefix = str_replace('webcal://','http://',$filename);
+			$cal_httpsPrefix = str_replace('webcal://','https://',$filename);
+			$cal_httpsPrefix = str_replace('http://','https://',$cal_httpsPrefix);
+			$filename = $cal_httpPrefix;
+			$master_array['-4'][$calnumber]['webcal'] = 'yes';
+			$actual_mtime = time();
+		} else {
+			$actual_mtime = filemtime($filename);
+		}
+		
 		$ifile = @fopen($filename, "r");
 		if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $filename));
 		$nextline = fgets($ifile, 1024);
 		if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal'], $filename));
-		
-		//Mod time
-		if ($is_webcal == false) {
-			$actual_mtime = filemtime($filename);
-		}
 		
 		// Set a value so we can check to make sure $master_array contains valid data
 		$master_array['-1'] = 'valid cal file';
@@ -160,6 +175,7 @@ foreach ($cal_filelist as $filename) {
 				if (!isset($master_array['-3'][$calnumber])) $master_array['-3'][$calnumber] = $actual_calname;
 				if (!isset($master_array['-4'][$calnumber]['mtime'])) $master_array['-4'][$calnumber]['mtime'] = $actual_mtime;
 				if (!isset($master_array['-4'][$calnumber]['filename'])) $master_array['-4'][$calnumber]['filename'] = $filename;
+				if (!isset($master_array['-4'][$calnumber]['webcal'])) $master_array['-4'][$calnumber]['webcal'] = 'no';
 				if (!isset($url)) $url = '';
 				if (!isset($type)) $type = '';
 				
@@ -1135,12 +1151,13 @@ if ($parse_file) {
 	}
 	
 	// write the new master array to the file
-	if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE) {
+	if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes') {
 		$write_me = serialize($master_array);
 		$fd = fopen($parsedcal, 'w');
 		fwrite($fd, $write_me);
 		fclose($fd);
 		touch($parsedcal, $realcal_mtime);
+		//echo 'writing file';
 	}
 }
 

@@ -41,8 +41,9 @@ http://phpicalendar.sourceforge.net/phpBB2
 
 Supported Calendar Applications:
 --------------------------------
-PHP iCalendar supports any calendar application that can generate
-valid IETF 2445 files (.ics). Some of the supported applications are:
+PHP iCalendar does not edit calendars, instead it supports any calendar 
+application that can generate valid IETF 2445 files (.ics). 
+Some of the supported applications are:
 	
 	- Apple iCal
 		- http://www.apple.com/ical/
@@ -101,6 +102,7 @@ Changes:
 	-RSS respects $calendar_path.
 	-YEARLY repeating events display better.
 	-All Calendars Combined can now be cached for greater performance.
+	-Webcals can be cached for greater performance.
 	-Parsing engine now twice as fast.
 	-Various bug fixes.
 	
