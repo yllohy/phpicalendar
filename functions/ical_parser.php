@@ -31,7 +31,7 @@ $this_year = $day_array2[1];
 
 // reading the file if it's allowed
 $parse_file = true;
-if (($is_webcal == false) && ($save_parsed_cals == 'yes') && ($cal != 'all_calenders_combined971')) {	
+if (($is_webcal == false) && ($save_parsed_cals == 'yes') && ($cal != $ALL_CALENDARS_COMBINED)) {	
 	$realcal_mtime = filemtime($filename);
 	$parsedcal = $tmp_dir.'/parsedcal-'.$cal_filename.'-'.$this_year;
 	if (file_exists($parsedcal)) {
@@ -967,7 +967,7 @@ if ($parse_file) {
 	}
 	
 	// write the new master array to the file
-	if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE && $cal != 'all_calenders_combined971') {
+	if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE && $cal != $ALL_CALENDARS_COMBINED) {
 		$write_me = serialize($master_array);
 		$fd = fopen($parsedcal, 'w');
 		fwrite($fd, $write_me);
@@ -989,7 +989,7 @@ if ($parse_file) {
 //print '</pre>';
 
 // Set a calender name for all calenders combined
-if ($cal == 'all_calenders_combined971') {
+if ($cal == $ALL_CALENDARS_COMBINED) {
 	$calendar_name = $all_cal_comb_lang;
 }
 					

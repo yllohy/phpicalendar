@@ -8,6 +8,7 @@
 // uncomment when developing, comment for shipping version
 //error_reporting (E_ALL);
 
+$ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
@@ -54,7 +55,7 @@ if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 	$cal_filename = urldecode($HTTP_GET_VARS['cal']);
 } else {
 	if (isset($default_cal_check)) {
-		if ($default_cal_check != 'all_calenders_combined971') {
+		if ($default_cal_check != $ALL_CALENDARS_COMBINED) {
 			$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
 			$calcheckopen = @fopen($calcheck, "r");
 			if ($calcheckopen == FALSE) {
@@ -63,7 +64,7 @@ if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 				$cal_filename = $default_cal_check;
 			}
 		} else {
-			$cal_filename = 'all_calenders_combined971';
+			$cal_filename = $ALL_CALENDARS_COMBINED;
 		}
 	} else {
 		$cal_filename = $default_cal;
@@ -98,7 +99,7 @@ if ($is_webcal) {
 		if (!isset($filename)) {
 			// empty the filelist array
 			$cal_filelist = array();
-			if ($cal == 'all_calenders_combined971') { // Create an array with the paths to all files to be combined
+			if ($cal == $ALL_CALENDARS_COMBINED) { // Create an array with the paths to all files to be combined
 				// Note: code here is similar to code in list_icals.php
 				// open directory
 				$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));

@@ -38,10 +38,10 @@ if ($display_ical_list == "yes") {
 	}			
 
 	// option to open all (non-web) calenders together
-	if ($cal == 'all_calenders_combined971') {
-		print "<option value=\"$current_view.php?cal=all_calenders_combined971\" selected>$all_cal_comb_lang</option>";
+	if ($cal == $ALL_CALENDARS_COMBINED) {
+		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED\" selected>$all_cal_comb_lang</option>";
 	} else {
-		print "<option value=\"$current_view.php?cal=all_calenders_combined971\">$all_cal_comb_lang</option>";
+		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
 	}
 		
 	foreach($list_webcals as $cal_tmp) {

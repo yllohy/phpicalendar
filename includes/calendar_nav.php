@@ -1,6 +1,6 @@
 	<?php
 	
-	if ($cal == 'all_calenders_combined971') {
+	if ($cal == $ALL_CALENDARS_COMBINED) {
 		$cal_displayname2 = $all_cal_comb_lang;
 	} else {
 		$cal_displayname2 = $calendar_name . " $calendar_lang";
@@ -139,7 +139,7 @@
 												echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$really_today_today\">$goyear_lang</a><br>\n";
 												echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
 												if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
-												if ($cal != 'all_calenders_combined971') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+												if ($cal != $ALL_CALENDARS_COMBINED) echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
 											 ?>
 											</td>
 										</tr>

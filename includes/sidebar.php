@@ -3,7 +3,7 @@
 	$really_unix_time = strtotime(date('Ymd'));
 	$really_today_today = date ('Ymd', $really_unix_time);
 	
-	if ($cal == 'all_calenders_combined971') {
+	if ($cal == $ALL_CALENDARS_COMBINED) {
 		$cal_displayname2 = $all_cal_comb_lang;
 	} else {
 		$cal_displayname2 = $calendar_name . " $calendar_lang";
@@ -16,7 +16,7 @@
 	$search_box = '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" style="font-size:10px" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" name="submit" value="Search"></form>';
 	
 	?>
-	
+	<form action="" method="GET">	
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr>
 			<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"[$prev_lang]\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
@@ -35,13 +35,14 @@
 					echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$really_today_today\">$goyear_lang</a><br>\n";
 					echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
 					if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
-					if ($cal != 'all_calenders_combined971') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+					if ($cal != $ALL_CALENDARS_COMBINED) echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
 					echo '</span></div>';
 				 ?>
 			</td>
 		</tr>
 	</table>
-	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	</form>
+	<form action="day.php" method="GET">
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD"><?php echo "$jump_lang"; ?></div></td>
@@ -51,12 +52,11 @@
 				<?php 
 				
 				echo '<div style="padding: 5px;">';
-				echo "<form action=\"day.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
+				echo "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
 				include('./functions/list_icals.php');
 				include('./functions/list_years.php');
 				include('./functions/list_months.php');
 				include('./functions/list_weeks.php');
-				//echo "</form>";
 				if ($show_search == 'yes') {
 					echo $search_box;
 				}
@@ -72,10 +72,10 @@
 			</td>
 		</tr>
 	</table>
-	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	</form>
 	
 	<?php if (isset($master_array[($tomorrows_date)]) && sizeof($master_array[($tomorrows_date)]) > 0) { ?>
-	
+	<form action="" method="GET">
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD"><?php echo "$tomorrows_lang"; ?></div></td>
@@ -133,11 +133,11 @@
 			<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 		</tr>
 	</table>
-	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	</form>
 <?php 
 	}
 		if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
-		
+	<form action="" method="GET">
 	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" width="98%" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD"><?php echo "$todo_lang"; ?></div></td>
@@ -210,12 +210,11 @@
 			<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 		</tr>
 	</table>
-
-	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	</form>
 <?php } 
 		$fake_getdate_time = strtotime($this_year.'-'.$this_month.'-15');
 ?>	
-
+	<form action="" method="GET">
 	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", $fake_getdate_time))); ?></font></td>
@@ -270,7 +269,8 @@
 			</td>
 		</tr>
 	</table>
-	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	</form>
+	<form action="" method="GET">
 	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime($getdate))); ?></font></td>
@@ -325,7 +325,8 @@
 			</td>
 		</tr>
 	</table>
-	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	</form>
+
 	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
 		<tr height="20">
 			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>

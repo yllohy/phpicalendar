@@ -79,7 +79,7 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <title><?php 
-  				if ($calendar_name == 'all_calenders_combined971') {
+  				if ($calendar_name == $ALL_CALENDARS_COMBINED) {
 					echo "$all_cal_comb_lang";
 				} else {
 					echo "$calendar_name2";
@@ -92,7 +92,7 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 		<td align="left" valign="top" width="1%" class="sideback"><img src="../images/spacer.gif" width="1" height="20" alt=" "></td>
 		<td align="center" width="98%" class="sideback"><font class="G10BOLD">
 			<?php 
-				if ($calendar_name == 'all_calenders_combined971') {
+				if ($calendar_name == $ALL_CALENDARS_COMBINED) {
 					echo "$all_cal_comb_lang";
 				} else {
 					echo "$calendar_name2 $calendar_lang";
