@@ -35,7 +35,7 @@ $list_calcolors = list_calcolors();
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
-$show_user_login = (!$is_logged_in && $allow_login);
+$show_user_login = (!$is_logged_in && $allow_login == 'yes');
 $login_querys = login_querys();
 $logout_querys = logout_querys();
 
