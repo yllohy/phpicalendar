@@ -1,7 +1,7 @@
 <?php
 
 define('BASE','./');
-include_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
 $display_date = $preferences_lang;
 

@@ -1,39 +1,34 @@
 {HEADER}
 <center>
-<table border="0" width="700" cellspacing="0" cellpadding="0">
+<table border="0" width="520" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td align="left" width="120" class="navback"><a href="{BACK_PAGE}"><img src="templates/{TEMPLATE}/images/back.gif" alt="{L_BACK}" border="0" align="left"></a></td>
-					<td class="navback">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td align="center" class="navback" nowrap valign="middle"><font class="H20">{L_RESULTS}</font></td>
-							</tr>
-						</table>
-					</td>
-					<td align="right" width="120" class="navback">	
+				<tr valign="top">
+					<td align="left" width="400" class="navback"><div style="padding: 5px;"><span class="H20">{L_RESULTS}</span><br /><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></div></td>
+					<td valign="top" align="right" width="120" class="navback">	
+						<div style="padding-top: 3px;">
 						<table width="120" border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0"></a></td>
-								<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0"></a></td>
-								<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0"></a></td>
-								<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0"></a></td>
+							<tr valign="top">
+								<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
+								<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
+								<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
+								<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
 							</tr>
 						</table>
+						</div>
 					</td>
-				</tr>
+				</tr>  			
 			</table>
 		</td>
 	</tr>
 	<tr>
-		<td class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
+		<td class="dayborder"><img src="images/spacer.gif" width="1" height="1" alt=" "></td>
 	</tr>
 	<tr>
 		<td align="left">
 			<div style="padding: 10px;">
-				<div align="center"><p class="V12">{L_QUERY}: {FORMATTED_SEARCH}</p></div>
+				<div><p class="V12">{L_QUERY}: {FORMATTED_SEARCH}</p></div>
 				<!-- switch results on -->
 				<font class="V12"><b><a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{DAYOFMONTH}</a></b></font><br>
 				<div style="margin-left: 10px; margin-bottom: 10px;">
@@ -98,13 +93,20 @@
 				
 				<div align="center">
 					{SEARCH_BOX}
-					<p class="V9G">{L_SEARCH_TOOK} {SEARCH_TOOK)</p>
 				</div>
 				<br>
 			</div>
 		</td>
 	</tr>
 </table>
+<table width="520" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
 </center>
+
 {FOOTER}
 

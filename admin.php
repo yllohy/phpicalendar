@@ -2,9 +2,8 @@
 session_start();
 
 define('BASE', './');
-require_once(BASE.'functions/init.inc.php');
 require_once(BASE.'functions/admin_functions.php');
-require_once(BASE.'functions/list_functions.php');
+require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
 
 // Redirect if administration is not allowed

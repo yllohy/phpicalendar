@@ -3,7 +3,9 @@
 define('BASE','./');
 $current_view = 'search';
 $display_date = $results_lang;
-include('./functions/ical_parser.php');
+require_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/list_functions.php');
+require_once(BASE.'functions/template.php');
 
 if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
 	$back_page = $HTTP_SERVER_VARS['HTTP_REFERER'];
@@ -71,173 +73,6 @@ if ($search_valid) {
 $search_ended = getmicrotime();
 
 $search_took = number_format(($search_ended-$search_started),3);
-
-include (BASE.'includes/header.inc.php'); 
-
-?>
-
-<center>
-<table border="0" width="700" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
-	<tr>
-		<td>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-      			<tr>
-      				<td align="left" width="120" class="navback"><?php echo '<a href="'.$back_page.'"><img src="styles/'.$style_sheet.'/back.gif" alt="['.$back_lang.']" border="0" align="left"></a>'; ?></td>
-      				<td class="navback">
-      					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-      						<tr>
-								<td align="center" class="navback" nowrap valign="middle"><font class="H20"><?php echo $results_lang; ?></font></td>
-      						</tr>
-      					</table>
-      				</td>
-      				<td align="right" width="120" class="navback">	
-      					<table width="120" border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="'.$day_view_lang.'" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="'.$week_view_lang.'" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="'.$month_view_lang.'" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="'.$year_view_lang.'" border="0"></a></td>'; ?>
-							</tr>
-						</table>
-					</td>
-      			</tr>
-      		</table>
-      	</td>
-    </tr>
-	<tr>
-		<td class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
-	</tr>
-	<tr>
-		<td align="left">
-			<div style="padding: 10px;">
-				<?php 
-				
-				echo '<div align="center"><p class="V12">'.$query_lang.': '.$formatted_search.'</p></div>';
-				
-				if (isset($the_arr) && is_array($the_arr)) {
-					foreach($the_arr as $val) {
-						$key = $val['date'];
-						if ($key > 1) { 
-							$dayofmonth = strtotime ($key);
-							$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-							echo '<font class="V12"><b><a class="ps3" href="day.php?cal='.$cal.'&amp;getdate='.$key.'">'.$dayofmonth.'</a></b></font><br>';
-						}
-						if ($val["event_text"]) {	
-							$event_text 	= stripslashes(urldecode($val["event_text"]));
-							$description 	= stripslashes(urldecode($val["description"]));
-							$event_start 	= $val["event_start"];
-							$event_end 		= $val["event_end"];
-							$event_calna 	= $val["calname"];
-							$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-							$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-							$event_start 	= "$event_start - $event_end";
-							if (!$val["event_start"]) { 
-								$event_start = "$all_day_lang";
-								$event_start2 = '';
-								$event_end = '';
-							}
-							echo '<div style="margin-left: 10px; margin-bottom: 10px;">';
-							echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
-							echo "<tr>\n";
-							echo "<td width=\"120\" class=\"G10BOLD\">$time_lang:</td>\n";
-							echo "<td align=\"left\" class=\"G10B\">$event_start</td>\n";
-							echo "</tr>\n";
-							echo "<tr>\n";
-							echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$summary_lang:</td>\n";
-							echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$event_text</td>\n";
-							echo "</tr>\n";
-							if (isset($val['recur'])) {
-								$recur = $val['recur'];
-								echo "<tr>\n";
-								echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">Recurring event:</td>\n";
-								echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$recur</td>\n";
-								echo "</tr>\n";
-							}
-							if ($val["description"]) {
-								echo "<tr>\n";
-								echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$description_lang:</td>\n";
-								echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$description</td>\n";
-								echo "</tr>\n";
-							}
-							echo "</table>\n";
-							echo '</div>';
-							if (isset($val['exceptions'])) {
-								echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-								foreach($val['exceptions'] as $val2) {
-									$key = $val2['date'];
-									$dayofmonth = strtotime ($key);
-									$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-									echo "<td align=\"left\" colspan=\"2\"><font class=\"V10\"><i>$exception_lang</i>: <a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font></td></tr>";
-									
-									if ($val2["event_text"]) {	
-										$event_text 	= stripslashes(urldecode($val2["event_text"]));
-										$description 	= stripslashes(urldecode($val2["description"]));
-										$event_start 	= $val2["event_start"];
-										$event_end 		= $val2["event_end"];
-										$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-										$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-										$event_start 	= "$event_start - $event_end";
-										if (!$val2["event_start"]) { 
-											$event_start = "$all_day_lang";
-											$event_start2 = '';
-											$event_end = '';
-										}
-										echo "<tr>\n";
-										echo "<td align=\"left\">\n";
-										echo '<div style="margin-left: 10px;">';
-										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
-										echo "<tr>\n";
-										echo "<td width=\"100\" class=\"V10\">$time_lang:</td>\n";
-										echo "<td align=\"left\" class=\"V10\">$event_start</td>\n";
-										echo "</tr>\n";
-										echo "<tr>\n";
-										echo "<td valign=\"top\" width=\"100\" class=\"V10\">$summary_lang:</td>\n";
-										echo "<td valign=\"top\" align=\"left\" class=\"V10\">$event_text</td>\n";
-										echo "</tr>\n";
-										if (isset($val2['recur'])) {
-											$recur = $val2['recur'];
-											echo "<tr>\n";
-											echo "<td valign=\"top\" width=\"100\" class=\"V10\">$recurring_event_lang:</td>\n";
-											echo "<td valign=\"top\" align=\"left\" class=\"V10\">$recur</td>\n";
-											echo "</tr>\n";
-										}
-										if ($val2["description"]) {
-											echo "<tr>\n";
-											echo "<td valign=\"top\" width=\"100\" class=\"V10\">$description_lang:</td>\n";
-											echo "<td valign=\"top\" align=\"left\" class=\"V10\">$description</td>\n";
-											echo "</tr>\n";
-										}
-										echo "</table>";
-										echo '</div><br>';
-		
-									}
-								}
-							}
-						}
-					}
-				} else {
-					echo '<div align="center">';
-					echo '<p class="V12">'.$no_results_lang.'</p>';
-					echo '</div>';
-				}
-					
-					echo '<div align="center">';
-					echo $search_box;
-					echo '<p class="V9G">'.sprintf($search_took_lang,$search_took).'</p></div>';
-					echo '</div>';
-				?>
-
-					</td>
-				</tr>
-			</table>		
-		</td>
-	</tr>
-</table>
-</center>
-<?php 
-
-include (BASE.'includes/footer.inc.php');
-
 
 // takes a boolean search and formats it into an array
 // use with sister function search_boolean()
@@ -434,8 +269,27 @@ function format_recur($arr) {
 	return $print;
 }
 
-function getmicrotime() { 
-	list($usec, $sec) = explode(' ',microtime()); 
-	return ((float)$usec + (float)$sec); 
-}
+$page = new Page(BASE.'templates/'.$template.'/search.tpl');
+
+$page->replace_tags(array(
+	'header'			=> BASE.'templates/'.$template.'/header.tpl',
+	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
+	'event_js'			=> BASE.'functions/event.js',
+	'template'			=> $template,
+	'cal'				=> $cal,
+	'getdate'			=> $getdate,
+	'calendar_name'		=> $calendar_name,
+	'display_date'		=> $display_date,
+	'current_view'		=> $current_view,
+	'sidebar_date'		=> $sidebar_date,
+	'rss_powered'	 	=> $rss_powered,
+	'rss_available' 	=> '',
+	'rss_valid' 		=> '',
+	'todo_js' 			=> '',
+	'show_search' 		=> ''		
+	));
+
+$page->output();
+
 ?>
