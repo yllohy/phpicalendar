@@ -45,16 +45,11 @@ $goweek_lang		= 'Go to This Week';
 $gomonth_lang		= 'Go to This Month';
 $goyear_lang		= 'Go to This Year';
 
-// Date display since setlocale isnt perfect.
 $daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 $daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 $daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
 $monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
 $monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
-
-// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-// These do not work on Mac OS X, but are fine on other builds of *nix.
-setlocale (LC_TIME, 'en_EN');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'g:i A';
@@ -86,11 +81,11 @@ Notes about dateFormat_*
 // Error messages - %s will be replaced with a variable
 $error_title_lang = 'Error!';
 $error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar %s caused this error.';
-$error_path_lang = 'Unable to open the path: %s';
+$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
+$error_path_lang = 'Unable to open the path: "%s"';
 $error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'You cannot view remote calendars on this server which are not approved.';
-$error_restrictedcal_lang = 'You have tried to access calendar that is restricted on this server.';
+$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
+$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
 $error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
 
 ?>

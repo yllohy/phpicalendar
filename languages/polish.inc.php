@@ -1,7 +1,7 @@
 <?
 
 // Polish language include
-// For version 0.5 PHP iCalendar
+// For version 0.6 PHP iCalendar
 //
 // Translation by Stanislaw Cieslicki (stahoo@poczta.onet.pl)
 //
@@ -25,7 +25,7 @@ $last_year_lang		= 'Zeszły rok';
 $subscribe_lang		= 'Subskrybuj';
 $download_lang		= 'Pobież';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.5';
+$version_lang		= '0.6';
 $event_lang			= 'Zadanie';
 $event_start_lang	= 'Początek';
 $event_end_lang		= 'Koniec';
@@ -47,16 +47,11 @@ $goweek_lang		= 'Go to This Week';
 $gomonth_lang		= 'Go to This Month';
 $goyear_lang		= 'Go to This Year';
 
-// Date display since setlocale isnt perfect.
 $daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 $daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 $daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
 $monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
 $monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
-
-
-// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-setlocale (LC_TIME, 'pl_PL');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'G:i';
@@ -84,5 +79,15 @@ Notes about $dateFormat_*
 	If this causes problems with representing your language accurately, let
 	us know. We will be happy to modify this if needed.
 */
+
+// Error messages - %s will be replaced with a variable
+$error_title_lang = 'Error!';
+$error_window_lang = 'There was an error!';
+$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
+$error_path_lang = 'Unable to open the path: "%s"';
+$error_back_lang = 'Please use the "Back" button to return.';
+$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
+$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
+$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
 
 ?>

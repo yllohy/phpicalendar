@@ -26,7 +26,7 @@ $lang_file = './languages/'.$language.'.inc.php';
 if (file_exists($lang_file)) {
 	include($lang_file);
 } else {
-	exit(error('Requested lanugage "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
+	exit(error('The requested lanugage "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
 }
 
 if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
@@ -38,7 +38,7 @@ if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
 
 
 $is_webcal = FALSE;
-if (isset($HTTP_GET_VARS['cal'])) {
+if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 	$cal_decoded = urldecode($HTTP_GET_VARS['cal']);
 	if (substr($cal_decoded, 0, 7) == 'http://' || substr($cal_decoded, 0, 9) == 'webcal://') {
 		$is_webcal = TRUE;
@@ -60,18 +60,18 @@ if ($is_webcal) {
 		$filename = $cal_filename;
 		$subscribe_path = $cal_webcalPrefix;
 	} else {
-		exit(error('Remote calendars are not allowed on this server and the calendar located at '.$HTTP_GET_VARS['cal'].' is not in the list of allowed calendars. Please use the "Back" button to return.'));
+		exit(error($error_remotecal_lang, $HTTP_GET_VARS['cal']));
 	}
 } else {
 	$cal_displayname = str_replace('32', ' ', $cal_filename);
 	$cal = urlencode($cal_filename);
 	if (in_array($cal_filename, $blacklisted_cals)) {
-		exit(error($cal_filename.' is restricted on this server. Please use the "Back" button to return.'));
+		exit(error($error_restrictedcal_lang, $cal_filename));
 	} else {
 		if (!isset($filename)) {
 			$filename = $calendar_path.'/'.$cal_filename.'.ics';
 			if (!file_exists($filename)) {
-				$dir_handle = @opendir($calendar_path) or die('Unable to open path: '.$calendar_path);
+				$dir_handle = @opendir($calendar_path) or die(error($error_path_lang, $calendar_path));
 				while ($file = readdir($dir_handle)) {
 					if (substr($file, -4) == '.ics') {
 						$cal = urlencode(substr($file, 0, -4));

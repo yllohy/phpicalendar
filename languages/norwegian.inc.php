@@ -1,7 +1,7 @@
 <?php
 
 // Norwegian language include
-// For version 0.5 PHP iCalendar
+// For version 0.6 PHP iCalendar
 //
 // Translation by Geir Kielland (geir.kielland@jus.uio.no)
 //
@@ -25,7 +25,7 @@ $last_year_lang		= 'Forrige &Aring;r';
 $subscribe_lang		= 'Abonn&eacute;r';
 $download_lang		= 'Last Ned';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.5';
+$version_lang		= '0.6';
 $event_lang			= 'Hendelse';
 $event_start_lang	= 'Start Tid';
 $event_end_lang		= 'Slutt Tid';
@@ -34,8 +34,6 @@ $date_lang			= 'Dato';
 $summary_lang		= 'Sammendrag';
 $all_day_lang		= 'Hele dagen';
 $notes_lang			= 'Notater';
-
-// new since last translation
 $this_years_lang	= 'Hendelser dette &aring;ret';
 $today_lang			= 'I dag';
 $this_week_lang		= 'Denne uken';
@@ -47,16 +45,12 @@ $goweek_lang		= 'G&aring; til denne uken';
 $gomonth_lang		= 'G&aring; til denne m&aring;neden';
 $goyear_lang		= 'G&aring; til dette &aring;ret';
 
-// Date display since setlocale isnt perfect. // new since last translation
 $daysofweek_lang			= array('S&oslash;ndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','L&oslash;rdag');
 $daysofweekshort_lang		= array ('S&oslash;n','Man','Tir','Ons','Tor','Fre','L&oslash;r');
 $daysofweekreallyshort_lang	= array ('S','M','T','O','T','F','L');
 $monthsofyear_lang			= array ('Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember');
 $monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Des');
 
-
-// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-setlocale (LC_TIME, 'no_NO');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'H:i';
@@ -65,7 +59,7 @@ $timeFormat = 'H:i';
 $dateFormat_day = '%A, %e. %B ';
 $dateFormat_week = '%e. %B';
 $dateFormat_week_list = '%a, %e. %b';
-$dateFormat_week_jump = '%b %e'; // new since last translation
+$dateFormat_week_jump = '%b %e';
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A, %e. %B';
 
@@ -84,5 +78,16 @@ Notes about dateFormat_*
 	If this causes problems with representing your language accurately, let
 	us know. We will be happy to modify this if needed.
 */
+
+// Error messages - %s will be replaced with a variable
+$error_title_lang = 'Error!';
+$error_window_lang = 'There was an error!';
+$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
+$error_path_lang = 'Unable to open the path: "%s"';
+$error_back_lang = 'Please use the "Back" button to return.';
+$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
+$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
+$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+
 
 ?>

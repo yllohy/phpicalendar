@@ -1,38 +1,39 @@
 <?
 
-// German language include
+// Spanish language include
 // For version 0.6 PHP iCalendar
 //
-// Translation by David Reindl (dre@andare.ch)
+// Translation by XIPS (buzon@xips.es)
 //
+// Submit new translations to chad@chadsdomain.com
 
 
 
-$day_lang			= 'Tag';
-$week_lang			= 'Woche';
-$month_lang			= 'Monat';
-$year_lang			= 'Jahr';
-$calendar_lang		= 'Kalender';
-$next_day_lang		= 'Folgender Tag';
-$next_month_lang	= 'Folgender Monat';
-$next_week_lang		= 'Folgende Woche';
-$next_year_lang		= 'Folgendes Jahr';
-$last_day_lang		= 'Vorhergehender Tag';
-$last_month_lang	= 'Vorhergehender Monat';
-$last_week_lang		= 'Vorhergehende Woche';
-$last_year_lang		= 'Vorhergehendes Jahr';
-$subscribe_lang		= 'Abonnieren';
-$download_lang		= 'Herunterladen';
-$powered_by_lang 	= 'Powered by';
-$version_lang		= '0.6';
-$event_lang			= 'Eintrag';
-$event_start_lang	= 'Beginn';
-$event_end_lang		= 'Ende';
-$this_months_lang	= 'Alle Einträge in diesem Monat';
-$date_lang			= 'Datum';
-$summary_lang		= 'Beschreibung';
+$day_lang			= "D&iacute;a";
+$week_lang			= "Semana";
+$month_lang			= "Mes";
+$year_lang			= "A&ntilde;o";
+$calendar_lang		= "Calendario";
+$next_day_lang		= "D&iacute;a siguiente";
+$next_month_lang	= "Mes siguiente";
+$next_week_lang		= "Semana siguiente";
+$next_year_lang		= "A&ntilde;o siguiente";
+$last_day_lang		= "D&iacute;a anterior";
+$last_month_lang	= "Mes anterior";
+$last_week_lang		= "Semana anterior";
+$last_year_lang		= "A&ntilde;o anterior";
+$subscribe_lang		= "Suscribir";
+$download_lang		= "Descargar";
+$powered_by_lang 	= "Powered by";
+$version_lang		= "0.6";
 
-// new since last translation
+// from here down, translate
+$event_lang			= 'Event';
+$event_start_lang	= 'Start Time';
+$event_end_lang		= 'End Time';
+$this_months_lang	= 'This Month\'s Events';
+$date_lang			= 'Date';
+$summary_lang		= 'Summary';
 $all_day_lang		= 'All day event';
 $notes_lang			= 'Notes';
 $this_years_lang	= 'This Year\'s Events';
@@ -46,31 +47,22 @@ $goweek_lang		= 'Go to This Week';
 $gomonth_lang		= 'Go to This Month';
 $goyear_lang		= 'Go to This Year';
 
-// Date display since setlocale isnt perfect. // new since last translation
 $daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 $daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 $daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
 $monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
 $monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
-// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-// for Switzerland
-setlocale (LC_TIME, 'ch_DE');
-// for Germany
-// setlocale (LC_TIME, 'de_DE');
-// for Austria
-// setlocale (LC_TIME, 'at_DE');
-
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
-$timeFormat = 'H:i';
+$timeFormat = 'g:i A';
 
 // For date formatting, see note below
-$dateFormat_day = '%A, %e. %B';
+$dateFormat_day = '%A, %B %e';
 $dateFormat_week = '%B %e';
-$dateFormat_week_list = '%a, %e. %b';
-$dateFormat_week_jump = '%b %e';// new since last translation
+$dateFormat_week_list = '%a, %b %e';
+$dateFormat_week_jump = '%b %e';
 $dateFormat_month = '%B %Y';
-$dateFormat_month_list = '%A, %e. %B';
+$dateFormat_month_list = '%A, %B %e';
 
 /*
 Notes about dateFormat_*
@@ -97,5 +89,6 @@ $error_back_lang = 'Please use the "Back" button to return.';
 $error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
 $error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
 $error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+
 
 ?>

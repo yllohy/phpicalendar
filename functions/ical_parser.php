@@ -35,15 +35,39 @@ $this_day = $day_array2[3];
 $this_month = $day_array2[2];
 $this_year = $day_array2[1];
 
+// reading the file if it's allowed
+$parse_file = true;
+if ($is_webcal == false && $save_parsed_cals == 'yes') {	
+	$realcal_mtime = filemtime($filename);
+	$parsedcal = '/tmp/parsedcal-'.$cal_filename.'-'.$this_year.'-'.$realcal_mtime;
+	if (file_exists($parsedcal)) {
+		$parsedcal_mtime = filemtime($parsedcal);
+		if ($realcal_mtime == $parsedcal_mtime) {
+			$fd = fopen($parsedcal, 'r');
+			$contents = fread($fd, filesize($parsedcal));
+			fclose($fd);
+			$master_array = unserialize($contents);
+			if ($master_array['-1'] == 'valid cal file') {
+				$parse_file = false;
+				$calendar_name = $master_array['calendar_name'];
+			}
+		}
+	}
+}
+
 // Start the session
 //session_start();
 //if (($aYear != $this_year) || ($use_sessions != 'yes') || (!is_array($aArray))) {
 //echo 'not using sessions';
 
+if ($parse_file) {
 
 // open the iCal file, read it into a string
 $contents = @file($filename);
-if ($contents[0] != 'BEGIN:VCALENDAR'."\n") exit(error('Calendar '.$filename.' is invalid. Please try a different calendar'));
+if ($contents[0] != 'BEGIN:VCALENDAR'."\n") exit(error($error_invalidcal_lang, $filename));
+
+// Set a value so we can check to make sure $master_array contains valid data
+$master_array['-1'] = 'valid cal file';
 
 // auxiliary array for determining overlaps of events
 $overlap_array = array ();
@@ -243,8 +267,14 @@ foreach($contents as $line) {
 						$start_date_time = strtotime($start_date);
 						$this_month_start_time = strtotime($this_year.$this_month.'01');
 						
-						$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
-						$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
+						if ($save_parsed_cals == 'yes' && !$is_webcal) {
+							$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
+							$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
+						} else {
+							$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
+							$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
+						}
+						
 						
 						// NOTE: This part not in use for the time being. We are choosing to fill out 3 months time.
 						// depending on which view we're looking at, we do one month or one week
@@ -568,6 +598,7 @@ foreach($contents as $line) {
 		
 		} elseif (strstr($field, 'X-WR-CALNAME')) {
 			$calendar_name = $data;
+			$master_array['calendar_name'] = $calendar_name;
 		
 		} elseif (strstr($field, 'DTSTART;VALUE=DATE')) {
 			$allday_start = $data;
@@ -627,7 +658,17 @@ if (is_array($master_array)) {
 	}
 }
 
+// write the new master array to the file
+if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE) {
+	$write_me = serialize($master_array);
+	$fd = fopen($parsedcal, 'w');
+	fwrite($fd, $write_me);
+	fclose($fd);
+	touch($parsedcal, $realcal_mtime);
+}
 
+// this bracket is the end of the if ($parse_file) statment
+}
 
 // Store information in the session
 /*if ($use_sessions == 'yes') {

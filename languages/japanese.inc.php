@@ -1,7 +1,7 @@
 <?php
 
 // English language include
-// For version 0.5 PHP iCalendar
+// For version 0.6 PHP iCalendar
 //
 // Translation by Jared Wangen (jared@silter.org)
 // With the help of Eri Hayashiguchi
@@ -28,7 +28,7 @@ $download_lang		= 'ダウンロード';
 $published_lang		= '公開日：';
 $powered_by_lang 	= 'Powered by';
 
-$version_lang		= '0.5';
+$version_lang		= '0.6';
 $event_lang			= '件名';
 $event_start_lang	= '開始日';
 $event_end_lang		= '終了日';
@@ -47,11 +47,11 @@ $this_month_lang	= '今月';
 $this_year_lang		= '今年';
 
 $jump_lang			= 'Jump to';
-$tomorrows_lang		= 'Tomorrow\'s Events';
-$goday_lang			= 'Go to Today';
-$goweek_lang		= 'Go to This Week';
-$gomonth_lang		= 'Go to This Month';
-$goyear_lang		= 'Go to This Year';
+$tomorrows_lang		= '翌日の予定';
+$goday_lang			= '今日に行く';
+$goweek_lang		= '今週に行く';
+$gomonth_lang		= '今月に行く';
+$goyear_lang		= '今年に行く';
 
 $daysofweek_lang			= array ('日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日');
 $daysofweekshort_lang		= array ('日曜','月曜','火曜','水曜','木曜','金曜','土曜');
@@ -88,5 +88,16 @@ Notes about dateFormat_*
 	If this causes problems with representing your language accurately, let
 	us know. We will be happy to modify this if needed.
 */
+
+// Error messages - %s will be replaced with a variable
+$error_title_lang = 'Error!';
+$error_window_lang = '間違いがあった!';
+$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
+$error_path_lang = 'Unable to open the path: "%s"';
+$error_back_lang = 'Please use the "Back" button to return.';
+$error_remotecal_lang = 'このサーバーは遠隔カレンダーを妨げる承認されなかった。';
+$error_restrictedcal_lang = 'あなたはカレンダーにアクセスすることを試みたこのサーバーで 限られている';
+$error_invalidcal_lang = 'カレンダーファイルは無効であること。 別のカレンダーを試みなさい。';
+
 
 ?>
