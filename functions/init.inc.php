@@ -36,6 +36,8 @@ if ($cookie_uri == '') {
 	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 }
 
+if ($bleed_time == '') $bleed_time = $day_start;
+
 // If not HTTP authenticated, try login via cookies or the web page.
 $username = ''; $password = '';
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
