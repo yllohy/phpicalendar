@@ -66,7 +66,6 @@ if ($parse_file) {
 	$contents = ereg_replace("\n ", '', $contents);
 	$contents = split ("\n", $contents);
 	if ($contents[0] != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
-	// echo "$contents[0]";
 	
 	// Set a value so we can check to make sure $master_array contains valid data
 	$master_array['-1'] = 'valid cal file';
@@ -441,43 +440,24 @@ if ($parse_file) {
 			
 			// Old style
 			// sscanf($line, "%[^:]:%[^\n]", &$field, &$data);
-			// echo "$field, $data<br>";
 			
 			if(stristr($field, 'DTSTART;TZID')) {
 				$data = ereg_replace('T', '', $data);
 				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-				$year = $regs[1];
-				$month = $regs[2];
-				$day = $regs[3];
-				$hour = $regs[4];
-				$minute = $regs[5];
-				
-				$start_date = $year . $month . $day;
-				$start_time = $hour . $minute;
+				$start_date = $regs[1] . $regs[2] . $regs[3];
+				$start_time = $regs[4] . $regs[5];
 	
 			} elseif (stristr($field, 'DTEND;TZID')) {
 				$data = ereg_replace('T', '', $data);
 				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-				$year = $regs[1];
-				$month = $regs[2];
-				$day = $regs[3];
-				$hour = $regs[4];
-				$minute = $regs[5];
-			
-				$end_date = $year . $month . $day;
-				$end_time = $hour . $minute;
+				$end_date = $regs[1] . $regs[2] . $regs[3];
+				$end_time = $regs[4] . $regs[5];
 				
 			} elseif (stristr($field, 'EXDATE;TZID')) {
 				$data = ereg_replace('T', '', $data);
 				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-				$year = $regs[1];
-				$month = $regs[2];
-				$day = $regs[3];
-				$hour = $regs[4];
-				$minute = $regs[5];
-			
-				$except_dates[] = $year . $month . $day;
-				$except_times[] = $hour . $minute;
+				$except_dates[] = $regs[1] . $regs[2] . $regs[3];
+				$except_times[] = $regs[4] . $regs[5];
 				
 			} elseif (stristr($field, 'SUMMARY')) {
 				$summary = $data;
@@ -491,7 +471,6 @@ if ($parse_file) {
 			
 			} elseif (stristr($field, 'DTSTART;VALUE=DATE')) {
 				$allday_start = $data;
-				// echo $allday_start;
 			
 			} elseif (stristr($field, 'DTEND;VALUE=DATE')) {
 				$allday_end = $data;
