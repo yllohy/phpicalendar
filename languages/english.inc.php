@@ -79,14 +79,14 @@ $set_prefs_lang			= 'Set preferences';
 //To-dos
 $completed_date_lang	= 'Completed on ';
 $completed_lang			= 'Completed';
-$created_lang			= 'Created: ';
-$due_lang				= 'Due: ';
-$priority_lang			= 'Priority: ';
+$created_lang			= 'Created:';
+$due_lang				= 'Due:';
+$priority_lang			= 'Priority:';
 $priority_high_lang		= 'High';
 $priority_low_lang		= 'Low';
 $priority_medium_lang	= 'Medium';
 $priority_none_lang		= 'None';
-$status_lang			= 'Status: ';
+$status_lang			= 'Status:';
 $todo_lang				= 'To do items';
 $unfinished_lang		= 'Unfinished';
 

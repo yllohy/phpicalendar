@@ -105,24 +105,24 @@ if (isset($vtodo_array['priority']) && ($vtodo_array['priority'] !== '')) {
 				<?php if ($status) { ?>
 				<tr>
 					 <td></td>
-		 			 <td align="left" colspan="2" class="V12"><?php echo $status_lang . $status; ?></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo "$status_lang $status"; ?></td>
 				</tr>
 				<?php } ?>
 
 				<tr>
 					 <td></td>
-		 			 <td align="left" colspan="2" class="V12"><?php echo $priority_lang . $priority; ?></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo "$priority_lang $priority"; ?></td>
 				</tr>
 
 				<tr>
 					 <td></td>
-		 			 <td align="left" colspan="2" class="V12"><?php echo $created_lang . $start_date; ?></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo "$created_lang $start_date"; ?></td>
 				</tr>
 
 				<?php if ($due_date) { ?>
 				<tr>
 					 <td></td>
-		 			 <td align="left" colspan="2" class="V12"><?php echo $due_lang . $due_date; ?></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo "$due_lang $due_date"; ?></td>
 				</tr>
 				<?php } ?>
 				
