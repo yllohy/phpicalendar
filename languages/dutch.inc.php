@@ -39,35 +39,35 @@ $today_lang			= 'Vandaag';
 $this_week_lang		= 'Deze Week';
 $this_month_lang	= 'Deze Maand';
 $jump_lang			= 'Ga naar';
-$tomorrows_lang		= 'Activiteiten van morgen';
+$tomorrows_lang		= 'Activiteiten voor morgen';
 $goday_lang			= 'Ga Naar Vandaag';
 $goweek_lang		= 'Ga Naar Deze Week';
 $gomonth_lang		= 'Ga Naar Deze Maand';
 $goyear_lang		= 'Ga Naar Dit Jaar';
 
 // new in 0.8 -------------
-$search_lang		= 'Search'; // the verb
-$results_lang		= 'Search Results';
-$query_lang			= 'Query: '; // will be followed by the search query
-$no_results_lang	= 'No events found';
+$search_lang		= 'Zoeken'; // the verb
+$results_lang		= 'Zoek Resultaten';
+$query_lang			= 'Zoekopdracht: '; // will be followed by the search query
+$no_results_lang	= 'Geen activiteiten gevonden';
 
-$goprint_lang		= 'Printer Friendly';
-$time_lang			= 'Time';
-$summary_lang		= 'Summary';
-$description_lang	= 'Description';
+$goprint_lang		= 'Makkelijk Printbaar';
+$time_lang			= 'Tijd';
+$summary_lang		= 'Overzicht';
+$description_lang	= 'Beschrijving';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'This site is';
-$no_events_day_lang		= 'No events today.';
-$no_events_week_lang	= 'No events this week.';
-$no_events_month_lang	= 'No events this month.';
+$this_site_is_lang		= 'Deze site is';
+$no_events_day_lang		= 'Geen activiteiten vandaag.';
+$no_events_week_lang	= 'Geen activiteiten deze week.';
+$no_events_month_lang	= 'Geen activiteiten deze maand.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
 // -------------------------
 
 $daysofweek_lang			= array ('Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag');
-$daysofweekshort_lang		= array ('Zon','Ma','Din','Woe','Do','Vrij','Zat');
+$daysofweekshort_lang		= array ('Zon','Maa','Din','Woe','Don','Vrij','Zat');
 $daysofweekreallyshort_lang	= array ('Z','M','D','W','D','V','Z');
 $monthsofyear_lang			= array ('Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December');
 $monthsofyearshort_lang		= array ('Jan','Feb','Maa','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec');
@@ -104,7 +104,7 @@ $error_title_lang = 'Fout!';
 $error_window_lang = 'Er is een fout opgetreden!';
 $error_calendar_lang = 'De kalender "%s" was aan het processen toen de fout gebeurde.';
 $error_path_lang = 'Onmogelijk om het path te openen: "%s"';
-$error_back_lang = 'Gebruik de "Back" knop om terug te keren.';
+$error_back_lang = 'Gebruik de knop "Vorige" om terug te keren.';
 $error_remotecal_lang = 'Deze server blokt alle niet-geaccepteerde kalenders.';
 $error_restrictedcal_lang = 'Je probeerde een beveiligde kalender te bekijken.';
 $error_invalidcal_lang = 'Ongeldige Kalender file. Probeer een andere kalender aub.';

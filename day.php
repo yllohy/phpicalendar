@@ -153,8 +153,9 @@ if (is_array($master_array[($getdate)])) {
 								$event_length = array ();
 								$border = 0;
 								foreach ($day_array as $key) {
-									$cal_time = $key;	
-									$key = strtotime ($key);
+									ereg('([0-9]{2})([0-9]{2})', $key, $regs_tmp);
+									$cal_time = $key;
+									$key = mktime($regs_tmp[1],$regs_tmp[2],0,$this_month,$this_day,$this_year);
 									$key = date ($timeFormat, $key);
 									unset($this_time_arr);
 									

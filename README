@@ -72,6 +72,7 @@ Changes:
 	-Fixed a bug causing Sunday to be listed twice.
 	-Fixed a bug preventing < 4.1.0 php users to run app.
 	-Fixed a bug displaying quotes in summary.
+	-Fixed many other bugs
 
 0.7
 	-Added Year view.
