@@ -597,12 +597,10 @@ class Page {
 					$event_text = stripslashes(urldecode($val["event_text"]));
 					$event_text = strip_tags($event_text, '<b><i><u>');
 					if ($event_text != "") {	
-						$event_start 	= $val["event_start"];
-						$event_end 		= $val["event_end"];
 						$event_calna 	= $val["calname"];
 						$event_url 		= $val["url"];
-						$event_start 	= date ($timeFormat, @strtotime ($event_start));
-						$event_end 		= date ($timeFormat, @strtotime ($event_end));
+						$event_start 	= date ($timeFormat, $val["start_unixtime"]);
+						$event_end 		= date ($timeFormat, $val["end_unixtime"]);
 						if (!isset($val["event_start"])) { 
 							$event_start = $lang['l_all_day']; 
 							$event_end = ''; 

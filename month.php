@@ -16,6 +16,7 @@ $unix_time 				= strtotime($getdate);
 $today_today 			= date('Ymd', strtotime("now + $second_offset seconds")); 
 $tomorrows_date 		= date('Ymd', strtotime("+1 day",  $unix_time));
 $yesterdays_date 		= date('Ymd', strtotime("-1 day",  $unix_time));
+$sidebar_date 			= localizeDate($dateFormat_week_list, $unix_time);
 
 // find out next month
 $next_month_month 		= ($this_month+1 == '13') ? '1' : ($this_month+1);
@@ -81,6 +82,7 @@ $page->replace_tags(array(
 	'legend'	 		=> $list_calcolors,
 	'current_view'		=> $current_view,
 	'style_select' 		=> $style_select,
+	'sidebar_date'		=> $sidebar_date,
 	'l_goprint'			=> $lang['l_goprint'],
 	'l_preferences'		=> $lang['l_preferences'],
 	'l_calendar'		=> $lang['l_calendar'],

@@ -56,7 +56,7 @@
 					<td width="160" valign="top">
 						<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
 							<tr>
-								<td align="center" class="sideback"><div style="height:16px;"><b>{CALENDAR_NAME}</b></div></td>
+								<td align="center" class="sideback"><div style="height:16px;"><b>{SIDEBAR_DATE}</b></div></td>
 							</tr>
 							<tr>
 								<td>
