@@ -186,7 +186,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php echo "$display_month1"; ?></b></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php print (strftime ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></td>
 						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
@@ -202,30 +202,35 @@
 									<td><img src="images/spacer.gif" width="21" height="1"></td>
 								</tr>
 								<tr>
-									<td align="center" class="G10B"><b>Su</b></td>
-									<td align="center" class="G10B"><b>Mo</b></td>
-									<td align="center" class="G10B"><b>Tu</b></td>
-									<td align="center" class="G10B"><b>We</b></td>
-									<td align="center" class="G10B"><b>Th</b></td>
-									<td align="center" class="G10B"><b>Fr</b></td>
-									<td align="center" class="G10B"><b>Sa</b></td>
+								<?php
+									$start_day = strtotime($week_start_day);
+									for ($i=0; $i<7; $i++) {
+										$day = substr(date("D", $start_day), 0, 2);
+										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
+										$start_day = ($start_day + (24.5 * 60 * 60));
+									}
+								?>
 								</tr>
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
 									</td>
 								</tr>
-								<?php 	 
-									$sunday = strtotime("$first_sunday1");
+								<?php
+									$minical_time = strtotime("-1 month", strtotime($getdate));
+									$minical_month = date("m", $minical_time);
+									$minical_year = date("Y", $minical_time);
+									$first_of_month = $minical_year.$minical_month."01";
+									$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
 									$i = 0;
 									$whole_month = TRUE;
 									$num_of_events = 0;
 									do {
-										$day = date ("j", $sunday);
-										$daylink = date ("Ymd", $sunday);
-										$check_month = date ("m", $sunday);
-										if ($check_month != $month1) $day= "<font class=\"G10B\">$day</font>";
+										$day = date ("j", $start_day);
+										$daylink = date ("Ymd", $start_day);
+										$check_month = date ("m", $start_day);
+										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
-										if (($master_array[("$daylink")]) && ($check_month == $month1)) {
+										if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
 											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
@@ -234,13 +239,13 @@
 											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
-										$sunday = ($sunday + (24.5 * 60 * 60));
+										$start_day = ($start_day + (24.5 * 60 * 60));
 										$i++;
 										if ($i == 7) { 
 											echo "</tr>\n";
 											$i = 0;
-											$checkagain = date ("m", $sunday);
-											if ($checkagain != $month1) $whole_month = FALSE;	
+											$checkagain = date ("m", $start_day);
+											if ($checkagain != $minical_month) $whole_month = FALSE;	
 										}
 									} while ($whole_month == TRUE);
 								?>
@@ -261,7 +266,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php echo "$display_month2"; ?></b></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php print (strftime ($dateFormat_month, strtotime($getdate))); ?></b></td>
 						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
@@ -277,31 +282,35 @@
 									<td><img src="images/spacer.gif" width="21" height="1"></td>
 								</tr>
 								<tr>
-									<td align="center" class="G10B"><b>Su</b></td>
-									<td align="center" class="G10B"><b>Mo</b></td>
-									<td align="center" class="G10B"><b>Tu</b></td>
-									<td align="center" class="G10B"><b>We</b></td>
-									<td align="center" class="G10B"><b>Th</b></td>
-									<td align="center" class="G10B"><b>Fr</b></td>
-									<td align="center" class="G10B"><b>Sa</b></td>
+								<?php
+									$start_day = strtotime($week_start_day);
+									for ($i=0; $i<7; $i++) {
+										$day = substr(date("D", $start_day), 0, 2);
+										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
+										$start_day = ($start_day + (24.5 * 60 * 60));
+									}
+								?>
 								</tr>
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
 									</td>
 								</tr>
-								<?php 	 
-									$sunday = strtotime("$first_sunday2");
+								<?php
+									$minical_time = strtotime($getdate);
+									$minical_month = date("m", $minical_time);
+									$minical_year = date("Y", $minical_time);
+									$first_of_month = $minical_year.$minical_month."01";
+									$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
 									$i = 0;
 									$whole_month = TRUE;
 									$num_of_events = 0;
 									do {
-										$day = date ("j", $sunday);
-										$daylink = date ("Ymd", $sunday);
-										$check_month = date ("m", $sunday);
-										if ($check_month != $month2) $day= "<font class=\"G10B\">$day</font>";
-										if ($daylink == $getdate) $day= "<b>$day</b>";
+										$day = date ("j", $start_day);
+										$daylink = date ("Ymd", $start_day);
+										$check_month = date ("m", $start_day);
+										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
-										if (($master_array[("$daylink")]) && ($check_month == $month2)) {
+										if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
 											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
@@ -310,13 +319,13 @@
 											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
-										$sunday = ($sunday + (24.5 * 60 * 60));
+										$start_day = ($start_day + (24.5 * 60 * 60));
 										$i++;
 										if ($i == 7) { 
 											echo "</tr>\n";
 											$i = 0;
-											$checkagain = date ("m", $sunday);
-											if ($checkagain != $month2) $whole_month = FALSE;	
+											$checkagain = date ("m", $start_day);
+											if ($checkagain != $minical_month) $whole_month = FALSE;	
 										}
 									} while ($whole_month == TRUE);
 								?>
@@ -337,7 +346,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php echo "$display_month3"; ?></b></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php print (strftime ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></td>
 						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
@@ -353,30 +362,35 @@
 									<td><img src="images/spacer.gif" width="21" height="1"></td>
 								</tr>
 								<tr>
-									<td align="center" class="G10B"><b>Su</b></td>
-									<td align="center" class="G10B"><b>Mo</b></td>
-									<td align="center" class="G10B"><b>Tu</b></td>
-									<td align="center" class="G10B"><b>We</b></td>
-									<td align="center" class="G10B"><b>Th</b></td>
-									<td align="center" class="G10B"><b>Fr</b></td>
-									<td align="center" class="G10B"><b>Sa</b></td>
+								<?php
+									$start_day = strtotime($week_start_day);
+									for ($i=0; $i<7; $i++) {
+										$day = substr(date("D", $start_day), 0, 2);
+										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
+										$start_day = ($start_day + (24.5 * 60 * 60));
+									}
+								?>
 								</tr>
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="1" height="3">
 									</td>
 								</tr>
-								<?php 	 
-									$sunday = strtotime("$first_sunday3");
+								<?php
+									$minical_time = strtotime("+1 month", strtotime($getdate));
+									$minical_month = date("m", $minical_time);
+									$minical_year = date("Y", $minical_time);
+									$first_of_month = $minical_year.$minical_month."01";
+									$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
 									$i = 0;
 									$whole_month = TRUE;
 									$num_of_events = 0;
 									do {
-										$day = date ("j", $sunday);
-										$daylink = date ("Ymd", $sunday);
-										$check_month = date ("m", $sunday);
-										if ($check_month != $month3) $day= "<font class=\"G10B\">$day</font>";
+										$day = date ("j", $start_day);
+										$daylink = date ("Ymd", $start_day);
+										$check_month = date ("m", $start_day);
+										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
-										if (($master_array[("$daylink")]) && ($check_month == $month3)) {
+										if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
 											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
@@ -385,13 +399,13 @@
 											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
-										$sunday = ($sunday + (24.5 * 60 * 60));
+										$start_day = ($start_day + (24.5 * 60 * 60));
 										$i++;
 										if ($i == 7) { 
 											echo "</tr>\n";
 											$i = 0;
-											$checkagain = date ("m", $sunday);
-											if ($checkagain != $month3) $whole_month = FALSE;	
+											$checkagain = date ("m", $start_day);
+											if ($checkagain != $minical_month) $whole_month = FALSE;	
 										}
 									} while ($whole_month == TRUE);
 								?>
