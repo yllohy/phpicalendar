@@ -25,7 +25,7 @@
 						<table width="160" border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-								<td align="center" class="G10B"><b><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></td>
+								<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></font></td>
 								<td align="right" valign="top" width="1"></td>
 							</tr>
 							<tr>
@@ -46,7 +46,7 @@
 											for ($i=0; $i<7; $i++) {
 												$day_num = date("w", $start_day);
 												$day = $daysofweekreallyshort_lang[$day_num];
-												print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
+												print "<td align=\"center\"><font class=\"G10BOLD\">$day</font></td>\n";
 												$start_day = ($start_day + (24.5 * 60 * 60));
 											}
 										?>
@@ -67,7 +67,7 @@
 												$day = date ("j", $start_day);
 												$daylink = date ("Ymd", $start_day);
 												$check_month = date ("m", $start_day);
-												if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
+												if ($check_month != $minical_month) $day= "<font class=\"G10G\">$day</font>";
 												if ($i == 0) echo "<tr>\n";
 												if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 													echo "<td align=\"center\" class=\"G10B\">\n";
@@ -112,28 +112,28 @@
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><b><?php echo "$jump_lang"; ?></b></td>
+														<td colspan="6"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php include('./functions/list_icals.php'); ?></td>
+														<td colspan="6"><?php include('./functions/list_icals.php'); ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php include('./functions/list_months.php'); ?></td>
+														<td colspan="6"><?php include('./functions/list_months.php'); ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php include('./functions/list_weeks.php'); ?></td>
+														<td colspan="6"><?php include('./functions/list_weeks.php'); ?></td>
 													</tr>
 													<?php
 													if ($display_custom_goto == "yes") {
@@ -173,7 +173,7 @@
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><b><?php echo "$cal_displayname2"; ?></b></td>
+														<td colspan="6"><font class="G10BOLD"><?php echo "$cal_displayname2"; ?></font></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
@@ -201,13 +201,13 @@
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$subscribe_path\"><img src=\"styles/$style_sheet/smallicon.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
+														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$subscribe_path\"><img src=\"styles/$style_sheet/smallicon.gif\" alt=\"\" border=\"0\" align=\"middle\"></a>"; ?></td>
 														<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
 														<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>"; ?></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$filename\"><img src=\"styles/$style_sheet/download_arrow.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
+														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$filename\"><img src=\"styles/$style_sheet/download_arrow.gif\" alt=\"\" border=\"0\" align=\"middle\"></a>"; ?></td>
 														<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
 														<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
 													</tr>
@@ -232,7 +232,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td align="center" class="G10B"><b><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></td>
+						<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
 						<td align="right" valign="top" width="1"></td>
 					</tr>
 					<tr>
@@ -253,7 +253,7 @@
 									for ($i=0; $i<7; $i++) {
 										$day_num = date("w", $start_day);
 										$day = $daysofweekreallyshort_lang[$day_num];
-										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
+										print "<td align=\"center\"><font class=\"G10BOLD\">$day</font></td>\n";
 										$start_day = ($start_day + (24.5 * 60 * 60));
 									}
 								?>
@@ -274,7 +274,7 @@
 										$day = date ("j", $start_day);
 										$daylink = date ("Ymd", $start_day);
 										$check_month = date ("m", $start_day);
-										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
+										if ($check_month != $minical_month) $day= "<font class=\"G10G\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";

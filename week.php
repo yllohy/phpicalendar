@@ -78,18 +78,18 @@ for ($i=0;$i<7;$i++) {
       				<td>
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
-								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
+								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
 								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $display_date; ?></font></td>
-      							<td align="left" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
+      							<td align="left" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
       						</tr>
       					</table>
       				</td>
       				<td align="right" width="90" class="navback">	
       					<table width="90" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" width="30" height="24" alt=""></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" width="30" height="24" alt=""></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" width="30" height="24" alt=""></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt=""></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt=""></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt=""></td>'; ?>
 							</tr>
 						</table>
 					</td>
@@ -328,7 +328,7 @@ for ($i=0;$i<7;$i++) {
 </td>
 		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
 		<td width="160" valign="top"><?php include('./sidebar.php'); ?><center>
-		<?php echo "<font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/\">PHP iCalendar $version_lang</a></font>"; ?></center></td>
+		<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?></center></td>
 	</tr>
 </table>
 </center>

@@ -54,7 +54,7 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 <table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-		<td align="center" width="98%" class="sideback"><font class="G10B"><b><?php echo "$calendar_name2 $calendar_lang"; ?></b></font></td>
+		<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$calendar_name2 $calendar_lang"; ?></font></td>
 		<td align="right" valign="top" width="1%" class="sideback"></td>
 	</tr>
 	<tr>

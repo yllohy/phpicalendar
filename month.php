@@ -97,7 +97,7 @@
 	</tr>
 	<tr>
 			<td align="center" valign="top">
-			<table width="100%" border="0" cellspacing="1" cellpadding="0" class="G10B" bgcolor="#A1A5A9">
+			<table width="100%" border="0" cellspacing="1" cellpadding="0" class="monthback">
 				<tr>	
 				<?php 	 
 					$sunday = strtotime("$start_month_day");
@@ -109,21 +109,21 @@
 						$daylink = date ("Ymd", $sunday);
 						$check_month = date ("m", $sunday);
 						if ($check_month != $this_month) {
-							$day= "<font color=\"#666666\">$day";
-							$bgcolor="#F2F2F2";
+							$day= "<font class=\"G10G\">$day</font>";
+							$bgclass="class=\"monthoff\"";
 						} else {
 							if ($getdate == $daylink) {
-								$bgcolor="#F2F9FF";
+								$bgclass="class=\"monthon\"";
 							} else {
-								$bgcolor="#FFFFFF";
+								$bgclass="class=\"monthreg\"";
 							}
 						}
 						if ($i == 0) echo "<tr height=\"105\">\n";
 						if (isset($master_array[("$daylink")]) && ($check_month == $this_month)) {
-							echo "<td align=\"center\" valign=\"top\" bgcolor=\"$bgcolor\" width=\"105\" height=\"105\">\n";
+							echo "<td align=\"center\" valign=\"top\" $bgclass width=\"105\" height=\"105\">\n";
 							echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
 							echo "<tr>\n";
-							echo "<td align=\"right\" valign=\"top\">\n";
+							echo "<td align=\"right\" valign=\"top\" class=\"G10B\">\n";
 							echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 							echo "</td>\n";
 							echo "</tr>\n";
@@ -148,7 +148,7 @@
 											echo "<td>\n";
 											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 											echo "<tr>\n";
-											echo "<td>\n";
+											echo "<td class=\"G10B\">\n";
 											if (!isset($val["event_start"])) {
 												$event_start = 'All';
 												$event_end = 'Day';
@@ -169,10 +169,10 @@
 							echo "</table>\n";
 							echo "</td>\n";
 						} else {
-							echo "<td align=\"center\" valign=\"top\" bgcolor=\"$bgcolor\" width=\"105\" height=\"105\">\n";
+							echo "<td align=\"center\" valign=\"top\" $bgclass width=\"105\" height=\"105\">\n";
 							echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
 							echo "<tr>\n";
-							echo "<td align=\"right\" valign=\"top\">\n";
+							echo "<td align=\"right\" valign=\"top\" class=\"G10B\">\n";
 							echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 							echo "</td>\n";
 							echo "</tr>\n";
@@ -196,7 +196,7 @@
 <?php include "./month_bottom.php"; ?>
 
 <br>
-<?php echo "<font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/\">PHP iCalendar $version_lang</a></font>"; ?></center></td>
+<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?>
 </center>
 </body>
 </html>
