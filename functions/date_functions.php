@@ -196,7 +196,6 @@ function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text,
 			// fix for URL-length bug in IE: populate and submit a hidden form on click
 			static $popup_data_index = 0;
 $return = "
-
     <script language=\"Javascript\" type=\"text/javascript\"><!--
     var eventData = new EventData('$escaped_event', '$escaped_calendar', '$escaped_start', '$escaped_end', '$description', '$status', '$location', '$organizer', '$attendee', '$url');
     document.popup_data[$popup_data_index] = eventData;

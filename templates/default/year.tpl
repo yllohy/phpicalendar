@@ -12,13 +12,13 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td align="right" width="45%" class="navback">
-										<a class="psf" href="year.php?cal=all_calendars_combined971&amp;getdate=20030129"><img src="styles/silver/left_day.gif" alt="[Previous Year]" border="0" align="right"></a>
+										<a class="psf" href="year.php?cal={CAL}&amp;getdate={PREV_YEAR}"><img src="styles/silver/left_day.gif" alt="[Previous Year]" border="0" align="right"></a>
 									</td>
 									<td align="center" width="10%" class="navback" nowrap valign="middle">
-										<font class="H20">2004</font>
+										<font class="H20">{THIS_YEAR}</font>
 									</td>
 									<td align="left" width="45%" class="navback">
-										<a class="psf" href="year.php?cal=all_calendars_combined971&amp;getdate=20050129"><img src="styles/silver/right_day.gif" alt="[Next Year]" border="0" align="left"></a>
+										<a class="psf" href="year.php?cal={CAL}&amp;getdate={NEXT_YEAR}"><img src="styles/silver/right_day.gif" alt="[Next Year]" border="0" align="left"></a>
 									</td>
 								</tr>
 							</table>

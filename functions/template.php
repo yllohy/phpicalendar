@@ -2,8 +2,6 @@
 
 //print_r($master_array);
 
-
-
 class Page {
 	var $page;
 	function draw_month($template_p, $offset = '+0', $type) {
@@ -21,7 +19,6 @@ class Page {
 		$t_month[0]			= trim($match3[1]);
 		$t_month[1]			= trim($match4[1]);
 		$t_month[2] 		= trim($match5[1]);
-		
 		$startweek 			= trim($match6[1]);
 		$endweek 			= trim($match7[1]);
 		if ($type != 'medium') {
@@ -126,6 +123,7 @@ class Page {
 		$return = preg_replace('!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is', $weekday_loop, $template_p);
 		$return = ereg_replace('<!-- loop monthweeks on -->(.*)<!-- loop monthweeks off -->', $middle, $return);
 		$return = str_replace('{MONTH_TITLE}', $month_title, $return);
+		$return = str_replace('{CAL}', $cal, $return);
 		
 		return $return;
 		

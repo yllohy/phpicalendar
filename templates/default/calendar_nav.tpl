@@ -21,11 +21,11 @@
 							<tr>
 								<td>
 									<div style="padding: 5px;">
-										<form style="margin-bottom:0;" action="day.php" method="GET">
-											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_ICALS}</select><br>
-											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_YEARS}</select><br>
-											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_MONTHS}</select><br>
-											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_WEEKS}</select><br>
+										<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="GET">
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br>
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br>
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br>
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br>
 										</form>
 										<!-- switch show_search on -->
 										{SEARCH_BOX}
