@@ -10,5 +10,5 @@ $use_sessions = "yes";					// For speedy performance on web servers, not good fo
 $day_start = "0700";					// Start time for day grid
 $gridLength = "15";						// grid distance in minutes for day view
 $display_custom_goto = "";				// in the "Jump To" box, display the custom "go to day" box. "yes" means Yes, anything else means no. "yes" must be lowercase.
-
+$display_ical_list = "yes";				// in the "Jump To" box, display the pop-up menu with the list of all calendars in the $calendar_path directory. "yes" means Yes, anything else means no. "yes" must be lowercase.
 ?>
