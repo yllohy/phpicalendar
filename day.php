@@ -1,6 +1,6 @@
 <?php
-if (isset($_GET["jumpto_day"])) {
-	$jumpto_day_time = strtotime($_GET["jumpto_day"]);
+if (isset($HTTP_GET_VARS["jumpto_day"])) {
+	$jumpto_day_time = strtotime($HTTP_GET_VARS["jumpto_day"]);
 	if ($jumpto_day_time == -1) {
 		$getdate = date("Ymd");
 	} else {

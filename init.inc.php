@@ -10,7 +10,7 @@ if(phpversion() >= "4.2.0")
 include('./config.inc.php');
 
 // subscribe link prefix, doesn't need to be user configureable
-$fullpath = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'.$calendar_path.'/';
+$fullpath = 'webcal://'.$HTTP_SERVER_VARS['SERVER_NAME'].dirname($HTTP_SERVER_VARS['PHP_SELF']).'/'.$calendar_path.'/';
 
 
 // language support
@@ -28,8 +28,8 @@ if (file_exists($lang_file)) {
 
 // $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
 // $cal_filename should always be the filename of the calendar without .ics
-if (isset($_GET["cal"])) {
-	$cal_filename = stripslashes(urldecode($_GET["cal"]));
+if (isset($HTTP_GET_VARS["cal"])) {
+	$cal_filename = stripslashes(urldecode($HTTP_GET_VARS["cal"]));
 } else {
 	$cal_filename = $default_cal;
 }
@@ -42,7 +42,7 @@ if (!isset($filename)) {
 	if (!file_exists($filename)) {
 		$dir_handle = @opendir($calendar_path) or die("Unable to open $calendar_path");
 		while ($file = readdir($dir_handle)) {
-			if (strstr ($file, ".ics")) {
+			if (substr($file, -4) == ".ics") {
 				$filename = $calendar_path."/".$file;
 				break;
 			}
