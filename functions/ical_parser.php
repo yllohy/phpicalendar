@@ -116,9 +116,12 @@ foreach ($cal_filelist as $filename) {
 				
 			} elseif ($line == 'END:VEVENT') {
 				
-				$end_unixtime 	= $start_unixtime + $the_duration;
-				$end_time 		= date ('Hi', $end_unixtime);
-				
+				// Handle DURATION
+				if (!isset($end_unixtime) && isset($the_duration)) {
+					$end_unixtime 	= $start_unixtime + $the_duration;
+					$end_time 	= date ('Hi', $end_unixtime);
+				}
+					
 				// CLASS support
 				if (isset($class)) {
 					if ($class == 'PRIVATE') {
@@ -146,11 +149,6 @@ foreach ($cal_filelist as $filename) {
 					if (!isset($start_date)) $start_date = $old_start_date;
 					if (!isset($start_time)) $start_time = $master_array[$old_start_date][$old_start_time][$uid]['event_start'];
 					if (!isset($start_unixtime)) $start_unixtime = $master_array[$old_start_date][$old_start_time][$uid]['start_unixtime'];
-					// Handle DURATION
-					if (!isset($end_unixtime) && isset($the_duration)) {
-						$end_unixtime 	= $start_unixtime + $the_duration;
-						$end_time 	= date ('Hi', $end_unixtime);
-					}
 					if (!isset($end_unixtime)) $end_unixtime = $master_array[$old_start_date][$old_start_time][$uid]['end_unixtime'];
 					if (!isset($end_time)) $end_time = $master_array[$old_start_date][$old_start_time][$uid]['event_end'];
 					if (!isset($summary)) $summary = $master_array[$old_start_date][$old_start_time][$uid]['event_text'];
@@ -872,7 +870,7 @@ foreach ($cal_filelist as $filename) {
 							$end_date = $regs[1] . $regs[2] . $regs[3];
 							$end_time = $regs[4] . $regs[5];
 							$end_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-			
+																	
 							$dlst = date('I', $end_unixtime);
 							$server_offset_tmp = chooseOffset($end_unixtime);
 							if (isset($tz_dtend)) {
