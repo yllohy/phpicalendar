@@ -80,14 +80,15 @@ class Page {
 						$event_start 	= $new_val2['event_start'];
 						$event_end 		= $new_val2['event_end'];
 						if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
-							$event_start 	= date ($timeFormat, strtotime ($event_start));
-							$event_end 		= date ($timeFormat, strtotime ($event_end));
-							$event_start 	= $event_start .' - '.$event_end;
 							if (!$new_val2['event_start']) { 
 								$event_start = $lang['l_all_day'];
 								$event_start2 = '';
 								$event_end = '';
-							}							
+							} else {
+								$event_start 	= date ($timeFormat, strtotime ($event_start));
+								$event_end 		= date ($timeFormat, strtotime ($event_end));
+								$event_start 	= $event_start .' - '.$event_end;
+							}
 						}
 						
 						if ($description == '') {

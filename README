@@ -92,6 +92,7 @@ Changes:
 	-Added iCal specific publish.php.
 	-Fixed stat bug.
 	-PHP5 support added.
+	-Requires PHP 4.1.0 or greater now.
 	-Various Bug fixes.
 
 2.0 alpha 2
