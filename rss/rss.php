@@ -101,26 +101,29 @@ if ($rssview == "month") {
 		ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
 		if ($regs[1] == $parse_month) {
 			$getdate = $key;
+			$dayofmonth = strtotime ($getdate);
+			$dayofmonth = localizeDate ($rss_month_date, $dayofmonth);
 			
 			// Pull out each day
 			foreach ($new_val2 as $new_val) {
 				
 				// Pull out each time
 				foreach ($new_val as $new_key2 => $val) {
-
-					$event_start 	= @$val["event_start"];
-					$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
-					$event_text 	= stripslashes(urldecode($val["event_text"]));
-					$event_text 	= strip_tags($event_text, '<b><i><u>');
-					$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
-					$description 	= stripslashes(urldecode($val["description"]));
-					$description 	= strip_tags($description, '<b><i><u>');
-					$rss .= '<item>'."\n";
-					$rss .= '<title>'.$event_start.' '.$event_text.'</title>'."\n";
-					$rss .= '<link>'.$default_path.'/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
-					$rss .= '<description>'.$description.'</description>'."\n";
-					$rss .= '</item>'."\n";
-					$events_week++;
+					if ($val["event_text"]) {
+						$event_start 	= @$val["event_start"];
+						$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+						$event_text 	= stripslashes(urldecode($val["event_text"]));
+						$event_text 	= strip_tags($event_text, '<b><i><u>');
+						$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
+						$description 	= stripslashes(urldecode($val["description"]));
+						$description 	= strip_tags($description, '<b><i><u>');
+						$rss .= '<item>'."\n";
+						$rss .= '<title>'.$dayofmonth.': '.$event_text.'</title>'."\n";
+						$rss .= '<link>'.$default_path.'/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
+						$rss .= '<description>'.$dayofmonth.' '.$event_start.': '.$description.'</description>'."\n";
+						$rss .= '</item>'."\n";
+						$events_week++;
+					}
 							
 					if ($events_week < 1) {
 						$rss .= '<item>'."\n";
