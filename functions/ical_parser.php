@@ -143,6 +143,11 @@ foreach ($cal_filelist as $filename) {
 					if (!isset($start_date)) $start_date = $old_start_date;
 					if (!isset($start_time)) $start_time = $master_array[$old_start_date][$old_start_time][$uid]['event_start'];
 					if (!isset($start_unixtime)) $start_unixtime = $master_array[$old_start_date][$old_start_time][$uid]['start_unixtime'];
+					// Handle DURATION
+					if (!isset($end_unixtime) && isset($the_duration)) {
+						$end_unixtime 	= $start_unixtime + $the_duration;
+						$end_time 	= date ('Hi', $end_unixtime);
+					}
 					if (!isset($end_unixtime)) $end_unixtime = $master_array[$old_start_date][$old_start_time][$uid]['end_unixtime'];
 					if (!isset($end_time)) $end_time = $master_array[$old_start_date][$old_start_time][$uid]['event_end'];
 					if (!isset($summary)) $summary = $master_array[$old_start_date][$old_start_time][$uid]['event_text'];
@@ -657,6 +662,8 @@ foreach ($cal_filelist as $filename) {
 						if (preg_match("/^DUE;VALUE=DATE/i", $field))  {
 							$allday_start = $data;
 							$start_date = $allday_start;
+							$start_unixtime = strtotime($data);
+                            $due_date = date('Ymd', $start_unixtime);
 						} else {
 							if (preg_match("/^DUE;TZID=/i", $field)) {
 								$tz_tmp = explode('=', $field);
@@ -954,8 +961,9 @@ foreach ($cal_filelist as $filename) {
 							$minutes 		= ereg_replace('M', '', $duration[5]); 
 							$seconds 		= ereg_replace('S', '', $duration[6]); 
 							$the_duration 	= ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
-							$end_unixtime 	= $start_unixtime + $the_duration;
-							$end_time 		= date ('Hi', $end_unixtime);
+							// Do this in the END:VEVENT now so that it doesn't have to come after DTSTART
+							//$end_unixtime 	= $start_unixtime + $the_duration;
+							//$end_time 		= date ('Hi', $end_unixtime);
 							$first_duration = FALSE;
 						}	
 						break;
