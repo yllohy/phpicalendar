@@ -144,6 +144,7 @@ include (BASE.'includes/header.inc.php');
 									}
 								}
 							}
+							echo '</div>';
 							echo '</td>';
 						} else {
 							echo '<td align="center" valign="top" '.$bgclass.' width="105" height="105">';
