@@ -2,6 +2,7 @@
 
 $current_view = "week";
 include("./functions/ical_parser.php");
+define('BASE', './');
 if ($minical_view == "current") $minical_view = "week";
 
 $starttime = "0500";
@@ -56,10 +57,10 @@ for ($i=0;$i<7;$i++) {
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo "$calendar_name - $display_date"; ?></title>
   	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
-	<?php include "functions/event.js"; ?>
+	<?php include BASE.'functions/event.js'; ?>
 </head>
 <body bgcolor="#FFFFFF">
-<?php include ('./header.inc.php'); ?>
+<?php include (BASE.'header.inc.php'); ?>
 <center>
 <table border="0" width="720" cellspacing="0" cellpadding="0">
 	<tr>

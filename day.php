@@ -51,10 +51,10 @@ if (is_array($master_array[($getdate)])) {
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo "$calendar_name - $display_date"; ?></title>
   	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
-	<?php include ('./functions/event.js'); ?>
+	<?php include (BASE.'functions/event.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
-<?php include ('./header.inc.php'); ?>
+<?php include (BASE.'header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
