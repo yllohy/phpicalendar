@@ -13,13 +13,14 @@ function kgv($a, $b) {
 
 
 // drei 20020921: function for checking and counting overlapping events
-function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time) {
+// drei 20020212: added parameter uid to function call
+function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time, $ol_uid) {
 	global $master_array, $overlap_array;
 
 		$drawTimes = drawEventTimes($ol_start_time, $ol_end_time);
 		$newMasterTime = $drawTimes["draw_start"];
-		if (isset($master_array[($ol_start_date)][($newMasterTime)])) $newMasterEventKey = sizeof($master_array[($ol_start_date)][($newMasterTime)]);
-		else $newMasterEventKey = 0;
+		// if (isset($master_array[($ol_start_date)][($newMasterTime)])) $newMasterEventKey = sizeof($master_array[($ol_start_date)][($newMasterTime)]);
+		// else $newMasterEventKey = 0;
 		
 		$maxOverlaps = 0;
 		$newEventAdded = FALSE;
@@ -32,7 +33,8 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time) {
 					if ($loopBlock["blockStart"] > $drawTimes["draw_start"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["blockStart"] = $drawTimes["draw_start"];
 					if ($loopBlock["blockEnd"] < $drawTimes["draw_end"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["blockEnd"] = $drawTimes["draw_end"];
 					// add the new event to the array of events
-					$overlap_array[($ol_start_date)][($loopBlockKey)]["events"][] = array ("time" => $newMasterTime, "key" => $newMasterEventKey);
+					// $overlap_array[($ol_start_date)][($loopBlockKey)]["events"][] = array ("time" => $newMasterTime, "key" => $newMasterEventKey);
+					$overlap_array[($ol_start_date)][($loopBlockKey)]["events"][] = array ("time" => $newMasterTime, "key" => $ol_uid);
 					// check if the adjusted overlap block must be merged with an existing overlap block
 					reset($overlap_array[($ol_start_date)]);
 					do {
@@ -96,7 +98,8 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time) {
 					}
 					$overlap_array[($ol_start_date)][($loopBlockKey)]["maxOverlaps"] = $maxOverlaps;
 					foreach ($overlap_array[($ol_start_date)][($loopBlockKey)]["events"] as $updMasterEvent) {
-						if (($updMasterEvent["time"] != $newMasterTime) or ($updMasterEvent["key"] != $newMasterEventKey)) {
+						//if (($updMasterEvent["time"] != $newMasterTime) or ($updMasterEvent["key"] != $newMasterEventKey)) {
+						if (($updMasterEvent["time"] != $newMasterTime) or ($updMasterEvent["key"] != $ol_uid)) {
 							$master_array[($ol_start_date)][($updMasterEvent["time"])][($updMasterEvent["key"])]["event_overlap"] = $maxOverlaps;
 						}
 					}
@@ -128,7 +131,8 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time) {
 								$overlapBlock_end = $drawTimes["draw_end"];
 							}
 							if (!isset($newBlockKey)) {
-								$overlap_array[($ol_start_date)][] = array ("blockStart" => $overlapBlock_start, "blockEnd" => $overlapBlock_end, "maxOverlaps" => 1, "events" => array (array ("time" => $keyTime, "key" => $keyEvent), array ("time" => $newMasterTime, "key" => $newMasterEventKey)), "overlapRanges" => array (array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end)));
+								// $overlap_array[($ol_start_date)][] = array ("blockStart" => $overlapBlock_start, "blockEnd" => $overlapBlock_end, "maxOverlaps" => 1, "events" => array (array ("time" => $keyTime, "key" => $keyEvent), array ("time" => $newMasterTime, "key" => $newMasterEventKey)), "overlapRanges" => array (array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end)));
+								$overlap_array[($ol_start_date)][] = array ("blockStart" => $overlapBlock_start, "blockEnd" => $overlapBlock_end, "maxOverlaps" => 1, "events" => array (array ("time" => $keyTime, "key" => $keyEvent), array ("time" => $newMasterTime, "key" => $ol_uid)), "overlapRanges" => array (array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end)));
 								$maxOverlaps = 1;
 								end($overlap_array[($ol_start_date)]);
 								$newBlockKey = key($overlap_array[($ol_start_date)]);
@@ -153,5 +157,28 @@ function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time) {
 //print '</pre>';
 
 	return $maxOverlaps;
+}
+
+// drei 20021126: function for checking and removing overlapping events
+function removeOverlap($ol_start_date, $ol_start_time, $ol_key = 0) {
+	global $master_array, $overlap_array;
+	if (sizeof($overlap_array[$ol_start_date]) > 0) {
+		$ol_end_time = $master_array[$ol_start_date][$ol_start_time][$ol_key]["event_end"];
+		foreach ($overlap_array[$ol_start_date] as $keyBlock => $blockId) {
+			if (($blockId["blockStart"] <= $ol_start_time) or ($blockId["blockEnd"] >= $ol_start_time)) {
+				foreach ($blockId["events"] as $keyEvent => $ol_event) {
+					$master_array[$ol_start_date][$ol_event["time"]][$ol_event["key"]]["event_overlap"] -= 1;
+					if (($ol_event["time"] == $ol_start_time) and ($ol_event["key"] == $ol_key)) {
+						unset ($overlap_array[$ol_start_date][$keyBlock]["events"][$keyEvent]);
+					}
+				}
+				if ($blockId["maxOverlaps"] = 1) {
+					unset ($overlap_array[$ol_start_date][$keyBlock]);
+				} else {
+					$blockId["maxOverlaps"] -= 1;
+				}
+			}
+		}
+	}
 }
 ?>
