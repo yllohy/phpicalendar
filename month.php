@@ -33,22 +33,7 @@
 </head>
 <body bgcolor="#FFFFFF">
 <center>
-<table width="740" border="0" cellspacing="0" cellpadding="0" class="V12">
-	<tr>
-		<td align="left" width="100"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$today_lang</a>"; ?></td>
-		<td align="center" width="600"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">$this_month_lang</a>"; ?></td>
-		<td align="right" width="100"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
-	</tr>
-	<tr>
-		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
-	</tr>
-</table>
-<table width="740" border="0" cellspacing="1" cellpadding="2" class="calborder">
-<tr>
-<td>
-	<table width="740" border="0" cellspacing="0" cellpadding="0" class="calborder">
-		<tr>
-			<td align="center" valign="middle">
+
 				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9">
 					<tr>
 						<td align="center" valign="middle" bgcolor="white">
@@ -192,33 +177,9 @@
 							</table>
 						</td>
 					</tr>
-					<tr>
-						<td align="center" valign="middle">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tr height="36">
-									<td align="left" valign="middle" bgcolor="white" height="36">
-										<table border="0" cellspacing="0" cellpadding="0" width="100%">
-											<tr>
-												<td align="left">
-													<font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$next_month_lang</a>"; ?></font>
-												</td>
-												<td align="right">
-													<font class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$last_month_lang</a>"; ?></font>
-												</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
 				</table>
-			</td>
-		</tr>
-	</table>
-				</td>
-		</tr>
-	</table>
+
+
 	<br>
 <?php
 
@@ -226,9 +187,7 @@ if ($num_of_events != 0) {
 
 ?>	
 	
-	<table width="740" border="0" cellspacing="1" cellpadding="2" class="calborder">
-<tr>
-<td>
+
 	<table width="740" border="0" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
 			<td align="center" valign="middle">
@@ -315,9 +274,7 @@ if ($num_of_events != 0) {
 			</td>
 		</tr>
 	</table>
-				</td>
-		</tr>
-	</table>
+
 <br>
 
 <?php } ?>	
