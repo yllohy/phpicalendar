@@ -119,12 +119,7 @@ include (BASE.'includes/header.inc.php');
 										$event_url 		= $val['url'];
 										if (!isset($val["event_start"])) {
 											echo '<div align="center" class="V10">';
-											openevent("$event_calna", "", "", $val, $month_event_lines,
-											15,
-											"<i>",
-											"</i>",
-											"psf",
-											$event_url);
+											openevent($event_calna, '', '', $val, $month_event_lines, 15, '<i>', '</i>', 'psf', $event_url);
 											echo '</div>';
 										} else {	
 											echo '<div align="left" class="V9">&nbsp;';
@@ -134,16 +129,7 @@ include (BASE.'includes/header.inc.php');
 											$event_start = date($timeFormat, @strtotime ("$event_start"));
 											$start2		 = date($timeFormat_small,@strtotime("$event_start"));
 											$event_end   = date($timeFormat, @strtotime ("$event_end"));
-											@openevent("$event_calna",
-											"$event_start",
-											"$event_end",
-											$val,
-											$month_event_lines,
-											11,
-											"$start2 ",
-											"",
-											"ps3",
-											$event_url);
+											openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url);
 											echo '</div>';
 										}
 									}
@@ -224,16 +210,7 @@ include (BASE.'includes/header.inc.php');
 										$first_time = FALSE;
 									}
 									echo "<td>\n";
-									openevent("$event_calna",
-									"$event_start",
-									"$event_end",
-									$new_val2,
-									0,
-									65,
-									"<font class=\"G10B\">",
-									"</font>",
-									"psf",
-									$event_url);
+									openevent($event_calna, $event_start, $event_end, $new_val2, 0, 65, '<font class="G10B">', '</font>', 'psf', $event_url);
 									echo "</td>\n";
 									echo "</tr>\n";
 								}
