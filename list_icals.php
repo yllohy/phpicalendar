@@ -6,7 +6,7 @@ if (isset($getdate)) {
 } else {
 	$query="";
 }
-print "<select name=\"action\" onChange=\"window.location.href=this.options[this.selectedIndex].value+'$query';\">\n";
+print "<form>\n<select name=\"action\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">\n";
 print "<option value=\"null\">Select a Calendar</option>\n";
 
 // open file
@@ -34,5 +34,5 @@ while ($file = readdir($dir_handle)) {
 closedir($dir_handle);
 
 // finish <select>
-print "</select>";
+print "</select>\n</form>";
 ?>
