@@ -46,7 +46,7 @@
 												</td>
 												<!-- loop daysofweek on -->
 												<td width="80" align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={DAYLINK}'">
-													<a class="ps3" href="week.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9BOLD">{DAY}</span></a> 
+													<a class="ps3" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9BOLD">{DAY}</span></a> 
 												</td>
 												<!-- loop daysofweek off -->
 											</tr>
@@ -62,101 +62,33 @@
 												</td>
 												<!-- loop alldaysofweek off -->
 											</tr>
+										</table>
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<!-- loop row on -->
 											<tr>
-												<td colspan="4" rowspan="4" align="center" valign="top" width="60" class="timeborder">
-													8:00 AM
-												</td>
-												<td width="80" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
+												<td rowspan="4" align="center" valign="top" width="60" class="timeborder">9:00 AM</td>
+												<td width="1" height="15"></td>
+												<td class="dayborder">&nbsp;</td>
 											</tr>
 											<tr>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
+												<td width="1" height="15"></td>
+												<td class="dayborder2">&nbsp;</td>
 											</tr>
 											<tr>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
+												<td width="1" height="15"></td>
+												<td class="dayborder">&nbsp;</td>
 											</tr>
 											<tr>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td width="80"colspan="1" class="weekborder">
-													&nbsp;
-												</td>
+												<td width="1" height="15"></td>
+												<td class="dayborder2">&nbsp;</td>
 											</tr>
+											<!-- loop row off -->
+											<!-- loop event on -->
+											<div class="eventfont">
+												<div class="eventbg_{EVENT_CALNO}">{CONFIRMED}<b>{EVENT_START}</b></div>
+												<div class="padd">{EVENT}</div>
+											</div>
+											<!-- loop event off -->
 										</table>	
 									</td>
 								</tr>

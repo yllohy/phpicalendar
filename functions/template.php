@@ -49,7 +49,7 @@ class Page {
 	}	
 	
 	function draw_week($template_p) {
-		global $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view;
+		global $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength;
 		
 		for ($i=0; $i<7; $i++) {
 			$thisdate 			= date ('Ymd', $start_week_time); 
@@ -117,6 +117,181 @@ class Page {
 			$weekday_loop  .= $loop_tmp;
 		}
 		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is', $weekday_loop, $this->page);
+		
+		// Build the body
+		$dayborder = 0;
+		$thisdate = $start_week_time;
+		for ($i=0;$i<7;$i++) {
+			$thisday = date("Ymd", $thisdate);
+			$nbrGridCols[$thisday] = 1;
+			if (isset($master_array[$thisday])) {
+				foreach($master_array[($thisday)] as $ovlKey => $ovlValue) {
+					if ($ovlKey != "-1") {
+						foreach($ovlValue as $ovl2Value) {
+							$nbrGridCols[($thisday)] = kgv($nbrGridCols[($thisday)], ($ovl2Value["event_overlap"] + 1));
+						}
+					}
+				} 
+			}
+			$thisdate = ($thisdate + (25 * 60 * 60));
+		}
+		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!is", $this->page, $match2);
+		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!is", $this->page, $match3);
+		$loop_hours = trim($match2[1]);
+		$loop_event = trim($match3[1]);
+
+		$event_length = array ();
+		$border = 0;
+		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $getdate, $day_array2);
+		$this_day = $day_array2[3]; 
+		$this_month = $day_array2[2];
+		$this_year = $day_array2[1];
+		$thisdate = $start_week_time;
+		for ($i=0;$i<7;$i++) {
+			$thisday = date("Ymd", $thisdate);
+			$event_length[$thisday] = array ();
+			$thisdate = ($thisdate + (25 * 60 * 60));
+		}
+		foreach ($day_array as $key) {
+			$cal_time = $key;	
+			ereg('([0-9]{2})([0-9]{2})', $key, $regs_tmp);
+			$key = mktime($regs_tmp[1],$regs_tmp[2],0,$this_month,$this_day,$this_year);
+			$key = date ($timeFormat, $key);
+												
+
+			if (ereg("([0-9]{1,2}):00", $key)) {
+				$weekdisplay .= '<tr>';
+				$weekdisplay .= '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
+				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>';
+			} elseif ($cal_time == $day_start) {
+				$size_tmp = 60 - (int)substr($cal_time,2,2);
+				$weekdisplay .= '<tr>';
+				$weekdisplay .= '<td rowspan="' . ($size_tmp / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
+				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>';
+			} else {
+
+				$weekdisplay .= '<tr>';
+				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>';
+			}
+			
+			// initialize $thisdate again
+			$thisdate = $start_week_time;
+			
+			// loop this part 7 times, one for each day
+			for ($week_loop=0; $week_loop<7; $week_loop++) {
+				$thisday = date("Ymd", $thisdate);
+				$dayborder = 0;
+				unset($this_time_arr);
+				if (isset($master_array[$thisday][$cal_time]) && sizeof($master_array[$thisday][$cal_time]) > 0) {
+					$this_time_arr = $master_array[$thisday][$cal_time];
+				}
+					
+				if ("$day_start" == "$cal_time" && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
+					foreach($master_array[$thisday] as $time_key => $time_arr) {
+						if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
+							foreach($time_arr as $event_tmp) {
+								if ((int)$event_tmp['event_end'] > (int)$cal_time) {
+									$this_time_arr[] = $event_tmp;
+								}
+							}
+						} else {
+							break;
+						}
+					}
+				}
+				
+				
+				// check for eventstart 
+				if (isset($this_time_arr) && sizeof($this_time_arr) > 0) {
+					foreach ($this_time_arr as $eventKey => $loopevent) {
+						$drawEvent = drawEventTimes ($cal_time, $loopevent["event_end"]);
+						$j = 0;
+						while (isset($event_length[$thisday][$j])) {
+							if ($event_length[$thisday][$j]["state"] == "ended") {
+								$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+								break;
+							}
+							$j++;
+						}
+						if ($j == sizeof($event_length[$thisday])) {
+							array_push ($event_length[$thisday], array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
+						}
+					}
+				}
+
+				if (sizeof($event_length[$thisday]) == 0) {
+					if ($dayborder == 0) {
+						$class = " class=\"weekborder\"";
+						$dayborder++;
+					} else {
+						$class = "";
+						$dayborder = 0;
+					}
+					
+					$weekdisplay .= "<td colspan=\"" . $nbrGridCols[$thisday] . "\" $class>&nbsp;</td>\n";
+					
+				} else {
+					$emptyWidth = $nbrGridCols[$thisday];
+					for ($i=0;$i<sizeof($event_length[$thisday]);$i++) {
+					
+						$drawWidth = $nbrGridCols[$thisday] / ($event_length[$thisday][$i]["overlap"] + 1);
+						$emptyWidth = $emptyWidth - $drawWidth;
+						switch ($event_length[$thisday][$i]["state"]) {
+							case "begin":
+								$event_length[$thisday][$i]["state"] = "started";
+								$event_start 	= $this_time_arr[($event_length[$thisday][$i]["key"])]["start_unixtime"];
+								$event_start 	= date ($timeFormat, $event_start);
+								$event_calno  = $this_time_arr[($event_length[$thisday][$i]['key'])]['calnumber'];
+								$event_status	= strtolower($this_time_arr[($event_length[$thisday][$i]['key'])]['status']);
+								if ($event_calno < 1) $event_calno = 1;
+								if ($event_calno > 7) $event_calno = 7;
+								if ($event_status != '') {
+						  			$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
+						  		}
+								$weekdisplay .= '<td rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
+
+								$event_end	= $this_time_arr[($event_length[$thisday][$i]["key"])]["end_unixtime"];
+								 if (isset($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end']);
+								$event_end 	= date ($timeFormat, $event_end);
+							  
+								// Start drawing the event
+								$event_temp  = $loop_event;
+								$event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
+								$event_url   = $this_time_arr[($event_length[$i]['key'])]['url'];
+								$event 		 = openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$thisday][$i]["key"])], $week_events_lines, 25, '', '', 'ps', $event_url);
+								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
+								$event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
+\								$event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
+								$event_temp   = str_replace('{EVENT_CALNO}', $event_calno, $event_temp);
+								$weekdisplay .= $event_temp;
+								// End event drawing
+						  
+								break;
+							case "started":
+								break;
+							case "ended":
+								$weekdisplay .= '<td colspan="' . $drawWidth . '" '.$class.'>&nbsp;</td>';
+								break;
+						}
+						$event_length[$thisday][$i]["length"]--;
+						if ($event_length[$thisday][$i]["length"] == 0) {
+							$event_length[$thisday][$i]["state"] = "ended";
+						}
+					}
+					//fill emtpy space on the right
+					if ($emptyWidth > 0) {
+						$weekdisplay .= "<td colspan=\"" . $emptyWidth . "\" $class>&nbsp;</td>\n";
+					}
+					while (isset($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"]) && $event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
+						array_pop($event_length[$thisday]);
+					}
+				}
+				$thisdate = ($thisdate + (25 * 60 * 60));
+			}
+			$weekdisplay .= "</tr>\n";
+		}
+		
+		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!is', $weekdisplay, $this->page);
 		
 		
 		
