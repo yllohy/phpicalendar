@@ -1,11 +1,8 @@
 <?php 
 	$current_view = "month";
-	include("./functions/ical_parser.php");
-	if ($minical_view == "current") $minical_view = "month";
-
-	//might not need this, depending on implimentation, doesn't work correctly in current form anyway
-	//setcookie("last_view", "month");
-
+	define('BASE', './');
+	include(BASE.'functions/ical_parser.php');
+	if ($minical_view == 'current') $minical_view = 'month';
 
 	ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 	$this_day = $day_array2[3]; 

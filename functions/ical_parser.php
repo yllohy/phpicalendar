@@ -1,11 +1,12 @@
 <?php
 
-include('./functions/init.inc.php');
-include('./functions/date_add.php');
-include('./functions/date_functions.php');
-include('./functions/draw_functions.php');
-include('./functions/overlapping_events.php');
-include('./functions/timezones.php');
+define('BASE', './');
+include(BASE.'functions/init.inc.php');
+include(BASE.'functions/date_add.php');
+include(BASE.'functions/date_functions.php');
+include(BASE.'functions/draw_functions.php');
+include(BASE.'functions/overlapping_events.php');
+include(BASE.'functions/timezones.php');
 
 $fillTime = $day_start;
 $day_array = array ();

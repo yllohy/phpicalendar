@@ -7,9 +7,10 @@ if (isset($HTTP_GET_VARS['jumpto_day'])) {
 		$getdate = date('Ymd', $jumpto_day_time);
 	}
 }
+define('BASE', './');
 $current_view = 'day';
-include('./functions/ical_parser.php');
-if ($minical_view == "current") $minical_view = "day";
+include(BASE.'functions/ical_parser.php');
+if ($minical_view == 'current') $minical_view = 'day';
 
 $starttime = '0500';
 $weekstart = 1;

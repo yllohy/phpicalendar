@@ -4,12 +4,6 @@ $current_view = "week";
 include("./functions/ical_parser.php");
 if ($minical_view == "current") $minical_view = "week";
 
-//if ($use_sessions == "yes") {
-//	session_start();
-//	if (is_array($aArray)) $master_array = $aArray;
-//	echo "using sessions";
-//}
-
 $starttime = "0500";
 $weekstart = 1;
 // dpr 20020926: moved variable gridLength to config.inc.php

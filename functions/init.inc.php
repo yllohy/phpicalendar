@@ -18,8 +18,10 @@ if(phpversion() >= '4.2.0')
 		extract($HTTP_POST_VARS);
 	}
 */
-include('./config.inc.php');
-include('./functions/error.php');
+
+define('BASE', './');
+include(BASE.'config.inc.php');
+include(BASE.'functions/error.php');
 
 // language support
 $language = strtolower($language);

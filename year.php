@@ -1,6 +1,7 @@
 <?php
 $current_view = 'year';
-include('./functions/ical_parser.php');
+define('BASE', './');
+include(BASE.'functions/ical_parser.php');
 
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day = $day_array2[3]; 
