@@ -6,7 +6,7 @@
   <title><? echo "$calendar_name"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
 </head>
- <body bgcolor="#eeeeee" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0" rightmargin="0">
+ <body bgcolor="#eeeeee">
    <br>
    <table border="0" cellspacing="0" cellpadding="0">
     <tr height="18">
