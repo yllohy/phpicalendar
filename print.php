@@ -14,17 +14,24 @@ $parse_month = date ("Ym", strtotime($getdate));
 $printview = $HTTP_GET_VARS['printview'];
 $cal_displayname = str_replace("32", " ", $cal);
 $events_week = 0;
+$unix_time = strtotime("$getdate");
 
 if ($printview == 'day') {
 	$print_title = localizeDate ($dateFormat_day, strtotime($getdate));
+	$next = date("Ymd", strtotime("+1 day", $unix_time));
+	$prev = date("Ymd", strtotime("-1 day", $unix_time));
 } elseif ($printview == 'week') {
 	$start_week = localizeDate($dateFormat_week, $start_week_time);
 	$end_week =  localizeDate($dateFormat_week, $end_week_time);
 	$print_title = "$start_week - $end_week";
 	$week_start = date("Ymd", $start_week_time);
 	$week_end = date("Ymd", $end_week_time);
+	$next = date("Ymd", strtotime("+1 week", $unix_time));
+	$prev = date("Ymd", strtotime("-1 week", $unix_time));
 } elseif ($printview == 'month') {
 	$print_title = localizeDate ($dateFormat_month, strtotime($getdate));
+	$next = date("Ymd", strtotime("+1 month", $unix_time));
+	$prev = date("Ymd", strtotime("-1 month", $unix_time));
 }
 
 	?>
