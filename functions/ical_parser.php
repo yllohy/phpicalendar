@@ -150,7 +150,7 @@ if ($parse_file) {
 					$rrule_array['END_DAY'] = $allday_end;
 					$rrule_array['END'] = 'end';
 					$recur_start = $allday_start;
-					$diff_allday_days = dayCompare($allday_end, $allday_start);
+					$start_date = $allday_start;
 					if (isset($allday_end)) {
 						$diff_allday_days = dayCompare($allday_end, $allday_start);
 					 } else {
