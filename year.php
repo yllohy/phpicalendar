@@ -1,7 +1,7 @@
 <?php
 
 define('BASE', './');
-include_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
 $current_view = 'year';
 
@@ -20,10 +20,12 @@ $page->replace_tags(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'template'			=> $template,
+	'default_path'		=> '',
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
 	'display_date'		=> $this_year,
+	'default_path'		=> '',
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',

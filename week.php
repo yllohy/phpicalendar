@@ -43,6 +43,7 @@ $page->replace_tags(array(
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
 	'event_js'			=> BASE.'functions/event.js',
+	'default_path'		=> '',
 	'template'			=> $template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,

@@ -60,6 +60,7 @@ $page->replace_tags(array(
 	'calendar_name'		=> $calendar_name,
 	'display_date'		=> $display_date,
 	'rss_powered'	 	=> $rss_powered,
+	'default_path'		=> '',
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'todo_js' 			=> '',

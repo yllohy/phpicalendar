@@ -136,6 +136,7 @@ $page->replace_tags(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'template'			=> $template,
+	'default_path'		=> '',
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,

@@ -113,21 +113,24 @@ $lang['l_delete_success']		= 'was deleted successfully.';
 $lang['l_action_success']		= 'Your action was successful.';
 $lang['l_submit']				= 'Submit';
 $lang['l_delete']				= 'Delete';
-$all_cal_comb_lang		= 'All calendars combined';
+$all_cal_comb_lang		= 'All Combined';
 
 // New for 2.0
 $lang['l_legend']			= 'Legend';
 $lang['l_admin_subhead']	= 'Manage your calendars from this page';
 $lang['l_prefs_subhead']	= 'Sets a cookie for visiting this site';
+$lang['l_rss_info']			= 'RSS Information';
+$lang['l_rss_subhead']		= 'Basic RSS feeds available for each calendar';
+$lang['l_rss_notenabled']	= 'RSS is not enabled on this site';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$lang['l_back'] 		= 'Back';
+$lang['l_next'] 		= 'Next';
+$lang['l_prev'] 		= 'Prev';
+$lang['l_day_view'] 	= 'Day View';
+$lang['l_week_view'] 	= 'Week View';
+$lang['l_month_view'] 	= 'Month View';
+$lang['l_year_view'] 	= 'Year View';
 
 // ---------------------------------
 
