@@ -102,7 +102,6 @@ $addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calenda
 $delete_cal_lang		= 'Delete a Calendar';
 $logout_lang			= 'Logout';
 $cal_file_lang			= 'Calendar File';
-$confirm_lang			= 'Are you sure?';
 $php_error_lang			= 'PHP Error';
 $upload_error_gen_lang	= 'There was a problem with your upload.';
 $upload_error_lang[0]	= 'There was a problem with your upload.';
@@ -113,8 +112,10 @@ $upload_error_lang[4]	= 'You must select a file for upload.';
 $upload_error_type_lang = 'Only .ics files may be uploaded.';
 $copy_error_lang		= 'Failed to copy file';
 $delete_error_lang		= 'Failed to delete file';
+$delete_success_lang	= 'was deleted successfully.';
 $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
+$delete_lang			= 'Delete';
 
 
 

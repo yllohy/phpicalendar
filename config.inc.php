@@ -47,12 +47,13 @@ $show_todos				= 'yes';			// Show your todo list on the side of day and week vie
 $show_completed			= 'yes';			// Show completed todos on your todo list.
 
 // Administration settings
-$allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password			
-$external_auth			= 'no';				// Set to yes if external authentication (such as HTTP Authentication) is used and no authentican should be performed by PHP iCalendar
-$admin_username			= 'clittle';			// The username for the administrator
-$admin_password			= 'jackhamm3r';		// change this if allow_admin is set to yes
-$confirm_changes		= 'yes';			// Set to no to eliminate the confirmation popup on administration form submits
-										
+$allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
+$auth_method			= 'ftp';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
+$auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.
+$auth_internal_password	= 'default';		// Only used if $auth_method='internal'. The password for the administrator.
+$ftp_server				= 'localhost';		// Only used if $auth_method='ftp'. The ftp server name. 'localhost' will work for most servers.
+$ftp_calendar_path		= '';				// Only used if $auth_method='ftp'. The full path to the calendar directory on the ftp server. If = '', will attempt to deduce the path based on $calendar_path, but may not be accurate depending on ftp server config.
+
 $blacklisted_cals[] = '';					// Fill in between the quotes the name of the calendars 
 $blacklisted_cals[] = '';					// you wish to 'blacklist' or that you don't want to show up in your calendar
 $blacklisted_cals[] = '';					// list. This should be the exact calendar filename without .ics
