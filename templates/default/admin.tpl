@@ -1,14 +1,15 @@
+{HEADER}
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
-		<td align="center" valign="middle">
+		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td align="left" width="120" class="navback"><a href="{BACK_PAGE}"><img src="templates/{TEMPLATE}/images/back.gif" alt="{L_BACK}" border="0" align="left"></a></td>
 					<td class="navback">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td align="center" class="navback" nowrap valign="middle"><font class="H20"><?php echo "$admin_header_lang"; ?></font></td>
+								<td align="center" class="navback" nowrap valign="middle"><font class="H20">{L_ADMIN_HEADER}</font></td>
 							</tr>
 						</table>
 					</td>
@@ -125,6 +126,6 @@
 		</td>
 	</tr>
 </table>
-
+{FOOTER}
 
 
