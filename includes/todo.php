@@ -79,24 +79,24 @@ if (isset($vtodo_array['priority']) && ($vtodo_array['priority'] !== '')) {
 <body bgcolor="#eeeeee"><center>
 <table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
+		<td align="left" valign="top" width="1%" class="sideback"><img src="../images/spacer.gif" width="1" height="20" alt=" "></td>
 		<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$calendar_name $calendar_lang"; ?></font></td>
 		<td align="right" valign="top" width="1%" class="sideback"></td>
 	</tr>
 	<tr>
-		<td colspan="3"><img src="images/spacer.gif" width="1" height="6" alt=" "></td>
+		<td colspan="3"><img src="../images/spacer.gif" width="1" height="6" alt=" "></td>
 	</tr>
 	<tr>
 		<td colspan="3">  
 	   		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					 <td width="1%"><img src="images/spacer.gif" width="6" height="1" alt=" "></td>
+					 <td width="1%"><img src="../images/spacer.gif" width="6" height="1" alt=" "></td>
 		 			 <td align="left" colspan="2" class="V12"><?php echo ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$vtodo_text).'<br /><br />'; ?></td>
 				</tr>
 				
 				<?php if ($description) { ?>    
 					<tr>
-					 <td width="1%"><img src="images/spacer.gif" width="6" height="1" alt=" "></td>
+					 <td width="1%"><img src="../images/spacer.gif" width="6" height="1" alt=" "></td>
 					 <td align="left" colspan="2" class="V12">
 					 <?php echo ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", '<a target="_new" href="\0">\0</a>', $description); ?></td>
 					</tr>
