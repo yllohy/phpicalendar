@@ -23,7 +23,7 @@
 	<table cellpadding="0" cellspacing="0" border="0" width="<?php echo $login_width; ?>" class="calborder">
 		<tr>
 			<td bgcolor="#FFFFFF" valign="middle" align="center">
-				<table cellpadding="0" cellspacing="0" border="0">
+				<table cellpadding="0" cellspacing="0" border="0" width="<?php echo $login_width; ?>">
 					<tr>
 						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td colspan="3" align="center" width="98%" class="sideback"><font class="G10BOLD">Login</font></td>
@@ -34,16 +34,16 @@
 					</tr>
 					<tr>
 						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=""></td>
-						<td width="48%"><font class="G10B">Username:</font></td>
+						<td width="48%" align="right"><font class="G10B">Username:</font></td>
 						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=""></td>
-						<td width="48%"><input class="login_style" type="text" size="8" name="username"></td>
+						<td width="48%" align="left"><input class="login_style" type="text" size="8" name="username"></td>
 						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=""></td>
 					</tr>
 					<tr>
 						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=""></td>
-						<td width="48%"><font class="G10B">Password:</font></td>
+						<td width="48%" align="right"><font class="G10B">Password:</font></td>
 						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=""></td>
-						<td width="48%"><input class="login_style" type="password" size="8" name="password"></td>
+						<td width="48%" align="left"><input class="login_style" type="password" size="8" name="password"></td>
 						<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=""></td>
 					</tr>
 					<tr>
