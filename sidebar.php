@@ -147,35 +147,37 @@
 								</tr>
 								
 								<?php
-								foreach ($master_array[("$tomorrows_date")] as $event_times) {
-									foreach ($event_times as $val) {
-										$event_text = stripslashes(urldecode($val["event_text"]));
-										$event_text = strip_tags($event_text, '<b><i><u>');
-										if ($event_text != "") {	
-											$event_text2 	= rawurlencode(addslashes($val["event_text"]));
-											$description 	= addslashes(urlencode($val["description"]));
-											$event_start 	= @$val["event_start"];
-											$event_end 		= @$val["event_end"];
-											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
-											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
-											$calendar_name2	= addslashes($calendar_name);
-											$calendar_name2 = urlencode($calendar_name2);
-											$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
-											echo "<tr>\n";
-											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
-											echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
-											if (!isset($val["event_start"])) {
-												$event_start = $all_day_lang;
-												$event_end = '';
-												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a>\n";
-											} else {	
-												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+									echo "<tr>\n";
+									echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
+									echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
+									foreach ($master_array[("$tomorrows_date")] as $event_times) {
+										foreach ($event_times as $val) {
+											$event_text = stripslashes(urldecode($val["event_text"]));
+											$event_text = strip_tags($event_text, '<b><i><u>');
+											if ($event_text != "") {	
+												$event_text2 	= rawurlencode(addslashes($val["event_text"]));
+												$description 	= addslashes(urlencode($val["description"]));
+												$event_start 	= @$val["event_start"];
+												$event_end 		= @$val["event_end"];
+												$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+												$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
+												$calendar_name2	= addslashes($calendar_name);
+												$calendar_name2 = urlencode($calendar_name2);
+												$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
+												
+												if (!isset($val["event_start"])) {
+													$event_start = $all_day_lang;
+													$event_end = '';
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a><br>\n";
+												} else {	
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a><br>\n";
+												}
+												
 											}
-											echo "</td>\n";
-											echo "</tr>\n";
 										}
 									}
-								}
+									echo "</td>\n";
+									echo "</tr>\n";
 								?>
 							</table>
 						</td>
@@ -208,30 +210,36 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 								</tr>
 								
 								<?php
-								foreach ($master_array['-2'] as $event_times) {
-									foreach ($event_times as $val) {
-										$event_text = stripslashes(urldecode($val["event_text"]));
-										$event_text = strip_tags($event_text, '<b><i><u>');
-										if ($event_text != "") {	
-											$event_text2 	= rawurlencode(addslashes($val["event_text"]));
-											$description 	= addslashes(urlencode($val["description"]));
-											$event_start 	= @$val["event_start"];
-											$event_end 		= @$val["event_end"];
-											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
-											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
-											$calendar_name2	= addslashes($calendar_name);
-											$calendar_name2 = urlencode($calendar_name2);
-											$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
-											if ($val['status'] == 'COMPLETED') $event_text = "<S>$event_text</S>";
-											echo "<tr>\n";
-											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
-											echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
-											echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
-											echo "</td>\n";
-											echo "</tr>\n";
+									echo "<tr>\n";
+									echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
+									echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
+									foreach ($master_array['-2'] as $event_times) {
+										foreach ($event_times as $val) {
+											$event_text = stripslashes(urldecode($val["event_text"]));
+											$event_text = strip_tags($event_text, '<b><i><u>');
+											if ($event_text != "") {	
+												$event_text2 	= rawurlencode(addslashes($val["event_text"]));
+												$description 	= addslashes(urlencode($val["description"]));
+												$event_start 	= @$val["event_start"];
+												$event_end 		= @$val["event_end"];
+												$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+												$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
+												$calendar_name2	= addslashes($calendar_name);
+												$calendar_name2 = urlencode($calendar_name2);
+												$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
+												if ($val['status'] == 'COMPLETED') {
+													if ($show_completed == 'yes') {
+														$event_text = "<S>$event_text</S>";
+														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a><br>\n";
+													}
+												} else {
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a><br>\n";
+												}
+											}
 										}
 									}
-								}
+									echo "</td>\n";
+									echo "</tr>\n";
 								?>
 							</table>
 						</td>
