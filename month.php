@@ -1,8 +1,8 @@
 <?php 
-
-$current_view = "month";
 define('BASE', './');
-include(BASE.'functions/ical_parser.php');
+include_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/template.php');
+$current_view = "month";
 if ($minical_view == 'current') $minical_view = 'month';
 
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
@@ -38,7 +38,38 @@ $start_month_day 		= dateOfWeek($first_of_month, $week_start_day);
 $thisday2 				= localizeDate($dateFormat_week_list, $unix_time);
 $num_of_events2 			= 0;
 
-include (BASE.'includes/header.inc.php'); 
+// select for calendars
+$list_icals = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
+
+
+$page = new Page(BASE.'templates/'.$template.'/month.tpl');
+
+$page->replace_tags(array(
+	'header'			=> BASE.'templates/'.$template.'/header.tpl',
+	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	'calendar_nav'		=> BASE.'templates/'.$template.'/calendar_nav.tpl',
+	'template'			=> $template,
+	'cal'				=> $cal,
+	'getdate'			=> $getdate,
+	'calendar_name'		=> $calendar_name,
+	'display_date'		=> $display_date,
+	'rss_powered'	 	=> $rss_powered,
+	'rss_available' 	=> '',
+	'rss_valid' 		=> '',
+	'todo_available' 	=> '',
+	'next_month' 		=> $next_month,
+	'prev_month'	 	=> $prev_month,
+	'show_goto' 		=> '',
+	'list_icals' 		=> $list_icals,
+	'startday_select' 	=> $startday_select,
+	'style_select' 		=> $style_select,
+	'message'	 		=> $message
+			
+	));
+	
+$page->replace_langs($lang);
+
+$page->output();
 
 ?>
 <center>

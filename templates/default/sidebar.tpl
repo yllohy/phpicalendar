@@ -37,7 +37,7 @@
 		<td bgcolor="#FFFFFF" align="left">
 			<div style="padding: 5px;">
 				<form style="margin-bottom:0;" action="day.php" method="GET">
-					{LIST_ICALS}<br>
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_ICALS}</select><br>
 					{LIST_YEARS}<br>
 					{LIST_MONTHS}<br>
 					{LIST_WEEKS}<br>

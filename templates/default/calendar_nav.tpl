@@ -1,20 +1,4 @@
-<table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
-	<tr>
-		<td align="left" valign="top" width="1%" class="sideback">
-			<a class="psf" href="month.php?cal={CAL}&amp;getdate={PREV_GETDATE}"><img src="templates/{TEMPLATE}/images/left_arrows.gif" alt="{L_PREV_DAY}" border="0" align="left"></a>
-		</td>
-		<td align="center" class="sideback">
-			<font class="G10B"><b>Thursday, January 29</b></font>
-		</td>
-		<td align="right" valign="top" width="1%" class="sideback">
-			<a class="psf" href="month.php?cal={CAL}&amp;getdate={NEXT_GETDATE}"><img src="templates/{TEMPLATE}/images/right_arrows.gif" alt="{L_NEXT_DAY}" border="0" align="right"></a>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3">
-			<img src="images/spacer.gif" width="1" height="5" alt=" ">
-		</td>
-	</tr>
+<table border="0" width="737" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="1%" valign="top" align="right">
 			{MONTH_SMALL|-1}
@@ -25,7 +9,7 @@
 					<td width="160" valign="top">
 						<div style="padding: 5px;">
 							<form style="margin-bottom:0;" action="day.php" method="GET">
-								{LIST_ICALS}<br>
+								<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_ICALS}</select><br>
 								{LIST_YEARS}<br>
 								{LIST_MONTHS}<br>
 								{LIST_WEEKS}<br>
@@ -59,7 +43,7 @@
 								<a class="psf" href="preferences.php?cal={CAL}&amp;getdate={GETDATE}">{L_PREFERENCES}</a><br>
 								<!-- switch allow_preferences off -->
 								<!-- switch display_download on -->
-								<a class="psf" href="{SUBSCRIBE_PATH}">{SUBSCRIBE_LANG}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{DOWNLOAD_LANG}</a><br>
+								<a class="psf" href="{SUBSCRIBE_PATH}">{L_SUBSCRIBE}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{L_DOWNLOAD}</a><br>
 								<!-- switch display_download off -->
 								<!-- switch is_logged_in on -->
 								<a class="psf" href="{SCRIPT_NAME}?{QUERYS}">Logout {USERNAME}</a>

@@ -1,4 +1,4 @@
-<center class="V9"><br />{POWERED_BY_LANG} <a class="psf" href="http://phpicalendar.sourceforge.net/nuke/">PHP iCalendar 2.0</a><br>
+<center class="V9"><br />{L_POWERED_BY} <a class="psf" href="http://phpicalendar.sourceforge.net/nuke/">PHP iCalendar 2.0</a><br>
 <!-- switch rss_valid on -->
 <p>
 <a style="color:gray" href="http://feeds.archive.org/validator/check?url={FOOTER_CHECK}">
@@ -6,7 +6,7 @@
 </p>
 <!-- switch rss_valid off -->
 <!-- switch rss_powered on -->
-{THIS_SITE_IS_LANG} <a class="psf" href="{BASE}rss/index.php?cal={CAL}&amp;getdate={GETDATE}">RSS-Enabled</a>
+{L_THIS_SITE_IS} <a class="psf" href="{BASE}rss/index.php?cal={CAL}&amp;getdate={GETDATE}">RSS-Enabled</a>
 <!-- switch rss_powered off -->
 </center>
 </body>
