@@ -72,7 +72,7 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 									
 									// build the <option> tags
 									while ($file = readdir($dir_handle)) {
-										if (substr($file, -4) == ".ics") {
+										if (preg_match("/^[^.].+\.ics$/", $file)) {
 											
 											// $cal_filename is the filename of the calendar without .ics
 											// $cal is a urlencoded version of $cal_filename

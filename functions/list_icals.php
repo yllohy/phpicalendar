@@ -17,7 +17,7 @@ if ($display_ical_list == "yes") {
 
 	// build the <option> tags
 	while (false != ($file = readdir($dir_handle))) {
-		if (substr($file, -4) == ".ics") {
+		if (preg_match("/^[^.].+\.ics$/", $file)) {
 			array_push($filelist, $file);
 		}
 	}

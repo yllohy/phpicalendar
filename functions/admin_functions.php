@@ -294,7 +294,7 @@ function get_calendar_files($calendar_path) {
 	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path)));
 	$filelist = array();
 	while ($file = readdir($dir_handle)) {
-		if (substr($file, -4) == ".ics") {
+		if (preg_match("/^[^.].+\.ics$/", $file)) {
 			array_push($filelist, $file);
 		}
 	}

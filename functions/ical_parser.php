@@ -883,20 +883,15 @@ foreach ($cal_filelist as $filename) {
 						break;
 					case 'DURATION':
 						if (($first_duration == TRUE) && (!stristr($field, '=DURATION'))) {
-							ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
-							if ($duration[2] = 'W') {
-								$weeks = $duration[1];
-								$days = 0;
-							} else {
-								$days = $duration[1];
-								$weeks = 0;
-							}
-							$hours = ereg_replace('H', '', $duration[3]);
-							$minutes = ereg_replace('M', '', $duration[4]);
-							$seconds = ereg_replace('S', '', $duration[5]);
-							$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
-							$end_unixtime = $start_unixtime + $the_duration;
-							$end_time = date ('Hi', $end_unixtime);
+							ereg ('^P([0-9]{1,2}[W])?([0-9]{1,2}[D])?([T]{0,1})?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration); 
+							$weeks 			= ereg_replace('W', '', $duration[1]); 
+							$days 			= ereg_replace('D', '', $duration[2]); 
+							$hours 			= ereg_replace('H', '', $duration[4]); 
+							$minutes 		= ereg_replace('M', '', $duration[5]); 
+							$seconds 		= ereg_replace('S', '', $duration[6]); 
+							$the_duration 	= ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
+							$end_unixtime 	= $start_unixtime + $the_duration;
+							$end_time 		= date ('Hi', $end_unixtime);
 							$first_duration = FALSE;
 						}	
 						break;
@@ -926,46 +921,6 @@ foreach ($cal_filelist as $filename) {
 				}
 			}
 		}
-		
-		/*
-		//print '<pre>';	
-		// Remove pesky recurrences
-		if (is_array($recurrence_delete)) {
-			foreach ($recurrence_delete as $delete => $delete_key) {
-				foreach ($delete_key as $key => $val) {
-					#echo "Before Delete::  $delete  $key  $val<br>";
-					#print_r($master_array["$delete"]);
-					if (is_array($master_array[($delete)][($key)][($val)])) {
-						removeOverlap($delete, $key, $val);
-						unset($master_array["$delete"]["$key"]["$val"]);
-						// Remove date from array if no events
-						if (sizeof($master_array["$delete"]["$key"] = 1)) {
-							#echo "deleting  $delete  $key  $val<br>";
-							unset($master_array["$delete"]["$key"]);
-							if (!sizeof($master_array["$delete"] > 1)) {
-								#echo "deleting  $delete  $key  $val<br>";
-								unset($master_array["$delete"]);
-							}
-						}
-						#print_r($master_array["$delete"]);
-						// Check for overlaps and rewrite them
-						foreach($master_array["$delete"] as $overlap_time => $overlap_val) {
-							$recur_data_date = $delete;
-							foreach ($overlap_val as $uid => $val) {
-								$start_time = $val['event_start'];
-								$end_time = $val['event_end'];
-								#$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
-								#$master_array[($recur_data_date)][($start_time)][($uid)]['event_overlap'] = 0;
-								#echo "$recur_data_date - $uid - $start_time - $end_time - $nbrOfOverlaps<br>";
-								#print_r($val);
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		*/
 	}
 	$calnumber = $calnumber + 1;
 }

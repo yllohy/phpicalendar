@@ -167,7 +167,7 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 												$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 												$filelist = array();
 												while ($file = readdir($dir_handle)) {
-													if (substr($file, -4) == ".ics") {
+													if (preg_match("/^[^.].+\.ics$/", $file)) {
 														array_push($filelist, $file);
 													}
 												}

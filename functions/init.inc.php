@@ -106,14 +106,14 @@ if ($is_webcal) {
 
 				// build the array
 				while (false != ($file = readdir($dir_handle))) {
-					if (substr($file, -4) == ".ics") {
+					if (preg_match("/^[^.].+\.ics$/", $file)) {
 						$file = $calendar_path.'/'.$file;
 						array_push($cal_filelist, $file);
 					}
 				}
 				// add webcals
 				foreach ($list_webcals as $file) {
-					if (substr($file, -4) == ".ics") {
+					if (preg_match("/^[^.].+\.ics$/", $file)) {
 						array_push($cal_filelist, $file);
 					}
 				}
