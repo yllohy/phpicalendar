@@ -43,7 +43,7 @@ function logout_querys() {
 // if no valid login is found. Returns a boolean invalid_login to
 // indicate that the login is invalid.
 function user_login() {
-	global $HTTP_COOKIE_VARS, $HTTP_GET_VARS, $HTTP_POST_VARS, $_SERVER;
+	global $_COOKIE, $HTTP_GET_VARS, $HTTP_POST_VARS, $_SERVER;
 	global $login_cookies, $cookie_uri, $locked_map;
 	
 	// Initialize return values.
@@ -57,9 +57,9 @@ function user_login() {
 
 	// Look for a login cookie.
 	if ($login_cookies == 'yes' &&
-		isset($HTTP_COOKIE_VARS['phpicalendar_login']))
+		isset($_COOKIE['phpicalendar_login']))
 	{
-		$login_cookie = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar_login']));
+		$login_cookie = unserialize(stripslashes($_COOKIE['phpicalendar_login']));
 		if (isset($login_cookie['username']) &&
 			isset($login_cookie['password']))
 		{

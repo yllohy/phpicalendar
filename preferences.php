@@ -37,11 +37,11 @@ if ($action == 'setcookie') {
 	} else {
 		setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
 	}
-	$HTTP_COOKIE_VARS['phpicalendar'] = $the_cookie;
+	$_COOKIE['phpicalendar'] = $the_cookie;
 }
 
-if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
-	$phpicalendar 		= unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
+if (isset($_COOKIE['phpicalendar'])) {
+	$phpicalendar 		= unserialize(stripslashes($_COOKIE['phpicalendar']));
 	$cookie_language 	= $phpicalendar['cookie_language'];
 	$cookie_calendar 	= $phpicalendar['cookie_calendar'];
 	$cookie_view 		= $phpicalendar['cookie_view'];
@@ -53,7 +53,7 @@ if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	}
 }
 
-if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
+if ((!isset($_COOKIE['phpicalendar'])) || ($cookie_unset)) {
 	# No cookie set -> use defaults from config file.
 	$cookie_language = ucfirst($language);
 	$cookie_calendar = $default_cal;

@@ -17,8 +17,8 @@ include_once(BASE.'config.inc.php');
 include_once(BASE.'functions/error.php');
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
-if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
-	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
+if (isset($_COOKIE['phpicalendar'])) {
+	$phpicalendar = unserialize(stripslashes($_COOKIE['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
 	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal_check	= $phpicalendar['cookie_calendar'];
 	if (isset($phpicalendar['cookie_view'])) 		$default_view 		= $phpicalendar['cookie_view'];
