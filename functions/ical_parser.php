@@ -125,7 +125,11 @@ if ($parse_file) {
 			// Handling of the all day events
 			if ((isset($allday_start) && $allday_start != '')) {
 				$start = strtotime($allday_start);
-				$end = strtotime($allday_end);
+				if (isset($allday_end)) {
+					$end = strtotime($allday_end);
+				} else {
+					$end = strtotime('+1 day', $start);
+				}
 				if (($end > $mArray_begin) && ($end < $mArray_end)) {
 					while ($start != $end) {
 						$start_date = date('Ymd', $start);
@@ -146,8 +150,12 @@ if ($parse_file) {
 					$rrule_array['END_DAY'] = $allday_end;
 					$rrule_array['END'] = 'end';
 					$recur_start = $allday_start;
-					$start_date = $allday_start;
 					$diff_allday_days = dayCompare($allday_end, $allday_start);
+					if (isset($allday_end)) {
+						$diff_allday_days = dayCompare($allday_end, $allday_start);
+					 } else {
+						$diff_allday_days = 1;
+					}
 				} else {
 					$rrule_array['START_DATE'] = $start_date;
 					$rrule_array['START_TIME'] = $start_time;
@@ -315,7 +323,7 @@ if ($parse_file) {
 												}
 											break;
 											case 'YEARLY':
-												if (!$bymonth) $bymonth = date ("m", strtotime($start_time));
+												if (!isset($bymonth)) $bymonth[] = date('m', $start_date_time);
 												foreach($bymonth as $month) {
 													$year = date('Y', $next_range_time);
 													$month = str_pad($month, 2, '0', STR_PAD_LEFT);
