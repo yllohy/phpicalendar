@@ -91,7 +91,7 @@ if ($parse_file) {
 				$allday_start, $allday_end, $start, $end, $the_duration, 
 				$beginning, $rrule_array, $start_of_vevent, $description, 
 				$valarm_description, $start_unixtime, $end_unixtime,
-				$recurrence_id, $uid
+				$recurrence_id, $uid, $class, $attendee, $location, $organizer
 			);
 				
 			$except_dates = array();
@@ -890,8 +890,17 @@ if ($parse_file) {
 						$rrule_array[$regs[1]] = $regs[2];
 					}
 					break;
+				// Attendee support only testing in Apple iCal 1.0.2	
 				case 'ATTENDEE':
-					$attendee = $data;
+					$field = ereg_replace("ATTENDEE;CN=", "", $field);
+					$data = ereg_replace ("mailto:", "", $data);
+					$attendee[] = array ('name' => $field, 'email' => $data);
+					#print_r($attendee);
+					break;
+				case 'ORGANIZER':
+					$field = ereg_replace("ORGANIZER;CN=", "", $field);
+					$data = ereg_replace ("mailto:", "", $data);
+					$organizer[] = array ('name' => $field, 'email' => $data);
 					break;
 			}
 		}

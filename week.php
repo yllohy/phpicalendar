@@ -222,7 +222,7 @@ for ($i=0;$i<7;$i++) {
 													echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 												} else {
 			
-													echo "<tr">\n";
+													echo "<tr>\n";
 													echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 												}
 												

@@ -4,7 +4,7 @@ $year_time = strtotime("$getdate");
 $getdate_year = date("Y", strtotime($getdate));
 $num_years2 = $num_years;
 //echo "$num_years2";
-print "<form>\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value);\">\n";
+print "<form action=\"day.php\" method=\"GET\">\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value);\">\n";
 // build the <option> tags
 for ($i=0; $i < ($num_years2 +2); $i++) {
 	$year_time2 = strtotime ("-$num_years2 year", $year_time);

@@ -7,7 +7,7 @@ if ($display_ical_list == "yes") {
 	} else {
 		$query="";
 	}
-	print "<form>\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">\n";
+	print "<form action=\"day.php\" method=\"GET\">\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">\n";
 	
 	// open file
 	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
