@@ -1,8 +1,7 @@
 <?php
-if (!defined('BASE')) define('BASE','../');
-require_once(BASE.'config.inc.php');
-require_once(BASE.'functions/init.inc.php');
+if (!defined('BASE')) define('BASE','./');
 require_once(BASE.'functions/template.php');
+
 
 function error($error_msg='There was an error processing the request.', $file='NONE') {
 	global $template, $language, $enable_rss, $lang;
@@ -21,11 +20,13 @@ function error($error_msg='There was an error processing the request.', $file='N
 	$calendar_name 		= $lang['l_error_title'];	
 	
 	$page = new Page(BASE.'templates/'.$template.'/error.tpl');
+	
+	$page->replace_files(array(
+	'header'			=> BASE.'templates/'.$template.'/header.tpl',
+	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	));
 
 	$page->replace_tags(array(
-		'header'			=> BASE.'templates/'.$template.'/header.tpl',
-		'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-		'calendar_nav'		=> BASE.'templates/'.$template.'/calendar_nav.tpl',
 		'default_path'		=> '',
 		'template'			=> $template,
 		'cal'				=> $cal,

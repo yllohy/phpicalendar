@@ -17,10 +17,9 @@
 				</tr>
 				<tr>
 					<td>
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
+						<table width="100%" border="0" cellspacing="0" cellpadding="10" class="G10B">	
 							<tr>
-								<td align="center" valign="top">
-									<br />
+								<td align="center" valign="top" class="V12">
 									{ERROR_MSG}
 									<br />
 									<br />
@@ -28,7 +27,6 @@
 									<br />
 									<br />
 									{L_ERROR_BACK}
-									<br />
 									<br />
 								</td>
 							</tr>

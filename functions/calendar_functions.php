@@ -14,7 +14,7 @@
 //					  returned.
 function availableCalendars($username, $password, $cal_filename, $admin = false) {
 	// Import globals.
-	global $allow_login, $calendar_path, $blacklisted_cals, $list_webcals, $locked_cals, $locked_map, $apache_map, $error_path_lang, $error_restrictedcal_lang, $error_invalidcal_lang, $ALL_CALENDARS_COMBINED, $_SERVER;
+	global $allow_login, $calendar_path, $blacklisted_cals, $list_webcals, $locked_cals, $locked_map, $apache_map, $lang, $ALL_CALENDARS_COMBINED, $_SERVER;
 
 	// Create the list of available calendars.
 	$calendars = array();
@@ -36,7 +36,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	if ($cal_filename == $ALL_CALENDARS_COMBINED || $admin) {
 		// Add local calendars.
 		$dir_handle = @opendir($calendar_path)
-			or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
+			or die(error(sprintf($lang['l_error_path'], $calendar_path), $cal_filename));
 		while (($file = readdir($dir_handle)) != false) {
 			// Make sure this is not a dot file and it ends with .ics,
 			// and that it is not blacklisted.
@@ -80,7 +80,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		// to remove a .ics suffix because it would not have been passed
 		// in the argument.
 		if (in_array($cal_filename, $blacklisted_cals))
-			exit(error($error_restrictedcal_lang, $cal_filename));
+			exit(error($lang['l_error_restrictedcal'], $cal_filename));
 
 		// If HTTP authenticated, make sure this calendar is available
 		// to the user.
@@ -88,7 +88,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			if (!in_array($cal_filename, $apache_map[$http_user])) {
 				// Use the invalid calendar message so that the user is
 				// not made aware of locked calendars.
-				exit(error($error_invalidcal_lang, $cal_filename));
+				exit(error($lang['l_error_invalidcal'], $cal_filename));
 			}
 		}
 		
@@ -98,7 +98,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		{
 			// Use the invalid calendar message so that the user is
 			// not made aware of locked calendars.
-			exit(error($error_invalidcal_lang, $cal_filename));
+			exit(error($lang['l_error_invalidcal'], $cal_filename));
 		}
 		
 		// Add this calendar.

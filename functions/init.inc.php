@@ -14,7 +14,7 @@ $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 // Pull in the configuration and some functions.
 if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'config.inc.php');
-include_once(BASE.'functions/error.php');
+include_once(BASE.'error.php');
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
 if (isset($_COOKIE['phpicalendar'])) {
