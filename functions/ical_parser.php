@@ -138,7 +138,7 @@ if ($parse_file) {
 			if (!isset($summary)) $summary = '';
 			if (!isset($description)) $description = '';
 			
-			$mArray_begin = mktime (0,0,0,1,1,$this_year);
+			$mArray_begin = mktime (0,0,0,12,21,($this_year - 1));
 			$mArray_end = mktime (0,0,0,1,12,($this_year + 1));
 			
 			if (isset($start_time) && isset($end_time)) {
