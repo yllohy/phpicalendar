@@ -33,16 +33,28 @@
 										<table width="100%" border="0" cellspacing="0" cellpadding="2">
 											<tr>
 												<td align="left" valign="top" width="30" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={PREV_WEEKK}'">
-													<span class="V12"><a class="psf" href="week.php?cal={CAL}&amp;getdate={PREV_WEEK}">&laquo;</a></span>
+													<span class="V12">&nbsp;&nbsp;<a class="psf" href="week.php?cal={CAL}&amp;getdate={PREV_WEEK}">&laquo;</a></span>
 												</td>
 												<td align="right" valign="top" width="30" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={NEXT_WEEK}'">
-													<span class="V12"><a class="psf" href="week.php?cal={CAL}&amp;getdate={NEXT_WEEK}">&raquo;</a></span>
+													<span class="V12"><a class="psf" href="week.php?cal={CAL}&amp;getdate={NEXT_WEEK}">&raquo;</a>&nbsp;&nbsp;</span>
 												</td>
 												<!-- loop daysofweek on -->
 												<td width="80" align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='day.php?cal={CAL}&amp;getdate={DAYLINK}'">
 													<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9">{DAY}</span></a> 
 												</td>
 												<!-- loop daysofweek off -->
+											</tr>
+											<tr>
+												<td width="60" class="rowOff" colspan="2">
+												<!-- loop alldaysofweek on -->
+												<td>
+													<!-- loop allday on -->
+													<div class="alldaybg_{CALNO}">
+														{EVENT}
+													</div>
+													<!-- loop allday off -->
+												</td>
+												<!-- loop alldaysofweek off -->
 											</tr>
 											<tr>
 												<td rowspan="4" align="center" valign="top" width="60" class="timeborder" colspan="2">
@@ -144,6 +156,13 @@
 								</tr>
 							</table>
 						</td>
+					</tr>
+				</table>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+						<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+						<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 					</tr>
 				</table>
 			</td>

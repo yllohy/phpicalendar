@@ -44,6 +44,7 @@ $page->replace_tags(array(
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
+	'current_view'		=> $current_view,
 	'display_date'		=> $display_date,
 	'sidebar_date'		=> $sidebar_date,
 	'rss_powered'	 	=> $rss_powered,

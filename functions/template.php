@@ -4,6 +4,53 @@
 
 class Page {
 	var $page;
+	function draw_print($template_p) {
+		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day;
+		foreach($master_array as $key => $val) {
+			ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
+			if ((($regs[1] == $parse_month) && ($printview == "month")) || (($key == $getdate) && ($printview == "day")) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == "week"))) {
+				$events_week++;
+				$dayofmonth = strtotime ($key);
+				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
+				echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
+				echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><b>$dayofmonth</b></font></td></tr>";
+				echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\" alt=\" \"></td></tr>\n";
+				
+				// Pull out each day
+				foreach ($val as $new_val) {
+					foreach ($new_val as $new_key2 => $new_val2) {
+					if ($new_val2["event_text"]) {	
+						$event_text 	= stripslashes(urldecode($new_val2["event_text"]));
+						$description 	= stripslashes(urldecode($new_val2["description"]));
+						$event_start 	= $new_val2["event_start"];
+						$event_end 		= $new_val2["event_end"];
+						if (isset($new_val2["display_end"])) $event_end = $new_val2["display_end"];
+						$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+						$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+						$event_start 	= "$event_start - $event_end";
+						if (!$new_val2["event_start"]) { 
+							$event_start = "$all_day_lang";
+							$event_start2 = '';
+							$event_end = '';
+						}
+						
+						$middle = '';
+						
+						if ($new_val2["description"]) {
+							$middle = '';
+						}
+							$middle = '';		
+						}
+					}
+				}
+			}
+		}
+		
+		if ($events_week < 1) {
+			$middle = $no_events;
+		}	
+	}	
+	
 	function draw_day($template_p) {
 		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day;
 		

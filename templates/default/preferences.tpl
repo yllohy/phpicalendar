@@ -96,6 +96,13 @@
 		</td>
 	</tr>
 </table>
+<table width="650" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
 
 </center>
 {FOOTER}
