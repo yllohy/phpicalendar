@@ -18,7 +18,6 @@ if (isset($HTTP_GET_VARS['query']) && $HTTP_GET_VARS['query'] != '') {
 }
 
 $search_box = '';
-s
 $search_box .= 
 	'<form action="search.php" method="GET">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
