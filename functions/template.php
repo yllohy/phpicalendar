@@ -248,15 +248,15 @@ class Page {
 			if (ereg('([0-9]{1,2}):00', $key)) {
 				$daydisplay .= '<tr>'."\n";
 				$daydisplay .= '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'."\n";
-				$daydisplay .= '<td width="1" height="' . $gridLength . '"></td>'."\n";
+				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>'."\n";
 			} elseif("$cal_time" == "$day_start") {
 				$size_tmp = 60 - (int)substr($cal_time,2,2);
 				$daydisplay .= '<tr>'."\n";
 				$daydisplay .= "<td rowspan=\"" . ($size_tmp / $gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
-				$daydisplay .= '<td width="1" height="' . $gridLength . '"></td>'."\n";
+				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>'."\n";
 			} else {
 				$daydisplay .= '<tr>'."\n";
-				$daydisplay .= '<td width="1" height="' . $gridLength . '"></td>'."\n";
+				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>'."\n";
 			}
 			if ($dayborder == 0) {
 				$class = ' class="dayborder"';
@@ -289,7 +289,8 @@ class Page {
 						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
 						  }
 						  
-						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
+						  $colspan_width = round((460 / $nbrGridCols) * $drawWidth);
+						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" width="'.$colspan_width.'" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 						  
 						  // Start drawing the event
 						  $event_temp  = $loop_event;
