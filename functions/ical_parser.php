@@ -107,6 +107,16 @@ if ($parse_file) {
 			);
 			
 		} elseif ($line == 'END:VEVENT') {
+			
+			// CLASS support
+			if ($class == 'PRIVATE') {
+				$summary ='**PRIVATE**';
+				$description ='**PRIVATE**';
+			} elseif ($class == 'CONFIDENTIAL') {
+				$summary ='**CONFIDENTIAL**';
+				$description ='**CONFIDENTIAL**';
+			}			 
+			
 			// make sure we have some value for $uid
 			if (!isset($uid)) {
 				$uid = $uid_counter;
