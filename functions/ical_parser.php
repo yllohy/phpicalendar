@@ -62,7 +62,7 @@ if ($parse_file) {
 // Then turn it into an array after we pull every wrapped line up a level.
 
 $contents = @file($filename);
-$contents = implode('', $contents);
+$contents = @implode('', $contents);
 $contents = ereg_replace("\n ", '', $contents);
 $contents = split ("\n", $contents);
 if ($contents[0] != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
@@ -423,6 +423,7 @@ foreach($contents as $line) {
 												// loop through the days on which this event happens
 												foreach($bymonthday as $day) {
 													if ($day != '0') {
+														$day = str_pad($day, 2, '0', STR_PAD_LEFT);
 														$next_date_time = strtotime(date('Y-m-',$next_range_time).$day);
 														$next_date = date('Ymd', $next_date_time);
 														if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
@@ -490,7 +491,9 @@ foreach($contents as $line) {
 									if ($diff_years < $count) {
 										if ($diff_years % $number == 0) {
 											foreach($bymonth as $month) {
+											$month = str_pad($month, 2, '0', STR_PAD_LEFT);
 												if (is_array($byday)) {
+													
 													$next_range_time = strtotime($this_year.$month.'01');
 													foreach($byday as $day) {
 														ereg ('([0-9]{1})([A-Z]{2})', $day, $byday_arr);
