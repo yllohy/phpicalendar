@@ -122,6 +122,8 @@ if ($parse_file) {
 				$start_date_tmp = $recurrence_id['date'];
 				if (!isset($start_date)) $start_date = $old_start_date;
 				if (!isset($start_time)) $start_time = $master_array[$old_start_date][$old_start_time][$uid]['event_start'];
+				if (!isset($start_unixtime)) $start_unixtime = $master_array[$old_start_date][$old_start_time][$uid]['start_unixtime'];
+				if (!isset($end_unixtime)) $end_unixtime = $master_array[$old_start_date][$old_start_time][$uid]['end_unixtime'];
 				if (!isset($end_time)) $end_time = $master_array[$old_start_date][$old_start_time][$uid]['event_end'];
 				if (!isset($summary)) $summary = $master_array[$old_start_date][$old_start_time][$uid]['event_text'];
 				if (!isset($length)) $length = $master_array[$old_start_date][$old_start_time][$uid]['event_length'];
@@ -145,16 +147,20 @@ if ($parse_file) {
 					$allday_start = $start_date;
 					$allday_end = ($start_date + 1);
 				}
-				
-				// If the events go past midnight
-				// Needs to be re-thunk
-				if ($end_time < $start_time) $end_time = 2359;
 			}
-			
+			if (isset($start_unixtime,$end_unixtime) && date('d',$start_unixtime) != date('d',$end_unixtime)) {
+				$spans_day = true;
+			} else {
+				$spans_day = false;
+			}
 			if (isset($start_time) && $start_time != '') {
 				ereg ('([0-9]{2})([0-9]{2})', $start_time, $time);
 				ereg ('([0-9]{2})([0-9]{2})', $end_time, $time2);
-				$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
+				if (isset($start_unixtime) && isset($end_unixtime)) {
+					$length = $end_unixtime - $start_unixtime;
+				} else {
+					$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
+				}
 				
 				$drawKey = drawEventTimes($start_time, $end_time);
 				ereg ('([0-9]{2})([0-9]{2})', $drawKey['draw_start'], $time3);
@@ -193,9 +199,33 @@ if ($parse_file) {
 			
 			// Handling regular events
 			if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
-				$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time, $uid);
-				$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class);
-				if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
+				if ($spans_day) {
+					$start_tmp = strtotime(date('Ymd',$start_unixtime));
+					$end_date_tmp = date('Ymd',$end_unixtime);
+					while ($start_tmp < $end_unixtime) {
+						$start_date_tmp = date('Ymd',$start_tmp);
+						if ($start_date_tmp == $start_date) {
+							$time_tmp = $hour.$minute;
+							$start_time_tmp = $start_time;
+						} else {
+							$time_tmp = '0000';
+							$start_time_tmp = '0000';
+						}
+						if ($start_date_tmp == $end_date_tmp) {
+							$end_time_tmp = $end_time;
+						} else {
+							$end_time_tmp = '2400';
+						}
+						$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
+						$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true);
+						$start_tmp = strtotime('+1 day',$start_tmp);
+					}
+					if (!$write_processed) $master_array[$start_date][($hour.$minute)][$uid]['exception'] = true;
+				} else {
+					$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time, $uid);
+					$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false);
+					if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
+				}
 			}
 			
 			// Handling of the recurring events, RRULE
@@ -445,8 +475,14 @@ if ($parse_file) {
 								}
 								// use the same code to write the data instead of always changing it 5 times						
 								if (isset($recur_data) && is_array($recur_data)) {
+									$recur_data_hour = substr($start_time,0,2);
+									$recur_data_minute = substr($start_time,2,2);
 									foreach($recur_data as $recur_data_time) {
-										$recur_data_date = date('Ymd', $recur_data_time);
+										$recur_data_year = date('Y', $recur_data_time);
+										$recur_data_month = date('m', $recur_data_time);
+										$recur_data_day = date('d', $recur_data_time);
+										$recur_data_date = $recur_data_year.$recur_data_month.$recur_data_day;
+										
 										if (($recur_data_time > $start_date_time) && ($recur_data_time <= $end_date_time) && ($count_to != $count) && !in_array($recur_data_date, $except_dates)) {
 											if (isset($allday_start) && $allday_start != '') {
 												$start_time2 = $recur_data_time;
@@ -457,8 +493,10 @@ if ($parse_file) {
 													$start_time2 = strtotime('+1 day', $start_time2);
 												}
 											} else {
+												$start_unixtime_tmp = mktime($recur_data_hour,$recur_data_minute,0,$recur_data_month,$recur_data_day,$recur_data_year);
+												$end_unixtime_tmp = $start_unixtime_tmp + $length;
 												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
-												$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class);
+												$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class);
 											}
 										}
 									}
@@ -799,8 +837,8 @@ if ($parse_file) {
 						$minutes = ereg_replace('M', '', $duration[4]);
 						$seconds = ereg_replace('S', '', $duration[5]);
 						$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
-						$beginning = (strtotime($start_time) + $the_duration);
-						$end_time = date ('Hi', $beginning);
+						$end_unixtime = $start_unixtime + $the_duration;
+						$end_time = date ('Hi', $end_unixtime);
 						$first_duration = FALSE;
 					}	
 					break;
