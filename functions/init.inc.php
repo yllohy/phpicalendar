@@ -18,8 +18,8 @@ if ($HTTP_COOKIE_VARS['phpicalendar']) {
 	$default_view 		= $phpicalendar['cookie_view'];
 	$style_sheet 		= $phpicalendar['cookie_style'];
 	$week_start_day		= $phpicalendar['cookie_startday'];
+	$day_start			= $phpicalendar['cookie_time'];
 }
-
 
 // language support
 $language = strtolower($language);

@@ -13,10 +13,11 @@ if ($action == 'setcookie') {
 	$cookie_view 		= $HTTP_POST_VARS['cookie_view'];
 	$cookie_style 		= $HTTP_POST_VARS['cookie_style'];
 	$cookie_startday	= $HTTP_POST_VARS['cookie_startday'];
-	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style");
+	$cookie_time	= $HTTP_POST_VARS['cookie_time'];
+	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time");
 	$the_cookie 		= serialize($the_cookie);
 	setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
-	unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
+	#unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
 }
 
 if ($HTTP_COOKIE_VARS['phpicalendar']) {
@@ -26,6 +27,7 @@ if ($HTTP_COOKIE_VARS['phpicalendar']) {
 	$cookie_view 		= $phpicalendar['cookie_view'];
 	$cookie_style 		= $phpicalendar['cookie_style'];
 	$cookie_startday	= $phpicalendar['cookie_startday'];
+	$cookie_time		= $phpicalendar['cookie_time'];
 }
 #echo "$cookie_uri";
 #print_r(unserialize($HTTP_COOKIE_VARS['phpicalendar']));
@@ -159,6 +161,18 @@ include(BASE.'functions/ical_parser.php');
 								print "<option value=\"week\">$week_lang</option>\n";
 								print "<option value=\"month\">$month_lang</option>\n";
 								print "<option value=\"print\">$printer_lang</option>\n";
+								print "</select>\n";
+								echo '<br><br>';
+								
+								// Begin Time Selection
+								//
+								echo 'Select your default start time:<br><br>';
+								print "<select name=\"cookie_time\" class=\"query_style\">\n";
+								print "<option value=\"0500\">0500</option>\n";
+								print "<option value=\"0600\">0600</option>\n";
+								print "<option value=\"0700\">0700</option>\n";
+								print "<option value=\"0800\">0800</option>\n";
+								print "<option value=\"0900\">0900</option>\n";
 								print "</select>\n";
 								echo '<br><br>';
 								
