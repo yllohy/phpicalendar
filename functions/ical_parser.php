@@ -69,11 +69,11 @@ if ($parse_file) {
 	while (!feof($ifile)) {
 		$line = $nextline;
 		$nextline = fgets($ifile, 1024);
-		$nextline = @rtrim($nextline, "\r\n");
+		$nextline = ereg_replace("\r\n", "", $nextline);
 		while (substr($nextline, 0, 1) == " ") {
 			$line = $line . substr($nextline, 1);
 			$nextline = fgets($ifile, 1024);
-			$nextline = @rtrim($nextline, "\r\n");
+			$nextline = ereg_replace("\r\n", "", $nextline);
 		}
 		$line = trim($line);
 		if (stristr($line, 'BEGIN:VEVENT')) {

@@ -172,7 +172,7 @@
 										$event_text = strip_tags($event_text, '<b><i><u>');
 										if ($event_text != "") {	
 											$event_text2 	= rawurlencode(addslashes($val["event_text"]));
-											$description 	= urlencode(addslashes($val["description"]));
+											$description 	= addslashes(urlencode($val["description"]));
 											$event_start 	= @$val["event_start"];
 											$event_end 		= @$val["event_end"];
 											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));

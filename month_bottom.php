@@ -364,7 +364,7 @@
 													$event_text2 	= addslashes($new_val2["event_text"]);
 													$event_text2 	= str_replace("\"", "&quot;", $event_text2);
 													$event_text2 	= urlencode($event_text2);
-													$description 	= addslashes($new_val2["description"]);
+													$description 	= addslashes(urlencode($new_val2["description"]));
 													$description 	= str_replace("\"", "&quot;", $description);
 													$event_start 	= $new_val2["event_start"];
 													$event_end 		= $new_val2["event_end"];

@@ -95,7 +95,7 @@ if (is_array($master_array[($getdate)])) {
 						echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
 						foreach($master_array[($getdate)]['-1'] as $allday) {
 							$event_text = stripslashes(urldecode($allday['event_text']));
-							$description = $allday['description'];
+							$description = addslashes(urlencode($allday['description']));
 							$event_text2 = rawurlencode(addslashes($allday['event_text']));
 					
 							echo '<tr>'."\n";
@@ -178,7 +178,7 @@ if (is_array($master_array[($getdate)])) {
 													$event_text2 	= rawurlencode(addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']));
 													$event_start 	= strtotime ($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_start']);
 													$event_end		= strtotime ($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_end']);
-													$description 	= rawurlencode(addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['description']));
+													$description 	= addslashes(urlencode($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['description']));
 													$event_start 	= date ($timeFormat, $event_start);
 													$event_end 		= date ($timeFormat, $event_end);
 													$calendar_name2	= rawurlencode(addslashes($calendar_name));
