@@ -20,9 +20,6 @@ $prev_week2 = ($date - (7 * 24.4 * 60 * 60));
 $next_week = date("Ymd", $next_week2);
 $prev_week = date("Ymd", $prev_week2);
 
-if (!$cal) $cal = "$default_cal";
-
-
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"

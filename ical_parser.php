@@ -270,10 +270,10 @@ foreach($contents as $line) {
  
 ksort($master_array);
 reset($master_array);
-// If you want to see the values in the arrays, uncomment below.
-// print_r($master_array);
-// print_r($day_array);
-// print_r($rrule);			
+//If you want to see the values in the arrays, uncomment below.
+//print_r($master_array);
+//print_r($day_array);
+//print_r($rrule);			
 		
 	
 	

@@ -23,8 +23,6 @@ if ($getdate == (date("Ymd"))) {
 	$yesterdays_date = date( "Ymd", ($yesterday));
 }
 
-if (!$cal) $cal = "$default_cal";
-
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
