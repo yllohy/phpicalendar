@@ -74,10 +74,33 @@ if ($master_array[($getdate)]) {
      	<td align="center" valign="middle">
       		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
       			<tr>
-					<td class="H20" align="center" bgcolor="#DDDDDD" background="images/time_bg.gif"><img src="images/spacer.gif" width="1" height="6" alt=""><br><?php echo "$display_date"; ?><br><img src="images/spacer.gif" width="1" height="3" alt=""></td>
+      				<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"images/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
+					<td class="H20" align="center" bgcolor="#DDDDDD" background="images/time_bg.gif"><?php echo "$display_date"; ?></td>
+      				<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"images/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
       			</tr>
+      			
+				<?php
+					// The all day events returned here.
+					if ($master_array[($getdate)]["-1"]) {
+						echo "<tr>\n";
+						echo "<td colspan=\"3\" height=\"24\">\n";
+						echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";
+						foreach($master_array[($getdate)]["-1"] as $allday) {
+							$all_day_text = $allday["event_text"];
+							$description = $allday["description"];
+					
+							echo "<tr>\n";
+							echo "<td valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\"><i>$all_day_text</i></font></a></td>\n";
+							echo "</tr>\n";
+						}
+						echo "</table>\n";
+						echo "</td>\n";
+						echo "</tr>\n";
+					}
+					?>
+
       			<tr>
-					<td align="center" valign="top">
+					<td align="center" valign="top" colspan="3">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>

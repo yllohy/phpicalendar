@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // function returns starttime and endtime and event length for drawing into a grid
 
 function drawEventTimes ($start, $end) {
@@ -34,5 +34,4 @@ function drawEventTimes ($start, $end) {
 	
 	return array ("draw_start" => ($sta_h . $sta_min), "draw_end" => ($end_h . $end_min), "draw_length" => $draw_len);
 }
-
 ?>

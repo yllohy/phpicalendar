@@ -13,9 +13,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"images/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%"><b><?php echo "$thisday2"; ?></b></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"images/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"images/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "$thisday2"; ?></b></td>
+						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"images/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -58,9 +58,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%"><b><?php echo "Jump to"; ?></b></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%"></td>
+						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "Jump to"; ?></b></td>
+						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -96,9 +96,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%"><b><?php echo "Tomorrow's Events"; ?></b></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%"></td>
+						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "Tomorrow's Events"; ?></b></td>
+						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -157,9 +157,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B"><b><?php echo "$display_month1"; ?></b></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1"></td>
+						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php echo "$display_month1"; ?></b></td>
+						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -232,9 +232,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B"><b><?php echo "$display_month2"; ?></b></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1"></td>
+						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php echo "$display_month2"; ?></b></td>
+						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -308,9 +308,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B"><b><?php echo "$display_month3"; ?></b></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1"></td>
+						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php echo "$display_month3"; ?></b></td>
+						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
