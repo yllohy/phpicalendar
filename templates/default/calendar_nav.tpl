@@ -4,9 +4,9 @@
 			{MONTH_SMALL|-1}
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-					<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-					<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+					<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 				</tr>
 			</table>
 		</td>
@@ -44,14 +44,14 @@
 						</table>
 						<table width="100%" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-								<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-								<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+								<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 							</tr>
 						</table>
 					</td>
 					<td>
-						<img src="images/spacer.gif" width="20" height="1" alt=" ">
+						<img src="images/spacer.gif" width="20" height="1" alt=" " />
 					</td>
 					<td width="160" valign="top">
 						<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
@@ -79,9 +79,9 @@
 						</table>
 						<table width="100%" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-								<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-								<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+								<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 							</tr>
 						</table>
 					</td>
@@ -92,9 +92,9 @@
 			{MONTH_SMALL|+1}
 			<table width="170" border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-					<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-					<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+					<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 				</tr>
 			</table>
 		</td>

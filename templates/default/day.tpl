@@ -12,10 +12,10 @@
 								<td align="right" width="120" class="navback">	
 									<table width="120" border="0" cellpadding="0" cellspacing="0">
 										<tr>
-											<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0"></a></td>
-											<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0"></a></td>
-											<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0"></a></td>
-											<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0"></a></td>
+											<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
+											<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
+											<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
+											<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
 										</tr>
 									</table>
 								</td>
@@ -90,13 +90,13 @@
         	</table>
         	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-					<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-					<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+					<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 				</tr>
 			</table>
     	</td>
-		<td width="10"><img src="images/spacer.gif" width="10" height="1" alt=" "></td>
+		<td width="10"><img src="images/spacer.gif" width="10" height="1" alt=" " /></td>
 		<td width="170" valign="top">
 			{SIDEBAR}
 		</td>

@@ -14,12 +14,12 @@
 				<tr height="30">
 					<!-- loop monthdays on -->
 					<!-- switch notthismonth on -->
-					<td width="30" height="30" align="right" valign="top" class="monthoff" onmouseover="this.style.backgroundColor="#DDDDDD"" onmouseout="this.style.backgroundColor="#F2F2F2"" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20031228'">
+					<td width="30" height="30" align="right" valign="top" class="monthoff" onmouseover="this.style.backgroundColor='#DDDDDD'" onmouseout="this.style.backgroundColor='#F2F2F2'" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20031228'">
 						<div align="right" valign="top" class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a></div>
 					</td>
 					<!-- switch notthismonth off -->
 					<!-- switch istoday on -->
-					<td width="30" height="30" align="right" valign="top" class="monthreg" onmouseover="this.style.backgroundColor="#DDDDDD"" onmouseout="this.style.backgroundColor="#FFFFFF"" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20040101'">
+					<td width="30" height="30" align="right" valign="top" class="monthreg" onmouseover="this.style.backgroundColor='#DDDDDD'" onmouseout="this.style.backgroundColor='#FFFFFF'" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20040101'">
 						<div align="right" valign="top" class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a></div>
 						<div align="center" valign="top">
 							{ALLDAY}
@@ -28,7 +28,7 @@
 					</td>
 					<!-- switch istoday off -->
 					<!-- switch ismonth on -->
-					<td width="30" height="30" align="right" valign="top" class="monthreg" onmouseover="this.style.backgroundColor="#DDDDDD"" onmouseout="this.style.backgroundColor="#FFFFFF"" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20040101'">
+					<td width="30" height="30" align="right" valign="top" class="monthreg" onmouseover="this.style.backgroundColor='#DDDDDD'" onmouseout="this.style.backgroundColor='#FFFFFF'" onclick="window.location.href='day.php?cal=all_calendars_combined971&amp;getdate=20040101'">
 						<div align="right" valign="top" class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a></div>
 						<div align="center" valign="top">
 							{ALLDAY}

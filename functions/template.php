@@ -122,7 +122,7 @@ class Page {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0">';
 									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
-									$switch['ALLDAY'] .= '</span></div>';
+									$switch['ALLDAY'] .= '</div>';
 								} else {
 									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0">';
 								}
@@ -135,7 +135,7 @@ class Page {
 								if ($type == 'large') {
 									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0">';
 									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url).'<br>';
-									$switch['EVENT'] .= '</span></div>';
+									$switch['EVENT'] .= '</div>';
 								} else {
 									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0">';
 								}

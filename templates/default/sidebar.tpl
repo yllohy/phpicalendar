@@ -112,21 +112,21 @@
 					<!-- switch show_completed on -->
 					<tr>
 						<td><img src="images/completed.gif" alt=" " width="13" height="11" border="0" align="middle"></td>
-						<td><img src="images/spacer.gif" width="2" height="1" border"0" /></td>
+						<td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
 						<td><s><a class="psf" href="javascript:openTodoInfo('{VTODO_ARRAY}')"><font class="G10B"> {VTODO_TEXT}</font></a></s></td>
 					</tr>
 					<!-- switch show_completed off -->
 					<!-- switch show_important on -->
 					<tr>
 						<td><img src="images/important.gif" alt=" " width="13" height="11" border="0" align="middle"></td>
-						<td><img src="images/spacer.gif" width="2" height="1" border"0" /></td>
+						<td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
 						<td><a class="psf" href="javascript:openTodoInfo('{VTODO_ARRAY}')"><font class="G10B"> {VTODO_TEXT}</font></a></td>
 					</tr>
 					<!-- switch show_important off -->
 					<!-- switch show_normal on -->
 					<tr>
 						<td><img src="images/not_completed.gif" alt=" " width="13" height="11" border="0" align="middle"></td>
-						<td><img src="images/spacer.gif" width="2" height="1" border"0" /></td>
+						<td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
 						<td><a class="psf" href="javascript:openTodoInfo('{VTODO_ARRAY}')"><font class="G10B"> {VTODO_TEXT}</font></a></td>
 					</tr>
 					<!-- switch show_normal on -->
