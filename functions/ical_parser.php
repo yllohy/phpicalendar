@@ -330,6 +330,7 @@ foreach ($cal_filelist as $filename) {
 							case 'UNTIL':
 								$until = ereg_replace('T', '', $val);
 								$until = ereg_replace('Z', '', $until);
+								if (strlen($until) == 8) $until = $until.'235959';
 								$abs_until = $until;
 								ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})', $until, $regs);
 								$until = mktime($regs[4],$regs[5],$regs[6],$regs[2],$regs[3],$regs[1]);
