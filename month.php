@@ -32,7 +32,7 @@
 <table width="740" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><a class="psf" href="day.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Day</a> | <a class="psf" href="week.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Week</a> | <a class="psf" href="month.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Month</a></td>
+		<td align="center" width="90%"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
@@ -53,15 +53,9 @@
 									<td align="left" valign="middle" bgcolor="white" height="36">
 										<table border="0" cellspacing="0" cellpadding="0" width="100%">
 											<tr>
-												<td align="left">
-													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">Last Month</a>"; ?></font>
-												</td>
-												<td class="H20" align="center" valign="middle" bgcolor="white" height="36">
-													<? echo "$display_month"; ?>
-												</td>
-												<td align="right">
-													<font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">Next Month</a>"; ?></font>
-												</td>
+												<td align="left" width="100"><font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\">$last_month_lang</a>"; ?></font></td>
+												<td class="H20" align="center" valign="middle" bgcolor="white" height="24"><? echo "$display_month"; ?></td>
+												<td align="right" width="100"><font class="G10B"><? echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\">$next_month_lang</a>"; ?></font></td>
 											</tr>
 										</table>
 									</td>
@@ -71,13 +65,10 @@
 					</tr>
 					<tr>
 						<td align="center" valign="middle">
-							
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
-								<tr height="28">
+								<tr height="20">
 									<td align="left" valign="middle" height="26"><? include('./list_icals.php'); ?></td>
-									<td align="right" class="G10B">
-										&nbsp;<a class="psf" href="<? echo "$fullpath"; ?>">Subscribe</a>&nbsp;|&nbsp;<a class="psf" href="<? echo "$filename"; ?>">Download</a>&nbsp;
-									</td>
+									<td align="right" class="G10B"><? echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
 								</tr>
 							</table>
 						</td>

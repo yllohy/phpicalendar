@@ -35,7 +35,7 @@ $prev_week = date("Ymd", $prev_week2);
 	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
-		<td align="center" width="90%"><a class="psf" href="day.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Day</a> | <a class="psf" href="week.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Week</a> | <a class="psf" href="month.php?cal=<? echo "$cal&getdate=$getdate"; ?>">Month</a></td>
+		<td align="center" width="90%"><? echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
@@ -57,18 +57,18 @@ $prev_week = date("Ymd", $prev_week2);
 									<table width="100%" border="0" cellspacing="4" cellpadding="0">
 										<tr>
 											<td colspan="3">
-												<table width="100%" border="0" cellspacing="4" cellpadding="0">
+												<table width="100%" border="0" cellspacing="0" cellpadding="0">
 													<tr>
-														<td class="V12" align="left" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\">Previous Week</a>"; ?></td>
+														<td class="G10B" align="left" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\">$last_week_lang</a>"; ?></td>
 														<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$start_week - $end_week"; ?></td>
-														<td class="V12" align="right" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\">Next Week</a>"; ?></td>
+														<td class="G10B" align="right" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\">$next_week_lang</a>"; ?></td>
 													</tr>
 												</table>
 											</td>
 										</tr>	
 										<tr>
 											<td align="left" valign="middle"><? include('./list_icals.php'); ?></td>
-											<td align="right" valign="middle" class="V12"><a class="psf" href="<? echo "$fullpath"; ?>">Subscribe</a>&nbsp;|&nbsp;<a class="psf" href="<? echo "$filename"; ?>">Download</a></td>
+											<td align="right" valign="middle" class="G10B"><? echo "<a class=\"psf\" href=\"$fullpath\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
 										</tr>
 									</table>
 								</td>

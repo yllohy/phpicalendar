@@ -6,7 +6,7 @@ if (isset($getdate)) {
 } else {
 	$query="";
 }
-print "<form>\n<select name=\"action\" class=\"V12\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">\n";
+print "<form>\n<select name=\"action\" class=\"G10B\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">\n";
 #print "<option value=\"null\">Select a Calendar</option>\n";
 
 // open file
