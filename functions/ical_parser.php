@@ -181,7 +181,7 @@ foreach ($cal_filelist as $filename) {
 				}
 				if (isset($start_unixtime,$end_unixtime) && date('d',$start_unixtime) != date('d',$end_unixtime)) {
 					$spans_day = true;
-					$bleed_check = ((date('d',$start_unixtime)) - (date('d',$end_unixtime)));
+					$bleed_check = (($start_unixtime - $end_unixtime) < (60*60*24)) ? '-1' : '0';
 				} else {
 					$spans_day = false;
 					$bleed_check = 0;
@@ -253,7 +253,8 @@ foreach ($cal_filelist as $filename) {
 							if ($start_date_tmp == $end_date_tmp) {
 								$end_time_tmp = $end_time;
 							} else {
-								$end_time_tmp = '0000';
+								$end_time_tmp = '2400';
+								$display_end_tmp = '0000';
 							}
 							$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
 							$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url );
@@ -596,18 +597,24 @@ foreach ($cal_filelist as $filename) {
 															if ($start_date_tmp == $end_date_tmp) {
 																$end_time_tmp = $end_time;
 															} else {
-																$end_time_tmp = '0000';
+																$end_time_tmp = '2400';
+																$display_end_tmp = '0000';
 															}
-															$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
-															$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url) ;
+															
+															// Let's double check the until to not write past it
+															$until_check = $recur_data_date.$time_tmp.'00';
+															if ($abs_until > $until_check) {
+																$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
+																$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url) ;
+															}
 															$start_tmp = strtotime('+1 day',$start_tmp);
 														}
 													} else {
 														if ($bleed_check == '-1') {
 															$display_end_tmp = $end_time;
-															$end_time_tmp1 = '2400';	
+															$end_time_tmp1 = '2400';
+																
 														}
-														
 														if (!isset($end_time_tmp1)) $end_time_tmp1 = $end_time;
 													
 														// Let's double check the until to not write past it
