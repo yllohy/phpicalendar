@@ -62,6 +62,11 @@ COPYING for more information about our license.
 
 Changes:
 --------
+0.9.1
+	-Added unset preferences
+	-Cookies now fall back to defaults if data is bad.
+	-Fixed a bug with the latest version of Ximian.
+
 0.9
 	-Added complete VTODO support.
 	-Added STATUS support for VEVENT and VTODO.
