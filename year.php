@@ -120,11 +120,11 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 												}
 											}	
 											if (isset($master_array[("$daylink")][-1])) $image2 = '<img src="styles/silver/allday_dot.gif" alt="" border="0">';
-											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=Home&getdate=' . $daylink . '\'">' . "\n";
+											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=' . $cal . '&getdate=' . $daylink . '\'">' . "\n";
 											echo '<table width="100%" border="0" cellspacing="0" cellpadding="1">' . "\n";
 											echo '<tr>' . "\n";
 											echo '<td align="right" valign="top" class="V9">' . "\n";
-											echo '<a class="psf" href="day.php?cal=Home&getdate=' . $daylink . '">' . $day . '</a>' . "\n";
+											echo '<a class="psf" href="day.php?cal=' . $cal . '&getdate=' . $daylink . '">' . $day . '</a>' . "\n";
 											echo '</td>' . "\n";
 											echo '</tr>' . "\n";
 											echo '<tr>' . "\n";
@@ -132,11 +132,11 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 											echo '</tr>' . "\n";
 											echo '</table>' . "\n";
 										} elseif ($check_month == $minical_month) {
-											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=Home&getdate=' . $daylink . '\'">' . "\n";
-											echo '<font class="V9"><a class="psf" href="day.php?cal=Home&getdate=' . $daylink . '">' . $day . '</a></font></td>' . "\n";
+											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=' . $cal . '&getdate=' . $daylink . '\'">' . "\n";
+											echo '<font class="V9"><a class="psf" href="day.php?cal=' . $cal . '&getdate=' . $daylink . '">' . $day . '</a></font></td>' . "\n";
 										} else {
-											echo '<td width="30" height="30" align="right" valign="top" class="monthoff" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#F2F2F2" onclick="window.location.href=\'day.php?cal=Home&getdate=' . $daylink . '\'">' . "\n";
-											echo '<a class="psf" href="day.php?cal=Home&getdate=' . $daylink . '">' . $day . '</a></td>' . "\n";
+											echo '<td width="30" height="30" align="right" valign="top" class="monthoff" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#F2F2F2" onclick="window.location.href=\'day.php?cal=' . $cal . '&getdate=' . $daylink . '\'">' . "\n";
+											echo '<a class="psf" href="day.php?cal=' . $cal . '&getdate=' . $daylink . '">' . $day . '</a></td>' . "\n";
 										}
 										$start_day = ($start_day + (24.5 * 60 * 60));
 										$i++;
