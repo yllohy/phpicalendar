@@ -53,6 +53,7 @@ if (is_array($master_array[($getdate)])) {
   	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
   	<link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $default_path.'/rss/rss.php?cal='.$cal.'&rssview=day'; ?>">
 	<?php include (BASE.'functions/event.js'); ?>
+	<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
 <?php include (BASE.'header.inc.php'); ?>

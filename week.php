@@ -58,7 +58,8 @@ for ($i=0;$i<7;$i++) {
 	<title><?php echo "$calendar_name - $display_date"; ?></title>
   	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
   	<link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $default_path.'/rss/rss.php?cal='.$cal.'&rssview=week'; ?>">
-	<?php include BASE.'functions/event.js'; ?>
+	<?php include (BASE.'functions/event.js'); ?>
+	<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
 <?php include (BASE.'header.inc.php'); ?>
@@ -108,10 +109,12 @@ for ($i=0;$i<7;$i++) {
 											$thisdate = $start_week_time;
 											$i = 0;
 											do {
+												$thisday = date("Ymd", $thisdate);
 												$colWidth = round(70 / $nbrGridCols[$thisday]);
 												for ($j=0;$j < $nbrGridCols[$thisday];$j++) {
 													echo "<td width=\"" . $colWidth . "\"><img src=\"images/spacer.gif\" width=\"" . $colWidth . "\" height=\"1\" alt=\"\"></td>\n";
 												}
+												$thisdate = ($thisdate + (25 * 60 * 60));
 												$i++;
 											} while ($i < 7);
 											?>
