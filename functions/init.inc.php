@@ -134,7 +134,7 @@ if ($is_webcal) {
 		}
 		
 		// Sets the download and subscribe paths from the config if present.
-		if ($download_uri == '') {
+		if ($download_uri == '' && preg_match('/(^\/|\.\.\/)/', $filename) == 0) {
 			$subscribe_path = 'webcal://'.$HTTP_SERVER_VARS['SERVER_NAME'].dirname($HTTP_SERVER_VARS['PHP_SELF']).'/'.$filename;
 			$download_filename = $filename;
 		} elseif ($download_uri != '') {
