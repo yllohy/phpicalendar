@@ -97,7 +97,7 @@ foreach ($cal_filelist as $filename) {
 					$allday_start, $allday_end, $start, $end, $the_duration, 
 					$beginning, $rrule_array, $start_of_vevent, $description, 
 					$valarm_description, $start_unixtime, $end_unixtime,
-					$recurrence_id, $uid, $class, $location
+					$recurrence_id, $uid, $class, $location, $rrule
 				);
 					
 				$except_dates 	= array();
@@ -431,7 +431,7 @@ foreach ($cal_filelist as $filename) {
 												case 'MONTHLY':
 													$next_range_time = strtotime(date('Y-m-01', $next_range_time));
 													// month has two cases, either $bymonthday or $byday
-													if (is_array($bymonthday)) {
+													if ((is_array($bymonthday)) && (!is_array($byday))) {
 														// loop through the days on which this event happens
 														foreach($bymonthday as $day) {
 															$year = date('Y', $next_range_time);
@@ -445,20 +445,35 @@ foreach ($cal_filelist as $filename) {
 													} else {
 														// loop through the days on which this event happens
 														foreach($byday as $day) {
-															ereg ('([-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
+															ereg ('([-\+]{0,1})?([0-9]{1})?([A-Z]{2})', $day, $byday_arr);
 															$nth = $byday_arr[2]-1;
 															$on_day = two2threeCharDays($byday_arr[3]);
 															$on_day_num = two2threeCharDays($byday_arr[3],false);
-															if ($byday_arr[1] == '-') {
+															if ((isset($byday_arr[1])) && ($byday_arr[1] == '-')) {
 																$last_day_tmp = date('t',$next_range_time);
 																$next_range_time = strtotime(date('Y-m-'.$last_day_tmp, $next_range_time));
 																$last_tmp = (date('w',$next_range_time) == $on_day_num) ? '' : 'last ';
 																$next_date_time = strtotime($last_tmp.$on_day.' -'.$nth.' week', $next_range_time);
-															} else {
+															} elseif (is_array($bymonthday)) {
+																// This supports MONTHLY where BYDAY and BYMONTH are both set
+																if (!isset($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
+																foreach($bymonthday as $day) {
+																	$year 	= date('Y', $next_range_time);
+																	$month 	= date('m', $next_range_time);
+																	if (checkdate($month,$day,$year)) {
+																		$next_date_time = mktime(0,0,0,$month,$day,$year);
+																		$daday = strtolower(strftime("%a", $next_date_time));
+																		if ($daday == $on_day && in_array($month, $bymonth)) {
+																			$recur_data[] = $next_date_time;
+																		}
+																	}
+																}
+															} elseif (isset($byday_arr[1])) {
 																$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
+																$recur_data[] = $next_date_time;
 															}
 															$next_date = date('Ymd', $next_date_time);
-															$recur_data[] = $next_date_time;
+															//$recur_data[] = $next_date_time;
 														}
 													}
 													break;
@@ -469,7 +484,7 @@ foreach ($cal_filelist as $filename) {
 														if ((isset($byday)) && (is_array($byday))) {
 															$checkdate_time = mktime(0,0,0,$month,1,$year);
 															foreach($byday as $day) {
-																ereg ('([-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
+																ereg ('([-\+]{0,1})?([0-9]{1})?([A-Z]{2})', $day, $byday_arr);
 																$nth = $byday_arr[2]-1;
 																$on_day = two2threeCharDays($byday_arr[3]);
 																if ($byday_arr[1] == '-') {
@@ -954,15 +969,14 @@ if ($parse_file) {
 
 
 //If you want to see the values in the arrays, uncomment below.
-/*
-print '<pre>';
-print_r($master_array);
-print_r($overlap_array);
+
+//print '<pre>';
+//print_r($master_array);
+//print_r($overlap_array);
 //print_r($day_array);
-//print_r($rrule);
+//print_r($rrule_array);
 //print_r($recurrence_delete);	
-print '</pre>';
-*/
+//print '</pre>';
 
 // Set a calender name for all calenders combined
 if ($cal == 'all_calenders_combined971') {

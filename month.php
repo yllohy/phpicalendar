@@ -126,8 +126,8 @@ $num_of_events = 0;
 							}
 						}
 						if ($i == 0) echo '<tr height="105">';
-						echo '<td valign="top" align="left" '.$bgclass.' width="105" height="105">';
 						if (isset($master_array[("$daylink")])) {
+							echo '<td valign="top" align="left" '.$bgclass.' width="105" height="105">';
 							echo '<div align="right"><font class="G10"><a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a></font></div>';
 							echo '<div align="left">';
 							if ($master_array[("$daylink")]) {
@@ -162,7 +162,7 @@ $num_of_events = 0;
 							echo '</td>';
 						} else {
 							echo '<td align="center" valign="top" '.$bgclass.' width="105" height="105">';
-							echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a>';
+							echo '<div align="right"><font class="G10"><a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a></font></div>';
 							echo '</td>';
 						}
 						$sunday = strtotime("+1 day", $sunday); 
