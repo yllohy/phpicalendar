@@ -24,14 +24,14 @@ if ($getdate == (date("Ymd"))) {
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+ <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
   <title><? echo "$calendar_name"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
 </head>
 <body bgcolor="#FFFFFF">
 <center>
 
-
+<? include('./list_icals.php'); ?>
 <table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>

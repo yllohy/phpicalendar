@@ -12,6 +12,13 @@ $style_sheet = "default.css";
 
 // what iCal file are we using
 $fullpath = "webcal://";
-$filename = "calendars/Home.ics";
+
+// path to directory with calendars
+$calendar_path = "./calendars";
+
+// filename of calendar without .ics
+$default_cal = "Home";
+
+$default_view = "day";
 
 ?>
