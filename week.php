@@ -114,7 +114,7 @@ for ($i=0;$i<7;$i++) {
 								do {
 									$thisday = date("Ymd", $thisdate);
 									$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
-									$colWidth = round(120 / $nbrGridCols[$thisday]);
+									$colWidth = round(70 / $nbrGridCols[$thisday]);
 									for ($j=0;$j < $nbrGridCols[$thisday];$j++) {
 										echo "<td width=\"" . $colWidth . "\"><img src=\"images/spacer.gif\" width=\"" . $colWidth . "\" height=\"1\" alt=\"\"></td>\n";
 									}
