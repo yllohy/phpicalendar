@@ -19,8 +19,8 @@ $next_month_lang	= 'Neste m&aring;ned';
 $next_week_lang		= 'Neste uke';
 $next_year_lang		= 'Neste &aring;r';
 $last_day_lang		= 'Forrige dag';
-$last_month_lang	= 'Forrige M&aring;ned';
-$last_week_lang		= 'Forrige Uke';
+$last_month_lang	= 'Forrige m&aring;ned';
+$last_week_lang		= 'Forrige uke';
 $last_year_lang		= 'Forrige &aring;r';
 $subscribe_lang		= 'Abonn&eacute;r';
 $download_lang		= 'Last ned';
@@ -82,11 +82,11 @@ Notes about dateFormat_*
 // Error messages - %s will be replaced with a variable
 $error_title_lang = 'Feil!';
 $error_window_lang = 'Det skjedde en feil!';
-$error_calendar_lang = 'Kalenderen "%s" ble aksessert n&aring;r denne feilen oppstod.';
+$error_calendar_lang = 'Kalenderen "%s" var i bruk n&aring;r denne feilen oppstod.';
 $error_path_lang = 'Kunne ikke &aring;pne adressen: "%s"';
 $error_back_lang = 'Vennligst bruk "Tilbake" knappen for &aring; returnere.';
 $error_remotecal_lang = 'Denne tjenermaskinen blokkerer ikke-lokale kalendere uten godkjenning.';
-$error_restrictedcal_lang = 'Du har pr&oslash;vd &aring; &aring;pne en kalender som er begrenset p&aring; denne tjenermaskinen.';
+$error_restrictedcal_lang = 'Du har pr&oslash;vd &aring; &aring;pne en kalender som er sperret p&aring; denne tjenermaskinen.';
 $error_invalidcal_lang = 'Ugyldig kalenderfil. Vennligst pr&oslash;v en annen kalenderfil.';
 
 
