@@ -46,7 +46,7 @@ a.ps3:hover		{ color: #000000; background-color: transparent; text-decoration:	u
 	
 /* Body attributes */
 
-body			{ background-color: #E5E5E5; }
+body			{ background-image: url(background.gif); }
 
 /* CSS definitions for fonts */
 

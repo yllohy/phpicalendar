@@ -22,31 +22,32 @@ $week_events_lines 		= '1';				// Number of lines to wrap each event title in th
 $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$save_parsed_cals = 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
-$use_sessions = 'yes';					// This has not yet been implemented.
-$display_custom_goto = 'no';			// In the 'Jump To' box, display the custom 'go to day' box.
-$display_ical_list = 'yes';				// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
-$allow_webcals = 'no';					// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
-$this_months_events = 'yes';			// Display "This month's events" at the bottom off the month page.
-$use_color_cals = 'yes';				// Display each calendar in the pop-up as a different color.
-$daysofweek_dayview = 'no';			// Display the days of the week in day.php view.
+$save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$use_sessions 			= 'yes';			// This has not yet been implemented.
+$display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
+$display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
+$allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
+$this_months_events 	= 'yes';			// Display "This month's events" at the bottom off the month page.
+$use_color_cals 		= 'yes';			// Display each calendar in the pop-up as a different color.
+$daysofweek_dayview 	= 'no';				// Display the days of the week in day.php view.
 										
-$blacklisted_cals[] = '';				// Fill in between the quotes the name of the calendars 
-$blacklisted_cals[] = '';				// you wish to 'blacklist' or that you don't want to show up in your calendar
-$blacklisted_cals[] = '';				// list. This should be the exact calendar filename without .ics
-$blacklisted_cals[] = '';				// the parser will *not* parse any cal that is in this list (it will not be Web accessible)
+$blacklisted_cals[] = '';					// Fill in between the quotes the name of the calendars 
+$blacklisted_cals[] = '';					// you wish to 'blacklist' or that you don't want to show up in your calendar
+$blacklisted_cals[] = '';					// list. This should be the exact calendar filename without .ics
+$blacklisted_cals[] = '';					// the parser will *not* parse any cal that is in this list (it will not be Web accessible)
 // add more lines as necessary
 
-$list_webcals[] = 'webcal://ical.mac.com/ical/Movies.ics';					// Fill in between the quotes exact URL of a calendar that you wish
-$list_webcals[] = 'webcal://phpicalendar.sourceforge.net/phpicalendar-0.6/calendars/Jareds32Classes.ics';					// to show up in your calendar list. You must prefix the URL with http://
-$list_webcals[] = '';					// or webcal:// and the filename should contain the .ics suffix
-$list_webcals[] = '';					// $allow_webcals does *not* need to be "yes" for these to show up and work
+$list_webcals[] = '';						// Fill in between the quotes exact URL of a calendar that you wish
+$list_webcals[] = '';						// to show up in your calendar list. You must prefix the URL with http://
+$list_webcals[] = '';						// or webcal:// and the filename should contain the .ics suffix
+$list_webcals[] = '';						// $allow_webcals does *not* need to be "yes" for these to show up and work
 // add more lines as necessary
 
-$color_cals[] = 'silver';				// Fill in between the quotes the colors you want to display
-$color_cals[] = 'red';					// multiple calendars in.
-$color_cals[] = 'orange';				// The first color will be used if no color is selected.
-$color_cals[] = 'grey';					// 
-$color_cals[] = 'green';				// 
+$color_cals[] = 'silver';					// Fill in between the quotes the colors you want to display
+$color_cals[] = 'red';						// multiple calendars in.
+$color_cals[] = 'orange';					// The first color will be used if no color is selected.
+$color_cals[] = 'grey';						// 
+$color_cals[] = 'green';					// 
+$color_cals[] = 'tan';						// 
 // add more lines as necessary
 ?>
