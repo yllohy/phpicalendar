@@ -12,6 +12,7 @@ $default_cal 			= $ALL_CALENDARS_COMBINED;		// Exact filename of calendar withou
 $language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto'
 $week_start_day 		= 'Sunday';			// Day of the week your week starts on
 $day_start 				= '0800';			// Start time for day grid
+$day_end				= '2000';			// End time for day grid
 $gridLength 			= '15';				// Grid distance in minutes for day view, multiples of 15 preferred
 $num_years 				= '3';				// Number of years to display in 'Jump to'
 $month_event_lines 		= '1';				// Number of lines to wrap each event title in month view, 0 means display all lines.

@@ -9,7 +9,7 @@ include(BASE.'functions/timezones.php');
 
 $fillTime = $day_start;
 $day_array = array ();
-while ($fillTime != '2400') {
+while ($fillTime < $day_end) {
 	array_push ($day_array, $fillTime);
 	ereg ('([0-9]{2})([0-9]{2})', $fillTime, $dTime);
 	$fill_h = $dTime[1];
