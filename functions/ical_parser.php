@@ -495,8 +495,32 @@ if ($parse_file) {
 											} else {
 												$start_unixtime_tmp = mktime($recur_data_hour,$recur_data_minute,0,$recur_data_month,$recur_data_day,$recur_data_year);
 												$end_unixtime_tmp = $start_unixtime_tmp + $length;
-												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
-												$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class);
+												
+												if ($spans_day) {
+													$start_tmp = strtotime(date('Ymd',$start_unixtime_tmp));
+													$end_date_tmp = date('Ymd',$end_unixtime_tmp);
+													while ($start_tmp < $end_unixtime_tmp) {
+														$start_date_tmp = date('Ymd',$start_tmp);
+														if ($start_date_tmp == $start_date) {
+															$time_tmp = $hour.$minute;
+															$start_time_tmp = $start_time;
+														} else {
+															$time_tmp = '0000';
+															$start_time_tmp = '0000';
+														}
+														if ($start_date_tmp == $end_date_tmp) {
+															$end_time_tmp = $end_time;
+														} else {
+															$end_time_tmp = '2400';
+														}
+														$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
+														$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true);
+														$start_tmp = strtotime('+1 day',$start_tmp);
+													}
+												} else {
+													$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
+													$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false);
+												}
 											}
 										}
 									}
