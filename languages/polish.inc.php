@@ -85,6 +85,7 @@ $priority_low_lang		= 'Niski';
 $priority_medium_lang	= 'Średni';
 $priority_none_lang		= 'Żaden';
 $status_lang			= 'Status:';
+
 $todo_lang				= 'Do zrobienia';
 $unfinished_lang		= 'Niewykonane';
 
@@ -96,6 +97,7 @@ $day_view_lang = 'Day View';
 $week_view_lang = 'Week View';
 $month_view_lang = 'Month View';
 $year_view_lang = 'Year View';
+
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'

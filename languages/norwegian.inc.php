@@ -61,31 +61,31 @@ $rss_month_date			= '%b %e';  // Lists just the day
 
 // new in 0.9 ----------------------
 
-$search_took_lang		= 'Search took %s seconds';
-$recurring_event_lang	= 'Recurring event';
-$exception_lang			= 'Exception';
-$no_query_lang			= 'No query given';
-$preferences_lang		= 'Preferences';
-$printer_lang			= 'Printer';
-$select_lang_lang		= 'Select your default language:';
-$select_cal_lang		= 'Select your default calendar:';
-$select_view_lang		= 'Select your default view:';
-$select_time_lang		= 'Select your default start time:';
-$select_day_lang		= 'Select your default start day of week:';
-$select_style_lang		= 'Select your default style:';
-$set_prefs_lang			= 'Set preferences';
-$completed_date_lang	= 'Completed on';
-$completed_lang			= 'Completed';
-$created_lang			= 'Created:';
-$due_lang				= 'Due:';
-$priority_lang			= 'Priority:';
-$priority_high_lang		= 'High';
-$priority_low_lang		= 'Low';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'None';
+$search_took_lang		= 'S&oslash;ket tok %s sekunder';
+$recurring_event_lang	= 'Repeterende hendelse';
+$exception_lang			= 'Unntak';
+$no_query_lang			= 'Ingen foresp&oslash;rsel gitt';
+$preferences_lang		= 'Valg';
+$printer_lang			= 'Skriver';
+$select_lang_lang		= 'Velg ditt foretrukne spr&aring;k:';
+$select_cal_lang		= 'Velg din foretrukne kalender:';
+$select_view_lang		= 'Velg din foretrukne visning:';
+$select_time_lang		= 'Velg din foretrukne starttid:';
+$select_day_lang		= 'Velg din foretrukne f&oslash;rste dag i kalenderuken:';
+$select_style_lang		= 'Velg din foretrukne stil:';
+$set_prefs_lang			= 'Lagre valg';
+$completed_date_lang	= 'Ferdig p&aring;';
+$completed_lang			= 'Ferdig';
+$created_lang			= 'Opprettet:';
+$due_lang				= 'Forfaller:';
+$priority_lang			= 'Prioritet:';
+$priority_high_lang		= 'H&oslash;y';
+$priority_low_lang		= 'Lav';
+$priority_medium_lang	= 'Middels';
+$priority_none_lang		= 'Ingen';
 $status_lang			= 'Status:';
-$todo_lang				= 'To do items';
-$unfinished_lang		= 'Unfinished';
+$todo_lang				= 'Gj&oslash;rem&aring;lsliste';
+$unfinished_lang		= 'Uferdig';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'

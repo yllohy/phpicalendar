@@ -50,7 +50,7 @@ $no_results_lang	= 'Geen activiteiten gevonden';
 $goprint_lang		= 'Makkelijk Printbaar';
 $time_lang			= 'Tijd';
 $summary_lang		= 'Overzicht';
-$description_lang	= 'Beschrijving';
+$description_lang	= 'Omschrijving';
 $this_site_is_lang		= 'Deze site is';
 $no_events_day_lang		= 'Geen activiteiten vandaag.';
 $no_events_week_lang	= 'Geen activiteiten deze week.';
@@ -62,50 +62,50 @@ $rss_language			= 'en-us';
 
 // new in 0.9 ----------------------
 
-$search_took_lang		= 'Search took %s seconds';
-$recurring_event_lang	= 'Recurring event';
-$exception_lang			= 'Exception';
-$no_query_lang			= 'No query given';
-$preferences_lang		= 'Preferences';
+$search_took_lang		= 'Zoeken duurde %s seconden';
+$recurring_event_lang	= 'Terugkerend evenement';
+$exception_lang			= 'Uitzondering';
+$no_query_lang			= 'Geen opdracht gegeven';
+$preferences_lang		= 'Voorkeuren';
 $printer_lang			= 'Printer';
-$select_lang_lang		= 'Select your default language:';
-$select_cal_lang		= 'Select your default calendar:';
-$select_view_lang		= 'Select your default view:';
-$select_time_lang		= 'Select your default start time:';
-$select_day_lang		= 'Select your default start day of week:';
-$select_style_lang		= 'Select your default style:';
-$set_prefs_lang			= 'Set preferences';
-$completed_date_lang	= 'Completed on';
-$completed_lang			= 'Completed';
-$created_lang			= 'Created:';
-$due_lang				= 'Due:';
-$priority_lang			= 'Priority:';
-$priority_high_lang		= 'High';
-$priority_low_lang		= 'Low';
+$select_lang_lang		= 'Selecteer jouw standaard taal:';
+$select_cal_lang		= 'Selecteer jouw standaard kalender:';
+$select_view_lang		= 'Selecteer jouw standaard view:';
+$select_time_lang		= 'Selecteer jouw standaard start tijd:';
+$select_day_lang		= 'Selecteer jouw standaard start weekdag:';
+$select_style_lang		= 'Selecteer jouw standaard stijl:';
+$set_prefs_lang			= 'Zet voorkeuren';
+$completed_date_lang	= 'Volbracht op';
+$completed_lang			= 'Volbracht';
+$created_lang			= 'Gemaakt:';
+$due_lang				= 'Op:';
+$priority_lang			= 'Prioriteit:';
+$priority_high_lang		= 'Hoog';
+$priority_low_lang		= 'Laag';
 $priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'None';
+$priority_none_lang		= 'Geen';
 $status_lang			= 'Status:';
-$todo_lang				= 'To do items';
-$unfinished_lang		= 'Unfinished';
+$todo_lang				= 'Nog af te werken items';
+$unfinished_lang		= 'Niet afgewerkt';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 
-$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
-$format_recur_lang['monthly']		= array('month','months');		// and plural forms
-$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
-$format_recur_lang['daily']			= array('day','days');			// in the replacement below
-$format_recur_lang['hourly']		= array('hour','hours');
-$format_recur_lang['minutely']		= array('minute','minutes');
-$format_recur_lang['secondly']		= array('second','seconds');
+$format_recur_lang['yearly']		= array('jaar','jaren');		// for these, put singular
+$format_recur_lang['monthly']		= array('maand','maanden');		// and plural forms
+$format_recur_lang['weekly']		= array('week','weken');		// these will be %freq%
+$format_recur_lang['daily']			= array('dag','dagen');			// in the replacement below
+$format_recur_lang['hourly']		= array('uur','uren');
+$format_recur_lang['minutely']		= array('minuut','minuten');
+$format_recur_lang['secondly']		= array('second','seconden');
 
-$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
-$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+$format_recur_lang['start']			= 'Iedere %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'tot %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= '%int% maal';		// ie, 'for 5 times'
 
-$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
-$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
-$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+$format_recur_lang['bymonth']		= 'In de maanden: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'Op datums: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'Op dagen: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
 
 // ---------------------------------
 
@@ -147,11 +147,11 @@ Notes about dateFormat_*
 $error_title_lang = 'Fout!';
 $error_window_lang = 'Er is een fout opgetreden!';
 $error_calendar_lang = 'De kalender "%s" was aan het processen toen de fout gebeurde.';
-$error_path_lang = 'Onmogelijk om het path te openen: "%s"';
+$error_path_lang = 'Onmogelijk om de directory te openen: "%s"';
 $error_back_lang = 'Gebruik de knop "Vorige" om terug te keren.';
 $error_remotecal_lang = 'Deze server blokt alle niet-geaccepteerde kalenders.';
 $error_restrictedcal_lang = 'Je probeerde een beveiligde kalender te bekijken.';
-$error_invalidcal_lang = 'Ongeldige Kalender file. Probeer een andere kalender aub.';
+$error_invalidcal_lang = 'Ongeldig kalender bestand. Probeer een andere kalender aub.';
 
 
 ?>
