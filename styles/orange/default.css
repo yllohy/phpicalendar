@@ -65,5 +65,5 @@ body			{ background-color: #E5E5E5; }
 
 /* Length of the form drop downs */
 
-.query_style 	{ font-size : 11px; font-family : verdana, geneva, arial, sans-serif; width: 146px; margin-bottom:0; }
-
+.query_style 	{ font-size: 11px; font-family: verdana, geneva, arial, sans-serif; width: 156px; margin-bottom: 0; }
+.search_style 	{ font-size: 12px; font-family: verdana, geneva, arial, sans-serif; width: 134px; margin-bottom: 0; }
