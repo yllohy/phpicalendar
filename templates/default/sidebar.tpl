@@ -1,6 +1,6 @@
 <!-- switch show_user_login on -->
-<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php?{LOGIN_QUERYS}" method="GET">
-<input type="hidden" name="action" value="login">
+<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php?{LOGIN_QUERYS}" method="get">
+<input type="hidden" name="action" value="login" />
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
 		<td colspan="2" align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{L_LOGIN}</div></td>
@@ -16,11 +16,11 @@
 	<!-- switch invalid_login off -->
 	<tr>
 		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-top: 5px;">Username:</div></td>
-		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-top: 5px;"><input type="text" name="username" size="10"></div></td>
+		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-top: 5px;"><input type="text" name="username" size="10" /></div></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">Password:</div></td>
-		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;"><input type="password" name="password" size="10"></div></td>
+		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;"><input type="password" name="password" size="10" /></div></td>
 	</tr>
 </table>
 </form>
@@ -74,18 +74,18 @@
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
 			<div style="padding: 5px;">
-				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="GET">
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_JUMPS}</select><br />
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br />
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br />
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br />
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br />
+				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_JUMPS}</select><br />
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br />
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br />
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br />
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br />
 				</form>
 				<!-- switch show_search on -->
 				{SEARCH_BOX}
 				<!-- switch show_search off -->
 				<!-- switch show_goto on -->
-				<form style="margin-bottom:0;" action="day.php" method="GET">
+				<form style="margin-bottom:0;" action="day.php" method="get">
 					<input type="hidden" name="cal" value="{URL_CAL}">
 					<input type="text" style="width:160px; font-size:10px" name="jumpto_day">
 					<input type="submit" value="Go">
@@ -206,7 +206,7 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" / ></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>

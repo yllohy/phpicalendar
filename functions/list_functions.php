@@ -29,7 +29,7 @@ function list_months() {
 		$month_month 	= date("m", $month_time);
 		$select_month 	= localizeDate($dateFormat_month, $month_time);
 		if ($month_month == $getdate_month) {
-			$return .= "<option value=\"month.php?cal=$cal&amp;getdate=$monthdate\" selected>$select_month</option>\n";
+			$return .= "<option value=\"month.php?cal=$cal&amp;getdate=$monthdate\" selected=\"selected\">$select_month</option>\n";
 		} else {
 			$return .= "<option value=\"month.php?cal=$cal&amp;getdate=$monthdate\">$select_month</option>\n";
 		}
@@ -53,7 +53,7 @@ function list_years() {
 	
 	$getdate_date = date("Ymd", $year_time);
 	$getdate_year = date("Y", $year_time);
-	$return .= "<option value=\"year.php?cal=$cal&amp;getdate=$getdate_date\" selected>$getdate_year</option>\n";
+	$return .= "<option value=\"year.php?cal=$cal&amp;getdate=$getdate_date\" selected=\"selected\">$getdate_year</option>\n";
 	
 	for ($i=0; $i < $num_years; $i++) {
 		$offset = $i + 1;
@@ -83,7 +83,7 @@ function list_weeks() {
 		$select_week2 	= localizeDate($dateFormat_week_jump, $end_week_time);
 	
 		if (($check_week >= $start_week_time) && ($check_week <= $end_week_time)) {
-			$return .= "<option value=\"week.php?cal=$cal&amp;getdate=$weekdate\" selected>$select_week1 - $select_week2</option>\n";
+			$return .= "<option value=\"week.php?cal=$cal&amp;getdate=$weekdate\" selected=\"selected\">$select_week1 - $select_week2</option>\n";
 		} else {
 			$return .= "<option value=\"week.php?cal=$cal&amp;getdate=$weekdate\">$select_week1 - $select_week2</option>\n";
 		}
@@ -102,7 +102,7 @@ function list_languages() {
 		if (substr($file, -8) == ".inc.php") {
 			$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
 			if ($language_tmp == $tmp_pref_language) {
-				$return .= "<option value=\"$current_view.php?chlang=$language_tmp\" selected>in $language_tmp</option>\n";
+				$return .= "<option value=\"$current_view.php?chlang=$language_tmp\" selected=\"selected\">in $language_tmp</option>\n";
 			} else {
 				$return .= "<option value=\"$current_view.php?chlang=$language_tmp\">in $language_tmp</option>\n";
 			}

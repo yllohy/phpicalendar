@@ -1,6 +1,6 @@
 <table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
-	<tr height="20">
-		<td align="center" class="sideback"><b>{MONTH_TITLE}</b></td>
+	<tr>
+		<td align="center" class="sideback"><div style="height:20px;"><b>{MONTH_TITLE}</b></div></td>
 	</tr>
 	<tr>
 		<td align="center">
@@ -32,7 +32,7 @@
 				</tr>
 				<!-- loop monthweeks off -->
 			</table>
-			<img src="images/spacer.gif" width="1" height="3" alt=" "><br />
+			<img src="images/spacer.gif" width="1" height="3" alt=" " /><br />
 		</td>
 	</tr>
 </table>
