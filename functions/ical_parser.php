@@ -523,18 +523,20 @@ foreach ($cal_filelist as $filename) {
 														}
 														$recur_data[] = $next_date_time;
 													}
-													foreach ($byyearday as $yearday) {
-														ereg ('([-\+]{0,1})?([0-9]{1,3})', $yearday, $byyearday_arr);
-														if ($byyearday_arr[1] == '-') {
-															$ydtime = mktime(0,0,0,12,31,$this_year);
-															$yearnum = $byyearday_arr[2] - 1;
-															$next_date_time = strtotime('-'.$yearnum.' days', $ydtime);
-														} else {
-															$ydtime = mktime(0,0,0,1,1,$this_year);
-															$yearnum = $byyearday_arr[2] - 1;
-															$next_date_time = strtotime('+'.$yearnum.' days', $ydtime);
+													if (isset($byyearday)) {
+														foreach ($byyearday as $yearday) {
+															ereg ('([-\+]{0,1})?([0-9]{1,3})', $yearday, $byyearday_arr);
+															if ($byyearday_arr[1] == '-') {
+																$ydtime = mktime(0,0,0,12,31,$this_year);
+																$yearnum = $byyearday_arr[2] - 1;
+																$next_date_time = strtotime('-'.$yearnum.' days', $ydtime);
+															} else {
+																$ydtime = mktime(0,0,0,1,1,$this_year);
+																$yearnum = $byyearday_arr[2] - 1;
+																$next_date_time = strtotime('+'.$yearnum.' days', $ydtime);
+															}
+															$recur_data[] = $next_date_time;
 														}
-														$recur_data[] = $next_date_time;
 													}
 													break;
 												default:
