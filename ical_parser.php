@@ -204,7 +204,7 @@ foreach($contents as $line) {
 					if ($allday_start != "") {
 						
 						// Since we hit the end of the RRULE array, lets do something.
-						// Below handles yearly all day events only.
+						// Below handles yearly, montly, weekly, daily all-day events.
 						// $parse_to_year is the year we are parsing, January 10th, next year.
 						// $start_of_vevent is the date the recurring event starts.
 						// $end_of_vevent is the date the recurring event stops.
@@ -217,7 +217,6 @@ foreach($contents as $line) {
 
 						if ($start_of_vevent < $parse_to_year) {
 							do {
-									
 								// This steps through each day of a multiple all-day event and adds to master array
 								// Every all day event should pass through here at least once.
 								$start = $start_of_vevent;
@@ -227,13 +226,10 @@ foreach($contents as $line) {
 									$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
 									$start = ($start + (24*3600));
 								} while ($start < $end);
-								
 								$start_of_vevent = DateAdd ($interval,  $number, $start_of_vevent);
 								$end_of_vevent = DateAdd ($interval,  $number, $end_of_vevent);
-													
 							} while ($start_of_vevent < $parse_to_year); 
 						}
-						//echo "$interval - $number - $date - $recur_year - $this_year";
 					
 					// Let's take care of recurring events that are not all day events
 					// Nothing is here yet, Jared seems to way to play, so I'll let him do these... muahahahaha.
