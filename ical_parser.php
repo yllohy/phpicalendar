@@ -78,6 +78,7 @@ foreach($contents as $line) {
 		$bymonthday = "";
 		$byday = "";
 		$count = 1000000;
+		$description = "";
 	} elseif (strstr($line, "END:VEVENT")) {
 		
 		// Clean out \n's and other slashes
