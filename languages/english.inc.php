@@ -34,8 +34,13 @@ $date_lang			= "Date";
 $summary_lang		= "Summary";
 $all_day_lang		= "All day event";
 $notes_lang			= "Notes";
+$this_years_lang	= "This Year's Events";
+$today_lang			= "Today";
+$this_week_lang		= "This Week";
+$this_month_lang	= "This Month";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
+// These do not work on Mac OS X, but are fine on other builds of *nix.
 setlocale (LC_TIME, 'en_EN');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php

@@ -9,16 +9,14 @@ include("./ical_parser.php");
 //	echo "using sessions";
 //}
 
-
 $starttime = "0700";
 $weekstart = 1;
 $gridLength = 30;
-$today_today = date ("Ymd");
 $unix_time = strtotime($getdate);
-$display_date = strftime($dateFormat_day, $unix_time);
+$today_today = date ("Ymd");
 $tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
 $yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
-
+$display_date = strftime($dateFormat_day, $unix_time);
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -35,9 +33,9 @@ $yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 
 <table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
-		<td align="left" width="5%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">Today</a>"; ?></td>
-		<td align="center" width="90%"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
-		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
+		<td align="left" width="100"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$today_lang</a>"; ?></td>
+		<td align="center" width="600"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$getdate\">$day_lang</a> | <a class=\"psf\" href=\"week.php?cal=$cal&getdate=$getdate\">$week_lang</a> | <a class=\"psf\" href=\"month.php?cal=$cal&getdate=$getdate\">$month_lang</a>"; ?></td>
+		<td align="right" width="100"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" height="10" width="1" alt=""></td>
