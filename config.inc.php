@@ -5,7 +5,7 @@ $fullpath = "webcal://";				// what iCal file are we using
 $calendar_path = "./calendars";			// path to directory with calendars
 $default_view = "day";					// default view for calendars = "day", "week", "month"
 $default_cal = "Home";					// filename of calendar without .ics
-$language = "Japanese";					// Language support - "English", "Polish", "German", "French", "Dutch", "Danish", "Italian", "Japanese"
+$language = "English";					// Language support - "English", "Polish", "German", "French", "Dutch", "Danish", "Italian", "Japanese"
 $week_start_day = "Sunday";				// Day of the week your week starts on
 $time_format = "12"						// Enter "12" for 12 hour clock, "24" for 24 hour clock (military, european)
 
