@@ -111,7 +111,7 @@
 							$day= "<font class=\"G10G\">$day</font>";
 							$bgclass="class=\"monthoff\"";
 						} else {
-							if ($getdate == $daylink) {
+							if ($today_today == $daylink) {
 								$bgclass="class=\"monthon\"";
 							} else {
 								$bgclass="class=\"monthreg\"";

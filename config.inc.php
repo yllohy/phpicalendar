@@ -24,7 +24,7 @@ $default_path			= 'http://www.example.com/phpicalendar'; // The HTTP URL to the 
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$save_parsed_cals 		= 'yes';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
 $use_sessions 			= 'no';				// This has not yet been implemented.
 $display_custom_goto 	= 'no';				// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
