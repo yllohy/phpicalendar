@@ -1,14 +1,9 @@
 <?php
 
-ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
-$this_day = $day_array2[3]; 
-$this_month = $day_array2[2];
-$this_year = $day_array2[1];
-
 print "<form>\n<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value);\">\n";
 $i = 0;
-$month_time = mktime (0,0,0,1,$this_day,$this_year);
-echo "$this_day, $this_year";
+$month_time = strtotime($getdate);
+// echo "$this_day, $this_year";
 // build the <option> tags
 while ($i != 12) {
 	$monthdate = date ("Ymd", $month_time);
