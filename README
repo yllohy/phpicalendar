@@ -63,10 +63,11 @@ COPYING for more information about our license.
 Changes:
 --------
 0.9
-	-Added VTODO support
-	-Added STATUS support for VEVENT and VTODO
+	-Added complete VTODO support.
+	-Added STATUS support for VEVENT and VTODO.
 	-Added RSS auto-detection on day, week, month, and year pages.
 	-Added year view icon.
+	-Added Finnish language support.
 	-Added Preferences page (uses cookies).
 		-Select defualt language
 		-Select default calendar
@@ -74,8 +75,8 @@ Changes:
 		-Select default theme
 		-Select default start day
 		-Select default start time
-		-Upload new calendars (ftp)
 	-Print view can now be set for your default view.
+	-Updated silver and red styles.
 	-Calendars can now be stored outside of phpicalendar's installation.
 	-Cleaned up folders for easier installation.
 	-Minor interface enhancements.
