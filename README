@@ -34,7 +34,7 @@ marks to change the setting of that variable. If there are restrictions
 as to what that variable can be set to, the comment behind will specify
 them. If you have difficulty with your configuration, you can ask the 
 developers and other PHP iCalendar users at the PHP iCalendar forums: 
-http://phpicalendar.sourceforge.net/phpBB2/
+http://phpicalendar.sourceforge.net/phpBB2
 
 Bugs:
 -----
@@ -68,6 +68,8 @@ Changes:
 	-Fixed a bug with RSS not properly validating.
 	-Fixed a bug with Search returning errors on some characters.
 	-Brought some languages up to 0.8 translations.
+	-Added support for "last X in month"
+	-Fixed many small bugs.
 
 0.8
 	-Added search capability.
