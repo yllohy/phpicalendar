@@ -641,7 +641,7 @@ class Page {
 					$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
 					if ($vtodo_text != "") {	
 						if (isset($val["description"])) { 
-							$description 	= urldecode($val["description"]);
+							$description 	= stripslashes(urldecode($val["description"]));
 						} else {
 							$description = ""; 
 						}
