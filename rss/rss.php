@@ -1,36 +1,84 @@
 <?php
 
+/********************************************************************************
+*	Modified from phpicalendar 2.0a distribution by Jim Hu
+*	philosophical changes 
+*		- instead of having separate generators, use a date range for all views (done)
+*		- change the rss generation method to conform to standards(not done)
+*	PHP note: #@ is error control operator to suppress execution halt on error
+*		- used below to deal with undef?
+*********************************************************************************/
 define('BASE', '../');
 include(BASE.'functions/ical_parser.php');
 
 if ($enable_rss != 'yes') {
-	exit(error('RSS is not available for this installation.', $cal, '../'));
+	die ("RSS feeds are not enabled on this site.");
 }
 
-if (empty($default_path)) {
-	if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
-		$default_path = 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
-	} else {
-		$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
-	}
-} else {
-	$default_path = $default_path.'rss/';
-}
+$default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].':'.$HTTP_SERVER_VARS['SERVER_PORT'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'],'/rss/'));
 
-$start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
-$end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
-$start_week 		= localizeDate($dateFormat_week, $start_week_time);
-$end_week 			=  localizeDate($dateFormat_week, $end_week_time);
+
+//set the range of days to return based on the view chosen
+$rssview = $_GET['rssview'];
+
+if (!$getdate){$getdate = date("Ymd");}
+
+switch ($rssview){
+	case 'day':
+		$fromdate = $getdate;
+		$todate = $getdate;
+		$theview = $day_lang;
+		break;
+	case 'month':
 $parse_month 		= date ("Ym", strtotime($getdate));
-$rssview 			= $_GET['rssview'];
+		$fromdate = ($parse_month *100) + 1;
+		$nextmonth = ($parse_month +1) * 100;   #should give the 0th day of following month
+		$todate = date('Ymd',strtotime($nextmonth));	
+		$theview = date('M Y',strtotime($fromdate));
+		break;
+	case 'daysfrom':
+		$fromdate = $getdate;
+		$todate = $getdate + $_GET['days'];
+		#print "from:$fromdate to: $todate<br>";
+		$theview = $_GET['days']." days from ".date('n/d/Y',strtotime($fromdate));
+		break;
+	case 'daysto':
+		$todate = $getdate;
+		$fromdate = $getdate - $_GET['days'];
+		#print "from:$fromdate to: $todate<br>";
+		$theview = $_GET['days']." days before ".date('n/d/Y',strtotime($todate));
+		break;
+	case 'range':
+		$fromdate = $_GET['from'];
+		$todate = $_GET['to'];
+		$theview = date('n/d/Y',strtotime($fromdate)).'-'.date('n/d/Y',strtotime($todate));
+		break;
+	default:
+		#default to week
+		$fromdate = dateOfWeek($getdate, $week_start_day);
+		$todate = $fromdate + 6;
+		$theview = $lang['l_week']." of ".date('n/d/Y',strtotime($fromdate));
+
+}
+//Set calendar or calendar directory name for feed
+//Note that this depends on other modifications I've made to 
+//allow phpicalendar to use calendar subdirectories - see bbs
+
 $cal_displayname 	= str_replace("32", " ", $cal);
-$events_week 		= 0;
-$view_path	 		= $default_path.$rss_view.'.php'; 
+if ($cal == $ALL_CALENDARS_COMBINED) {
+	$temp = explode("/",$calendar_path);
+	$cal_displayname = str_replace("32"," ",ucfirst(array_pop($temp)));
+}
+
+$events_count = 0;
 
 // calculate a value for Last Modified and ETag
-$cal = urldecode($cal);
-$filemod = @filemtime("$calendar_path/$cal.ics");
-$filemodtime = @date("r", $filemod);
+if ($cal == $ALL_CALENDARS_COMBINED) {
+	$filemod = filemtime("$calendar_path");
+}else{
+	$filemod = filemtime("$calendar_path/$cal.ics");
+}	
+$filemodtime = date("r", $filemod);
 
 //send relevant headers
 header ("Last-Modified: $filemodtime");
@@ -45,143 +93,75 @@ if ( ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || ($_SERVER['HTTP_IF_
 	exit;
 }
 
-if ($rssview == "day") {
-	$theview = $lang['l_day'];
-} elseif ($rssview == "week") {
-	$theview = $lang['l_week'];
-} elseif ($rssview == "month") {
-	$theview = $lang['l_month'];
-}
-
-
+//If client needs new feed - make the header
 $rss = 	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\n";
 $rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">'."\n";
 $rss .= '<rss version="0.91">'."\n";
 $rss .= '<channel>'."\n";
 $rss .= '<title>'.$cal_displayname.' - '.$theview.'</title>'."\n";
-$rss .= '<link>'.htmlspecialchars ($view_path).'</link>'."\n";
+$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 $rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
 $rss .= '<language>'.$rss_language.'</language>'."\n";
-$rss .= '<copyright>Copyright 2004, '.htmlspecialchars ("$default_path").'</copyright>'."\n";
+$rss .= '<copyright>Copyright '.date(Y).', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 
+//generate the items
+$numdays = $todate - $fromdate;	
+$thisdate = $fromdate; 	#	start at beginning of date range, 
+						# 	note that usage of $thisdate is different from distribution
+						# 	I use it as a date, dist uses it as a time
+$i = 0;  #day counter
 
-if ($rssview == 'day') {
-	if (isset($master_array[($getdate)]) && sizeof($master_array[($getdate)]) > 0) {
-		foreach ($master_array[("$getdate")] as $event_times) {
+	do {
+	$dayofweek = localizeDate ("%a %b %e %Y", strtotime($thisdate));
+	if (isset($master_array[($thisdate)]) && sizeof($master_array[($thisdate)]) > 0) {
+		foreach ($master_array[("$thisdate")] as $event_times) {
 			foreach ($event_times as $val) {
-				$event_start 	= @$val["event_start"];
-				$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+				if(!$val["event_start"]){
+					$event_start = "all day";
+				}else{	
+					$event_start 	= @$val["event_start"];	
+					$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+				}	
 				$event_text 	= stripslashes(urldecode($val["event_text"]));
 				$event_text 	= strip_tags($event_text, '<b><i><u>');
-				$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
-				$description 	= stripslashes(urldecode($val["description"]));
-				$description 	= strip_tags($description, '<b><i><u>');
-				$rss_title		= htmlspecialchars ("$event_start $event_text");
-				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-				$rss_description	= htmlspecialchars ("$description");
-				$rss .= '<item>'."\n";
-				$rss .= '<title>'.$rss_title.'</title>'."\n";
-				$rss .= '<link>'.$rss_link.'</link>'."\n";
-				$rss .= '<description>'.$rss_description.'</description>'."\n";
-				$rss .= '</item>'."\n";
-				$events_week++;
-			}
-		}
-	}
-	if ($events_week < 1) {
-		$rss .= '<item>'."\n";
-		$rss .= '<title>'.$lang['l_no_events_day'].'</title>'."\n";
-		$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
-		$rss .= '</item>'."\n";
-	}
-}
-
-$thisdate = $start_week_time;
-$i = 0;
-if ($rssview == "week") {
-	do {
-		$getdate = date("Ymd", $thisdate);
-		$dayofweek = strtotime ($getdate);
-		$dayofweek = localizeDate ($dateFormat_day, $dayofweek);
-		if (isset($master_array[($getdate)]) && sizeof($master_array[($getdate)]) > 0) {
-			foreach ($master_array[("$getdate")] as $event_times) {
-				foreach ($event_times as $val) {
-					$event_start 	= @$val["event_start"];
-					$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
-					$event_text 	= stripslashes(urldecode($val["event_text"]));
-					$event_text 	= strip_tags($event_text, '<b><i><u>');
-					$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
+				$event_text 	= str_replace("& ","&amp;", $event_text);
+			#uncomment for shorter event text with ...
+			#	$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines); 		
 					$description 	= stripslashes(urldecode($val["description"]));
 					$description 	= strip_tags($description, '<b><i><u>');
 					$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
-					$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-					$rss_description	= htmlspecialchars ("$dayofweek $event_start: $event_text - $description");
-					$rss .= '<item>'."\n";
-					$rss .= '<title>'.$rss_title.'</title>'."\n";
-					$rss .= '<link>'.$rss_link.'</link>'."\n";
-					$rss .= '<description>'.$rss_description.'</description>'."\n";
-					$rss .= '</item>'."\n";
-					$events_week++;
-				}
-			}
-		}
-		if (($events_week < 1) && ($i == 6)) {
-			$rss .= '<item>'."\n";
-			$rss .= '<title>'.$lang['l_no_events_week'].'</title>'."\n";
-			$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
-			$rss .= '</item>'."\n";
-		}
-		$thisdate = ($thisdate + (25 * 60 * 60));
-		$i++;
-	} while ($i < 7);
-}
-
-if ($rssview == "month") {
-	foreach($master_array as $key => $new_val2) {
-										
-		// Pull out only this months
-		ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
-		if ($regs[1] == $parse_month) {
-			$getdate = $key;
-			$dayofmonth = strtotime ($getdate);
-			$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-			
-			// Pull out each day
-			foreach ($new_val2 as $new_val) {
+				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal&cpath=$cpath");
+				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
-				// Pull out each time
-				foreach ($new_val as $new_key2 => $val) {
-					if ($val["event_text"]) {
-						$event_start 	= @$val["event_start"];
-						$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
-						$event_text 	= stripslashes(urldecode($val["event_text"]));
-						$event_text 	= strip_tags($event_text, '<b><i><u>');
-						$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
-						$description 	= stripslashes(urldecode($val["description"]));
-						$description 	= strip_tags($description, '<b><i><u>');
-						$rss_title		= htmlspecialchars ("$dayofmonth: $event_text");
-						$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-						$rss_description	= htmlspecialchars ("$dayofmonth $event_start: $event_text - $description");
-						$rss .= '<item>'."\n";
-						$rss .= '<title>'.$rss_title.'</title>'."\n";
-						$rss .= '<link>'.$rss_link.'</link>'."\n";
-						$rss .= '<description>'.$rss_description.'</description>'."\n";
-						$rss .= '</item>'."\n";
-						$events_week++;
-					}
-							
-					if ($events_week < 1) {
-						$rss .= '<item>'."\n";
-						$rss .= '<title>'.$lang['no_events_month'].'</title>'."\n";
-						$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
-						$rss .= '</item>'."\n";
-					}
-				}
+				$rss .= '<item>'."\n";
+				$rss .= '<event_start>'.$event_start.'</event_start>'."\n";
+				$rss .= '<title>'.$rss_title.'</title>'."\n";
+				
+				$rss .= '<seminardate>'.$dayofweek.'</seminardate>'."\n";
+				$rss .= '<seminarspeaker>'.$event_text.'</seminarspeaker>'."\n";
+				$rss .= '<seminartitle>'.$description.'</seminartitle>'."\n";
+				$rss .= '<tagged>'.$val["description"].'</tagged>'."\n";
+				$rss .= '<seminarhost>'.$val['attendee'].'</seminarhost>'."\n";
+				$rss .= '<organizer>'.$val['organizer'].'</organizer>'."\n";
+				$rss .= '<status>'.$val['status'].'</status>'."\n";
+
+				$rss .= '<link>'.$rss_link.'</link>'."\n";
+				$rss .= '<description>'.$rss_description.'</description>'."\n";
+				$rss .= '<location>'.$val['location'].'</location>';
+				$rss .= '</item>'."\n";
+				$events_count++;
 			}
 		}
 	}
-}
-
+	if (($events_count < 1) && ($i == $numdays)) {
+		$rss .= '<item>'."\n";
+		$rss .= '<title>No events found</title>'."\n";
+		$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
+		$rss .= '</item>'."\n";
+	}
+	$thisdate++;
+		$i++;
+	} while ($i <= $numdays);
 
 $rss .= '</channel>'."\n";
 $rss .= '</rss>'."\n";
