@@ -9,7 +9,7 @@
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="{DEFAULT_VIEW}/rss/rss.php?cal={CAL}&amp;rssview={CURRENT_VIEW}">
 	<!-- switch rss_available off -->		
 	<!-- switch todo_available on -->
-	{TODO_JS}
+		{TODO_JS}
 	<!-- switch todo_available off -->
 </head>
 <body>

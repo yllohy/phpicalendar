@@ -13,23 +13,14 @@
 		<!-- loop monthdays on -->
 		<!-- switch notthismonth on -->
 		<td valign="top" align="left" class="monthoff" width="105" height="105">
-			
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="G10G">{DAY}</font></a>
 			</div>
 			<!-- switch allday on -->
-			<div align="left">
-				<div align="center" class="V10">
-					{JS_OPEN_EVENT} <a class="psf" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
-				</div>
-			</div>
+				{ALLDAY}
 			<!-- switch allday off -->
 			<!-- switch event on -->
-			<div align="left">
-				<div align="left" class="V9">
-					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TIME} {EVENT_TITLE}</a> 
-				</div>
-			</div>
+				{EVENT}	
 			<!-- switch event off -->
 			
 		</td>
@@ -40,18 +31,10 @@
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
 			<!-- switch allday on -->
-			<div align="left">
-				<div align="center" class="V10">
-					{JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
-				</div>
-			</div>
+				{ALLDAY}
 			<!-- switch allday off -->
 			<!-- switch event on -->
-			<div align="left">
-				<div align="left" class="V9">
-					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TIME} {EVENT_TITLE}</a> 
-				</div>
-			</div>
+				{EVENT}
 			<!-- switch event off -->
 		</td>
 		<!-- switch istoday off -->
@@ -61,18 +44,10 @@
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
 			<!-- switch allday on -->
-			<div align="left">
-				<div align="left" class="V9">
-					{JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
-				</div>
-			</div>
+				{ALLDAY}
 			<!-- switch allday off -->
 			<!-- switch event on -->
-			<div align="left">
-				<div align="left" class="V9">
-					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TIME} {EVENT_TITLE}</a> 
-				</div>
-			</div>
+				{EVENT}
 			<!-- switch event off -->
 		</td>
 		<!-- switch ismonth off -->

@@ -55,7 +55,7 @@
 				<table width="100%" cellspacing="1" cellpadding="4" border="0">
 					<!-- loop showbottomevents_odd on -->
 					<tr align="left" valign="top">
-						<td width="155" class="G10B" nowrap>
+						<td width="170" nowrap>
 							<a class="psf" href="{CAL}&amp;getdate={DAYLINK}">{START_DATE}</a> <font class="V9G">({START_TIME})</font>
 						</td>
 						<td>
@@ -65,7 +65,7 @@
 					<!-- loop showbottomevents_odd off -->
 					<!-- loop showbottomevents_even on -->
 					<tr align="left" valign="top">
-						<td width="155" class="G10B" nowrap bgcolor="#EEEEEE">
+						<td width="170" nowrap bgcolor="#EEEEEE">
 							<a class="psf" href="{CAL}&amp;getdate={DAYLINK}">{START_DATE}</a> <font class="V9G">({START_TIME})</font>
 						</td>
 						<td bgcolor="#EEEEEE">

@@ -195,21 +195,22 @@ function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text,
 			$escaped_end = addslashes($end);
 			// fix for URL-length bug in IE: populate and submit a hidden form on click
 			static $popup_data_index = 0;
-echo <<<END
+$return = "
 
-    <script language="Javascript" type="text/javascript"><!--
+    <script language=\"Javascript\" type=\"text/javascript\"><!--
     var eventData = new EventData('$escaped_event', '$escaped_calendar', '$escaped_start', '$escaped_end', '$description', '$status', '$location', '$organizer', '$attendee', '$url');
     document.popup_data[$popup_data_index] = eventData;
-    // --></script>
+    // --></script>";
 
-END;
-			echo '<a class="'.$link_class.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
+			$return .= '<a class="'.$link_class.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
 			$popup_data_index++;
 		} else {
-			echo '<a class="'.$link_class.'" href="'.$res[1].'">';
+			$return .= '<a class="'.$link_class.'" href="'.$res[1].'">';
 		}
-		echo $pre_text.$event_text.$post_text.'</a>'."\n";
+		$return .= $pre_text.$event_text.$post_text.'</a>'."\n";
 	}
+	
+	return $return;
 }
 
 

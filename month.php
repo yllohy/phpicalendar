@@ -44,9 +44,6 @@ $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 
-$php_ended = getmicrotime();
-$generated = number_format(($php_ended-$php_started),3);
-
 $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 
 $page->replace_tags(array(
@@ -76,8 +73,6 @@ $page->replace_tags(array(
 			
 	));
 	
-$page->replace_langs($lang);
-
 $page->output();
 
 

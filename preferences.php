@@ -156,8 +156,6 @@ $page->replace_tags(array(
 			
 	));
 
-$page->replace_langs($lang);
-
 $page->output();
 
 ?>
