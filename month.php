@@ -50,7 +50,13 @@ $num_of_events = 0;
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo "$calendar_name - $display_month"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
-	<link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $default_path.'/rss/rss.php?cal='.$cal.'&rssview=month'; ?>">
+   <?php 
+		// if RSS is enabled, set the RSS auto-discovery link
+		if ($enable_rss == 'yes') 
+		{
+    		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&rssview=month\">";
+		} 
+	?>
 	<?php include (BASE.'functions/event.js'); ?>
 </head>
 <body>
