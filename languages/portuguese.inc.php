@@ -58,17 +58,17 @@ $no_events_month_lang   = 'Nao existem registos para este mes.';
 $rss_day_date           = 'g:i A';  // Lists just the time
 $rss_week_date          = '%e %b';  // Lists just the day
 $rss_month_date         = '%e %b';  // Lists just the day
-$search_took_lang                = 'A procura demorou %s segundos';
-$recurring_event_lang        = 'Evento de retorno';
-$exception_lang                        = 'Excecao';
-$no_query_lang                        = 'Nenhuma procura dada';
-$preferences_lang                = 'Preferencias';
-$printer_lang                        = 'Impressora';
-$select_lang_lang                = 'Escolha a sua linguagem por defeito:';
-$select_cal_lang                = 'Escolha o seu calendário base:';
-$select_view_lang                = 'Selecione a sua vista por defeito :';
-$select_time_lang                = 'Selecione a sua hora de inicio:';
-$select_day_lang                = 'Selecione o seu dia de inicio da semana:';
+$search_took_lang       = 'A procura demorou %s segundos';
+$recurring_event_lang   = 'Evento de retorno';
+$exception_lang         = 'Excecao';
+$no_query_lang          = 'Nenhuma procura dada';
+$preferences_lang       = 'Preferencias';
+$printer_lang           = 'Impressora';
+$select_lang_lang       = 'Escolha a sua linguagem por defeito:';
+$select_cal_lang        = 'Escolha o seu calendário base:';
+$select_view_lang       = 'Selecione a sua vista por defeito :';
+$select_time_lang       = 'Selecione a sua hora de inicio:';
+$select_day_lang        = 'Selecione o seu dia de inicio da semana:';
 $select_style_lang                = 'Selecione o seu estilo por defeito:';
 $set_prefs_lang                        = 'Ajuste preferencias';
 $completed_date_lang        = 'Terminado em';
@@ -86,18 +86,18 @@ $unfinished_lang                = 'Por terminar';
 
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
+$prefs_set_lang = 'A suas preferencias foram aplicadas.';
+$prefs_unset_lang = 'Preferencias retiradas. Alteracoes aparecerao nas proxinas paginas.';
+$unset_prefs_lang = 'Retirar preferencias:';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Anterior';
+$next_lang = 'Seguinte';
+$prev_lang = 'Ver ';
+$day_view_lang = 'Ver Dia';
+$week_view_lang = 'Ver Semana';
+$month_view_lang = 'Ver Mes';
+$year_view_lang = 'Ver Ano';
 
 // ---------------------------------
 
