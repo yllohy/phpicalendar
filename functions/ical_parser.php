@@ -877,13 +877,13 @@ if ($parse_file) {
 
 
 //If you want to see the values in the arrays, uncomment below.
-print '<pre>';
-print_r($master_array);
+//print '<pre>';
+//print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
 //print_r($rrule);
 //print_r($recurrence_delete);	
-print '</pre>';
+//print '</pre>';
 	
 					
 ?>
