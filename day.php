@@ -118,7 +118,8 @@ if (isset($master_array[($getdate)])) {
 							   0,
 							   "",
 							   '<font color="#ffffff"><i>',
-							   "</i></font>");
+							   "</i></font>",
+							   "psf");
 						 echo "</td>\n</tr>\n";
 					   }
 					   echo '</table>'."\n";
@@ -271,7 +272,8 @@ if (isset($master_array[($getdate)])) {
 												  "",
 												  0,
 												  "<font class=\"eventfont\">",
-												  "</font>");
+												  "</font>",
+												  "psf");
 												  echo '</td></tr>'."\n";
 												  echo '</table>'."\n";
 												  echo '</td>'."\n";           

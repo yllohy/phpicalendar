@@ -160,7 +160,7 @@ function chooseOffset($time) {
 	return $offset;
 }
 
-function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic) { 
+function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic, $class) { 
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	# for iCal pseudo tag <http> comptability
 	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$reg)) { 
@@ -192,8 +192,8 @@ function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic) {
 	}
 	if ($event_text != "") {	
 		if ($lines) $event_text = word_wrap($event_text, $wrap, $lines);
-		$dsc  =urlencode(addslashes($arr["description"]));
-		echo "<a class=\"psf\" href=\"";
+		$dsc  = urlencode(addslashes($arr["description"]));
+		echo '<a class="'.$class.'" href="';
 		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $ev, $res))) || ($dsc)) {
 			echo "javascript:w=window.open('";
 			echo "includes/event.php?event=";
@@ -207,7 +207,7 @@ function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic) {
 		} else {
 			echo $res[1];
 		}
-	echo "\">$clic$event_text</a>";
+	echo '">'.$clic.$event_text.'</a>'.$fclic;
 	}
 }
 

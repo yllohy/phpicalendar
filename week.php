@@ -189,7 +189,8 @@ for ($i=0;$i<7;$i++) {
 													  	$allday_week_lines,
 													  	12,
 													  	'<font color="#ffffff">',
-													  	"</font>");
+													  	"</font>",
+													  	"psf");
 														echo "</td></tr>\n";
 												  	}
 												  echo "</table>\n";
@@ -323,7 +324,8 @@ for ($i=0;$i<7;$i++) {
 																		  $week_events_lines,
 																		  25,
 																		  "<font class=\"V10W\">",
-																		  "</font>");
+																		  "</font>",
+																		  "psf");
 																	echo "</td></tr>\n";
 																	echo "</table>\n";
 																	echo "</td>\n";           
