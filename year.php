@@ -81,7 +81,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 									$monthlink = date("Ym", $startYear); 
 									$monthlink = $monthlink . $this_day;
 								?>
-								<td align="center" class="sideback"><?php echo '<a class="ps3" "href="month.php?cal=' . $cal . '&getdate=' . $monthlink . '">'; ?><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, $startYear)); ?></font></a></td>
+								<td align="center" class="sideback"><?php echo '<a class="ps3" href="month.php?cal=' . $cal . '&getdate=' . $monthlink . '">'; ?><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, $startYear)); ?></font></a></td>
 								<td width="1" class="sideback"></td>
 							</tr>
 						</table>
