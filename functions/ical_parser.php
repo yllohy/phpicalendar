@@ -13,7 +13,7 @@ $fillTime = $day_start;
 $day_array = array ();
 while ($fillTime < $day_end) {
 	array_push ($day_array, $fillTime);
-	ereg ('([0-9]{2})([0-9]{2})', $fillTime, $dTime);
+	preg_match ('/([0-9]{2})([0-9]{2})/', $fillTime, $dTime);
 	$fill_h = $dTime[1];
 	$fill_min = $dTime[2];
 	$fill_min = sprintf('%02d', $fill_min + $gridLength);
@@ -26,7 +26,7 @@ while ($fillTime < $day_end) {
 
 // what date we want to get data for (for day calendar)
 if (!isset($getdate) || $getdate == '') $getdate = date('Ymd');
-ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $getdate, $day_array2);
+preg_match ("/([0-9]{4})([0-9]{2})([0-9]{2})/", $getdate, $day_array2);
 $this_day = $day_array2[3];
 $this_month = $day_array2[2];
 $this_year = $day_array2[1];
@@ -83,21 +83,26 @@ foreach ($cal_filelist as $filename) {
 		while (!feof($ifile)) {
 			$line = $nextline;
 			$nextline = fgets($ifile, 1024);
-			$nextline = ereg_replace("[\r\n]", "", $nextline);
+			$nextline = str_replace("\r\n", "", $nextline);
 			while (substr($nextline, 0, 1) == " ") {
 				$line = $line . substr($nextline, 1);
 				$nextline = fgets($ifile, 1024);
-				$nextline = ereg_replace("[\r\n]", "", $nextline);
+				$nextline = str_replace("\r\n", "", $nextline);
 			}
 			$line = trim($line);
-			if ($line == 'BEGIN:VEVENT') {
+			
+		switch ($line) {
+			case 'BEGIN:VEVENT':
 				// each of these vars were being set to an empty string
 				unset (
 					$start_time, $end_time, $start_date, $end_date, $summary, 
 					$allday_start, $allday_end, $start, $end, $the_duration, 
 					$beginning, $rrule_array, $start_of_vevent, $description, $bd, $url, 
 					$valarm_description, $start_unixtime, $end_unixtime, $display_end_tmp, $end_time_tmp1, 
-					$recurrence_id, $uid, $class, $location, $rrule, $abs_until, $until_check
+					$recurrence_id, $uid, $class, $location, $rrule, $abs_until, $until_check,
+					$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
+					$byminute, $byhour, $bysecond, $byyearday, $bysetpos, $wkst,
+					$interval, $number
 				);
 					
 				$except_dates 	= array();
@@ -110,13 +115,9 @@ foreach ($cal_filelist as $filename) {
 				$attendee		= array();
 				$organizer		= array();
 				
-				unset(
-					$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
-					$byminute, $byhour, $bysecond, $byyearday, $bysetpos, $wkst,
-					$interval, $number
-				);
-				
-			} elseif ($line == 'END:VEVENT') {
+				break;
+			
+			case 'END:VEVENT':
 				
 				if (!isset($master_array[-3][$calnumber])) $master_array[-3][$calnumber] = $actual_calname;
 				
@@ -202,8 +203,8 @@ foreach ($cal_filelist as $filename) {
 					$bleed_check = 0;
 				}
 				if (isset($start_time) && $start_time != '') {
-					ereg ('([0-9]{2})([0-9]{2})', $start_time, $time);
-					ereg ('([0-9]{2})([0-9]{2})', $end_time, $time2);
+					preg_match ('/([0-9]{2})([0-9]{2})/', $start_time, $time);
+					preg_match ('([0-9]{2})([0-9]{2})', $end_time, $time2);
 					if (isset($start_unixtime) && isset($end_unixtime)) {
 						$length = $end_unixtime - $start_unixtime;
 					} else {
@@ -691,9 +692,8 @@ foreach ($cal_filelist as $filename) {
 			   // Clear event data now that it's been saved.
 			   unset($start_time, $start_time_tmp, $end_time, $end_time_tmp, $start_unixtime, $start_unixtime_tmp, $end_unixtime, $end_unixtime_tmp, $summary, $length, $nbrOfOverlaps, $description, $status, $class, $location, $organizer, $attendee);
 
-
-			// Begin VTODO Support
-			} elseif ($line == 'END:VTODO') {
+				break;
+			case 'END:VTODO':
 				if ((!$vtodo_priority) && ($status == 'COMPLETED')) {
 					$vtodo_sort = 11;
 				} elseif (!$vtodo_priority) { 
@@ -704,13 +704,20 @@ foreach ($cal_filelist as $filename) {
 				$master_array['-2']["$vtodo_sort"]["$uid"] = array ('start_date' => $start_date, 'start_time' => $start_time, 'vtodo_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories, 'description' => $description, 'calname' => $actual_calname);
 				unset ($start_date, $start_time, $due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary, $description);
 				$vtodo_set = FALSE;
-			} elseif ($line == 'BEGIN:VTODO') {
+				
+				break;
+				
+			case 'BEGIN:VTODO':
 				$vtodo_set = TRUE;
-			} elseif ($line == 'BEGIN:VALARM') {
+				break;
+			case 'BEGIN:VALARM':
 				$valarm_set = TRUE;
-			} elseif ($line == 'END:VALARM') {
+				break;
+			case 'END:VALARM':
 				$valarm_set = FALSE;
-			} else {
+				break;
+				
+			default:
 		
 				unset ($field, $data, $prop_pos, $property);
 				ereg ("([^:]+):(.*)", $line, $line);
@@ -864,7 +871,7 @@ foreach ($cal_filelist as $filename) {
 								$tz_dtstart = 'GMT';
 							}
 			
-							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
 							$start_date = $regs[1] . $regs[2] . $regs[3];
 							$start_time = $regs[4] . $regs[5];
 							$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
@@ -901,7 +908,7 @@ foreach ($cal_filelist as $filename) {
 						$data = str_replace('Z', '', $data);
 						$field = str_replace(';VALUE=DATE-TIME', '', $field); 
 						if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
-							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtend_check);
+							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $data, $dtend_check);
 							if ($dtend_check[1] < 1970) { 
 								$data = '1971'.$dtend_check[2].$dtend_check[3];
 							}
@@ -915,7 +922,7 @@ foreach ($cal_filelist as $filename) {
 								$tz_dtend = 'GMT';
 							}
 							
-							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
 							$end_date = $regs[1] . $regs[2] . $regs[3];
 							$end_time = $regs[4] . $regs[5];
 							$end_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
