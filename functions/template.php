@@ -35,10 +35,22 @@ class Page {
 			$day_num 		= date("w", $start_day);
 			$weekday 		= $daysofweek_lang[$day_num];
 			$daylink		= date('Ymd', $start_wt);
+			if ($daylink == $getdate) {
+				$row1 = 'rowToday';
+				$row2 = 'rowOn';
+				$row3 = 'rowToday';
+			} else {
+				$row1 = 'rowOff';
+				$row2 = 'rowOn';
+				$row3 = 'rowOff';
+			}
 			$start_day 		= strtotime("+1 day", $start_day);
 			$start_wt 		= strtotime("+1 day", $start_wt);
 			$loop_tmp 		= str_replace('{DAY}', $weekday, $loop_dof);
 			$loop_tmp 		= str_replace('{DAYLINK}', $daylink, $loop_tmp);
+			$loop_tmp 		= str_replace('{ROW1}', $row1, $loop_tmp);
+			$loop_tmp 		= str_replace('{ROW2}', $row2, $loop_tmp);
+			$loop_tmp 		= str_replace('{ROW3}', $row3, $loop_tmp);
 			$weekday_loop  .= $loop_tmp;
 		}
 		$this->page = ereg_replace('<!-- loop daysofweek on -->(.*)<!-- loop daysofweek off -->', $weekday_loop, $this->page);
@@ -99,9 +111,6 @@ class Page {
 		$completed 	= trim($match1[1]);
 		$important 	= trim($match2[1]);
 		$normal 	= trim($match3[1]);
-		$comp_data	= '';
-		$impt_data	= '';
-		$norm_data	= '';
 		
 		if (is_array($master_array['-2'])) {
 			foreach ($master_array['-2'] as $vtodo_times) {
