@@ -12,24 +12,31 @@ if ($display_ical_list == "yes") {
 	// open file
 	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 	
+	// empty the filelist array
+	$filelist = array();
+
 	// build the <option> tags
-	while ($file = readdir($dir_handle)) {
+	while (false != ($file = readdir($dir_handle))) {
 		if (substr($file, -4) == ".ics") {
-			
-			// $cal_filename is the filename of the calendar without .ics
-			// $cal is a urlencoded version of $cal_filename
-			// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
-			$cal_filename_tmp = substr($file,0,-4);
-			$cal_tmp = urlencode($cal_filename_tmp);
-			$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
-			if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
-				if ($cal_tmp == $cal) {
-					print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
-				} else {
-					print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
-				}		
-			}	
+			array_push($filelist, $file);
 		}
+	}
+	natcasesort($filelist);
+	foreach ($filelist as $file) {
+		
+		// $cal_filename is the filename of the calendar without .ics
+		// $cal is a urlencoded version of $cal_filename
+		// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
+		$cal_filename_tmp = substr($file,0,-4);
+		$cal_tmp = urlencode($cal_filename_tmp);
+		$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+		if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
+			if ($cal_tmp == $cal) {
+				print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
+			} else {
+				print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
+			}		
+		}	
 	}			
 	foreach($list_webcals as $cal_tmp) {
 		if ($cal_tmp != '') {
