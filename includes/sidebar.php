@@ -211,7 +211,11 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 										foreach ($vtodo_times as $val) {
 											$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
 											if ($vtodo_text != "") {	
-												if (isset($val["description"])) $description 	= $val["description"];
+												if (isset($val["description"])) { 
+													$description 	= $val["description"];
+												} else {
+													$description = ""; 
+												}
 												$completed_date = $val['completed_date'];
 												$status 		= $val["status"];
 												$priority 		= $val['priority'];
@@ -266,243 +270,168 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 <?php } 
 		$fake_getdate_time = strtotime($this_year.'-'.$this_month.'-15');
 ?>	
-	<table cellpadding="0" cellspacing="0" border="0" width="170">
-		<tr>
-			<td valign="middle" align="center">
-				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-					<tr>
 
-						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
-						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", $fake_getdate_time))); ?></font></td>
-						<td align="right" valign="top" width="1" class="sideback"></td>
-					</tr>
-					<tr>
-						<td colspan="3" bgcolor="#FFFFFF" align="center">
-							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
-								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-								</tr>
-								<tr>
-								<?php
-									$start_day = strtotime($week_start_day);
-									for ($i=0; $i<7; $i++) {
-										$day_num = date("w", $start_day);
-										$day = $daysofweekreallyshort_lang[$day_num];
-										print "<td align=\"center\" class=\"G10BOLD\">$day</td>\n";
-										$start_day = strtotime("+1 day", $start_day); 
-									}
-								?>
-								</tr>
-								<tr>
-									<td colspan="7" height="3"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
-								</tr>
-								<?php
-									$minical_time = strtotime("-1 month", $fake_getdate_time);
-									$minical_month = date("m", $minical_time);
-									$minical_year = date("Y", $minical_time);
-									$first_of_month = $minical_year.$minical_month."01";
-									$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
-									$i = 0;
-									$whole_month = TRUE;
-									$num_of_events = 0;
-									do {
-										$day = date ("j", $start_day);
-										$daylink = date ("Ymd", $start_day);
-										$check_month = date ("m", $start_day);
-										if ($check_month != $minical_month) $day= "<font class=\"G10G\">$day</font>";
-										if ($i == 0) echo "<tr>\n";
-										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
-											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
-											echo "</td>\n";
-										} else {
-											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
-											echo "</td>\n";
-										}
-										$start_day = strtotime("+1 day", $start_day); 
-										$i++;
-										if ($i == 7) { 
-											echo "</tr>\n";
-											$i = 0;
-											$checkagain = date ("m", $start_day);
-											if ($checkagain != $minical_month) $whole_month = FALSE;	
-										}
-									} while ($whole_month == TRUE);
-								?>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
-					</tr>
+	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+		<tr height="20">
+			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", $fake_getdate_time))); ?></font></td>
+		</tr>
+		<tr>
+			<td bgcolor="#FFFFFF" align="center">
+				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+					<?php
+						$start_day = strtotime($week_start_day);
+						echo '<tr>';
+						for ($i=0; $i<7; $i++) {
+							$day_num = date("w", $start_day);
+							$day = $daysofweekreallyshort_lang[$day_num];
+							echo '<td align="center" class="G10BOLD">'.$day.'</td>';
+							$start_day = strtotime("+1 day", $start_day); 
+						}
+						$minical_time 		= strtotime("-1 month", $fake_getdate_time);
+						$minical_month 		= date("m", $minical_time);
+						$minical_year 		= date("Y", $minical_time);
+						$first_of_month 	= $minical_year.$minical_month."01";
+						$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
+						$i 					= 0;
+						$whole_month 		= TRUE;
+						$num_of_events 		= 0;
+						do {
+							$day 			= date ("j", $start_day);
+							$daylink 		= date ("Ymd", $start_day);
+							$check_month 	= date ("m", $start_day);
+							if ($check_month != $minical_month) $day = '<font class="G10G">'.$day.'</font>';
+							if ($i == 0) echo "<tr>\n";
+							if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+								echo '<td width="22" align="center" class="G10B">';
+								echo '<a class="ps2" href="'.$minical_view.'.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a>';
+								echo '</td>';
+							} else {
+								echo '<td width="22" align="center" class="G10B">';
+								echo '<a class="psf" href="'.$minical_view.'.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a>';
+								echo '</td>';
+							}
+							$start_day = strtotime("+1 day", $start_day); 
+							$i++;
+							if ($i == 7) { 
+								echo '</tr>';
+								$i = 0;
+								$checkagain = date ("m", $start_day);
+								if ($checkagain != $minical_month) $whole_month = FALSE;	
+							}
+						} while ($whole_month == TRUE);
+					?>
 				</table>
+				<img src="images/spacer.gif" width="1" height="3" alt=" "><br>
 			</td>
 		</tr>
 	</table>
 	<br>
-	<table cellpadding="0" cellspacing="0" border="0" width="170">
+	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+		<tr height="20">
+			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime($getdate))); ?></font></td>
+		</tr>
 		<tr>
-			<td valign="middle" align="center">
-				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-					<tr>
-						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
-						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime($getdate))); ?></font></td>
-						<td align="right" valign="top" width="1" class="sideback"></td>
-					</tr>
-					<tr>
-						<td colspan="3" bgcolor="#FFFFFF" align="center">
-							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
-								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-								</tr>
-								<tr>
-								<?php
-									$start_day = strtotime($week_start_day);
-									for ($i=0; $i<7; $i++) {
-										$day_num = date("w", $start_day);
-										$day = $daysofweekreallyshort_lang[$day_num];
-										print "<td align=\"center\" class=\"G10BOLD\">$day</td>\n";
-										$start_day = strtotime("+1 day", $start_day); 
-									}
-								?>
-								</tr>
-								<tr>
-									<td colspan="7" height="3"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
-								</tr>
-								<?php
-									$minical_time = $fake_getdate_time;
-									$minical_month = date("m", $minical_time);
-									$minical_year = date("Y", $minical_time);
-									$first_of_month = $minical_year.$minical_month."01";
-									$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
-									$i = 0;
-									$whole_month = TRUE;
-									$num_of_events = 0;
-									do {
-										$day = date ("j", $start_day);
-										$daylink = date ("Ymd", $start_day);
-										$check_month = date ("m", $start_day);
-										if ($check_month != $minical_month) $day= "<font class=\"G10G\">$day</font>";
-										if ($i == 0) echo "<tr>\n";
-										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
-											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
-											echo "</td>\n";
-										} else {
-											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
-											echo "</td>\n";
-										}
-										$start_day = strtotime("+1 day", $start_day); 
-										$i++;
-										if ($i == 7) { 
-											echo "</tr>\n";
-											$i = 0;
-											$checkagain = date ("m", $start_day);
-											if ($checkagain != $minical_month) $whole_month = FALSE;	
-										}
-									} while ($whole_month == TRUE);
-								?>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
-					</tr>
+			<td bgcolor="#FFFFFF" align="center">
+				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+					<?php
+						$start_day = strtotime($week_start_day);
+						echo '<tr>';
+						for ($i=0; $i<7; $i++) {
+							$day_num = date("w", $start_day);
+							$day = $daysofweekreallyshort_lang[$day_num];
+							echo '<td align="center" class="G10BOLD">'.$day.'</td>';
+							$start_day = strtotime("+1 day", $start_day); 
+						}
+						$minical_time 		= $fake_getdate_time;
+						$minical_month 		= date("m", $minical_time);
+						$minical_year 		= date("Y", $minical_time);
+						$first_of_month 	= $minical_year.$minical_month."01";
+						$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
+						$i 					= 0;
+						$whole_month 		= TRUE;
+						$num_of_events 		= 0;
+						do {
+							$day 			= date ("j", $start_day);
+							$daylink 		= date ("Ymd", $start_day);
+							$check_month 	= date ("m", $start_day);
+							if ($check_month != $minical_month) $day = '<font class="G10G">'.$day.'</font>';
+							if ($i == 0) echo "<tr>\n";
+							if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+								echo '<td width="22" align="center" class="G10B">';
+								echo '<a class="ps2" href="'.$minical_view.'.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a>';
+								echo '</td>';
+							} else {
+								echo '<td width="22" align="center" class="G10B">';
+								echo '<a class="psf" href="'.$minical_view.'.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a>';
+								echo '</td>';
+							}
+							$start_day = strtotime("+1 day", $start_day); 
+							$i++;
+							if ($i == 7) { 
+								echo '</tr>';
+								$i = 0;
+								$checkagain = date ("m", $start_day);
+								if ($checkagain != $minical_month) $whole_month = FALSE;	
+							}
+						} while ($whole_month == TRUE);
+					?>
 				</table>
+				<img src="images/spacer.gif" width="1" height="3" alt=" "><br>
 			</td>
 		</tr>
 	</table>
 	<br>
-	<table cellpadding="0" cellspacing="0" border="0" width="170">
+	<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+		<tr height="20">
+			<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
+		</tr>
 		<tr>
-			<td valign="middle" align="center">
-				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-					<tr>
-						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
-						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
-						<td align="right" valign="top" width="1" class="sideback"></td>
-					</tr>
-					<tr>
-						<td colspan="3" bgcolor="#FFFFFF" align="center">
-							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
-								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
-								</tr>
-								<tr>
-								<?php
-									$start_day = strtotime($week_start_day);
-									for ($i=0; $i<7; $i++) {
-										$day_num = date("w", $start_day);
-										$day = $daysofweekreallyshort_lang[$day_num];
-										print "<td align=\"center\" class=\"G10BOLD\">$day</td>\n";
-										$start_day = strtotime("+1 day", $start_day); 
-									}
-								?>
-								</tr>
-								<tr>
-									<td colspan="7" height="3"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
-								</tr>
-								<?php
-									$minical_time = strtotime("+1 month", $fake_getdate_time);
-									$minical_month = date("m", $minical_time);
-									$minical_year = date("Y", $minical_time);
-									$first_of_month = $minical_year.$minical_month."01";
-									$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
-									$i = 0;
-									$whole_month = TRUE;
-									$num_of_events = 0;
-									do {
-										$day = date ("j", $start_day);
-										$daylink = date ("Ymd", $start_day);
-										$check_month = date ("m", $start_day);
-										if ($check_month != $minical_month) $day= "<font class=\"G10G\">$day</font>";
-										if ($i == 0) echo "<tr>\n";
-										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
-											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
-											echo "</td>\n";
-										} else {
-											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
-											echo "</td>\n";
-										}
-										$start_day = strtotime("+1 day", $start_day); 
-										$i++;
-										if ($i == 7) { 
-											echo "</tr>\n";
-											$i = 0;
-											$checkagain = date ("m", $start_day);
-											if ($checkagain != $minical_month) $whole_month = FALSE;	
-										}
-									} while ($whole_month == TRUE);
-								?>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
-					</tr>
+			<td bgcolor="#FFFFFF" align="center">
+				<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+					<?php
+						$start_day = strtotime($week_start_day);
+						echo '<tr>';
+						for ($i=0; $i<7; $i++) {
+							$day_num = date("w", $start_day);
+							$day = $daysofweekreallyshort_lang[$day_num];
+							echo '<td align="center" class="G10BOLD">'.$day.'</td>';
+							$start_day = strtotime("+1 day", $start_day); 
+						}
+						$minical_time 		= strtotime("+1 month", $fake_getdate_time);
+						$minical_month 		= date("m", $minical_time);
+						$minical_year 		= date("Y", $minical_time);
+						$first_of_month 	= $minical_year.$minical_month."01";
+						$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
+						$i 					= 0;
+						$whole_month 		= TRUE;
+						$num_of_events 		= 0;
+						do {
+							$day 			= date ("j", $start_day);
+							$daylink 		= date ("Ymd", $start_day);
+							$check_month 	= date ("m", $start_day);
+							if ($check_month != $minical_month) $day = '<font class="G10G">'.$day.'</font>';
+							if ($i == 0) echo "<tr>\n";
+							if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+								echo '<td width="22" align="center" class="G10B">';
+								echo '<a class="ps2" href="'.$minical_view.'.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a>';
+								echo '</td>';
+							} else {
+								echo '<td width="22" align="center" class="G10B">';
+								echo '<a class="psf" href="'.$minical_view.'.php?cal='.$cal.'&amp;getdate='.$daylink.'">'.$day.'</a>';
+								echo '</td>';
+							}
+							$start_day = strtotime("+1 day", $start_day); 
+							$i++;
+							if ($i == 7) { 
+								echo '</tr>';
+								$i = 0;
+								$checkagain = date ("m", $start_day);
+								if ($checkagain != $minical_month) $whole_month = FALSE;	
+							}
+						} while ($whole_month == TRUE);
+					?>
 				</table>
+				<img src="images/spacer.gif" width="1" height="3" alt=" "><br>
 			</td>
 		</tr>
 	</table>
