@@ -83,12 +83,15 @@ Older Browser Support:
 ----------------------
 Starting with 0.9.4, PHP iCalendar is moving away from supporting 4.x browsers.
 If you still need support for these browers, 0.9.3 is still available for
-download. To get the latest ical support, simply download the latest version
-of PHP iCalendar and replace the file called 'ical_parser.php' in the 
-functions folder.
+download. 
 
 Changes:
 --------
+2.0 beta
+	-Swedish translation added.
+	-Fixed stat bug.
+	-Various Bug fixes.
+
 2.0 alpha 2
 	-Mozilla calendars work again.
 	-Todos work again.
