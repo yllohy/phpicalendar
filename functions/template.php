@@ -14,6 +14,46 @@ class Page {
 		}
 	}
 	
+	function draw_admin() {
+		global $template, $getdate, $cal, $master_array, $is_loged_in;
+		
+		if ($is_loged_in == TRUE) { 
+			// Print Calendar Checkboxes
+			$COLUMNS_TO_PRINT = 3;
+			$column = 1;
+			$filelist = availableCalendarNames('', '', '', true);
+			foreach ($filelist as $file) {
+				if ($column > $COLUMNS_TO_PRINT) {
+					$delete_table 	.= '</tr>';
+					$column 	= 1;
+				}
+				if ($column == 1) {
+					$delete_table .= '<tr>';
+				}
+				
+				$cal_filename_tmp = substr($file,0,-4);
+				$cal_tmp = urlencode($file);
+				$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+				
+				$delete_table .= '<td align="left"><input name="delete_calendar[]" value="'.$cal_tmp.'" type="checkbox" />'.$cal_displayname_tmp.'</td>';
+				
+				$column++;
+			}
+			// Print remaining empty columns if necessary
+			$number_of_columns = count($filelist);
+			while (gettype($number_of_columns/$COLUMNS_TO_PRINT) != "integer") {
+				$delete_table .= '<td>&nbsp;</td>';
+				$number_of_columns++;
+			}
+			
+			$this->page 	= str_replace('{DELETE_TABLE}', $delete_table, $this->page);
+		} else {
+			$this->page 	= preg_replace('!<\!-- switch logged_in on -->(.*)<\!-- switch logged_in off -->!is', '', $this->page);
+			$this->page 	= preg_replace('!<\!-- switch logged_in2 on -->(.*)<\!-- switch logged_in2 off -->!is', '', $this->page);
+		}
+	
+	}
+	
 	function draw_print($template_p) {
 		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
 		preg_match("!<\!-- loop events on -->(.*)<\!-- loop events off -->!is", $this->page, $match1);

@@ -27,9 +27,9 @@
 	</tr>
 	<tr>
 		<td align="right">
-			<!-- switch logged_in on -->
+			<!-- switch logged_in2 on -->
 			<a href="admin.php?action=logout\">{L_LOGOUT}</a>&nbsp;
-			<!-- switch logged_in off -->
+			<!-- switch logged_in2 off -->
 		</td>
 	</tr>
 	<tr>
@@ -108,7 +108,9 @@
 						
 						<b>{L_DELETE_CAL}</b>
 						<form action="admin.php" method="post">
-							{DELETE_TABLE}
+							<table width="100%" border="0" cellspacing="0" cellpadding="2" class="G10B">
+								{DELETE_TABLE}
+							</table>
 							<input type="hidden" name="action" value="delete">
 							<p><input type="submit" value="{L_DELETE}"></p>
 							<p>{DELETE_MSG} &nbsp;</p>

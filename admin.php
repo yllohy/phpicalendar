@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 define('BASE', './');
 require_once(BASE.'functions/admin_functions.php');
 require_once(BASE.'functions/ical_parser.php');
@@ -20,18 +18,16 @@ if (!isset($action)) $action = '';
 
 // Logout by clearing session variables
 if ((isset($action)) && ($action == "logout")) {
-	$HTTP_SESSION_VARS['phpical_loggedin'] = FALSE;
-	unset($HTTP_SESSION_VARS['phpical_username']);
-	unset($HTTP_SESSION_VARS['phpical_password']);
+	$_SESSION['phpical_loggedin'] = FALSE;
+	unset($_SESSION['phpical_username']);
+	unset($_SESSION['phpical_password']);
 }
 
 
 // if $auth_method == 'none', don't do any authentication
 if ($auth_method == "none") {
 	$is_loged_in = TRUE;
-}
-// Check if The User is Identified
-else {
+} else {
 	$is_loged_in = FALSE;
 	
 	if (is_loggedin()) {
@@ -77,6 +73,7 @@ $page->replace_tags(array(
 	'l_delete_cal'		=> $lang['l_delete_cal'],
 	'l_delete'			=> $lang['l_delete'],
 	'l_logout'			=> $lang['l_logout'],
+	'l_login'			=> $lang['l_login'],
 	'l_submit'			=> $lang['l_submit'],
 	'l_addupdate_cal'	=> $lang['l_addupdate_cal'],
 	'l_addupdate_desc'	=> $lang['l_addupdate_desc'],
@@ -84,6 +81,7 @@ $page->replace_tags(array(
 	'l_this_site_is'	=> $lang['l_this_site_is']			
 	));
 
+$page->draw_admin();
 $page->output();
 
 ?>
