@@ -136,7 +136,7 @@ include (BASE.'includes/header.inc.php');
 								$event_start2 = '';
 								$event_end = '';
 							}
-							echo '<div style="margin-left: 10px;">';
+							echo '<div style="margin-left: 10px; margin-bottom: 10px;">';
 							echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
 							echo "<tr>\n";
 							echo "<td width=\"120\" class=\"G10BOLD\">$time_lang:</td>\n";
