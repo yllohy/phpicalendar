@@ -44,7 +44,8 @@
 										<?php
 											$start_day = strtotime($week_start_day);
 											for ($i=0; $i<7; $i++) {
-												$day = substr(date("D", $start_day), 0, 2);
+												$day_num = date("w", $start_day);
+												$day = $daysofweekreallyshort_lang[$day_num];
 												print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
 												$start_day = ($start_day + (24.5 * 60 * 60));
 											}
@@ -250,7 +251,8 @@
 								<?php
 									$start_day = strtotime($week_start_day);
 									for ($i=0; $i<7; $i++) {
-										$day = substr(date("D", $start_day), 0, 2);
+										$day_num = date("w", $start_day);
+										$day = $daysofweekreallyshort_lang[$day_num];
 										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
 										$start_day = ($start_day + (24.5 * 60 * 60));
 									}

@@ -143,10 +143,7 @@
 											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
 											$calendar_name2	= addslashes($calendar_name);
 											$calendar_name2 = urlencode($calendar_name2);
-											if (strlen($event_text) > 12) {
-												$event_text = substr("$event_text", 0, 10);
-												$event_text = $event_text . "...";
-											}	
+											$event_text		= word_wrap($event_text, 12, $month_event_lines);
 											echo "<tr>\n";
 											echo "<td>\n";
 											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";

@@ -26,7 +26,7 @@ $lang_file = './languages/'.$language.'.inc.php';
 if (file_exists($lang_file)) {
 	include($lang_file);
 } else {
-	exit(error('Requested lanugage "'.$language.'" is not a supported language. Please consult the configuration file to choose a supported language.'));
+	exit(error('Requested lanugage "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
 }
 
 if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {

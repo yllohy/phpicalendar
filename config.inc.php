@@ -8,6 +8,8 @@ $language = 'english';					// Language support - 'English', 'Polish', 'German', 
 $week_start_day = 'sunday';				// Day of the week your week starts on
 $day_start = '0700';					// Start time for day grid
 $gridLength = '15';						// grid distance in minutes for day view, multiples of 15 preferred
+$month_event_lines = '1';				// number of lines to wrap each event title in month view, 0 means display all lines.
+$tomorrows_events_lines = '1';			// number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $use_sessions = 'yes';					// For speedy performance on web servers, not good for localhost use. This has not yet been implemented.

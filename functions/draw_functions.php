@@ -34,4 +34,27 @@ function drawEventTimes ($start, $end) {
 	
 	return array ("draw_start" => ($sta_h . $sta_min), "draw_end" => ($end_h . $end_min), "draw_length" => $draw_len);
 }
+
+// word wrap function that returns specified number of lines
+// when lines is 0, it returns the entire string as wordwrap() does it
+function word_wrap($str, $length, $lines=0) {
+	$str = wordwrap($str, $length);
+	if ($lines > 0) {
+		$str_arr = explode("\n", $str);
+		if (count($str_arr) < $lines) $lines = count($str_arr);
+		$str = '';
+		for ($i=0; $i<($lines-1);$i++) {
+			$str .= $str_arr[$i].'<br>';
+		}
+		if (count($str_arr) > ($lines)) {
+			$tmp_str = substr($str_arr[$i], 0, ($length-2));
+			$str .= $tmp_str . '...';
+		} else {
+			$str .= $str_arr[$i];
+		}
+	} else {
+		$str = nl2br(trim($str));
+	}
+	return $str;
+}
 ?>

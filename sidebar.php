@@ -168,10 +168,7 @@
 											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
 											$calendar_name2	= addslashes($calendar_name);
 											$calendar_name2 = urlencode($calendar_name2);
-											if (strlen($event_text) > 21) {
-												$event_text = substr("$event_text", 0, 18);
-												$event_text = $event_text . "...";
-											}	
+											$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
 											echo "<tr>\n";
 											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
 											echo "<td colspan=\"6\" class=\"G10B\">\n";

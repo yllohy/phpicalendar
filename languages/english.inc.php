@@ -83,4 +83,14 @@ Notes about dateFormat_*
 	us know. We will be happy to modify this if needed.
 */
 
+// Error messages - %s will be replaced with a variable
+$error_title_lang = 'Error!';
+$error_window_lang = 'There was an error!';
+$error_calendar_lang = 'The calendar %s caused this error.';
+$error_path_lang = 'Unable to open the path: %s';
+$error_back_lang = 'Please use the "Back" button to return.';
+$error_remotecal_lang = 'You cannot view remote calendars on this server which are not approved.';
+$error_restrictedcal_lang = 'You have tried to access calendar that is restricted on this server.';
+$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+
 ?>
