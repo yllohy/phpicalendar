@@ -11,7 +11,12 @@ $current_view = "preferences";
 $back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
 if ($allow_preferences == 'no') header("Location: $back_page");
 
-$action = $HTTP_GET_VARS['action'];
+if (isset($HTTP_GET_VARS['action'])) {
+	$action = $HTTP_GET_VARS['action'];
+} else {
+	$action = '';
+} 
+
 $startdays = array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 
 if ($action == 'setcookie') { 
@@ -32,7 +37,7 @@ if ($action == 'setcookie') {
 	$HTTP_COOKIE_VARS['phpicalendar'] = $the_cookie;
 }
 
-if ($HTTP_COOKIE_VARS['phpicalendar']) {
+if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	$phpicalendar 		= unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	$cookie_language 	= $phpicalendar['cookie_language'];
 	$cookie_calendar 	= $phpicalendar['cookie_calendar'];
@@ -293,7 +298,7 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 											?>
 										</td>
 									</tr>
-									<?php if ($HTTP_COOKIE_VARS['phpicalendar']) { ?>
+									<?php if (isset($HTTP_COOKIE_VARS['phpicalendar'])) { ?>
 									<tr>
 										<td align="left" valign="top" nowrap><?php echo "$unset_prefs_lang"; ?></td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
