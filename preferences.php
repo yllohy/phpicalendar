@@ -154,7 +154,25 @@ $page->replace_tags(array(
 	'style_select' 		=> $style_select,
 	'display_date'	 	=> $lang['l_preferences'],
 	'generated'	 		=> $generated,
-	'message'	 		=> $message
+	'message'	 		=> $message,
+	'l_preferences'		=> $lang['l_preferences'],
+	'l_prefs_subhead'	=> $lang['l_prefs_subhead'],
+	'l_select_lang'		=> $lang['l_select_lang'],
+	'l_select_view'		=> $lang['l_select_view'],
+	'l_select_time'		=> $lang['l_select_time'],
+	'l_select_day'		=> $lang['l_select_day'],
+	'l_select_cal'		=> $lang['l_select_cal'],
+	'l_select_style'	=> $lang['l_select_style'],
+	'l_unset_prefs'		=> $lang['l_unset_prefs'],
+	'l_set_prefs'		=> $lang['l_set_prefs'],
+	'l_day'				=> $lang['l_day'],
+	'l_week'			=> $lang['l_week'],
+	'l_month'			=> $lang['l_month'],
+	'l_year'			=> $lang['l_year'],
+	'l_subscribe'		=> $lang['l_subscribe'],
+	'l_download'		=> $lang['l_download'],
+	'l_powered_by'		=> $lang['l_powered_by'],
+	'l_this_site_is'	=> $lang['l_this_site_is']	
 			
 	));
 

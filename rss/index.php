@@ -7,7 +7,7 @@ require_once(BASE.'functions/calendar_functions.php');
 $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].':'.$HTTP_SERVER_VARS['SERVER_PORT'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'],'/rss/'));
 
 $current_view = "rssindex";
-$display_date = "$calendar_lang - RSS Info";
+$display_date = "RSS Info";
 
 $filelist = availableCalendarNames($username, $password, $ALL_CALENDARS_COMBINED);
 foreach ($filelist as $file) {
