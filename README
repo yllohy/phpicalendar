@@ -70,6 +70,7 @@ Changes:
 		-Select default theme
 		-Select default start time, start day
 		-Upload new calendars (ftp)
+	-Print view can now be set for your default view.
 	-Minor bug fixes
 
 0.8.1
