@@ -159,7 +159,7 @@ $monthsofyearshort_lang		= array ('Tammi','Helmi','Maalis','Huhti','Touko','Kes&
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 //$timeFormat = 'g:i A';
 $timeFormat = 'H:i';
-$timeFormat_small = 'g:i';
+$timeFormat_small = 'H:i';
 
 // For date formatting, see note below
 $dateFormat_day = '%A, %e %Bta';
