@@ -2,6 +2,7 @@
 
 define('BASE','../');
 include(BASE.'functions/ical_parser.php');
+include(BASE.'functions/calendar_functions.php');
 $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
 if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
 	$back_page = $HTTP_SERVER_VARS['HTTP_REFERER'];
@@ -57,28 +58,21 @@ include (BASE.'includes/header.inc.php'); ?>
 									<br>
 									<?php 
 									
-									// open file
-									$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
-									
 									// build the <option> tags
-									while ($file = readdir($dir_handle)) {
-										if (preg_match("/^[^.].+\.ics$/", $file)) {
-											
-											// $cal_filename is the filename of the calendar without .ics
-											// $cal is a urlencoded version of $cal_filename
-											// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
-											$cal_filename_tmp = substr($file,0,-4);
-											$cal_tmp = urlencode($cal_filename_tmp);
-											$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
-											if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
-												echo '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br>';
-												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=day<br>';
-												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=week<br>';
-												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=month<br>';
-												$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&rssview='.$default_view;
-												echo '<br><br>';		
-											}	
-										}
+									$filelist = availableCalendarNames($username, $password, $ALL_CALENDARS_COMBINED);
+									foreach ($filelist as $file) {
+										// $cal_filename is the filename of the calendar without .ics
+										// $cal is a urlencoded version of $cal_filename
+										// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
+										$cal_filename_tmp = substr($file,0,-4);
+										$cal_tmp = urlencode($cal_filename_tmp);
+										$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+										echo '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br>';
+										echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=day<br>';
+										echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=week<br>';
+										echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=month<br>';
+										$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&rssview='.$default_view;
+										echo '<br><br>';
 									}
 									?>
 								</td>

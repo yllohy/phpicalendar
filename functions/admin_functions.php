@@ -284,23 +284,4 @@ function is_uploaded_ics ($filename) {
 	}
 }
 
-// Get all calendar filenames (not including path)
-//
-// argo: string path to calendar files
-// returns array filenames (not including path)
-function get_calendar_files($calendar_path) {
-	global $error_path_lang;
-	
-	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path)));
-	$filelist = array();
-	while ($file = readdir($dir_handle)) {
-		if (preg_match("/^[^.].+\.ics$/", $file)) {
-			array_push($filelist, $file);
-		}
-	}
-	closedir($dir_handle);
-	natcasesort($filelist);
-	return $filelist;
-}
-
 ?>

@@ -20,6 +20,10 @@
 	$fake_getdate_time = strtotime($this_year.'-'.$this_month.'-15');
 	?>
 <br>
+<?php
+	$login_width = 737;
+	include(BASE.'includes/login.php');
+?>
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$prev_day\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"[$last_day_lang]\" border=\"0\" align=\"left\"></a>"; ?></td>
@@ -146,6 +150,12 @@
 												echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
 												if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
 												if ($cal != $ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+												if (isset($username)) {
+													$querys = preg_replace("/action=[^&]+/", "action=logout", $QUERY_STRING);
+													if ($querys == $QUERY_STRING) $querys .= '&action=logout";
+													$querys = preg_replace("/(username|password)=[^&]+/", "", $querys);
+													echo "<a class=\"psf\" href=\"$SCRIPT_NAME?$querys\">Logout $username</a><br>\n";
+												}
 											 ?>
 											</td>
 										</tr>

@@ -8,16 +8,8 @@ if ($display_ical_list == "yes") {
 	// open file
 	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 	
-	// empty the filelist array
-	$filelist = array();
-
-	// build the <option> tags
-	while (false != ($file = readdir($dir_handle))) {
-		if (preg_match("/^[^.].+\.ics$/", $file)) {
-			array_push($filelist, $file);
-		}
-	}
-	natcasesort($filelist);
+	// Grab all calendars.
+	$filelist = availableCalendarNames($username, $password, $ALL_CALENDARS_COMBINED);
 	foreach ($filelist as $file) {
 		
 		// $cal_filename is the filename of the calendar without .ics
@@ -26,13 +18,11 @@ if ($display_ical_list == "yes") {
 		$cal_filename_tmp = substr($file,0,-4);
 		$cal_tmp = urlencode($cal_filename_tmp);
 		$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
-		if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
-			if ($cal_tmp == $cal) {
-				print "<option value=\"$current_view.php?cal=$cal_tmp&amp;getdate=$getdate\" selected>$cal_displayname_tmp $calendar_lang</option>";
-			} else {
-				print "<option value=\"$current_view.php?cal=$cal_tmp&amp;getdate=$getdate\">$cal_displayname_tmp $calendar_lang</option>";	
-			}
-		}	
+		if ($cal_tmp == $cal) {
+			print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
+		} else {
+			print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
+		}
 	}			
 
 	// option to open all (non-web) calenders together
@@ -55,14 +45,9 @@ if ($display_ical_list == "yes") {
 			}		
 		}
 	}
-
-	// close file
-	closedir($dir_handle);
 	
 	// finish <select>
 	print "</select>";
 	
 }
-
-
 ?>	

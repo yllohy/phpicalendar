@@ -16,6 +16,10 @@ if (strlen($cal_displayname2) > 24) {
 $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" style="font-size:10px" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" name="submit" value="Search"></form>';
 
 ?>
+<?php
+	$login_width = 170;
+	include(BASE.'includes/login.php');
+?>
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"[$prev_lang]\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
@@ -35,6 +39,12 @@ $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><
 				echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
 				if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
 				if ($cal != $ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+				if (isset($username)) {
+					$querys = preg_replace("/action=[^&]+/", "action=logout", $QUERY_STRING);
+					if ($querys == $QUERY_STRING) $querys .= '&action=logout';
+					$querys = preg_replace("/(username|password)=[^&]+/", "", $querys);
+					echo "<br>\n<a class=\"psf\" href=\"$SCRIPT_NAME?$querys\">Logout $username</a>\n";
+				}
 				echo '</span></div>';
 			 ?>
 		</td>

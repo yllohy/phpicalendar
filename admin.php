@@ -4,6 +4,7 @@ session_start();
 define('BASE', './');
 include (BASE.'functions/init.inc.php');
 include (BASE.'functions/admin_functions.php');
+include (BASE.'functions/calendar_functions.php');
 
 // Redirect if administration is not allowed
 if ($allow_admin != "yes") {
@@ -234,7 +235,7 @@ if ($action == "delete") {
 			//
 			$COLUMNS_TO_PRINT = 3;
 			$column = 1;
-			$filelist = get_calendar_files($calendar_path);
+			$filelist = availableCalendarNames('', '', '', true);
 			foreach ($filelist as $file) {
 				if ($column > $COLUMNS_TO_PRINT) {
 					echo "</tr>";

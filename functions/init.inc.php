@@ -12,6 +12,7 @@ $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
+include(BASE.'functions/calendar_functions.php');
 if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
@@ -20,6 +21,34 @@ if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	if (isset($phpicalendar['cookie_style'])) 		$style_sheet 		= $phpicalendar['cookie_style'];
 	if (isset($phpicalendar['cookie_startday'])) 	$week_start_day		= $phpicalendar['cookie_startday'];
 	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
+}
+
+// Look for a login cookie.
+unset($username, $password);
+if (isset($HTTP_COOKIE_VARS['phpicalendar_login'])) {
+	$login_cookie = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar_login']));
+	if (isset($login_cookie['username']))	$username = $login_cookie['username'];
+	if (isset($login_cookie['password']))	$password = $login_cookie['password'];
+}
+
+// Look for a new username and password.
+if (isset($HTTP_GET_VARS['username']))			$username = $HTTP_GET_VARS['username'];
+else if (isset($HTTP_POST_VARS['username']))	$username = $HTTP_POST_VARS['username'];
+if (isset($HTTP_GET_VARS['password']))			$password = $HTTP_GET_VARS['password'];
+else if (isset($HTTP_POST_VARS['password']))	$password = $HTTP_POST_VARS['password'];
+
+// Set the login cookie if logging in. Clear it if logging out.
+if (isset($HTTP_GET_VARS['action'])) {
+	$action = $HTTP_GET_VARS['action'];
+} else {
+	$action = '';
+}
+if ($action == 'login') {
+	$the_cookie = serialize(array('username' => $username, 'password' => $password));
+	setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
+} else if ($action == 'logout') {
+	setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $cookie_uri, 0);
+	unset($username, $password);
 }
 
 // language support
@@ -99,42 +128,8 @@ if ($is_webcal) {
 		exit(error($error_restrictedcal_lang, $cal_filename));
 	} else {
 		if (!isset($filename)) {
-			// empty the filelist array
-			$cal_filelist = array();
-			if ($cal == $ALL_CALENDARS_COMBINED) { // Create an array with the paths to all files to be combined
-				// Note: code here is similar to code in list_icals.php
-				// open directory
-				$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
-	
-				// build the array
-				while (false != ($file = readdir($dir_handle))) {
-					if (preg_match("/^[^.].+\.ics$/", $file) &&
-						!in_array(substr($file, 0, -4), $blacklisted_cals)) {
-							$file = $calendar_path.'/'.$file;
-							array_push($cal_filelist, $file);
-					}
-				}
-				// add webcals
-				foreach ($list_webcals as $file) {
-					if (preg_match("/^[^.].+\.ics$/", $file)) {
-						array_push($cal_filelist, $file);
-					}
-				}
-				natcasesort($cal_filelist);
-			} else { // Handle a single file
-				$filename = $calendar_path.'/'.$cal_filename.'.ics';
-				if (true == false) {
-					$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
-					while ($file = readdir($dir_handle)) {
-						if (substr($file, -4) == '.ics') {
-							$cal = urlencode(substr($file, 0, -4));
-							$filename = $calendar_path.'/'.$file;
-							break;
-						}
-					}
-				}
-				array_push($cal_filelist, $filename);
-			}
+			$cal_filelist = availableCalendars($username, $password, $cal_filename);
+			if (count($cal_filelist) == 1) $filename = $cal_filelist[0];
 		}
 		
 		// Sets the download and subscribe paths from the config if present.
