@@ -81,16 +81,16 @@ $events_week = 0;
 													echo "<td align=\"left\">\n";
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
 													echo "<tr>\n";
-													echo "<td width=\"100\" class=\"G10BOLD\">Time:</td>\n";
+													echo "<td width=\"100\" class=\"G10BOLD\">$time_lang:</td>\n";
 													echo "<td align=\"left\" class=\"G10B\">$event_start - $event_end</td>\n";
 													echo "</tr>\n";
 													echo "<tr>\n";
-													echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">Summary:</td>\n";
+													echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$summary_lang:</td>\n";
 													echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$event_text</td>\n";
 													echo "</tr>\n";
 													if ($new_val2["description"]) {
 														echo "<tr>\n";
-														echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">Description:</td>\n";
+														echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$description_lang:</td>\n";
 														echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$description</td>\n";
 														echo "</tr>\n";
 													}

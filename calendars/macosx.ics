@@ -13,7 +13,8 @@ SUMMARY:"Terminal.app:Unix for Mac folk" Chris Stone Brian Jepson (Room: Camino 
 DTSTAMP:19010101T010101Z
 UID:3113
 DTEND;TZID=US/Pacific:20020930T121500
-DESCRIPTION:Description: This tutorial covers Unix commands for navigating directories\, copying and moving files\, editing text files\, and working with super-user privileges\, as well as installation of the cron daemon\, anacron\, Fink package management system\, and Streamripper.\nSpeaker(s): Chris Stone; Brian Jepson\nTrack: Mac OS X Tutorials\nRoom: Camino Real
+DESCRIPTION:Description: This tutorial covers Unix commands for navigating directories\, copying and moving files\, editing text files\, and working with super-user privileges\, as well as installation of the cron daemon\, anacron\, Fink package management system\, and Streamripper.
+\nSpeaker(s): Chris Stone; Brian Jepson\nTrack: Mac OS X Tutorials\nRoom: Camino Real
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -158,6 +159,7 @@ DTSTAMP:19010101T010101Z
 UID:3202
 DTEND;TZID=US/Pacific:20021001T101500
 DESCRIPTION:Description: It's taken 17 years to go from System 1.0 to Mac OS X\, from 128K of memory to 
+
 128 megs\, from 400K disks to 40 gigabytes. What will another 17 years bring? David Pogue takes a funny\, whirlwind look back\, pauses to analyze the promise and perils of Mac OS X\, and fast-forwards to 2020 to imagine what's ahead on the road to Mac OS XX.\nSpeaker(s): David Pogue; \nTrack: Keynote\nRoom: Santa Clara Ballroom
 END:VEVENT
 BEGIN:VEVENT
@@ -312,7 +314,9 @@ DTSTAMP:19010101T010101Z
 UID:3369
 DTEND;TZID=US/Pacific:20021001T164500
 DESCRIPTION:Description: Mac OS X is becoming\, whether by design or by accident\, a Digital Rights
+
 Management operating system where the rights in question are the user's
+
 rights. Can this distinctly pro-customer approach continue in the face of Hollywood's ire and the entertainment industry's clout in Congress? Will Apple copy Microsoft and build harsh DRM for copyright owners into the system?\nSpeaker(s): Dan Gillmor; Cory Doctorow; J.D. Lasica; Victor Nemechek; Tim O'Reilly\nTrack: Keynote\nRoom: Santa Clara Ballroom
 END:VEVENT
 BEGIN:VEVENT
@@ -377,6 +381,7 @@ DTSTAMP:19010101T010101Z
 UID:3102
 DTEND;TZID=US/Pacific:20021001T183000
 DESCRIPTION:Description: There are a number of Unix applications that are available and work
+
 very well under Mac OS X. Unfortunately\, the reverse is not true.  Most Mac OS X applications take advantage of platform specific features which rely on proprietary technology which is not portable to other Unix systems.  This session covers how to develop brilliant Mac OS X applications which are also portable to other Unix systems such as Linux\, BSD\, and Solaris.\nSpeaker(s): Kevin Burton; \nTrack: Unix\nRoom: Stevens Creek
 END:VEVENT
 BEGIN:VEVENT
@@ -440,7 +445,8 @@ SUMMARY:"Discussion:  Mac OS X: Unix Moves Out" Jordan Hubbard  (Room: Santa Cla
 DTSTAMP:19010101T010101Z
 UID:3258
 DTEND;TZID=US/Pacific:20021002T101500
-DESCRIPTION:Description: Jordan Hubbard discusses Unix's long history in universities\, research institutions\, and server rooms\, and explains the new opportunities Mac OS X represents for the Unix development community.\nSpeaker(s): Jordan Hubbard; \nTrack: Keynote\nRoom: Santa Clara Ballroom
+DESCRIPTION:Description: Jordan Hubbard discusses Unix's long history in universities\, research institutions\, and server rooms\, and explains the new opportunities Mac OS X represents for the Unix development community.
+\nSpeaker(s): Jordan Hubbard; \nTrack: Keynote\nRoom: Santa Clara Ballroom
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -467,7 +473,8 @@ SUMMARY:"Zero Configuration Networking with Rendezvous" Stuart Cheshire Chris Bo
 DTSTAMP:19010101T010101Z
 UID:3288
 DTEND;TZID=US/Pacific:20021002T113000
-DESCRIPTION:Description: ZeroConf promises to bring true plug-and-play to the Internet Protocol (IP)\, by enabling users to automatically find and connect to IP devices using Multicast DNS and service-based lookups. Learn more about ZeroConf and Apple's implementation (aka Rendezvous)\, as well as how you can make your services more discoverable. \nSpeaker(s): Stuart Cheshire; Chris Bourdon\nTrack: Servers and Networking\nRoom: Winchester
+DESCRIPTION:Description: ZeroConf promises to bring true plug-and-play to the Internet Protocol (IP)\, by enabling users to automatically find and connect to IP devices using Multicast DNS and service-based lookups. Learn more about ZeroConf and Apple's implementation (aka Rendezvous)\, as well as how you can make your services more discoverable. 
+\nSpeaker(s): Stuart Cheshire; Chris Bourdon\nTrack: Servers and Networking\nRoom: Winchester
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -558,6 +565,7 @@ DTSTAMP:19010101T010101Z
 UID:3189
 DTEND;TZID=US/Pacific:20021002T141500
 DESCRIPTION:Description: mmalcom Crawford uses the database context\, snapshots\, conflict detection\,
+
 and multiple database connections to show how to avoid being too optimistic in relying on Enterprise Objects Framework's optimistic locking strategy.\nSpeaker(s): mmalcolm Crawford; \nTrack: Servers and Networking\nRoom: Winchester
 END:VEVENT
 BEGIN:VEVENT
@@ -567,7 +575,8 @@ SUMMARY:"Getting Data Onscreen with Cocoa" Scott Anguish  (Room: Lafayette/San T
 DTSTAMP:19010101T010101Z
 UID:3191
 DTEND;TZID=US/Pacific:20021002T141500
-DESCRIPTION:Description: This session provides users and developers with an insight into using Cocoa User Interface Elements to display data in windows. Anguish discusses basic datasources for NSTableView and NSOutlineView\, using the NSTextView\, and making a simple NSView subclass that draws and prints.\nSpeaker(s): Scott Anguish; \nTrack: Programming\nRoom: Lafayette/San Tomas/Lawrence
+DESCRIPTION:Description: This session provides users and developers with an insight into using Cocoa User Interface Elements to display data in windows. Anguish discusses basic datasources for NSTableView and NSOutlineView\, using the NSTextView\, and making a simple NSView subclass that draws and prints.
+\nSpeaker(s): Scott Anguish; \nTrack: Programming\nRoom: Lafayette/San Tomas/Lawrence
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -595,7 +604,9 @@ DTSTAMP:19010101T010101Z
 UID:3083
 DTEND;TZID=US/Pacific:20021002T150000
 DESCRIPTION:Description: This talk covers the full spectrum of security issues in Mac OS X 
-including privileged access\, NetInfo features and shortcomings\, packet-filtering firewalls\, disabling or securing network services\, securing network communications with SSH\, IPSec\, PPTP\, Apple APIs: Common Data Security Architecture\, Authorization\, password protection\, Kernel parameters\, tools\, and setup tasks.\nSpeaker(s): Leon Towns-von Stauber; \nTrack: Unix\nRoom: Stevens Creek
+
+including privileged access\, NetInfo features and shortcomings\, packet-filtering firewalls\, disabling or securing network services\, securing network communications with SSH\, IPSec\, PPTP\, Apple APIs: Common Data Security Architecture\, Authorization\, password protection\, Kernel parameters\, tools\, and setup tasks.
+\nSpeaker(s): Leon Towns-von Stauber; \nTrack: Unix\nRoom: Stevens Creek
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -632,6 +643,7 @@ DTSTAMP:19010101T010101Z
 UID:3146
 DTEND;TZID=US/Pacific:20021002T174500
 DESCRIPTION:Description: Learn how to leverage the sophisticated web tools that are available free to every Mac OS 9 and Mac OS X user. This session includes secrets for authoring lean\, mean QuickTime(r) video; how to publish iPhoto slide shows online; the 
+
 best way to make large files available to others without ftp access; and more.\nSpeaker(s): Derrick Story; Rael Dornfest\nTrack: Multimedia/ The iApps\nRoom: Stevens Creek
 END:VEVENT
 BEGIN:VEVENT
@@ -650,7 +662,8 @@ SUMMARY:"An Introduction to the Cocoa Document Architecture" mmalcolm Crawford S
 DTSTAMP:19010101T010101Z
 UID:3188
 DTEND;TZID=US/Pacific:20021002T174500
-DESCRIPTION:Description: mmalcolm Crawford gives an overview of the main classes that are used in multi-document applications\, and describes how to use the architecture supplied by Cocoa to develop applications that can create\, open\, load\, and save multiple document files.\nSpeaker(s): mmalcolm Crawford; Scott Anguish\nTrack: Programming\nRoom: Lafayette/San Tomas/Lawrence
+DESCRIPTION:Description: mmalcolm Crawford gives an overview of the main classes that are used in multi-document applications\, and describes how to use the architecture supplied by Cocoa to develop applications that can create\, open\, load\, and save multiple document files.
+\nSpeaker(s): mmalcolm Crawford; Scott Anguish\nTrack: Programming\nRoom: Lafayette/San Tomas/Lawrence
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -669,6 +682,7 @@ DTSTAMP:19010101T010101Z
 UID:3120
 DTEND;TZID=US/Pacific:20021002T183000
 DESCRIPTION:Description: George Reese looks at the role of MySQL and other Unix tools in solving the problems of digital media management. In particular\, the tutorial covers
+
 remote production with Final Cut Pro\, the sharing of online and offline media assets among a team members\, and searching and retrieving offline media assets.\nSpeaker(s): George Reese; \nTrack: Multimedia/ The iApps\nRoom: Stevens Creek
 END:VEVENT
 BEGIN:VEVENT
@@ -696,7 +710,8 @@ SUMMARY:"Serving Your Site From a Mac" Dori Smith  (Room: Winchester)
 DTSTAMP:19010101T010101Z
 UID:3160
 DTEND;TZID=US/Pacific:20021002T183000
-DESCRIPTION:Description: Now that you have Mac OS X\, you've also got Apache\, a powerful web serving machine. Dori Smith describes the numerous available free tools in addition to the ones that came with your Mac. Learn what's available\, what to use\, and when. This session assumes some knowledge of web technologies.\nSpeaker(s): Dori Smith; \nTrack: Servers and Networking\nRoom: Winchester
+DESCRIPTION:Description: Now that you have Mac OS X\, you've also got Apache\, a powerful web serving machine. Dori Smith describes the numerous available free tools in addition to the ones that came with your Mac. Learn what's available\, what to use\, and when. This session assumes some knowledge of web technologies.
+\nSpeaker(s): Dori Smith; \nTrack: Servers and Networking\nRoom: Winchester
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -795,7 +810,8 @@ SUMMARY:"Using Fink: a Developer's How-To" David Morrison  (Room: Stevens Creek)
 DTSTAMP:19010101T010101Z
 UID:3168
 DTEND;TZID=US/Pacific:20021003T121500
-DESCRIPTION:Description: The Fink project uses Debian tools to install and uninstall open-source Unix software\, manage dependencies between packages\, and keep track of versions. This session demonstrates an initial download of the source file\, simple modifications to port the software to Mac OS X\, and the creation of a Fink package.\nSpeaker(s): David Morrison; \nTrack: Unix\nRoom: Stevens Creek
+DESCRIPTION:Description: The Fink project uses Debian tools to install and uninstall open-source Unix software\, manage dependencies between packages\, and keep track of versions. This session demonstrates an initial download of the source file\, simple modifications to port the software to Mac OS X\, and the creation of a Fink package.
+\nSpeaker(s): David Morrison; \nTrack: Unix\nRoom: Stevens Creek
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -805,9 +821,13 @@ DTSTAMP:19010101T010101Z
 UID:3378
 DTEND;TZID=US/Pacific:20021003T121500
 DESCRIPTION:Description: In this tutorial\, Brian Jepson shows you how to install and configure
+
 PostgreSQL and MySQL for Mac OS X.  He explains how to install from
+
 source or binary distribution\, and demonstrates how to set up
+
 user accounts and databases.  Other topics include: database-enabled web
+
 programming\, GUI admin tools\, and ODBC.\nSpeaker(s): Brian Jepson; \nTrack: Servers and Networking\nRoom: Winchester
 END:VEVENT
 BEGIN:VEVENT
@@ -835,7 +855,8 @@ SUMMARY:"Outstanding Applications Graphics: A Developer's Workflow" Scott Nichol
 DTSTAMP:19010101T010101Z
 UID:3175
 DTEND;TZID=US/Pacific:20021003T141500
-DESCRIPTION:Description: Scott Nichol shows developers how to leverage new technologies built into Adobe's Photoshop\, Illustrator\, and GoLive to streamline graphics content creation for print\, web\, and Interface Builder.  Learn to manage files using the collaboration features of built-in WebDAV services\, and how scripting these applications can save time during the next release.\nSpeaker(s): Scott Nichol; \nTrack: Multimedia/ The iApps\nRoom: Stevens Creek
+DESCRIPTION:Description: Scott Nichol shows developers how to leverage new technologies built into Adobe's Photoshop\, Illustrator\, and GoLive to streamline graphics content creation for print\, web\, and Interface Builder.  Learn to manage files using the collaboration features of built-in WebDAV services\, and how scripting these applications can save time during the next release.
+\nSpeaker(s): Scott Nichol; \nTrack: Multimedia/ The iApps\nRoom: Stevens Creek
 END:VEVENT
 BEGIN:VEVENT
 SEQUENCE:1
@@ -890,10 +911,15 @@ DTSTAMP:19010101T010101Z
 UID:3377
 DTEND;TZID=US/Pacific:20021003T150000
 DESCRIPTION:Description: Wireless networks built by and for local communities are popping up
+
 everywhere.  But how can you find and make use of these networks without
+
 exposing yourself to eavesdroppers and other nefarious individuals?
+
 Rob Flickenger surveys several common tools and methods for compromising
+
 wireless networks\, and suggest methods to combat them using tunneling
+
 and strong cryptography in Mac OS X.\nSpeaker(s): Rob Flickenger; \nTrack: Servers and Networking\nRoom: Winchester
 END:VEVENT
 BEGIN:VEVENT
@@ -913,6 +939,6 @@ DTSTAMP:19010101T010101Z
 UID:3412
 DTEND;TZID=US/Pacific:20021003T161500
 DESCRIPTION:Description: Mark Frauenfelder presents a slideshow of imaginary devices he would
-like to one day be able to plug into his iMac's Digital Hub. He also answers questions about his experiences as an Apple Switch campaign star.\nSpeaker(s): Mark Frauenfelder; \nTrack: Keynote\nRoom: Santa Clara Ballroom
+ like to one day be able to plug into his iMac's Digital Hub. He also answers questions about his experiences as an Apple Switch campaign star.\nSpeaker(s): Mark Frauenfelder; \nTrack: Keynote\nRoom: Santa Clara Ballroom
 END:VEVENT
 END:VCALENDAR
