@@ -19,8 +19,9 @@ Installation:
 2. configure path to PHP iCalendar config file (below)
 3. make sure that PHP has write access to the calendars directory (or whatever you set $calendar_path to)
 4. set up directory security on your calendars directory
+5. turn on publishing in your PHP iCalendar config file by setting $phpicalendar_publishing to 1.
 
-Usage:
+Usage (Apple iCal):
 1. Open iCal, select a calendar for publishing
 2. Select "Publish" from the "Calendar" menu
 3. Configure to your liking, and set the URL to (eg): http://localhost/~dietricha/calendar/calendars/publish.php
@@ -46,76 +47,90 @@ include('../config.inc.php');
 // set calendar path, or just use current directory
 $calendar_path = (isset($calendar_path) && $calendar_path != '') ? $calendar_path : '';
 
-// toggle logging
-define( 'PHPICALENDAR_LOG_PUBLISHING', 0 );
+// allow/disallow publishing
 
-// viewing
+$phpicalendar_publishing = isset($phpicalendar_publishing) ? $phpicalendar_publishing : 0;
+define( 'PHPICALENDAR_PUBLISHING', $phpicalendar_publishing );
+
+// toggle logging
+define( 'PHPICALENDAR_LOG_PUBLISHING', 1 );
+
+/* force GET requests to main calendar view
 if($_SERVER['REQUEST_METHOD'] == 'GET')
 {
 	header('Location: '.$default_path);
 	return;
 }
-
-// unpublishing
-if($_SERVER['REQUEST_METHOD'] == 'DELETE')
+*/
+// only allow publishing if explicitly enabled
+if(PHPICALENDAR_PUBLISHING == 1)
 {
-	// get calendar filename
-	$calendar_file = $calendar_path.substr($_SERVER['REQUEST_URI'] , ( strrpos($_SERVER['REQUEST_URI'], '/') + 1) ) ;
-	
-	logmsg('received request to delete '.$calendar_file);
-	
-	// remove calendar file
-	if(!unlink($calendar_file))
+	// unpublishing
+	if($_SERVER['REQUEST_METHOD'] == 'DELETE')
 	{
-		logmsg('unable to delete the calendar file');
-	}
-	else
-	{
-		logmsg('deleted');
-	}
-	return;
-}
-
-// publishing
-if($_SERVER['REQUEST_METHOD'] == 'PUT')
-{
-	// get calendar data
-	$fp = fopen('php://input','r');
-	
-	while(!feof($fp))
-	{
-		$data .= fgets($fp,4096);
-	}
-	
-	fclose($fp);
-	
-	if(isset($data))
-	{
+		// get calendar filename
+		$calendar_file = $calendar_path.substr($_SERVER['REQUEST_URI'] , ( strrpos($_SERVER['REQUEST_URI'], '/') + 1) ) ;
 		
-		// get calendar name
-		$cal_arr = explode("\n",$data);
+		logmsg('received request to delete '.$calendar_file);
 		
-		foreach($cal_arr as $k => $v)
+		// remove calendar file
+		if(!unlink($calendar_file))
 		{
-			if(strstr($v,'X-WR-CALNAME:'))
-			{
-				$arr = explode(':',$v);
-				$calendar_name = trim($arr[1]);
-				break;
-			}
-		}
-		
-		$calendar_name = isset($calendar_name) ? $calendar_name : 'default';
-		
-		// write to file
-		if($fp = fopen($calendar_path.$calendar_name.'.ics','w+'))
-		{
-			fputs($fp, $data, strlen($data) );
-			fclose($fp);
+			logmsg('unable to delete the calendar file');
 		}
 		else
 		{
-			logmsg( 'couldnt open file '.$calendar_path.$calendar_name.'.ics' );
+			logmsg('deleted');
+		}
+		return;
+	}
+	
+	// publishing
+	if($_SERVER['REQUEST_METHOD'] == 'PUT')
+	{
+		// get calendar data
+		if($fp = fopen('php://input','r'))
+		{
+			while(!@feof($fp))
+			{
+				$data .= fgets($fp,4096);
+			}
+			
+			@fclose($fp);
+		}
+		else
+		{
+			logmsg('unable to read input data');
+		}
+		
+		if(isset($data))
+		{
+			
+			// get calendar name
+			$cal_arr = explode("\n",$data);
+			
+			foreach($cal_arr as $k => $v)
+			{
+				if(strstr($v,'X-WR-CALNAME:'))
+				{
+					$arr = explode(':',$v);
+					$calendar_name = trim($arr[1]);
+					break;
+				}
+			}
+			
+			$calendar_name = isset($calendar_name) ? $calendar_name : 'default';
+			
+			// write to file
+			if($fp = fopen($calendar_path.$calendar_name.'.ics','w+'))
+			{
+				fputs($fp, $data, strlen($data) );
+				@fclose($fp);
+			}
+			else
+			{
+				logmsg( 'couldnt open file '.$calendar_path.$calendar_name.'.ics' );
+			}
 		}
 	}
 }
