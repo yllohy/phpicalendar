@@ -185,9 +185,8 @@ if ($parse_file) {
 						$year = $regs[1];
 						$month = $regs[2];
 						$day = $regs[3];
-						$until = strtotime($year.$month.$day);
-						$until = strtotime('+12 hours', $until);
-						
+						$until = mktime(0,0,0,$month,$day,$year);
+						$until = strtotime('-1 day', $until);		
 					} elseif ($key == 'INTERVAL')	{
 						$number = $val;
 					
