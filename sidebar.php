@@ -227,7 +227,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 												$calendar_name2	= addslashes($calendar_name);
 												$calendar_name2 = urlencode($calendar_name2);
 												$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
-												if ($val['status'] == 'COMPLETED') {
+												if ($val['status'] == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
 													if ($show_completed == 'yes') {
 														$event_text = "<S>$event_text</S>";
 														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $event_text</font></a><br>\n";

@@ -74,7 +74,7 @@ Changes:
 		-Select default start time
 		-Upload new calendars (ftp)
 	-Print view can now be set for your default view.
-	-Calendars can now be store outside of phpicalendar's installation.
+	-Calendars can now be stored outside of phpicalendar's installation.
 	-Minor bug fixes
 
 0.8.1
