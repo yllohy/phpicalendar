@@ -63,7 +63,23 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'todo_js' 			=> '',
-	'show_search' 		=> ''		
+	'show_search' 		=> '',
+	'l_day'				=> $lang['l_day'],
+	'l_week'			=> $lang['l_week'],
+	'l_month'			=> $lang['l_month'],
+	'l_year'			=> $lang['l_year'],
+	'l_admin_header'	=> $lang['l_admin_header'],
+	'l_admin_subhead'	=> $lang['l_admin_subhead'],
+	'l_invalid_login'	=> $lang['l_invalid_login'],
+	'l_username'		=> $lang['l_username'],
+	'l_password'		=> $lang['l_password'],
+	'l_cal_file'		=> $lang['l_cal_file'],
+	'l_delete_cal'		=> $lang['l_delete_cal'],
+	'l_delete'			=> $lang['l_delete'],
+	'l_logout'			=> $lang['l_logout'],
+	'l_submit'			=> $lang['l_submit'],
+	'l_powered_by'		=> $lang['l_powered_by'],
+	'l_this_site_is'	=> $lang['l_this_site_is']			
 	));
 
 $page->output();
