@@ -392,6 +392,13 @@ foreach ($cal_filelist as $filename) {
 								$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $wkst;
 								break;
 							case 'END':
+							
+							// Modify the COUNT based on BYDAY
+							if ((is_array($byday)) && (isset($count))) {
+								$blah = sizeof($byday);
+								$count = ($count / $blah);
+								unset ($blah);
+							}
 						
 							if (!isset($number)) $number = 1;
 							// if $until isn't set yet, we set it to the end of our range we're looking at
