@@ -207,7 +207,7 @@ function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic, $class) 
 		} else {
 			echo $res[1];
 		}
-	echo '">'.$clic.$event_text.'</a>'.$fclic;
+	echo '">'.$clic.$event_text.$fclic.'</a>';
 	}
 }
 
