@@ -304,11 +304,9 @@ include (BASE.'includes/header.inc.php');
 		<td width="10"><img src="images/spacer.gif" width="10" height="1" alt=" "></td>
 		<td width="170" valign="top">
 			<?php include (BASE.'includes/sidebar.php'); ?>
-			<?php include (BASE.'includes/footer.inc.php'); ?>
 		</td>
 	</tr>
 </table>
 </center>
-</body>
-</html>
+<?php include (BASE.'includes/footer.inc.php'); ?>
 

@@ -166,7 +166,5 @@ include (BASE.'includes/header.inc.php');
 		</td>
 	</tr>
 </table>
-<?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
-</body>
-</html>
+<?php include (BASE.'includes/footer.inc.php'); ?>

@@ -1,6 +1,6 @@
 <?php 
 
-echo "<center><font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/nuke/\">PHP iCalendar 0.9.4</a>";
+echo "<center class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/nuke/\">PHP iCalendar 0.9.4</a>";
 if ($enable_rss == 'yes') {
 	echo "<br>\n";
 	if ((isset($current_view)) && ($current_view == 'rssindex')) {
@@ -9,6 +9,9 @@ if ($enable_rss == 'yes') {
 		echo $this_site_is_lang.' <a class="psf" href="'.BASE.'rss/index.php?cal='.$cal.'&amp;getdate='.$getdate.'">RSS-Enabled</a>';
 	}
 }
-echo '</font></center>';
+echo '</center>';
 
 ?>
+
+</body>
+</html>

@@ -271,13 +271,9 @@ if ($action == "delete") {
 		</td>
 	</tr>
 </table>
-
+</center>
 
 <?php include (BASE.'includes/footer.inc.php'); ?>
 
-
-</center>
-</body>
-</html>
 
 

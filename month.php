@@ -233,7 +233,7 @@ include (BASE.'includes/header.inc.php');
 				?>
 			</table>		
 <?php } ?>
-<?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
-</body>
-</html>
+<?php include (BASE.'includes/footer.inc.php'); ?>
+
+

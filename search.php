@@ -86,18 +86,10 @@ $search_ended = getmicrotime();
 
 $search_took = number_format(($search_ended-$search_started),3);
 
+include (BASE.'includes/header.inc.php'); 
+
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$calendar_name - $results_lang"; ?></title>
-  	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
-</head>
-<body bgcolor="#FFFFFF">
-<?php include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
@@ -283,10 +275,10 @@ $search_took = number_format(($search_ended-$search_started),3);
 	</tr>
 </table>
 </center>
-<?php include (BASE.'includes/footer.inc.php'); ?>
-</body>
-</html>
-<?php
+<?php 
+
+include (BASE.'includes/footer.inc.php');
+
 
 // takes a boolean search and formats it into an array
 // use with sister function search_boolean()

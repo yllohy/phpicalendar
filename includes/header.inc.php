@@ -1,4 +1,9 @@
-<? if ($current_view == 'preferences') $display_date = $preferences_lang; ?>
+<? 
+
+if ($current_view == 'preferences') $display_date = $preferences_lang; 
+if ($current_view == 'search') $display_date = $results_lang;
+
+?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
