@@ -35,11 +35,11 @@ if ( ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || ($_SERVER['HTTP_IF_
 }
 
 if ($rssview == "day") {
-	$theview = $day_lang;
+	$theview = $lang['l_day'];
 } elseif ($rssview == "week") {
-	$theview = $week_lang;
+	$theview = $lang['l_week'];
 } elseif ($rssview == "month") {
-	$theview = $month_lang;
+	$theview = $lang['l_month'];
 }
 
 
@@ -49,9 +49,9 @@ $rss .= '<rss version="0.91">'."\n";
 $rss .= '<channel>'."\n";
 $rss .= '<title>'.$cal_displayname.' - '.$theview.'</title>'."\n";
 $rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
-$rss .= '<description>'.$cal_displayname.' '.$calendar_lang.' - '.$theview.'</description>'."\n";
+$rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
 $rss .= '<language>'.$rss_language.'</language>'."\n";
-$rss .= '<copyright>Copyright 2002, '.htmlspecialchars ("$default_path").'</copyright>'."\n";
+$rss .= '<copyright>Copyright 2004, '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 
 
 if ($rssview == 'day') {
@@ -79,7 +79,7 @@ if ($rssview == 'day') {
 	}
 	if ($events_week < 1) {
 		$rss .= '<item>'."\n";
-		$rss .= '<title>'.$no_events_day_lang.'</title>'."\n";
+		$rss .= '<title>'.$lang['l_no_events_day'].'</title>'."\n";
 		$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 		$rss .= '</item>'."\n";
 	}
@@ -91,7 +91,7 @@ if ($rssview == "week") {
 	do {
 		$getdate = date("Ymd", $thisdate);
 		$dayofweek = strtotime ($getdate);
-		$dayofweek = localizeDate ($rss_week_date, $dayofweek);
+		$dayofweek = localizeDate ($dateFormat_day, $dayofweek);
 		if (isset($master_array[($getdate)]) && sizeof($master_array[($getdate)]) > 0) {
 			foreach ($master_array[("$getdate")] as $event_times) {
 				foreach ($event_times as $val) {
@@ -104,7 +104,7 @@ if ($rssview == "week") {
 					$description 	= strip_tags($description, '<b><i><u>');
 					$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
 					$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-					$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
+					$rss_description	= htmlspecialchars ("$dayofweek $event_start: $event_text - $description");
 					$rss .= '<item>'."\n";
 					$rss .= '<title>'.$rss_title.'</title>'."\n";
 					$rss .= '<link>'.$rss_link.'</link>'."\n";
@@ -116,7 +116,7 @@ if ($rssview == "week") {
 		}
 		if (($events_week < 1) && ($i == 6)) {
 			$rss .= '<item>'."\n";
-			$rss .= '<title>'.$no_events_week_lang.'</title>'."\n";
+			$rss .= '<title>'.$lang['l_no_events_week'].'</title>'."\n";
 			$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 			$rss .= '</item>'."\n";
 		}
@@ -133,7 +133,7 @@ if ($rssview == "month") {
 		if ($regs[1] == $parse_month) {
 			$getdate = $key;
 			$dayofmonth = strtotime ($getdate);
-			$dayofmonth = localizeDate ($rss_month_date, $dayofmonth);
+			$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 			
 			// Pull out each day
 			foreach ($new_val2 as $new_val) {
@@ -150,7 +150,7 @@ if ($rssview == "month") {
 						$description 	= strip_tags($description, '<b><i><u>');
 						$rss_title		= htmlspecialchars ("$dayofmonth: $event_text");
 						$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
-						$rss_description	= htmlspecialchars ("$dayofmonth $event_start: $description");
+						$rss_description	= htmlspecialchars ("$dayofmonth $event_start: $event_text - $description");
 						$rss .= '<item>'."\n";
 						$rss .= '<title>'.$rss_title.'</title>'."\n";
 						$rss .= '<link>'.$rss_link.'</link>'."\n";
@@ -161,7 +161,7 @@ if ($rssview == "month") {
 							
 					if ($events_week < 1) {
 						$rss .= '<item>'."\n";
-						$rss .= '<title>'.$no_events_month_lang.'</title>'."\n";
+						$rss .= '<title>'.$lang['no_events_month'].'</title>'."\n";
 						$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 						$rss .= '</item>'."\n";
 					}

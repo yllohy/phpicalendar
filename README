@@ -99,6 +99,8 @@ Changes:
 	-Some authentication issues resolved.
 	-Change your charset in config.
 	-Better Evolution compatibility.
+	-Better RSS Feeds.
+	-Various Bug fixes.
 
 2.0 alpha
 	-New templating system.
