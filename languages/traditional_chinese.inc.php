@@ -87,37 +87,37 @@ $unfinished_lang		= '尚未完成';
 $prefs_set_lang 		= '您的偏好設定已設定。';
 $prefs_unset_lang 		= '設定已還原。更動的部份會在讀取下一頁時生效。';
 $unset_prefs_lang 		= '還原設定:';
-$organizer_lang			= 'Organizer';
-$attendee_lang			= 'Attendee';
-$status_lang			= 'Status';
-$location_lang			= 'Location';
-$admin_header_lang		= 'PHP iCalendar Administration';
-$username_lang			= 'Username';
-$password_lang			= 'Password';
-$login_lang				= 'Login';
-$invalid_login_lang		= 'Wrong username or password.';
-$addupdate_cal_lang		= 'Add or Update a Calendar';
-$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
-$delete_cal_lang		= 'Delete a Calendar';
-$logout_lang			= 'Logout';
-$cal_file_lang			= 'Calendar File';
-$php_error_lang			= 'PHP Error';
-$upload_error_gen_lang	= 'There was a problem with your upload.';
-$upload_error_lang[0]	= 'There was a problem with your upload.';
-$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
-$upload_error_lang[4]	= 'You must select a file for upload.';
-$upload_error_type_lang = 'Only .ics files may be uploaded.';
-$copy_error_lang		= 'Failed to copy file';
-$delete_error_lang		= 'Failed to delete file';
-$delete_success_lang	= 'was deleted successfully.';
-$action_success_lang	= 'Your action was successful.';
-$submit_lang			= 'Submit';
-$delete_lang			= 'Delete';
+$organizer_lang			= '萬用行事曆';
+$attendee_lang			= '出席者';
+$status_lang			= '狀態';
+$location_lang			= '位置';
+$admin_header_lang		= 'PHP iCalendar 管理區';
+$username_lang			= '使用者名稱';
+$password_lang			= '密碼';
+$login_lang				= '登入';
+$invalid_login_lang		= '帳號或密碼輸入錯誤。';
+$addupdate_cal_lang		= '新增或更新行事曆';
+$addupdate_desc_lang	= '上傳新檔案來新增行事曆或上傳相同檔名的檔案來更新行事曆。';
+$delete_cal_lang		= '刪除行事曆';
+$logout_lang			= '登出';
+$cal_file_lang			= '行事曆檔案';
+$php_error_lang			= 'PHP 錯誤';
+$upload_error_gen_lang	= '您上傳的檔案有問題。';
+$upload_error_lang[0]	= '您上傳的檔案有問題。';
+$upload_error_lang[1]	= '您上傳的檔案太大。';
+$upload_error_lang[2]	= '您上傳的檔案太大。';
+$upload_error_lang[3]	= '您只上傳的檔案內容不完整。';
+$upload_error_lang[4]	= '您必須選定要上傳的檔案。';
+$upload_error_type_lang = '只能上傳副檔名是 .ics 的行事曆檔案。';
+$copy_error_lang		= '複製檔案失敗';
+$delete_error_lang		= '刪除檔案失敗';
+$delete_success_lang	= '已成功刪除。';
+$action_success_lang	= '操作成功。';
+$submit_lang			= '確定';
+$delete_lang			= '刪除';
 
-// ----- New for 1.0
-$all_cal_comb_lang		= 'All calendars combined';
+// ----- New for 0.9.5
+$all_cal_comb_lang		= '已結合所有的行事曆';
 
 // - navigation
 $back_lang = '回去';
@@ -194,3 +194,4 @@ $error_restrictedcal_lang = '您試圖存取被本伺服器所限制使用的行
 $error_invalidcal_lang = '錯誤的行事曆檔案。請換一個行事曆試試。';
 
 ?>
+

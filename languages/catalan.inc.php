@@ -4,6 +4,8 @@
 // For version 1.0 PHP iCalendar
 //
 // Translation by Oriol Ferrer Mesia; (tm05788@salleurl.edu)
+//
+// Submit new translations to chad@chadsdomain.com
 
 $day_lang			= "Dia";
 $week_lang			= "Setmana";
@@ -21,7 +23,6 @@ $last_year_lang		= "Any anterior";
 $subscribe_lang		= "Subscriure";
 $download_lang		= "Descarregar";
 $powered_by_lang 	= "Gr&agrave;cies a";
-$version_lang		= "0.9";
 $event_lang			= 'Event';
 $event_start_lang	= 'Inici';
 $event_end_lang		= 'Fi';
@@ -81,9 +82,9 @@ $priority_none_lang		= 'Cap';
 $status_lang			= 'Estat:';
 $todo_lang				= 'Pendent';
 $unfinished_lang		= 'Sense acabar';
-$prefs_set_lang 		= 'Your preferences have been set.';
-$prefs_unset_lang 		= 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang 		= 'Unset preferences:';
+$prefs_set_lang 		= 'Les teves prefer&egrave;ncies s\'han guardat.';
+$prefs_unset_lang 		= 'Les prefer&egrave;ncies s\'han esborat. Els canvis ser&agrave;n visibles quan es recarregui la p&agrave;gina';
+$unset_prefs_lang 		= 'Esborra les prefer&egrave;ncies:';
 $organizer_lang			= 'Organitzador';
 $attendee_lang			= 'Persones presents';
 $status_lang			= 'Estat';
@@ -92,7 +93,7 @@ $admin_header_lang		= 'Administraci&oacute; PHP iCalendar';
 $username_lang			= 'Nom d\'usuari';
 $password_lang			= 'contrasenya';
 $login_lang				= 'Login';
-$invalid_login_lang		= 'Nom d\'usuari o contrassenya incorrectes.';
+$invalid_login_lang		= 'Nom d\'usuari o contrasenya incorrectes.';
 $addupdate_cal_lang		= 'Afegeix o actualitza un Calendari';
 $addupdate_desc_lang	= 'Afegeix un Calendari enviant un fitxer. Actualitza un Calendari enviant un fitxer amb el mateix nom.';
 $delete_cal_lang		= 'Esborra un Calendari';
@@ -113,8 +114,8 @@ $action_success_lang	= 'L\'acci&oacute; ha acabat satisfact&ograve;riament.';
 $submit_lang			= 'Envia';
 $delete_lang			= 'Esborra';
 
-// ----- New for 1.0
-$all_cal_comb_lang		= 'All calendars combined';
+// ----- New for 0.9.5
+$all_cal_comb_lang		= 'Tots els calendaris alhora';
 
 // - navigation
 $back_lang = 'Endarrera';
