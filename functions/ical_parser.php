@@ -471,7 +471,13 @@ if ($parse_file) {
 		
 		// Begin VTODO Support
 		} elseif ($line == 'END:VTODO') {
-			$master_array['-2'][][$uid] = array ('start_date' => $start_date, 'start_time' => $start_time, 'event_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories);
+			if ((!$vtodo_priority) && ($status == 'COMPLETED')) {
+				$vtodo_priority = 11;
+			} elseif (!$vtodo_priority) { 
+				$vtodo_priority = 10;
+			}
+			if (!$due_date) $due_date = date("Ymd", strtotime("+1 year", strtotime("$start_date")));
+			$master_array['-2']["$vtodo_priority"]["$uid"] = array ('start_date' => $start_date, 'start_time' => $start_time, 'event_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories);
 			unset ($due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary);
 			$vtodo_set = FALSE;
 		} elseif ($line == 'BEGIN:VTODO') {
@@ -871,13 +877,13 @@ if ($parse_file) {
 
 
 //If you want to see the values in the arrays, uncomment below.
-//print '<pre>';
-//print_r($master_array);
+print '<pre>';
+print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
 //print_r($rrule);
 //print_r($recurrence_delete);	
-//print '</pre>';
+print '</pre>';
 	
 					
 ?>
