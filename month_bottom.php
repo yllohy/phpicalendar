@@ -10,9 +10,9 @@
 <br>
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
-											<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"images/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+											<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\"><img src=\"images/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
 		<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php print (strftime ($dateFormat_day, strtotime($getdate))); ?></b></td>
-											<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"images/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+											<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\"><img src=\"images/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
