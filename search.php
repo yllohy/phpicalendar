@@ -24,27 +24,24 @@ $search_box = '';
 switch($HTTP_GET_VARS['mode']) {
 	case 'advanced_search':
 		// display advanced search stuff
-		
 		break;
 	case 'search':
 		// display simple search stuff
-		$search_box .= 
-			'<form action="search.php" method="GET">'."\n".
-			'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
-			'<input type="submit" value="Search">'."\n".
-			'</form>';
 		break;
 	case 'results':
 		// display results of either simple or advanced search
 		break;
 	default:
 		// some generic thing, maybe same as search
-		$search_box .= 
-			'<form action="search.php" method="GET">'."\n".
-			'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
-			'<input type="submit" value="Search">'."\n".
-			'</form>';
 }
+
+$search_box .= 
+	'<form action="search.php" method="GET">'."\n".
+	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
+	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
+	'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
+	'<input type="submit" value="Search">'."\n".
+	'</form>';
 
 $search_started = getmicrotime();
 if ($search_valid) {
@@ -231,6 +228,7 @@ function format_search($search_str) {
 	// clean up search string
 	$search_str = trim($search_str);
 	$search_str = str_replace(' and ', ' ', $search_str);
+	$search_str = str_replace(' - ', ' ', $search_str);
 	$search_str = ereg_replace('[[:space:]]+',' ', $search_str);
 	$search_str = str_replace(' not ', ' -', $search_str);
 	
