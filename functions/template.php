@@ -222,39 +222,28 @@ class Page {
 	
 	function output() {
 		global $template, $php_started, $lang;
-		// Small month builder
-		preg_match_all ('!(\{MONTH_SMALL\|[+|-][0-9]\})!is', $this->page, $match);
-		if (sizeof($match) > 0) {
-			$template_file = $this->parse('templates/'.$template.'/month_small.tpl');
-			foreach ($match[1] as $key => $val) {
-				$offset = str_replace('}', '', $val);
-				$offset = str_replace('{MONTH_SMALL|', '', $offset);
-				$data = $this->draw_month($template_file, $offset, 'small');
-				$this->page = str_replace($val, $data, $this->page);
-			}
-		}
 		
-		// Medium month builder
-		preg_match_all ('!(\{MONTH_MEDIUM\|[0-9][0-9]\})!is', $this->page, $match);
+		// Looks for {MONTH} before sending page out
+		preg_match_all ('!\{MONTH_([A-Z]*)\|?([+|-])([0-9]{1,2})\}!is', $this->page, $match);
 		if (sizeof($match) > 0) {
-			$template_file = $this->parse('templates/'.$template.'/month_medium.tpl');
+			$i=0;
 			foreach ($match[1] as $key => $val) {
-				$offset = str_replace('}', '', $val);
-				$offset = str_replace('{MONTH_MEDIUM|', '', $offset);
-				$data = $this->draw_month($template_file, $offset, 'medium');
-				$this->page = str_replace($val, $data, $this->page);
-			}
-		}
-		
-		// Large month builder
-		preg_match_all ('!(\{MONTH_LARGE\|[+|-][0-9]\})!is', $this->page, $match);
-		if (sizeof($match) > 0) {
-			$template_file = $this->parse('templates/'.$template.'/month_large.tpl');
-			foreach ($match[1] as $key => $val) {
-				$offset = str_replace('}', '', $val);
-				$offset = str_replace('{MONTH_LARGE|', '', $offset);
-				$data = $this->draw_month($template_file, $offset, 'large');
-				$this->page = str_replace($val, $data, $this->page);
+				if ($match[1][$i] == 'SMALL') {
+					$template_file 	= $this->parse('templates/'.$template.'/month_small.tpl');
+					$type 			= 'small';
+					$offset 		= $match[2][$i].$match[3][$i];
+				} elseif ($match[1][$i] == 'MEDIUM') {
+					$template_file 	= $this->parse('templates/'.$template.'/month_medium.tpl');
+					$type 			= 'medium';
+					$offset 		= $match[3][$i];
+				} else {
+					$template_file 	= $this->parse('templates/'.$template.'/month_large.tpl');
+					$type 			= 'large';
+					$offset 		= $match[2][$i].$match[3][$i];
+				}
+				$data = $this->draw_month($template_file, $offset, $type);
+				$this->page = str_replace($match[0][$i], $data, $this->page);
+				$i++;
 			}
 		}
 		

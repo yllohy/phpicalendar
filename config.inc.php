@@ -1,12 +1,12 @@
 <?php
 
-// Configuration file for PHP iCalendar 1.2
+// Configuration file for PHP iCalendar 2.0
 //
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information
 
 $style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, grey, tan
-$template 				= 'default';
+$template 				= 'default';		// Template support
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal 			= $ALL_CALENDARS_COMBINED;		// Exact filename of calendar without .ics. Or set to $ALL_CALENDARS_COMBINED to open all calenders combined into one.
@@ -24,7 +24,7 @@ $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 $calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
 $second_offset			= '0';				// The time in seconds between your time and your server's time.
-$bleed_time				= '';				// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359'. Is automatically set to $day_start if left blank.
+$bleed_time				= '';				// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359', or '-1' for no bleed time. Is automatically set to $day_start if left blank.
 $cookie_uri				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar -- AUTO SETTING -- Only set if you are having cookie issues.
 $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http://www.example.com/phpicalendar/calendars -- AUTO SETTING -- Only set if you are having subscribe issues.
 $default_path			= 'http://www.example.com/phpicalendar'; 						// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
