@@ -1,5 +1,12 @@
 <?php
-if (isset($_GET["jumpto_day"])) $getdate = date("Ymd", strtotime($_GET["jumpto_day"]));
+if (isset($_GET["jumpto_day"])) {
+	$jumpto_day_time = strtotime($_GET["jumpto_day"]);
+	if ($jumpto_day_time == -1) {
+		$getdate = date("Ymd");
+	} else {
+		$getdate = date("Ymd", $jumpto_day_time);
+	}
+}
 $current_view = "day";
 include("./ical_parser.php");
 
