@@ -40,3 +40,8 @@ a.psf:hover	{
 
 .query_style { font-size : 12px; font-family : geneva, arial, sans-serif; width: 135px; }
 .add_style { font-size : 12px; font-family : verdana, geneva, arial, sans-serif; width: 160px; }
+
+td.smaller { width: 60px; border: 1px #98AAB1 solid; }
+td.borders { border-bottom: 1px #98AAB1 dotted; 
+			 border-right: 1px #98AAB1 solid; }
+td.border_all { border: 1px #98AAB1 solid; }
