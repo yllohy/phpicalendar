@@ -6,7 +6,7 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-// error_reporting (E_ERROR | E_WARNING | E_PARSE);
+error_reporting (E_ERROR | E_WARNING | E_PARSE);
 
 // Older versions of PHP do not define $_SERVER. Define it here instead.
 if (!isset($_SERVER) && isset($HTTP_SERVER_VARS)) {

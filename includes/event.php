@@ -1,6 +1,8 @@
 <?php 
 define('BASE', '../');
 include_once(BASE.'functions/init.inc.php'); 
+require_once(BASE.'functions/template.php');
+error_reporting(E_ALL);
 
 function decode_popup ($item) {
 	$item = stripslashes(rawurldecode($item));
@@ -30,10 +32,7 @@ if ($start == '' && $end == '' && (isset($start) && isset($end))) {
 	$event_times=' - <font class="V9">(<i>' . $all_day_lang . '</i>)</font>';
 }
 
-if ($description) {
-	$display = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$description);
-	$display .= '<br>';
-}
+if ($description) $description = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$description);
 if ($organizer) {
 	$i=0;
 	$display .= $organizer_lang . ' - ';
@@ -41,8 +40,7 @@ if ($organizer) {
 		$organizers .= $organizer[$i]["name"] . ', ';
 		$i++;
 	}
-	$display .= substr($organizers,0,-2);
-	$display .= '<br>';
+	$organizer = substr($organizers,0,-2);
 }
 if ($attendee) {
 	$i=0;
@@ -51,48 +49,35 @@ if ($attendee) {
 		$attendees .= $attendee[$i]["name"] . ', ';
 		$i++;
 	}
-	$display .= substr($attendees,0,-2);
-	$display .= '<br>';
+	$attendee = substr($attendees,0,-2);
 }
-if ($status) {
-	$display .= $status_lang . ' - ' . $status. '<br>' . "\n";
-}
+
 if ($location) {
 	if ($url != '') $location = '<a href="'.$url.'" target="_blank">'.$location.'</a>';
-	$display .= $location_lang . ' - ' . $location.'<br>';
 }
 $sheet_href = BASE.'styles/'.$style_sheet.'/default.css';
 
+$page = new Page(BASE.'templates/default/event.tpl');
 
-echo <<<END
+$page->replace_tags(array(
+	'cal' 				=> $cal,
+	'event' 			=> $event,
+	'event_times' 		=> $event_times,
+	'description' 		=> $description,
+	'organizer_lang' 	=> $organizer_lang,
+	'organizer' 		=> $organizer,
+	'attendee_lang' 	=> $attendee_lang,
+	'attendee'	 		=> $attendee,
+	'status_lang' 		=> $status_lang,
+	'status'	 		=> $status,
+	'location_lang' 	=> $location_lang,
+	'location' 			=> $location,
+	'sheet_href'		=> $sheet_href,
+	'cal_title_full'	=> $cal_title_full
+	
+	));
 
-	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-			"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-	<html>
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-		<title>{$cal}</title>
-		<link rel="stylesheet" type="text/css" href="{$sheet_href}">
-	</head>
-	<body>
-	<center>
-		<table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
-			<tr>
-				<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{$cal_title_full}</div></td>
-			</tr>
-			<tr>
-				<td align="left" class="V12">
-					<div style="margin-left: 10px; margin-bottom:10px;">
-						<p>{$event}  {$event_times}</p>
-						{$display}
-					</div>
-				</td>
-			</tr>
-		</table>
-	</center>
-	</body>
-	</html>
+$page->output();
 
-END;
 
 ?>

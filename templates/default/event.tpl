@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title>{CAL}</title>
-	<link rel="stylesheet" type="text/css" href="{SHEET_HREF">
+	<link rel="stylesheet" type="text/css" href="{SHEET_HREF}">
 </head>
 <body>
 <center>
