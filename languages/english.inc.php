@@ -87,7 +87,7 @@ $unfinished_lang		= 'Unfinished';
 
 // ----- New for 0.9.1
 
-$set_prefs_lang = 'Your preferences have been set.';
+$prefs_set_lang = 'Your preferences have been set.';
 
 // - navigation
 $back_lang = 'Back';
