@@ -80,6 +80,7 @@ $page->replace_tags(array(
 	'l_year'			=> $lang['l_year'],
 	'l_subscribe'		=> $lang['l_subscribe'],
 	'l_download'		=> $lang['l_download'],
+	'l_no_results'		=> $lang['l_no_results'],
 	'l_powered_by'		=> $lang['l_powered_by'],
 	'l_this_site_is'	=> $lang['l_this_site_is']				
 	));
