@@ -64,6 +64,7 @@ $no_events_month_lang	= 'Brak zadań an ten miesiąc.';
 $rss_day_date			= 'G:i A';  // Lists just the time
 $rss_week_date			= '%A, %e %B';  // Lists just the day
 $rss_month_date			= '%A, %e %B';  // Lists just the day
+$rss_language			= 'en-us';
 // -------------------------
 
 $daysofweek_lang			= array ('Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota');

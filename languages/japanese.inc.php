@@ -72,6 +72,7 @@ $no_events_month_lang	= '今月は予定がありません';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e日';  // Lists just the day
 $rss_month_date			= '%b %e日';  // Lists just the day
+$rss_language			= 'en-us';
 // -------------------------
 
 $daysofweek_lang			= array ('日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日');

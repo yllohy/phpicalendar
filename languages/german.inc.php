@@ -63,6 +63,7 @@ $no_events_month_lang	= 'Keine Einträge in diesem Monat.';
 $rss_day_date			= 'H:i';  // Lists just the time
 $rss_week_date			= '%e. %b';  // Lists just the day
 $rss_month_date			= '%e. %b';  // Lists just the day
+$rss_language			= 'en-us';
 // -------------------------
 
 $daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');

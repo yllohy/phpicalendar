@@ -29,7 +29,7 @@ $rss .= '<channel>'."\n";
 $rss .= '<title>'.$cal_displayname.' - '.$theview.'</title>'."\n";
 $rss .= '<link>'.$default_path.'</link>'."\n";
 $rss .= '<description>'.$cal_displayname.' '.$calendar_lang.' - '.$theview.'</description>'."\n";
-$rss .= '<language>us-en</language>'."\n";
+$rss .= '<language>'.$rss_language.'</language>'."\n";
 $rss .= '<copyright>Copyright 2002, '.$default_path.'</copyright>'."\n";
 
 

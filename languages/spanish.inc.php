@@ -61,6 +61,7 @@ $no_events_month_lang	= 'No hay eventos para este mes.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%e de %b';  // Lists just the day
 $rss_month_date			= '%e de %b';  // Lists just the day
+$rss_language			= 'en-us';
 // -------------------------
 
 $daysofweek_lang			= array ('Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado');

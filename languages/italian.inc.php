@@ -65,6 +65,7 @@ $no_events_month_lang	= 'Nessun evento per questo mese.';
 $rss_day_date			= 'G:i';  // Lists just the time
 $rss_week_date			= '%e %B';  // Lists just the day
 $rss_month_date			= '%e %B';  // Lists just the day
+$rss_language			= 'en-us';
 // -------------------------
 
 // Date display since setlocale isnt perfect. // new since last translation
