@@ -1,122 +1,33 @@
 <?php
-// function to determine the colspan for overlapping events
-// takes 2 parameters: index of event (in regards of column output) and number of overlapping events
-function eventWidth($ind, $overlaps) {
-	switch ($overlaps) {
-	// case 1 means 1 overlap -> two concurrent events etc.
-		case 0:
-			return 12;
-			break;
-		case 1:
-			return 6;
-			break;
-		case 2:
-			return 4;
-			break;
-		case 3:
-			return 3;
-			break;
-		case 4:
-			switch ($ind) {
-				case 0:
-					return 3;
-					break;
-				case 2:
-					return 3;
-					break;
-				default:
-					return 2;
-			}
-			break;
-		case 5:
-			return 2;
-			break;
-		case 6:
-			switch ($ind) {
-				case 0:
-					return 1;
-					break;
-				case 3:
-					return 1;
-					break;
-				default:
-					return 2;
-			}
-			break;
-		case 7:
-			switch ($ind) {
-				case 0:
-					return 2;
-					break;
-				case 2:
-					return 2;
-					break;
-				case 4:
-					return 2;
-					break;
-				case 6:
-					return 2;
-					break;
-				default:
-					return 1;
-			}
-			break;
-		case 8:
-			switch ($ind) {
-				case 0:
-					return 2;
-					break;
-				case 3:
-					return 2;
-					break;
-				case 6:
-					return 2;
-					break;
-				default:
-					return 1;
-			}
-			break;
-		case 9:
-			switch ($ind) {
-				case 0:
-					return 2;
-					break;
-				case 7:
-					return 2;
-					break;
-				default:
-					return 1;
-			}
-			break;
-		case 10:
-			switch ($ind) {
-				case 5:
-					return 2;
-					break;
-				default:
-					return 1;
-			}
-			break;
-		case 11:
-			return 1;
-			break;
+// function to determine maximum necessary columns per day
+// actually an algorithm to get the smallest multiple for two numbers
+function kgv($a, $b) {
+	$x = $a;
+	$y = $b;
+	while ($x != $y) {
+		if ($x < $y) $x += $a;
+		else $y += $b;
 	}
-} 
+	return $x;
+}
+
 
 // drei 20020921: function for checking and counting overlapping events
 function checkOverlap() {
 	global $master_array, $overlap_array, $start_date, $start_time, $end_time;
 
+		$drawTimes = drawEventTimes($start_time, $end_time);
+
 		$maxOverlaps = 0;
 		if (sizeof($master_array[($start_date)]) > 0) {
 			foreach ($master_array[($start_date)] as $keyTime => $eventTime) {
 				foreach ($eventTime as $keyEvent => $event) {
-					if (($event["event_start"] < $end_time) and ($event["event_end"] > $start_time)) {
+					if (($event["event_start"] < $drawTimes["draw_end"]) and ($event["event_end"] > $drawTimes["draw_start"])) {
 
-						if ($event["event_start"] < $start_time) $overlap_start = $start_time;
+						if ($event["event_start"] < $drawTimes["draw_start"]) $overlap_start = $drawTimes["draw_start"];
 						else $overlap_start = $event["event_start"];
-						if ($event["event_end"] < $end_time) $overlap_end = $event["event_end"];
-						else $overlap_end = $end_time;
+						if ($event["event_end"] < $drawTimes["draw_end"]) $overlap_end = $event["event_end"];
+						else $overlap_end = $drawTimes["draw_end"];
 						
 						if (sizeof($overlap_array[($start_date)][($keyTime)][($keyEvent)]) > 0) {
 							$newOverlapEntry = TRUE;
