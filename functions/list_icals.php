@@ -2,11 +2,6 @@
 if ($display_ical_list == "yes") {
 
 	// start of <select> tag
-	if (isset($getdate)) {
-		$query="&amp;getdate=$getdate";
-	} else {
-		$query="";
-	}	
 	echo "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'";
 	if (isset($query)) echo $query;
 	echo "');\">";

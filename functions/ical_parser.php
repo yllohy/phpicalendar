@@ -258,9 +258,12 @@ foreach ($cal_filelist as $filename) {
 						}
 						if (!$write_processed) $master_array[$start_date][($hour.$minute)][$uid]['exception'] = true;
 					} else {
-						$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time, $uid);
-						$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber );
-						if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
+						// This if statement should prevent writing of an excluded date if its the first recurrance - CL
+						if (!in_array($start_date, $except_dates)) {
+							$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time, $uid);
+							$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber );
+							if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
+						}
 					}
 				}
 				
@@ -566,7 +569,7 @@ foreach ($cal_filelist as $filename) {
 											$recur_data_month = date('m', $recur_data_time);
 											$recur_data_day = date('d', $recur_data_time);
 											$recur_data_date = $recur_data_year.$recur_data_month.$recur_data_day;
-											
+
 											if (($recur_data_time > $start_date_time) && ($recur_data_time <= $end_date_time) && ($count_to != $count) && !in_array($recur_data_date, $except_dates)) {
 												if (isset($allday_start) && $allday_start != '') {
 													$start_time2 = $recur_data_time;
@@ -616,9 +619,25 @@ foreach ($cal_filelist as $filename) {
 					}
 				}
 
-                               // Clear event data now that it's been saved.
-                               unset($start_time, $start_time_tmp, $end_time, $end_time_tmp, $start_unixtime, $start_unixtime_tmp, $end_unixtime, $end_unixtime_tmp, $summary, $length, $nbrOfOverlaps, $description, $status, $class, $location, $organizer, $attendee);
-			
+				// This should remove any exdates that were missed.
+				// Added for version 0.9.5
+				if (is_array($except_dates)) {
+					foreach ($except_dates as $key => $value) {
+						$time = $except_times[$key];
+						unset($master_array[$value][$time][$uid]);
+						if (count($master_array[$value][$time]) < 1) {
+							unset($master_array[$value][$time]);
+							if (count($master_array[$value]) < 1) {
+								unset($master_array[$value]);	
+							}
+						}
+					}
+				}
+				
+			   // Clear event data now that it's been saved.
+			   unset($start_time, $start_time_tmp, $end_time, $end_time_tmp, $start_unixtime, $start_unixtime_tmp, $end_unixtime, $end_unixtime_tmp, $summary, $length, $nbrOfOverlaps, $description, $status, $class, $location, $organizer, $attendee);
+
+
 			// Begin VTODO Support
 			} elseif ($line == 'END:VTODO') {
 				if ((!$vtodo_priority) && ($status == 'COMPLETED')) {
