@@ -53,12 +53,14 @@ Changes:
 --------
 
 0.7
-	-Added year.php
+	-Added Year view.
+	-New themes, Green, Orange, and Grey.
+	-Parses calendars much faster.
+	-Page titles added for bookmarking. 
 	-Fixed bug not letting notes to fully display.
 	-Fixed bug in recurring all-day events.
 	-Fixed a bug for showing &'s and #'s in the javascript.
 	-Basic Mozilla Calendar support started.
-	-Added new themes - orange, grey, green.
 	-Overlapping events now display better.
 	-Other various bug fixes.
 
