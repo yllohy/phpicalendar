@@ -4,7 +4,7 @@ define('BASE','../');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/calendar_functions.php');
 
-$default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
+$default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].':'.$HTTP_SERVER_VARS['SERVER_PORT'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'],'/rss/'));
 
 $current_view = "rssindex";
 $display_date = "$calendar_lang - RSS Info";
