@@ -63,6 +63,7 @@ Changes:
 
 0.8
 	-Added search capability
+	-Added support for single event changes in a recurring set
 	-Added RSS feeds for day, week, month
 	-Added 'clickable links' for web addresses.
 	-Tweeked Red and Grey styles.
