@@ -94,7 +94,20 @@ $page->replace_tags(array(
 	'l_this_site_is'	=> $lang['l_this_site_is']			
 	));
 	
-$page->monthbottom($this->page);
+if ($allow_login == 'yes') {
+	$page->replace_tags(array(
+	'l_invalid_login'	=> $lang['l_invalid_login'],
+	'l_password'		=> $lang['l_password'],
+	'l_username'		=> $lang['l_username'],
+	'l_login'			=> $lang['l_login'],
+	'l_logout'			=> $lang['l_logout']
+	));
+}
+
+	
+if ($this_months_events == 'yes') {	
+	$page->monthbottom($this->page);
+}
 $page->draw_subscribe($this->page);
 
 $page->output();
