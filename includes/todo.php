@@ -51,7 +51,11 @@ $page->replace_tags(array(
 	'status'	 		=> $status,
 	'due_date' 			=> $due_date,
 	'cal_title_full'	=> $cal_title_full,
-	'template'			=> $template
+	'template'			=> $template,
+	'l_created'			=> $lang['l_created'],
+	'l_priority'		=> $lang['l_priority'],
+	'l_status'			=> $lang['l_status'],
+	'l_due'				=> $lang['l_due']
 		
 	));
 
