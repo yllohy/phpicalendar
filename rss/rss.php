@@ -18,7 +18,7 @@ $cal_displayname = str_replace("32", " ", $cal);
 $events_week = 0;
 
 // calculate a value for Last Modified and ETag
-$filemod = filemtime("../calendars/$cal.ics");
+$filemod = filemtime("$calendar_path/$cal.ics");
 $filemodtime = date("r", $filemod);
 
 //send relevant headers
