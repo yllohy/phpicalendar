@@ -616,6 +616,7 @@ foreach ($cal_filelist as $filename) {
 					// Start VTODO Parsing
 					//
 					case 'DUE':
+						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
 						$data = ereg_replace('T', '', $data);
@@ -662,6 +663,7 @@ foreach ($cal_filelist as $filename) {
 						break;
 						
 					case 'COMPLETED':
+						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
 						$data = ereg_replace('T', '', $data);
@@ -729,6 +731,7 @@ foreach ($cal_filelist as $filename) {
 					// End VTODO Parsing				
 						
 					case 'DTSTART':
+						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
 						$data = ereg_replace('T', '', $data);
@@ -776,6 +779,7 @@ foreach ($cal_filelist as $filename) {
 						break;
 						
 					case 'DTEND';
+						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
 						$data = ereg_replace('T', '', $data);
