@@ -97,7 +97,7 @@ foreach ($cal_filelist as $filename) {
 					$allday_start, $allday_end, $start, $end, $the_duration, 
 					$beginning, $rrule_array, $start_of_vevent, $description, 
 					$valarm_description, $start_unixtime, $end_unixtime,
-					$recurrence_id, $uid, $class, $location, $rrule
+					$recurrence_id, $uid, $class, $location, $rrule, $abs_until, $until_check
 				);
 					
 				$except_dates 	= array();
@@ -321,25 +321,9 @@ foreach ($cal_filelist as $filename) {
 							case 'UNTIL':
 								$until = ereg_replace('T', '', $val);
 								$until = ereg_replace('Z', '', $until);
-								ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $until, $regs);
-								$year = $regs[1];
-								$month = $regs[2];
-								$day = $regs[3];
-								$until = mktime(0,0,0,$month,$day,$year);
-								if (ereg('^([0-9]{4})([0-9]{2})([0-9]{2})T([0-9]{2})([0-9]{2})([0-9]{2})$', $val)) {
-									// RFC 2445 says that if an UNTIL has a date-time value,
-									// it MUST be in UTC (i.e. trailing Z).  iCal tends to
-									// put an end date on the next day early in the morning,
-									// not in UTC time, so we try to correct for it.
-									//
-									// Bill's guess: iCal stores the UNTIL internally as
-									// 23:59:59 UTC, then accidentally converts that to local
-									// time when exporting the event.  Thus, if the UNTIL time
-									// is before noon, it is a day ahead; if it's after noon
-									// it's the right day.
-									if ($regs[4] < 12)
-										$until = strtotime('-1 day', $until);
-								}
+								$abs_until = $until;
+								ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})', $until, $regs);
+								$until = mktime($regs[4],$regs[5],$regs[6],$regs[2],$regs[3],$regs[1]);
 								$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = localizeDate($dateFormat_week,$until);
 								break;
 							case 'INTERVAL':
@@ -610,8 +594,12 @@ foreach ($cal_filelist as $filename) {
 															$start_tmp = strtotime('+1 day',$start_tmp);
 														}
 													} else {
-														$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
-														$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber);
+														// Let's double check the until to not write past it
+														$until_check = $recur_data_date.$hour.$minute.'00';
+														if ($abs_until > $until_check) {
+															$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
+															$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber);
+														}
 													}
 												}
 											}
