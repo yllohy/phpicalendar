@@ -147,7 +147,7 @@
 														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 														echo "<tr>\n";
 														echo "<td>\n";
-														echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
 														echo "</table>\n";
