@@ -84,7 +84,7 @@ $page->replace_tags(array(
 	'l_this_site_is'	=> $lang['l_this_site_is']				
 	));
 	
-$page->draw_print($this->page);
+$page->draw_print($page);
 
 $page->output();
 

@@ -69,7 +69,7 @@ function list_years() {
 
 
 function list_weeks() {
-	global $getdate, $this_year, $cal, $dateFormat_week_jump;
+	global $getdate, $this_year, $cal, $dateFormat_week_jump, $week_start_day;
 	ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 	$this_day 			= $day_array2[3]; 
 	$this_month 		= $day_array2[2];

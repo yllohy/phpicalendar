@@ -111,9 +111,9 @@ if ($allow_login == 'yes') {
 
 	
 if ($this_months_events == 'yes') {	
-	$page->monthbottom($this->page);
+	$page->monthbottom($page);
 }
-$page->draw_subscribe($this->page);
+$page->draw_subscribe($page);
 
 $page->output();
 

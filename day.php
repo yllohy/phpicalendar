@@ -107,10 +107,10 @@ if ($allow_login == 'yes') {
 	));
 }
 	
-$page->draw_day($this->page);
-$page->tomorrows_events($this->page);
-$page->get_vtodo($this->page);
-$page->draw_subscribe($this->page);
+$page->draw_day($page);
+$page->tomorrows_events($page);
+$page->get_vtodo($page);
+$page->draw_subscribe($page);
 
 $page->output();
 
