@@ -70,6 +70,7 @@ $search_took_lang		= 'Search took %s seconds';
 $recurring_event_lang	= 'Recurring event';
 $exception_lang			= 'Exception';
 $no_query_lang			= 'No query given';
+$preferences_lang		= 'Preferences';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'

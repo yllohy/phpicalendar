@@ -4,6 +4,12 @@ define('BASE','../');
 $current_view = "rssindex";
 include(BASE.'functions/ical_parser.php');
 $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
+if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
+	$back_page = $HTTP_SERVER_VARS['HTTP_REFERER'];
+} else {
+	$back_page = BASE.$default_view.'.php?cal='.$cal.'&getdate='.$getdate;
+}
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -22,14 +28,31 @@ $default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_V
 			<table width="640" border="0" cellspacing="0" cellpadding="0" class="calborder">
 				<tr>
 					<td align="center" valign="middle">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td align="left" valign="top" width="1%" class="sideback"><img src="../images/spacer.gif" width="1" height="20"></td>
-								<td align="center" valign="center" width="98%" class="sideback"><b><?php echo 'RSS information'; ?></b></td>
-								<td class="sideback" width="1%"></td>
+								<td align="left" width="90" class="navback"><?php echo '<a href="'.$back_page.'"><img src="'.BASE.'/styles/'.$style_sheet.'/back.gif" alt="" border="0" align="left"></a>'; ?></td>
+								<td class="navback">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td align="center" class="navback" nowrap valign="middle"><font class="H20"><?php echo 'RSS Information'; ?></font></td>
+										</tr>
+									</table>
+								</td>
+								<td align="right" width="90" class="navback">	
+									<table width="90" border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
+											<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
+											<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
+										</tr>
+									</table>
+								</td>
 							</tr>
-						</table>
+			      		</table>
 					</td>
+				</tr>
+				<tr>
+					<td class="dayborder"><img src="images/spacer.gif" width="1" height="5"></td>
 				</tr>
 				<tr>
 					<td>

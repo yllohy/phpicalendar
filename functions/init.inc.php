@@ -8,30 +8,13 @@
 // uncomment when developing, comment for shipping version
 // error_reporting (E_ALL);
 
-// Retain some compatibility backwards like.
-//jared.20021003 I think we're always going to make sure these are extracted by hand
-//so I'll comment this out for now, otherwise, uncomment this
-//chad - navigation breaks after 4.2.0 without this.
-// jared-2002.10.19; Re-enabled code at line 32 of this file. Shouldn't need this now.
-// if we're going to use this, we should just extract them for all versions in case
-// someone has manually turned of $register_globals, Otherwise we'll just do it by hand
-// for the vars we care about
-/*
-if(phpversion() >= '4.2.0') 
-
-	{
-		extract($HTTP_GET_VARS);	
-		extract($HTTP_POST_VARS);
-	}
-*/
-
 if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
 
 // language support
 $language = strtolower($language);
-$lang_file = getcwd().'/languages/'.$language.'.inc.php';
+$lang_file = BASE.'/languages/'.$language.'.inc.php';
 
 if (file_exists($lang_file)) {
 	include($lang_file);
