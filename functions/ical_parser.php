@@ -60,6 +60,10 @@ if ($parse_file) {
 	
 	// Set a value so we can check to make sure $master_array contains valid data
 	$master_array['-1'] = 'valid cal file';
+
+	// Set default calendar name - can be overridden by X-WR-CALNAME
+	$calendar_name = $cal_filename;
+	$master_array['calendar_name'] = $calendar_name;
 	
 	// auxiliary array for determining overlaps of events
 	$overlap_array = array ();
