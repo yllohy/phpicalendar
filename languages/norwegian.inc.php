@@ -1,9 +1,9 @@
 <?php
 
 // Norwegian language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.5 PHP iCalendar
 //
-// Translation by Geir Kielland (geir.kielland@jus.uio.no)
+// Translation by Geir Kielland (kielland@mac.com)
 //
 // Submit new translations to chad@chadsdomain.com
 
@@ -114,7 +114,7 @@ $submit_lang			= 'Legg inn';
 $delete_lang			= 'Slett';
 
 // ----- New for 0.9.5
-$all_cal_comb_lang		= 'All calendars combined';
+$all_cal_comb_lang		= 'Alle kalenderne samlet';
 
 // - navigation
 $back_lang = 'Tilbake';
