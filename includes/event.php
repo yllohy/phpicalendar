@@ -9,17 +9,17 @@ function decode_popup ($item) {
 	return $item;
 }
 
-$event			= (isset($HTTP_POST_VARS['event'])) ? decode_popup($HTTP_POST_VARS['event']) : ('');
-$description	= (isset($HTTP_POST_VARS['description'])) ? decode_popup($HTTP_POST_VARS['description']) : ('');
-$cal			= (isset($HTTP_POST_VARS['cal'])) ? decode_popup($HTTP_POST_VARS['cal']) : ('');
-$start			= (isset($HTTP_POST_VARS['start'])) ? decode_popup($HTTP_POST_VARS['start']) : ('');
-$end			= (isset($HTTP_POST_VARS['end'])) ? decode_popup($HTTP_POST_VARS['end']) : ('');
-$status			= (isset($HTTP_POST_VARS['status'])) ? decode_popup($HTTP_POST_VARS['status']) : ('');
-$location		= (isset($HTTP_POST_VARS['location'])) ? decode_popup($HTTP_POST_VARS['location']) : ('');
-$url			= (isset($HTTP_POST_VARS['url'])) ? decode_popup($HTTP_POST_VARS['url']) : ('');
-$organizer		= (isset($HTTP_POST_VARS['organizer'])) ? ($HTTP_POST_VARS['organizer']) : ('');
+$event			= (isset($_POST['event'])) ? decode_popup($_POST['event']) : ('');
+$description	= (isset($_POST['description'])) ? decode_popup($_POST['description']) : ('');
+$cal			= (isset($_POST['cal'])) ? decode_popup($_POST['cal']) : ('');
+$start			= (isset($_POST['start'])) ? decode_popup($_POST['start']) : ('');
+$end			= (isset($_POST['end'])) ? decode_popup($_POST['end']) : ('');
+$status			= (isset($_POST['status'])) ? decode_popup($_POST['status']) : ('');
+$location		= (isset($_POST['location'])) ? decode_popup($_POST['location']) : ('');
+$url			= (isset($_POST['url'])) ? decode_popup($_POST['url']) : ('');
+$organizer		= (isset($_POST['organizer'])) ? ($_POST['organizer']) : ('');
 $organizer 		= unserialize (decode_popup ($organizer));
-$attendee		= (isset($HTTP_POST_VARS['attendee'])) ? ($HTTP_POST_VARS['attendee']) : ('');
+$attendee		= (isset($_POST['attendee'])) ? ($_POST['attendee']) : ('');
 $attendee 		= unserialize (decode_popup ($attendee));
 $cal_title_full	= $cal.' '.$calendar_lang;
 

@@ -23,13 +23,13 @@ if (isset($HTTP_GET_VARS['action'])) {
 $startdays = array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 
 if ($action == 'setcookie') { 
-	$cookie_language 	= $HTTP_POST_VARS['cookie_language'];
-	$cookie_calendar 	= $HTTP_POST_VARS['cookie_calendar'];
-	$cookie_view 		= $HTTP_POST_VARS['cookie_view'];
-	$cookie_style 		= $HTTP_POST_VARS['cookie_style'];
-	$cookie_startday	= $HTTP_POST_VARS['cookie_startday'];
-	$cookie_time		= $HTTP_POST_VARS['cookie_time'];
-	$cookie_unset		= $HTTP_POST_VARS['unset'];
+	$cookie_language 	= $_POST['cookie_language'];
+	$cookie_calendar 	= $_POST['cookie_calendar'];
+	$cookie_view 		= $_POST['cookie_view'];
+	$cookie_style 		= $_POST['cookie_style'];
+	$cookie_startday	= $_POST['cookie_startday'];
+	$cookie_time		= $_POST['cookie_time'];
+	$cookie_unset		= $_POST['unset'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time");
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 

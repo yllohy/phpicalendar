@@ -43,7 +43,7 @@ function logout_querys() {
 // if no valid login is found. Returns a boolean invalid_login to
 // indicate that the login is invalid.
 function user_login() {
-	global $_COOKIE, $HTTP_GET_VARS, $HTTP_POST_VARS, $_SERVER;
+	global $_COOKIE, $HTTP_GET_VARS, $_POST, $_SERVER;
 	global $login_cookies, $cookie_uri, $locked_map;
 	
 	// Initialize return values.
@@ -88,11 +88,11 @@ function user_login() {
 	{
 		$username = $HTTP_GET_VARS['username'];
 		$password = $HTTP_GET_VARS['password'];
-	} else if (isset($HTTP_POST_VARS['username']) &&
-			   isset($HTTP_POST_VARS['password']))
+	} else if (isset($_POST['username']) &&
+			   isset($_POST['password']))
 	{
-		$username = $HTTP_POST_VARS['username'];
-		$password = $HTTP_POST_VARS['password'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
 	}
 	
 	// Check to make sure the username and password is valid.

@@ -36,7 +36,7 @@ if ($bleed_time == '') $bleed_time = $day_start;
 
 // Grab the action (login or logout).
 if (isset($HTTP_GET_VARS['action']))			$action = $HTTP_GET_VARS['action'];
-else if (isset($HTTP_POST_VARS['action']))		$action = $HTTP_POST_VARS['action'];
+else if (isset($_POST['action']))		$action = $_POST['action'];
 else											$action = '';
 	
 // Login and/or logout.
