@@ -10,34 +10,8 @@ if(phpversion() >= "4.2.0")
 include('./config.inc.php');
 
 // define supported languages
-switch ($language) {
-	case "German":
-		include("./languages/german.inc.php");
-		break;
-	case "Polish":
-		include("./languages/polish.inc.php");
-		break;
-	case "French":
-		include("./languages/french.inc.php");
-		break;
-	case "Dutch":
-		include("./languages/dutch.inc.php");
-		break;
-	case "Danish":
-		include("./languages/danish.inc.php");
-		break;
-	case "Italian":
-		include("./languages/italian.inc.php");
-		break;
-	case "Japanese":
-		include("./languages/japanese.inc.php");
-		break;
-	case "Norwegian":
-		include("./languages/norwegian.inc.php");
-		break;	
-	default:
-		include("./languages/english.inc.php");
-}
+include("./languages/$language.inc.php");
+
 
 // $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
 // $cal_filename should always be the filename of the calendar without .ics

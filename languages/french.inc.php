@@ -35,7 +35,7 @@ $summary_lang		= "R&eacute;sum&eacute;";
 $all_day_lang		= "All day event";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/fr/function.setlocale.php
-setlocale (LC_TIME,"french");
+setlocale (LC_TIME,"fr_FR");
 
 // For time formatting, check out: http://www.php.net/manual/fr/function.date.php
 $timeFormat = "H:i";
