@@ -14,7 +14,7 @@
 //					  returned.
 function availableCalendars($username, $password, $cal_filename, $admin = false) {
 	// Import globals.
-	global $calendar_path, $blacklisted_cals, $list_webcals, $locked_cals, $locked_map, $apache_map, $error_path_lang, $error_restrictedcal_lang, $error_invalidcal_lang, $ALL_CALENDARS_COMBINED, $_SERVER;
+	global $allow_login, $calendar_path, $blacklisted_cals, $list_webcals, $locked_cals, $locked_map, $apache_map, $error_path_lang, $error_restrictedcal_lang, $error_invalidcal_lang, $ALL_CALENDARS_COMBINED, $_SERVER;
 
 	// Create the list of available calendars.
 	$calendars = array();
