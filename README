@@ -86,6 +86,12 @@ functions folder.
 
 Changes:
 --------
+1.0
+	-Fixed all reported bugs.
+	-Event popup now displays calendar name.
+	-Event popup now supports more than 1024 characters.
+	-URL support added.
+
 0.9.5
 	-Fixed all reported bugs.
 	-Added a method to publish without Webdav in iCal. calendars/publish.php
