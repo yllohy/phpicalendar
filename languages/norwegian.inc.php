@@ -48,7 +48,7 @@ $goyear_lang		= 'G&aring; til dette &aring;ret';
 // new in 0.8 -------------
 $search_lang		= 'S&oslash;k'; // the verb
 $results_lang		= 'S&oslash;keresultater';
-$query_lang			= 'Sp&oslash;rsm&aring;l '; // will be followed by the search query
+$query_lang			= 'Sp&oslash;rring: '; // will be followed by the search query
 $no_results_lang	= 'Ingen hendelser funnet';
 
 $goprint_lang		= 'Utskriftsvennlig';
@@ -58,13 +58,12 @@ $description_lang	= 'Beskrivelse';
 
 // RSS text for 0.8
 $this_site_is_lang		= 'Dette nettstedet er';
-$no_events_day_lang		= 'Ingen hendleser i dag.';
+$no_events_day_lang		= 'Ingen hendelser i dag.';
 $no_events_week_lang	= 'Ingen hendelser denne uken.';
 $no_events_month_lang	= 'Ingen hendelser denne m&aring;neden.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
-$rss_language			= 'en-us';
 // -------------------------
 
 $daysofweek_lang			= array('S&oslash;ndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','L&oslash;rdag');

@@ -374,20 +374,23 @@ function search_boolean($needle_arr, $haystack) {
 	$not_arr = $needle_arr[3];
 	
 	if (!$needle_arr[0]) return false;
+	if ((sizeof($and_arr) == 0) &&
+		(sizeof($or_arr) == 0) &&
+		(sizeof($not_arr) == 0)) return false;
 	
 	// compare lowercase versions of the strings
 	$haystack = strtolower($haystack);
 
 	// check against the NOT
 	foreach($not_arr as $s) {
-		if (ereg($s, $haystack) == true) {
+		if (is_string(strstr($haystack,$s)) == true) {
 			return false;
 		}
 	}
 	
 	// check against the AND
 	foreach($and_arr as $s) {
-		if (ereg($s,$haystack) == false) {
+		if (is_string(strstr($haystack,$s)) == false) {
 			return false;
 		}
 	}
@@ -397,18 +400,17 @@ function search_boolean($needle_arr, $haystack) {
 		$is_false = true;
 		foreach($or as $s) {
 			if (substr($s,0,1) == '-') {
-				if (ereg(substr($s,1),$haystack) == false) {
+				if (is_string(strstr($haystack,substr($s,1))) == false) {
 					$is_false = false;
 					break;
 				}			
-			} elseif (ereg($s,$haystack) == true) {
+			} elseif (is_string(strstr($haystack,$s)) == true) {
 				$is_false = false;
 				break;
 			}
 		}
 		if ($is_false) return false;	
 	}
-	
 	// if we haven't returned false, then we return true
 	return true;
 }
