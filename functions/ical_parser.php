@@ -1017,6 +1017,7 @@ foreach ($cal_filelist as $filename) {
 					case 'SUMMARY':
 						$data = str_replace("\\n", "<br />", $data);
 						$data = str_replace("\\r", "<br />", $data);
+						$data = str_replace('$', '&#36;', $data);
 						$data = htmlentities(urlencode($data));
 						if ($valarm_set == FALSE) { 
 							$summary = $data;
@@ -1028,6 +1029,7 @@ foreach ($cal_filelist as $filename) {
 					case 'DESCRIPTION':
 						$data = str_replace("\\n", "<br />", $data);
 						$data = str_replace("\\r", "<br />", $data);
+						$data = str_replace('$', '&#36;', $data);
 						$data = htmlentities(urlencode($data));
 						if ($valarm_set == FALSE) { 
 							$description = $data;
@@ -1174,7 +1176,7 @@ if ($parse_file) {
 //print_r($day_array);
 //print_r($rrule_array);
 //print_r($recurrence_delete);	
-//wprint '</pre>';
+//print '</pre>';
 
 // Set a calender name for all calenders combined
 if ($cal == $ALL_CALENDARS_COMBINED) {
