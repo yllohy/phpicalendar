@@ -80,13 +80,12 @@ if ($parse_file) {
 			unset (
 				$start_time, $start_time, $start_date, $end_date, $summary, 
 				$allday_start, $allday_end, $start, $end, $the_duration, 
-				$beginning, $rrule_array, $start_of_vevent, $description, $valarm_description
+				$beginning, $rrule_array, $start_of_vevent, $description, 
+				$valarm_description
 			);
 	
 			$except_dates = array();
 			$except_times = array();
-			
-			$allday_written = FALSE;
 			$first_duration = TRUE;
 			$count = 1000000;
 			$valarm_set = FALSE;
@@ -107,6 +106,9 @@ if ($parse_file) {
 				$allday_start = $start_date;
 				$allday_end = ($start_date + 1);
 			}
+			
+			// If the events go past midnight
+			if ($end_time < $start_time) $end_time = 2359;
 			
 			if (isset($start_time) && $start_time != '') {
 				ereg ('([0-9]{2})([0-9]{2})', $start_time, $time);
