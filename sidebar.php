@@ -25,7 +25,7 @@
 								</tr>
 								<tr>
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "$cal_displayname2"; ?></td>
+									<td colspan="6" class="G10B"><b><?php echo "$cal_displayname2"; ?></b></td>
 								</tr>
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
@@ -33,6 +33,20 @@
 								<tr>
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
 									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">Go to Today</a>"; ?></td>
+								</tr>
+								<tr>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
+								</tr>
+								<tr>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$today_today\">Go to This Week</a>"; ?></td>
+								</tr>
+								<tr>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
+								</tr>
+								<tr>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">Go to This Month</a>"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
