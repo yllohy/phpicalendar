@@ -268,15 +268,15 @@ foreach($contents as $line) {
 						// again, $parse_to_year is set to January 10 of the upcoming year
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
 						$start_date_time = strtotime($start_date);
-						$start_date_time = strtotime('+12 hours', $start_date_time);
+						//$start_date_time = strtotime('+12 hours', $start_date_time);
 						$this_month_start_time = strtotime($this_year.$this_month.'01');
-						$this_month_start_time = strtotime('+12 hours', $this_month_start_time);
+						//$this_month_start_time = strtotime('+12 hours', $this_month_start_time);
 						
 						if ($save_parsed_cals == 'yes' && !$is_webcal) {
 							$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
-							$start_range_time = strtotime('+12 hours', $start_range_time);
+							///$start_range_time = strtotime('+12 hours', $start_range_time);
 							$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
-							$end_range_time = strtotime('+12 hours', $end_range_time);
+							//$end_range_time = strtotime('+12 hours', $end_range_time);
 						} else {
 							$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
 							$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
@@ -318,7 +318,6 @@ foreach($contents as $line) {
 							$count_to = 0;
 							// start at the $start_range and go until we hit the end of our range.
 							while (($next_range_time >= $start_range_time) && ($next_range_time <= $end_range_time) && ($count_to != $count)) {
-								
 								// handling WEEKLY events here
 								if ($rrule_array['FREQ'] == 'WEEKLY') {
 
@@ -333,10 +332,13 @@ foreach($contents as $line) {
 											
 												// use my fancy little function to get the date of each day
 												$day = two2threeCharDays($day);
+
 												#$thedate = date ("r", $next_range_time);
+
 												$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
 												#echo "$day -- $summary -- $thedate -- $next_date<br>";
 												$next_date_time = strtotime($next_date);
+												//print date('Y-m-d  ', $next_date_time);
 												
 												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
 													// add it to the array if it passes inspection, it allows the first time to be

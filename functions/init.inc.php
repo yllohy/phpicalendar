@@ -17,7 +17,10 @@ include('./functions/error.php');
 
 // subscribe link prefix, doesn't need to be user configureable
 
+// cheap trick... until timezones are implemented, make the server think we're at
+// central time.
 
+putenv("TZ=US/Central");
 
 // language support
 $language = strtolower($language);
