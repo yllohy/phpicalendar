@@ -168,14 +168,11 @@
 								<?php
 								foreach ($master_array[("$tomorrows_date")] as $event_times) {
 									foreach ($event_times as $val) {
-										$event_text = urldecode($val["event_text"]);
+										$event_text = stripslashes(urldecode($val["event_text"]));
 										$event_text = strip_tags($event_text, '<b><i><u>');
 										if ($event_text != "") {	
-											$event_text2 	= addslashes($val["event_text"]);
-											$event_text2 	= urlencode($event_text2);
-											$description 	= $val["description"];
-											$description 	= addslashes($val["description"]);
-											$description	= urlencode($description);
+											$event_text2 	= rawurlencode(addslashes($val["event_text"]));
+											$description 	= urlencode(addslashes($val["description"]));
 											$event_start 	= @$val["event_start"];
 											$event_end 		= @$val["event_end"];
 											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
@@ -195,7 +192,6 @@
 											}
 											echo "</td>\n";
 											echo "</tr>\n";
-											//$num_of_events++;
 										}
 									}
 								}

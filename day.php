@@ -94,12 +94,12 @@ if (is_array($master_array[($getdate)])) {
 						echo '<td colspan="3" height="24">'."\n";
 						echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
 						foreach($master_array[($getdate)]['-1'] as $allday) {
-							$all_day_text = $allday['event_text'];
+							$event_text = stripslashes(urldecode($allday['event_text']));
 							$description = $allday['description'];
-							$event_text2 = rawurlencode(addslashes($all_day_text));
+							$event_text2 = rawurlencode(addslashes($allday['event_text']));
 					
 							echo '<tr>'."\n";
-							echo '<td valign="top" align="center" class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\')"><font color="#ffffff"><i>'.$all_day_text.'</i></font></a></td>'."\n";
+							echo '<td valign="top" align="center" class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\')"><font color="#ffffff"><i>'.$event_text.'</i></font></a></td>'."\n";
 							echo '</tr>'."\n";
 						}
 						echo '</table>'."\n";
@@ -174,19 +174,14 @@ if (is_array($master_array[($getdate)])) {
 											switch ($event_length[$i]['state']) {
 												case 'begin':
 													$event_length[$i]['state'] = 'started';
-													$event_text 	= urldecode($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']);
-													$event_text2 	= addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']);
-													$event_text2 	= rawurlencode($event_text2);
-													$event_start 	= $master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_start'];
-													$event_end		= $master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_end'];
-													$description 	= addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['description']);
-													$description	= rawurlencode($description);
-													$event_start 	= strtotime ($event_start);
+													$event_text 	= stripslashes(urldecode($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']));
+													$event_text2 	= rawurlencode(addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']));
+													$event_start 	= strtotime ($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_start']);
+													$event_end		= strtotime ($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_end']);
+													$description 	= rawurlencode(addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['description']));
 													$event_start 	= date ($timeFormat, $event_start);
-													$event_end 		= strtotime ($event_end);
 													$event_end 		= date ($timeFormat, $event_end);
-													$calendar_name2	= addslashes($calendar_name);
-													$calendar_name2 = rawurlencode($calendar_name2);
+													$calendar_name2	= rawurlencode(addslashes($calendar_name));
 													echo '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2">'."\n";
 													echo '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
 													echo '<tr>'."\n";

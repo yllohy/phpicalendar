@@ -173,9 +173,9 @@ for ($i=0;$i<7;$i++) {
 									if (isset($master_array[($thisday)]["-1"])) {
 										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
 										foreach($master_array[($thisday)]["-1"] as $allday) {
-											$all_day_text 	= urldecode($allday["event_text"]);
-											$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
+											$all_day_text 	= stripslashes(urldecode($allday["event_text"]));
 											$event_text2 	= urlencode(addslashes($all_day_text));
+											$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
 											$description 	= $allday["description"];
 											echo "<tr>\n";
 											echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
@@ -263,20 +263,15 @@ for ($i=0;$i<7;$i++) {
 													case "begin":
 													
 														$event_length[$thisday][$i]["state"] = "started";
-														$event_text 	= urldecode($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]);
+														$event_text 	= stripslashes(urldecode($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]));
 														$event_text 	= word_wrap($event_text, 25, $week_events_lines);
-														$event_text2 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]);
-														$event_text2 	= urlencode($event_text2);
-														$event_start 	= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_start"];
-														$event_end		= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_end"];
-														$description 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["description"]);
-														$description	= urlencode($description);
-														$event_start 	= strtotime ("$event_start");
+														$event_text2 	= urlencode(addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]));
+														$event_start 	= strtotime ($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_start"]);
+														$event_end		= strtotime ($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_end"]);
+														$description 	= urlencode(addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["description"]));
 														$event_start 	= date ($timeFormat, $event_start);
-														$event_end 		= strtotime ("$event_end");
 														$event_end 		= date ($timeFormat, $event_end);
-														$calendar_name2	= addslashes($calendar_name);
-														$calendar_name2 = urlencode($calendar_name2);
+														$calendar_name2	= urlencode(addslashes($calendar_name));
 														echo "<td rowspan=\"" . $event_length[$thisday][$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2week\">\n";
 														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 														echo "<tr>\n";
