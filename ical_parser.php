@@ -76,6 +76,7 @@ foreach($contents as $line) {
 		$except_times = array();
 		$first_duration = TRUE;
 		$bymonthday = "";
+		$byday = "";
 		$count = 1000000;
 	} elseif (strstr($line, "END:VEVENT")) {
 		
@@ -98,8 +99,9 @@ foreach($contents as $line) {
 		}
 		
 		
-		// Handling of the all day events	
-		if (($allday_start != "") && ($rrule_array == "")) {
+		// Handling of the all day events
+// to go back to old allday way, add to this if--> && ($rrule_array == "")
+		if (($allday_start != "")) {
 			$start = strtotime("$allday_start");
 			$end = strtotime("$allday_end");
 			if (($end > $mArray_begin) && ($end < $mArray_end)) {
@@ -120,6 +122,8 @@ foreach($contents as $line) {
 				$rrule_array["END_DAY"] = $allday_end;
 				$rrule_array["END"] = "end";
 				$recur_start = $allday_start;
+				$start_date = $allday_start;
+				$diff_allday_days = dayCompare($allday_end, $allday_start);
 			} else {
 				$rrule_array["START_DATE"] = $start_date;
 				$rrule_array["START_TIME"] = $start_time;
@@ -198,7 +202,8 @@ foreach($contents as $line) {
 					$wkst = $val;
 				
 				} elseif ($key == "END")		{
-					
+// to go back to old allday way, uncomment this set
+					/*
 					if ($allday_start != "") {
 						
 						// Since we hit the end of the RRULE array, lets do something.
@@ -235,7 +240,7 @@ foreach($contents as $line) {
 					// DAILY and WEEKLY recurrences seem to work fine. Need feedback.
 					// Known bug, doesn't look at UNTIL or COUNT yet.
 					} else {
-					
+					*/
 						// again, $parse_to_year is set to January 10 of the upcoming year
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
 						$start_date_time = strtotime($start_date);
@@ -302,10 +307,21 @@ foreach($contents as $line) {
 													// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
 													// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
 													// on days that have been deleted by the user
+													if ($allday_start != "") {
+														
+														$start_time = $next_date_time;
+														$end_time = strtotime("+$diff_allday_days days", $next_date_time);
+														while ($start_time < $end_time) {
+															$start_date2 = date("Ymd", $start_time);
+															$master_array[($start_date2)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
+															$start_time = strtotime("+1 day", $start_time);
+														}
+													} else {
 // check for overlapping events
 													$nbrOfOverlaps = checkOverlap();
 // writes to $master array here
 													$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+													}
 												}
 											}
 										} else {
@@ -330,11 +346,21 @@ foreach($contents as $line) {
 											$next_date_time = strtotime($next_date);
 											
 											if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-												// same general concept as the WEEKLY recurrence
+												if ($allday_start != "") {
+													
+													$start_time = $next_date_time;
+													$end_time = strtotime("+$diff_allday_days days", $next_date_time);
+													while ($start_time < $end_time) {
+														$start_date2 = date("Ymd", $start_time);
+														$master_array[($start_date2)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
+														$start_time = strtotime("+1 day", $start_time);
+													}
+												} else {
 // check for overlapping events
-												$nbrOfOverlaps = checkOverlap();
+													$nbrOfOverlaps = checkOverlap();
 // writes to $master array here
-												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+													$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+												}
 											}
 										} else {
 											$interval = 1;
@@ -365,11 +391,20 @@ foreach($contents as $line) {
 														$next_date_time = strtotime(date("Y-m-",$next_range_time).$day);
 														$next_date = date("Ymd", $next_date_time);
 														if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-															// same general concept as the WEEKLY recurrence
+															if ($allday_start != "") {
+																$start_time = $next_date_time;
+																$end_time = strtotime("+$diff_allday_days days", $next_date_time);
+																while ($start_time < $end_time) {
+																	$start_date2 = date("Ymd", $start_time);
+																	$master_array[($start_date2)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
+																	$start_time = strtotime("+1 day", $start_time);
+																}
+															} else {
 // check for overlapping events	
-															$nbrOfOverlaps = checkOverlap();
+																$nbrOfOverlaps = checkOverlap();
 // writes to $master array here
-															$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+																$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+															}
 														}
 													}
 												}
@@ -384,11 +419,22 @@ foreach($contents as $line) {
 													$next_date_time = strtotime("$on_day +$nth week", $next_range_time);
 													$next_date = date("Ymd", $next_date_time);
 													if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
-														// same general concept as the WEEKLY recurrence
-// check for overlapping events	
-														$nbrOfOverlaps = checkOverlap();
-// writes to $master array here
-														$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+
+														if ($allday_start != "") {
+															
+															$start_time = $next_date_time;
+															$end_time = strtotime("+$diff_allday_days days", $next_date_time);
+															while ($start_time < $end_time) {
+																$start_date2 = date("Ymd", $start_time);
+																$master_array[($start_date2)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
+																$start_time = strtotime("+1 day", $start_time);
+															}
+														} else {
+// check for overlapping events		
+															$nbrOfOverlaps = checkOverlap();
+// writes to $master array here	
+															$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+														}
 													}
 												}
 											}
@@ -400,15 +446,62 @@ foreach($contents as $line) {
 										// end the loop because we aren't going to write this event anyway
 										$count_to = $count;
 									}
-									
-									
+								
+								// handle yearly events
+								} elseif ($rrule_array["FREQ"] == "YEARLY") {
+									// use yearCompare to see if we even have this event this year
+									$the_month_day = date("m", $start_date_time);
+									$diff_years = yearCompare(date("Ymd",$next_range_time), $start_date);
+									if ($diff_years < $count) {
+										if ($diff_years % $number == 0) {
+											foreach($bymonth as $month) {
+												if (is_array($byday)) {
+													$next_range_time = strtotime("$this_year-$month-01");
+													foreach($byday as $day) {
+														ereg ("([0-9]{1})([A-Z]{2})", $day, $byday_arr);
+														$nth = $byday_arr[1]-1;
+														$on_day = two2threeCharDays($byday_arr[2]);
+														$next_date_time = strtotime("$on_day +$nth week", $next_range_time);
+														
+													}
+												} else {
+													$next_date_time = strtotime("$this_year-$month-$the_month_day", $next_range_time);
+												}
+												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
+													if ($allday_start != "") {
+														
+														$start_time = $next_date_time;
+														$end_time = strtotime("+$diff_allday_days days", $next_date_time);
+														while ($start_time < $end_time) {
+															$start_date2 = date("Ymd", $start_time);
+															$master_array[($start_date2)][("-1")][]= array ("event_text" => "$summary", "description" => $description);
+															$start_time = strtotime("+1 day", $start_time);
+														}
+													} else {
+// check for overlapping events		
+														$nbrOfOverlaps = checkOverlap();
+// writes to $master array here	
+														$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length, "event_overlap" => $nbrOfOverlaps, "description" => $description);
+													}
+												}
+											}
+										} else {
+											$interval = 1;
+										}
+										$next_range_time = strtotime("+$interval year", $next_range_time);
+									} else {
+										// end the loop because we aren't going to write this event anyway
+										$count_to = $count;
+									}
+								
 								// anything else we need to end the loop
 								} else {
 									$next_range_time = $end_range_time + 100;
 									$count_to = $count;
 								}
 							}
-						}
+// to go back to old allday way, uncomment this bracket
+					//	}
 					}
 				}	
 			}

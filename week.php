@@ -127,31 +127,41 @@ for ($i=0;$i<7;$i++) {
 							echo "</tr>";
 							
 							// The all day events returned here.
+							$allday_events_this_week = false;
 							$thisdate = $start_week_time;
-							$i = 0;
-							echo "<tr>\n";
-							echo "<td bgcolor=\"#f5f5f5\" colspan=\"2\"></td>";
-							do {
+							for ($i=0;$i<7;$i++) {
 								$thisday = date("Ymd", $thisdate);
-
 								if ($master_array[($thisday)]["-1"]) {
-									echo "<td bgcolor=\"#f5f5f5\" height=\"24\">\n";
-									echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
-									foreach($master_array[($thisday)]["-1"] as $allday) {
-										$all_day_text = $allday["event_text"];
-										$description = $allday["description"];
-										echo "<tr>\n";
-										echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
-										echo "</tr>\n";
-									}
-									echo "</table>\n";
-									echo "</td>\n";
+									$allday_events_this_week = true;
+									break;
 								}
 								$thisdate = ($thisdate + (25 * 60 * 60));
-								$i++;
-							} while ($i < 7);
-							echo "</tr>\n";
-							
+							}
+							if ($allday_events_this_week) {
+								$thisdate = $start_week_time;
+								$i = 0;
+								echo "<tr>\n";
+								echo "<td bgcolor=\"#f5f5f5\" colspan=\"2\"></td>";
+								do {
+									$thisday = date("Ymd", $thisdate);
+									echo "<td bgcolor=\"#f5f5f5\" height=\"24\">\n";
+									if ($master_array[($thisday)]["-1"]) {
+										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
+										foreach($master_array[($thisday)]["-1"] as $allday) {
+											$all_day_text = $allday["event_text"];
+											$description = $allday["description"];
+											echo "<tr>\n";
+											echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
+											echo "</tr>\n";
+										}
+										echo "</table>\n";
+										}
+									echo "</td>\n";
+									$thisdate = ($thisdate + (25 * 60 * 60));
+									$i++;
+								} while ($i < 7);
+								echo "</tr>\n";
+							}
 								// $master_array[($getdate)]["$day_time"]
 								
 								$thisdate = $start_week_time;

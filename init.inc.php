@@ -39,6 +39,15 @@ $cal = urlencode($cal_filename);
 
 if (!isset($filename)) {
 	$filename = $calendar_path."/".$cal_filename.".ics";
+	if (!file_exists($filename)) {
+		$dir_handle = @opendir($calendar_path) or die("Unable to open $calendar_path");
+		while ($file = readdir($dir_handle)) {
+			if (strstr ($file, ".ics")) {
+				$filename = $calendar_path."/".$file;
+				break;
+			}
+		}
+	}
 }
 
 ?>
