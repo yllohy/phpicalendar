@@ -29,12 +29,13 @@ if (file_exists($lang_file)) {
 	exit(error('The requested language "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
 }
 
+/*
 if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
 	$getdate = $HTTP_GET_VARS['getdate'];
 } else {
 	$getdate = date('Ymd');
 }
-
+*/
 
 
 $is_webcal = FALSE;

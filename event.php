@@ -29,15 +29,15 @@ if (isset($HTTP_GET_VARS['end']) && ($HTTP_GET_VARS['end'] !== '') ) {
 	$end = '';
 }
 
-$event = urldecode($event);
+$event = rawurldecode($event);
 $event = stripslashes($event);
 $event = str_replace('\\', '', $event);
 $event = htmlspecialchars($event);
-$description = urldecode($description);
+$description = rawurldecode($description);
 $description = stripslashes($description);
 $description = str_replace('\\', '', $description);
 //$description = htmlspecialchars($description);
-$calendar_name2 = urldecode($calendar_name);
+$calendar_name2 = rawurldecode($calendar_name);
 $calendar_name2 = stripslashes($calendar_name2);
 $calendar_name2 = str_replace('\\', '', $calendar_name2);
 //$calendar_name2 = htmlspecialchars($calendar_name2);

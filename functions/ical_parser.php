@@ -29,7 +29,7 @@ while ($fillTime != '2400') {
 
 
 // what date we want to get data for (for day calendar)
-if (!$getdate) $getdate = date('Ymd');
+if (!isset($getdate) || $getdate == '') $getdate = date('Ymd');
 ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $getdate, $day_array2);
 $this_day = $day_array2[3];
 $this_month = $day_array2[2];
