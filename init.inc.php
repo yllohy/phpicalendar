@@ -20,6 +20,15 @@ switch ($language) {
 	case "French":
 		include("./languages/french.inc.php");
 		break;
+	case "Dutch":
+		include("./languages/dutch.inc.php");
+		break;
+	case "Danish":
+		include("./languages/danish.inc.php");
+		break;
+	case "Italian":
+		include("./languages/italian.inc.php");
+		break;
 	default:
 		include("./languages/english.inc.php");
 }
