@@ -9,10 +9,10 @@
 
 
 
-$day_lang 				= 'Dia';
-$week_lang				= 'Semana';
-$month_lang				= 'Mes';
-$year_lang				= 'Ano';
+$day_lang               = 'Dia';
+$week_lang              = 'Semana';
+$month_lang             = 'Mes';
+$year_lang              = 'Ano';
 $calendar_lang          = 'Calendario';
 $next_day_lang          = 'Dia seguinte';
 $next_month_lang        = 'Mes seguinte';
@@ -25,46 +25,44 @@ $last_year_lang         = 'Ano anterior';
 $subscribe_lang         = 'Assinar';
 $download_lang          = 'Download';
 $powered_by_lang        = 'Powered by';
-$version_lang           = '0.8';
-$event_lang                        = 'Evento';
-$event_start_lang        = 'Hora de inicio';
-$event_end_lang                = 'Hora de fim';
-$this_months_lang        = 'Eventos deste mes';
-$date_lang                        = 'Data';
-$summary_lang                = 'Sumario';
-$all_day_lang                = 'Evento dia todo';
+$event_lang             = 'Evento';
+$event_start_lang       = 'Hora de inicio';
+$event_end_lang         = 'Hora de fim';
+$this_months_lang       = 'Registos para deste mes';
+$date_lang              = 'Data';
+$summary_lang           = 'Sumario';
+$all_day_lang           = 'Todo dia';
 $notes_lang                        = 'Notas';
-$this_years_lang        = 'Eventos deste ano';
+$this_years_lang        = 'Registos deste ano';
 $today_lang                        = 'Hoje';
 $this_week_lang                = 'Esta semana';
 $this_month_lang        = 'Este mes';
 $jump_lang                        = 'Ir para';
-$tomorrows_lang                = 'Eventos para amanha';
-$goday_lang                        = 'Ir para Hoje';
-$goweek_lang                = 'Ir para este semana';
-$gomonth_lang                = 'Ir para este mes';
-$goyear_lang                = 'Ir para este ano';
+$tomorrows_lang                = 'Registos para amanha';
+$goday_lang                        = 'Ver Hoje';
+$goweek_lang                = 'Ver esta semana';
+$gomonth_lang                = 'Ver este mes';
+$goyear_lang                = 'Ver este ano';
 
 // new in 0.8 -------------
-$search_lang		= 'Search'; // the verb
-$results_lang		= 'Search Results';
-$query_lang			= 'Query: '; // will be followed by the search query
-$no_results_lang	= 'No events found';
+$search_lang                = 'Procurar'; // the verb
+$results_lang                = 'Resultados da pesquisa';
+$query_lang                        = 'Pesquisa por: '; // will be followed by the search query
+$no_results_lang        = 'Nao foram encontrados registos';
 
-$goprint_lang		= 'Printer Friendly';
-$time_lang			= 'Time';
-$summary_lang		= 'Summary';
-$description_lang	= 'Description';
+$goprint_lang                = 'Versao para Imprimir';
+$time_lang                        = 'Hora';
+$summary_lang                = 'Resumo';
+$description_lang        = 'Descricao';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'This site is';
-$no_events_day_lang		= 'No events today.';
-$no_events_week_lang	= 'No events this week.';
-$no_events_month_lang	= 'No events this month.';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e';  // Lists just the day
-$rss_month_date			= '%b %e';  // Lists just the day
-$rss_language			= 'en-us';
+$this_site_is_lang                = 'Este site e';
+$no_events_day_lang                = 'Nao existem registos para hoje.';
+$no_events_week_lang        = 'Nao existem registos para esta semana.';
+$no_events_month_lang        = 'Nao existem registos para este mes.';
+$rss_day_date                        = 'g:i A';  // Lists just the time
+$rss_week_date                        = '%e %b';  // Lists just the day
+$rss_month_date                        = '%e %b';  // Lists just the day
 // -------------------------
 
 $daysofweek_lang                        = array ('Domingo','Segunda','Terca','Quarta','Quinta','Sexta','Sabado');
