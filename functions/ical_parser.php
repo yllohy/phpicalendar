@@ -927,28 +927,28 @@ foreach ($cal_filelist as $filename) {
 
 
 if ($parse_file) {	
-		// Sort the array by absolute date.
-		if (isset($master_array) && is_array($master_array)) { 
-			ksort($master_array);
-			reset($master_array);
-			
-			// sort the sub (day) arrays so the times are in order
-			foreach (array_keys($master_array) as $k) {
-				if (isset($master_array[$k]) && is_array($master_array[$k])) {
-					ksort($master_array[$k]);
-					reset($master_array[$k]);
-				}
+	// Sort the array by absolute date.
+	if (isset($master_array) && is_array($master_array)) { 
+		ksort($master_array);
+		reset($master_array);
+		
+		// sort the sub (day) arrays so the times are in order
+		foreach (array_keys($master_array) as $k) {
+			if (isset($master_array[$k]) && is_array($master_array[$k])) {
+				ksort($master_array[$k]);
+				reset($master_array[$k]);
 			}
 		}
-		
-		// write the new master array to the file
-		if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE) {
-			$write_me = serialize($master_array);
-			$fd = fopen($parsedcal, 'w');
-			fwrite($fd, $write_me);
-			fclose($fd);
-			touch($parsedcal, $realcal_mtime);
-		}
+	}
+	
+	// write the new master array to the file
+	if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes' && $is_webcal == FALSE && $cal != 'all_calenders_combined971') {
+		$write_me = serialize($master_array);
+		$fd = fopen($parsedcal, 'w');
+		fwrite($fd, $write_me);
+		fclose($fd);
+		touch($parsedcal, $realcal_mtime);
+	}
 }
 
 
