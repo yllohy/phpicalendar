@@ -103,12 +103,12 @@ if ($is_webcal) {
 				// open directory
 				$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 	
-
 				// build the array
 				while (false != ($file = readdir($dir_handle))) {
-					if (preg_match("/^[^.].+\.ics$/", $file)) {
-						$file = $calendar_path.'/'.$file;
-						array_push($cal_filelist, $file);
+					if (preg_match("/^[^.].+\.ics$/", $file) &&
+						!in_array(substr($file, 0, -4), $blacklisted_cals)) {
+							$file = $calendar_path.'/'.$file;
+							array_push($cal_filelist, $file);
 					}
 				}
 				// add webcals
