@@ -1,1 +1,409 @@
-<? include "ical_parser.php"; ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);$this_day = $day_array2[3];$this_week = $day_array2[2];$this_year = $day_array2[1];$sunday = sundayOfWeek($this_year, $this_month, $this_day);$sunday_date = strtotime("$sunday");$saturday = ($sunday_date + (6 * 25 * 60 * 60));$start_week = date ("F jS", strtotime("$sunday"));$end_week =  date ("F jS", $saturday);$date = strtotime ("$getdate");$next_week2 = ($date + (7 * 24.4 * 60 * 60));$prev_week2 = ($date - (7 * 24.4 * 60 * 60));$next_week = date("Ymd", $next_week2);$prev_week = date("Ymd", $prev_week2);?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd"><html lang="en"><head>	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">	<title>Home</title> 	<link rel="stylesheet" type="text/css" href="styles/default.css"></head><body bgcolor="#FFFFFF"><center>	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">	<tr>		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>		<td align="center" width="90%"><a class="psf" href="day.php">Day</a> | <a class="psf" href="week.php">Week</a> | <a class="psf" href="month.php">Month</a></td>		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>	</tr>	<tr>		<td colspan="3"><img src="images/spacer.gif" height="24" width="1"></td>	</tr>		<tr>			<td class="V12" align="left" valign="top" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$prev_week"; ?>">Previous Week</a></td>			<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$start_week - $end_week"; ?></td>			<td class="V12" align="right" valign="top" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$next_week"; ?>">Next Week</a></td>		</tr>			<tr>		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>	</tr>	</table>	<table width="700" border="0" cellspacing="1" cellpadding="2" class="calborder"><tr><td>	<table width="700" border="0" cellspacing="0" cellpadding="0">    <tr>     	<td align="center" valign="middle">      		<table border="0" cellspacing="0" cellpadding="0" bgcolor="#a1a5a9" class="G10B">      			<tr>					<td align="center" valign="top">						<table border="0" cellspacing="1" cellpadding="0">							<tr>								<td colspan="3" bgcolor="white" nowrap>									<table width="100%" border="0" cellspacing="4" cellpadding="0">										<tr>											<td align="left" valign="middle"><b><font class="V12">Home Calendar</font></b></td>											<td align="right" valign="middle" class="V12"><a class="psf" href="webcal://chadsdomain.com/ical/Home.ics">Subscribe</a> | <a class="psf" href="http://chadsdomain.com/ical/Home.ics">Download</a></td>										</tr>									</table>								</td>							</tr>					<tr>						<td align="center" valign="top">							<table border="0" cellspacing="1" cellpadding="0" class="G10B">								<tr height="12">									<td colspan="2" height="11" width="60" nowrap bgcolor="#f5f5f5">										&nbsp; 									</td>									<?											$thisdate = strtotime ("$sunday");										$i = 0;										do {											$thisday = date("Ymd", $thisdate);											$thisday2 = date("D, M j", $thisdate);											echo "<td height=\"12\" width=\"101\" colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#f5f5f5\" class=\"V9\">\n";											echo "<a class=\"psf\" href=\"day.php?getdate=$thisday\">$thisday2</a>\n";											echo "</td>\n";											$thisdate = ($thisdate + (25 * 60 * 60));											$i++;																				} while ($i != 7);																																						?>								</tr>								<tr>									<td colspan="2" width="60" valign="top" align="center" bgcolor="#f5f5f5">										<img src="images/spacer.gif" width="1" height="1"> 									</td>																										<?										$thisdate = strtotime ("$sunday");										$i = 0;										do {											$thisday = date("Ymd", $thisdate);											if ($master_array[("$thisday")]["0001"]["event_text"]) {												echo "<td colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#ffffff\">\n";												foreach ($master_array[("$thisday")]["0001"]["event_text"] as $event_text) {													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";													echo "<tr height=\"20\">\n";													echo "<td height=\"20\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";													echo "<tr>\n";													echo "<td valign=\"top\" align=\"center\">\n";													echo "<font class=\"eventfont\"><i>$event_text</i></font>\n";													echo "</td>\n";													echo "</tr>\n";													echo "</table>\n";													echo "</td>\n";													echo "</tr>\n";													echo "<tr height=\"1\">\n";													echo "<td height=\"1\">\n";													echo "<img src=\"images/spacer.gif\" width=\"1\" height=\"1\"> \n";													echo "</td>\n";													echo "</tr>\n";													echo "</table>\n";												}												echo "</td>\n";											} else {												echo "<td colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#ffffff\">\n";												echo "<img src=\"images/spacer.gif\" width=\"1\" height=\"1\">\n";												echo "</td>\n";											}											$thisdate = ($thisdate + (25 * 60 * 60));											$i++;																				} while ($i != 7);																?>																	</tr>								<tr>									<td width="60" bgcolor="#a1a5a9" nowrap>										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="1" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>									<td width="45" nowrap bgcolor="#a1a5a9">										<img src="images/spacer.gif" width="1" height="1"> 									</td>								</tr>								<?																$event_length = 0;																foreach ($day_array as $key) {									$thisdate = strtotime ("$sunday");									$thisday = date("Ymd", $thisdate);									$k = 0;									$cal_time = $key;										$key = strtotime ("$key");									$key = date ("g:i A", $key);																		// The first <TR> (on the hour)									if (ereg("^([0-9]{1,2}):00", $key)) {										echo "<tr height=\"30\">\n";										echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";										echo "<td height=\"30\" width=\"1\"><img src=\"images/spacer.gif\" width=\"1\" height=\"1\"></td>\n";																				// Sunday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																					// Monday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																				// Tuesday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																														// Wednesday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																														// Thursday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																				// Friday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																				// Saturday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																				// End Week										echo "</tr>\n";									}																											// The second <TR> (on the half hour)									$thisdate = strtotime ("$sunday");									$thisday = date("Ymd", $thisdate);									if (ereg("([0-9]{1,2}):30", $key)) {										echo "<tr height=\"30\">\n";										echo "<td height=\"30\" width=\"1\"><img src=\"images/spacer.gif\" width=\"1\" height=\"1\"></td>\n";																				// Sunday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																					// Monday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																				// Tuesday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																														// Wednesday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																														// Thursday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																				// Friday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);																				// Saturday										if ($master_array[("$thisday")]["$cal_time"]) {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";										} else {											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";										}										$thisdate = ($thisdate + (25 * 60 * 60));										$thisday = date("Ymd", $thisdate);										echo "</tr>\n";									}																										}																?>									<!--									[[td rowspan="2" colspan="2" valign="top" align="left" bgcolor="#68aaef"]]										[[table width="100%" border="0" cellpadding="2" cellspacing="0"]]											[[tr]]												[[td bgcolor="#0065DB"]][[font style="color:#ffffff; font-weight: bold"]]12:00pm[[/font]]												[[/td]]											[[/tr]]											[[tr]]												[[td]]													[[table width="100%" border="0" cellpadding="1" cellspacing="0"]]														[[tr]]															[[td bgcolor="#68aaef"]][[font style="font-size: 11px; color:#ffffff"]]Lunch with Stef's mom and sis[[/font]]															[[/td]]														[[/tr]]													[[/table]]												[[/td]]											[[/tr]]										[[/table]]									[[/td]]									-->							</table>						</td>					</tr>				</table>			</td>		</tr>	</table>	</td></tr></table>	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">	<tr>		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>	</tr>	<tr>		<td class="V12" align="left" valign="middle" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$prev_week"; ?>">Previous Week</a></td>		<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$today"; ?></td>		<td class="V12" align="right" valign="middle" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$next_week"; ?>">Next Week</a></td>	</tr><!--	[[tr]]		[[td colspan="3"]][[img src="images/spacer.gif" height="24" width="1"]][[/td]]	[[/tr]]	[[tr]]		[[td align="left" width="5%"]][[a href="day.php"]]Today[[/a]][[/td]]		[[td align="center" width="90%"]][[a href="day.php"]]Day[[/a]] | [[a href="week.php"]]Week[[/a]] | [[a href="month.php"]]Month[[/a]][[/td]]		[[td align="right" width="5%"]][[a href="preferences.php"]]Preferences[[/a]][[/td]]	[[/tr]]--></table></center></body></html>
+<? include "ical_parser.php"; 
+
+ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
+$this_day = $day_array2[3];
+$this_week = $day_array2[2];
+$this_year = $day_array2[1];
+$sunday = sundayOfWeek($this_year, $this_month, $this_day);
+$sunday_date = strtotime("$sunday");
+$saturday = ($sunday_date + (6 * 25 * 60 * 60));
+$start_week = date ("F jS", strtotime("$sunday"));
+$end_week =  date ("F jS", $saturday);
+
+$date = strtotime ("$getdate");
+$next_week2 = ($date + (7 * 24.4 * 60 * 60));
+$prev_week2 = ($date - (7 * 24.4 * 60 * 60));
+$next_week = date("Ymd", $next_week2);
+$prev_week = date("Ymd", $prev_week2);
+
+
+
+?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<title>Home</title> 
+	<link rel="stylesheet" type="text/css" href="styles/default.css">
+</head>
+<body bgcolor="#FFFFFF">
+<center>
+	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
+	<tr>
+		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
+		<td align="center" width="90%"><a class="psf" href="day.php">Day</a> | <a class="psf" href="week.php">Week</a> | <a class="psf" href="month.php">Month</a></td>
+		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
+	</tr>
+	<tr>
+		<td colspan="3"><img src="images/spacer.gif" height="24" width="1"></td>
+	</tr>
+		<tr>
+			<td class="V12" align="left" valign="top" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$prev_week"; ?>">Previous Week</a></td>
+			<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$start_week - $end_week"; ?></td>
+			<td class="V12" align="right" valign="top" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$next_week"; ?>">Next Week</a></td>
+		</tr>
+			<tr>
+		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
+	</tr>
+	</table>
+	<table width="700" border="0" cellspacing="1" cellpadding="2" class="calborder">
+<tr>
+<td>
+	<table width="700" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     	<td align="center" valign="middle">
+      		<table border="0" cellspacing="0" cellpadding="0" bgcolor="#a1a5a9" class="G10B">
+      			<tr>
+					<td align="center" valign="top">
+						<table border="0" cellspacing="1" cellpadding="0">
+							<tr>
+								<td colspan="3" bgcolor="white" nowrap>
+									<table width="100%" border="0" cellspacing="4" cellpadding="0">
+										<tr>
+											<td align="left" valign="middle"><b><font class="V12">Home Calendar</font></b></td>
+											<td align="right" valign="middle" class="V12"><a class="psf" href="webcal://chadsdomain.com/ical/Home.ics">Subscribe</a> | <a class="psf" href="http://chadsdomain.com/ical/Home.ics">Download</a></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+
+					<tr>
+						<td align="center" valign="top">
+							<table border="0" cellspacing="1" cellpadding="0" class="G10B">
+								<tr height="12">
+									<td colspan="2" height="11" width="60" nowrap bgcolor="#f5f5f5">
+										&nbsp; 
+									</td>
+									<?	
+										$thisdate = strtotime ("$sunday");
+										$i = 0;
+										do {
+											$thisday = date("Ymd", $thisdate);
+											$thisday2 = date("D, M j", $thisdate);
+											echo "<td height=\"12\" width=\"101\" colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#f5f5f5\" class=\"V9\">\n";
+											echo "<a class=\"psf\" href=\"day.php?getdate=$thisday\">$thisday2</a>\n";
+											echo "</td>\n";
+											$thisdate = ($thisdate + (25 * 60 * 60));
+											$i++;
+										
+										} while ($i != 7);
+										
+										
+									
+									?>
+
+								</tr>
+								<tr>
+									<td colspan="2" width="60" valign="top" align="center" bgcolor="#f5f5f5">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									
+									
+								<?
+										$thisdate = strtotime ("$sunday");
+										$i = 0;
+										do {
+											$thisday = date("Ymd", $thisdate);
+											if ($master_array[("$thisday")]["0001"]["event_text"]) {
+												echo "<td colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#ffffff\">\n";
+												foreach ($master_array[("$thisday")]["0001"]["event_text"] as $event_text) {
+													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+													echo "<tr height=\"20\">\n";
+													echo "<td height=\"20\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
+													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+													echo "<tr>\n";
+													echo "<td valign=\"top\" align=\"center\">\n";
+													echo "<font class=\"eventfont\"><i>$event_text</i></font>\n";
+													echo "</td>\n";
+													echo "</tr>\n";
+													echo "</table>\n";
+													echo "</td>\n";
+													echo "</tr>\n";
+													echo "<tr height=\"1\">\n";
+													echo "<td height=\"1\">\n";
+													echo "<img src=\"images/spacer.gif\" width=\"1\" height=\"1\"> \n";
+													echo "</td>\n";
+													echo "</tr>\n";
+													echo "</table>\n";
+												}
+												echo "</td>\n";
+											} else {
+												echo "<td colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#ffffff\">\n";
+												echo "<img src=\"images/spacer.gif\" width=\"1\" height=\"1\">\n";
+												echo "</td>\n";
+											}
+											$thisdate = ($thisdate + (25 * 60 * 60));
+											$i++;
+										
+										} while ($i != 7);
+								
+								?>	
+								
+								</tr>
+								<tr>
+									<td width="60" bgcolor="#a1a5a9" nowrap>
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="1" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+									<td width="45" nowrap bgcolor="#a1a5a9">
+										<img src="images/spacer.gif" width="1" height="1"> 
+									</td>
+								</tr>
+								<?
+								
+								$event_length = 0;
+								
+								foreach ($day_array as $key) {
+									$thisdate = strtotime ("$sunday");
+									$thisday = date("Ymd", $thisdate);
+									$k = 0;
+									$cal_time = $key;	
+									$key = strtotime ("$key");
+									$key = date ("g:i A", $key);
+									
+									// The first <TR> (on the hour)
+									if (ereg("^([0-9]{1,2}):00", $key)) {
+										echo "<tr height=\"30\">\n";
+										echo "<td rowspan=\"2\" align=\"center\" valign=\"top\" bgcolor=\"#f5f5f5\" width=\"60\">$key</td>\n";
+										echo "<td height=\"30\" width=\"1\"><img src=\"images/spacer.gif\" width=\"1\" height=\"1\"></td>\n";
+										
+										// Sunday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+											
+										// Monday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										
+										// Tuesday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+																				
+										// Wednesday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+																				
+										// Thursday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										
+										// Friday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										
+										// Saturday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										
+										// End Week
+										echo "</tr>\n";
+									}
+									
+									
+									// The second <TR> (on the half hour)
+									$thisdate = strtotime ("$sunday");
+									$thisday = date("Ymd", $thisdate);
+									if (ereg("([0-9]{1,2}):30", $key)) {
+										echo "<tr height=\"30\">\n";
+										echo "<td height=\"30\" width=\"1\"><img src=\"images/spacer.gif\" width=\"1\" height=\"1\"></td>\n";
+										
+										// Sunday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+											
+										// Monday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										
+										// Tuesday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+																				
+										// Wednesday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+																				
+										// Thursday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										
+										// Friday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										
+										// Saturday
+										if ($master_array[("$thisday")]["$cal_time"]) {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$thisday\">Event</a></td>\n";
+										} else {
+											echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
+										}
+										$thisdate = ($thisdate + (25 * 60 * 60));
+										$thisday = date("Ymd", $thisdate);
+										echo "</tr>\n";
+									}
+									
+									
+								}
+								
+								?>
+									<!--
+									[[td rowspan="2" colspan="2" valign="top" align="left" bgcolor="#68aaef"]]
+										[[table width="100%" border="0" cellpadding="2" cellspacing="0"]]
+											[[tr]]
+												[[td bgcolor="#0065DB"]][[font style="color:#ffffff; font-weight: bold"]]12:00pm[[/font]]
+												[[/td]]
+											[[/tr]]
+											[[tr]]
+												[[td]]
+													[[table width="100%" border="0" cellpadding="1" cellspacing="0"]]
+														[[tr]]
+															[[td bgcolor="#68aaef"]][[font style="font-size: 11px; color:#ffffff"]]Lunch with Stef's mom and sis[[/font]]
+															[[/td]]
+														[[/tr]]
+													[[/table]]
+												[[/td]]
+											[[/tr]]
+										[[/table]]
+									[[/td]]
+									-->
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	</td>
+</tr>
+</table>
+	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
+	<tr>
+		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
+	</tr>
+	<tr>
+		<td class="V12" align="left" valign="middle" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$prev_week"; ?>">Previous Week</a></td>
+		<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$today"; ?></td>
+		<td class="V12" align="right" valign="middle" width="5%" nowrap><a class="psf" href="week.php?getdate=<? echo "$next_week"; ?>">Next Week</a></td>
+	</tr>
+<!--
+	[[tr]]
+		[[td colspan="3"]][[img src="images/spacer.gif" height="24" width="1"]][[/td]]
+	[[/tr]]
+	[[tr]]
+		[[td align="left" width="5%"]][[a href="day.php"]]Today[[/a]][[/td]]
+		[[td align="center" width="90%"]][[a href="day.php"]]Day[[/a]] | [[a href="week.php"]]Week[[/a]] | [[a href="month.php"]]Month[[/a]][[/td]]
+		[[td align="right" width="5%"]][[a href="preferences.php"]]Preferences[[/a]][[/td]]
+	[[/tr]]
+-->
+</table>
+</center>
+</body>
+</html>
