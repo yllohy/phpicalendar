@@ -78,12 +78,12 @@ if ($parse_file) {
 		if (stristr($line, 'BEGIN:VEVENT')) {
 			// each of these vars were being set to an empty string
 			unset (
-				$start_time, $start_time, $start_date, $end_date, $summary, 
+				$start_time, $end_time, $start_date, $end_date, $summary, 
 				$allday_start, $allday_end, $start, $end, $the_duration, 
 				$beginning, $rrule_array, $start_of_vevent, $description, 
 				$valarm_description
 			);
-	
+				
 			$except_dates = array();
 			$except_times = array();
 			$first_duration = TRUE;
@@ -100,7 +100,8 @@ if ($parse_file) {
 			
 			$mArray_begin = mktime (0,0,0,1,1,$this_year);
 			$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
-					
+			//if ((!$allday_end) && (!$end_time)) $allday_end = $mArray_end;	
+			
 			// Mozilla style all-day events or just really long events
 			if (($end_time - $start_time) > 2345) {
 				$allday_start = $start_date;
@@ -314,6 +315,7 @@ if ($parse_file) {
 												}
 											break;
 											case 'YEARLY':
+												if (!$bymonth) $bymonth = date ("m", strtotime($start_time));
 												foreach($bymonth as $month) {
 													$year = date('Y', $next_range_time);
 													$month = str_pad($month, 2, '0', STR_PAD_LEFT);
@@ -399,6 +401,7 @@ if ($parse_file) {
 				$data = ereg_replace('Z', '', $data);
 				if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
 					$allday_start = $data;
+					echo "$summary - $allday_start<br>";
 				} else {
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$start_date = $regs[1] . $regs[2] . $regs[3];
@@ -417,11 +420,14 @@ if ($parse_file) {
 				}
 				
 			} elseif (preg_match("/^EXDATE/i", $field)) {
-				$data = ereg_replace('T', '', $data);
-				$data = ereg_replace('Z', '', $data);
-				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-				$except_dates[] = $regs[1] . $regs[2] . $regs[3];
-				$except_times[] = $regs[4] . $regs[5];
+				$data = split(",", $data);
+				foreach ($data as $exdata) {
+					$exdata = ereg_replace('T', '', $exdata);
+					$exdata = ereg_replace('Z', '', $exdata);
+					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $exdata, $regs);
+					$except_dates[] = $regs[1] . $regs[2] . $regs[3];
+					$except_times[] = $regs[4] . $regs[5];
+				}
 				
 			} elseif (preg_match("/^SUMMARY/i", $field)) {
 				$data = str_replace("\\n", "<br>", $data);
@@ -508,7 +514,7 @@ if ($parse_file) {
 //print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
-//print_r($rrule);			
+//print_r($rrule);	
 //print '</pre>';
 	
 					
