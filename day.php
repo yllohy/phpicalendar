@@ -165,14 +165,14 @@ if (is_array($master_array[($getdate)])) {
 										echo '<tr height="' . $gridLength . '">'."\n";
 										echo '<td width="1" height="' . $gridLength . '"></td>'."\n";
 									}
+									if ($dayborder == 0) {
+										$class = ' class="dayborder"';
+										$dayborder++;
+									} else {
+										$class = ' class="dayborder2"';
+										$dayborder = 0;
+									}
 									if (sizeof($event_length) == 0) {
-										if ($dayborder == 0) {
-											$class = ' class="dayborder"';
-											$dayborder++;
-										} else {
-											$class = ' class="dayborder2"';
-											$dayborder = 0;
-										}
 										echo '<td bgcolor="#ffffff" colspan="' . $nbrGridCols . '" '.$class.'>&nbsp;</td>'."\n";
 										
 									} else {
@@ -218,7 +218,7 @@ if (is_array($master_array[($getdate)])) {
 												case 'started':
 													break;
 												case 'ended':
-													echo '<td bgcolor="#ffffff" colspan="' . $drawWidth . '">&nbsp;</td>'."\n";
+													echo '<td bgcolor="#ffffff" colspan="' . $drawWidth . '" ' . $class . '>&nbsp;</td>'."\n";
 													break;
 											}
 											$event_length[$i]['length']--;
@@ -228,7 +228,7 @@ if (is_array($master_array[($getdate)])) {
 										}
 										//fill emtpy space on the right
 										if ($emptyWidth > 0) {
-											echo '<td bgcolor="#ffffff" colspan="' . $emptyWidth . '">&nbsp;</td>'."\n";
+											echo '<td bgcolor="#ffffff" colspan="' . $emptyWidth . '" ' . $class . '>&nbsp;</td>'."\n";
 										}
 										while ($event_length[(sizeof($event_length) - 1)]['state'] == 'ended') {
 											array_pop($event_length);
