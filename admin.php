@@ -89,7 +89,7 @@ include (BASE.'includes/header.inc.php');
 
 // If User is Not Logged In, Display The Login Page
 if ($is_loged_in == FALSE) {
-	if (isset($username)) {
+	if (isset($username)  && $username !='') {
 		$login_error =  "<font color=\"red\">$invalid_login_lang</font>";
 	} else {
 		$login_error = '';
