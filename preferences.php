@@ -17,6 +17,7 @@ if ($action == 'setcookie') {
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time");
 	$the_cookie 		= serialize($the_cookie);
 	setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
+	$HTTP_COOKIE_VARS['phpicalendar'] = $the_cookie;
 	#unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
 }
 
@@ -33,6 +34,16 @@ if ($HTTP_COOKIE_VARS['phpicalendar']) {
 #print_r(unserialize($HTTP_COOKIE_VARS['phpicalendar']));
 #print_r($phpicalendar);
 include(BASE.'functions/ical_parser.php');
+
+if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
+	# No cookie set -> use defaults from config file.
+	$cookie_language = ucfirst($language);
+	$cookie_calendar = $default_cal;
+	$cookie_view = $default_view;
+	$cookie_style = $style_sheet;
+	$cookie_startday = $week_start_day;
+	$cookie_time = $day_start;
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -130,19 +141,24 @@ include(BASE.'functions/ical_parser.php');
 												//
 												print "<select name=\"cookie_calendar\" class=\"query_style\">\n";
 												$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
+												$filelist = array();
 												while ($file = readdir($dir_handle)) {
 													if (substr($file, -4) == ".ics") {
-														$cal_filename_tmp = substr($file,0,-4);
-														$cal_tmp = urlencode($cal_filename_tmp);
-														$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
-														if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
-															if ($cal_tmp == $cookie_calendar) {
-																print "<option value=\"$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
-															} else {
-																print "<option value=\"$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
-															}		
-														}	
+														array_push($filelist, $file);
 													}
+												}
+												natcasesort($filelist);
+												foreach ($filelist as $file) {
+													$cal_filename_tmp = substr($file,0,-4);
+													$cal_tmp = urlencode($cal_filename_tmp);
+													$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+													if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
+														if ($cal_tmp == $cookie_calendar) {
+															print "<option value=\"$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
+														} else {
+															print "<option value=\"$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
+														}		
+													}	
 												}			
 												foreach($list_webcals as $cal_tmp) {
 													if ($cal_tmp != '') {
@@ -171,10 +187,18 @@ include(BASE.'functions/ical_parser.php');
 												// Begin View Selection
 												//
 												print "<select name=\"cookie_view\" class=\"query_style\">\n";
-												print "<option value=\"day\">$day_lang</option>\n";
-												print "<option value=\"week\">$week_lang</option>\n";
-												print "<option value=\"month\">$month_lang</option>\n";
-												print "<option value=\"print\">$printer_lang</option>\n";
+												print "<option value=\"day\"";
+												if ($cookie_view == "day") print " selected";
+												print ">$day_lang</option>\n";
+												print "<option value=\"week\"";
+												if ($cookie_view == "week") print " selected";
+												print ">$week_lang</option>\n";
+												print "<option value=\"month\"";
+												if ($cookie_view == "month") print " selected";
+												print ">$month_lang</option>\n";
+												print "<option value=\"print\"";
+												if ($cookie_view == "print") print " selected";
+												print ">$printer_lang</option>\n";
 												print "</select>\n";
 											?>
 										</td>
@@ -188,11 +212,14 @@ include(BASE.'functions/ical_parser.php');
 												// Begin Time Selection
 												//
 												print "<select name=\"cookie_time\" class=\"query_style\">\n";
-												print "<option value=\"0500\">0500</option>\n";
-												print "<option value=\"0600\">0600</option>\n";
-												print "<option value=\"0700\">0700</option>\n";
-												print "<option value=\"0800\">0800</option>\n";
-												print "<option value=\"0900\">0900</option>\n";
+												for ($i = 500; $i <= 900; $i += 100) {
+													$s = sprintf("%04d", $i);
+													print "<option value=\"$s\"";
+													if ($s == $cookie_time) {
+														print " selected";
+													}
+													print ">$s</option>\n";
+												}
 												print "</select>\n";
 											?>
 										</td>
