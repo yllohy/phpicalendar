@@ -86,6 +86,13 @@
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
 									<td colspan="6" class="G10B"><?php include('./functions/list_months.php'); ?></td>
 								</tr>
+								<tr>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+								</tr>
+								<tr>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td colspan="6" class="G10B"><?php include('./functions/list_weeks.php'); ?></td>
+								</tr>
 							</table>
 						</td>
 					</tr>

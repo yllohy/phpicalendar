@@ -50,6 +50,7 @@ $timeFormat = "g:i A";
 $dateFormat_day = "%A, %B %e";
 $dateFormat_week = "%B %e";
 $dateFormat_week_list = "%a, %b %e";
+$dateFormat_week_jump = "%b %e";
 $dateFormat_month = "%B %Y";
 $dateFormat_month_list = "%A, %B %e";
 
