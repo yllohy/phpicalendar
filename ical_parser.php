@@ -450,7 +450,7 @@ foreach($contents as $line) {
 								// handle yearly events
 								} elseif ($rrule_array["FREQ"] == "YEARLY") {
 									// use yearCompare to see if we even have this event this year
-									$the_month_day = date("m", $start_date_time);
+									$the_month_day = date("d", $start_date_time);
 									$diff_years = yearCompare(date("Ymd",$next_range_time), $start_date);
 									if ($diff_years < $count) {
 										if ($diff_years % $number == 0) {
@@ -467,6 +467,7 @@ foreach($contents as $line) {
 												} else {
 													$next_date_time = strtotime("$this_year-$month-$the_month_day", $next_range_time);
 												}
+												print date("Y-m-d     ", $next_date_time);
 												if (($next_date_time > $start_date_time) && ($next_date_time <= $end_date_time) && ($count_to != $count) && !in_array($next_date, $except_dates)) {
 													if ($allday_start != "") {
 														
