@@ -140,6 +140,12 @@ if ($parse_file) {
 				}
 			}
 			
+			// Handling regular events
+			if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
+				$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
+				$master_array[($start_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+			}
+			
 			// Handling of the recurring events, RRULE
 // jared-2002.10.17, Commented this line out, replacing it with another. Not sure why the $allday_written var was
 // implemented. This var in this "if" broke all recurring all-day event support (ie, only the first occurrence would show up)
@@ -165,74 +171,73 @@ if ($parse_file) {
 				}
 				//print_r($rrule_array);
 				foreach ($rrule_array as $key => $val) {
-					if ($key == 'FREQ') {
-						switch ($val) {
-							case 'YEARLY':		$freq_type = 'year';	break;
-							case 'MONTHLY':		$freq_type = 'month';	break;
-							case 'WEEKLY':		$freq_type = 'week';	break;
-							case 'DAILY':		$freq_type = 'day';		break;
-							case 'HOURLY':		$freq_type = 'hour';	break;
-							case 'MINUTELY':	$freq_type = 'minute';	break;
-							case 'SECONDLY':	$freq_type = 'second';	break;
-						}
-					} elseif ($key == 'COUNT') 		{
-						$count = $val;
-					
-					} elseif ($key == 'UNTIL') 		{
-						$until = ereg_replace('T', '', $val);
-						$until = ereg_replace('Z', '', $val);
-						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $until, $regs);
-						$year = $regs[1];
-						$month = $regs[2];
-						$day = $regs[3];
-						$until = mktime(0,0,0,$month,$day,$year);
-						$until = strtotime('-1 day', $until);		
-					} elseif ($key == 'INTERVAL')	{
-						$number = $val;
-					
-					} elseif ($key == 'BYSECOND') 	{
-						$bysecond = $val;
-						$bysecond = split (',', $bysecond);
-					
-					} elseif ($key == 'BYMINUTE') 	{
-						$byminute = $val;
-						$byminute = split (',', $byminute);
-					
-					} elseif ($key == 'BYHOUR')		{
-						$byhour = $val;
-						$byhour = split (',', $byhour);
-					
-					} elseif ($key == 'BYDAY') 		{
-						$byday = $val;
-						$byday = split (',', $byday);
-						#echo "<pre>";
-						#print_r ($byday);
-						#echo "</pre>";
-					
-					} elseif ($key == 'BYMONTHDAY') {
-						$bymonthday = $val;
-						$bymonthday = split (',', $bymonthday);
-						//print_r ($bymonthday);
-					
-					} elseif ($key == 'BYYEARDAY') 	{
-						$byyearday = $val;
-						$byyearday = split (',', $byyearday);
-					
-					} elseif ($key == 'BYWEEKNO') 	{
-						$byweekno = $val;
-						$byweekno = split (',', $byweekno);
-					
-					} elseif ($key == 'BYMONTH') 	{
-						$bymonth = $val;
-						$bymonth = split (',', $bymonth);
-					
-					} elseif ($key == 'BYSETPOS') 	{
-						$bysetpos = $val;
-					
-					} elseif ($key == 'WKST') 		{
-						$wkst = $val;
-					
-					} elseif ($key == 'END')		{
+					switch($key) {
+						case 'FREQ':
+							switch ($val) {
+								case 'YEARLY':		$freq_type = 'year';	break;
+								case 'MONTHLY':		$freq_type = 'month';	break;
+								case 'WEEKLY':		$freq_type = 'week';	break;
+								case 'DAILY':		$freq_type = 'day';		break;
+								case 'HOURLY':		$freq_type = 'hour';	break;
+								case 'MINUTELY':	$freq_type = 'minute';	break;
+								case 'SECONDLY':	$freq_type = 'second';	break;
+							}
+							break;
+						case 'COUNT':
+							$count = $val;
+							break;
+						case 'UNTIL':
+							$until = ereg_replace('T', '', $val);
+							$until = ereg_replace('Z', '', $val);
+							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $until, $regs);
+							$year = $regs[1];
+							$month = $regs[2];
+							$day = $regs[3];
+							$until = mktime(0,0,0,$month,$day,$year);
+							$until = strtotime('-1 day', $until);
+							break;
+						case 'INTERVAL':
+							$number = $val;
+							break;
+						case 'BYSECOND':
+							$bysecond = $val;
+							$bysecond = split (',', $bysecond);
+							break;
+						case 'BYMINUTE':
+							$byminute = $val;
+							$byminute = split (',', $byminute);
+							break;
+						case 'BYHOUR':
+							$byhour = $val;
+							$byhour = split (',', $byhour);
+							break;
+						case 'BYDAY':
+							$byday = $val;
+							$byday = split (',', $byday);
+							break;
+						case 'BYMONTHDAY':
+							$bymonthday = $val;
+							$bymonthday = split (',', $bymonthday);
+							break;					
+						case 'BYYEARDAY':
+							$byyearday = $val;
+							$byyearday = split (',', $byyearday);
+							break;
+						case 'BYWEEKNO':
+							$byweekno = $val;
+							$byweekno = split (',', $byweekno);
+							break;
+						case 'BYMONTH':
+							$bymonth = $val;
+							$bymonth = split (',', $bymonth);
+							break;
+						case 'BYSETPOS':
+							$bysetpos = $val;
+							break;
+						case 'WKST':
+							$wkst = $val;
+							break;
+						case 'END':
 					
 						// again, $parse_to_year is set to January 10 of the upcoming year
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
@@ -276,7 +281,7 @@ if ($parse_file) {
 											case 'DAILY':
 												$next_date_time = $next_range_time;
 												$recur_data[] = $next_date_time;
-											break;
+												break;
 											case 'WEEKLY':
 												if (is_array($byday)) {
 													// loop through the days on which this event happens
@@ -288,7 +293,7 @@ if ($parse_file) {
 														$recur_data[] = $next_date_time;
 													}
 												}
-											break;
+												break;
 											case 'MONTHLY':
 												$next_range_time = strtotime(date('Y-m-01', $next_range_time));
 												// month has two cases, either $bymonthday or $byday
@@ -314,7 +319,7 @@ if ($parse_file) {
 														$recur_data[] = $next_date_time;
 													}
 												}
-											break;
+												break;
 											case 'YEARLY':
 												if (!isset($bymonth)) $bymonth[] = date('m', $start_date_time);
 												foreach($bymonth as $month) {
@@ -334,7 +339,7 @@ if ($parse_file) {
 													}
 													$recur_data[] = $next_date_time;
 												}
-											break;
+												break;
 											default:
 												// anything else we need to end the loop
 												$next_range_time = $end_range_time + 100;
@@ -362,9 +367,7 @@ if ($parse_file) {
 													$start_time2 = strtotime('+1 day', $start_time2);
 												}
 											} else {
-// check for overlapping events		
 												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time);
-// writes to $master array here	
 												$master_array[($recur_data_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 											}
 										}
@@ -377,19 +380,8 @@ if ($parse_file) {
 				}
 			}
 		
-		// Let's write all the data to the master array
-		if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
-// check for overlapping events
-			$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
+
 	
-// writes to $master array here
-			$master_array[($start_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
-		}
-			
-	
-			
-			
-			
 		} elseif (stristr($line, "BEGIN:VALARM")) {
 			$valarm_set = TRUE;
 		} elseif (stristr($line, "END:VALARM")) {
