@@ -204,6 +204,21 @@ for ($i=0;$i<7;$i++) {
 											}
 										}
 										
+										/*if (sizeof($event_length[$thisday]) == 0) {
+											if ($dayborder < 7) {
+												$class = " class=\"weekborder\"";
+												$dayborder++;
+											} elseif ($dayborder2 < 7) {
+												$class = " class=\"weekborder2\"";
+												$dayborder2++;
+											} else {
+												$class = " class=\"weekborder\"";
+												$dayborder = 1;
+												$dayborder2 = 0;
+											}*/
+										
+										
+										
 										if (sizeof($event_length[$thisday]) == 0) {
 											if ($dayborder == 0) {
 												$class = " class=\"weekborder\"";
@@ -212,6 +227,8 @@ for ($i=0;$i<7;$i++) {
 												$class = "";
 												$dayborder = 0;
 											}
+										
+										
 											
 											echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols[$thisday] . "\" $class>&nbsp;</td>\n";
 											
