@@ -45,7 +45,18 @@ $page->replace_tags(array(
 	'rssdisable'	 	=> '',
 	'rss_valid' 		=> '',
 	'todo_js' 			=> '',
-	'show_search' 		=> ''			
+	'show_search' 		=> '',
+	'l_rss_info'		=> $lang['l_rss_info'],
+	'l_rss_subhead'		=> $lang['l_rss_subhead'],
+	'l_day'				=> $lang['l_day'],
+	'l_week'			=> $lang['l_week'],
+	'l_month'			=> $lang['l_month'],
+	'l_year'			=> $lang['l_year'],
+	'l_subscribe'		=> $lang['l_subscribe'],
+	'l_download'		=> $lang['l_download'],
+	'l_this_months'		=> $lang['l_this_months'],
+	'l_powered_by'		=> $lang['l_powered_by'],
+	'l_this_site_is'	=> $lang['l_this_site_is']				
 	));
 
 $page->output();

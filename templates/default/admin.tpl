@@ -75,7 +75,7 @@
 						<p>{L_ADDUPDATE_DESC}</p>
 						<form action="admin.php" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="action" value="addupdate">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
+							<table width="100%" border="0" cellspacing="0" cellpadding="2" class="G10B">
 								<tr>
 									<td nowrap>{L_CAL_FILE} 1: </td>
 									<td><input type="file" name="calfile[1]"></td>

@@ -78,6 +78,8 @@ $page->replace_tags(array(
 	'l_delete'			=> $lang['l_delete'],
 	'l_logout'			=> $lang['l_logout'],
 	'l_submit'			=> $lang['l_submit'],
+	'l_addupdate_cal'	=> $lang['l_addupdate_cal'],
+	'l_addupdate_desc'	=> $lang['l_addupdate_desc'],
 	'l_powered_by'		=> $lang['l_powered_by'],
 	'l_this_site_is'	=> $lang['l_this_site_is']			
 	));
