@@ -89,12 +89,15 @@ Changes:
 		-Dutch
 		-Traditional Chinese
 		-Lithuanian
+		-Portugese
 	-Added iCal specific publish.php.
 	-Fixed stat bug.
 	-PHP5 support added.
 	-Admin page works again.
+	-Admin page moved to its own folder.
 	-Oct. to Nov. transition more reliable.
 	-RSS handles files with spaces.
+	-Faster template generation.
 	-Requires PHP 4.1.0 or greater now.
 	-Various Bug fixes.
 
