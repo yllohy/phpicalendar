@@ -20,6 +20,7 @@
 .monthon		{ background-color: #F2F9FF; }
 .montheventtop	{ background-image: url(side_bg.gif); border-top: 1px solid #A1A5A9; }
 .montheventline	{ border-right: 1px dotted #A1A5A9; }
+.yearmonth		{ background: #CCCCCC; }
 
 /* Link colors and attributes */
 /* This is the main link style */
