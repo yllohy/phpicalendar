@@ -254,8 +254,9 @@ foreach ($cal_filelist as $filename) {
 								$end_time_tmp = $end_time;
 							} else {
 								$end_time_tmp = '2400';
-								$display_end_tmp = '0000';
+								$display_end_tmp = $end_time;
 							}
+							
 							$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
 							$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url );
 							$start_tmp = strtotime('+1 day',$start_tmp);
@@ -598,11 +599,11 @@ foreach ($cal_filelist as $filename) {
 																$end_time_tmp = $end_time;
 															} else {
 																$end_time_tmp = '2400';
-																$display_end_tmp = '0000';
+																$display_end_tmp = $end_time;
 															}
 															
 															// Let's double check the until to not write past it
-															$until_check = $recur_data_date.$time_tmp.'00';
+															$until_check = $start_date_tmp.$time_tmp.'00';
 															if ($abs_until > $until_check) {
 																$nbrOfOverlaps = checkOverlap($start_date_tmp, $start_time_tmp, $end_time_tmp, $uid);
 																$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url) ;

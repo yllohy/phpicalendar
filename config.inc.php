@@ -24,7 +24,7 @@ $default_path			= 'http://www.example.com/phpicalendar'; 	// The HTTP URL to the
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 $calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
 $second_offset			= '0';				// The time in seconds between your time and your server's time.
-$bleed_time				= '0200';			// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359'
+$bleed_time				= '0400';			// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359'
 
 // Advanced settings for custom installs, cookies, etc.
 // In most cases these will not need to be set.
