@@ -17,7 +17,7 @@ $yesterdays_date 	= date( "Ymd", strtotime("-1 day",  $unix_time));
 $start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $start_week 		= localizeDate($dateFormat_week, $start_week_time);
-$end_week 			=  ocalizeDate($dateFormat_week, $end_week_time);
+$end_week 			= localizeDate($dateFormat_week, $end_week_time);
 $display_date 		= "$start_week - $end_week";
 
 // For the side months
