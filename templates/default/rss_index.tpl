@@ -35,7 +35,7 @@
 								<td width="2%"></td>
 								<td width="98%" valign="top" align="left">
 									<br />
-									{L_THIS_SITE_IS} <a class="psf" href="http://www.oreillynet.com/rss/">RSS 0.91 enabled</a>.<br>
+									{L_THIS_SITE_IS} <a class="psf" href="http://www.oreillynet.com/rss/">RSS 0.91 enabled</a>.<br />
 									<br />
 									{RSS_LIST}
 									<br />

@@ -21,16 +21,16 @@
 					<!-- switch description off -->
 					<p>
 					<!-- switch organizer on -->
-					<b>{L_ORGANIZER}</b>: {ORGANIZER}<br>
+					<b>{L_ORGANIZER}</b>: {ORGANIZER}<br />
 					<!-- switch organizer off -->
 					<!-- switch attendee on -->
-					<b>{L_ATTENDEE}</b>: {ATTENDEE}<br>
+					<b>{L_ATTENDEE}</b>: {ATTENDEE}<br />
 					<!-- switch attendee off -->
 					<!-- switch status on -->
-					<b>{L_STATUS}</b>: {STATUS}<br>
+					<b>{L_STATUS}</b>: {STATUS}<br />
 					<!-- switch status off -->
 					<!-- switch location on -->
-					<b>{L_LOCATION}</b>: {LOCATION}<br>
+					<b>{L_LOCATION}</b>: {LOCATION}<br />
 					<!-- switch location off -->
 					</p>
 				</div>

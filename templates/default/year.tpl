@@ -38,7 +38,7 @@
 			</td>
 		</tr>
 	</table>
-	<br>
+	<br />
 	<table border="0" width="670" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="210" valign="top" align="left">

@@ -69,7 +69,7 @@
 						<!-- switch logged_in on -->
 						
 						<!-- switch action_message on -->
-						<font color="green">{L_CAL_FILE} {FILENUMBER}: {ACTION_MSG}</font><br>
+						<font color="green">{L_CAL_FILE} {FILENUMBER}: {ACTION_MSG}</font><br />
 						<!-- switch action_message off -->
 						<b>{L_ADDUPDATE_CAL}</b>
 						<p>{L_ADDUPDATE_DESC}</p>

@@ -246,7 +246,7 @@ class Page {
 								if ($event_calno < 1) $event_calno = 1;
 								if ($event_calno > 7) $event_calno = 7;
 								if ($event_status != '') {
-						  			$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
+						  			$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
 								$weekdisplay .= '<td rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 
@@ -261,9 +261,10 @@ class Page {
 								$event 		 = openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$thisday][$i]["key"])], $week_events_lines, 25, '', '', 'ps', $event_url);
 								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
 								$event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
-\								$event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
+								$event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
 								$event_temp   = str_replace('{EVENT_CALNO}', $event_calno, $event_temp);
 								$weekdisplay .= $event_temp;
+								$weekdisplay .= '</td>';
 								// End event drawing
 						  
 								break;
@@ -462,9 +463,9 @@ class Page {
 						  if ($event_calno < 1) $event_calno = 1;
 						  if ($event_calno > 7) $event_calno = 7;
 						  if ($event_status != '') {
-						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
+						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  } elseif (is_array($event_recur)) {
-						  	$confirmed = '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
+						  	$confirmed = '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  }
 						  $colspan_width = round((460 / $nbrGridCols) * $drawWidth);
 						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" width="'.$colspan_width.'" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
@@ -480,6 +481,7 @@ class Page {
 						  $event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
 						  $event_temp   = str_replace('{EVENT_CALNO}', $event_calno, $event_temp);
 						  $daydisplay .= $event_temp;
+						  $daydisplay .= '</td>';
 						  // End event drawing
 						  
 						  break;
@@ -594,7 +596,7 @@ class Page {
 							'vtodo_text' 	=> $vtodo_text);
 
 						$vtodo_array 	= base64_encode(serialize($vtodo_array));
-						$vtodo_text 	= word_wrap(strip_tags(str_replace('<br>',' ',$vtodo_text), '<b><i><u>'), 21, $tomorrows_events_lines);
+						$vtodo_text 	= word_wrap(strip_tags(str_replace('<br />',' ',$vtodo_text), '<b><i><u>'), 21, $tomorrows_events_lines);
 						$data 			= array ('{VTODO_TEXT}', '{VTODO_ARRAY}');
 						$rep			= array ($vtodo_text, $vtodo_array);
 						
@@ -707,11 +709,11 @@ class Page {
 							$event_url 		= $val['url'];
 							if (!isset($val['event_start'])) {
 								if ($type == 'large') {
-									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0">';
+									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0" />';
 									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
 									$switch['ALLDAY'] .= '</div>';
 								} else {
-									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0">';
+									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							} else {	
 								$event_start = $val['start_unixtime'];
@@ -720,11 +722,11 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								$event_end   = date($timeFormat, @strtotime ($event_end));
 								if ($type == 'large') {
-									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0">';
-									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url).'<br>';
+									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0" />';
+									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url).'<br />';
 									$switch['EVENT'] .= '</div>';
 								} else {
-									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0">';
+									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							}
 						}

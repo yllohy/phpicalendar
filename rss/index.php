@@ -17,10 +17,10 @@ foreach ($filelist as $file) {
 	$cal_filename_tmp = substr($file,0,-4);
 	$cal_tmp = urlencode($cal_filename_tmp);
 	$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
-	$rss_list = '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br>';
-	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=day<br>';
-	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=week<br>';
-	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=month<br>';
+	$rss_list = '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br />';
+	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=day<br />';
+	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=week<br />';
+	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=month<br />';
 	$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&rssview='.$default_view;
 }
 

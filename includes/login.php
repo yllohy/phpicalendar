@@ -49,7 +49,7 @@ echo <<<END
 		</tr>
 	</table>
 	</form>
-	<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+	<img src="images/spacer.gif" width="1" height="10" alt=" "><br />
 
 END;
 

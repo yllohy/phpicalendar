@@ -35,21 +35,21 @@
 <!-- switch show_user_login off -->
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={PREV_DAY}"><img src="templates/{TEMPLATE}/images/left_arrows.gif" alt="{L_PREV}" width="16" height="20" border="0" align="left"></a></td>
+		<td align="left" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={PREV_DAY}"><img src="templates/{TEMPLATE}/images/left_arrows.gif" alt="{L_PREV}" width="16" height="20" border="0" align="left" /></a></td>
 		<td align="center" width="112" class="sideback"><font class="G10BOLD">{SIDEBAR_DATE}</font></td>
-		<td align="right" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={NEXT_DAY}"><img src="templates/{TEMPLATE}/images/right_arrows.gif" alt="{L_NEXT}" width="16" height="20" border="0" align="right"></a></td>
+		<td align="right" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={NEXT_DAY}"><img src="templates/{TEMPLATE}/images/right_arrows.gif" alt="{L_NEXT}" width="16" height="20" border="0" align="right" /></a></td>
 	</tr>
 	<tr>
 		<td colspan="3" bgcolor="#FFFFFF" align="left">
 			<div style="padding: 5px;">
-				<b>{L_LEGEND}:</b><br>
+				<b>{L_LEGEND}:</b><br />
 				{LEGEND}
-				<a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview={CURRENT_VIEW}">{L_GOPRINT}</a><br>
+				<a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview={CURRENT_VIEW}">{L_GOPRINT}</a><br />
 				<!-- switch allow_preferences on -->
-				<a class="psf" href="preferences.php?cal={CAL}&amp;getdate={GETDATE}">{L_PREFERENCES}</a><br>
+				<a class="psf" href="preferences.php?cal={CAL}&amp;getdate={GETDATE}">{L_PREFERENCES}</a><br />
 				<!-- switch allow_preferences off -->
 				<!-- switch display_download on -->
-				<a class="psf" href="{SUBSCRIBE_PATH}">{L_SUBSCRIBE}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{L_DOWNLOAD}</a><br>
+				<a class="psf" href="{SUBSCRIBE_PATH}">{L_SUBSCRIBE}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{L_DOWNLOAD}</a><br />
 				<!-- switch display_download off -->
 				<!-- switch is_logged_in on -->
 				<a class="psf" href="{CURRENT_VIEW}.php?{LOGOUT_QUERYS}">{L_LOGOUT} {USERNAME}</a>
@@ -75,11 +75,11 @@
 		<td bgcolor="#FFFFFF" align="left">
 			<div style="padding: 5px;">
 				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="GET">
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_JUMPS}</select><br>
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br>
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br>
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br>
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br>
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_JUMPS}</select><br />
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br />
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br />
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br />
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br />
 				</form>
 				<!-- switch show_search on -->
 				{SEARCH_BOX}
@@ -146,21 +146,21 @@
 				<table cellpadding="0" cellspacing="0" border="0">
 					<!-- switch show_completed on -->
 					<tr>
-						<td><img src="images/completed.gif" alt=" " width="13" height="11" border="0" align="middle"></td>
+						<td><img src="images/completed.gif" alt=" " width="13" height="11" border="0" align="middle" /></td>
 						<td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
 						<td><s><a class="psf" href="javascript:openTodoInfo('{VTODO_ARRAY}')"><font class="G10B"> {VTODO_TEXT}</font></a></s></td>
 					</tr>
 					<!-- switch show_completed off -->
 					<!-- switch show_important on -->
 					<tr>
-						<td><img src="images/important.gif" alt=" " width="13" height="11" border="0" align="middle"></td>
+						<td><img src="images/important.gif" alt=" " width="13" height="11" border="0" align="middle" /></td>
 						<td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
 						<td><a class="psf" href="javascript:openTodoInfo('{VTODO_ARRAY}')"><font class="G10B"> {VTODO_TEXT}</font></a></td>
 					</tr>
 					<!-- switch show_important off -->
 					<!-- switch show_normal on -->
 					<tr>
-						<td><img src="images/not_completed.gif" alt=" " width="13" height="11" border="0" align="middle"></td>
+						<td><img src="images/not_completed.gif" alt=" " width="13" height="11" border="0" align="middle" /></td>
 						<td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
 						<td><a class="psf" href="javascript:openTodoInfo('{VTODO_ARRAY}')"><font class="G10B"> {VTODO_TEXT}</font></a></td>
 					</tr>
@@ -190,7 +190,7 @@
 		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br />
+<img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
 
 {MONTH_SMALL|+0}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -200,7 +200,7 @@
 		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br />
+<img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
 
 {MONTH_SMALL|+1}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">

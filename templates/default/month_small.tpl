@@ -32,7 +32,7 @@
 				</tr>
 				<!-- loop monthweeks off -->
 			</table>
-			<img src="images/spacer.gif" width="1" height="3" alt=" "><br>
+			<img src="images/spacer.gif" width="1" height="3" alt=" "><br />
 		</td>
 	</tr>
 </table>

@@ -135,7 +135,7 @@ Changes:
 
 0.9.3	
 	-Multiple calendar support (up to 8).
-	-Fixed pesky <BR> tags in event popup.
+	-Fixed pesky <br /> tags in event popup.
 	-Added Esperanto language.
 	-Major bug fixes.
 	-Last to support Netscape 4.x

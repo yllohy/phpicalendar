@@ -31,10 +31,10 @@
 			<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 		</tr>
 	</table>
-	<br>
+	<br />
 	{CALENDAR_NAV}
 	<!-- switch showbottom on -->
-	<br>
+	<br />
 	<table width="735" border="0" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
 			<td align="center" valign="middle" bgcolor="white">
@@ -53,22 +53,22 @@
 					<!-- loop showbottomevents_odd on -->
 					<tr align="left" valign="top">
 						<td width="170" nowrap>
-							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{START_DATE}</a><br>
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{START_DATE}</a><br />
 							<span class="V9G">{START_TIME}</span>
 						</td>
 						<td>
-							{EVENT_TEXT}<br><span class="V9G">{CALNAME}</span>
+							{EVENT_TEXT}<br /><span class="V9G">{CALNAME}</span>
 						</td>
 					</tr>
 					<!-- loop showbottomevents_odd off -->
 					<!-- loop showbottomevents_even on -->
 					<tr align="left" valign="top">
 						<td width="170" nowrap bgcolor="#EEEEEE">
-							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{START_DATE}</a><br>
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{START_DATE}</a><br />
 							<span class="V9G">{START_TIME}</span>
 						</td>
 						<td bgcolor="#EEEEEE">
-							{EVENT_TEXT}<br><span class="V9G">{CALNAME}</span>
+							{EVENT_TEXT}<br /><span class="V9G">{CALNAME}</span>
 						</td>
 					</tr>
 					<!-- loop showbottomevents_even off -->

@@ -30,7 +30,7 @@
 			<div style="padding: 10px;">
 				<div><p class="V12">{L_QUERY}: {FORMATTED_SEARCH}</p></div>
 				<!-- switch results on -->
-				<font class="V12"><b><a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{DAYOFMONTH}</a></b></font><br>
+				<font class="V12"><b><a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{DAYOFMONTH}</a></b></font><br />
 				<div style="margin-left: 10px; margin-bottom: 10px;">
 					<table width="100%" border="0" cellspacing="1" cellpadding="1">
 						<tr>
@@ -56,7 +56,7 @@
 					</table>
 				</div>
 				<!-- switch exceptions on -->		
-				<font class="V10"><i>{L_EXCEPTION}</i>: <a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{DAYOFMONTH}</a></font><br>
+				<font class="V10"><i>{L_EXCEPTION}</i>: <a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{DAYOFMONTH}</a></font><br />
 				<div style="margin-left: 10px;">
 					<table width="100%" border="0" cellspacing="1" cellpadding="1">
 						<tr>
@@ -82,7 +82,7 @@
 					</table>
 				</div>
 				<!-- switch exceptions off -->		
-				<br>
+				<br />
 				<!-- switch results off -->
 				
 				<!-- switch no_results on -->
@@ -94,7 +94,7 @@
 				<div align="center">
 					{SEARCH_BOX}
 				</div>
-				<br>
+				<br />
 			</div>
 		</td>
 	</tr>

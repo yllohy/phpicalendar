@@ -20,16 +20,16 @@
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 							<tr>
 								<td align="center" valign="top">
-									<br>
+									<br />
 									{ERROR_MSG}
-									<br>
-									<br>
+									<br />
+									<br />
 									{ERROR_CALENDAR}
-									<br>
-									<br>
+									<br />
+									<br />
 									{L_ERROR_BACK}
-									<br>
-									<br>
+									<br />
+									<br />
 								</td>
 							</tr>
 						</table>

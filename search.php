@@ -231,7 +231,7 @@ function format_recur($arr) {
 			if ($key == $last)	$list .= $monthsofyear_lang[($month-1)];
 			else 				$list .= $monthsofyear_lang[($month-1)].$d;
 		}
-		$print .= '<br>'."\n";
+		$print .= '<br />'."\n";
 		$print .= str_replace('%list%', $list, $format_recur_lang['bymonth']);
 	}
 	
@@ -246,7 +246,7 @@ function format_recur($arr) {
 			if ($key == $last)	$list .= $day;
 			else				$list .= $day.$d;
 		}
-		$print .= '<br>'."\n";
+		$print .= '<br />'."\n";
 		$print .= str_replace('%list%', $list, $format_recur_lang['bymonthday']);
 	}
 	
@@ -262,7 +262,7 @@ function format_recur($arr) {
 			if ($key == $last)	$list .= $daysofweek_lang[$num];
 			else				$list .= $daysofweek_lang[$num].$d;
 		}
-		$print .= '<br>'."\n";
+		$print .= '<br />'."\n";
 		$print .= str_replace('%list%', $list, $format_recur_lang['byday']);
 	}
 	

@@ -934,8 +934,8 @@ foreach ($cal_filelist as $filename) {
 						break;
 						
 					case 'SUMMARY':
-						$data = str_replace("\\n", "<br>", $data);
-						$data = str_replace("\\r", "<br>", $data);
+						$data = str_replace("\\n", "<br />", $data);
+						$data = str_replace("\\r", "<br />", $data);
 						$data = htmlentities(urlencode($data));
 						if ($valarm_set == FALSE) { 
 							$summary = $data;
@@ -945,8 +945,8 @@ foreach ($cal_filelist as $filename) {
 						break;
 						
 					case 'DESCRIPTION':
-						$data = str_replace("\\n", "<br>", $data);
-						$data = str_replace("\\r", "<br>", $data);
+						$data = str_replace("\\n", "<br />", $data);
+						$data = str_replace("\\r", "<br />", $data);
 						$data = htmlentities(urlencode($data));
 						if ($valarm_set == FALSE) { 
 							$description = $data;
@@ -1041,8 +1041,8 @@ foreach ($cal_filelist as $filename) {
 						$organizer[] = array ('name' => $field, 'email' => $data);
 						break;
 					case 'LOCATION':
-						$data = str_replace("\\n", "<br>", $data);
-						$data = str_replace("\\r", "<br>", $data);
+						$data = str_replace("\\n", "<br />", $data);
+						$data = str_replace("\\r", "<br />", $data);
 						$location = $data;
 						break;
 					case 'URL':
