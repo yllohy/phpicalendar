@@ -39,17 +39,9 @@ $prev_week = date("Ymd", $prev_week2);
 		<td align="right" width="5%"><!--[[a class="psf" href="preferences.php"]]Preferences[[/a]]--></td>
 	</tr>
 	<tr>
-		<td colspan="3"><img src="images/spacer.gif" height="24" width="1"></td>
-	</tr>
-		<tr>
-			<td class="V12" align="left" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\">Previous Week</a>"; ?></td>
-			<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$start_week - $end_week"; ?></td>
-			<td class="V12" align="right" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\">Next Week</a>"; ?></td>
-		</tr>
-			<tr>
 		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
 	</tr>
-	</table>
+</table>
 	<table width="700" border="0" cellspacing="1" cellpadding="2" class="calborder">
 <tr>
 <td>
@@ -63,6 +55,17 @@ $prev_week = date("Ymd", $prev_week2);
 							<tr>
 								<td colspan="3" bgcolor="white" nowrap>
 									<table width="100%" border="0" cellspacing="4" cellpadding="0">
+										<tr>
+											<td colspan="3">
+												<table width="100%" border="0" cellspacing="4" cellpadding="0">
+													<tr>
+														<td class="V12" align="left" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\">Previous Week</a>"; ?></td>
+														<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$start_week - $end_week"; ?></td>
+														<td class="V12" align="right" valign="top" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\">Next Week</a>"; ?></td>
+													</tr>
+												</table>
+											</td>
+										</tr>	
 										<tr>
 											<td align="left" valign="middle"><? include('./list_icals.php'); ?></td>
 											<td align="right" valign="middle" class="V12"><a class="psf" href="<? echo "$fullpath"; ?>">Subscribe</a>&nbsp;|&nbsp;<a class="psf" href="<? echo "$filename"; ?>">Download</a></td>
@@ -297,26 +300,6 @@ $prev_week = date("Ymd", $prev_week2);
 	</table>
 	</td>
 </tr>
-</table>
-	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
-	<tr>
-		<td colspan="3"><img src="images/spacer.gif" height="10" width="1"></td>
-	</tr>
-	<tr>
-		<td class="V12" align="left" valign="middle" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$prev_week\">Previous Week</a>"; ?></td>
-		<td class="H20" align="center" valign="middle" width="90%" nowrap><? echo "$today"; ?></td>
-		<td class="V12" align="right" valign="middle" width="5%" nowrap><? echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$next_week\">Next Week</a>"; ?></td>
-	</tr>
-<!--
-	[[tr]]
-		[[td colspan="3"]][[img src="images/spacer.gif" height="24" width="1"]][[/td]]
-	[[/tr]]
-	[[tr]]
-		[[td align="left" width="5%"]][[a href="day.php"]]Today[[/a]][[/td]]
-		[[td align="center" width="90%"]][[a href="day.php"]]Day[[/a]] | [[a href="week.php"]]Week[[/a]] | [[a href="month.php"]]Month[[/a]][[/td]]
-		[[td align="right" width="5%"]][[a href="preferences.php"]]Preferences[[/a]][[/td]]
-	[[/tr]]
--->
 </table>
 </center>
 </body>
