@@ -72,6 +72,8 @@ $page->replace_tags(array(
 	'style_select' 		=> $style_select			
 	));
 	
+$page->monthbottom($this->page);
+
 $page->output();
 
 

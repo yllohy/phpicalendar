@@ -42,34 +42,40 @@
 	{CALENDAR_NAV}
 	<!-- switch showbottom on -->
 	<br>
-	<table width="737" border="0" cellspacing="0" cellpadding="0" class="calborder">
+	<table width="735" border="0" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
-			<td colspan="3" align="center" class="sideback" nowrap>
-				<div style="height: 20px;">
-					<b>{L_THIS_MONTHS}</b>
-				</div>
+			<td align="center" valign="middle" bgcolor="white">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td align="right" width="40%" class="navback"><a class="psf" href="month.php?cal={CAL}&amp;getdate={PREV_MONTH}"><img src="templates/{TEMPLATE}/images/left_day.gif" alt="{L_PREV}" border="0" align="right"></a></td>
+						<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20">{L_THIS_MONTHS}</font></td>
+						<td align="left" width="40%" class="navback"><a class="psf" href="month.php?cal={CAL}&amp;getdate={NEXT_MONTH}"><img src="templates/{TEMPLATE}/images/right_day.gif" alt="{L_NEXT}" border="0" align="left"></a></td>
+					</tr>
+				</table>
 			</td>
-		</tr>
+		</tr>	
 		<tr>
 			<td>
 				<table width="100%" cellspacing="1" cellpadding="4" border="0">
 					<!-- loop showbottomevents_odd on -->
 					<tr align="left" valign="top">
 						<td width="170" nowrap>
-							<a class="psf" href="{CAL}&amp;getdate={DAYLINK}">{START_DATE}</a> <font class="V9G">({START_TIME})</font>
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{START_DATE}</a><br>
+							<span class="V9G">{START_TIME}</span>
 						</td>
 						<td>
-							{JS_OPENEVENT}<a class="psf" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;"><font class="G10B">{EVENT_TEXT}</font></a> 
+							{EVENT_TEXT}<br><span class="V9G">{DESCRIPTION}</span>
 						</td>
 					</tr>
 					<!-- loop showbottomevents_odd off -->
 					<!-- loop showbottomevents_even on -->
 					<tr align="left" valign="top">
 						<td width="170" nowrap bgcolor="#EEEEEE">
-							<a class="psf" href="{CAL}&amp;getdate={DAYLINK}">{START_DATE}</a> <font class="V9G">({START_TIME})</font>
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{START_DATE}</a><br>
+							<span class="V9G">{START_TIME}</span>
 						</td>
 						<td bgcolor="#EEEEEE">
-							{JS_OPENEVENT}<a class="psf" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;"><font class="G10B">{EVENT_TEXT}</font></a> 
+							{EVENT_TEXT}<br><span class="V9G">{DESCRIPTION}</span>
 						</td>
 					</tr>
 					<!-- loop showbottomevents_even off -->

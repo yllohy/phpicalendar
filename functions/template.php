@@ -106,7 +106,6 @@ class Page {
 			#print_r($switch);
 			
 			foreach ($switch as $tag => $data) {
-				#echo $tag.'<br>';
 				$temp = str_replace('{'.$tag.'}', $data, $temp);
 			}
 			$middle .= $temp;
@@ -125,10 +124,61 @@ class Page {
 		$return = str_replace('{MONTH_TITLE}', $month_title, $return);
 		$return = str_replace('{CAL}', $cal, $return);
 		
-		return $return;
-		
+		return $return;	
 	}
 	
+	function monthbottom() {
+		global $template, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $timeFormat_small, $dateFormat_week_list, $lang;
+		preg_match("!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!is", $this->page, $match1);
+		preg_match("!<\!-- loop showbottomevents_even on -->(.*)<\!-- loop showbottomevents_even off -->!is", $this->page, $match2);
+		
+		$loop[0] 	= trim($match1[1]);
+		$loop[1] 	= trim($match2[1]);
+		
+		$m_start = $this_year.$this_month.'01';
+		$u_start = strtotime($m_start);
+		$i=0;
+		do {
+			foreach ($master_array[$m_start] as $event_times) {
+				$switch['CAL'] 			= $cal;
+				$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
+				foreach ($event_times as $val) {
+					$event_calno 	= $val['calnumber'];
+					$event_calna 	= $val['calname'];
+					$event_url 		= $val['url'];
+					if (!isset($val['event_start'])) {
+						$switch['START_TIME'] 	= $lang['l_all_day'];
+						$switch['DESCRIPTION'] 	= urldecode($val['description']);
+						$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+					} else {	
+						$event_start = $val['start_unixtime'];
+						$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
+						$event_start = date($timeFormat, $val['start_unixtime']);
+						$event_end   = date($timeFormat, @strtotime ($event_end));
+						$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
+						$switch['EVENT_TEXT'] 	= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+						$switch['DESCRIPTION'] 	= urldecode($val['description']);
+					}
+					if ($switch['EVENT_TEXT'] != '') {
+						$switch['DAYLINK'] = $m_start;
+						$temp = $loop[$i];
+						foreach ($switch as $tag => $data) {
+							$temp = str_replace('{'.$tag.'}', $data, $temp);
+						}
+						$middle .= $temp;
+						$i = ($i == 1) ? 0 : 1;
+					}
+				}
+			}
+			$u_start 	 = strtotime("+1 day", $u_start);
+			$m_start 	 = date('Ymd', $u_start);
+			$check_month = date('m', $u_start);
+			unset ($switch);
+		} while ($this_month == $check_month);
+		
+		$this->page = ereg_replace('<!-- loop showbottomevents_odd on -->(.*)<!-- loop showbottomevents_even off -->', $middle, $this->page);
+			
+	}
 	
 	function Page($template = 'std.tpl') {
 		if (file_exists($template))
