@@ -179,6 +179,7 @@ foreach($contents as $line) {
 					$month = $regs[2];
 					$day = $regs[3];
 					$until = strtotime($year.$month.$day);
+					$until = strtotime('+12 hours', $until);
 					
 				} elseif ($key == 'INTERVAL')	{
 					$number = $val;
@@ -264,16 +265,21 @@ foreach($contents as $line) {
 					*/
 						// again, $parse_to_year is set to January 10 of the upcoming year
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
-						$start_date_time = strtotime($start_date.' +12 hours');
-						$this_month_start_time = strtotime($this_year.$this_month.'01'.' +12 hours');
+						$start_date_time = strtotime($start_date);
+						$start_date_time = strtotime('+12 hours', $start_date_time);
+						$this_month_start_time = strtotime($this_year.$this_month.'01');
+						$this_month_start_time = strtotime('+12 hours', $this_month_start_time);
 						
 						if ($save_parsed_cals == 'yes' && !$is_webcal) {
-							$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days +12 hours');
-							$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days +12 hours');
+							$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
+							$start_range_time = strtotime('+12 hours', $start_range_time);
+							$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
+							$end_range_time = strtotime('+12 hours', $end_range_time);
 						} else {
 							$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
 							$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
 						}
+
 						
 						
 						// NOTE: This part not in use for the time being. We are choosing to fill out 3 months time.
