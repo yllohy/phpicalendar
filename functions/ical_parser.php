@@ -482,7 +482,12 @@ foreach ($cal_filelist as $filename) {
 													} else {
 														foreach($byday as $day) {
 															ereg ('([-\+]{0,1})?([0-9]{1})?([A-Z]{2})', $day, $byday_arr);
-															$nth = $byday_arr[2]-1;
+															//Added for 2.0 when no modifier is set
+															if ($byday_arr[2] != '') {
+																$nth = $byday_arr[2]-1;
+															} else {
+																$nth = 0;
+															}
 															$on_day = two2threeCharDays($byday_arr[3]);
 															$on_day_num = two2threeCharDays($byday_arr[3],false);
 															if ((isset($byday_arr[1])) && ($byday_arr[1] == '-')) {
@@ -832,7 +837,6 @@ foreach ($cal_filelist as $filename) {
 							if ($dtstart_check[1] < 1970) { 
 								$data = '1971'.$dtstart_check[2].$dtstart_check[3];
 							}
-							echo $data.'<br>';
 							$allday_start = $data;
 							$start_date = $allday_start;
 							$start_unixtime = strtotime($data);
