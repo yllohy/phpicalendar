@@ -320,8 +320,8 @@ foreach ($cal_filelist as $filename) {
 					$start_date_time = strtotime($start_date);
 					$this_month_start_time = strtotime($this_year.$this_month.'01');
 					if ($save_parsed_cals == 'yes' && !$is_webcal) {
-						$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
-						$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
+						$start_range_time = strtotime($this_year.'-01-01 -2 weeks');
+						$end_range_time = strtotime($this_year.'-12-31 +2 weeks');
 					} else {
 						$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
 						$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
@@ -536,8 +536,11 @@ foreach ($cal_filelist as $filename) {
 														$bymonth = array("$m");
 													}	
 													foreach($bymonth as $month) {
-														// Something is wrong with this range
+														// FIXME: Jan 1 does not display in December
 														$year = date('Y', $next_range_time);
+														if (($year != $this_year) && ($month < 3)) {
+															$year = $this_year;
+														}
 														if ((isset($byday)) && (is_array($byday))) {
 															$checkdate_time = mktime(0,0,0,$month,1,$year);
 															foreach($byday as $day) {
