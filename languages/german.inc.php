@@ -31,6 +31,7 @@ $event_end_lang		= "Ende";
 $this_months_lang	= "Alle Einträge in diesem Monat";
 $date_lang			= "Datum";
 $summary_lang		= "Beschreibung";
+$all_day_lang		= "All day event";
 
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
 // for Switzerland

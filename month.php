@@ -285,7 +285,7 @@
 													echo "</td>\n";
 													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"540\" height=\"20\">\n";
 													if (!$new_val2["event_start"]) {
-														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
+														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</font></a> <font class=\"V9\">($all_day_lang)</font>\n";
 													} else {	
 														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
 													}
