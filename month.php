@@ -25,9 +25,31 @@
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 <head>
-		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><? echo "$calendar_name"; ?></title>
-		<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
+	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
+	<script language="JavaScript">
+  	<!--
+		function openEventInfo(event, start, end)
+		{	
+			var windowW = 500;
+			var windowH = 450;
+		
+			var url = "event.php?event="+escape(event)+
+				"&start="+escape(start)+
+				"&end="+escape(end);
+				
+			alert(url);
+		
+			options = "scrollbars=no"+",width="+windowW+",height="+windowH;
+		
+			info = window.open(url, "Popup", options);
+			
+			info.focus();
+		}
+
+	//-->
+  	</script>
 </head>
 <body bgcolor="#FFFFFF">
 <center>
@@ -128,7 +150,8 @@
 													}
 													echo "<tr height=\"15\">\n";
 													echo "<td height=\"15\" valign=\"middle\" align=\"center\" bgcolor=\"#ffffff\">\n";
-													echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
+													//echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('event', 'start', 'end')\"><i>$event_text</i></a>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}

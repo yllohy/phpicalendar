@@ -30,9 +30,9 @@ if ($getdate == (date("Ymd"))) {
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-  <title><? echo "$calendar_name"; ?></title>
-	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<title><? echo "$calendar_name"; ?></title>
+  	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
 </head>
 <body bgcolor="#FFFFFF">
 <center>
