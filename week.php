@@ -212,17 +212,17 @@ for ($i=0;$i<7;$i++) {
 																					
 			
 												if (ereg("([0-9]{1,2}):00", $key)) {
-													echo "<tr height=\"" . $gridLength . "\">\n";
+													echo "<tr>\n";
 													echo "<td rowspan=\"" . (60 / $gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
 													echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 												} elseif("$cal_time" == "$day_start") {
 													$size_tmp = 60 - (int)substr($cal_time,2,2);
-													echo "<tr height=\"" . $gridLength . "\">\n";
+													echo "<tr>\n";
 													echo "<td rowspan=\"" . ($size_tmp / $gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
 													echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 												} else {
 			
-													echo "<tr height=\"" . $gridLength . "\">\n";
+													echo "<tr">\n";
 													echo "<td width=\"1\" height=\"" . $gridLength . "\"></td>\n";
 												}
 												
