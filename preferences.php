@@ -136,6 +136,7 @@ $page = new Page(BASE.'templates/'.$template.'/preferences.tpl');
 $page->replace_tags(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	'charset'			=> $charset,
 	'template'			=> $template,
 	'default_path'		=> '',
 	'cal'				=> $cal,
@@ -145,7 +146,6 @@ $page->replace_tags(array(
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
-	'todo_js' 			=> '',
 	'event_js' 			=> '',
 	'language_select' 	=> $language_select,
 	'calendar_select' 	=> $calendar_select,

@@ -277,7 +277,6 @@ $page->replace_tags(array(
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
 	'event_js'			=> BASE.'functions/event.js',
-	'todo_js'			=> BASE.'functions/todo.js',
 	'charset'			=> $charset,
 	'default_path'		=> '',
 	'template'			=> $template,
@@ -290,7 +289,6 @@ $page->replace_tags(array(
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
-	'todo_js' 			=> '',
 	'show_search' 		=> ''		
 	));
 

@@ -44,7 +44,6 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rssdisable'	 	=> '',
 	'rss_valid' 		=> '',
-	'todo_js' 			=> '',
 	'show_search' 		=> '',
 	'l_rss_info'		=> $lang['l_rss_info'],
 	'l_rss_subhead'		=> $lang['l_rss_subhead'],

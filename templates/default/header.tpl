@@ -9,7 +9,6 @@
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="{DEFAULT_VIEW}/rss/rss.php?cal={CAL}&amp;rssview={CURRENT_VIEW}">
 	<!-- switch rss_available off -->		
 	{EVENT_JS}
-	{TODO_JS}
 </head>
 <body>
 <form name="eventPopupForm" id="eventPopupForm" method="post" action="includes/event.php" style="display: none;">
