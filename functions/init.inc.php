@@ -34,8 +34,11 @@ if (ini_get('max_execution_time') < 60) {
 	ini_set('max_execution_time', '60');
 }
 
-$calendar_path_orig = $calendar_path;
-$calendar_path = BASE.$calendar_path;
+if ($calendar_path == '') {
+	$calendar_path = 'calendars';
+	$calendar_path_orig = $calendar_path;
+	$calendar_path = BASE.$calendar_path;
+}
 
 $is_webcal = FALSE;
 if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {

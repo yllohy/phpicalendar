@@ -6,7 +6,6 @@
 // Follow instructions to the right for detailed information
 
 $style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, grey, tan
-$calendar_path 			= './calendars';	// Path to directory with calendars
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal 			= 'School';			// Exact filename of calendar without .ics
@@ -22,6 +21,8 @@ $week_events_lines 		= '1';				// Number of lines to wrap each event title in th
 $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
 $default_path			= 'http://www.example.com/phpicalendar'; // The HTTP URL to the PHP iCalendar directory
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
+$calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
+
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
