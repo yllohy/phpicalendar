@@ -116,7 +116,7 @@ class Page {
 	}	
 	
 	function draw_week($template_p) {
-		global $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small, $day_start;
+		global $unique_colors, $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small, $day_start;
 		
 		// Figure out colspans
 		$dayborder 	= 0;
@@ -159,8 +159,7 @@ class Page {
 					$event_calno  	= $allday['calnumber'];
 					$event_calna  	= $allday['calname'];
 					$event_url	   	= $allday['url'];
-					if ($event_calno < 1) $event_calno=1;
-					if ($event_calno > 7) $event_calno=7;
+					if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
 					$event 			= openevent($event_calna, '', '', $allday, 1, 11, '', '', 'psf', $event_url);
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
@@ -317,8 +316,7 @@ class Page {
 								$event_calna  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['calname'];
 								$event_url  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['url'];
 								$event_status	= strtolower($this_time_arr[($event_length[$thisday][$i]['key'])]['status']);
-								if ($event_calno < 1) $event_calno = 1;
-								if ($event_calno > 7) $event_calno = 7;
+								if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
 								if ($event_status != '') {
 						  			$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
@@ -372,7 +370,7 @@ class Page {
 	}
 	
 	function draw_day($template_p) {
-		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $day_start;
+		global $template, $getdate, $cal, $master_array, $unique_colors, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $day_start;
 		
 		// Replaces the allday events
 		$replace = '';
@@ -383,8 +381,7 @@ class Page {
 				$event_calno  	= $allday['calnumber'];
 				$event_calna  	= $allday['calname'];
 				$event_url	   	= $allday['url'];
-				if ($event_calno < 1) $event_calno=1;
-				if ($event_calno > 7) $event_calno=7;
+				if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
 				$event 			= openevent($event_calna, '', '', $allday, 0, '', '', '', '', $event_url);
 				$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
@@ -531,8 +528,7 @@ class Page {
 						  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];
 						  $event_recur  = $this_time_arr[($event_length[$i]['key'])]['recur'];
 						  $event_status = strtolower($this_time_arr[($event_length[$i]['key'])]['status']);
-						  if ($event_calno < 1) $event_calno = 1;
-						  if ($event_calno > 7) $event_calno = 7;
+						  if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
 						  if ($event_status != '') {
 						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  } elseif (is_array($event_recur)) {
@@ -706,7 +702,7 @@ class Page {
 	}
 	
 	function draw_month($template_p, $offset = '+0', $type) {
-		global $template, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
+		global $template, $getdate, $master_array, $this_year, $this_month, $unique_colors, $dateFormat_month, $week_start_day, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
 		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template_p, $match1);
 		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template_p, $match2);
 		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template_p, $match3);
@@ -774,12 +770,13 @@ class Page {
 				if ($type != 'small') {
 					foreach ($master_array[$daylink] as $event_times) {
 						foreach ($event_times as $val) {
-							$calno 			= $val['calnumber'];
+							$event_calno 	= $val['calnumber'];
+							if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
 							$event_calna 	= $val['calname'];
 							$event_url 		= $val['url'];
 							if (!isset($val['event_start'])) {
 								if ($type == 'large') {
-									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0" />';
+									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
 									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
 									$switch['ALLDAY'] .= '</div>';
 								} else {
@@ -792,7 +789,7 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								$event_end   = date($timeFormat, @strtotime ($event_end));
 								if ($type == 'large') {
-									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$calno.'.gif" alt="" width="9" height="9" border="0" />';
+									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
 									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url).'<br />';
 									$switch['EVENT'] .= '</div>';
 								} else {

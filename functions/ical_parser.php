@@ -1153,11 +1153,11 @@ if ($parse_file) {
 	// write the new master array to the file
 	if (isset($master_array) && is_array($master_array) && $save_parsed_cals == 'yes') {
 		$write_me = serialize($master_array);
-		$fd = fopen($parsedcal, 'w');
-		fwrite($fd, $write_me);
-		fclose($fd);
-		touch($parsedcal, $realcal_mtime);
-		//echo 'writing file';
+		$fd = @fopen($parsedcal, 'w');
+		if ($fd == FALSE) exit(error($lang['l_error_cache'], $filename));
+		@fwrite($fd, $write_me);
+		@fclose($fd);
+		@touch($parsedcal, $realcal_mtime);
 	}
 }
 

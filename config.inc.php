@@ -57,6 +57,13 @@ $auth_internal_password	= 'default';		// Only used if $auth_method='internal'. T
 $ftp_server				= 'localhost';		// Only used if $auth_method='ftp'. The ftp server name. 'localhost' will work for most servers.
 $ftp_calendar_path		= '';				// Only used if $auth_method='ftp'. The full path to the calendar directory on the ftp server. If = '', will attempt to deduce the path based on $calendar_path, but may not be accurate depending on ftp server config.
 
+// Calendar colors
+//
+// You can increase the number of unique colors by adding additional images (monthdot_n.gif) 
+// and in the css file (default.css) classes .alldaybg_n, .eventbg_n and .eventbg2_n
+// Colors will rotate to double the number listed below. (That's 14 colors, 2 calendars per color).
+$unique_colors			= '7';				
+
 $blacklisted_cals[] = '';					// Fill in between the quotes the name of the calendars 
 $blacklisted_cals[] = '';					// you wish to 'blacklist' or that you don't want to show up in your calendar
 $blacklisted_cals[] = '';					// list. This should be the exact calendar filename without .ics

@@ -11,9 +11,12 @@ function list_jumps() {
 }
 
 function list_calcolors() {
-	global $template, $master_array;
+	global $template, $master_array, $unique_colors;
+	$i = 1;
 	foreach ($master_array['-3'] as $key => $val) {
-		$return .= '<img src="templates/'.$template.'/images/monthdot_'.$key.'.gif" alt="" /> '.$val.'<br />';
+		if ($i > $unique_colors) $i = 1;
+		$return .= '<img src="templates/'.$template.'/images/monthdot_'.$i.'.gif" alt="" /> '.$val.'<br />';
+		$i++;
 	}
 	return $return;
 }

@@ -200,5 +200,6 @@ $lang['l_error_remotecal'] 		= 'This server blocks remote calendars which have n
 $lang['l_error_restrictedcal'] 	= 'You have tried to access a calendar that is restricted on this server.';
 $lang['l_error_invalidcal'] 	= 'Invalid calendar file. Please try a different calendar.';
 $lang['l_error_cantopen'] 		= 'Unable to open calendar.';
+$lang['l_error_cache']			= 'Unable to write to cache directory. Please check your config.';
 
 ?>
