@@ -96,7 +96,7 @@ if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 							
 							if ($action == 'setcookie') { ?>
 							<tr>
-								<td colspan="2" align="center"><font class="G10BOLD">Your preferences have been set.</font></td>
+								<td colspan="2" align="center"><font class="G10BOLD"><?php echo "$prefs_set_lang"; ?></font></td>
 							</tr>
 							<?php } ?>
 							

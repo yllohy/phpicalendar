@@ -1,7 +1,7 @@
 <?php
 
 // English language include
-// For version 0.9 PHP iCalendar
+// For version 0.9.1 PHP iCalendar
 //
 // Translation by Chad Little (chad@chadsdomain.com)
 //
@@ -59,9 +59,6 @@ $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
 $rss_language			= 'en-us';
-
-// new in 0.9 ----------------------
-
 $search_took_lang		= 'Search took %s seconds';
 $recurring_event_lang	= 'Recurring event';
 $exception_lang			= 'Exception';
@@ -88,6 +85,10 @@ $status_lang			= 'Status:';
 $todo_lang				= 'To do items';
 $unfinished_lang		= 'Unfinished';
 
+// ----- New for 0.9.1
+
+$set_prefs_lang = 'Your preferences have been set.';
+
 // - navigation
 $back_lang = 'Back';
 $next_lang = 'Next';
@@ -96,6 +97,9 @@ $day_view_lang = 'Day View';
 $week_view_lang = 'Week View';
 $month_view_lang = 'Month View';
 $year_view_lang = 'Year View';
+
+// ---------------------------------
+
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
@@ -115,9 +119,6 @@ $format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
 $format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
 $format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
 $format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
-
-// ---------------------------------
-
 $daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 $daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
 $daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
