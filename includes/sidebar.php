@@ -6,7 +6,7 @@
 		$cal_displayname2 = $cal_displayname2 . "...";
 	}
 	
-	$search_box = '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search"></form>';
+	$search_box = '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" name="submit" value="Search"></form>';
 	
 	?>
 	
@@ -306,8 +306,8 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 									}
 								?>
 								</tr>
-								<tr height="3">
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
+								<tr>
+									<td colspan="7" height="3"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("-1 month", $fake_getdate_time);
@@ -386,8 +386,8 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 									}
 								?>
 								</tr>
-								<tr height="3">
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
+								<tr>
+									<td colspan="7" height="3"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 								</tr>
 								<?php
 									$minical_time = $fake_getdate_time;
@@ -466,8 +466,8 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 									}
 								?>
 								</tr>
-								<tr height="3">
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
+								<tr>
+									<td colspan="7" height="3"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("+1 month", $fake_getdate_time);
