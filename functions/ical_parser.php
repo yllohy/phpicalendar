@@ -126,6 +126,7 @@ if ($parse_file) {
 				if (!isset($summary)) $summary = $master_array[$old_start_date][$old_start_time][$uid]['event_text'];
 				if (!isset($length)) $length = $master_array[$old_start_date][$old_start_time][$uid]['event_length'];
 				if (!isset($description)) $description = $master_array[$old_start_date][$old_start_time][$uid]['description'];
+				removeOverlap($start_date_tmp, $old_start_time, $uid);
 				unset($master_array[$start_date_tmp][$old_start_time]);
 				$write_processed = false;
 			} else {
@@ -192,7 +193,7 @@ if ($parse_file) {
 			
 			// Handling regular events
 			if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
-				$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
+				$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time, $uid);
 				$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class);
 				if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
 			}
@@ -456,7 +457,7 @@ if ($parse_file) {
 													$start_time2 = strtotime('+1 day', $start_time2);
 												}
 											} else {
-												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time);
+												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
 												$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status, 'class' => $class);
 											}
 										}
@@ -825,6 +826,7 @@ if ($parse_file) {
 				#echo "Before Delete::  $delete  $key  $val<br>";
 				#print_r($master_array["$delete"]);
 				if (is_array($master_array[($delete)][($key)][($val)])) {
+					removeOverlap($delete, $key, $val);
 					unset($master_array["$delete"]["$key"]["$val"]);
 					// Remove date from array if no events
 					if (sizeof($master_array["$delete"]["$key"] = 1)) {
@@ -842,7 +844,7 @@ if ($parse_file) {
 						foreach ($overlap_val as $uid => $val) {
 							$start_time = $val['event_start'];
 							$end_time = $val['event_end'];
-							#$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time);
+							#$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time, $uid);
 							#$master_array[($recur_data_date)][($start_time)][($uid)]['event_overlap'] = 0;
 							#echo "$recur_data_date - $uid - $start_time - $end_time - $nbrOfOverlaps<br>";
 							#print_r($val);
