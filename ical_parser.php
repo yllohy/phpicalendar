@@ -39,10 +39,16 @@ foreach($contents as $line) {
 		$the_duration = "";
 		$beginning = "";
 		$rrule_array = "";
+		$parse_to_year = "";
+		$start_of_vevent = "";
+		$end_of_vevent = "";
+		$interval = "";
+		$number = "";
 	} elseif (strstr($line, "END:VEVENT")) {
 		
-		// Clean out \n's
+		// Clean out \n's and other slashes
 		$summary = str_replace("\\n", "<br>", $summary);
+		$summary = stripslashes($summary);
 		
 		
 		//echo "<b>Start</b> $start_time <b>End</B> $end_time <b>Summary</b> $summary<br>\n";
@@ -71,7 +77,6 @@ foreach($contents as $line) {
 			do {
 				$start_date = date("Ymd", $start);
 				$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
-				$i++;
 				$start = ($start + (24*3600));
 			} while ($start != $end);
 		}
@@ -163,40 +168,35 @@ foreach($contents as $line) {
 						
 						// Since we hit the end of the RRULE array, lets do something.
 						// Below handles yearly all day events only.
-						// $this_year is the year we are parsing.
-						// $recur_year is the date the recurring event starts.
-						// $end_date is the date the recurring event stops.
+						// $parse_to_year is the year we are parsing, January 10th, next year.
+						// $start_of_vevent is the date the recurring event starts.
+						// $end_of_vevent is the date the recurring event stops.
 						 
-						$recur_year = date("Y", strtotime("$allday_start"));
-						$date = strtotime("$allday_start");
-						$end_date = strtotime("$allday_end");
-						if ($this_year > $recur_year) {
-							do {
-								$date = DateAdd ($interval,  $number, $date);
-								$end_date = DateAdd ($interval,  $number, $end_date);
-								$recur_year = date ("Y", $date);
-							} while ($this_year > $recur_year);
-							
-							$allday_start = date ("Ymd", $date);
-							$allday_end = date ("Ymd", $end_date);
-							//echo "$allday_start, $allday_end ---- ";
-						}
-						//echo "$interval - $number - $date - $recur_year - $this_year - ";
-						
-						// This steps through each day of a multiple all-day event
+						$parse_to_year = $this_year + 1;
+						$parse_to_year  = mktime(0,0,0,1,10,$parse_to_year);						
 						$start_of_vevent = strtotime("$allday_start");
 						$end_of_vevent = strtotime("$allday_end");
-						do {
-							$start_date = date("Ymd", $start_of_vevent);
-							$check_year = date("Y", $start_of_vevent);
-							// Only write the current year
-							if ($this_year == $check_year) {
-								//echo "date_written<br>";
-								$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
-							}
-							$start_of_vevent = ($start_of_vevent + (24*3600));
-						} while ($start_of_vevent != $end_of_vevent);
-					
+						//echo "End = $start_of_vevent, $parse_to_year - $summary, $interval, $number<br>";
+
+						if ($start_of_vevent < $parse_to_year) {
+							do {
+									
+								// This steps through each day of a multiple all-day event and adds to master array
+								// Every all day event should pass through here at least once.
+								$start = $start_of_vevent;
+								$end = $end_of_vevent;
+								do {
+									$start_date = date("Ymd", $start);
+									$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
+									$start = ($start + (24*3600));
+								} while ($start < $end);
+								
+								$start_of_vevent = DateAdd ($interval,  $number, $start_of_vevent);
+								$end_of_vevent = DateAdd ($interval,  $number, $end_of_vevent);
+													
+							} while ($start_of_vevent < $parse_to_year); 
+						}
+						//echo "$interval - $number - $date - $recur_year - $this_year";
 					
 					// Let's take care of recurring events that are not all day events
 					// Nothing is here yet, Jared seems to way to play, so I'll let him do these... muahahahaha.
