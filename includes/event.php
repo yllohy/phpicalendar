@@ -70,7 +70,11 @@ $page->replace_tags(array(
 	'status'	 		=> $status,
 	'location' 			=> $location,
 	'cal_title_full'	=> $cal_title_full,
-	'template'			=> $template
+	'template'			=> $template,
+	'l_organizer'		=> $lang['l_organizer'],
+	'l_attendee'		=> $lang['l_attendee'],
+	'l_status'			=> $lang['l_status'],
+	'l_location'		=> $lang['l_location']
 		
 	));
 
