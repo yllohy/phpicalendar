@@ -43,7 +43,11 @@ $search_box .=
 $search_started = getmicrotime();
 if ($search_valid) {
 	$format_search_arr = format_search($query);
-	$formatted_search = $format_search_arr[0];
+	if (!$format_search_arr[0]) {
+		$formatted_search = '<b>No query given</b>';
+	} else {
+		$formatted_search = $format_search_arr[0];
+	}
 	if (isset($master_array) && is_array($master_array)) {
 		foreach($master_array as $date_key_tmp => $date_tmp) {
 			if (is_array($date_tmp)) {
@@ -291,6 +295,8 @@ function format_search($search_str) {
 
 	$search_str = strtolower($search_str);
 	
+	if ($search_str == ' ') return array(false,$and_arr,$or_arr,$not_arr);
+	
 	// clean up search string
 	$search_str = trim($search_str);
 	$search_str = str_replace(' and ', ' ', $search_str);
@@ -366,6 +372,8 @@ function search_boolean($needle_arr, $haystack) {
 	$and_arr = $needle_arr[1];
 	$or_arr = $needle_arr[2];
 	$not_arr = $needle_arr[3];
+	
+	if (!$needle_arr[0]) return false;
 	
 	// compare lowercase versions of the strings
 	$haystack = strtolower($haystack);
