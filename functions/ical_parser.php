@@ -128,7 +128,11 @@ if ($parse_file) {
 			}
 			
 			// Handling of the recurring events, RRULE
-			if ((is_array($rrule_array)) && ($allday_written != TRUE)) {
+// jared-2002.10.17, Commented this line out, replacing it with another. Not sure why the $allday_written var was
+// implemented. This var in this "if" broke all recurring all-day event support (ie, only the first occurrence would show up)
+// let's chat about why and figure out a better solution
+//			if ((is_array($rrule_array)) && ($allday_written != TRUE)) {
+			if (is_array($rrule_array)) {
 				if (isset($allday_start) && $allday_start != '') {
 					$rrule_array['START_DAY'] = $allday_start;
 					$rrule_array['END_DAY'] = $allday_end;
@@ -145,21 +149,15 @@ if ($parse_file) {
 				//print_r($rrule_array);
 				foreach ($rrule_array as $key => $val) {
 					if ($key == 'FREQ') {
-						if ($val == 'YEARLY') {
-							$freq_type = 'year';
-						} elseif ($val == 'MONTHLY') {
-							$freq_type = 'month';
-						} elseif ($val == 'WEEKLY') {
-							$freq_type = 'week';
-						} elseif ($val == 'DAILY') {
-							$freq_type = 'day';
-						} elseif ($val == 'HOURLY') {
-							$freq_type = 'hour';
-						} elseif ($val == 'MINUTELY') {
-							$freq_type = 'minute';
-						} elseif ($val == 'SECONDLY') {
-							$freq_type = 'second';
-						}		
+						switch ($val) {
+							case 'YEARLY':		$freq_type = 'year';	break;
+							case 'MONTHLY':		$freq_type = 'month';	break;
+							case 'WEEKLY':		$freq_type = 'week';	break;
+							case 'DAILY':		$freq_type = 'day';		break;
+							case 'HOURLY':		$freq_type = 'hour';	break;
+							case 'MINUTELY':	$freq_type = 'minute';	break;
+							case 'SECONDLY':	$freq_type = 'second';	break;
+						}
 					} elseif ($key == 'COUNT') 		{
 						$count = $val;
 					
@@ -343,10 +341,9 @@ if ($parse_file) {
 								// use the same code to write the data instead of always changing it 5 times						
 								if (isset($recur_data) && is_array($recur_data)) {
 									foreach($recur_data as $recur_data_time) {
-										$recur_data_date = date('Ymd', $recur_data_time);	
+										$recur_data_date = date('Ymd', $recur_data_time);
 										if (($recur_data_time > $start_date_time) && ($recur_data_time <= $end_date_time) && ($count_to != $count) && !in_array($recur_data_date, $except_dates)) {
 											if (isset($allday_start) && $allday_start != '') {
-												
 												$start_time2 = $recur_data_time;
 												$end_time2 = strtotime('+'.$diff_allday_days.' days', $recur_data_time);
 												while ($start_time2 < $end_time2) {
