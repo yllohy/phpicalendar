@@ -107,6 +107,8 @@ foreach ($cal_filelist as $filename) {
 				$valarm_set 	= FALSE;
 				$attendee		= array();
 				$organizer		= array();
+				$url			= '';
+				$display_end_tmp = '';
 				
 				unset(
 					$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
@@ -866,6 +868,11 @@ foreach ($cal_filelist as $filename) {
 						$data = ereg_replace('Z', '', $data);
 						$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
 						if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
+							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtend_check);
+							if ($dtstart_check[1] < 1969) { 
+								$dtstart_check[1] = '1990';
+								$data = $dtend_check[1].$dtend_check[2].$dtend_check[3];
+							}
 							$allday_end = $data;
 						} else {
 							if (preg_match("/^DTEND;TZID=/i", $field)) {

@@ -6,7 +6,7 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-// error_reporting (E_ERROR | E_WARNING | E_PARSE);
+error_reporting (E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 
 // Older versions of PHP do not define $_SERVER. Define it here instead.
 if (!isset($_SERVER) && isset($HTTP_SERVER_VARS)) {
@@ -21,6 +21,7 @@ if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'config.inc.php');
 include_once(BASE.'functions/error.php');
 include_once(BASE.'functions/calendar_functions.php');
+$filename = '';
 if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
