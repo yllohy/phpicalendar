@@ -1,7 +1,7 @@
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={YESTERDAYS_DATE}"><img src="templates/{TEMPLATE}/images/left_arrows.gif" alt="{PREV_LANG}" width="16" height="20" border="0" align="left"></a></td>
-		<td align="center" width="112" class="sideback"><font class="G10BOLD">{THISDAY2}</font></td>
+		<td align="center" width="112" class="sideback"><font class="G10BOLD">{DISPLAY_DATE}</font></td>
 		<td align="right" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={TOMORROWS_DATE}"><img src="templates/{TEMPLATE}/images/right_arrows.gif" alt="{NEXT_LANG}" width="16" height="20" border="0" align="right"></a></td>
 	</tr>
 	<tr>
@@ -18,7 +18,7 @@
 					<a class="psf" href="preferences.php?cal={CAL}&amp;getdate={GETDATE}">{L_PREFERENCES}</a><br>
 					<!-- switch allow_preferences off -->
 					<!-- switch display_download on -->
-					<a class="psf" href="{SUBSCRIBE_PATH}">{SUBSCRIBE_LANG}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{DOWNLOAD_LANG}</a><br>
+					<a class="psf" href="{SUBSCRIBE_PATH}">{L_SUBSCRIBE}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{L_DOWNLOAD}</a><br>
 					<!-- switch display_download off -->
 					<!-- switch is_logged_in on -->
 					<a class="psf" href="{SCRIPT_NAME}?{QUERYS}">Logout {USERNAME}</a>
@@ -28,7 +28,15 @@
 		</td>
 	</tr>
 </table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+	</tr>
+</table>
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr height="20">
 		<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{L_JUMP}</div></td>
@@ -36,12 +44,11 @@
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
 			<div style="padding: 5px;">
-				<form style="margin-bottom:0;" action="day.php" method="GET">
-					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value">{LIST_ICALS}</select><br>
-					{LIST_YEARS}<br>
-					{LIST_MONTHS}<br>
-					{LIST_WEEKS}<br>
-					<br>
+				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="GET">
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br>
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br>
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br>
+					<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br>
 				</form>
 				<!-- switch show_search on -->
 				{SEARCH_BOX}
@@ -57,13 +64,20 @@
 		</td>
 	</tr>
 </table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+	</tr>
+</table>
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 
 <!-- switch tomorrows_events on -->
 
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr height="20">
-		<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{TOMORROWS_LANG}</div></td>
+		<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{L_TOMORROWS}</div></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
@@ -78,6 +92,13 @@
 		</td>
 	</tr>
 </table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+	</tr>
+</table>
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 
 <!-- switch tomorrows_events off -->
@@ -86,7 +107,7 @@
 
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr height="20">
-		<td align="center" width="98%" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{TODO_LANG}</div></td>
+		<td align="center" width="98%" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{L_TODO}</div></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
@@ -118,14 +139,43 @@
 		</td>
 	</tr>			
 </table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+	</tr>
+</table>
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+
 
 <!-- switch todo off -->
 
 {MONTH_SMALL|-1}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+	</tr>
+</table>
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 
 {MONTH_SMALL|+0}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+	</tr>
+</table>
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 
 {MONTH_SMALL|+1}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+	</tr>
+</table>

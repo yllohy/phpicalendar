@@ -12,8 +12,8 @@ $this_year 				= $day_array2[1];
 
 $unix_time 				= strtotime($getdate);
 $today_today 			= date('Ymd', strtotime("now + $second_offset seconds")); 
-$tomorrows_date 		= date( "Ymd", strtotime("+1 day",  $unix_time));
-$yesterdays_date 		= date( "Ymd", strtotime("-1 day",  $unix_time));
+$tomorrows_date 		= date('Ymd', strtotime("+1 day",  $unix_time));
+$yesterdays_date 		= date('Ymd', strtotime("-1 day",  $unix_time));
 
 // find out next month
 $next_month_month 		= ($this_month+1 == '13') ? '1' : ($this_month+1);

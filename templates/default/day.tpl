@@ -34,21 +34,14 @@
 				</tr>
 				<tr>
 					<td>
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
-							<!-- loop allday on -->
-							<tr>
-								<td height="24">
-									<table width="100%" border="0" cellspacing="1" cellpadding="4">
-										<tr>
-											<td valign="top" align="center" class="eventbg_{EVENT_CALNO}">
-												<font color="#ffffff"><i>{EVENT}</i></font>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<!-- loop allday off -->
-						</table>
+						<!-- loop allday on -->
+						<div style="height: 18px; padding-top: 4px; border: 1px solid #fff;" class="eventbg_1">
+							<center><font class="V10W">{ALLDAY}</font></center>
+						</div>
+						<div style="height: 18px; padding-top: 4px; border: 1px solid #fff;" class="eventbg_1">
+							<center><font class="V10W">{ALLDAY}</font></center>
+						</div>
+						<!-- loop allday off -->
 					</td>
 				</tr>
 				<!-- switch showdays on -->
@@ -62,6 +55,24 @@
 								<td width="74" valign="top" align="center" class="dateback">
 									<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={THISDAY}">{DAY}</a></font>
 								</td>
+								<td width="74" valign="top" align="center" class="dateback">
+									<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={THISDAY}">{DAY}</a></font>
+								</td>
+								<td width="74" valign="top" align="center" class="dateback">
+									<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={THISDAY}">{DAY}</a></font>
+								</td>
+								<td width="74" valign="top" align="center" class="dateback">
+									<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={THISDAY}">{DAY}</a></font>
+								</td>
+								<td width="74" valign="top" align="center" class="dateback">
+									<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={THISDAY}">{DAY}</a></font>
+								</td>
+								<td width="74" valign="top" align="center" class="dateback">
+									<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={THISDAY}">{DAY}</a></font>
+								</td>
+								<td width="74" valign="top" align="center" class="dateback">
+									<font class="V9"><a class="psf" href="day.php?cal={CAL}&amp;getdate={THISDAY}">{DAY}</a></font>
+								</td>
 							</tr>	
 						</table>
 					</td>
@@ -70,56 +81,55 @@
       			<tr>
 					<td align="center" valign="top" colspan="3">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=" "></td>
-								<td width="1"></td>
-								<!-- loop spacer on -->
-								<td><img src="images/spacer.gif" width="{NBRGRIDCOLS_SPACE}" height="1" alt=" "></td>
-								<!-- loop spacer off -->
-							</tr>
 							<!-- loop row on -->
 							<tr>
-								<td rowspan="{ROWSPAN}" align="center" valign="top" width="60" class="timeborder">{TIME}</td>
-								<td width="1" height="{GRIDLENGTH}"></td>
-								<!-- switch event on -->
-								<td rowspan="6" colspan="1" align="left" valign="top" class="eventbg2_1">
-									<table width="100%" border="0" cellspacing="0" cellpadding="2">
-										<tr>
-											<td class="eventborder"><font class="eventfont"><b>{EVENT_START}</b> - {EVENT_END}</font></td>
-										</tr>
-										<tr>
-											<td colspan="2">
-												<table width="100%" border="0" cellpadding="1" cellspacing="0">
-													<tr>
-														<td class="eventbg_{CALNO}">{SUMMARY}</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table>
-								</td>
-								<!-- switch event off -->
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">11:00 AM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
 							</tr>
 							<tr>
-								<td width="1" height="{GRIDLENGTH}"></td>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
 							</tr>
 							<tr>
-								<td width="1" height="{GRIDLENGTH}"></td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
 							</tr>
 							<tr>
-								<td width="1" height="{GRIDLENGTH}"></td>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
 							</tr>
-							<tr>
 							<!-- loop row off -->
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">12:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
         	</table>
+        	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+					<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+					<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+				</tr>
+			</table>
     	</td>
-	</tr>
-</table>
-</td>
-<td width="10"><img src="images/spacer.gif" width="10" height="1" alt=" "></td>
+		<td width="10"><img src="images/spacer.gif" width="10" height="1" alt=" "></td>
 		<td width="170" valign="top">
 			{SIDEBAR}
 		</td>
