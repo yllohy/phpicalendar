@@ -69,6 +69,10 @@ if ($parse_file) {
 	// auxiliary array for determining overlaps of events
 	$overlap_array = array ();
 	
+	// using $uid to set specific points in array, if $uid is not in the 
+	// .ics file, we need to have some unique place in the array
+	$uid_counter = 0;
+	
 // read file in line by line
 // XXX end line is skipped because of the 1-line readahead
 	while (!feof($ifile)) {
@@ -87,7 +91,8 @@ if ($parse_file) {
 				$start_time, $end_time, $start_date, $end_date, $summary, 
 				$allday_start, $allday_end, $start, $end, $the_duration, 
 				$beginning, $rrule_array, $start_of_vevent, $description, 
-				$valarm_description, $start_unixtime, $end_unixtime
+				$valarm_description, $start_unixtime, $end_unixtime,
+				$recurrence_id, $uid
 			);
 				
 			$except_dates = array();
@@ -103,6 +108,30 @@ if ($parse_file) {
 			);
 			
 		} elseif (stristr($line, 'END:VEVENT')) {
+			// make sure we have some value for $uid
+			if (!isset($uid)) {
+				$uid = $uid_counter;
+				$uid_counter++;
+				$uid_valid = false;
+			} else {
+				$uid_valid = true;
+			}
+			
+			if ($uid_valid && isset($processed[$uid]) && isset($recurrence_id['date'])) {
+				$old_start_date = $processed[$uid][0];
+				$old_start_time = $processed[$uid][1];
+				$start_date_tmp = $recurrence_id['date'];
+				if (!isset($start_date)) $start_date = $old_start_date;
+				if (!isset($start_time)) $start_time = $master_array[$old_start_date][$old_start_time][$uid]['event_start'];
+				if (!isset($end_time)) $end_time = $master_array[$old_start_date][$old_start_time][$uid]['event_end'];
+				if (!isset($summary)) $summary = $master_array[$old_start_date][$old_start_time][$uid]['event_text'];
+				if (!isset($length)) $length = $master_array[$old_start_date][$old_start_time][$uid]['event_length'];
+				if (!isset($description)) $description = $master_array[$old_start_date][$old_start_time][$uid]['description'];
+				unset($master_array[$start_date_tmp][$old_start_time]);
+				$write_processed = false;
+			} else {
+				$write_processed = true;
+			}
 			
 			$mArray_begin = mktime (0,0,0,1,1,$this_year);
 			$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
@@ -128,6 +157,11 @@ if ($parse_file) {
 				$minute = $time3[2];
 			}
 			
+			// handle single changes in recurring events
+			if ($uid_valid && $write_processed) {
+				$processed[$uid] = array($start_date,($hour.$minute));
+			}
+						
 			// Handling of the all day events
 			if ((isset($allday_start) && $allday_start != '')) {
 				$start = strtotime($allday_start);
@@ -139,7 +173,7 @@ if ($parse_file) {
 				if (($end > $mArray_begin) && ($end < $mArray_end)) {
 					while ($start != $end) {
 						$start_date = date('Ymd', $start);
-						$master_array[($start_date)][('-1')][]= array ('event_text' => $summary, 'description' => $description);
+						$master_array[($start_date)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description);
 						$start = strtotime('+1 day', $start);
 					}
 				}
@@ -148,7 +182,8 @@ if ($parse_file) {
 			// Handling regular events
 			if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
 				$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
-				$master_array[($start_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+				$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+
 			}
 			
 			// Handling of the recurring events, RRULE
@@ -386,7 +421,7 @@ if ($parse_file) {
 												}
 											} else {
 												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time);
-												$master_array[($recur_data_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+												$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 											}
 										}
 									}
@@ -507,7 +542,48 @@ if ($parse_file) {
 				} else {
 					$valarm_description = $data;
 				}
-			
+			} elseif (preg_match("/^RECURRENCE-ID/i", $field)) {
+
+				$parts = split(';', $field);
+				foreach($parts as $part) {
+					$eachval = split('=',$part);
+					if ($eachval[0] == 'TZID') {
+						$recurrence_id['tzid'] = $eachval[1];
+					} elseif ($eachval[0] == 'RANGE') {
+						$recurrence_id['range'] = $eachval[1];
+					} elseif ($eachval[0] == 'VALUE') {
+						$recurrence_id['value'] = $eachval[1];
+					} else {
+						$recurrence_id[] = $eachval[1];
+					}
+				}
+				unset($parts, $part, $eachval);
+				
+				$data = ereg_replace('T', '', $data);
+				$data = ereg_replace('Z', '', $data);
+				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+				$recurrence_id['date'] = $regs[1] . $regs[2] . $regs[3];
+				$recurrence_id['time'] = $regs[4] . $regs[5];
+
+				$recur_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+
+				$dlst = date('I', $recur_unixtime);
+				$server_offset_tmp = chooseOffset($recur_unixtime);
+				if (isset($recurrence_id['tzid'])) {
+					$tz_tmp = $recurrence_id['tzid'];
+					$offset_tmp = $tz_array[$tz_tmp][$dlst];
+				} elseif (isset($calendar_tz)) {
+					$offset_tmp = $tz_array[$calendar_tz][$dlst];
+				} else {
+					$offset_tmp = $server_offset_tmp;
+				}
+				$recur_unixtime = calcTime($offset_tmp, $server_offset_tmp, $recur_unixtime);
+				$recurrence_id['date'] = date('Ymd', $recur_unixtime);
+				$recurrence_id['time'] = date('Hi', $recur_unixtime);
+				unset($server_offset_tmp);
+				
+			} elseif (preg_match("/^UID/i", $field)) {
+				$uid = $data;
 			} elseif (preg_match("/^X-WR-CALNAME/i", $field)) {
 				$calendar_name = $data;
 				$master_array['calendar_name'] = $calendar_name;
@@ -516,7 +592,7 @@ if ($parse_file) {
 				$master_array['calendar_tz'] = $calendar_tz;
 			} elseif (preg_match("/^DURATION/i", $field)) {
 				
-				if (($first_duration = TRUE) && (!stristr($field, '=DURATION'))) {
+				if (($first_duration == TRUE) && (!stristr($field, '=DURATION'))) {
 					ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
 					if ($duration[2] = 'W') {
 						$weeks = $duration[1];
