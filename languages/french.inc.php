@@ -26,24 +26,24 @@ $subscribe_lang		= "Souscrire";
 $download_lang		= "T&eacute;l&eacute;charger";
 $powered_by_lang 	= "Produit avec";
 $version_lang		= "0.5";
-$event_lang			= "Event";
-$event_start_lang	= "Start Time";
-$event_end_lang		= "End Time";
-$this_months_lang	= "This Month's Events";
+$event_lang			= "&Eacute;v&eacute;nement";
+$event_start_lang	= "D&eacute;but";
+$event_end_lang		= "Fin";
+$this_months_lang	= "&Eacute;v&eacute;nements de ce mois";
 $date_lang			= "Date";
-$summary_lang		= "Summary";
+$summary_lang		= "R&eacute;sum&eacute;";
 
-// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-setlocale (LC_TIME, 'fr_CA');
+// Set Location for date formatting, check out: http://www.php.net/manual/fr/function.setlocale.php
+setlocale (LC_TIME,"french");
 
-// For time formatting, check out: http://www.php.net/manual/en/function.date.php
-$timeFormat = "g:i A";
+// For time formatting, check out: http://www.php.net/manual/fr/function.date.php
+$timeFormat = "H:i";
 
-// For date formatting, check out: http://www.php.net/manual/en/function.strftime.php
-$dateFormat_day = "%A, %B %e";
-$dateFormat_week = "%B %e";
-$dateFormat_week_list = "%a, %b %e";
+// For date formatting, check out: http://www.php.net/manual/fr/function.strftime.php
+$dateFormat_day = "%A %e %B";
+$dateFormat_week = "%e %B";
+$dateFormat_week_list = "%a %e %b";
 $dateFormat_month = "%B %Y";
-$dateFormat_month_list = "%A, %B %e";
+$dateFormat_month_list = "%A %e %B";
 
 ?>
