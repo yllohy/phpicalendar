@@ -40,11 +40,11 @@ them. If you have difficulty with your configuration, you can ask the
 developers and other PHP iCalendar users at the PHP iCalendar forums: 
 http://phpicalendar.net/forums/
 
-Supported Calendar Applications:
+Creating calendars and events:
 --------------------------------
-PHP iCalendar does not edit calendars, instead it supports any calendar 
-application that can generate valid IETF 2445 files (.ics). 
-Some of the supported applications are:
+PHP iCalendar DOES NOT create or edit calendars (or events). Instead it 
+provides a way to view calendars from applications that generate valid 
+IETF 2445 files (.ics). Some of the supported applications are:
 	
 	- Apple iCal
 		- http://www.apple.com/ical/
@@ -78,12 +78,6 @@ Licensing:
 ----------
 This product is distributed under the GPL.  Please read through the file
 COPYING for more information about our license.
-
-Older Browser Support:
-----------------------
-Starting with 0.9.4, PHP iCalendar is moving away from supporting 4.x browsers.
-If you still need support for these browers, 0.9.3 is still available for
-download. 
 
 Changes:
 --------
