@@ -8,17 +8,17 @@ function decode_popup ($item) {
 	return $item;
 }
 
-$event			= (isset($HTTP_POST_VARS['event'])) ? decode_popup($HTTP_POST_VARS['event']) : ('unset');
-$description	= (isset($HTTP_POST_VARS['description'])) ? decode_popup($HTTP_POST_VARS['description']) : ('unset');
-$cal			= (isset($HTTP_POST_VARS['cal'])) ? decode_popup($HTTP_POST_VARS['cal']) : ('unset');
-$start			= (isset($HTTP_POST_VARS['start'])) ? decode_popup($HTTP_POST_VARS['start']) : ('unset');
-$end			= (isset($HTTP_POST_VARS['end'])) ? decode_popup($HTTP_POST_VARS['end']) : ('unset');
-$status			= (isset($HTTP_POST_VARS['status'])) ? decode_popup($HTTP_POST_VARS['status']) : ('unset');
-$location		= (isset($HTTP_POST_VARS['location'])) ? decode_popup($HTTP_POST_VARS['location']) : ('unset');
-$url			= (isset($HTTP_POST_VARS['url'])) ? decode_popup($HTTP_POST_VARS['url']) : ('unset');
-$organizer		= (isset($HTTP_POST_VARS['organizer'])) ? ($HTTP_POST_VARS['organizer']) : ('unset');
+$event			= (isset($HTTP_POST_VARS['event'])) ? decode_popup($HTTP_POST_VARS['event']) : ('');
+$description	= (isset($HTTP_POST_VARS['description'])) ? decode_popup($HTTP_POST_VARS['description']) : ('');
+$cal			= (isset($HTTP_POST_VARS['cal'])) ? decode_popup($HTTP_POST_VARS['cal']) : ('');
+$start			= (isset($HTTP_POST_VARS['start'])) ? decode_popup($HTTP_POST_VARS['start']) : ('');
+$end			= (isset($HTTP_POST_VARS['end'])) ? decode_popup($HTTP_POST_VARS['end']) : ('');
+$status			= (isset($HTTP_POST_VARS['status'])) ? decode_popup($HTTP_POST_VARS['status']) : ('');
+$location		= (isset($HTTP_POST_VARS['location'])) ? decode_popup($HTTP_POST_VARS['location']) : ('');
+$url			= (isset($HTTP_POST_VARS['url'])) ? decode_popup($HTTP_POST_VARS['url']) : ('');
+$organizer		= (isset($HTTP_POST_VARS['organizer'])) ? ($HTTP_POST_VARS['organizer']) : ('');
 $organizer 		= unserialize (decode_popup ($organizer));
-$attendee		= (isset($HTTP_POST_VARS['attendee'])) ? ($HTTP_POST_VARS['attendee']) : ('unset');
+$attendee		= (isset($HTTP_POST_VARS['attendee'])) ? ($HTTP_POST_VARS['attendee']) : ('');
 $attendee 		= unserialize (decode_popup ($attendee));
 $cal_title_full	= $cal.' '.$calendar_lang;
 

@@ -162,12 +162,13 @@ $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><
 									$description = ""; 
 								}
 								$completed_date = $val['completed_date'];
+								$event_calna 	= $val['calname'];
 								$status 		= $val["status"];
 								$priority 		= $val['priority'];
 								$start_date 	= $val["start_date"];
 								$due_date 		= $val['due_date'];
 								$vtodo_array 	= array(
-									'cal'			=> $calendar_name,
+									'cal'			=> $event_calna,
 									'completed_date'=> $completed_date,
 									'description'	=> $description,
 									'due_date'		=> $due_date,

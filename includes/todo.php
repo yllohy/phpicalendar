@@ -4,29 +4,18 @@ define('BASE', '../');
 include (BASE.'functions/init.inc.php');
 include (BASE.'functions/date_functions.php');
 
-// Unserialize the array so that we can use it.
 $vtodo_array = unserialize(base64_decode($HTTP_GET_VARS['vtodo_array']));
 
 // Set the variables from the array
-if (isset($vtodo_array['vtodo_text']) && ($vtodo_array['vtodo_text'] !== '') ) {
-	$vtodo_text = $vtodo_array['vtodo_text'];
-} else {
-	$vtodo_text = '';
-}
+$vtodo_text		= (isset($vtodo_array['vtodo_text'])) ? $vtodo_array['vtodo_text'] : ('');
+$description	= (isset($vtodo_array['description'])) ? $vtodo_array['description'] : ('');
+$completed_date	= (isset($vtodo_array['completed_date'])) ? localizeDate ($dateFormat_day, strtotime($vtodo_array['completed_date'])) : ('');
+$status			= (isset($vtodo_array['status'])) ? $vtodo_array['status'] : ('');
+$calendar_name  = (isset($vtodo_array['cal'])) ? $vtodo_array['cal'] : ('');
+$start_date 	= (isset($vtodo_array['start_date'])) ? localizeDate ($dateFormat_day, strtotime($vtodo_array['start_date'])) : ('');
+$due_date 		= (isset($vtodo_array['due_date'])) ? localizeDate ($dateFormat_day, strtotime($vtodo_array['due_date'])) : ('');
+$priority 		= (isset($vtodo_array['priority'])) ? $vtodo_array['due_date'] : ('');
 
-if (isset($vtodo_array['description']) && ($vtodo_array['description'] !== '') ) {
-	$description = $vtodo_array['description'];
-} else {
-	$description = '';
-}
-
-if (isset($vtodo_array['completed_date']) && ($vtodo_array['completed_date'] !== '') ) {
-	$completed_date = localizeDate ($dateFormat_day, strtotime($vtodo_array['completed_date']));
-}
-
-if (isset($vtodo_array['status']) && ($vtodo_array['status'] !== '') ) {
-	$status = $vtodo_array['status'];
-}
 if ((!isset($status) || $status == "COMPLETED") && isset($completed_date)) {
 	$status = "$completed_date_lang $completed_date";
 } else if ($status == "COMPLETED") {
@@ -35,34 +24,12 @@ if ((!isset($status) || $status == "COMPLETED") && isset($completed_date)) {
 	$status = $unfinished_lang;
 }
 
-if (isset($vtodo_array['cal']) && ($vtodo_array['cal'] !== '') ) {
-	$calendar_name = $vtodo_array['cal'];
-} else {
-	$calendar_name = '';
-}
-
-if (isset($vtodo_array['start_date']) && ($vtodo_array['start_date'] !== '') ) {
-	$start_date = localizeDate ($dateFormat_day, strtotime($vtodo_array['start_date']));
-}
-
-if (isset($vtodo_array['due_date']) && ($vtodo_array['due_date'] !== '') && strtotime($vtodo_array['due_date']) != strtotime("+1 year", strtotime($start_date))) {
-	$due_date = localizeDate ($dateFormat_day, strtotime($vtodo_array['due_date']));
-} else {
-	$due_date = '';
-}
-
-if (isset($vtodo_array['priority']) && ($vtodo_array['priority'] !== '')) {
-	$priority = $vtodo_array['priority'];
-
-	if ($priority >= 1 && $priority <= 4) {
-		$priority = $priority_high_lang;
-	} else if ($priority == 5) {
-		$priority = $priority_medium_lang;
-	} else if ($priority >= 6 && $priority <= 9) {
-		$priority = $priority_low_lang;
-	} else {
-		$priority = $priority_none_lang;
-	}
+if ($priority >= 1 && $priority <= 4) {
+	$priority = $priority_high_lang;
+} else if ($priority == 5) {
+	$priority = $priority_medium_lang;
+} else if ($priority >= 6 && $priority <= 9) {
+	$priority = $priority_low_lang;
 } else {
 	$priority = $priority_none_lang;
 }
