@@ -179,9 +179,9 @@ foreach($contents as $line) {
 							
 							$allday_start = date ("Ymd", $date);
 							$allday_end = date ("Ymd", $end_date);
-							echo "$allday_start, $allday_end ---- ";
+							//echo "$allday_start, $allday_end ---- ";
 						}
-						echo "$interval - $number - $date - $recur_year - $this_year - ";
+						//echo "$interval - $number - $date - $recur_year - $this_year - ";
 						
 						// This steps through each day of a multiple all-day event
 						$start_of_vevent = strtotime("$allday_start");
@@ -191,7 +191,7 @@ foreach($contents as $line) {
 							$check_year = date("Y", $start_of_vevent);
 							// Only write the current year
 							if ($this_year == $check_year) {
-								echo "date_written<br>";
+								//echo "date_written<br>";
 								$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
 							}
 							$start_of_vevent = ($start_of_vevent + (24*3600));
