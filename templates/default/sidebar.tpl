@@ -9,13 +9,13 @@
 			<div style="padding: 5px;">
 				<font class="G10BOLD">{CAL_DISPLAYNAME2}</font><br>
 				<span class="G10">
-					<a class="psf" href="day.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{GODAY_LANG}</a><br>
-					<a class="psf" href="week.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{GOWEEK_LANG}</a><br>
-					<a class="psf" href="month.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{GOMONTH_LANG}</a><br>
-					<a class="psf" href="year.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{GOYEAR_LANG}</a><br>
-					<a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview={CURRENT_VIEW}">{GOPRINT_LANG}</a><br>
+					<a class="psf" href="day.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GODAY}</a><br>
+					<a class="psf" href="week.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GOWEEK}</a><br>
+					<a class="psf" href="month.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GOMONTH}</a><br>
+					<a class="psf" href="year.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GOYEAR}</a><br>
+					<a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview={CURRENT_VIEW}">{L_GOPRINT}</a><br>
 					<!-- switch allow_preferences on -->
-					<a class="psf" href="preferences.php?cal={CAL}&amp;getdate={GETDATE}">{PREFERENCES_LANG}</a><br>
+					<a class="psf" href="preferences.php?cal={CAL}&amp;getdate={GETDATE}">{L_PREFERENCES}</a><br>
 					<!-- switch allow_preferences off -->
 					<!-- switch display_download on -->
 					<a class="psf" href="{SUBSCRIBE_PATH}">{SUBSCRIBE_LANG}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{DOWNLOAD_LANG}</a><br>
@@ -31,7 +31,7 @@
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr height="20">
-		<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{JUMP_LANG}</div></td>
+		<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{L_JUMP}</div></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
@@ -48,7 +48,7 @@
 				<!-- switch show_search off -->
 				<!-- switch show_goto on -->
 				<form style="margin-bottom:0;" action="day.php" method="GET">
-					<input type="hidden" name="cal" value="'.urlencode({CAL}).'">
+					<input type="hidden" name="cal" value="{URL_CAL}">
 					<input type="text" style="width:160px; font-size:10px" name="jumpto_day">
 					<input type="submit" value="Go">
 				</form>
@@ -122,48 +122,10 @@
 
 <!-- switch todo off -->
 
-<!-- loop minimonth on -->
-
-<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
-	<tr height="20">
-		<td align="center" class="sideback"><font class="G10BOLD">{MONTH_TITLE}</font></td>
-	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF" align="center">
-			<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
-				<!-- loop daysofweek on -->
-				<tr>	
-					<!-- loop days on -->
-						<td align="center" class="G10BOLD">{DAY}</td>
-					<!-- loop days off -->
-				</tr>
-				<!-- loop dayofweek off -->
-				<!-- loop monthdays on -->
-				<tr>
-					<!-- loop days on -->
-						<!-- switch notthismonth on -->
-						<td width="22" align="center" class="G10B">
-							<a class="ps2" href="{MINICAL_VIEW}php?cal={CAL}&amp;getdate={DAYLINK}"><span class="G10G">{DAY}</span></a>
-						</td>
-						<!-- switch notthismonth off -->
-						<!-- switch isevent on -->
-						<td width="22" align="center" class="G10B">
-							<a class="ps2" href="{MINICAL_VIEW}php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
-						</td>
-						<!-- switch isevent off -->
-						<!-- switch notevent on -->
-						<td width="22" align="center" class="G10B">
-							<a class="psf" href="{MINICAL_VIEW}php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
-						</td>
-						<!-- switch thismonth off -->
-					<!-- loop days off -->
-				</tr>
-				<!-- loop monthdays on -->
-			</table>
-			<img src="images/spacer.gif" width="1" height="3" alt=" "><br>
-		</td>
-	</tr>
-</table>
+{MONTH_SMALL|-1}
 <img src="images/spacer.gif" width="1" height="10" alt=" "><br>
 
-<!-- loop minimonth off -->
+{MONTH_SMALL|+0}
+<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+
+{MONTH_SMALL|+1}
