@@ -59,7 +59,7 @@ if ($status) {
 }
 if ($location) {
 	if (isset($url)) $location = '<a href="'.$url.'" target="_blank">'.$location.'</a>';
-	$display .= $location_lang . ' - ' . $location.'<br>' . "\n";
+	$display .= $location_lang . ' - ' . $location.'<br>';
 }
 $sheet_href = BASE.'styles/'.$style_sheet.'/default.css';
 
@@ -74,11 +74,11 @@ echo <<<END
 		<title>{$cal}</title>
 		<link rel="stylesheet" type="text/css" href="{$sheet_href}">
 	</head>
-	<body bgcolor="#eeeeee">
+	<body>
 	<center>
 		<table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 			<tr>
-				<td align="center" width="98%" class="sideback"><div style="height: 17px; margin-top: 3px;"><font class="G10BOLD">{$cal_title_full}</font></div></td>
+				<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{$cal_title_full}</div></td>
 			</tr>
 			<tr>
 				<td align="left" class="V12">
