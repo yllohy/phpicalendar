@@ -17,9 +17,12 @@ $prev_year 	= date ("Ymd", $prev_year);
 
 $page = new Page(BASE.'templates/'.$template.'/year.tpl');
 
-$page->replace_tags(array(
+$page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	'footer'			=> BASE.'templates/'.$template.'/footer.tpl'
+	));
+
+$page->replace_tags(array(
 	'template'			=> $template,
 	'charset'			=> $charset,
 	'default_path'		=> '',

@@ -38,10 +38,13 @@ if ($printview == 'day') {
 
 $page = new Page(BASE.'templates/'.$template.'/print.tpl');
 
-$page->replace_tags(array(
+$page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
+	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl'
+	));
+
+$page->replace_tags(array(
 	'event_js'			=> BASE.'functions/event.js',
 	'charset'			=> $charset,
 	'default_path'		=> '',

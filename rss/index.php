@@ -27,9 +27,12 @@ foreach ($filelist as $file) {
 
 $page = new Page(BASE.'templates/'.$template.'/rss_index.tpl');
 
-$page->replace_tags(array(
+$page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	'footer'			=> BASE.'templates/'.$template.'/footer.tpl'
+	));
+
+$page->replace_tags(array(
 	'event_js'			=> BASE.'functions/event.js',
 	'default_path'		=> $default_path.'/',
 	'template'			=> $template,

@@ -43,10 +43,12 @@ $calendar_name = $lang['l_admin_header'];
 
 $page = new Page(BASE.'templates/'.$template.'/admin.tpl');
 
-$page->replace_tags(array(
+$page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
+	'footer'			=> BASE.'templates/'.$template.'/footer.tpl'
+	));
+
+$page->replace_tags(array(
 	'event_js'			=> BASE.'functions/event.js',
 	'charset'			=> $charset,
 	'default_path'		=> '',

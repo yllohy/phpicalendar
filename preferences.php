@@ -133,9 +133,12 @@ $generated = number_format(($php_ended-$php_started),3);
 
 $page = new Page(BASE.'templates/'.$template.'/preferences.tpl');
 
-$page->replace_tags(array(
+$page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	'footer'			=> BASE.'templates/'.$template.'/footer.tpl'
+	));
+
+$page->replace_tags(array(
 	'charset'			=> $charset,
 	'template'			=> $template,
 	'default_path'		=> '',
