@@ -9,7 +9,7 @@ $style_sheet = 'silver';				// Themes support
 $calendar_path = './calendars';			// Path to directory with calendars
 $default_view = 'day';					// Default view for calendars = 'day', 'week', 'month'
 $default_cal = 'Home';					// Exact filename of calendar without .ics
-$language = 'english';					// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish'
+$language = 'danish';					// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish'
 $week_start_day = 'sunday';				// Day of the week your week starts on
 $day_start = '0700';					// Start time for day grid
 $gridLength = '15';						// Grid distance in minutes for day view, multiples of 15 preferred

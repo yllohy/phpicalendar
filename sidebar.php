@@ -8,10 +8,10 @@
 	
 	?>
 	
-	<table cellpadding="0" cellspacing="0" border="0" width="160">
+	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
 						<td align="center" width="112" class="sideback"><font class="G10BOLD"><?php echo "$thisday2"; ?></font></td>
@@ -74,10 +74,10 @@
 		</tr>
 	</table>
 	<br>
-	<table cellpadding="0" cellspacing="0" border="0" width="160">
+	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
 						<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
@@ -135,10 +135,10 @@
 	</table>
 	<br>
 <?php if (isset($master_array[($tomorrows_date)]) && sizeof($master_array[($tomorrows_date)]) > 0) { ?>
-	<table cellpadding="0" cellspacing="0" border="0" width="160">
+	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
 						<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$tomorrows_lang"; ?></font></td>
@@ -198,10 +198,10 @@
 	</table>
 	<br>
 <?php } ?>	
-	<table cellpadding="0" cellspacing="0" border="0" width="160">
+	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
@@ -279,10 +279,10 @@
 		</tr>
 	</table>
 	<br>
-	<table cellpadding="0" cellspacing="0" border="0" width="160">
+	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
 						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime($getdate))); ?></font></td>
@@ -359,10 +359,10 @@
 		</tr>
 	</table>
 	<br>
-	<table cellpadding="0" cellspacing="0" border="0" width="160">
+	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
 						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>

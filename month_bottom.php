@@ -10,19 +10,19 @@
 <br>
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$prev_month\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" border=\"0\" align=\"left\"></a>"; ?></td>
 		<td align="center" class="sideback"><font class="G10B"><b><?php print (localizeDate ($dateFormat_day, strtotime($getdate))); ?></b></font></td>
-		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$next_month\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" border=\"0\" align=\"right\"></a>"; ?></td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
 	</tr>
 	<tr>
 		<td width="1%" valign="top" align="right">
-			<table cellpadding="0" cellspacing="0" border="0" width="160">
+			<table cellpadding="0" cellspacing="0" border="0" width="175">
 				<tr>
 					<td valign="center" align="center">
-						<table width="160" border="0" cellpadding="0" cellspacing="0">
+						<table width="175" border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
 								<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></font></td>
@@ -101,11 +101,11 @@
 		<td width="98%" valign="top" align="center">
 			<table border="0" width="330" cellspacing="0" cellpadding="0">
 				<tr>
-					<td width="160" valign="top">
-						<table cellpadding="0" cellspacing="0" border="0" width="160">
+					<td width="175" valign="top">
+						<table cellpadding="0" cellspacing="0" border="0" width="175">
 							<tr>
 								<td valign="center" align="center">
-									<table width="160" border="0" cellpadding="0" cellspacing="0">
+									<table width="175" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td colspan="3" bgcolor="#FFFFFF" align="left">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
@@ -162,11 +162,11 @@
 						</table>
 					</td>
 					<td><img src="images/spacer.gif" width="10" height="1"></td>
-					<td width="160" valign="top">
-						<table cellpadding="0" cellspacing="0" border="0" width="160">
+					<td width="175" valign="top">
+						<table cellpadding="0" cellspacing="0" border="0" width="175">
 							<tr>
 								<td valign="center" align="left" valign="top">
-									<table width="160" border="0" cellpadding="0" cellspacing="0">
+									<table width="175" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td colspan="3" bgcolor="#FFFFFF" align="left" valign="top">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
@@ -225,10 +225,10 @@
 			</table>
 		</td>
 		<td width="1%" valign="top" align="left">
-	<table cellpadding="0" cellspacing="0" border="0" width="160">
+	<table cellpadding="0" cellspacing="0" border="0" width="175">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0">
+				<table width="175" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
 						<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
