@@ -17,13 +17,21 @@ class Page {
 	}
 	
 	function draw_print($template_p) {
-		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day;
+		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
+		preg_match("!<\!-- loop events on -->(.*)<\!-- loop events off -->!is", $this->page, $match1);
+		preg_match("!<\!-- switch some_events on -->(.*)<\!-- loop events on -->!is", $this->page, $match3);
+		$loop_event	= trim($match1[1]);
+		$loop_day 	= trim($match3[1]);
+		
 		foreach($master_array as $key => $val) {
 			ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
 			if ((($regs[1] == $parse_month) && ($printview == "month")) || (($key == $getdate) && ($printview == "day")) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == "week"))) {
 				$events_week++;
 				$dayofmonth = strtotime ($key);
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
+				$events_tmp = $loop_event;
+				$day_tmp	= $loop_day;
+				//echo $dayofmonth;
 				
 				// Pull out each day
 				foreach ($val as $new_val) {
@@ -34,30 +42,39 @@ class Page {
 						$event_start 	= $new_val2["event_start"];
 						$event_end 		= $new_val2["event_end"];
 						if (isset($new_val2["display_end"])) $event_end = $new_val2["display_end"];
-						$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-						$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-						$event_start 	= "$event_start - $event_end";
-						if (!$new_val2["event_start"]) { 
-							$event_start = "$all_day_lang";
-							$event_start2 = '';
-							$event_end = '';
+							$event_start 	= date ($timeFormat, strtotime ($event_start));
+							$event_end 		= date ($timeFormat, strtotime ($event_end));
+							$event_start 	= "$event_start - $event_end";
+							if (!$new_val2["event_start"]) { 
+								$event_start = $lang['l_all_day'];
+								$event_start2 = '';
+								$event_end = '';
+							}							
 						}
 						
-						$middle = '';
+						if ($description == '') {
+							$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!is', '', $events_tmp);
+						}
 						
-						if ($new_val2["description"]) {
-							$middle = '';
-						}
-							$middle = '';		
-						}
+						$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}');
+						$replace	= array($event_start, $event_text, $description);
+						$events_tmp = str_replace($search, $replace, $events_tmp);
+						$some_events .= $events_tmp;
+						$events_tmp	= $loop_event;
 					}
 				}
+				$day_tmp  = str_replace('{DAYOFMONTH}', $dayofmonth, $day_tmp);
+				$final   .= $day_tmp.$some_events;
+				unset ($day_tmp, $some_events);
 			}
 		}
 		
 		if ($events_week < 1) {
-			$middle = $no_events;
-		}	
+			$this->page = preg_replace('!<\!-- switch some_events on -->(.*)<\!-- switch some_events off -->!is', '', $this->page);
+		} else {
+			$this->page = preg_replace('!<\!-- switch some_events on -->(.*)<\!-- switch some_events off -->!is', $final, $this->page);
+			$this->page = preg_replace('!<\!-- switch no_events on -->(.*)<\!-- switch no_events off -->!is', '', $this->page);
+		}
 	}	
 	
 	function draw_week($template_p) {

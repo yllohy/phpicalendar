@@ -10,9 +10,9 @@
 						<div style="padding-top: 3px;">
 						<table width="90" border="0" cellpadding="0" cellspacing="0">
 							<tr valign="top">
-								<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
-								<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
-								<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=day"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=week"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=month"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
 							</tr>
 						</table>
 						</div>
@@ -22,13 +22,14 @@
       	</td>
     </tr>
 	<tr>
-		<td colspan="3" class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
+		<td colspan="3" class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" " /></td>
 	</tr>
 	<tr>
 		<td colspan="3">
 			<table border="0" cellspacing="0" cellpadding="5" width="100%">
 				<tr>
 					<td align="left" valign="top">
+						<!-- switch some_events on -->
 						<div class="V12"><b>{DAYOFMONTH}</b></div>
 						<!-- loop events on -->
 						<div style="padding: 6px;">
@@ -50,9 +51,10 @@
 							</table>
 						</div>
 						<!-- loop events off -->
+						<!-- switch some_events off -->
 															
 						<!-- switch no_events on -->
-						<div class="V12"><b>{L_ZERO_EVENTS}</b></div>
+						<div class="V12"><b>{L_NO_RESULTS}</b></div>
 						<!-- switch no_events off -->
 					</td>
 				</tr>
@@ -67,4 +69,5 @@
 		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
+</center>
 {FOOTER}
