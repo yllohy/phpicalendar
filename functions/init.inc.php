@@ -25,7 +25,7 @@ include(BASE.'functions/error.php');
 
 // language support
 $language = strtolower($language);
-$lang_file = './languages/'.$language.'.inc.php';
+$lang_file = BASE.'languages/'.$language.'.inc.php';
 
 if (file_exists($lang_file)) {
 	include($lang_file);
@@ -44,6 +44,9 @@ if (!isset($getdate)) {
 if (ini_get('max_execution_time') < 60) {
 	ini_set('max_execution_time', '60');
 }
+
+$calendar_path_orig = $calendar_path;
+$calendar_path = BASE.$calendar_path;
 
 $is_webcal = FALSE;
 if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {

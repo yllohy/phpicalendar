@@ -51,7 +51,7 @@ if ($is_webcal == false && $save_parsed_cals == 'yes') {
 	}
 }
 
-if ($parse_file) {
+if ($parse_file) {	
 	// patch to speed up parser
 	
 	$ifile = fopen($filename, "r");
