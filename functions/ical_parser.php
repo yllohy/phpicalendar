@@ -360,7 +360,7 @@ foreach($contents as $line) {
 														}
 													} else {
 // check for overlapping events
-													$nbrOfOverlaps = checkOverlap();
+													$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
 // writes to $master array here
 													$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 													}
@@ -399,7 +399,7 @@ foreach($contents as $line) {
 													}
 												} else {
 // check for overlapping events
-													$nbrOfOverlaps = checkOverlap();
+													$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
 // writes to $master array here
 													$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 												}
@@ -444,7 +444,7 @@ foreach($contents as $line) {
 																}
 															} else {
 // check for overlapping events	
-																$nbrOfOverlaps = checkOverlap();
+																$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
 // writes to $master array here
 																$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 															}
@@ -474,7 +474,7 @@ foreach($contents as $line) {
 															}
 														} else {
 // check for overlapping events		
-															$nbrOfOverlaps = checkOverlap();
+															$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
 // writes to $master array here	
 															$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 														}
@@ -524,7 +524,7 @@ foreach($contents as $line) {
 														}
 													} else {
 // check for overlapping events		
-														$nbrOfOverlaps = checkOverlap();
+														$nbrOfOverlaps = checkOverlap($next_date, $start_time, $end_time);
 // writes to $master array here	
 														$master_array[($next_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
 													}
@@ -555,7 +555,7 @@ foreach($contents as $line) {
 	// Let's write all the data to the master array
 	if (($start_time != '') && ($allday_start == '')) {
 // check for overlapping events
-		$nbrOfOverlaps = checkOverlap();
+		$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
 
 // writes to $master array here
 		$master_array[($start_date)][($hour.$minute)][] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
