@@ -15,7 +15,9 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .alldaybg_6 {background: url(images/allday_6.gif) repeat-x; height: 19px; padding-top: 5px; text-align: center;}
 .alldaybg_7 {background: url(images/allday_7.gif) repeat-x; height: 19px; padding-top: 5px; text-align: center;}
 
-
+.rowOn			{ background-color: #DFF7F7; }
+.rowOff			{ background-color: #E1E8F1; }
+.rowLent		{ background-color: #DDDDDD; }
 
 
 

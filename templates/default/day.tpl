@@ -8,8 +8,8 @@
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td class="navback"><div style="padding: 5px;" class="H20">&nbsp;{DISPLAY_DATE}</div></td>
-								<td align="right" width="120" class="navback">	
+								<td align="left" width="90%" class="navback"><div style="padding: 5px;" class="H20">&nbsp;{DISPLAY_DATE}</div></td>
+								<td align="right" width="10%" class="navback">	
 									<table width="120" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
@@ -24,11 +24,17 @@
 								<td colspan="2">
 									<table width="100%" border="0" cellspacing="1" cellpadding="2">
 										<tr>
+											<td align="left" valign="top" width="20" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='day.php?cal={CAL}&amp;getdate={DAYLINK}'">
+												<span class="V12"><a class="psf" href="day.php?cal={CAL}&amp;getdate={PREV_DAY}">&laquo;</a></span>
+											</td>
 											<!-- loop daysofweek on -->
-											<td width="14%" align="center" class="sideback">
-												<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9">{DAY}</span></a>
+											<td width="14%" align="center" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='day.php?cal={CAL}&amp;getdate={DAYLINK}'">
+												<span class="V9BOLD"><a class="ps3" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a></span>
 											</td>
 											<!-- loop daysofweek off -->
+											<td align="right" valign="top" width="20" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='day.php?cal={CAL}&amp;getdate={DAYLINK}'">
+												<span class="V12"><a class="psf" href="day.php?cal={CAL}&amp;getdate={NEXT_DAY}">&raquo;</a></span>
+											</td>
 										</tr>	
 									</table>
 								</td>
