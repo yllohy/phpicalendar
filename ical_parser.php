@@ -253,7 +253,7 @@ foreach($contents as $line) {
 							$start_range_time = strtotime("$this_year-$this_month-01");
 							$end_range_time = strtotime("+1 month +1 week", $start_range_time);
 						} else {
-							$start_range_time = strtotime(dateOfWeek($getdate, substr($week_start_day, 0, 2)));
+							$start_range_time = strtotime(dateOfWeek($getdate, $week_start_day));
 							$end_range_time = strtotime("+1 week", $start_range_time);
 						}
 						*/
@@ -291,6 +291,7 @@ foreach($contents as $line) {
 											foreach($byday as $day) {
 											
 												// use my fancy little function to get the date of each day
+												$day = two2threeCharDays($day);
 												$next_date = dateOfWeek(date("Ymd", $next_range_time),$day);
 												$next_date_time = strtotime($next_date);
 												
