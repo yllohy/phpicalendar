@@ -58,7 +58,7 @@ $summary_lang		= '結言';
 $description_lang	= 'メモ';
 
 // RSS text for 0.8
-$this_site_is_lang		= 'このウェブサイトはです。';
+$this_site_is_lang		= 'このウェブサイトは%sです。';
 $no_events_day_lang		= '今日は予定がありません。';
 $no_events_week_lang	= '今週は予定がありません。';
 $no_events_month_lang	= '今月は予定がありません';
@@ -72,37 +72,37 @@ $rss_language			= 'ja';
 $search_took_lang		= '検索に%s秒かかりました。';
 $recurring_event_lang	= '引き続く予定';
 $exception_lang			= '特例';
-$no_query_lang			= 'No query given';
-$preferences_lang		= 'Preferences';
-$printer_lang			= 'Printer';
+$no_query_lang			= '検索キーワードがありませんでした。';
+$preferences_lang		= '環境設定';
+$printer_lang			= 'プリンタ';
 $select_lang_lang		= 'Select your default language:';
 $select_cal_lang		= 'Select your default calendar:';
 $select_view_lang		= 'Select your default view:';
 $select_time_lang		= 'Select your default start time:';
 $select_day_lang		= 'Select your default start day of week:';
 $select_style_lang		= 'Select your default style:';
-$set_prefs_lang			= 'Set preferences';
-$completed_date_lang	= 'Completed on';
+$set_prefs_lang			= '環境を設定する';
+$completed_date_lang	= '%sに完成しました。';
 $completed_lang			= 'Completed';
 $created_lang			= 'Created:';
 $due_lang				= 'Due:';
-$priority_lang			= 'Priority:';
-$priority_high_lang		= 'High';
-$priority_low_lang		= 'Low';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'None';
+$priority_lang			= '優先順位:';
+$priority_high_lang		= '高い';
+$priority_low_lang		= '低い';
+$priority_medium_lang	= '普通';
+$priority_none_lang		= 'なし';
 $status_lang			= 'Status:';
 $todo_lang				= 'To do items';
 $unfinished_lang		= 'Unfinished';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = '戻る';
+$next_lang = '次';
+$prev_lang = '前';
+$day_view_lang = '日';
+$week_view_lang = '週';
+$month_view_lang = '月';
+$year_view_lang = '年';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= '、';								// ie, 'one, two, three'
