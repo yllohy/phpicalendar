@@ -52,9 +52,13 @@ $search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><
 			echo '<div style="padding: 5px;">';
 			echo '<form style="margin-bottom:0;" action="day.php" method="GET">';
 			include('./functions/list_icals.php');
+			echo '<br>';
 			include('./functions/list_years.php');
+			echo '<br>';
 			include('./functions/list_months.php');
+			echo '<br>';
 			include('./functions/list_weeks.php');
+			echo '<br>';
 			echo '</form>';
 			if ($show_search == 'yes') {
 				echo $search_box;
