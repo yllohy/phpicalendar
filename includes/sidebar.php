@@ -74,39 +74,25 @@
 						<td colspan="3" bgcolor="#FFFFFF" align="left">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>
+									<td colspan="2"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-									<td colspan="6"><?php include('./functions/list_icals.php'); ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-									<td colspan="6"><?php include('./functions/list_years.php'); ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-									<td colspan="6"><?php include('./functions/list_months.php'); ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-									<td colspan="6"><?php include('./functions/list_weeks.php'); ?></td>
+									<td width="4"></td>
+									<td>
+										<?php 
+											include('./functions/list_icals.php');
+											include('./functions/list_years.php');
+											include('./functions/list_months.php');
+											include('./functions/list_weeks.php'); 
+										?>
+									</td>
 								</tr>
 								<?php
 								if ($display_custom_goto == "yes") {
 								?>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-									<td colspan="6" class="G10B">
+									<td width="4"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
+									<td class="G10B">
 										<form action="day.php" method="GET">
 											<input type="hidden" name="cal" value="<?php print urlencode($cal); ?>">
 											<input type="text" size="15" name="jumpto_day">
@@ -118,11 +104,11 @@
 								}
 								if ($show_search == 'yes') { ?>
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
+									<td colspan="2"><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
-									<td colspan="6" valign="middle" align="left"><?php echo "$search_box"; ?></td>
+									<td width="4"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
+									<td valign="middle" align="left"><?php echo "$search_box"; ?></td>
 								</tr>
 								<?php } ?>
 							</table>
@@ -225,7 +211,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 										foreach ($vtodo_times as $val) {
 											$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
 											if ($vtodo_text != "") {	
-												$description 	= $val["description"];
+												if (isset($val["description"])) $description 	= $val["description"];
 												$completed_date = $val['completed_date'];
 												$status 		= $val["status"];
 												$priority 		= $val['priority'];
