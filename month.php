@@ -44,6 +44,10 @@ $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 
+$php_ended = getmicrotime();
+
+$generated = number_format(($php_ended-$php_started),3);
+//$generated = sprintf($search_took_lang,$search_took);
 
 $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 
@@ -64,12 +68,13 @@ $page->replace_tags(array(
 	'next_month' 		=> $next_month,
 	'prev_month'	 	=> $prev_month,
 	'show_goto' 		=> '',
+	'is_logged_in' 		=> '',
 	'list_icals' 		=> $list_icals,
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,
 	'list_weeks' 		=> $list_weeks,
 	'style_select' 		=> $style_select,
-	'message'	 		=> $message
+	'generated'	 		=> $generated
 			
 	));
 	
@@ -77,3 +82,6 @@ $page->replace_langs($lang);
 
 $page->output();
 
+
+
+?>

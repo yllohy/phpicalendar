@@ -1,4 +1,3 @@
-
 <table width="735" border="0" cellspacing="1" cellpadding="2" class="monthback">
 	<tr>
 		<!-- loop weekday on -->
@@ -11,42 +10,73 @@
 	</tr>
 	<!-- loop monthweeks on -->
 	<tr height="105">
+		<!-- loop monthdays on -->
 		<!-- switch notthismonth on -->
 		<td valign="top" align="left" class="monthoff" width="105" height="105">
+			
 			<div align="right">
-				<font class="G10"><a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="G10G">{DAY}</font></a></font>
+				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="G10G">{DAY}</font></a>
 			</div>
+			<!-- switch allday on -->
 			<div align="left">
-				<div align="left" class="V9">
-					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
+				<div align="center" class="V10">
+					{JS_OPEN_EVENT} <a class="psf" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
 				</div>
 			</div>
+			<!-- switch allday off -->
+			<!-- switch event on -->
+			<div align="left">
+				<div align="left" class="V9">
+					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TIME} {EVENT_TITLE}</a> 
+				</div>
+			</div>
+			<!-- switch event off -->
+			
 		</td>
 		<!-- switch notthismonth off -->
-		<!-- switch isevent on -->
-		<td valign="top" align="left" class="monthreg" width="105" height="105">
+		<!-- switch istoday on -->
+		<td valign="top" align="left" class="monthon" width="105" height="105">
 			<div align="right">
-				<font class="G10"><a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a></font>
+				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
+			<!-- switch allday on -->
 			<div align="left">
-				<div align="left" class="V9">
-					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
+				<div align="center" class="V10">
+					{JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
 				</div>
 			</div>
-		</td>
-		<!-- switch isevent off -->
-		<!-- switch notevent on -->
-		<td valign="top" align="left" class="monthreg" width="105" height="105">
-			<div align="right">
-				<font class="G10"><a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a></font>
-			</div>
+			<!-- switch allday off -->
+			<!-- switch event on -->
 			<div align="left">
 				<div align="left" class="V9">
-					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
+					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TIME} {EVENT_TITLE}</a> 
 				</div>
 			</div>
+			<!-- switch event off -->
 		</td>
-		<!-- switch notevent off -->
+		<!-- switch istoday off -->
+		<!-- switch ismonth on -->
+		<td valign="top" align="left" class="monthreg" width="105" height="105">
+			<div align="right">
+				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
+			</div>
+			<!-- switch allday on -->
+			<div align="left">
+				<div align="left" class="V9">
+					{JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TITLE}</a> 
+				</div>
+			</div>
+			<!-- switch allday off -->
+			<!-- switch event on -->
+			<div align="left">
+				<div align="left" class="V9">
+					&nbsp; {JS_OPEN_EVENT} <a class="ps3" href="#" onclick="openEventWindow({EVENT_NUMBER}); return false;">{EVENT_TIME} {EVENT_TITLE}</a> 
+				</div>
+			</div>
+			<!-- switch event off -->
+		</td>
+		<!-- switch ismonth off -->
+		<!-- loop monthdays off -->
 	</tr>
 	<!-- loop monthweeks off -->
 </table>

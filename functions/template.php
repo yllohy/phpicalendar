@@ -1,24 +1,20 @@
 <?php
 
+//print_r($master_array);
+
 function draw_month($template, $offset = '+0', $type) {
-	global $getdate, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang, $daysofweek_lang;
+	global $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang, $daysofweek_lang;
 	ob_start();
 	include($template);
 	$template = ob_get_contents();
 	ob_end_clean();
 	preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template, $match1);
-	preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthweeks off -->!is", $template, $match2);
-	preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template, $match3);
-	preg_match("!<\!-- switch notevent on -->(.*)<\!-- switch notevent off -->!is", $template, $match4);
-	preg_match("!<\!-- switch isevent on -->(.*)<\!-- switch isevent off -->!is", $template, $match5);
-	preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- switch notthismonth on -->!is", $template, $match6);
-	preg_match("!<\!-- switch notevent off -->(.*)<\!-- loop monthweeks off -->!is", $template, $match7);
+	preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template, $match2);
+	preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!is", $template, $match6);
+	preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!is", $template, $match7);
 	
 	$loop_wd 			= trim($match1[1]);
-	$loop_w 			= trim($match2[1]);
-	$notthismonth 		= trim($match3[1]);
-	$notevent 			= trim($match4[1]);
-	$isevent 			= trim($match5[1]);
+	$loop_md 			= trim($match2[1]);
 	$startweek 			= trim($match6[1]);
 	$endweek 			= trim($match7[1]);
 	$fake_getdate_time 	= strtotime($this_year.'-'.$this_month.'-15');
@@ -47,25 +43,39 @@ function draw_month($template, $offset = '+0', $type) {
 	$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
 	$i 					= 0;
 	$whole_month 		= TRUE;
-	$to_replace			= array('{DAY}', '{CAL}', '{DAYLINK}', '{MINICAL_VIEW}');
 	
 	do {
-		if ($i == 0) $middle .= $startweek;
-		$day 			= date ("j", $start_day);
-		$daylink 		= date ("Ymd", $start_day);
-		$check_month 	= date ("m", $start_day);
-		$replace_with 	= array($day, $cal, $daylink, $minical_view);
-		if ($check_month != $minical_month) { 
-			$middle .= str_replace($to_replace, $replace_with, $notthismonth);
-		} elseif (isset($master_array[$daylink]) && ($check_month == $minical_month)) {
-			$middle .= str_replace($to_replace, $replace_with, $isevent);
+		if ($i == 0) $middle .= $startweek; $i++;
+		$temp_middle			= $loop_md;
+		$switch					= array('notthismonth' => '', 'istoday' => '', 'ismonth' => '', 'noevent' => '', 'anyevent' => '', 'allday' => '', 'event_title' => '', 'cal' => $cal, 'minical_view' => $minical_view);
+		$check_month 			= date ("m", $start_day);
+		$daylink 				= date ("Ymd", $start_day);
+		$switch['day']	 		= date ("j", $start_day);
+		$switch['daylink'] 		= date ("Ymd", $start_day);
+		$switch['notthismonth'] = ($check_month != $minical_month) ? 'set' : '';
+		$switch['istoday'] 		= ($switch['daylink'] == $getdate) ? 'set' : '';
+		$switch['ismonth'] 		= (($switch['istoday'] == '') && ($switch['notthismonth'] == '')) ? 'set' : '';
+		if (isset($master_array[$daylink]['-1'])) {
+			$switch['anyevent']	= 'set';
+			$switch['allday']	= 'set';
+			//$switch['event_title'] = $master_array[$daylink]['-1']['0']['event_text'];
+			//print_r ($master_array[$daylink]['-1']);
+		} elseif (isset($master_array[$daylink])) {
+			$switch['anyevent']	= 'set';
 		} else {
-			$middle .= str_replace($to_replace, $replace_with, $notevent);
+			$switch['noevent']	= 'set';
 		}
 		
-		$start_day = strtotime("+1 day", $start_day); 
+		foreach ($switch as $tag => $data) {
+			if (!$data) {
+				$temp_middle = eregi_replace('<!-- switch ' . $tag . ' on -->(.*)<!-- switch ' . $tag . ' off -->', '', $temp_middle);
+			} else {
+				$temp_middle = eregi_replace('{' . $tag . '}', $data, $temp_middle);
+			}
+		}
+		$middle .= $temp_middle;
 		
-		$i++;
+		$start_day = strtotime("+1 day", $start_day); 
 		if ($i == 7) { 
 			$i = 0;
 			$middle .= $endweek;

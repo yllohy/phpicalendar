@@ -6,8 +6,9 @@
 </p>
 <!-- switch rss_valid off -->
 <!-- switch rss_powered on -->
-{L_THIS_SITE_IS} <a class="psf" href="{BASE}rss/index.php?cal={CAL}&amp;getdate={GETDATE}">RSS-Enabled</a>
+{L_THIS_SITE_IS} <a class="psf" href="{BASE}rss/index.php?cal={CAL}&amp;getdate={GETDATE}">RSS-Enabled</a><br>
 <!-- switch rss_powered off -->
+Page generated in {GENERATED} seconds.
 </center>
 </body>
 </html>

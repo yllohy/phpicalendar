@@ -45,8 +45,8 @@
 	<table width="737" border="0" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
 			<td colspan="3" align="center" class="sideback" nowrap>
-				<div style="height: 20px;" class="G10BOLD">
-					{L_THIS_MONTHS_EVENTS}
+				<div style="height: 20px;">
+					<b>{L_THIS_MONTHS}</b>
 				</div>
 			</td>
 		</tr>

@@ -8,6 +8,8 @@ include_once(BASE.'functions/overlapping_events.php');
 include_once(BASE.'functions/timezones.php');
 include_once(BASE.'functions/list_functions.php');
 
+$php_started = getmicrotime();
+
 $fillTime = $day_start;
 $day_array = array ();
 while ($fillTime < $day_end) {
