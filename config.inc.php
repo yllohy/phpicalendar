@@ -27,6 +27,7 @@ $display_custom_goto = 'no';			// In the 'Jump To' box, display the custom 'go t
 $display_ical_list = 'yes';				// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
 $allow_webcals = 'no';					// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
 $this_months_events = 'yes';			// Display "This month's events" at the bottom off the month page.
+$use_color_cals = 'yes';				// Display each calendar in the pop-up as a different color.
 										
 $blacklisted_cals[] = '';				// Fill in between the quotes the name of the calendars 
 $blacklisted_cals[] = '';				// you wish to 'blacklist' or that you don't want to show up in your calendar
@@ -40,4 +41,10 @@ $list_webcals[] = '';					// or webcal:// and the filename should contain the .i
 $list_webcals[] = '';					// $allow_webcals does *not* need to be "yes" for these to show up and work
 // add more lines as necessary
 
+$color_cals[] = 'silver';				// Fill in between the quotes the colors you want to display
+$color_cals[] = 'red';					// multiple calendars in.
+$color_cals[] = 'orange';				// The first color will be used if no color is selected.
+$color_cals[] = 'grey';					// 
+$color_cals[] = 'green';				// 
+// add more lines as necessary
 ?>
