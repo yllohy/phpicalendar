@@ -182,10 +182,11 @@ for ($i=0;$i<7;$i++) {
 														$event_text2 	= urlencode(addslashes($all_day_text));
 														$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
 														$description 	= addslashes(urlencode($allday["description"]));
+														$status			= $allday["status"];
 														$event_start 	= '';
 														$event_end		= '';
 														echo "<tr>\n";
-														echo "<td valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
+														echo "<td valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description', '$status')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
 														echo "</tr>\n";
 													}
 													echo "</table>\n";
@@ -303,6 +304,7 @@ for ($i=0;$i<7;$i++) {
 																	$event_start 	= date ($timeFormat, $event_start);
 																	$event_end 		= date ($timeFormat, $event_end);
 																	$calendar_name2	= urlencode(addslashes($calendar_name));
+																	$status			= $this_time_arr[($event_length[$thisday][$i]["key"])]["status"];
 																	echo "<td rowspan=\"" . $event_length[$thisday][$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2week\">\n";
 																	echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 																	echo "<tr>\n";
@@ -312,7 +314,7 @@ for ($i=0;$i<7;$i++) {
 																	echo "<td>\n";
 																	echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 																	echo "<tr>\n";
-																	echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"V10W\">$event_text</font></a></td>\n";
+																	echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description', '$status')\"><font class=\"V10W\">$event_text</font></a></td>\n";
 																	echo "</tr>\n";
 																	echo "</table>\n";
 																	echo "</td>\n";           

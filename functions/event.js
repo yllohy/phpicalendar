@@ -4,7 +4,7 @@
 ?>
 <script language="JavaScript" type="text/javascript">
 <!--
-	function openEventInfo(event, calendarname, start, end, description)
+	function openEventInfo(event, calendarname, start, end, description, status)
 	{	
 		var windowW = 460;
 		var windowH = 275;
@@ -13,7 +13,8 @@
 			"&cal="+calendarname+
 			"&start="+start+
 			"&end="+end+
-			"&description="+description;
+			"&description="+description+
+			"&status="+status;
 				
 		options = "scrollbars=yes,width="+windowW+",height="+windowH;
 	

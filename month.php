@@ -172,6 +172,7 @@ $num_of_events = 0;
 											$calendar_name2	= addslashes($calendar_name);
 											$calendar_name2 = urlencode($calendar_name2);
 											$event_text		= word_wrap($event_text, 12, $month_event_lines);
+											$status 		= $val["status"];
 											echo "<tr>\n";
 											echo "<td>\n";
 											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
@@ -179,9 +180,9 @@ $num_of_events = 0;
 											if (!isset($val["event_start"])) {
 												$event_start = '';
 												$event_end = '';
-												echo "<td><font class=\"V10\"><center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center></font></td>\n";
+												echo "<td><font class=\"V10\"><center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description', '$status')\"><i>$event_text</i></a></center></font></td>\n";
 											} else {	
-												echo "<td align=\"left\" valign=\"top\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"V9\">&nbsp;$event_start2 $event_text</font></a></td>\n";
+												echo "<td align=\"left\" valign=\"top\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description', '$status')\"><font class=\"V9\">&nbsp;$event_start2 $event_text</font></a></td>\n";
 											}
 											echo "</tr>\n";
 											echo "</table>\n";
@@ -261,6 +262,7 @@ $num_of_events = 0;
 									$event_text2 	= urlencode($event_text2);
 									$description 	= addslashes(urlencode($new_val2["description"]));
 									$description 	= str_replace("\"", "&quot;", $description);
+									$status			= $new_val2["status"];
 									if (isset($new_val2["event_start"])) {
 										$event_start 	= $new_val2["event_start"];
 										$event_end 		= $new_val2["event_end"];
@@ -280,7 +282,7 @@ $num_of_events = 0;
 									echo "<tr>\n";
 									echo "<td align=\"left\" valign=\"top\" width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
 									echo "<td align=\"left\" valign=\"top\" colspan=\"2\">\n";
-									echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a>\n";
+									echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description', '$status')\"><font class=\"G10B\">$event_text</font></a>\n";
 									echo "</td>\n";
 									echo "</tr>\n";
 								}

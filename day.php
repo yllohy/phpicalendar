@@ -106,13 +106,14 @@ if (is_array($master_array[($getdate)])) {
 						echo '<td colspan="3" height="24">'."\n";
 						echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
 						foreach($master_array[($getdate)]['-1'] as $allday) {
-							$event_text = stripslashes(urldecode($allday['event_text']));
-							$description = addslashes(urlencode($allday['description']));
-							$event_text2 = rawurlencode(addslashes($allday['event_text']));
+							$event_text 	= stripslashes(urldecode($allday['event_text']));
+							$description 	= addslashes(urlencode($allday['description']));
+							$event_text2 	= rawurlencode(addslashes($allday['event_text']));
+							$status			= $allday['status'];
 							$event_start 	= '';
 							$event_end		= '';					
 							echo '<tr>'."\n";
-							echo '<td valign="top" align="center" class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\')"><font color="#ffffff"><i>'.$event_text.'</i></font></a></td>'."\n";
+							echo '<td valign="top" align="center" class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\', \''.$status.'\')"><font color="#ffffff"><i>'.$event_text.'</i></font></a></td>'."\n";
 							echo '</tr>'."\n";
 						}
 						echo '</table>'."\n";
@@ -246,6 +247,7 @@ if (is_array($master_array[($getdate)])) {
 													$event_start 	= date ($timeFormat, $event_start);
 													$event_end 		= date ($timeFormat, $event_end);
 													$calendar_name2	= rawurlencode(addslashes($calendar_name));
+													$status			= $this_time_arr[($event_length[$i]['key'])]['status'];
 													echo '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2">'."\n";
 													echo '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
 													echo '<tr>'."\n";
@@ -255,7 +257,7 @@ if (is_array($master_array[($getdate)])) {
 													echo '<td>'."\n";
 													echo '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
 													echo '<tr>'."\n";
-													echo '<td class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name2.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\')"><font class="eventfont">'.$event_text.'</font></a></td>'."\n";
+													echo '<td class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name2.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\', \''.$status.'\')"><font class="eventfont">'.$event_text.'</font></a></td>'."\n";
 													echo '</tr>'."\n";
 													echo '</table>'."\n";
 													echo '</td>'."\n";           

@@ -28,6 +28,11 @@ if (isset($HTTP_GET_VARS['end']) && ($HTTP_GET_VARS['end'] !== '') ) {
 } else {
 	$end = '';
 }
+if (isset($HTTP_GET_VARS['status']) && ($HTTP_GET_VARS['status'] !== '') ) {
+	$status = $HTTP_GET_VARS['status'];
+} else {
+	$status = '';
+}
 
 $event = rawurldecode($event);
 $event = stripslashes($event);
@@ -78,6 +83,14 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 					 <td align="left" colspan="2" class="V12">
 					 <?php echo ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",
 							'<a target="_new" href="\0">\0</a>', $description); ?></td>
+					</tr>
+				<?php } ?>
+				
+				<?php if ($status) { ?>    
+					<tr>
+					 <td width="1%"><img src="images/spacer.gif" width="6" height="1" alt=" "></td>
+					 <td align="left" colspan="2" class="V12">
+					 <?php echo "$status"; ?></td>
 					</tr>
 				<?php } ?>
 	
