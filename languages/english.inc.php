@@ -40,6 +40,10 @@ $this_week_lang		= "This Week";
 $this_month_lang	= "This Month";
 $jump_lang			= "Jump to";
 $tomorrows_lang		= "Tomorrow's Events";
+$goday_lang			= "Go to Today";
+$goweek_lang		= "Go to This Week";
+$gomonth_lang		= "Go to This Month";
+$goyear_lang		= "Go to This Year";
 
 // Date display since setlocale isnt perfect.
 $daysofweek_lang			= array ("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");

@@ -8,17 +8,25 @@
 	
 	?>
 <br>
-<table border="0" width="737" cellspacing="0" cellpadding="0">
+<table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
+	<tr>
+											<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"images/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+		<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php print (strftime ($dateFormat_day, strtotime($getdate))); ?></b></td>
+											<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"images/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+	</tr>
+	<tr>
+		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
+	</tr>
 	<tr>
 		<td width="1%" valign="top" align="right">
 			<table cellpadding="0" cellspacing="0" border="0" width="160">
 				<tr>
 					<td valign="center" align="center">
-						<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+						<table width="160" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-								<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php print (strftime ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></td>
-								<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
+								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
+								<td align="center" class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></td>
+								<td align="right" valign="top" width="1"></td>
 							</tr>
 							<tr>
 								<td colspan="3" bgcolor="#FFFFFF" align="center">
@@ -91,92 +99,23 @@
 				</tr>
 			</table>
 		</td>
-		<td width="98% valign="top" align="center">
+		<td width="98%" valign="top" align="center">
 			<table border="0" width="330" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="160" valign="top">
 						<table cellpadding="0" cellspacing="0" border="0" width="160">
 							<tr>
-								<td valign="center" align="left">
-									<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
-										<tr>
-											<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"images/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
-											<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "$thisday2"; ?></b></td>
-											<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"images/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
-										</tr>
+								<td valign="center" align="center">
+									<table width="160" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td colspan="3" bgcolor="#FFFFFF" align="center">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
-													</tr>
-													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><b><?php echo "$cal_displayname2"; ?></b></td>
+														<td colspan="6" class="G10B"><b><?php echo "$jump_lang"; ?></b></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
-													</tr>
-													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">Go to Today</a>"; ?></td>
-													</tr>
-													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
-													</tr>
-													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$today_today\">Go to This Week</a>"; ?></td>
-													</tr>
-													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
-													</tr>
-													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">Go to This Month</a>"; ?></td>
-													</tr>
-													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
-													</tr>
-													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\"><img src=\"images/smallicon.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
-														<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
-														<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\">$subscribe_lang</a>"; ?></td>
-													</tr>
-													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$filename\"><img src=\"images/download_arrow.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
-														<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
-														<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</table>
-					</td>
-					<td><img src="images/spacer.gif" width="10" height="1"></td>
-					<td width="160" valign="top">
-						<table cellpadding="0" cellspacing="0" border="0" width="160">
-							<tr>
-								<td valign="center" align="center">
-									<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
-										<tr>
-											<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-											<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "Jump to"; ?></b></td>
-											<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
-										</tr>
-										<tr>
-											<td colspan="3" bgcolor="#FFFFFF" align="center">
-												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
-													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
@@ -223,6 +162,66 @@
 							</tr>
 						</table>
 					</td>
+					<td><img src="images/spacer.gif" width="10" height="1"></td>
+					<td width="160" valign="top">
+						<table cellpadding="0" cellspacing="0" border="0" width="160">
+							<tr>
+								<td valign="center" align="left" valign="top">
+									<table width="160" border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="3" bgcolor="#FFFFFF" align="center" valign="top">
+												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
+													<tr>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td colspan="6" class="G10B"><b><?php echo "$cal_displayname2"; ?></b></td>
+													</tr>
+													<tr>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
+													</tr>
+													<tr>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$goday_lang</a>"; ?></td>
+													</tr>
+													<tr>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
+													</tr>
+													<tr>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$today_today\">$goweek_lang</a>"; ?></td>
+													</tr>
+													<tr>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
+													</tr>
+													<tr>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">$gomonth_lang</a>"; ?></td>
+													</tr>
+													<tr>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+													</tr>
+													<tr>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\"><img src=\"images/smallicon.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
+														<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
+														<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\">$subscribe_lang</a>"; ?></td>
+													</tr>
+													<tr>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$filename\"><img src=\"images/download_arrow.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
+														<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
+														<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>	
+					</td>
 				</tr>
 			</table>
 		</td>
@@ -230,11 +229,11 @@
 	<table cellpadding="0" cellspacing="0" border="0" width="160">
 		<tr>
 			<td valign="center" align="center">
-				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<table width="160" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td align="left" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" background="images/side_bg.gif"><b><?php print (strftime ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></td>
-						<td align="right" valign="top" bgcolor="#DDDDDD" width="1" background="images/side_bg.gif"></td>
+						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="center" class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></td>
+						<td align="right" valign="top" width="1"></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
