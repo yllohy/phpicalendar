@@ -62,6 +62,7 @@ Changes:
 	-Fixed a bug for showing &'s and #'s in the javascript.
 	-Greatly improved Mozilla Calendar support.
 	-Overlapping events now display better.
+	-Added timezone support.
 	-Other various bug fixes.
 
 0.6

@@ -1,18 +1,24 @@
 TIMEZONES
 ---------
 If your timezone is not in this list, it is assumed that the GMT offset
-for both regular time and daylight savings time is +0000. If this is
+for both regular time and Daylight Savings Time is +0000. If this is
 not correct, please use a timezone from this list which will acurrately
-represent your GMT offsets. All these are case-sensitive.
+represent your GMT offsets. All these are case-sensitive. 
 
-'Same as Server' is also a choice and it also case sensitive. This will
-use the server's timezone offset. No entry at all (an empty string) means
-to use the timezome of the event or calendar itself. This is default.
+'Same as Server' is also a choice and it also case-sensitive. This will
+use the server's timezone offset. 
+
+No entry at all (an empty string) means to use the timezome of the event 
+or calendar itself. This is default.
 
 This does not support setting the offset itself (ie '+0500') because the 
 offset might change depending on if we're looking at events when Daylight
 Savings Time is on, or events when it's off. You must choose a timezone
 from this list or an empty string.
+
+*** None of these timezones represent both regular AND Daylight Savings
+Time as +0000 except for 'GMT' but ANY string other than whats in this list
+will return them both as +0000.
 
 List of Timezones
 -----------------
@@ -398,6 +404,7 @@ Europe/Zaporozhye
 Europe/Zurich
 GB
 GB-Eire
+GMT
 HST
 Hongkong
 Indian/Antananarivo
