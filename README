@@ -61,6 +61,14 @@ COPYING for more information about our license.
 Changes:
 --------
 
+0.8.1
+	-Added header.inc.php for custom headers.
+	-Added Brazilian language support.
+	-Fixed a bug with some of the style sheets not displaying correctly.
+	-Fixed a bug with RSS not properly validating.
+	-Fixed a bug with Search returning errors on some characters.
+	-Brought some languages up to 0.8 translations.
+
 0.8
 	-Added search capability.
 	-Added a Printer Friendly view for Day, Week, and Month.
