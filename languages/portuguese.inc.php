@@ -3,7 +3,7 @@
 // English language include
 // For version 0.7 PHP iCalendar
 //
-// Translation by Chad Little (chad@chadsdomain.com)
+// Translation by Rui Costa (ruicosta@ubi.pt)
 //
 // Submit new translations to chad@chadsdomain.com
 
