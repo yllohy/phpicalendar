@@ -21,70 +21,27 @@
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="left">
-							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
+							<table border="0" cellspacing="0" cellpadding="1" bgcolor="#FFFFFF" width="100%">
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="2"></td>
 								</tr>
 								<tr>
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
 									<td colspan="6"><font class="G10BOLD"><?php echo "$cal_displayname2"; ?></font></td>
 								</tr>
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
-								</tr>
-								<tr>
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$goday_lang</a>"; ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$today_today\">$goweek_lang</a>"; ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">$gomonth_lang</a>"; ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$today_today\">$goyear_lang</a>"; ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$getdate&printview=$current_view\">$goprint_lang</a>"; ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&getdate=$getdate\">$preferences_lang</a>"; ?></td>
-								</tr>
-								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$subscribe_path\"><img src=\"styles/$style_sheet/smallicon.gif\" alt=\"\" border=\"0\" align=\"middle\"></a>"; ?></td>
-									<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
-									<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>"; ?></td>
-								</tr>
-								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$filename\"><img src=\"styles/$style_sheet/download_arrow.gif\" alt=\"\" border=\"0\" align=\"middle\"></a>"; ?></td>
-									<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
-									<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$filename\">$download_lang</a>"; ?></td>
+									<td colspan="6" class="G10B">
+									<?php echo "
+										<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$goday_lang</a><br>\n
+										<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$today_today\">$goweek_lang</a><br>\n
+										<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">$gomonth_lang</a><br>\n
+										<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$today_today\">$goyear_lang</a><br>\n
+										<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$getdate&printview=$current_view\">$goprint_lang</a><br>\n
+										<a class=\"psf\" href=\"preferences.php?cal=$cal&getdate=$getdate\">$preferences_lang</a><br>\n
+										<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>\n
+									"; ?>
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -265,16 +222,11 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 											$calendar_name2	= addslashes($calendar_name);
 											$calendar_name2 = urlencode($calendar_name2);
 											$event_text = word_wrap($event_text, 21, $tomorrows_events_lines);
+											if ($val['status'] == 'COMPLETED') $event_text = "<S>$event_text</S>";
 											echo "<tr>\n";
 											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
 											echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
-											if (!isset($val["event_start"])) {
-												$event_start = $all_day_lang;
-												$event_end = '';
-												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a>\n";
-											} else {	
-												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
-											}
+											echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 											echo "</td>\n";
 											echo "</tr>\n";
 										}
