@@ -12,6 +12,8 @@ include('./config.inc.php');
 // define supported languages
 if ($language == "English") { 	
 	include "languages/english.inc.php";
+} elseif ($language == "Polish") {
+	include "languages/polish.inc.php";
 } else {
 	include "languages/english.inc.php";
 }
