@@ -66,7 +66,7 @@ foreach ($cal_filelist as $filename) {
 	
 	if ($parse_file) {	
 		
-		$ifile = fopen($filename, "r");
+		$ifile = @fopen($filename, "r");
 		if ($ifile == FALSE) exit(error($error_invalidcal_lang, $filename));
 		$nextline = fgets($ifile, 1024);
 		if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));

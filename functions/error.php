@@ -26,6 +26,7 @@ function error($error_msg='There was an error processing the request.', $file='N
 		'header'			=> BASE.'templates/'.$template.'/header.tpl',
 		'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 		'calendar_nav'		=> BASE.'templates/'.$template.'/calendar_nav.tpl',
+		'default_path'		=> '',
 		'template'			=> $template,
 		'cal'				=> $cal,
 		'getdate'			=> $getdate,
@@ -33,11 +34,16 @@ function error($error_msg='There was an error processing the request.', $file='N
 		'display_date'		=> $display_date,
 		'rss_powered'	 	=> $rss_powered,
 		'rss_available' 	=> '',
+		'event_js'			=> '',
+		'todo_js'			=> '',
 		'todo_available' 	=> '',
 		'rss_valid' 		=> '',
 		'error_msg'	 		=> $error_msg,
 		'error_calendar' 	=> $error_calendar,
-		'generated'	 		=> $generated
+		'generated'	 		=> $generated,
+		'l_powered_by'		=> $lang['l_powered_by'],
+		'l_error_back'		=> $lang['l_error_back'],
+		'l_error_window'	=> $lang['l_error_window']
 				
 		));
 		
