@@ -403,7 +403,6 @@ if ($parse_file) {
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$start_date = $regs[1] . $regs[2] . $regs[3];
 					$start_time = $regs[4] . $regs[5];
-					#echo "$field - $start_date, $start_time<br>";
 				}
 				
 			} elseif (preg_match("/DTEND/", $field)) {
@@ -415,7 +414,6 @@ if ($parse_file) {
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$end_date = $regs[1] . $regs[2] . $regs[3];
 					$end_time = $regs[4] . $regs[5];
-					#echo "$field - $end_date, $end_time<br>";
 				}
 				
 			} elseif (stristr($field, 'EXDATE;TZID')) {
