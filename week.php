@@ -109,6 +109,10 @@ $prev_week = date("Ymd", $prev_week2);
 											if ($master_array[("$thisday")]["0001"]["event_text"]) {
 												echo "<td colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#ffffff\">\n";
 												foreach ($master_array[("$thisday")]["0001"]["event_text"] as $event_text) {
+													if (strlen($event_text) > 14) {
+														$event_text = substr("$event_text", 0, 11);
+														$event_text = $event_text . "...";
+													}
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 													echo "<tr height=\"20\">\n";
 													echo "<td height=\"20\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
