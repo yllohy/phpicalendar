@@ -94,11 +94,11 @@ if ($parse_file) {
 				$recurrence_id, $uid, $class, $attendee, $location, $organizer
 			);
 				
-			$except_dates = array();
-			$except_times = array();
+			$except_dates 	= array();
+			$except_times 	= array();
 			$first_duration = TRUE;
-			$count = 1000000;
-			$valarm_set = FALSE;
+			$count 			= 1000000;
+			$valarm_set 	= FALSE;
 			
 			unset(
 				$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
@@ -109,13 +109,15 @@ if ($parse_file) {
 		} elseif ($line == 'END:VEVENT') {
 			
 			// CLASS support
-			if ($class == 'PRIVATE') {
-				$summary ='**PRIVATE**';
-				$description ='**PRIVATE**';
-			} elseif ($class == 'CONFIDENTIAL') {
-				$summary ='**CONFIDENTIAL**';
-				$description ='**CONFIDENTIAL**';
-			}			 
+			if (isset($class)) {
+				if ($class == 'PRIVATE') {
+					$summary ='**PRIVATE**';
+					$description ='**PRIVATE**';
+				} elseif ($class == 'CONFIDENTIAL') {
+					$summary ='**CONFIDENTIAL**';
+					$description ='**CONFIDENTIAL**';
+				}
+			}	 
 			
 			// make sure we have some value for $uid
 			if (!isset($uid)) {
@@ -145,8 +147,11 @@ if ($parse_file) {
 				$write_processed = true;
 			}
 			
-			if (!isset($summary)) $summary = '';
-			if (!isset($description)) $description = '';
+			if (!isset($summary)) 		$summary = '';
+			if (!isset($description)) 	$description = '';
+			if (!isset($status)) 		$status = '';
+			if (!isset($class)) 		$class = '';
+			if (!isset($location)) 		$location = '';
 			
 			$mArray_begin = mktime (0,0,0,12,21,($this_year - 1));
 			$mArray_end = mktime (0,0,0,1,12,($this_year + 1));
@@ -179,13 +184,16 @@ if ($parse_file) {
 			}
 
 			// RECURRENCE-ID Support
-			if ($recurrence_d) {
+			if (isset($recurrence_d)) {
+				
 				$recurrence_delete["$recurrence_d"]["$recurrence_t"] = $uid;
 			}
 				
 			// handle single changes in recurring events
 			// Maybe this is no longer need since done at bottom of parser? - CL 11/20/02
 			if ($uid_valid && $write_processed) {
+				if (!isset($hour)) $hour = 00;
+				if (!isset($minute)) $minute = 00;
 				$processed[$uid] = array($start_date,($hour.$minute));
 			}
 						
@@ -908,7 +916,9 @@ if ($parse_file) {
 			}
 		}
 	}
-//print '<pre>';	
+	
+	/*
+	//print '<pre>';	
 	// Remove pesky recurrences
 	if (is_array($recurrence_delete)) {
 		foreach ($recurrence_delete as $delete => $delete_key) {
@@ -943,7 +953,9 @@ if ($parse_file) {
 				}
 			}
 		}
-	}	
+	}
+	
+	*/
 	// Sort the array by absolute date.
 	if (isset($master_array) && is_array($master_array)) { 
 		ksort($master_array);

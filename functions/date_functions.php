@@ -170,17 +170,25 @@ function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic) {
 		$ev = $arr["event_text"];
 		$event_text = strip_tags($event_text, '<b><i><u>');
 	}
-	if ($arr["organizer"]) {
+	if (isset($arr["organizer"])) {
 		$organizer = urlencode(addslashes($arr["organizer"]));
+	} else {
+		$organizer = '';
 	}
-	if ($arr["attendee"]) {
+	if (isset($arr["attendee"])) {
 		$attendee = urlencode(addslashes($arr["attendee"]));
+	} else {
+		$attendee = '';
 	}
-	if ($arr["location"]) {
-		$organizer = $arr["location"];
+	if (isset($arr["location"])) {
+		$location = $arr["location"];
+	} else {
+		$location = '';
 	}
-	if ($arr["status"]) {
-		$organizer = $arr["status"];
+	if (isset($arr["status"])) {
+		$status = $arr["status"];
+	} else {
+		$status = '';
 	}
 	if ($event_text != "") {	
 		if ($lines) $event_text = word_wrap($event_text, $wrap, $lines);

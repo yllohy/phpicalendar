@@ -58,7 +58,7 @@ for ($i=0;$i<7;$i++) {
     		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=week\">";
 		} 
 	?>
-	<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
+	<?php if (isset($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
 <?php include (BASE.'includes/header.inc.php'); ?>

@@ -33,7 +33,7 @@ $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 $dayborder = 0;
 
 $nbrGridCols = 1;
-if (is_array($master_array[($getdate)])) {
+if (isset($master_array[($getdate)])) {
 	foreach($master_array[($getdate)] as $ovlKey => $ovlValue) {
 		if ($ovlKey != '-1') {
 			foreach($ovlValue as $ovl2Value) {
@@ -59,7 +59,7 @@ if (is_array($master_array[($getdate)])) {
 		} 
 	?>
 
-<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
+<?php if (isset($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
 <?php include (BASE.'includes/header.inc.php'); ?>
@@ -101,7 +101,7 @@ if (is_array($master_array[($getdate)])) {
       		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 				<?php
 					// The all day events returned here.
-					if ($master_array[($getdate)]['-1']) {
+					if (isset($master_array[($getdate)]['-1'])) {
 					   echo "<tr>\n";
 					   echo '<td colspan="3" height="24">'."\n";
 					   echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
@@ -179,7 +179,7 @@ if (is_array($master_array[($getdate)])) {
 									}
 									
 									// add events that overlap $day_start instead of cutting them out completely
-									if ("$day_start" == "$cal_time" && is_array($master_array[$getdate])) {
+									if ("$day_start" == "$cal_time" && isset($master_array[$getdate])) {
 										foreach($master_array[$getdate] as $time_key => $time_arr) {
 											if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
 												foreach($time_arr as $event_tmp) {

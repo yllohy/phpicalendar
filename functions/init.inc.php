@@ -6,12 +6,12 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-// error_reporting (E_ALL);
+error_reporting (E_ALL);
 
 if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
-if ($HTTP_COOKIE_VARS['phpicalendar']) {
+if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
 	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal_check	= $phpicalendar['cookie_calendar'];
