@@ -155,9 +155,9 @@ foreach ($cal_filelist as $filename) {
 			
 			case 'END:VEVENT':
 				
-				if (!isset($master_array[-3][$calnumber])) $master_array[-3][$calnumber] = $actual_calname;
-				if (!isset($master_array[-4][$calnumber]['mtime'])) $master_array[-4][$calnumber]['mtime'] = $actual_mtime;
-				if (!isset($master_array[-4][$calnumber]['filename'])) $master_array[-4][$calnumber]['filename'] = $filename;
+				if (!isset($master_array['-3'][$calnumber])) $master_array['-3'][$calnumber] = $actual_calname;
+				if (!isset($master_array['-4'][$calnumber]['mtime'])) $master_array['-4'][$calnumber]['mtime'] = $actual_mtime;
+				if (!isset($master_array['-4'][$calnumber]['filename'])) $master_array['-4'][$calnumber]['filename'] = $filename;
 				if (!isset($url)) $url = '';
 				if (!isset($type)) $type = '';
 				

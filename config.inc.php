@@ -5,7 +5,6 @@
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information
 
-$style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, grey, tan
 $template 				= 'default';		// Template support
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'

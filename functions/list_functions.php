@@ -12,7 +12,7 @@ function list_jumps() {
 
 function list_calcolors() {
 	global $template, $master_array;
-	foreach ($master_array[-3] as $key => $val) {
+	foreach ($master_array['-3'] as $key => $val) {
 		$return .= '<img src="templates/'.$template.'/images/monthdot_'.$key.'.gif" alt="" /> '.$val.'<br />';
 	}
 	return $return;
