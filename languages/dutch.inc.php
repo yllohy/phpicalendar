@@ -90,43 +90,43 @@ $unset_prefs_lang = 'Niet bewaarde voorkeuren:';
 
 // ----- New for 0.9.2
 
-$organizer_lang			= 'Organizer';
-$attendee_lang			= 'Attendee';
+$organizer_lang			= 'Organisator';
+$attendee_lang			= 'Aanwezige';
 $status_lang			= 'Status';
-$location_lang			= 'Location';
-$admin_header_lang		= 'PHP iCalendar Administration';
-$username_lang			= 'Username';
-$password_lang			= 'Password';
+$location_lang			= 'Locatie';
+$admin_header_lang		= 'PHP iCalender Administratie';
+$username_lang			= 'Gebruikersnaam';
+$password_lang			= 'Paswoord';
 $login_lang				= 'Login';
-$invalid_login_lang		= 'Wrong username or password.';
-$addupdate_cal_lang		= 'Add or Update a Calendar';
-$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
-$delete_cal_lang		= 'Delete a Calendar';
-$logout_lang			= 'Logout';
-$cal_file_lang			= 'Calendar File';
-$php_error_lang			= 'PHP Error';
-$upload_error_gen_lang	= 'There was a problem with your upload.';
-$upload_error_lang[0]	= 'There was a problem with your upload.';
-$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
-$upload_error_lang[4]	= 'You must select a file for upload.';
-$upload_error_type_lang = 'Only .ics files may be uploaded.';
-$copy_error_lang		= 'Failed to copy file';
-$delete_error_lang		= 'Failed to delete file';
-$delete_success_lang	= 'was deleted successfully.';
-$action_success_lang	= 'Your action was successful.';
-$submit_lang			= 'Submit';
-$delete_lang			= 'Delete';
+$invalid_login_lang		= 'Foute gebruikersnaam of paswoord.';
+$addupdate_cal_lang		= 'Voeg een kalender toe of pas hem aan';
+$addupdate_desc_lang	= 'Voeg een kalender toe door hem up te loaden. Update een kalender door hem te uploaden met dezelfde naam.';
+$delete_cal_lang		= 'Verwijder een Kalender';
+$logout_lang			= 'Log uit';
+$cal_file_lang			= 'Calender File';
+$php_error_lang			= 'PHP Fout';
+$upload_error_gen_lang	= 'Er was een probleem met uw upload';
+$upload_error_lang[0]	= 'Er was een probleem met uw upload.';
+$upload_error_lang[1]	= 'De file die je probeert up te loaden is te groot.';
+$upload_error_lang[2]	= 'De file die je probeert up te loaden is te groot.';
+$upload_error_lang[3]	= 'De file die je probeert up te loaden is maar gedeeltelijk geuploaded.';
+$upload_error_lang[4]	= 'Je moet een file aanduiden om te uploaden.';
+$upload_error_type_lang = 'Enkel .ics files mogen geuploaded worden.';
+$copy_error_lang		= 'Kopieren van de file mislukt';
+$delete_error_lang		= 'Verwijderen van de file mislukt';
+$delete_success_lang	= 'is succesvol verwijderd.';
+$action_success_lang	= 'uw actie was succesvol.';
+$submit_lang			= 'Verzenden';
+$delete_lang			= 'Verwijder';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Terug';
+$next_lang = 'Volgende';
+$prev_lang = 'Vorige';
+$day_view_lang = 'Dag overzicht';
+$week_view_lang = 'Week overzicht';
+$month_view_lang = 'Maand overzicht';
+$year_view_lang = 'Jaar overzicht';
 
 // ---------------------------------
 

@@ -21,7 +21,7 @@ $last_week_lang		= "Setmana anterior";
 $last_year_lang		= "Any anterior";
 $subscribe_lang		= "Subscriure";
 $download_lang		= "Descarregar";
-$powered_by_lang 	= "Powered by";
+$powered_by_lang 	= "Gr&agrave;cies a";
 $version_lang		= "0.9";
 $event_lang			= 'Event';
 $event_start_lang	= 'Inici';
@@ -88,43 +88,43 @@ $unset_prefs_lang 		= 'Unset preferences:';
 
 // ----- New for 0.9.2
 
-$organizer_lang			= 'Organizer';
-$attendee_lang			= 'Attendee';
-$status_lang			= 'Status';
-$location_lang			= 'Location';
-$admin_header_lang		= 'PHP iCalendar Administration';
-$username_lang			= 'Username';
-$password_lang			= 'Password';
+$organizer_lang			= 'Organitzador';
+$attendee_lang			= 'Persones presents';
+$status_lang			= 'Estat';
+$location_lang			= 'Lloc';
+$admin_header_lang		= 'Administraci&oacute; PHP iCalendar';
+$username_lang			= 'Nom d\'usuari';
+$password_lang			= 'contrasenya';
 $login_lang				= 'Login';
-$invalid_login_lang		= 'Wrong username or password.';
-$addupdate_cal_lang		= 'Add or Update a Calendar';
-$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
-$delete_cal_lang		= 'Delete a Calendar';
-$logout_lang			= 'Logout';
-$cal_file_lang			= 'Calendar File';
-$php_error_lang			= 'PHP Error';
-$upload_error_gen_lang	= 'There was a problem with your upload.';
-$upload_error_lang[0]	= 'There was a problem with your upload.';
-$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
-$upload_error_lang[4]	= 'You must select a file for upload.';
-$upload_error_type_lang = 'Only .ics files may be uploaded.';
-$copy_error_lang		= 'Failed to copy file';
-$delete_error_lang		= 'Failed to delete file';
-$delete_success_lang	= 'was deleted successfully.';
-$action_success_lang	= 'Your action was successful.';
-$submit_lang			= 'Submit';
-$delete_lang			= 'Delete';
+$invalid_login_lang		= 'Nom d\'usuari o contrassenya incorrectes.';
+$addupdate_cal_lang		= 'Afegeix o actualitza un Calendari';
+$addupdate_desc_lang	= 'Afegeix un Calendari enviant un fitxer. Actualitza un Calendari enviant un fitxer amb el mateix nom.';
+$delete_cal_lang		= 'Esborra un Calendari';
+$logout_lang			= 'Desconnexi&oacute;';
+$cal_file_lang			= 'Fitxer de Calendari';
+$php_error_lang			= 'Error de PHP ';
+$upload_error_gen_lang	= 'Hi ha hagut un error en el proc&eacute;s d\'enviament.';
+$upload_error_lang[0]	= 'Hi ha hagut un error en el proc&eacute;s d\'enviament.';
+$upload_error_lang[1]	= 'El fitxer enviat &eacute;s massa gran.';
+$upload_error_lang[2]	= 'El fitxer enviat &eacute;s massa gran.';
+$upload_error_lang[3]	= 'El fitxer ha estat enviat nom&eacute;s parcialment.';
+$upload_error_lang[4]	= 'Cal sel&middot;leccionar un fitxer a enviar.';
+$upload_error_type_lang = 'Nomes es poden enviar fitxers del tipus .ics.';
+$copy_error_lang		= 'Error durant la c&ograve;pia del fitxer.';
+$delete_error_lang		= 'Error al esborrar el fitxer.';
+$delete_success_lang	= 'ha estat eliminat.';
+$action_success_lang	= 'L\'acci&oacute; ha acabat satisfact&ograve;riament.';
+$submit_lang			= 'Envia';
+$delete_lang			= 'Esborra';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Endarrera';
+$next_lang = 'Seg&uuml;ent';
+$prev_lang = 'Anterior';
+$day_view_lang = 'Vista Di&agrave;ria';
+$week_view_lang = 'Vista Setmanal';
+$month_view_lang = 'Vista Mensual';
+$year_view_lang = 'Vista Anual';
 
 // ---------------------------------
 
@@ -150,7 +150,7 @@ $format_recur_lang['byday']			= 'Durant els dies de la setmana: %list%';			// ie
 // ---------------------------------
 
 $daysofweek_lang			= array ('Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte');
-$daysofweekshort_lang		= array ('Dium','Dil','Dima','Dime','Dij','Div','Dis');
+$daysofweekshort_lang		= array ('Dium','Dill','Dima','Dime','Dij','Div','Dis');
 $daysofweekreallyshort_lang	= array ('D','L','M','X','J','V','S');
 $monthsofyear_lang			= array ('Gener','Febrer','Mar&ccedil;','Abril','Maig','Juny','Juliol','Agost','Setembre','Octubre','Novembre','Desembre');
 $monthsofyearshort_lang		= array ('Gen','Feb','Mar','Abr','Mai','Jun','Jul','Ago','Sep','Oct','Nov','Des');
@@ -163,7 +163,7 @@ $timeFormat_small = 'G:i';
 $dateFormat_day = '%A, %e de %B';
 $dateFormat_week = '%e de %B';
 $dateFormat_week_list = '%a, %e de %b';
-$dateFormat_week_jump = '%e de %e';
+$dateFormat_week_jump = '%e de %b';
 $dateFormat_month = '%B de %Y';
 $dateFormat_month_list = '%A, %e de %B';
 
