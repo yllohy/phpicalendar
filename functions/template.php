@@ -76,7 +76,7 @@ class Page {
 	}	
 	
 	function draw_week($template_p) {
-		global $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small;
+		global $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small, $day_start;
 		
 		// Figure out colspans
 		$dayborder 	= 0;
@@ -251,16 +251,16 @@ class Page {
 
 				if (sizeof($event_length[$thisday]) == 0) {
 					if ($dayborder == 0) {
-						$class = " class=\"weekborder\"";
+						$class = ' class="weekborder"';
 						$dayborder++;
 					} else {
-						$class = "";
+						$class = '';
 						$dayborder = 0;
 					}
 					
 					$drawWidth = 1;
 					$colspan_width = round((80 / $nbrGridCols[$thisday]) * $drawWidth);
-					$weekdisplay .= "<td width=\"$colspan_width\" colspan=\"" . $nbrGridCols[$thisday] . "\" $class>&nbsp;</td>\n";
+					$weekdisplay .= '<td width="' . $colspan_width . '" colspan="' . $nbrGridCols[$thisday] . '" ' . $class . '>&nbsp;</td>'."\n";
 					
 				} else {
 					$emptyWidth = $nbrGridCols[$thisday];
@@ -271,9 +271,11 @@ class Page {
 						switch ($event_length[$thisday][$i]["state"]) {
 							case "begin":
 								$event_length[$thisday][$i]["state"] = "started";
-								$event_start 	= $this_time_arr[($event_length[$thisday][$i]["key"])]["start_unixtime"];
+								$event_start 	= $this_time_arr[($event_length[$thisday][$i]["key"])]['start_unixtime'];
 								$event_start 	= date ($timeFormat_small, $event_start);
-								$event_calno  = $this_time_arr[($event_length[$thisday][$i]['key'])]['calnumber'];
+								$event_calno  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['calnumber'];
+								$event_calna  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['calname'];
+								$event_url  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['url'];
 								$event_status	= strtolower($this_time_arr[($event_length[$thisday][$i]['key'])]['status']);
 								if ($event_calno < 1) $event_calno = 1;
 								if ($event_calno > 7) $event_calno = 7;
@@ -289,8 +291,6 @@ class Page {
 							  
 								// Start drawing the event
 								$event_temp  = $loop_event;
-								$event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
-								$event_url   = $this_time_arr[($event_length[$i]['key'])]['url'];
 								$event 		 = openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$thisday][$i]["key"])], $week_events_lines, 25, '', '', 'ps', $event_url);
 								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
 								$event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
@@ -332,7 +332,7 @@ class Page {
 	}
 	
 	function draw_day($template_p) {
-		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength;
+		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $day_start;
 		
 		// Replaces the allday events
 		$replace = '';
@@ -421,7 +421,7 @@ class Page {
 			}
 			
 			// add events that overlap $day_start instead of cutting them out completely
-			if ("$day_start" == "$cal_time" && isset($master_array[$getdate])) {
+			if (($day_start == $cal_time) && (isset($master_array[$getdate]))) {
 				foreach($master_array[$getdate] as $time_key => $time_arr) {
 					if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
 						foreach($time_arr as $event_tmp) {
