@@ -38,7 +38,7 @@ $show_search			= 'yes';			// Show the search box in the sidebar.
 $allow_preferences		= 'yes';			// Allow visitors to change various preferences via cookies.
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
-$show_completed			= 'no';				// Show completed todos on your todo list.
+$show_completed			= 'yes';				// Show completed todos on your todo list.
 $allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
 $login_cookies			= 'no';			// Set to yes to store authentication information via (unencrypted) cookies. Set to no to use sessions.
 

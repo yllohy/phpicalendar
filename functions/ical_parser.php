@@ -172,10 +172,6 @@ foreach ($cal_filelist as $filename) {
 			
 			case 'END:VEVENT':
 				
-				if (!isset($master_array['-3'][$calnumber])) $master_array['-3'][$calnumber] = $actual_calname;
-				if (!isset($master_array['-4'][$calnumber]['mtime'])) $master_array['-4'][$calnumber]['mtime'] = $actual_mtime;
-				if (!isset($master_array['-4'][$calnumber]['filename'])) $master_array['-4'][$calnumber]['filename'] = $filename;
-				if (!isset($master_array['-4'][$calnumber]['webcal'])) $master_array['-4'][$calnumber]['webcal'] = 'no';
 				if (!isset($url)) $url = '';
 				if (!isset($type)) $type = '';
 				
@@ -1139,6 +1135,11 @@ foreach ($cal_filelist as $filename) {
 	}
 	$calnumber = $calnumber + 1;
 }
+
+if (!isset($master_array['-3'][$calnumber])) $master_array['-3'][$calnumber] = $actual_calname;
+if (!isset($master_array['-4'][$calnumber]['mtime'])) $master_array['-4'][$calnumber]['mtime'] = $actual_mtime;
+if (!isset($master_array['-4'][$calnumber]['filename'])) $master_array['-4'][$calnumber]['filename'] = $filename;
+if (!isset($master_array['-4'][$calnumber]['webcal'])) $master_array['-4'][$calnumber]['webcal'] = 'no';
 
 if ($parse_file) {	
 	// Sort the array by absolute date.
