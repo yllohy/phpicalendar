@@ -655,6 +655,8 @@ foreach ($cal_filelist as $filename) {
 			} else {
 		
 				unset ($field, $data, $prop_pos, $property);
+				$field = '';
+				$data = '';
 				ereg ("([^:]+):(.*)", $line, $line);
 				$field = $line[1];
 				$data = $line[2];
