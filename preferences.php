@@ -1,8 +1,11 @@
 <?php
+
+define('BASE','./');
+include(BASE.'functions/ical_parser.php');
+
 if ($cookie_uri == '') {
 	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 }
-define('BASE','./');
 $current_view = "preferences";
 $default_view = "$default_view" . ".php";
 if ($allow_preferences == 'no') header("Location: $default_view");
@@ -42,7 +45,7 @@ if ($HTTP_COOKIE_VARS['phpicalendar']) {
 #echo "$cookie_uri";
 #print_r(unserialize($HTTP_COOKIE_VARS['phpicalendar']));
 #print_r($phpicalendar);
-include(BASE.'functions/ical_parser.php');
+
 
 if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 	# No cookie set -> use defaults from config file.
