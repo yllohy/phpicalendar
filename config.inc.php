@@ -39,12 +39,13 @@ $use_color_cals 		= 'yes';			// Display each calendar in the pop-up as a differe
 $daysofweek_dayview 	= 'no';				// Display the days of the week in day.php view.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
 $enable_publishing		= 'no';				// Enable webdav style publishing to your calendar's folder. READ calendars/publish.php before using!
-$show_search			= 'yes';				// Show the search box in the sidebar.
+$show_search			= 'yes';			// Show the search box in the sidebar.
 $allow_preferences		= 'yes';			// Allow visitors to change various preferences via cookies.
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
-$show_completed			= 'no';			// Show completed todos on your todo list.
+$show_completed			= 'no';				// Show completed todos on your todo list.
 $show_login				= 'no';				// Set to yes to prompt for login to unlock calendars.
+$phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
 
 // Administration settings
 $allow_admin			= 'no';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
