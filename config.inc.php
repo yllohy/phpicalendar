@@ -1,6 +1,6 @@
 <?
 
-$style_sheet = "default.css";			// Themes support
+$style_sheet = "default.css";			// Themes support - "default.css", "red.css", "green.css"
 $fullpath = "webcal://";				// what iCal file are we using
 $calendar_path = "./calendars";			// path to directory with calendars
 $default_view = "day";					// default view for calendars = "day", "week", "month"

@@ -1,0 +1,46 @@
+/* Style sheet for the red calendar (default) */
+
+.eventborder { background-color: #802022; border: 1px #CC3300 solid; }
+.eventbg { background-color: #a04042; }
+.eventfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; }
+.calborder { background-color: #FFFFFF; border: 1px #A1A5A9 solid; }
+
+
+
+a.psf	{
+	text-decoration:	none;
+	}
+a.psf:link	{
+	color:	#06f;
+	background-color: transparent;
+	}
+a.psf:visited	{
+	color:	#06f;
+	background-color: transparent;
+	}
+a.psf:active	{
+	color:	#36c;
+	background-color: transparent;
+	}
+a.psf:hover	{
+	color:	#009;
+	background-color: transparent;
+	}
+	
+	
+body	{
+background-color: #E5E5E5;
+}
+
+/* CSS definitions for fonts */
+
+.V9 { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; }
+.G10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #06f; }
+.G10B { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: black; }
+.V12 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; }
+.H20 { font-family: Helvetica, sans-serif; font-size: 20px; }
+
+
+.query_style { font-size : 12px; font-family : geneva, arial, sans-serif; width: 135px; }
+.add_style { font-size : 12px; font-family : verdana, geneva, arial, sans-serif; width: 160px; }
+

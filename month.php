@@ -243,7 +243,7 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr height="25">
 									<td colspan="3" align="center" valign="middle" class="eventborder" width="740" height="25">
-										<font class="V12" color="#FFFFFF"><b>This Month's Events</b></font>
+										<font class="eventfont" color="#FFFFFF"><b>This Month's Events</b></font>
 									</td>
 								</tr>
 								<tr height="11">

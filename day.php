@@ -165,7 +165,7 @@ if ($getdate == (date("Ymd"))) {
 											echo "<td>\n";
 											echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 											echo "<tr>\n";
-											echo "<td bgcolor=\"#68aaef\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
+											echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
 											echo "</tr>\n";
 											echo "</table>\n";
 											echo "</td>\n";           
