@@ -31,7 +31,7 @@ $this_year = $day_array2[1];
 
 // reading the file if it's allowed
 $parse_file = true;
-if ($is_webcal == false && $save_parsed_cals == 'yes') {	
+if (($is_webcal == false) && ($save_parsed_cals == 'yes') && ($cal != 'all_calenders_combined971')) {	
 	$realcal_mtime = filemtime($filename);
 	$parsedcal = $tmp_dir.'/parsedcal-'.$cal_filename.'-'.$this_year;
 	if (file_exists($parsedcal)) {
