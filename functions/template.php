@@ -117,12 +117,13 @@ class Page {
 			$weekday_loop  .= $loop_tmp;
 		}
 		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is', $weekday_loop, $this->page);
-	
+		
+		
 		
 	}
 	
 	function draw_day($template_p) {
-		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view;
+		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength;
 		
 		// Replaces the allday events
 		$replace = '';
@@ -175,6 +176,164 @@ class Page {
 			$weekday_loop  .= $loop_tmp;
 		}
 		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is', $weekday_loop, $this->page);
+		
+		// Build the body
+		$dayborder = 0;
+
+		$nbrGridCols = 1;
+		if (isset($master_array[($getdate)])) {
+			foreach($master_array[($getdate)] as $ovlKey => $ovlValue) {
+				if ($ovlKey != '-1') {
+					foreach($ovlValue as $ovl2Value) {
+						$nbrGridCols = kgv($nbrGridCols, ($ovl2Value['event_overlap'] + 1));
+					}
+				}
+			} 
+		}
+		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!is", $this->page, $match2);
+		$loop_hours = trim($match2[1]);
+
+		$event_length = array ();
+		$border = 0;
+		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $getdate, $day_array2);
+		$this_day = $day_array2[3]; 
+		$this_month = $day_array2[2];
+		$this_year = $day_array2[1];
+		foreach ($day_array as $key) {
+			ereg('([0-9]{2})([0-9]{2})', $key, $regs_tmp);
+			$cal_time = $key;
+			$key = mktime($regs_tmp[1],$regs_tmp[2],0,$this_month,$this_day,$this_year);
+			$key = date ($timeFormat, $key);
+			unset($this_time_arr);
+			
+			// add events that overlap the start time
+			if (isset($master_array[$getdate][$cal_time]) && sizeof($master_array[$getdate][$cal_time]) > 0) {
+				$this_time_arr = $master_array[$getdate][$cal_time];
+			}
+			
+			// add events that overlap $day_start instead of cutting them out completely
+			if ("$day_start" == "$cal_time" && isset($master_array[$getdate])) {
+				foreach($master_array[$getdate] as $time_key => $time_arr) {
+					if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
+						foreach($time_arr as $event_tmp) {
+							if ((int)$event_tmp['event_end'] > (int)$cal_time) {
+								$this_time_arr[] = $event_tmp;
+							}
+						}
+					} else {
+						break;
+					}
+				}
+			}																		
+			
+			// check for eventstart 
+			if (isset($this_time_arr) && sizeof($this_time_arr) > 0) {
+				foreach ($this_time_arr as $eventKey => $loopevent) {
+					$drawEvent = drawEventTimes ($cal_time, $loopevent['event_end']);
+					$j = 0;
+					while (isset($event_length[$j])) {
+						if ($event_length[$j]['state'] == 'ended') {
+							$event_length[$j] = array ('length' => ($drawEvent['draw_length'] / $gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin');
+							break;
+						}
+						$j++;
+					}
+					if ($j == sizeof($event_length)) {
+						array_push ($event_length, array ('length' => ($drawEvent['draw_length'] / $gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin'));
+					}
+				}
+			}
+			if (ereg('([0-9]{1,2}):00', $key)) {
+				$daydisplay .= '<tr>'."\n";
+				$daydisplay .= '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'."\n";
+				$daydisplay .= '<td width="1" height="' . $gridLength . '"></td>'."\n";
+			} elseif("$cal_time" == "$day_start") {
+				$size_tmp = 60 - (int)substr($cal_time,2,2);
+				$daydisplay .= '<tr>'."\n";
+				$daydisplay .= "<td rowspan=\"" . ($size_tmp / $gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
+				$daydisplay .= '<td width="1" height="' . $gridLength . '"></td>'."\n";
+			} else {
+				$daydisplay .= '<tr>'."\n";
+				$daydisplay .= '<td width="1" height="' . $gridLength . '"></td>'."\n";
+			}
+			if ($dayborder == 0) {
+				$class = ' class="dayborder"';
+				$dayborder++;
+			} else {
+				$class = ' class="dayborder2"';
+				$dayborder = 0;
+			}
+			if (sizeof($event_length) == 0) {
+				$daydisplay .= '<td bgcolor="#ffffff" colspan="' . $nbrGridCols . '" '.$class.'>&nbsp;</td>'."\n";
+				
+			} else {
+				$emptyWidth = $nbrGridCols;
+				for ($i=0;$i<sizeof($event_length);$i++) {
+					$drawWidth = $nbrGridCols / ($event_length[$i]['overlap'] + 1);
+					$emptyWidth = $emptyWidth - $drawWidth;
+					switch ($event_length[$i]['state']) {
+						case 'begin':
+						  $event_length[$i]['state'] = 'started';
+						  $event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
+						  $event_end	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
+						  if (isset($this_time_arr[($event_length[$i]['key'])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$i]['key'])]['display_end']);
+						  $event_start 	= date ($timeFormat, $event_start);
+						  $event_end	= date ($timeFormat, $event_end);
+						  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];
+						  $event_status = strtolower($this_time_arr[($event_length[$i]['key'])]['status']);
+						  if ($event_calno < 1) $event_calno = 1;
+						  if ($event_calno > 7) $event_calno = 7;
+		
+						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
+						  $daydisplay .= '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
+						  $daydisplay .= '<tr>'."\n";
+						  $daydisplay .= '<td class="eventborder"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
+						  if ($event_status != '') {
+							$daydisplay .= '<td class="eventborder" width="9" align="right" valign="center"><font class="eventfont">';
+							$daydisplay .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">';
+							$daydisplay .= '</font></td>'."\n";
+						  }
+						  $daydisplay .= '</tr>'."\n";
+						  $daydisplay .= '<tr>'."\n";
+						  $daydisplay .= '<td colspan="2">'."\n";
+						  $daydisplay .= '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
+						  $daydisplay .= '<tr>'."\n";
+						  $daydisplay .= '<td class="eventbg_'.$event_calno.'">';
+						  $event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
+						  $event_url   = $this_time_arr[($event_length[$i]['key'])]['url'];
+						  $daydisplay .= openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$i]['key'])], '', 0, '<font class="eventfont">', '</font>', 'psf', $event_url);
+						  $daydisplay .= '</td></tr>'."\n";
+						  $daydisplay .= '</table>'."\n";
+						  $daydisplay .= '</td>'."\n";           
+						  $daydisplay .= '</tr>'."\n";
+						  $daydisplay .= '</table>'."\n";
+						  $daydisplay .= '</td>'."\n";
+						  break;
+						case 'started':
+							break;
+						case 'ended':
+							$daydisplay .= '<td bgcolor="#eeeeee" colspan="' . $drawWidth . '" ' . $class . '>&nbsp;</td>'."\n";
+							break;
+					}
+					$event_length[$i]['length']--;
+					if ($event_length[$i]['length'] == 0) {
+						$event_length[$i]['state'] = 'ended';
+					}
+				}
+				//fill emtpy space on the right
+				if ($emptyWidth > 0) {
+					$daydisplay .= '<td bgcolor="#ffffff" colspan="' . $emptyWidth . '" ' . $class . '>&nbsp;</td>'."\n";
+				}
+				while (isset($event_length[(sizeof($event_length) - 1)]) && $event_length[(sizeof($event_length) - 1)]['state'] == 'ended') {
+					array_pop($event_length);
+				}
+				
+			}
+			$daydisplay .= '</tr>'."\n";
+		}
+		
+		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop row off -->!is', $daydisplay, $this->page);
+	
 	
 	}
 	
