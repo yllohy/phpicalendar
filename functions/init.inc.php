@@ -6,7 +6,7 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-//error_reporting (E_ALL);
+error_reporting (E_ALL);
 
 $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 if (!defined('BASE')) define('BASE', './');
