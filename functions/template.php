@@ -911,14 +911,29 @@ class Page {
 				// This replaces any tags
 				$this->page = str_replace('{' . strtoupper($tag) . '}', $data, $this->page);
 			}
+			
+		else
+			die('No tags designated for replacement.');
 		}
 		
 	function replace_files($tags = array()) {
 		if (sizeof($tags) > 0)
 			foreach ($tags as $tag => $data) {
+				
 				// This opens up another template and parses it as well.
 				$data = (file_exists($data)) ? $this->parse($data) : $data;
+				
+				// This removes any unfilled tags
+				if (!$data) {
+					$this->page = preg_replace('!<\!-- switch ' . $tag . ' on -->(.*)<\!-- switch ' . $tag . ' off -->!is', '', $this->page);
+				}
+				
+				// This replaces any tags
+				$this->page = str_replace('{' . strtoupper($tag) . '}', $data, $this->page);
 			}
+			
+		else
+			die('No tags designated for replacement.');
 		}
 	
 	function output() {
