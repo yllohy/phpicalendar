@@ -397,12 +397,16 @@ if ($parse_file) {
 			
 			
 			
+		} elseif (stristr($line, "BEGIN:VALARM")) {
+			$valarm_set = TRUE;
+		} elseif (stristr($line, "END:VALARM")) {
+			$valarm_set = FALSE;
 		} else {
 	
 			unset ($field, $data);
-			$line = explode (":", $line);
-			$field = $line[0];
-			$data = $line[1];
+			ereg ("([^:]+):(.*)", $line, $line);
+			$field = $line[1];
+			$data = $line[2];
 			
 			if (preg_match("/^DTSTART/i", $field)) {
 				$data = ereg_replace('T', '', $data);
@@ -445,7 +449,7 @@ if ($parse_file) {
 			} elseif (preg_match("/^DESCRIPTION/i", $field)) {
 				$data = str_replace("\\n", "<br>", $data);
 				$data = htmlentities(urlencode($data));
-				if ($valarm_set = FALSE) { 
+				if ($valarm_set == FALSE) { 
 					$description = $data;
 				} else {
 					$valarm_description = $data;
@@ -486,8 +490,6 @@ if ($parse_file) {
 			} elseif (preg_match("/^ATTENDEE/i", $field)) {
 				$attendee = $data;
 				
-			} elseif (preg_match("/^BEGIN:VALARM/i", $field)) {
-				$valarm_set = TRUE;
 			}
 		}
 	}
