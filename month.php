@@ -31,7 +31,7 @@
 </head>
 <body>
 <center>
-<table border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9" class="calborder">
+<table width="735" border="0" cellspacing="0" cellpadding="0" bgcolor="#A1A5A9" class="calborder">
 	<tr>
 		<td align="center" valign="middle" bgcolor="white">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
