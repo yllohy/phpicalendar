@@ -116,6 +116,9 @@ foreach ($cal_filelist as $filename) {
 				
 			} elseif ($line == 'END:VEVENT') {
 				
+				$end_unixtime 	= $start_unixtime + $the_duration;
+				$end_time 		= date ('Hi', $end_unixtime);
+				
 				// CLASS support
 				if (isset($class)) {
 					if ($class == 'PRIVATE') {
