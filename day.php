@@ -20,7 +20,7 @@ $today_today 	= date('Ymd', strtotime("now + $second_offset seconds"));
 $next_day		= date('Ymd', strtotime("+1 day",  $unix_time));
 $prev_day 		= date('Ymd', strtotime("-1 day",  $unix_time));
 
-$display_date = localizeDate($dateFormat_week_list, $unix_time);
+$display_date = localizeDate($dateFormat_day, $unix_time);
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 
 

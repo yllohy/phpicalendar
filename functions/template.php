@@ -5,7 +5,9 @@
 class Page {
 	var $page;
 	function draw_day($template_p) {
-		global $template, $getdate, $cal, $master_array ;
+		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day;
+		
+		// Replaces the allday events
 		$replace = '';
 		if (is_array($master_array[$getdate]['-1'])) {
 			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
@@ -23,6 +25,24 @@ class Page {
 			}
 		}
 		$this->page = ereg_replace('<!-- loop allday on -->(.*)<!-- loop allday off -->', $replace, $this->page);
+	
+		// Replaces the daysofweek
+		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
+		$loop_dof = trim($match1[1]);
+		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
+		$start_day 			= strtotime($week_start_day);
+		for ($i=0; $i<7; $i++) {
+			$day_num 		= date("w", $start_day);
+			$weekday 		= $daysofweek_lang[$day_num];
+			$daylink		= date('Ymd', $start_wt);
+			$start_day 		= strtotime("+1 day", $start_day);
+			$start_wt 		= strtotime("+1 day", $start_wt);
+			$loop_tmp 		= str_replace('{DAY}', $weekday, $loop_dof);
+			$loop_tmp 		= str_replace('{DAYLINK}', $daylink, $loop_tmp);
+			$weekday_loop  .= $loop_tmp;
+		}
+		$this->page = ereg_replace('<!-- loop daysofweek on -->(.*)<!-- loop daysofweek off -->', $weekday_loop, $this->page);
+	
 	}
 	
 	function draw_month($template_p, $offset = '+0', $type) {
