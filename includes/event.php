@@ -81,14 +81,27 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-  <title><?php echo $calendar_name2; ?></title>
+  <title><?php 
+  				if ($calendar_name == 'all_calenders_combined971') {
+					echo "$all_cal_comb_lang";
+				} else {
+					echo "$calendar_name2";
+				}?></title>
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
 </head>
 <body bgcolor="#eeeeee"><center>
 <table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
-		<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$calendar_name2 $calendar_lang"; ?></font></td>
+		<td align="center" width="98%" class="sideback"><font class="G10BOLD">
+			<?php 
+				if ($calendar_name == 'all_calenders_combined971') {
+					echo "$all_cal_comb_lang";
+				} else {
+					echo "$calendar_name2 $calendar_lang";
+				} 
+			?>
+		</font></td>
 		<td align="right" valign="top" width="1%" class="sideback"></td>
 	</tr>
 	<tr>

@@ -1,6 +1,10 @@
 	<?php
 	
-	$cal_displayname2 = $calendar_name . " $calendar_lang";
+	if ($cal == 'all_calenders_combined971') {
+		$cal_displayname2 = $all_cal_comb_lang;
+	} else {
+		$cal_displayname2 = $calendar_name . " $calendar_lang";
+	}
 	if (strlen($cal_displayname2) > 24) {
 		$cal_displayname2 = substr("$cal_displayname2", 0, 21);
 		$cal_displayname2 = $cal_displayname2 . "...";
@@ -8,7 +12,11 @@
 	
 	$next_day = date("Ymd", strtotime("+1 day", $unix_time));
 	$prev_day = date("Ymd", strtotime("-1 day", $unix_time));
-	
+
+	// Get the real date to display as "go to today", not the date displayed in the calendar
+	$really_unix_time = strtotime(date('Ymd'));
+	$really_today_today = date ('Ymd', $really_unix_time);
+		
 	$fake_getdate_time = strtotime($this_year.'-'.$this_month.'-15');
 	?>
 <br>
@@ -192,13 +200,13 @@
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6" class="G10B">
 														<?php 
-															echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$today_today\">$goday_lang</a><br>\n";
-															echo "<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$today_today\">$goweek_lang</a><br>\n";
-															echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$today_today\">$gomonth_lang</a><br>\n";
-															echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$really_today_today\">$goday_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$really_today_today\">$goweek_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$really_today_today\">$gomonth_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$really_today_today\">$goyear_lang</a><br>\n";
 															echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
 															if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
-															echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+															if ($cal != 'all_calenders_combined971') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
 														 ?>
 														</td>
 													</tr>
