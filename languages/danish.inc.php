@@ -3,8 +3,8 @@
 // Danish language include
 // For version 0.9.1 PHP iCalendar
 //
-// Translation by Henrik H¿jmark (styxx@worldonline.dk)
-//            and Jakob PeterhŠnsel (marook@creepers.org)
+// Translation by Henrik Hï¿½jmark (styxx@worldonline.dk)
+//            and Jakob Peterhï¿½nsel (marook@creepers.org)
 //
 // Submit new translations to chad@chadsdomain.com
 
@@ -87,18 +87,18 @@ $unfinished_lang		= 'Uafsluttet';
 
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
+$prefs_set_lang = 'Dine indstillinger er gemt.'; //Your preferences have been set.
+$prefs_unset_lang = 'Indstillinger fjernet. &AElig;ndringer er synlig ved n&aelig;ste sidevisning.'; //Preferences unset. Changes will take place next page load.
 $unset_prefs_lang = 'Unset preferences:';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Tilbage';
+$next_lang = 'N&aelig;ste';
+$prev_lang = 'Forrige';
+$day_view_lang = 'Vis Dag';
+$week_view_lang = 'Vis Uge';
+$month_view_lang = 'Vis M&aring;ned';
+$year_view_lang = 'Vis &Aring;r';
 
 // ---------------------------------
 

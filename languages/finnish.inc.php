@@ -1,7 +1,7 @@
 <?php
 
 // Finnish language include
-// For version 0.9.1 PHP iCalendar
+// For version 0.9 PHP iCalendar
 //
 // Translation by Kari Somby (kari.somby@ramk.fi)
 //
@@ -63,44 +63,48 @@ $search_took_lang		= 'Etsimiseen meni %s sekuntia';
 $recurring_event_lang	= 'Toistuva tapahtuma';
 $exception_lang			= 'Poikkeus';
 $no_query_lang			= 'Kysely&auml; ei annettu';
-$preferences_lang		= 'Preferences';
-$printer_lang			= 'Printer';
-$select_lang_lang		= 'Select your default language:';
-$select_cal_lang		= 'Select your default calendar:';
-$select_view_lang		= 'Select your default view:';
-$select_time_lang		= 'Select your default start time:';
-$select_day_lang		= 'Select your default start day of week:';
-$select_style_lang		= 'Select your default style:';
-$set_prefs_lang			= 'Set preferences';
-$completed_date_lang	= 'Completed on';
-$completed_lang			= 'Completed';
-$created_lang			= 'Created:';
-$due_lang				= 'Due:';
-$priority_lang			= 'Priority:';
-$priority_high_lang		= 'High';
-$priority_low_lang		= 'Low';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'None';
-$status_lang			= 'Status:';
-$todo_lang				= 'To do items';
-$unfinished_lang		= 'Unfinished';
+$preferences_lang		= 'Ominaisuudet';
+$printer_lang			= 'Tulostin';
+$select_lang_lang		= 'Valitse oletuskieli:';
+$select_cal_lang		= 'Valitse oletuskalenteri:';
+$select_view_lang		= 'Valitse oletusn&auml;kym&auml;:';
+$select_time_lang		= 'Valitse oletusaloitusaika:';
+$select_day_lang		= 'Valitse oletusaloitusp&auml;iv&auml; viikolle:';
+$select_style_lang		= 'Valitse oletustyyli:';
+$set_prefs_lang			= 'Aseta ominaisuudet';
+$completed_date_lang	= 'Valmistuu';
+$completed_lang			= 'Valmis';
+$created_lang			= 'Luotu:';
+$due_lang				= 'Er&auml;&auml;ntyy:';
+$priority_lang			= 'T&auml;rkeys:';
+$priority_high_lang		= 'Korkea';
+$priority_low_lang		= 'Matala';
+$priority_medium_lang	= 'Keski';
+$priority_none_lang		= 'Ei mit&auml;&auml;n';
+$status_lang			= 'Tila:';
+$todo_lang				= 'Teht&auml;v&auml;t:';
+$unfinished_lang		= 'P&auml;&auml;ttym&auml;tt&ouml;m&auml;t';
+
 
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
+$prefs_set_lang = 'Asetukset p&auml;ivitetty';
+$prefs_unset_lang = 'Asetuksia ei p&auml;ivitetty. Muutokset p&auml;ivitet&auml;&auml;n seuraavan sivun ladattua';
+$unset_prefs_lang = 'Asetukset peruttu';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Takaisin';
+$next_lang = 'Seuraava';
+$prev_lang = 'Edellinen';
+$day_view_lang = 'P&auml;iv&auml;n&auml;kym&auml;';
+$week_view_lang = 'Viikkon&auml;kym&auml;';
+$month_view_lang = 'Kuukausin&auml;kym&auml;';
+$year_view_lang = 'Vuosin&auml;kym&auml;';
 
 // ---------------------------------
+
+
+
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
@@ -120,8 +124,6 @@ $format_recur_lang['count']			= '%int% kertaa';		// ie, 'for 5 times'
 $format_recur_lang['bymonth']		= 'Kuukaudet: %list%';			// ie, 'In months: January, February, March'
 $format_recur_lang['bymonthday']	= 'P&auml;iv&auml;t: %list%';			// ie, 'On dates: 1, 2, 3, 4'
 $format_recur_lang['byday']			= 'Viikonp&auml;iv&auml;t: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
-
-// ---------------------------------
 
 $daysofweek_lang			= array ('Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai');
 $daysofweekshort_lang		= array ('Su','Ma','Ti','Ke','To','Pe','La');

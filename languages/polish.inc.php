@@ -3,7 +3,7 @@
 // Polish language include
 // For version 0.9.1 PHP iCalendar
 //
-// Translation by Stanislaw Cieslicki (stahoo@poczta.onet.pl)
+// Translation by Stanisław Cieślicki (stahoo@poczta.onet.pl)
 //
 // Submit new translations to chad@chadsdomain.com
 
@@ -87,9 +87,9 @@ $unfinished_lang		= 'Niewykonane';
 
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
+$prefs_set_lang = 'Twoje preferencje zostały ustawione.';
+$prefs_unset_lang = 'Preferencje przywrócone. Zmiany będą widoczne po ponownym załadowaniu strony.';
+$unset_prefs_lang = 'Przywróć preferencje:';
 
 // - navigation
 $back_lang = 'Back';

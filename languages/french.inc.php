@@ -85,20 +85,21 @@ $status_lang			= 'Status:';
 $todo_lang				= 'T&acirc;ches &agrave; faire';
 $unfinished_lang		= 'Non faites';
 
+// - navigation
+$back_lang = 'Retour';
+$next_lang = 'Suivant';
+$prev_lang = 'Pr&eacute;c&eacute;dent';
+$day_view_lang = 'Vue Journaliere';
+$week_view_lang = 'Vue Hebdomadaire';
+$month_view_lang = 'Vue Mensuelle';
+$year_view_lang = 'Vue Annuelle';
+
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
+$prefs_set_lang = 'Vos pr&eacute;f&eacute;rences ont &eacute;t&eacute; enregistr&eacute;es';
+$prefs_unset_lang = 'Pr&eacute;f&eacute;rences non d&eacute;finies. Les Changements seront pris en compte au prochain chargement de la page.';
+$unset_prefs_lang = 'Pr&eacute;f&eacute;rences non d&eacute;finies:';
 
-// - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
 
 // ---------------------------------
 

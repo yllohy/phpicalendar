@@ -86,39 +86,39 @@ $unfinished_lang		= 'Uferdig';
 
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
+$prefs_set_lang = 'Dine valg er satt.';
+$prefs_unset_lang = 'Valgene er tilbakestilt. Endringene vil vises neste gang siden lastes.';
+$unset_prefs_lang = 'Tilbakestill valgene:';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Tilbake';
+$next_lang = 'Neste';
+$prev_lang = 'Forrige';
+$day_view_lang = 'Dagvisning';
+$week_view_lang = 'Ukesvisning';
+$month_view_lang = 'M&aring;nedsvisning';
+$year_view_lang = '&Aring;rvisning';
 
 // ---------------------------------
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 
-$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
-$format_recur_lang['monthly']		= array('month','months');		// and plural forms
-$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
-$format_recur_lang['daily']			= array('day','days');			// in the replacement below
-$format_recur_lang['hourly']		= array('hour','hours');
-$format_recur_lang['minutely']		= array('minute','minutes');
-$format_recur_lang['secondly']		= array('second','seconds');
+$format_recur_lang['yearly']		= array('&aring;r','&aring;rlig');		// for these, put singular
+$format_recur_lang['monthly']		= array('m&aring;ned','m&aring;neder');		// and plural forms
+$format_recur_lang['weekly']		= array('uke','uker');		// these will be %freq%
+$format_recur_lang['daily']			= array('dag','dager');			// in the replacement below
+$format_recur_lang['hourly']		= array('time','timer');
+$format_recur_lang['minutely']		= array('minutt','minutter');
+$format_recur_lang['secondly']		= array('sekund','sekunder');
 
-$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
-$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+$format_recur_lang['start']			= 'Hver %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'til %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= 'for et antall av %int%';		// ie, 'for 5 times'
 
-$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
-$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
-$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+$format_recur_lang['bymonth']		= 'I måneder: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'På datoene: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'På dagene: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
 
 // ---------------------------------
 

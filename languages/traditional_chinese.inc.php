@@ -87,9 +87,9 @@ $unfinished_lang		= '尚未完成';
 
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
+$prefs_set_lang = '您的偏好設定已設定。';
+$prefs_unset_lang = '設定已還原。更動的部份會在讀取下一頁時生效。';
+$unset_prefs_lang = '還原設定:';
 
 // - navigation
 $back_lang = '回去';
@@ -160,9 +160,9 @@ $error_title_lang = '錯誤!';
 $error_window_lang = '有錯誤發生!';
 $error_calendar_lang = '處理行事曆 "%s" 時發生此錯誤。';
 $error_path_lang = '無法開啟此路徑: "%s"';
-$error_back_lang = '請使用 "回去" 按鈕退回.';
+$error_back_lang = '請使用 "回去" 按鈕退回。';
 $error_remotecal_lang = '本伺服器會擋掉未經審核的遠端行事曆。';
-$error_restrictedcal_lang = '您試圖存取被本伺服器限制使用的行事曆。';
+$error_restrictedcal_lang = '您試圖存取被本伺服器所限制使用的行事曆。';
 $error_invalidcal_lang = '錯誤的行事曆檔案。請換一個行事曆試試。';
 
 ?>

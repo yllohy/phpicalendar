@@ -85,18 +85,18 @@ $unfinished_lang		= 'Sin terminar';
 
 // ----- New for 0.9.1
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
+$prefs_set_lang = 'Sus preferencias han sido activadas.';
+$prefs_unset_lang = 'Preferencias no activas. Los cambios se activaran al recargar la p&aacute;gina.';
+$unset_prefs_lang = 'Preferencias sin activar:';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Atr&aacute;s';
+$next_lang = 'Siguiente';
+$prev_lang = 'Anterior';
+$day_view_lang = 'Vista diaria';
+$week_view_lang = 'Vista semanal';
+$month_view_lang = 'Vista mensual';
+$year_view_lang = 'Vista anual';
 
 // ---------------------------------
 
