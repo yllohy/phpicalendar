@@ -52,6 +52,14 @@ COPYING for more information about our license.
 Changes:
 --------
 
+0.7
+	-Added year.php
+	-Fixed bug not letting notes to fully display.
+	-Fixed bug in recurring all-day events.
+	-Added new themes - orange, grey, green.
+	-Overlapping events now display better.
+	-Other various bug fixes.
+
 0.6
 	-Added this README!
     -Greatly improved CSS for "themes", theme SDK available.
