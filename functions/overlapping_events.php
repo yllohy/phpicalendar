@@ -13,59 +13,59 @@ function kgv($a, $b) {
 
 
 // drei 20020921: function for checking and counting overlapping events
-function checkOverlap() {
-	global $master_array, $overlap_array, $start_date, $start_time, $end_time;
+function checkOverlap($ol_start_date, $ol_start_time, $ol_end_time) {
+	global $master_array, $overlap_array;
 
-		$drawTimes = drawEventTimes($start_time, $end_time);
+		$drawTimes = drawEventTimes($ol_start_time, $ol_end_time);
 		$newMasterTime = $drawTimes["draw_start"];
-		if (isset($master_array[($start_date)][($newMasterTime)])) $newMasterEventKey = sizeof($master_array[($start_date)][($newMasterTime)]);
+		if (isset($master_array[($ol_start_date)][($newMasterTime)])) $newMasterEventKey = sizeof($master_array[($ol_start_date)][($newMasterTime)]);
 		else $newMasterEventKey = 0;
 		
 		$maxOverlaps = 0;
 		$newEventAdded = FALSE;
-		if (isset($overlap_array[($start_date)])) {
-			foreach ($overlap_array[($start_date)] as $loopBlockKey => $loopBlock) {
+		if (isset($overlap_array[($ol_start_date)])) {
+			foreach ($overlap_array[($ol_start_date)] as $loopBlockKey => $loopBlock) {
 				// check for overlap with existing overlap block
 				if (($loopBlock["blockStart"] < $drawTimes["draw_end"]) and ($loopBlock["blockEnd"] > $drawTimes["draw_start"])) {
 					$newOverlapBlock = FALSE;
 					// if necessary adjust start and end times of overlap block
-					if ($loopBlock["blockStart"] > $drawTimes["draw_start"]) $overlap_array[($start_date)][($loopBlockKey)]["blockStart"] = $drawTimes["draw_start"];
-					if ($loopBlock["blockEnd"] < $drawTimes["draw_end"]) $overlap_array[($start_date)][($loopBlockKey)]["blockEnd"] = $drawTimes["draw_end"];
+					if ($loopBlock["blockStart"] > $drawTimes["draw_start"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["blockStart"] = $drawTimes["draw_start"];
+					if ($loopBlock["blockEnd"] < $drawTimes["draw_end"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["blockEnd"] = $drawTimes["draw_end"];
 					// add the new event to the array of events
-					$overlap_array[($start_date)][($loopBlockKey)]["events"][] = array ("time" => $newMasterTime, "key" => $newMasterEventKey);
+					$overlap_array[($ol_start_date)][($loopBlockKey)]["events"][] = array ("time" => $newMasterTime, "key" => $newMasterEventKey);
 					// check if the adjusted overlap block must be merged with an existing overlap block
-					reset($overlap_array[($start_date)]);
+					reset($overlap_array[($ol_start_date)]);
 					do {
-						$compBlockKey = key(current($overlap_array[($start_date)]));
+						$compBlockKey = key(current($overlap_array[($ol_start_date)]));
 						// only compare with other blocks
 						if ($compBlockKey != $loopBlockKey) {
 							// check if blocks overlap
-							if (($overlap_array[($start_date)][($compBlockKey)]["blockStart"] < $overlap_array[($start_date)][($loopBlockKey)]["blockEnd"]) and ($overlap_array[($start_date)][($compBlockKey)]["blockEnd"] > $overlap_array[($start_date)][($loopBlockKey)]["blockStart"])) {
+							if (($overlap_array[($ol_start_date)][($compBlockKey)]["blockStart"] < $overlap_array[($ol_start_date)][($loopBlockKey)]["blockEnd"]) and ($overlap_array[($ol_start_date)][($compBlockKey)]["blockEnd"] > $overlap_array[($ol_start_date)][($loopBlockKey)]["blockStart"])) {
 								// define start and end of merged overlap block
-								if ($loopBlock["blockStart"] > $overlap_array[($start_date)][($compBlockKey)]["blockStart"]) $overlap_array[($start_date)][($loopBlockKey)]["blockStart"] = $overlap_array[($start_date)][($compBlockKey)]["blockStart"];
-								if ($loopBlock["blockEnd"] < $overlap_array[($start_date)][($compBlockKey)]["blockEnd"]) $overlap_array[($start_date)][($loopBlockKey)]["blockEnd"] = $overlap_array[($start_date)][($compBlockKey)]["blockEnd"];
-								$overlap_array[($start_date)][($loopBlockKey)]["events"] = array_merge($overlap_array[($start_date)][($loopBlockKey)]["events"],$overlap_array[($start_date)][($compBlockKey)]["events"]);
-								$overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"] = array_merge($overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"],$overlap_array[($start_date)][($compBlockKey)]["overlapRanges"]);
-								unset($overlap_array[($start_date)][($compBlockKey)]);
-								reset($overlap_array[($start_date)]);
+								if ($loopBlock["blockStart"] > $overlap_array[($ol_start_date)][($compBlockKey)]["blockStart"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["blockStart"] = $overlap_array[($ol_start_date)][($compBlockKey)]["blockStart"];
+								if ($loopBlock["blockEnd"] < $overlap_array[($ol_start_date)][($compBlockKey)]["blockEnd"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["blockEnd"] = $overlap_array[($ol_start_date)][($compBlockKey)]["blockEnd"];
+								$overlap_array[($ol_start_date)][($loopBlockKey)]["events"] = array_merge($overlap_array[($ol_start_date)][($loopBlockKey)]["events"],$overlap_array[($ol_start_date)][($compBlockKey)]["events"]);
+								$overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"] = array_merge($overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"],$overlap_array[($ol_start_date)][($compBlockKey)]["overlapRanges"]);
+								unset($overlap_array[($ol_start_date)][($compBlockKey)]);
+								reset($overlap_array[($ol_start_date)]);
 							}
 						} 
-					} while (next($overlap_array[($start_date)]));
+					} while (next($overlap_array[($ol_start_date)]));
 					// insert new event to appropriate overlap range
 
 					$newOverlapRange = TRUE;
-					foreach ($overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"] as $keyOverlap => $overlapRange) {
+					foreach ($overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"] as $keyOverlap => $overlapRange) {
 						if (($overlapRange["start"] < $drawTimes["draw_end"]) and ($overlapRange["end"] > $drawTimes["draw_start"])) {
-							$overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["count"]++;
-							if ($overlapRange["start"] < $drawTimes["draw_start"]) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["start"] = $drawTimes["draw_start"];
-							if ($overlapRange["end"] > $drawTimes["draw_end"]) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["end"] = $drawTimes["draw_end"];
+							$overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["count"]++;
+							if ($overlapRange["start"] < $drawTimes["draw_start"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["start"] = $drawTimes["draw_start"];
+							if ($overlapRange["end"] > $drawTimes["draw_end"]) $overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["end"] = $drawTimes["draw_end"];
 							$newOverlapRange = FALSE;
 		//					break;
 						}
 					}
 					if ($newOverlapRange) {
 						foreach ($loopBlock["events"] as $blockEvents) {
-							$eventDrawTimes = drawEventTimes($master_array[($start_date)][($blockEvents["time"])][($blockEvents["key"])]["event_start"], $master_array[($start_date)][($blockEvents["time"])][($blockEvents["key"])]["event_end"]);
+							$eventDrawTimes = drawEventTimes($master_array[($ol_start_date)][($blockEvents["time"])][($blockEvents["key"])]["event_start"], $master_array[($ol_start_date)][($blockEvents["time"])][($blockEvents["key"])]["event_end"]);
 							if (isset($eventDrawTimes["draw_start"], $eventDrawTimes["draw_end"], $drawTimes["draw_end"], $drawTimes["draw_start"]) && ($eventDrawTimes["draw_start"] < $drawTimes["draw_end"]) and ($eventDrawTimes["draw_end"] > $drawTimes["draw_start"])) {
 								// define start time of overlap range and overlap block
 								if ($eventDrawTimes["draw_start"] < $drawTimes["draw_start"]) $overlap_start = $drawTimes["draw_start"];
@@ -75,29 +75,29 @@ function checkOverlap() {
 								else $overlap_end = $eventDrawTimes["draw_end"];
 								
 								$newOverlapRange2 = TRUE;
-								foreach ($overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"] as $keyOverlap => $overlapRange) {
+								foreach ($overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"] as $keyOverlap => $overlapRange) {
 									if (($overlapRange["start"] < $overlap_end) and ($overlapRange["end"] > $overlap_start)) {
-										$overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["count"]++;
-										if ($overlapRange["start"] < $overlap_start) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["start"] = $overlap_start;
-										if ($overlapRange["end"] > $overlap_end) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["end"] = $overlap_end;
+										$overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["count"]++;
+										if ($overlapRange["start"] < $overlap_start) $overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["start"] = $overlap_start;
+										if ($overlapRange["end"] > $overlap_end) $overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["end"] = $overlap_end;
 										$newOverlapRange2 = FALSE;
 			//							break;
 									}
 								}
 								if ($newOverlapRange2) {
-									array_push($overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"], array ("count" => 1,"start" => $overlap_start, "end" => $overlap_end));
+									array_push($overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"], array ("count" => 1,"start" => $overlap_start, "end" => $overlap_end));
 								}
 							}
 						}
 					}
 					// determine the maximum overlaps for the current overlap block
-					foreach ($overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"] as $overlapRange) {
+					foreach ($overlap_array[($ol_start_date)][($loopBlockKey)]["overlapRanges"] as $overlapRange) {
 						if ($overlapRange["count"] > $maxOverlaps) $maxOverlaps = $overlapRange["count"];
 					}
-					$overlap_array[($start_date)][($loopBlockKey)]["maxOverlaps"] = $maxOverlaps;
-					foreach ($overlap_array[($start_date)][($loopBlockKey)]["events"] as $updMasterEvent) {
+					$overlap_array[($ol_start_date)][($loopBlockKey)]["maxOverlaps"] = $maxOverlaps;
+					foreach ($overlap_array[($ol_start_date)][($loopBlockKey)]["events"] as $updMasterEvent) {
 						if (($updMasterEvent["time"] != $newMasterTime) or ($updMasterEvent["key"] != $newMasterEventKey)) {
-							$master_array[($start_date)][($updMasterEvent["time"])][($updMasterEvent["key"])]["event_overlap"] = $maxOverlaps;
+							$master_array[($ol_start_date)][($updMasterEvent["time"])][($updMasterEvent["key"])]["event_overlap"] = $maxOverlaps;
 						}
 					}
 					$newEventAdded = TRUE;
@@ -106,8 +106,8 @@ function checkOverlap() {
 			}
 		}
 		if (!$newEventAdded) {
-			if (isset($master_array[($start_date)])) {
-				foreach ($master_array[($start_date)] as $keyTime => $eventTime) {
+			if (isset($master_array[($ol_start_date)])) {
+				foreach ($master_array[($ol_start_date)] as $keyTime => $eventTime) {
 					foreach ($eventTime as $keyEvent => $event) {
 						$entryDrawTimes =  drawEventTimes($event["event_start"], $event["event_end"]);
 						if (isset($entryDrawTimes["draw_start"], $entryDrawTimes["draw_end"], $drawTimes["draw_end"], $drawTimes["draw_start"]) && ($entryDrawTimes["draw_start"] < $drawTimes["draw_end"]) and ($entryDrawTimes["draw_end"] > $drawTimes["draw_start"])) {
@@ -128,18 +128,18 @@ function checkOverlap() {
 								$overlapBlock_end = $drawTimes["draw_end"];
 							}
 							if (!isset($newBlockKey)) {
-								$overlap_array[($start_date)][] = array ("blockStart" => $overlapBlock_start, "blockEnd" => $overlapBlock_end, "maxOverlaps" => 1, "events" => array (array ("time" => $keyTime, "key" => $keyEvent), array ("time" => $newMasterTime, "key" => $newMasterEventKey)), "overlapRanges" => array (array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end)));
+								$overlap_array[($ol_start_date)][] = array ("blockStart" => $overlapBlock_start, "blockEnd" => $overlapBlock_end, "maxOverlaps" => 1, "events" => array (array ("time" => $keyTime, "key" => $keyEvent), array ("time" => $newMasterTime, "key" => $newMasterEventKey)), "overlapRanges" => array (array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end)));
 								$maxOverlaps = 1;
-								end($overlap_array[($start_date)]);
-								$newBlockKey = key($overlap_array[($start_date)]);
+								end($overlap_array[($ol_start_date)]);
+								$newBlockKey = key($overlap_array[($ol_start_date)]);
 							} else {
-								if ($overlap_array[($start_date)][($newBlockKey)]["blockStart"] > $overlapBlock_start) $overlap_array[($start_date)][($newBlockKey)]["blockStart"] = $overlapBlock_start;
-								if ($overlap_array[($start_date)][($newBlockKey)]["blockEnd"] < $overlapBlock_end) $overlap_array[($start_date)][($newBlockKey)]["blockEnd"] = $overlapBlock_end;
-								$overlap_array[($start_date)][($newBlockKey)]["events"][] = array ("time" => $keyTime, "key" => $keyEvent);
-								$overlap_array[($start_date)][($newBlockKey)]["overlapRanges"][] = array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end);
+								if ($overlap_array[($ol_start_date)][($newBlockKey)]["blockStart"] > $overlapBlock_start) $overlap_array[($ol_start_date)][($newBlockKey)]["blockStart"] = $overlapBlock_start;
+								if ($overlap_array[($ol_start_date)][($newBlockKey)]["blockEnd"] < $overlapBlock_end) $overlap_array[($ol_start_date)][($newBlockKey)]["blockEnd"] = $overlapBlock_end;
+								$overlap_array[($ol_start_date)][($newBlockKey)]["events"][] = array ("time" => $keyTime, "key" => $keyEvent);
+								$overlap_array[($ol_start_date)][($newBlockKey)]["overlapRanges"][] = array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end);
 							}
 							// update master_array
-							$master_array[($start_date)][($keyTime)][($keyEvent)]["event_overlap"] = $maxOverlaps;
+							$master_array[($ol_start_date)][($keyTime)][($keyEvent)]["event_overlap"] = $maxOverlaps;
 						}
 					}
 				}
@@ -147,7 +147,7 @@ function checkOverlap() {
 		}
 
 // for debugging the checkOverlap function
-//print 'Date: ' . $start_date . ' / New Time: ' . $newMasterTime . ' / New Key: ' . $newMasterEventKey . '<br />';
+//print 'Date: ' . $ol_start_date . ' / New Time: ' . $newMasterTime . ' / New Key: ' . $newMasterEventKey . '<br />';
 //print '<pre>';
 //print_r($overlap_array);
 //print '</pre>';
