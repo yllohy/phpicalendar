@@ -2,7 +2,6 @@
 
 define('BASE', './');
 include(BASE.'functions/init.inc.php');
-include(BASE.'functions/date_add.php');
 include(BASE.'functions/date_functions.php');
 include(BASE.'functions/draw_functions.php');
 include(BASE.'functions/overlapping_events.php');
@@ -377,10 +376,18 @@ if ($parse_file) {
 												} else {
 													// loop through the days on which this event happens
 													foreach($byday as $day) {
-														ereg ('([\-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
+														ereg ('([-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
 														$nth = $byday_arr[2]-1;
 														$on_day = two2threeCharDays($byday_arr[3]);
-														$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
+														$on_day_num = two2threeCharDays($byday_arr[3],false);
+														if ($byday_arr[1] == '-') {
+															$last_day_tmp = date('t',$next_range_time);
+															$next_range_time = strtotime(date('Y-m-'.$last_day_tmp, $next_range_time));
+															$last_tmp = (date('w',$next_range_time) == $on_day_num) ? '' : 'last ';
+															$next_date_time = strtotime($last_tmp.$on_day.' -'.$nth.' week', $next_range_time);
+														} else {
+															$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
+														}
 														$next_date = date('Ymd', $next_date_time);
 														$recur_data[] = $next_date_time;
 													}
@@ -393,10 +400,17 @@ if ($parse_file) {
 													if (is_array($byday)) {
 														$checkdate_time = mktime(0,0,0,$month,1,$year);
 														foreach($byday as $day) {
-															ereg ('([\-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
+															ereg ('([-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);
 															$nth = $byday_arr[2]-1;
 															$on_day = two2threeCharDays($byday_arr[3]);
-															$next_date_time = strtotime($on_day.' +'.$nth.' week', $checkdate_time);
+															if ($byday_arr[1] == '-') {
+																$last_day_tmp = date('t',$checkdate_time);
+																$checkdate_time = strtotime(date('Y-m-'.$last_day_tmp, $checkdate_time));
+																$last_tmp = (date('w',$checkdate_time) == $on_day_num) ? '' : 'last ';
+																$next_date_time = strtotime($last_tmp.$on_day.' -'.$nth.' week', $checkdate_time);
+															} else {															
+																$next_date_time = strtotime($on_day.' +'.$nth.' week', $checkdate_time);
+															}
 														}
 													} else {
 														$day = date('d', $start_date_time);
@@ -453,197 +467,210 @@ if ($parse_file) {
 			$valarm_set = FALSE;
 		} else {
 	
-			unset ($field, $data);
+			unset ($field, $data, $prop_pos, $property);
 			ereg ("([^:]+):(.*)", $line, $line);
 			$field = $line[1];
 			$data = $line[2];
 			
-			if (preg_match("/^DTSTART/i", $field)) {
-				$zulu_time = false;
-				if (substr($data,-1) == 'Z') $zulu_time = true;
-				$data = ereg_replace('T', '', $data);
-				$data = ereg_replace('Z', '', $data);
-				if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
-					$allday_start = $data;
-					//echo "$summary - $allday_start<br>";
-				} else {
-					if (preg_match("/^DTSTART;TZID=/i", $field)) {
-						$tz_tmp = explode('=', $field);
-						$tz_dtstart = $tz_tmp[1];
-						unset($tz_tmp);
-					} elseif ($zulu_time) {
-						$tz_dtstart = 'GMT';
-					}
-
-					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-					$start_date = $regs[1] . $regs[2] . $regs[3];
-					$start_time = $regs[4] . $regs[5];
-					$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-
-					$dlst = date('I', $start_unixtime);
-					$server_offset_tmp = chooseOffset($start_unixtime);
-					if (isset($tz_dtstart)) {
-						if (array_key_exists($tz_dtstart, $tz_array)) {
-							$offset_tmp = $tz_array[$tz_dtstart][$dlst];
-						} else {
-							$offset_tmp = '+0000';
+			$property = $field;
+			$prop_pos = strpos($property,';');
+			if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
+			
+			switch ($property) {
+				case 'DTSTART':
+					$zulu_time = false;
+					if (substr($data,-1) == 'Z') $zulu_time = true;
+					$data = ereg_replace('T', '', $data);
+					$data = ereg_replace('Z', '', $data);
+					if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
+						$allday_start = $data;
+						//echo "$summary - $allday_start<br>";
+					} else {
+						if (preg_match("/^DTSTART;TZID=/i", $field)) {
+							$tz_tmp = explode('=', $field);
+							$tz_dtstart = $tz_tmp[1];
+							unset($tz_tmp);
+						} elseif ($zulu_time) {
+							$tz_dtstart = 'GMT';
 						}
-					} elseif (isset($calendar_tz)) {
-						if (array_key_exists($calendar_tz, $tz_array)) {
+		
+						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+						$start_date = $regs[1] . $regs[2] . $regs[3];
+						$start_time = $regs[4] . $regs[5];
+						$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+		
+						$dlst = date('I', $start_unixtime);
+						$server_offset_tmp = chooseOffset($start_unixtime);
+						if (isset($tz_dtstart)) {
+							if (array_key_exists($tz_dtstart, $tz_array)) {
+								$offset_tmp = $tz_array[$tz_dtstart][$dlst];
+							} else {
+								$offset_tmp = '+0000';
+							}
+						} elseif (isset($calendar_tz)) {
+							if (array_key_exists($calendar_tz, $tz_array)) {
+								$offset_tmp = $tz_array[$calendar_tz][$dlst];
+							} else {
+								$offset_tmp = '+0000';
+							}
+						} else {
+							$offset_tmp = $server_offset_tmp;
+						}
+						$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
+						$start_date = date('Ymd', $start_unixtime);
+						$start_time = date('Hi', $start_unixtime);
+						unset($server_offset_tmp);
+					}
+					break;
+					
+				case 'DTEND';
+					$zulu_time = false;
+					if (substr($data,-1) == 'Z') $zulu_time = true;
+					$data = ereg_replace('T', '', $data);
+					$data = ereg_replace('Z', '', $data);
+					if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
+						$allday_end = $data;
+					} else {
+						if (preg_match("/^DTEND;TZID=/i", $field)) {
+							$tz_tmp = explode('=', $field);
+							$tz_dtend = $tz_tmp[1];
+							unset($tz_tmp);
+						} elseif ($zulu_time) {
+							$tz_dtend = 'GMT';
+						}
+						
+						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+						$end_date = $regs[1] . $regs[2] . $regs[3];
+						$end_time = $regs[4] . $regs[5];
+						$end_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+		
+						$dlst = date('I', $end_unixtime);
+						$server_offset_tmp = chooseOffset($end_unixtime);
+						if (isset($tz_dtend)) {
+							$offset_tmp = $tz_array[$tz_dtend][$dlst];
+						} elseif (isset($calendar_tz)) {
 							$offset_tmp = $tz_array[$calendar_tz][$dlst];
 						} else {
-							$offset_tmp = '+0000';
+							$offset_tmp = $server_offset_tmp;
 						}
-					} else {
-						$offset_tmp = $server_offset_tmp;
+						$end_unixtime = calcTime($offset_tmp, $server_offset_tmp, $end_unixtime);
+						$end_date = date('Ymd', $end_unixtime);
+						$end_time = date('Hi', $end_unixtime);
+						unset($server_offset_tmp);
+		
 					}
-					$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
-					$start_date = date('Ymd', $start_unixtime);
-					$start_time = date('Hi', $start_unixtime);
-					unset($server_offset_tmp);
-				}
-				
-			} elseif (preg_match("/^DTEND/i", $field)) {
-				$zulu_time = false;
-				if (substr($data,-1) == 'Z') $zulu_time = true;
-				$data = ereg_replace('T', '', $data);
-				$data = ereg_replace('Z', '', $data);
-				if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
-					$allday_end = $data;
-				} else {
-					if (preg_match("/^DTEND;TZID=/i", $field)) {
-						$tz_tmp = explode('=', $field);
-						$tz_dtend = $tz_tmp[1];
-						unset($tz_tmp);
-					} elseif ($zulu_time) {
-						$tz_dtend = 'GMT';
-					}
+					break;
 					
+				case 'EXDATE':
+					$data = split(",", $data);
+					foreach ($data as $exdata) {
+						$exdata = ereg_replace('T', '', $exdata);
+						$exdata = ereg_replace('Z', '', $exdata);
+						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $exdata, $regs);
+						$except_dates[] = $regs[1] . $regs[2] . $regs[3];
+						$except_times[] = $regs[4] . $regs[5];
+					}
+					break;
+					
+				case 'SUMMARY':
+					$data = str_replace("\\n", "<br>", $data);
+					$data = str_replace("\\r", "<br>", $data);
+					$data = htmlentities(urlencode($data));
+					$summary = $data;
+					break;
+					
+				case 'DESCRIPTION':
+					$data = str_replace("\\n", "<br>", $data);
+					$data = str_replace("\\r", "<br>", $data);
+					$data = htmlentities(urlencode($data));
+					if ($valarm_set == FALSE) { 
+						$description = $data;
+					} else {
+						$valarm_description = $data;
+					}
+					break;
+					
+				case 'RECURRENCE-ID':
+					$parts = explode(';', $field);
+					foreach($parts as $part) {
+						$eachval = split('=',$part);
+						if ($eachval[0] == 'TZID') {
+							$recurrence_id['tzid'] = $eachval[1];
+						} elseif ($eachval[0] == 'RANGE') {
+							$recurrence_id['range'] = $eachval[1];
+						} elseif ($eachval[0] == 'VALUE') {
+							$recurrence_id['value'] = $eachval[1];
+						} else {
+							$recurrence_id[] = $eachval[1];
+						}
+					}
+					unset($parts, $part, $eachval);
+					
+					$data = ereg_replace('T', '', $data);
+					$data = ereg_replace('Z', '', $data);
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-					$end_date = $regs[1] . $regs[2] . $regs[3];
-					$end_time = $regs[4] . $regs[5];
-					$end_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-
-					$dlst = date('I', $end_unixtime);
-					$server_offset_tmp = chooseOffset($end_unixtime);
-					if (isset($tz_dtend)) {
-						$offset_tmp = $tz_array[$tz_dtend][$dlst];
+					$recurrence_id['date'] = $regs[1] . $regs[2] . $regs[3];
+					$recurrence_id['time'] = $regs[4] . $regs[5];
+		
+					$recur_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+		
+					$dlst = date('I', $recur_unixtime);
+					$server_offset_tmp = chooseOffset($recur_unixtime);
+					if (isset($recurrence_id['tzid'])) {
+						$tz_tmp = $recurrence_id['tzid'];
+						$offset_tmp = $tz_array[$tz_tmp][$dlst];
 					} elseif (isset($calendar_tz)) {
 						$offset_tmp = $tz_array[$calendar_tz][$dlst];
 					} else {
 						$offset_tmp = $server_offset_tmp;
 					}
-					$end_unixtime = calcTime($offset_tmp, $server_offset_tmp, $end_unixtime);
-					$end_date = date('Ymd', $end_unixtime);
-					$end_time = date('Hi', $end_unixtime);
+					$recur_unixtime = calcTime($offset_tmp, $server_offset_tmp, $recur_unixtime);
+					$recurrence_id['date'] = date('Ymd', $recur_unixtime);
+					$recurrence_id['time'] = date('Hi', $recur_unixtime);
 					unset($server_offset_tmp);
-
-				}
-				
-			} elseif (preg_match("/^EXDATE/i", $field)) {
-				$data = split(",", $data);
-				foreach ($data as $exdata) {
-					$exdata = ereg_replace('T', '', $exdata);
-					$exdata = ereg_replace('Z', '', $exdata);
-					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $exdata, $regs);
-					$except_dates[] = $regs[1] . $regs[2] . $regs[3];
-					$except_times[] = $regs[4] . $regs[5];
-				}
-				
-			} elseif (preg_match("/^SUMMARY/i", $field)) {
-				$data = str_replace("\\n", "<br>", $data);
-				$data = str_replace("\\r", "<br>", $data);
-				$data = htmlentities(urlencode($data));
-				$summary = $data;
-				
-			} elseif (preg_match("/^DESCRIPTION/i", $field)) {
-				$data = str_replace("\\n", "<br>", $data);
-				$data = str_replace("\\r", "<br>", $data);
-				$data = htmlentities(urlencode($data));
-				if ($valarm_set == FALSE) { 
-					$description = $data;
-				} else {
-					$valarm_description = $data;
-				}
-			} elseif (preg_match("/^RECURRENCE-ID/i", $field)) {
-
-				$parts = split(';', $field);
-				foreach($parts as $part) {
-					$eachval = split('=',$part);
-					if ($eachval[0] == 'TZID') {
-						$recurrence_id['tzid'] = $eachval[1];
-					} elseif ($eachval[0] == 'RANGE') {
-						$recurrence_id['range'] = $eachval[1];
-					} elseif ($eachval[0] == 'VALUE') {
-						$recurrence_id['value'] = $eachval[1];
-					} else {
-						$recurrence_id[] = $eachval[1];
+					break;
+					
+				case 'UID':
+					$uid = $data;
+					break;
+				case 'X-WR-CALNAME':
+					$calendar_name = $data;
+					$master_array['calendar_name'] = $calendar_name;
+					break;
+				case 'X-WR-TIMEZONE':
+					$calendar_tz = $data;
+					$master_array['calendar_tz'] = $calendar_tz;
+					break;
+				case 'DURATION':
+					if (($first_duration == TRUE) && (!stristr($field, '=DURATION'))) {
+						ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
+						if ($duration[2] = 'W') {
+							$weeks = $duration[1];
+							$days = 0;
+						} else {
+							$days = $duration[1];
+							$weeks = 0;
+						}
+						$hours = ereg_replace('H', '', $duration[3]);
+						$minutes = ereg_replace('M', '', $duration[4]);
+						$seconds = ereg_replace('S', '', $duration[5]);
+						$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
+						$beginning = (strtotime($start_time) + $the_duration);
+						$end_time = date ('Hi', $beginning);
+						$first_duration = FALSE;
+					}	
+					break;
+				case 'RRULE':
+					$data = ereg_replace ('RRULE:', '', $data);
+					$rrule = split (';', $data);
+					foreach ($rrule as $recur) {
+						ereg ('(.*)=(.*)', $recur, $regs);
+						$rrule_array[$regs[1]] = $regs[2];
 					}
-				}
-				unset($parts, $part, $eachval);
-				
-				$data = ereg_replace('T', '', $data);
-				$data = ereg_replace('Z', '', $data);
-				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-				$recurrence_id['date'] = $regs[1] . $regs[2] . $regs[3];
-				$recurrence_id['time'] = $regs[4] . $regs[5];
-
-				$recur_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-
-				$dlst = date('I', $recur_unixtime);
-				$server_offset_tmp = chooseOffset($recur_unixtime);
-				if (isset($recurrence_id['tzid'])) {
-					$tz_tmp = $recurrence_id['tzid'];
-					$offset_tmp = $tz_array[$tz_tmp][$dlst];
-				} elseif (isset($calendar_tz)) {
-					$offset_tmp = $tz_array[$calendar_tz][$dlst];
-				} else {
-					$offset_tmp = $server_offset_tmp;
-				}
-				$recur_unixtime = calcTime($offset_tmp, $server_offset_tmp, $recur_unixtime);
-				$recurrence_id['date'] = date('Ymd', $recur_unixtime);
-				$recurrence_id['time'] = date('Hi', $recur_unixtime);
-				unset($server_offset_tmp);
-				
-			} elseif (preg_match("/^UID/i", $field)) {
-				$uid = $data;
-			} elseif (preg_match("/^X-WR-CALNAME/i", $field)) {
-				$calendar_name = $data;
-				$master_array['calendar_name'] = $calendar_name;
-			} elseif (preg_match("/^X-WR-TIMEZONE/i", $field)) {
-				$calendar_tz = $data;
-				$master_array['calendar_tz'] = $calendar_tz;
-			} elseif (preg_match("/^DURATION/i", $field)) {
-				
-				if (($first_duration == TRUE) && (!stristr($field, '=DURATION'))) {
-					ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
-					if ($duration[2] = 'W') {
-						$weeks = $duration[1];
-						$days = 0;
-					} else {
-						$days = $duration[1];
-						$weeks = 0;
-					}
-					$hours = ereg_replace('H', '', $duration[3]);
-					$minutes = ereg_replace('M', '', $duration[4]);
-					$seconds = ereg_replace('S', '', $duration[5]);
-					$the_duration = ($weeks * 60 * 60 * 24 * 7) + ($days * 60 * 60 * 24) + ($hours * 60 * 60) + ($minutes * 60) + ($seconds);
-					$beginning = (strtotime($start_time) + $the_duration);
-					$end_time = date ('Hi', $beginning);
-					$first_duration = FALSE;
-				}	
-				
-			} elseif (preg_match("/^RRULE/i", $field)) {
-				$data = ereg_replace ('RRULE:', '', $data);
-				$rrule = split (';', $data);
-				foreach ($rrule as $recur) {
-					ereg ('(.*)=(.*)', $recur, $regs);
-					$rrule_array[$regs[1]] = $regs[2];
-				}	
-				
-			} elseif (preg_match("/^ATTENDEE/i", $field)) {
-				$attendee = $data;
-				
+					break;
+				case 'ATTENDEE':
+					$attendee = $data;
+					break;
 			}
 		}
 	}

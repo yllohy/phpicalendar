@@ -3,7 +3,7 @@
 // so I have this making sure they all are. This should be commented out/deleted
 // for shipping versions. This is a convenience so when I commit, changes are made and
 // I don't get errors.
-chmod(BASE.'calendars/School.ics',0666);
+//chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
 //error_reporting (E_ALL);
