@@ -394,10 +394,10 @@ if ($parse_file) {
 			$field = $line[0];
 			$data = $line[1];
 			
-			if (preg_match("/DTSTART/", $field)) {
+			if (preg_match("/^DTSTART/i", $field)) {
 				$data = ereg_replace('T', '', $data);
 				$data = ereg_replace('Z', '', $data);
-				if (preg_match("/DTSTART;VALUE=DATE/", $field))  {
+				if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
 					$allday_start = $data;
 				} else {
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
@@ -405,10 +405,10 @@ if ($parse_file) {
 					$start_time = $regs[4] . $regs[5];
 				}
 				
-			} elseif (preg_match("/DTEND/", $field)) {
+			} elseif (preg_match("/^DTEND/i", $field)) {
 				$data = ereg_replace('T', '', $data);
 				$data = ereg_replace('Z', '', $data);
-				if (preg_match("/DTEND;VALUE=DATE/", $field))  {
+				if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
 					$allday_end = $data;
 				} else {
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
@@ -416,18 +416,19 @@ if ($parse_file) {
 					$end_time = $regs[4] . $regs[5];
 				}
 				
-			} elseif (stristr($field, 'EXDATE;TZID')) {
+			} elseif (preg_match("/^EXDATE/i", $field)) {
 				$data = ereg_replace('T', '', $data);
+				$data = ereg_replace('Z', '', $data);
 				ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 				$except_dates[] = $regs[1] . $regs[2] . $regs[3];
 				$except_times[] = $regs[4] . $regs[5];
 				
-			} elseif (stristr($field, 'SUMMARY')) {
+			} elseif (preg_match("/^SUMMARY/i", $field)) {
 				$data = str_replace("\\n", "<br>", $data);
 				$data = htmlentities(urlencode($data));
 				$summary = $data;
 				
-			} elseif (stristr($field, 'DESCRIPTION')) {
+			} elseif (preg_match("/^DESCRIPTION/i", $field)) {
 				$data = str_replace("\\n", "<br>", $data);
 				$data = htmlentities(urlencode($data));
 				if ($valarm_set = FALSE) { 
@@ -436,11 +437,11 @@ if ($parse_file) {
 					$valarm_description = $data;
 				}
 			
-			} elseif (stristr($field, 'X-WR-CALNAME')) {
+			} elseif (preg_match("/^X-WR-CALNAME/i", $field)) {
 				$calendar_name = $data;
 				$master_array['calendar_name'] = $calendar_name;
 				
-			} elseif (stristr($field, 'DURATION')) {
+			} elseif (preg_match("/^DURATION/i", $field)) {
 				
 				if (($first_duration = TRUE) && (!stristr($field, '=DURATION'))) {
 					ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
@@ -460,7 +461,7 @@ if ($parse_file) {
 					$first_duration = FALSE;
 				}	
 				
-			} elseif (stristr($field, 'RRULE')) {
+			} elseif (preg_match("/^RRULE/i", $field)) {
 				$data = ereg_replace ('RRULE:', '', $data);
 				$rrule = split (';', $data);
 				foreach ($rrule as $recur) {
@@ -468,10 +469,10 @@ if ($parse_file) {
 					$rrule_array[$regs[1]] = $regs[2];
 				}	
 				
-			} elseif (stristr($field, 'ATTENDEE')) {
+			} elseif (preg_match("/^ATTENDEE/i", $field)) {
 				$attendee = $data;
 				
-			} elseif (stristr($field, 'BEGIN:VALARM')) {
+			} elseif (preg_match("/^BEGIN:VALARM/i", $field)) {
 				$valarm_set = TRUE;
 			}
 		}
