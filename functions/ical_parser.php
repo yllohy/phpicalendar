@@ -116,7 +116,7 @@ foreach ($cal_filelist as $filename) {
 			$master_array['-4'][$calnumber]['webcal'] = 'yes';
 			$actual_mtime = time();
 		} else {
-			$actual_mtime = filemtime($filename);
+			$actual_mtime = @filemtime($filename);
 		}
 		
 		$ifile = @fopen($filename, "r");
@@ -1133,13 +1133,12 @@ foreach ($cal_filelist as $filename) {
 			}
 		}
 	}
+	if (!isset($master_array['-3'][$calnumber])) $master_array['-3'][$calnumber] = $actual_calname;
+	if (!isset($master_array['-4'][$calnumber]['mtime'])) $master_array['-4'][$calnumber]['mtime'] = $actual_mtime;
+	if (!isset($master_array['-4'][$calnumber]['filename'])) $master_array['-4'][$calnumber]['filename'] = $filename;
+	if (!isset($master_array['-4'][$calnumber]['webcal'])) $master_array['-4'][$calnumber]['webcal'] = 'no';
 	$calnumber = $calnumber + 1;
 }
-
-if (!isset($master_array['-3'][$calnumber])) $master_array['-3'][$calnumber] = $actual_calname;
-if (!isset($master_array['-4'][$calnumber]['mtime'])) $master_array['-4'][$calnumber]['mtime'] = $actual_mtime;
-if (!isset($master_array['-4'][$calnumber]['filename'])) $master_array['-4'][$calnumber]['filename'] = $filename;
-if (!isset($master_array['-4'][$calnumber]['webcal'])) $master_array['-4'][$calnumber]['webcal'] = 'no';
 
 if ($parse_file) {	
 	// Sort the array by absolute date.
@@ -1175,7 +1174,7 @@ if ($parse_file) {
 //print_r($day_array);
 //print_r($rrule_array);
 //print_r($recurrence_delete);	
-//print '</pre>';
+//wprint '</pre>';
 
 // Set a calender name for all calenders combined
 if ($cal == $ALL_CALENDARS_COMBINED) {
