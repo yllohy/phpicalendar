@@ -197,7 +197,7 @@
 														<td colspan="6" class="G10B"><?php include('./functions/list_weeks.php'); ?></td>
 													</tr>
 													<?php
-													if ($display_custom_goto == "yes" {
+													if ($display_custom_goto == "yes") {
 													?>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
