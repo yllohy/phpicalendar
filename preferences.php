@@ -3,7 +3,7 @@
 define('BASE','./');
 $current_view = "preferences";
 include(BASE.'functions/ical_parser.php');
-$default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
+$cookie_uri = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 $default_view = "$default_view" . ".php";
 if ($allow_preferences == 'no') header("Location: $default_view");
 $action = $HTTP_GET_VARS['action'];
@@ -11,12 +11,22 @@ if ($action == 'setcookie') {
 	$cookie_language 	= $HTTP_POST_VARS['cookie_language'];
 	$cookie_calendar 	= $HTTP_POST_VARS['cookie_calendar'];
 	$cookie_view 		= $HTTP_POST_VARS['cookie_view'];
-	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view");
-	echo '<pre>'; print_r($the_cookie); echo '</pre>';
-	serialize($the_cookie);
-	#setcookie("the_cookie","$the_cookie",time()+6604800,"/","localhost",0);
+	$cookie_style 		= $HTTP_POST_VARS['cookie_style'];
+	$cookie_startday	= $HTTP_POST_VARS['cookie_startday'];
+	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style");
+	//echo '<pre>'; print_r($the_cookie); echo '</pre>';
+	$the_cookie 		= serialize($the_cookie);
+	setcookie("phpicalendar","$the_cookie",time()+6604800,"/","$cookie_uri",0);
+} else {
+	$phpicalendar 		= $HTTP_COOKIE_VARS['phpicalendar'];
+	$phpicalendar 		= explode($phpicalendar);
+	$cookie_language 	= $phpicalendar['cookie_language'];
+	$cookie_calendar 	= $phpicalendar['cookie_calendar'];
+	$cookie_view 		= $phpicalendar['cookie_view'];
+	$cookie_style 		= $phpicalendar['cookie_style'];
+	$cookie_startday	= $phpicalendar['cookie_startday'];
 }
-
+echo "$cookie_uri";
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -64,6 +74,14 @@ if ($action == 'setcookie') {
 				<tr>
 					<td>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
+							<?php
+							
+							if ($phpicalendar) { ?>
+							<tr>
+								<td colspan="2" align="center"><font class="G10BOLD">Your preferences have been set.</font></td>
+							</tr>
+							<?php } ?>
+							
 							<tr>
 								<td width="2%"></td>
 								<td width="98%" valign="top" align="left">
@@ -143,10 +161,14 @@ if ($action == 'setcookie') {
 								// Begin Day Start Selection
 								//
 								echo 'Select your start day of week:<br><br>';
-								print "<select name=\"cookie_view\" class=\"query_style\">\n";
+								print "<select name=\"cookie_startday\" class=\"query_style\">\n";
 								$i=1;
 								foreach ($daysofweek_lang as $daysofweek) {
-									print "<option value=\"$i\">$daysofweek</option>\n";
+									if ($i == "$cookie_startday") {
+										print "<option value=\"$i\" selected>$daysofweek</option>\n";
+									} else {
+										print "<option value=\"$i\">$daysofweek</option>\n";
+									}
 									$i++;
 								}
 								print "</select>\n";
@@ -161,7 +183,11 @@ if ($action == 'setcookie') {
 									if (($file != ".") && ($file != "..") && ($file != "CVS")) {
 										if (!is_file($file)) {
 											$file = ucfirst($file);
-											print "<option value=\"$file\">$file</option>\n";
+											if ($file == "$cookie_style") {
+												print "<option value=\"$file\" selected>$file</option>\n";
+											} else {
+												print "<option value=\"$file\">$file</option>\n";
+											}
 										}
 									}
 								}
@@ -169,7 +195,7 @@ if ($action == 'setcookie') {
 								print "</select>\n";
 								echo '<br><br>';
 								 
-								echo '<button type="submit" name="set" value="true" class=\"query_style\"><font class="G10">Set Cookie</font></button>';
+								echo '<button type="submit" name="set" value="true" class=\"query_style\">Set Cookie</button>';
 								echo '</form><br>'; 
 								 ?>
 								</td>
