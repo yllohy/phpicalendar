@@ -457,13 +457,15 @@ class Page {
 						  $event_start 	= date ($timeFormat, $event_start);
 						  $event_end	= date ($timeFormat, $event_end);
 						  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];
+						  $event_recur  = $this_time_arr[($event_length[$i]['key'])]['recur'];
 						  $event_status = strtolower($this_time_arr[($event_length[$i]['key'])]['status']);
 						  if ($event_calno < 1) $event_calno = 1;
 						  if ($event_calno > 7) $event_calno = 7;
 						  if ($event_status != '') {
 						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
+						  } elseif (is_array($event_recur)) {
+						  	$confirmed = '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
 						  }
-						  
 						  $colspan_width = round((460 / $nbrGridCols) * $drawWidth);
 						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" width="'.$colspan_width.'" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 						  
