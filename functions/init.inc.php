@@ -69,6 +69,12 @@ if (ini_get('max_execution_time') < 60) {
 	@ini_set('max_execution_time', '60');
 }
 
+if($_REQUEST['cpath']){
+	$cpath 	= $_REQUEST['cpath'];				
+	$calendar_path 	.= "/$cpath";				
+	$tmp_dir 	.= "/$cpath";				
+}
+
 if ($calendar_path == '') {
 	$calendar_path = BASE.'calendars';
 }
@@ -129,15 +135,15 @@ if ($is_webcal == TRUE) {
 		// Sets the download and subscribe paths from the config if present.
 		if (isset($filename)) {
 			if (($download_uri == '') && (preg_match('/(^\/|\.\.\/)/', $filename) == 0)) {
-				$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'.$filename;
+				$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'."$cpath/".$filename;
 				$download_filename = $filename;
 			} elseif ($download_uri != '') {
 				$newurl = eregi_replace("^(http://)", "", $download_uri); 
-				$subscribe_path = 'webcal://'.$newurl.'/'.$cal_filename.'.ics';
-				$download_filename = $download_uri.'/'.$cal_filename.'.ics';
+				$subscribe_path = 'webcal://'.$newurl.'/'."$cpath/".$cal_filename.'.ics';
+				$download_filename = $download_uri.'/'."$cpath/".$cal_filename.'.ics';
 			} else {
-				$subscribe_path = '';
-				$download_filename = '';
+				$subscribe_path = "$cpath/";
+				$download_filename = "$cpath/";
 			}
 		}
 	}
