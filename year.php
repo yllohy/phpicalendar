@@ -46,9 +46,7 @@ $page->replace_tags(array(
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,
 	'list_weeks' 		=> $list_weeks,
-	'style_select' 		=> $style_select,
-	'generated'	 		=> $generated
-			
+	'style_select' 		=> $style_select			
 	));
 	
 $page->output();

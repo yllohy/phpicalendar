@@ -212,7 +212,7 @@ class Page {
 		
 		$php_ended = getmicrotime();
 		$generated = number_format(($php_ended-$php_started),3);
-		echo $generated;
+		$this->page = str_replace('{GENERATED}', $generated, $this->page);
 		print($this->page);
 	}
 }
