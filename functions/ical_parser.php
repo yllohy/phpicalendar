@@ -458,7 +458,7 @@ if ($parse_file) {
 												if (!isset($bymonth)) $bymonth[] = date('m', $start_date_time);
 												foreach($bymonth as $month) {
 													$year = date('Y', $next_range_time);
-													if (is_array($byday)) {
+													if ((isset($byday)) && (is_array($byday))) {
 														$checkdate_time = mktime(0,0,0,$month,1,$year);
 														foreach($byday as $day) {
 															ereg ('([-\+]{0,1})([0-9]{1})([A-Z]{2})', $day, $byday_arr);

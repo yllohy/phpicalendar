@@ -50,10 +50,10 @@ function login_ftp ($username, $password) {
 	global $ftp_server;
 	
 	// set up basic connection
-	$conn_id = ftp_connect($ftp_server); 
+	$conn_id = @ftp_connect($ftp_server); 
 	
 	// login with username and password
-	$login_result = ftp_login($conn_id, $username, $password); 
+	$login_result = @ftp_login($conn_id, $username, $password); 
 	
 	// check connection
 	if ((!$conn_id) || (!$login_result)) { 
@@ -61,7 +61,7 @@ function login_ftp ($username, $password) {
 	}
 	
 	// close the FTP stream 
-	ftp_close($conn_id);
+	@ftp_close($conn_id);
 	
 	return TRUE;
 }
@@ -96,24 +96,24 @@ function delete_cal ($filename) {
 		$filename = get_ftp_calendar_path() . "/" . $filename;
 		
 		// set up basic connection
-		$conn_id = ftp_connect($ftp_server); 
+		$conn_id = @ftp_connect($ftp_server); 
 		
 		// login with username and password
-		$login_result = ftp_login($conn_id, $HTTP_SESSION_VARS['phpical_username'], $HTTP_SESSION_VARS['phpical_password']); 
+		$login_result = @ftp_login($conn_id, $HTTP_SESSION_VARS['phpical_username'], $HTTP_SESSION_VARS['phpical_password']); 
 		
 		// check connection
 		if ((!$conn_id) || (!$login_result))
 			return FALSE;
 		
 		// delete the file
-		$delete = ftp_delete($conn_id, $filename); 
+		$delete = @ftp_delete($conn_id, $filename); 
 		
 		// check delete status
 		if (!$delete)
 			return FALSE;
 		
 		// close the FTP stream 
-		ftp_close($conn_id);
+		@ftp_close($conn_id);
 		
 		return TRUE;
 	}

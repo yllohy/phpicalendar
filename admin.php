@@ -15,6 +15,8 @@ if ($allow_admin != "yes") {
 if($HTTP_POST_VARS) 	{extract($HTTP_POST_VARS, EXTR_PREFIX_SAME, "post_");}
 if($HTTP_GET_VARS)  	{extract($HTTP_GET_VARS, EXTR_PREFIX_SAME, "get_");}
 
+if (!isset($action)) $action = '';
+
 // Logout by clearing session variables
 if ((isset($action)) && ($action == "logout")) {
 	$HTTP_SESSION_VARS['phpical_loggedin'] = FALSE;
@@ -57,20 +59,42 @@ else {
 <table width="640" border="0" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td align="center" valign="middle">
-
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td align="left" width="20" class="navback">&nbsp;</td>
-					<td align="center" class="navback" nowrap valign="middle"><font class="H20"><?php echo "$admin_header_lang"; ?></font></td>
-					<td align="right" width="20" class="navback" nowrap valign="middle"><font class="G10"><?php if ($auth_method != "none" && $is_loged_in == TRUE) { echo "<a href=\"{$HTTP_SERVER_VARS['PHP_SELF']}?action=logout\">{$logout_lang}</a>"; } ?></font>&nbsp;</td>
+					<td align="left" width="120" class="navback"><?php echo '<a href="'.BASE.'"><img src="'.BASE.'styles/'.$style_sheet.'/back.gif" alt=" " border="0" align="left"></a>'; ?></td>
+					<td class="navback">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td align="center" class="navback" nowrap valign="middle"><font class="H20"><?php echo "$admin_header_lang"; ?></font></td>
+							</tr>
+						</table>
+					</td>
+					<td align="right" width="120" class="navback">	
+						<table width="120" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><?php echo '<a class="psf" href="'.BASE.'day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/day_on.gif" alt=" " border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="'.BASE.'week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/week_on.gif" alt=" " border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="'.BASE.'month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/month_on.gif" alt=" " border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="'.BASE.'year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/year_on.gif" alt=" " border="0"></a></td>'; ?>
+							</tr>
+						</table>
+					</td>
 				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
+	</tr>
+	<tr>
+		<td class="G10" align="right"><?php if ($auth_method != "none" && $is_loged_in == TRUE) { echo "<a href=\"{$HTTP_SERVER_VARS['PHP_SELF']}?action=logout\">{$logout_lang}</a>"; } ?>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
 				<tr>
-					<td colspan="3" class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
-				</tr>
-				<tr>
-					<td align="left" width="20">&nbsp;</td>
-					<td colspan="2">
-
+					<td width="2%"></td>
+					<td width="98%" valign="top" align="left">
 <?php 
 
 
@@ -130,7 +154,9 @@ EOT;
 
 
 // Add or Update a calendar
-if ($action == "addupdate") {
+$addupdate_msg 	= '';
+$delete_msg		= '';
+if ((isset($action))  && ($action == "addupdate")) {
 	$addupdate_msg = "";
 
 	for($filenumber=1; $filenumber<6; $filenumber++) {

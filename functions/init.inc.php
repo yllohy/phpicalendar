@@ -6,7 +6,7 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-error_reporting (E_ALL);
+//error_reporting (E_ALL);
 
 if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
