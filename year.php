@@ -142,7 +142,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 											echo '<td width="30" height="30" align="right" valign="top" class="monthoff" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#F2F2F2" onclick="window.location.href=\'day.php?cal=' . $cal . '&getdate=' . $daylink . '\'">' . "\n";
 											echo '<a class="psf" href="day.php?cal=' . $cal . '&getdate=' . $daylink . '">' . $day . '</a></td>' . "\n";
 										}
-										$start_day = ($start_day + (24.5 * 60 * 60));
+										$start_day = strtotime("+1 day", $start_day); 
 										$i++;
 										$image1 = '';
 										$image2 = '';

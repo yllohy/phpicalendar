@@ -180,7 +180,7 @@
 							echo "</table>\n";
 							echo "</td>\n";
 						}
-						$sunday = ($sunday + (24.5 * 60 * 60));
+						$sunday = strtotime("+1 day", $sunday); 
 						$i++;
 						if ($i == 7) { 
 							echo "</tr>\n";

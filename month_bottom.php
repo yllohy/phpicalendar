@@ -49,7 +49,7 @@
 												$day_num = date("w", $start_day);
 												$day = $daysofweekreallyshort_lang[$day_num];
 												print "<td align=\"center\"><font class=\"G10BOLD\">$day</font></td>\n";
-												$start_day = ($start_day + (24.5 * 60 * 60));
+												$start_day = strtotime("+1 day", $start_day); 
 											}
 										?>
 										</tr>
@@ -79,7 +79,7 @@
 													echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 													echo "</td>\n";
 												}
-												$start_day = ($start_day + (24.5 * 60 * 60));
+												$start_day = strtotime("+1 day", $start_day); 
 												$i++;
 												if ($i == 7) { 
 													echo "</tr>\n";
@@ -269,7 +269,7 @@
 										$day_num = date("w", $start_day);
 										$day = $daysofweekreallyshort_lang[$day_num];
 										print "<td align=\"center\"><font class=\"G10BOLD\">$day</font></td>\n";
-										$start_day = ($start_day + (24.5 * 60 * 60));
+										$start_day = strtotime("+1 day", $start_day); 
 									}
 								?>
 								</tr>
@@ -299,7 +299,7 @@
 											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
-										$start_day = ($start_day + (24.5 * 60 * 60));
+										$start_day = strtotime("+1 day", $start_day); 
 										$i++;
 										if ($i == 7) { 
 											echo "</tr>\n";
