@@ -13,8 +13,8 @@ $unix_time 			= strtotime($getdate);
 $today_today 		= date('Ymd', strtotime("now + $second_offset seconds")); 
 $next_week 			= date("Ymd", strtotime("+1 week",  $unix_time));
 $prev_week 			= date("Ymd", strtotime("-1 week",  $unix_time));
-$tomorrows_date 	= date( "Ymd", strtotime("+1 day",  $unix_time));
-$yesterdays_date 	= date( "Ymd", strtotime("-1 day",  $unix_time));
+$next_day			= date('Ymd', strtotime("+1 day",  $unix_time));
+$prev_day 			= date('Ymd', strtotime("-1 day",  $unix_time));
 $start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $start_week 		= localizeDate($dateFormat_week, $start_week_time);
@@ -55,7 +55,9 @@ $page->replace_tags(array(
 	'todo_js' 			=> '',
 	'show_search' 		=> '',
 	'next_day' 			=> $next_day,
+	'next_week' 		=> $next_week,
 	'prev_day'	 		=> $prev_day,
+	'prev_week'	 		=> $prev_week,
 	'show_goto' 		=> '',
 	'is_logged_in' 		=> '',
 	'list_icals' 		=> $list_icals,
@@ -68,6 +70,8 @@ $page->replace_tags(array(
 	));
 	
 $page->draw_day($this->page);
+$page->tomorrows_events($this->page);
+$page->get_vtodo($this->page);
 
 $page->output();
 
