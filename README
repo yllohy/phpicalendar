@@ -20,6 +20,7 @@ Installation:
 - Edit the file "config.inc.php" and see section below called "Configuration"
 - Put your iCal files into the directory you specify in config.inc.php
   (default is "calendars")
+- Make sure PHP is enabled (http://developer.apple.com/internet/macosx/php.html)
 - Turn on Web sharing (if not already on)
 - View calendars in your web browser
   If it is in your Sites folder, the URL would be:
@@ -52,6 +53,7 @@ Changes:
 --------
 
 0.6
+	-Added this README!
     -Greatly improved CSS for "themes", theme SDK available.
     -HTML bug fixes specific to Windows browsers
     -All-day and Regular recurring event both support all types
