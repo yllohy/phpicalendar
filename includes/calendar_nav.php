@@ -50,6 +50,7 @@
 												echo '<td align="center" class="G10BOLD">'.$day.'</td>';
 												$start_day = strtotime("+1 day", $start_day); 
 											}
+											echo '</tr>';
 											$minical_time 		= strtotime("-1 month", $fake_getdate_time);
 											$minical_month 		= date("m", $minical_time);
 											$minical_year 		= date("Y", $minical_time);
@@ -103,7 +104,7 @@
 									
 									echo '<b>'.$jump_lang.'</b><br>';
 									echo '<img src="images/spacer.gif" width="1" height="6" alt=" "><br>';
-									echo "<form action=\"day.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
+									echo "<form action=\"month.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
 									include('./functions/list_icals.php');
 									include('./functions/list_years.php');
 									include('./functions/list_months.php');
@@ -171,6 +172,7 @@
 										echo '<td align="center" class="G10BOLD">'.$day.'</td>';
 										$start_day = strtotime("+1 day", $start_day); 
 									}
+									echo '</tr>';
 									$minical_time 		= strtotime("+1 month", $fake_getdate_time);
 									$minical_month 		= date("m", $minical_time);
 									$minical_year 		= date("Y", $minical_time);
