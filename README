@@ -72,6 +72,15 @@ COPYING for more information about our license.
 
 Changes:
 --------
+0.9.4
+	-Vastly improved BYDAY, BYMONTHDAY support
+	-Improved DURATION Support
+	-Smaller HTML footprint on all pages with same look and feel.
+	-Combined Calendars automatically refresh when changes are made
+	-Vtodo popup works again
+	-Validation increased on multiple pages
+	-Fixed a bug not listing blacklisted calendars
+
 0.9.3	
 	-Multiple calendar support (up to 8).
 	-Fixed pesky <BR> tags in event popup.
