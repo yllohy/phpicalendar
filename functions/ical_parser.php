@@ -898,7 +898,7 @@ foreach ($cal_filelist as $filename) {
 							$end_unixtime = calcTime($offset_tmp, $server_offset_tmp, $end_unixtime);
 							$end_date = date('Ymd', $end_unixtime);
 							$end_time = date('Hi', $end_unixtime);
-							unset($server_offset_tmp);
+							unset($server_offset_tmp, $offset_tmp, $tz_dtend);
 			
 						}
 						break;
