@@ -70,7 +70,7 @@ if ($master_array[($getdate)]) {
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo "$calendar_name"; ?></title>
-  	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
+  	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
 	<?php include "functions/event.js"; ?>
 </head>
 <body bgcolor="#FFFFFF">
@@ -83,9 +83,9 @@ if ($master_array[($getdate)]) {
      	<td align="center" valign="middle">
       		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
       			<tr>
-      				<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"images/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
-					<td class="H20" align="center" bgcolor="#DDDDDD" background="images/time_bg.gif"><?php echo "$display_date"; ?></td>
-      				<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"images/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
+      				<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
+					<td align="center" class="navback"><font class="H20"><?php echo "$display_date"; ?></font></td>
+      				<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
       			</tr>
       			
 				<?php
@@ -235,7 +235,7 @@ if ($master_array[($getdate)]) {
 </td>
 		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
 		<td width="160" valign="top"><?php include('./sidebar.php'); ?><center>
-		<?php echo "<font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a></font>"; ?></center></td>
+		<?php echo "<font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/\">PHP iCalendar $version_lang</a></font>"; ?></center></td>
 	</tr>
 </table>
 </center>

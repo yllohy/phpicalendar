@@ -31,7 +31,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo "$calendar_name"; ?></title>
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
 	<?php include "functions/event.js"; ?>
 </head>
 <body>
@@ -41,9 +41,9 @@
 		<td align="center" valign="middle" bgcolor="white">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\"><img src=\"images/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
-					<td class="H20" align="center" bgcolor="#DDDDDD" background="images/time_bg.gif"><?php echo "$display_month"; ?></td>
-					<td width="75" background="images/time_bg.gif"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\"><img src=\"images/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
+					<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"left\"></a>"; ?></td>
+					<td align="center" class="navback"><font class="H20"><?php echo "$display_month"; ?></font></td>
+					<td width="75" class="navback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" width=\"28\" height=\"28\" border=\"0\" align=\"right\"></a>"; ?></td>
 				</tr>
 			</table>
 		</td>
@@ -176,7 +176,7 @@
 <?php include "./month_bottom.php"; ?>
 
 <br>
-<?php echo "<font class=\"V9\">$powered_by_lang <a class=\"psf\" href=\"http://sourceforge.net/projects/phpicalendar/\">PHP iCalendar $version_lang</a>"; ?>
+<?php echo "<font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/\">PHP iCalendar $version_lang</a></font>"; ?></center></td>
 </center>
 </body>
 </html>

@@ -1,4 +1,4 @@
-/* Style sheet for the blue calendar (default) */
+/* Style sheet for the silver calendar (default) */
 
 .eventborder { background-color: #336699; border: 1px #006699 solid; }
 .eventbg { background-color: #6699CC; }
@@ -10,9 +10,11 @@
 .dayborder2 { border-top: 1px dashed #CCCCCC; }
 .weekborder { border-top: 1px dashed #A1A5A9; border-right: 1px solid #A1A5A9; }
 .weekborder2 { border-right: 1px solid #A1A5A9; }
-.timeborder { border-right: 2px solid #A1A5A9; border-top: 1px dashed #A1A5A9; }
-.timeborder2 { border-right: 2px solid #A1A5A9; border-top: 1px solid #A1A5A9; }
+.timeborder { border-right: 2px solid #A1A5A9; border-top: 1px dashed #A1A5A9; background-image: url(time_bg.gif); }
+.timeborder2 { border-right: 2px solid #A1A5A9; border-top: 1px solid #A1A5A9; background-image: url(time_bg.gif); }
 
+.navback { background-image: url(time_bg.gif); }
+.sideback { background-image: url(side_bg.gif); }
 
 a.psf	{
 	text-decoration:	none;
