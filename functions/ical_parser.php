@@ -108,7 +108,7 @@ foreach ($cal_filelist as $filename) {
 				$count 			= 1000000;
 				$valarm_set 	= FALSE;
 				$attendee		= array();
-				$organizer	= array();
+				$organizer		= array();
 				
 				unset(
 					$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
@@ -388,6 +388,7 @@ foreach ($cal_filelist as $filename) {
 							// if (isset($until)) $until = strtotime('+'.$interval.' '.$freq_type, $until);;
 							
 							if (!isset($until)) $until = $end_range_time;
+							if (!isset($abs_until)) $abs_until = date('YmdHis', $end_range_time);
 							$end_date_time = $until;
 							$start_range_time_tmp = $start_range_time;
 							$end_range_time_tmp = $end_range_time;
@@ -468,7 +469,7 @@ foreach ($cal_filelist as $filename) {
 																if (in_array($month, $bymonth)) {
 																	$recur_data[] = $next_date_time;
 																}
-															} elseif (is_array($bymonthday)) {
+															} elseif (isset($bymonthday)) {
 																// This supports MONTHLY where BYDAY and BYMONTH are both set
 																foreach($bymonthday as $day) {
 																	$year 	= date('Y', $next_range_time);
