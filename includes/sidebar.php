@@ -13,7 +13,7 @@ if (strlen($cal_displayname2) > 24) {
 	$cal_displayname2 = $cal_displayname2 . "...";
 }
 	
-$search_box = '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" style="font-size:10px" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" name="submit" value="Search"></form>';
+$search_box = '<form style="margin-bottom:0;" action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" style="font-size:10px" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" name="submit" value="Search"></form>';
 
 ?>
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
@@ -50,7 +50,7 @@ $search_box = '<form action="search.php" method="GET"><input type="hidden" name=
 			<?php 
 			
 			echo '<div style="padding: 5px;">';
-			echo '<form action="day.php" method="GET">';
+			echo '<form style="margin-bottom:0;" action="day.php" method="GET">';
 			echo "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
 			include('./functions/list_icals.php');
 			include('./functions/list_years.php');
@@ -61,7 +61,7 @@ $search_box = '<form action="search.php" method="GET"><input type="hidden" name=
 				echo $search_box;
 			}
 			if ($display_custom_goto == "yes") {
-				echo '<form action="day.php" method="GET">';
+				echo '<form style="margin-bottom:0;" action="day.php" method="GET">';
 				echo '<input type="hidden" name="cal" value="'.urlencode($cal).'">';	
 				echo '<input type="text" style="width:160px; font-size:10px" name="jumpto_day">';
 				echo '<input type="submit" value="Go">';

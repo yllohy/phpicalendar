@@ -104,7 +104,7 @@
 									
 									echo '<b>'.$jump_lang.'</b><br>';
 									echo '<img src="images/spacer.gif" width="1" height="6" alt=" "><br>';
-									echo "<form action=\"month.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
+									echo "<form style=\"margin-bottom:0;\" action=\"month.php\" method=\"GET\"><select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'$query');\">";
 									include('./functions/list_icals.php');
 									include('./functions/list_years.php');
 									include('./functions/list_months.php');
