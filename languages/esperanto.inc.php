@@ -1,7 +1,7 @@
 <?php
 
 // Esperanto language include
-// For version 0.9.4 PHP iCalendar
+// For version 0.9.5 PHP iCalendar
 //
 // Translation by Sjoerd Bosga (sjoerd@esperanto.se)
 //
@@ -114,7 +114,7 @@ $action_success_lang	= 'Via peto plenumi&#285;is.';
 $submit_lang			= 'En&#349;uti';
 $delete_lang			= 'Forigi';
 
-// ----- New after 0.9.4
+// ----- New after 0.9.5
 $all_cal_comb_lang		= '&#264;iuj kalendaroj kune';
 
 

@@ -1,7 +1,7 @@
 <?php
 
 // Italian language include
-// For version 0.9.4 PHP iCalendar
+// For version 0.9.5 PHP iCalendar
 //
 // First translation by Luca Cacciagrano (clooka@clac.it)
 // Updated translation by Daniele Nicolucci (jollino@discussioni.org)
@@ -115,7 +115,7 @@ $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
 
-// ----- New for 0.9.4
+// ----- New for 0.9.5
 $all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation

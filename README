@@ -78,7 +78,7 @@ COPYING for more information about our license.
 
 Older Browser Support:
 ----------------------
-Starting with 0.9.4, PHP iCalendar is moving away from supporting 4.x browsers.
+Starting with 0.9.5, PHP iCalendar is moving away from supporting 4.x browsers.
 If you still need support for these browers, 0.9.3 is still available for
 download. To get the latest ical support, simply download the latest version
 of PHP iCalendar and replace the file called 'ical_parser.php' in the 
@@ -86,6 +86,10 @@ functions folder.
 
 Changes:
 --------
+0.9.5
+	-Fixed many bugs.
+	-Added a method to publish without Webdav in iCal. calendars/publish.php
+
 0.9.4
 	-Vastly improved BYDAY, BYMONTHDAY, BYYEARDAY support.
 	-Improved DURATION Support.

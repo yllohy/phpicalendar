@@ -1,7 +1,7 @@
 <?php
 
 // Polish language include
-// For version 0.9.4 PHP iCalendar
+// For version 0.9.5 PHP iCalendar
 //
 // Translation by Stanisław Cieślicki (stahoo@poczta.onet.pl)
 //
@@ -114,7 +114,7 @@ $action_success_lang	= 'Zakończono sukcesem.';
 $submit_lang			= 'Wyślij';
 $delete_lang			= 'Wymaż';
 
-// ----- New for 0.9.4
+// ----- New for 0.9.5
 $all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation

@@ -113,7 +113,7 @@ $action_success_lang	= 'Din handling ble utf&oslash;rt.';
 $submit_lang			= 'Legg inn';
 $delete_lang			= 'Slett';
 
-// ----- New for 0.9.4
+// ----- New for 0.9.5
 $all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation

@@ -114,7 +114,7 @@ $action_success_lang	= '성공했습니다.';
 $submit_lang			= '제출';
 $delete_lang			= '삭제';
 
-// ----- New for 0.9.4
+// ----- New for 0.9.5
 $all_cal_comb_lang		= '모든 달력이 통합되었습니다';
 
 // - navigation

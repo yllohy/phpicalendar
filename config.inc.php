@@ -1,6 +1,6 @@
 <?php
 
-// Configuration file for PHP iCalendar 0.9.4
+// Configuration file for PHP iCalendar 0.9.5
 //
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information

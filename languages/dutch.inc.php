@@ -1,7 +1,7 @@
 <?php
 
 // Dutch language include
-// For version 0.9.4 PHP iCalendar
+// For version 0.9.5 PHP iCalendar
 //
 // Translation by Lieven Gekiere (Lieven@gekiere.com)
 //
@@ -114,7 +114,7 @@ $action_success_lang	= 'uw actie was succesvol.';
 $submit_lang			= 'Verzenden';
 $delete_lang			= 'Verwijder';
 
-// ----- New for 0.9.4
+// ----- New for 0.9.5
 $all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
