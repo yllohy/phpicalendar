@@ -13,6 +13,22 @@ $rssview = $HTTP_GET_VARS['rssview'];
 $cal_displayname = str_replace("32", " ", $cal);
 $events_week = 0;
 
+// calculate a value for Last Modified and ETag
+$filemod = filemtime("../calendars/$cal.ics");
+$filemodtime = date("r", $filemod);
+
+//send relevant headers
+header ("Last-Modified: $filemodtime");
+header ("ETag:\"$filemodtime\"");
+
+// checks the user agents headers to see if they kept track of our
+// stuff, if so be nice and send back a 304 and exit.
+
+if ( ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || ($_SERVER['HTTP_IF_NONE_MATCH'] == $filemodtime))
+{
+	header ("HTTP/1.1 304 Not Modified");
+	exit;
+}
 
 if ($rssview == "day") {
 	$theview = $day_lang;
@@ -156,7 +172,7 @@ $rss .= '</channel>'."\n";
 $rss .= '</rss>'."\n";
 
 header ("Content-Type: text/xml");
-echo "$rss";
 
+echo "$rss";
 
 ?>
