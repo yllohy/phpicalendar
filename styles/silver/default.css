@@ -42,11 +42,11 @@ body			{ background-color: #E5E5E5; }
 .V9 			{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; }
 .V9BOLD 		{ font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; font-weight: 900; }
 .G10 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #0066FF; }
-.G10B 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; }
+.G10B 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #000000; }
 .G10BOLD 		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-weight: 900; }
 .G10G 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #A1A5A9; }
-.V12 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; }
-.H20 			{ font-family: Helvetica, sans-serif; font-size: 18px; }
+.V12 			{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;  color: #000000; }
+.H20 			{ font-family: Helvetica, sans-serif; font-size: 18px; color: #000000; }
 .eventfont 		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; }
 
 
