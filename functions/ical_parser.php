@@ -727,8 +727,8 @@ foreach ($cal_filelist as $filename) {
 							}
 			
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-							$start_date = $regs[1] . $regs[2] . $regs[3];
-							$start_time = $regs[4] . $regs[5];
+							$due_date = $regs[1] . $regs[2] . $regs[3];
+							$due_time = $regs[4] . $regs[5];
 							$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
 			
 							$dlst = date('I', $start_unixtime);
@@ -774,8 +774,8 @@ foreach ($cal_filelist as $filename) {
 							}
 			
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-							$start_date = $regs[1] . $regs[2] . $regs[3];
-							$start_time = $regs[4] . $regs[5];
+							$completed_date = $regs[1] . $regs[2] . $regs[3];
+							$completed_time = $regs[4] . $regs[5];
 							$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
 			
 							$dlst = date('I', $start_unixtime);
