@@ -811,7 +811,7 @@ foreach ($cal_filelist as $filename) {
 						$data = ereg_replace('T', '', $data);
 						$data = ereg_replace('Z', '', $data);
 						$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
-						if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
+						if ((preg_match("/^DTSTART;VALUE=DATE/i", $field)) || (ereg ('^([0-9]{4})([0-9]{2})([0-9]{2})$', $data)))  {
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtstart_check);
 							if ($dtstart_check[1] < 1969) { 
 								$dtstart_check[1] = '1990';
