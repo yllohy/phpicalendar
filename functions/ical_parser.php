@@ -1009,7 +1009,12 @@ foreach ($cal_filelist as $filename) {
 							$exdata = str_replace('Z', '', $exdata);
 							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $exdata, $regs);
 							$except_dates[] = $regs[1] . $regs[2] . $regs[3];
-							$except_times[] = $regs[4] . $regs[5];
+							// Added for Evolution, since they dont think they need to tell me which time to exclude.
+							if (($regs[4] == '') && ($start_time != '')) { 
+								$except_times[] = $start_time;
+							} else {
+								$except_times[] = $regs[4] . $regs[5];
+							}
 						}
 						break;
 						
@@ -1164,7 +1169,7 @@ if ($parse_file) {
 //If you want to see the values in the arrays, uncomment below.
 
 //print '<pre>';
-//print_r($master_array['-4']);
+//print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
 //print_r($rrule_array);
