@@ -38,7 +38,7 @@ $today_lang			= 'Dnes';
 $this_week_lang		= 'Tento týden';
 $this_month_lang	= 'Tento měsíc';
 $jump_lang			= 'Jdi';
-$tomorrows_lang		= 'Odpoledne';
+$tomorrows_lang		= 'Zítra';
 $goday_lang			= 'Dnešek';
 $goweek_lang		= 'Tento týden';
 $gomonth_lang		= 'Tento měsíc';
@@ -49,7 +49,7 @@ $query_lang			= 'Dotaz: '; // will be followed by the search query
 $no_results_lang	= 'Žádné nalezené záznamy';
 $goprint_lang		= 'Tisk';
 $time_lang			= 'Čas';
-$summary_lang		= 'Výsledek';
+$summary_lang		= 'Souhrn';
 $description_lang	= 'Popis';
 $this_site_is_lang		= 'Tato stránka je';
 $no_events_day_lang		= 'Žádné záznamy v tomto dni.';
@@ -62,59 +62,59 @@ $rss_language			= 'cs-cz';
 
 // new in 0.9 ----------------------
 
-$search_took_lang		= 'Search took %s seconds';
-$recurring_event_lang	= 'Recurring event';
-$exception_lang			= 'Exception';
-$no_query_lang			= 'No query given';
-$preferences_lang		= 'Preferences';
-$printer_lang			= 'Printer';
-$select_lang_lang		= 'Select your default language:';
-$select_cal_lang		= 'Select your default calendar:';
-$select_view_lang		= 'Select your default view:';
-$select_time_lang		= 'Select your default start time:';
-$select_day_lang		= 'Select your default start day of week:';
-$select_style_lang		= 'Select your default style:';
-$set_prefs_lang			= 'Set preferences';
-$completed_date_lang	= 'Completed on';
-$completed_lang			= 'Completed';
-$created_lang			= 'Created:';
+$search_took_lang		= 'Hledání trvalo %s vteřin';
+$recurring_event_lang	= 'Opakující se událost';
+$exception_lang			= 'Výjimka';
+$no_query_lang			= 'Nebyl zadán dotaz';
+$preferences_lang		= 'Nastavení';
+$printer_lang			= 'Tiskárna';
+$select_lang_lang		= 'Výchozí jazyk:';
+$select_cal_lang		= 'Výchozí kalendář:';
+$select_view_lang		= 'Výchozí pohled:';
+$select_time_lang		= 'Výchozí startovní čas:';
+$select_day_lang		= 'Výchozí první den týdne:';
+$select_style_lang		= 'Výchozí styl:';
+$set_prefs_lang			= 'Ulož nastavení';
+$completed_date_lang	= 'Kompletní v';
+$completed_lang			= 'Kompletní';
+$created_lang			= 'Vytvořeno:';
 $due_lang				= 'Due:';
-$priority_lang			= 'Priority:';
-$priority_high_lang		= 'High';
-$priority_low_lang		= 'Low';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'None';
+$priority_lang			= 'Priorita:';
+$priority_high_lang		= 'Vysoká';
+$priority_low_lang		= 'Nízká';
+$priority_medium_lang	= 'Střední';
+$priority_none_lang		= 'Žádná';
 $status_lang			= 'Status:';
-$todo_lang				= 'To do items';
-$unfinished_lang		= 'Unfinished';
+$todo_lang				= 'Seznam úkolů';
+$unfinished_lang		= 'Nedokončeno';
 
 // - navigation
-$back_lang = 'Back';
-$next_lang = 'Next';
-$prev_lang = 'Prev';
-$day_view_lang = 'Day View';
-$week_view_lang = 'Week View';
-$month_view_lang = 'Month View';
-$year_view_lang = 'Year View';
+$back_lang = 'Zpět';
+$next_lang = 'Další';
+$prev_lang = 'Předchozí';
+$day_view_lang = 'Zobraz den';
+$week_view_lang = 'Zobraz týden';
+$month_view_lang = 'Zobraz měsíc';
+$year_view_lang = 'Zobraz rok';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 
-$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
-$format_recur_lang['monthly']		= array('month','months');		// and plural forms
-$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
-$format_recur_lang['daily']			= array('day','days');			// in the replacement below
-$format_recur_lang['hourly']		= array('hour','hours');
-$format_recur_lang['minutely']		= array('minute','minutes');
-$format_recur_lang['secondly']		= array('second','seconds');
+$format_recur_lang['yearly']		= array('rok','roky');		// for these, put singular
+$format_recur_lang['monthly']		= array('měsíc','měsíce');		// and plural forms
+$format_recur_lang['weekly']		= array('týden','týdny');		// these will be %freq%
+$format_recur_lang['daily']			= array('den','dny');			// in the replacement below
+$format_recur_lang['hourly']		= array('hodina','hodiny');
+$format_recur_lang['minutely']		= array('minuta','minuty');
+$format_recur_lang['secondly']		= array('vtřina','vteřiny');
 
-$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
-$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+$format_recur_lang['start']			= 'Každý %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'až do %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= '%int% krát';		// ie, 'for 5 times'
 
-$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
-$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
-$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+$format_recur_lang['bymonth']		= 'V měsících: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'V datech: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'Ve dnech: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
 
 // ---------------------------------
 
