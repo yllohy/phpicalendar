@@ -58,7 +58,7 @@ if ($status) {
 	$display .= $status_lang . ' - ' . $status. '<br>' . "\n";
 }
 if ($location) {
-	if (isset($url)) $location = '<a href="'.$url.'" target="_blank">'.$location.'</a>';
+	if ($url != '') $location = '<a href="'.$url.'" target="_blank">'.$location.'</a>';
 	$display .= $location_lang . ' - ' . $location.'<br>';
 }
 $sheet_href = BASE.'styles/'.$style_sheet.'/default.css';
