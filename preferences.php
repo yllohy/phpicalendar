@@ -97,7 +97,7 @@ include(BASE.'functions/ical_parser.php');
 									<tr>
 										<td align="left" valign="top" width="300" nowrap><?php echo "$select_lang_lang"; ?></td>
 										<td align="left" valign="top" width="20"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
-										<td align="left" valign="top" with="300">
+										<td align="left" valign="top" width="300">
 											<?php
 											
 												// Begin Language Selection
@@ -249,9 +249,10 @@ include(BASE.'functions/ical_parser.php');
 									<tr>
 										<td align="left" valign="top" nowrap>&nbsp;</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
-										<td align="left" valign="top"<button type="submit" name="set" value="true" class=\"query_style\">Set Cookie</button></form></td>
+										<td align="left" valign="top"><button type="submit" name="set" value="true" class="query_style">Set Cookie</button></td>
 									</tr>
 								</table>
+								</form>
 								<br>
 								</td>
 							</tr>
