@@ -176,7 +176,7 @@ class Page {
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
-		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
+		$start_day 			= strtotime($week_start_day);
 		for ($i=0; $i<7; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
@@ -941,7 +941,7 @@ class Page {
 		}
 	
 	function output() {
-		global $template, $php_started, $lang, $enable_rss, $template_started;
+		global $template, $php_started, $lang, $enable_rss, $template_started, $cpath;
 		
 		// Looks for {MONTH} before sending page out
 		preg_match_all ('!\{MONTH_([A-Z]*)\|?([+|-])([0-9]{1,2})\}!is', $this->page, $match);
@@ -976,6 +976,9 @@ class Page {
 			$this->page = preg_replace('!<\!-- switch rss_powered on -->(.*)<\!-- switch rss_powered off -->!is', '', $this->page);
 		} else {
 			$this->page = str_replace('{BASE}', BASE, $this->page);
+		}
+		if ($cpath){
+			$this->page = str_replace('&amp;getdate', "&amp;cpath=$cpath&amp;getdate", $this->page);
 		}
 		print($this->page);
 	}
