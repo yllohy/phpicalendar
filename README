@@ -20,6 +20,7 @@ phpicalendar-devel@lists.sourceforge.net
 Installation:
 -------------
 - Put PHP iCalendar into your Sites folder (or another web directory)
+- PHP iCalendar works 'out of the box' but you may want to configure some things
 - Edit the file "config.inc.php" and see section below called "Configuration"
 - Put your iCal files into the directory you specify in config.inc.php
   (default is "calendars")
@@ -37,7 +38,7 @@ marks to change the setting of that variable. If there are restrictions
 as to what that variable can be set to, the comment behind will specify
 them. If you have difficulty with your configuration, you can ask the 
 developers and other PHP iCalendar users at the PHP iCalendar forums: 
-http://phpicalendar.sourceforge.net/phpBB2
+http://phpicalendar.net/forums/
 
 Supported Calendar Applications:
 --------------------------------
