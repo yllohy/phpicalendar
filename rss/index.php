@@ -53,7 +53,7 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 					</td>
 				</tr>
 				<tr>
-					<td class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
+					<td class="dayborder"><img src="../images/spacer.gif" width="1" height="5" alt=" "></td>
 				</tr>
 				<?php if ($enable_rss == "yes") { ?>
 				<tr>
