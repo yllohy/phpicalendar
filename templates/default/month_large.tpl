@@ -16,8 +16,8 @@
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="G10G">{DAY}</font></a>
 			</div>
-			{ALLDAY}
-			{EVENT}				
+			<div align="left" class="V10">{ALLDAY}</div>
+			<div align="left" class="V9">{EVENT}</div>	
 		</td>
 		<!-- switch notthismonth off -->
 		<!-- switch istoday on -->
@@ -25,8 +25,8 @@
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
-			{ALLDAY}
-			{EVENT}
+			<div align="left" class="V10">{ALLDAY}</div>
+			<div align="left" class="V9">{EVENT}</div>
 		</td>
 		<!-- switch istoday off -->
 		<!-- switch ismonth on -->
@@ -34,8 +34,8 @@
 			<div align="right">
 				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
-			{ALLDAY}
-			{EVENT}
+			<div align="left" class="V10">{ALLDAY}</div>
+			<div align="left" class="V9">{EVENT}</div>
 		</td>
 		<!-- switch ismonth off -->
 		<!-- loop monthdays off -->

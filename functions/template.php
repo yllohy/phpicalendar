@@ -6,15 +6,15 @@
 
 class Page {
 	var $page;
-	function draw_month($template, $offset = '+0', $type) {
-		global $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
-		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template, $match1);
-		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template, $match2);
-		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template, $match3);
-		preg_match("!<\!-- switch istoday on -->(.*)<\!-- switch istoday off -->!is", $template, $match4);
-		preg_match("!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!is", $template, $match5);
-		preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!is", $template, $match6);
-		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!is", $template, $match7);		
+	function draw_month($template_p, $offset = '+0', $type) {
+		global $template, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
+		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template_p, $match1);
+		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template_p, $match2);
+		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template_p, $match3);
+		preg_match("!<\!-- switch istoday on -->(.*)<\!-- switch istoday off -->!is", $template_p, $match4);
+		preg_match("!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!is", $template_p, $match5);
+		preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!is", $template_p, $match6);
+		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!is", $template_p, $match7);		
 		
 		$loop_wd 			= trim($match1[1]);
 		$loop_md 			= trim($match2[1]);
@@ -24,10 +24,16 @@ class Page {
 		
 		$startweek 			= trim($match6[1]);
 		$endweek 			= trim($match7[1]);
-		$fake_getdate_time 	= strtotime($this_year.'-'.$this_month.'-15');
-		$fake_getdate_time	= strtotime("$offset month", $fake_getdate_time);
+		if ($type != 'medium') {
+			$fake_getdate_time 	= strtotime($this_year.'-'.$this_month.'-15');
+			$fake_getdate_time	= strtotime("$offset month", $fake_getdate_time);
+		} else {
+			$fake_getdate_time 	= strtotime($this_year.'-'.$offset.'-15');
+		}
+		
 		$start_day 			= strtotime($week_start_day);
 		$month_title 		= localizeDate ($dateFormat_month, $fake_getdate_time);
+
 		if ($type == 'small') {
 			$langtype = $daysofweekreallyshort_lang;
 		} elseif ($type == 'medium') {
@@ -76,9 +82,9 @@ class Page {
 							$event_url 		= $val['url'];
 							if (!isset($val['event_start'])) {
 								if ($type == 'large') {
-									$switch['ALLDAY'] .= '<div align="left" class="V10">';
-									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
-									$switch['ALLDAY'] .= '</div>';
+									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url).'<br>';
+								} else {
+									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0">';
 								}
 							} else {	
 								$event_start = $val['start_unixtime'];
@@ -87,15 +93,18 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								$event_end   = date($timeFormat, @strtotime ($event_end));
 								if ($type == 'large') {
-									$switch['EVENT'] .= '<div align="left" class="V9">';
-									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url);
-									$switch['EVENT'] .= '</div>';
+									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url).'<br>';
+								} else {
+									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0">';
 								}
 							}
 						}
 					}
 				}
 			}
+			
+			$switch['EVENT'] = (isset($switch['EVENT'])) ? $switch['EVENT'] : '';
+			$switch['ALLDAY'] = (isset($switch['ALLDAY'])) ? $switch['ALLDAY'] : '';
 			
 			#print_r($switch);
 			
@@ -114,7 +123,7 @@ class Page {
 			}
 		} while ($whole_month == TRUE);
 		
-		$return = preg_replace('!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is', $weekday_loop, $template);
+		$return = preg_replace('!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is', $weekday_loop, $template_p);
 		$return = ereg_replace('<!-- loop monthweeks on -->(.*)<!-- loop monthweeks off -->', $middle, $return);
 		$return = str_replace('{MONTH_TITLE}', $month_title, $return);
 		
@@ -172,7 +181,19 @@ class Page {
 			}
 		}
 		
-		// Small month builder
+		// Medium month builder
+		preg_match_all ('!(\{MONTH_MEDIUM\|[0-9][0-9]\})!is', $this->page, $match);
+		if (sizeof($match) > 0) {
+			$template_file = $this->parse('templates/'.$template.'/month_medium.tpl');
+			foreach ($match[1] as $key => $val) {
+				$offset = str_replace('}', '', $val);
+				$offset = str_replace('{MONTH_MEDIUM|', '', $offset);
+				$data = $this->draw_month($template_file, $offset, 'medium');
+				$this->page = str_replace($val, $data, $this->page);
+			}
+		}
+		
+		// Large month builder
 		preg_match_all ('!(\{MONTH_LARGE\|[+|-][0-9]\})!is', $this->page, $match);
 		if (sizeof($match) > 0) {
 			$template_file = $this->parse('templates/'.$template.'/month_large.tpl');
@@ -183,6 +204,8 @@ class Page {
 				$this->page = str_replace($val, $data, $this->page);
 			}
 		}
+		
+		// Replace any languages
 		foreach ($lang as $tag => $data) {
 			$this->page = str_replace('{' . strtoupper($tag) . '}', $data, $this->page);
 		}

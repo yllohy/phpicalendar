@@ -8,7 +8,7 @@ $current_view = 'year';
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day = $day_array2[3]; 
 $this_month = $day_array2[2];
-$this_year = $day_array2[1]. '01'. '01';
+$this_year = $day_array2[1];
 $display_date = $day_array2[1];
 
 $unix_time = strtotime($getdate);
@@ -36,6 +36,7 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'todo_available' 	=> '',
+	'event_js' 			=> '',
 	'show_search' 		=> '',
 	'next_month' 		=> $next_month,
 	'prev_month'	 	=> $prev_month,

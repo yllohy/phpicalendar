@@ -42,19 +42,19 @@
 	<table border="0" width="670" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|1}
+				{MONTH_MEDIUM|01}
 			</td>
 			<td width="20">
 				<img src="images/spacer.gif" width="20" height="1" alt=" ">
 			</td>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|2}
+				{MONTH_MEDIUM|02}
 			</td>
 			<td width="20">
 				<img src="images/spacer.gif" width="20" height="1" alt=" ">
 			</td>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|3}
+				{MONTH_MEDIUM|03}
 			</td>
 		</tr>
 		<tr>
@@ -64,19 +64,19 @@
 		</tr>
 		<tr>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|4}
+				{MONTH_MEDIUM|04}
 			</td>
 			<td width="20">
 				<img src="images/spacer.gif" width="20" height="1" alt=" ">
 			</td>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|5}
+				{MONTH_MEDIUM|05}
 			</td>
 			<td width="20">
 				<img src="images/spacer.gif" width="20" height="1" alt=" ">
 			</td>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|6}
+				{MONTH_MEDIUM|06}
 			</td>
 		</tr>
 		<tr>
@@ -86,19 +86,19 @@
 		</tr>
 		<tr>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|7}
+				{MONTH_MEDIUM|07}
 			</td>
 			<td width="20">
 				<img src="images/spacer.gif" width="20" height="1" alt=" ">
 			</td>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|8}
+				{MONTH_MEDIUM|08}
 			</td>
 			<td width="20">
 				<img src="images/spacer.gif" width="20" height="1" alt=" ">
 			</td>
 			<td width="210" valign="top" align="left">
-				{MONTH_MEDIUM|9}
+				{MONTH_MEDIUM|09}
 			</td>
 		</tr>
 		<tr>
