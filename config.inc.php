@@ -19,10 +19,14 @@ $tomorrows_events_lines = '1';				// Number of lines to wrap each event title in
 $allday_week_lines 		= '1';				// Number of lines to wrap each event title in all-day events in week view, 0 means display all lines.
 $week_events_lines 		= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
-$default_path			= 'http://www.example.com/phpicalendar'; // The HTTP URL to the PHP iCalendar directory
+$default_path			= 'http://www.example.com/phpicalendar'; 	// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 $calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
 
+// Advanced settings for custom installs, cookies, etc.
+// In most cases these will not need to be set.
+$cookie_uri				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
+$download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http://www.example.com/phpicalendar/calendars
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.

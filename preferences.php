@@ -1,5 +1,7 @@
 <?php
-$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
+if ($cookie_uri == '') {
+	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
+}
 define('BASE','./');
 $current_view = "preferences";
 $default_view = "$default_view" . ".php";
@@ -51,6 +53,9 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 	$cookie_startday = $week_start_day;
 	$cookie_time = $day_start;
 }
+
+$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -71,7 +76,7 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td align="left" width="120" class="navback">&nbsp;</td>
+								<td align="left" width="120" class="navback"><?php echo '<a href="'.$back_page.'"><img src="'.BASE.'styles/'.$style_sheet.'/back.gif" alt=" " border="0" align="left"></a>'; ?></td>
 								<td class="navback">
 									<table width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
@@ -82,10 +87,10 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 								<td align="right" width="120" class="navback">	
 									<table width="120" border="0" cellpadding="0" cellspacing="0">
 										<tr>
-											<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/day_on.gif" alt="'.$day_view_lang.'" border="0"></a></td>'; ?>
-											<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/week_on.gif" alt="'.$week_view_lang.'" border="0"></a></td>'; ?>
-											<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/month_on.gif" alt="'.$month_view_lang.'" border="0"></a></td>'; ?>
-											<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/year_on.gif" alt="'.$year_view_lang.'" border="0"></a></td>'; ?>
+											<td><?php echo '<a class="psf" href="'.BASE.'day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/day_on.gif" alt=" " border="0"></td>'; ?>
+											<td><?php echo '<a class="psf" href="'.BASE.'week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/week_on.gif" alt=" " border="0"></td>'; ?>
+											<td><?php echo '<a class="psf" href="'.BASE.'month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/month_on.gif" alt=" " border="0"></td>'; ?>
+											<td><?php echo '<a class="psf" href="'.BASE.'year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'styles/'.$style_sheet.'/year_on.gif" alt=" " border="0"></td>'; ?>
 										</tr>
 									</table>
 								</td>

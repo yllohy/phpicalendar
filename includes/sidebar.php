@@ -39,7 +39,7 @@
 										<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a><br>\n
 										<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n
 										<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n
-										<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>\n
+										<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n
 									"; ?>
 									</td>
 								</tr>

@@ -99,7 +99,17 @@ if ($is_webcal) {
 				}
 			}
 		}
-		$subscribe_path = 'webcal://'.$HTTP_SERVER_VARS['SERVER_NAME'].dirname($HTTP_SERVER_VARS['PHP_SELF']).'/'.$filename;
+		
+		// Sets the download and subscribe paths from the config if present.
+		if ($download_uri == '') {
+			$subscribe_path = 'webcal://'.$HTTP_SERVER_VARS['SERVER_NAME'].dirname($HTTP_SERVER_VARS['PHP_SELF']).'/'.$filename;
+			$download_filename = $filename;
+		} else {
+			$newurl = eregi_replace("^(http://)", "", $download_uri); 
+			$subscribe_path = 'webcal://'.$newurl.'/'.$cal_filename.'.ics';
+			$download_filename = $download_uri.'/'.$cal_filename.'.ics';
+		}
+		
 	}
 }
 ?>
