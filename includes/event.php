@@ -81,7 +81,7 @@ echo <<<END
 				<td align="center" width="98%" class="sideback"><div style="height: 17px; margin-top: 3px;"><font class="G10BOLD">{$cal_title_full}</font></div></td>
 			</tr>
 			<tr>
-				<td colspan="3" class="V12">
+				<td align="left" class="V12">
 					<div style="margin-left: 10px; margin-bottom:10px;">
 						<p>{$event}  {$event_times}</p>
 						{$display}
