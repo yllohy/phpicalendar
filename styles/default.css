@@ -1,17 +1,8 @@
-body	{
-background-color: #E5E5E5;
-}
+/* Style sheet for the blue calendar (default) */
 
-/* CSS definitions for fonts */
-
-.V9 { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; }
-.G10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #06f; }
-.G10B { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: black; }
-.G12 { font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 12px; }
-.V12 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; }
-.V14 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; }
-.V16 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; }
-.H20 { font-family: Helvetica, sans-serif; font-size: 20px; }
+.eventborder	{ background-color: #0065DB; border: 1px #0033CC solid; }
+.eventbg { background-color: #68AAEF; }
+.eventfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #FFFFFF; }
 
 
 a.psf	{
@@ -34,9 +25,23 @@ a.psf:hover	{
 	background-color: transparent;
 	}
 	
+	
+body	{
+background-color: #E5E5E5;
+}
+
+/* CSS definitions for fonts */
+
+.V9 { font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 9px; }
+.G10 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #06f; }
+.G10B { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: black; }
+.G12 { font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 12px; }
+.V12 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; }
+.H20 { font-family: Helvetica, sans-serif; font-size: 20px; }
+
+
+
 .bodyline	{ background-color: #FFFFFF; border: 1px #98AAB1 solid; }
-.bodyline2	{ background-color: #0065DB; border: 1px #03C solid; }
-.bodyline3	{ background-color: #0065DB; border: 1px #03C solid; }
 
 .query_style { font-size : 12px; font-family : geneva, arial, sans-serif; width: 135px; }
 .add_style { font-size : 12px; font-family : verdana, geneva, arial, sans-serif; width: 160px; }
