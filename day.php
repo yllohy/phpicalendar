@@ -1,7 +1,9 @@
 <?php
-
+if (isset($_GET["jumpto_day"])) $getdate = date("Ymd", strtotime($_GET["jumpto_day"]));
 $current_view = "day";
 include("./ical_parser.php");
+
+
 
 //if ($use_sessions == "yes") {
 //	session_start();
