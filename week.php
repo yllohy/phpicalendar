@@ -27,6 +27,7 @@ $start_week = localizeDate($dateFormat_week, $start_week_time);
 $end_week =  localizeDate($dateFormat_week, $end_week_time);
 
 $display_date = "$start_week - $end_week";
+$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
 
 // For the side months
@@ -87,9 +88,9 @@ for ($i=0;$i<7;$i++) {
       				<td align="right" width="90" class="navback">	
       					<table width="90" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt=""></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt=""></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt=""></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
 							</tr>
 						</table>
 					</td>

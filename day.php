@@ -35,7 +35,7 @@ $this_month = $day_array2[2];
 $this_year = $day_array2[1];
 
 $parse_month = date ('Ym', $date);
-$thisday2 = localizeDate($dateFormat_week_list, $date);
+$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
 $dayborder = 0;
 
@@ -83,9 +83,9 @@ if ($master_array[($getdate)]) {
       				<td align="right" width="90" class="navback">	
       					<table width="90" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt=""></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt=""></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt=""></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
 							</tr>
 						</table>
 					</td>

@@ -46,8 +46,8 @@ $goweek_lang		= 'Vai a questa settimana';
 $gomonth_lang		= 'Vai a questo mese';
 $goyear_lang		= 'Vai a quest\'anno';
 
-// Date display since setlocale isnt perfect. // new since last translation
-$daysofweek_lang			= array ('Domenica','Luned&iacute;','Marted&igrave;','Mercoled&igrave;','Gioved&igrave;','Venerd&igrave;','Sabato');
+// Date display since setlocale isnt perfect.
+$daysofweek_lang			= array ('Domenica','Luned&igrave;','Marted&igrave;','Mercoled&igrave;','Gioved&igrave;','Venerd&igrave;','Sabato');
 $daysofweekshort_lang		= array ('Dom','Lun','Mar','Mer','Gio','Ven','Sab');
 $daysofweekreallyshort_lang	= array ('D','L','M','M','G','V','S');
 $monthsofyear_lang			= array ('Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre');
@@ -81,14 +81,14 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$error_title_lang = 'Errore!';
+$error_window_lang = 'C\'&egrave; stato un errore!';
+$error_calendar_lang = 'Stavo elaborando il calendario "%s" quando si &egrave; verificato questo errore.';
+$error_path_lang = 'Impossibile accedere al percorso: "%s"';
+$error_back_lang = 'Usa il tasto "Back" ("Indietro") per tornare indietro.';
+$error_remotecal_lang = 'Questo server blocca i calendari remoti che non sono stati approvati.';
+$error_restrictedcal_lang = 'Hai cercato di accedere a un calendario che &egrave; stato limitato su questo server.';
+$error_invalidcal_lang = 'File di calendario non valido. Prova con un altro calendario.';
 
 
 ?>

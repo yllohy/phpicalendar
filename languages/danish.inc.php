@@ -34,25 +34,25 @@ $date_lang			= 'Dato';
 $summary_lang		= 'Opsummering';
 
 // new since last translation
-$all_day_lang		= 'All day event';
-$notes_lang			= 'Notes';
-$this_years_lang	= 'This Year\'s Events';
-$today_lang			= 'Today';
-$this_week_lang		= 'This Week';
-$this_month_lang	= 'This Month';
-$jump_lang			= 'Jump to';
-$tomorrows_lang		= 'Tomorrow\'s Events';
-$goday_lang			= 'Go to Today';
-$goweek_lang		= 'Go to This Week';
-$gomonth_lang		= 'Go to This Month';
-$goyear_lang		= 'Go to This Year';
+$all_day_lang		= 'Heldags Aftale';
+$notes_lang			= 'Noter';
+$this_years_lang	= 'Dette &Aring;s Aftaler';
+$today_lang			= 'I Dag';
+$this_week_lang		= 'Denne Uge';
+$this_month_lang	= 'Denne M&aring;ned';
+$jump_lang			= 'G&aring; Til';
+$tomorrows_lang		= 'N&aelig;ste Dags Aftaler';
+$goday_lang			= 'G&aring; Til Idag';
+$goweek_lang		= 'G&aring; Til Denne Uge';
+$gomonth_lang		= 'G&aring; Til Denne M&aring;ned';
+$goyear_lang		= 'G&aring; Til Dette &Aring;r';
 
 // new since last translation
-$daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-$daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
-$daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
-$monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
-$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+$daysofweek_lang			= array ('S&oslash;ndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','L&oslash;rdag');
+$daysofweekshort_lang		= array ('S&oslash;n','Man','Tir','Ons','Tor','Fre','L&oslash;r');
+$daysofweekreallyshort_lang	= array ('S','M','T','O','T','F','L');
+$monthsofyear_lang			= array ('Januar','Februar','Marts','April','Maj','Juni','Juli','August','September','Oktober','November','December');
+$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'H:i';
@@ -61,7 +61,7 @@ $timeFormat = 'H:i';
 $dateFormat_day = '%A, %B %e';
 $dateFormat_week = '%B %e';
 $dateFormat_week_list = '%a, %b %e';
-$dateFormat_week_jump = '%b %e'; // new since last translation
+$dateFormat_week_jump = '%b %e';
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A, %e %B';
 
@@ -82,14 +82,14 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$error_title_lang = 'Fejl!';
+$error_window_lang = 'Der opstod en fejl!';
+$error_calendar_lang = 'Kalenderen "%s" blev benyttet da fejlen opstod.';
+$error_path_lang = 'Kan ikke &aring;bne stien : "%s"';
+$error_back_lang = 'Brug venligst "Tilbage" knappen for at g&aring; tilbage.';
+$error_remotecal_lang = 'Denne server blokerer for kalendere der ikke er blevet godkendt';
+$error_restrictedcal_lang = 'Du har fors&oslash;gt at f&aring; adgang til en beskyttet kalender p&aring; denne server.';
+$error_invalidcal_lang = 'Kalenderen er muligvis i stykker. Pr&oslash;v en anden kalender.';
 
 
 ?>
