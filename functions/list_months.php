@@ -10,9 +10,9 @@ for ($i=0; $i<12; $i++) {
 	$month_month = date("m", $month_time);
 	$select_month = localizeDate($dateFormat_month, $month_time);
 	if ($month_month == $getdate_month) {
-		print "<option value=\"month.php?cal=$cal&getdate=$monthdate\" selected>$select_month</option>\n";
+		print "<option value=\"month.php?cal=$cal&amp;getdate=$monthdate\" selected>$select_month</option>\n";
 	} else {
-		print "<option value=\"month.php?cal=$cal&getdate=$monthdate\">$select_month</option>\n";
+		print "<option value=\"month.php?cal=$cal&amp;getdate=$monthdate\">$select_month</option>\n";
 	}
 	$month_time = strtotime ("+1 month", $month_time);
 }

@@ -7,7 +7,7 @@ include('./functions/ical_parser.php');
 if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
 	$back_page = $HTTP_SERVER_VARS['HTTP_REFERER'];
 } else {
-	$back_page = BASE.$default_view.'.php?cal='.$cal.'&getdate='.$getdate;
+	$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
 }
 
 $search_valid = false;
@@ -104,7 +104,7 @@ $search_took = number_format(($search_ended-$search_started),3);
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
-      				<td align="left" width="90" class="navback"><?php echo '<a href="'.$back_page.'"><img src="styles/'.$style_sheet.'/back.gif" alt="" border="0" align="left"></a>'; ?></td>
+      				<td align="left" width="120" class="navback"><?php echo '<a href="'.$back_page.'"><img src="styles/'.$style_sheet.'/back.gif" alt="" border="0" align="left"></a>'; ?></td>
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
@@ -112,12 +112,13 @@ $search_took = number_format(($search_ended-$search_started),3);
       						</tr>
       					</table>
       				</td>
-      				<td align="right" width="90" class="navback">	
-      					<table width="90" border="0" cellpadding="0" cellspacing="0">
+      				<td align="right" width="120" class="navback">	
+      					<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="" border="0"></a></td>'; ?>
 							</tr>
 						</table>
 					</td>
@@ -150,7 +151,7 @@ $search_took = number_format(($search_ended-$search_started),3);
 											$dayofmonth = strtotime ($key);
 											$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
-											echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><b><a class=\"ps3\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></b></font></td></tr>";
+											echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><b><a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></b></font></td></tr>";
 											echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\"></td></tr>\n";
 											
 											if ($val["event_text"]) {	
@@ -203,7 +204,7 @@ $search_took = number_format(($search_ended-$search_started),3);
 														$dayofmonth = strtotime ($key);
 														$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 														echo "<tr><td width=\"20\"><img src=\"images/spacer.gif\" width=\"20\" height=\"1\"></td>\n";
-														echo "<td align=\"left\" colspan=\"2\"><font class=\"V10\"><i>$exception_lang</i>: <a class=\"ps3\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font></td></tr>";
+														echo "<td align=\"left\" colspan=\"2\"><font class=\"V10\"><i>$exception_lang</i>: <a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font></td></tr>";
 														echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\"></td></tr>\n";
 														
 														if ($val2["event_text"]) {	

@@ -15,9 +15,9 @@
 			<td valign="center" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+						<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
 						<td align="center" width="112" class="sideback"><font class="G10BOLD"><?php echo "$thisday2"; ?></font></td>
-						<td align="right" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+						<td align="right" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="left">
@@ -33,12 +33,12 @@
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
 									<td colspan="6" class="G10B">
 									<?php echo "
-										<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$goday_lang</a><br>\n
-										<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$today_today\">$goweek_lang</a><br>\n
-										<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">$gomonth_lang</a><br>\n
-										<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$today_today\">$goyear_lang</a><br>\n
-										<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$getdate&printview=$current_view\">$goprint_lang</a><br>\n
-										<a class=\"psf\" href=\"preferences.php?cal=$cal&getdate=$getdate\">$preferences_lang</a><br>\n
+										<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$today_today\">$goday_lang</a><br>\n
+										<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$today_today\">$goweek_lang</a><br>\n
+										<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$today_today\">$gomonth_lang</a><br>\n
+										<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a><br>\n
+										<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&printview=$current_view\">$goprint_lang</a><br>\n
+										<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n
 										<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>\n
 									"; ?>
 									</td>
@@ -232,7 +232,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 														$event_text = "<S>$event_text</S>";
 														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $event_text</font></a><br>\n";
 													}
-												} elseif (($val['priority'] > 0) && ($val['priority'] < 10)){
+												} elseif (isset($val['priority']) && ($val['priority'] <= 5)) {
 													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $event_text</font></a><br>\n";
 												} else {
 													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $event_text</font></a><br>\n";
@@ -310,11 +310,11 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										} else {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
 										$start_day = strtotime("+1 day", $start_day); 
@@ -390,11 +390,11 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										} else {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
 										$start_day = strtotime("+1 day", $start_day); 
@@ -470,11 +470,11 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										} else {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
 										$start_day = strtotime("+1 day", $start_day); 

@@ -39,22 +39,23 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 		<td align="center" valign="middle" bgcolor="white">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
-      				<td align="left" width="90" class="navback">&nbsp;</td>
+      				<td align="left" width="120" class="navback">&nbsp;</td>
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
-								<td align="right" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$prev_year\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
+								<td align="right" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$prev_year\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
 								<td align="center" width="10%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $this_year2; ?></font></td>
-      							<td align="left" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$next_year\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
+      							<td align="left" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$next_year\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
       						</tr>
       					</table>
       				</td>
-      				<td align="right" width="90" class="navback">	
-      					<table width="90" border="0" cellpadding="0" cellspacing="0">
+      				<td align="right" width="120" class="navback">	
+      					<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="" border="0"></a></td>'; ?>
 							</tr>
 						</table>
 					</td>
@@ -83,7 +84,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 									$monthlink = date("Ym", $startYear); 
 									$monthlink = $monthlink . $this_day;
 								?>
-								<td align="center" class="sideback"><?php echo '<a class="ps3" href="month.php?cal=' . $cal . '&getdate=' . $monthlink . '">'; ?><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, $startYear)); ?></font></a></td>
+								<td align="center" class="sideback"><?php echo '<a class="ps3" href="month.php?cal=' . $cal . '&amp;getdate=' . $monthlink . '">'; ?><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, $startYear)); ?></font></a></td>
 								<td width="1" class="sideback"></td>
 							</tr>
 						</table>
@@ -126,11 +127,11 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 												}
 											}	
 											if (isset($master_array[("$daylink")][-1])) $image2 = '<img src="styles/silver/allday_dot.gif" alt="" border="0">';
-											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=' . $cal . '&getdate=' . $daylink . '\'">' . "\n";
+											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=' . $cal . '&amp;getdate=' . $daylink . '\'">' . "\n";
 											echo '<table width="100%" border="0" cellspacing="0" cellpadding="1">' . "\n";
 											echo '<tr>' . "\n";
 											echo '<td align="right" valign="top" class="V9">' . "\n";
-											echo '<a class="psf" href="day.php?cal=' . $cal . '&getdate=' . $daylink . '">' . $day . '</a>' . "\n";
+											echo '<a class="psf" href="day.php?cal=' . $cal . '&amp;getdate=' . $daylink . '">' . $day . '</a>' . "\n";
 											echo '</td>' . "\n";
 											echo '</tr>' . "\n";
 											echo '<tr>' . "\n";
@@ -138,11 +139,11 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 											echo '</tr>' . "\n";
 											echo '</table>' . "\n";
 										} elseif ($check_month == $minical_month) {
-											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=' . $cal . '&getdate=' . $daylink . '\'">' . "\n";
-											echo '<font class="V9"><a class="psf" href="day.php?cal=' . $cal . '&getdate=' . $daylink . '">' . $day . '</a></font></td>' . "\n";
+											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=' . $cal . '&amp;getdate=' . $daylink . '\'">' . "\n";
+											echo '<font class="V9"><a class="psf" href="day.php?cal=' . $cal . '&amp;getdate=' . $daylink . '">' . $day . '</a></font></td>' . "\n";
 										} else {
-											echo '<td width="30" height="30" align="right" valign="top" class="monthoff" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#F2F2F2" onclick="window.location.href=\'day.php?cal=' . $cal . '&getdate=' . $daylink . '\'">' . "\n";
-											echo '<a class="psf" href="day.php?cal=' . $cal . '&getdate=' . $daylink . '">' . $day . '</a></td>' . "\n";
+											echo '<td width="30" height="30" align="right" valign="top" class="monthoff" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#F2F2F2" onclick="window.location.href=\'day.php?cal=' . $cal . '&amp;getdate=' . $daylink . '\'">' . "\n";
+											echo '<a class="psf" href="day.php?cal=' . $cal . '&amp;getdate=' . $daylink . '">' . $day . '</a></td>' . "\n";
 										}
 										$start_day = strtotime("+1 day", $start_day); 
 										$i++;

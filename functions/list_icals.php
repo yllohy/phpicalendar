@@ -3,7 +3,7 @@ if ($display_ical_list == "yes") {
 
 	// start of <select> tag
 	if (isset($getdate)) {
-		$query="&getdate=$getdate";
+		$query="&amp;getdate=$getdate";
 	} else {
 		$query="";
 	}

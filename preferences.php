@@ -53,7 +53,7 @@ include(BASE.'functions/ical_parser.php');
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td align="left" width="90" class="navback"><?php echo '<a href="'.$back_page.'"><img src="'.BASE.'/styles/'.$style_sheet.'/back.gif" alt="" border="0" align="left"></a>'; ?></td>
+								<td align="left" width="120" class="navback"><?php echo '<a href="'.$back_page.'"><img src="'.BASE.'/styles/'.$style_sheet.'/back.gif" alt="" border="0" align="left"></a>'; ?></td>
 								<td class="navback">
 									<table width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
@@ -61,12 +61,13 @@ include(BASE.'functions/ical_parser.php');
 										</tr>
 									</table>
 								</td>
-								<td align="right" width="90" class="navback">	
-									<table width="90" border="0" cellpadding="0" cellspacing="0">
+								<td align="right" width="120" class="navback">	
+									<table width="120" border="0" cellpadding="0" cellspacing="0">
 										<tr>
-											<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
-											<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
-											<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
+											<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
+											<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
+											<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
+											<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="'.BASE.'/styles/'.$style_sheet.'/year_on.gif" alt="" border="0"></a></td>'; ?>
 										</tr>
 									</table>
 								</td>

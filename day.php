@@ -64,22 +64,23 @@ if (is_array($master_array[($getdate)])) {
      	<td align="center" valign="middle">
       		<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
-      				<td align="left" width="90" class="navback">&nbsp;</td>
+      				<td align="left" width="120" class="navback">&nbsp;</td>
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
-								<td align="right" width="40%" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$yesterdays_date.'"><img src="styles/'.$style_sheet.'/left_day.gif" alt="" border="0" align="right"></a>'; ?></td>
+								<td align="right" width="40%" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$yesterdays_date.'"><img src="styles/'.$style_sheet.'/left_day.gif" alt="" border="0" align="right"></a>'; ?></td>
 								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $display_date; ?></font></td>
-      							<td align="left" width="40%" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$tomorrows_date.'"><img src="styles/'.$style_sheet.'/right_day.gif" alt="" border="0" align="left"></a>'; ?></td>
+      							<td align="left" width="40%" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$tomorrows_date.'"><img src="styles/'.$style_sheet.'/right_day.gif" alt="" border="0" align="left"></a>'; ?></td>
       						</tr>
       					</table>
       				</td>
-      				<td align="right" width="90" class="navback">	
-      					<table width="90" border="0" cellpadding="0" cellspacing="0">
+      				<td align="right" width="120" class="navback">	
+      					<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="" border="0"></a></td>'; ?>
 							</tr>
 						</table>
 					</td>
@@ -127,7 +128,7 @@ if (is_array($master_array[($getdate)])) {
 						$day = $daysofweek_lang[$day_num];
 						$thisday = date("Ymd", $thisdate);
 						echo "<td width=\"74\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
-						echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$day</a></font>\n";
+						echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$thisday\">$day</a></font>\n";
 						echo "</td>\n";
 						$start_day = strtotime("+1 day", $start_day);
 						$thisdate = strtotime("+1 day", $thisdate);
@@ -224,10 +225,7 @@ if (is_array($master_array[($getdate)])) {
 									} else {
 										$emptyWidth = $nbrGridCols;
 										for ($i=0;$i<sizeof($event_length);$i++) {
-								//echo $this_time_arr[($event_length[$i]['key'])]['event_text'] . ' ind: ' . $i . ' / anz: ' . $event_length[$i]['overlap'] . ' = ' . eventWidth($i,$event_length[$i]['overlap']) . '<br />';
 											$drawWidth = $nbrGridCols / ($event_length[$i]['overlap'] + 1);
-											//print $nbrGridCols.' -- ';
-											//print $drawWidth;
 											$emptyWidth = $emptyWidth - $drawWidth;
 											switch ($event_length[$i]['state']) {
 												case 'begin':

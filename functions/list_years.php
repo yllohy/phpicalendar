@@ -10,7 +10,7 @@ for ($i=0; $i < ($num_years2 +2); $i++) {
 	$year_time2 = strtotime ("-$num_years2 year", $year_time);
 	$yeardate = date("Ymd", $year_time2);
 	$year_year = date ("Y", $year_time2);
-	print "<option value=\"year.php?cal=$cal&getdate=$yeardate\">$year_year</option>\n";
+	print "<option value=\"year.php?cal=$cal&amp;getdate=$yeardate\">$year_year</option>\n";
 	$num_years2--;
 }
 $year_time = strtotime("$this_year-01-01");
@@ -19,9 +19,9 @@ for ($i=0; $i < ($num_years +1); $i++) {
 	$year_year = date ("Y", $year_time);
 	$yeardate = date("Ymd", $year_time);
 	if ($year_year == $getdate_year) {
-		print "<option value=\"year.php?cal=$cal&getdate=$yeardate\" selected>$year_year</option>\n";
+		print "<option value=\"year.php?cal=$cal&amp;getdate=$yeardate\" selected>$year_year</option>\n";
 	} else {
-		print "<option value=\"year.php?cal=$cal&getdate=$yeardate\">$year_year</option>\n";
+		print "<option value=\"year.php?cal=$cal&amp;getdate=$yeardate\">$year_year</option>\n";
 	}
 	$year_time = strtotime ("+1 year", $year_time);
 }

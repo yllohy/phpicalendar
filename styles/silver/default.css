@@ -1,6 +1,6 @@
 /* Style sheet for the silver calendar (default) */
 
-.eventborder	{ background-color: #336699; border: 1px #006699 solid; }
+.eventborder	{ background-image: url(day_title.gif); border: 1px #006699 solid; }
 .eventbg	 	{ background-color: #6699CC; }
 .eventbg2 	 	{ background-color: #6699CC; border-right: 1px solid #FFFFFF; }
 .eventbg2week 	{ background-color: #6699CC; border-right: 1px solid #A1A5A9; }

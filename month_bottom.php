@@ -14,9 +14,9 @@
 <br>
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_day\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" border=\"0\" align=\"left\"></a>"; ?></td>
+		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$prev_day\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" border=\"0\" align=\"left\"></a>"; ?></td>
 		<td align="center" class="sideback"><font class="G10B"><b><?php print (localizeDate ($dateFormat_day, strtotime($getdate))); ?></b></font></td>
-		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_day\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" border=\"0\" align=\"right\"></a>"; ?></td>
+		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$next_day\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" border=\"0\" align=\"right\"></a>"; ?></td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
@@ -74,11 +74,11 @@
 												if ($i == 0) echo "<tr>\n";
 												if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 													echo "<td align=\"center\" class=\"G10B\">\n";
-													echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+													echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 													echo "</td>\n";
 												} else {
 													echo "<td align=\"center\" class=\"G10B\">\n";
-													echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+													echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 													echo "</td>\n";
 												}
 												$start_day = strtotime("+1 day", $start_day); 
@@ -190,35 +190,35 @@
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$today_today\">$goday_lang</a>"; ?></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$today_today\">$goday_lang</a>"; ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&getdate=$today_today\">$goweek_lang</a>"; ?></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$today_today\">$goweek_lang</a>"; ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">$gomonth_lang</a>"; ?></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$today_today\">$gomonth_lang</a>"; ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$today_today\">$goyear_lang</a>"; ?></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a>"; ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
 													</tr>
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$getdate&printview=$current_view\">$goprint_lang</a>"; ?></td>
+														<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&printview=$current_view\">$goprint_lang</a>"; ?></td>
 													</tr>
 													<tr>
 														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
@@ -301,11 +301,11 @@
 										if ($i == 0) echo "<tr>\n";
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"ps2\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										} else {
 											echo "<td align=\"center\" class=\"G10B\">\n";
-											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&getdate=$daylink\">$day</a>\n";
+											echo "<a class=\"psf\" href=\"$minical_view.php?cal=$cal&amp;getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 										}
 										$start_day = strtotime("+1 day", $start_day); 
@@ -392,7 +392,7 @@
 													}
 
 													echo "<tr>\n";
-													echo "<td align=\"left\" valign=\"top\" width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
+													echo "<td align=\"left\" valign=\"top\" width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
 													echo "<td align=\"left\" valign=\"top\" colspan=\"2\">\n";
 													echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a>\n";
 													echo "</td>\n";
