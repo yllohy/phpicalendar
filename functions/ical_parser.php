@@ -5,6 +5,7 @@ include('./functions/date_add.php');
 include('./functions/date_functions.php');
 include('./functions/draw_functions.php');
 include('./functions/overlapping_events.php');
+include('./functions/timezones.php');
 
 $fillTime = $day_start;
 $day_array = array ();
@@ -43,13 +44,13 @@ if ($is_webcal == false && $save_parsed_cals == 'yes') {
 			if ($master_array['-1'] == 'valid cal file') {
 				$parse_file = false;
 				$calendar_name = $master_array['calendar_name'];
+				$calendar_tz = $master_array['calendar_tz'];
 			}
 		}
 	}
 }
 
 if ($parse_file) {
-
 	// patch to speed up parser
 	
 	$ifile = fopen($filename, "r");
@@ -81,7 +82,7 @@ if ($parse_file) {
 				$start_time, $end_time, $start_date, $end_date, $summary, 
 				$allday_start, $allday_end, $start, $end, $the_duration, 
 				$beginning, $rrule_array, $start_of_vevent, $description, 
-				$valarm_description
+				$valarm_description, $start_unixtime, $end_unixtime
 			);
 				
 			$except_dates = array();
@@ -237,15 +238,11 @@ if ($parse_file) {
 						// again, $parse_to_year is set to January 10 of the upcoming year
 						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
 						$start_date_time = strtotime($start_date);
-						//$start_date_time = strtotime('+12 hours', $start_date_time);
 						$this_month_start_time = strtotime($this_year.$this_month.'01');
-						//$this_month_start_time = strtotime('+12 hours', $this_month_start_time);
 						
 						if ($save_parsed_cals == 'yes' && !$is_webcal) {
 							$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
-							///$start_range_time = strtotime('+12 hours', $start_range_time);
 							$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
-							//$end_range_time = strtotime('+12 hours', $end_range_time);
 						} else {
 							$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
 							$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
@@ -286,12 +283,9 @@ if ($parse_file) {
 													// loop through the days on which this event happens
 													foreach($byday as $day) {
 														// use my fancy little function to get the date of each day
-														$day = two2threeCharDays($day);
-														#$thedate = date ("r", $next_range_time);
+														$day = two2threeCharDays($day);														
 														$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
-														#echo "$day -- $summary -- $thedate -- $next_date<br>";
 														$next_date_time = strtotime($next_date);
-														//print date('Y-m-d  ', $next_date_time);
 														$recur_data[] = $next_date_time;
 													}
 												}
@@ -415,9 +409,30 @@ if ($parse_file) {
 					$allday_start = $data;
 					//echo "$summary - $allday_start<br>";
 				} else {
+					if (preg_match("/^DTSTART;TZID=/i", $field)) {
+						$tz_tmp = explode('=', $field);
+						$tz_dtstart = $tz_tmp[1];
+						unset($tz_tmp);
+					}	
+
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$start_date = $regs[1] . $regs[2] . $regs[3];
 					$start_time = $regs[4] . $regs[5];
+					$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+
+					$dlst = date('I', $start_unixtime);
+					$server_offset_tmp = date('O', $start_unixtime);
+					if (isset($tz_dtstart)) {
+						$offset_tmp = $tz_array[$tz_dtstart][$dlst];
+					} elseif (isset($calendar_tz)) {
+						$offset_tmp = $tz_array[$calendar_tz][$dlst];
+					} else {
+						$offset_tmp = $server_offset_tmp;
+					}
+					$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
+					$start_date = date('Ymd', $start_unixtime);
+					$start_time = date('Hi', $start_unixtime);
+					unset($server_offset_tmp);
 				}
 				
 			} elseif (preg_match("/^DTEND/i", $field)) {
@@ -426,9 +441,30 @@ if ($parse_file) {
 				if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
 					$allday_end = $data;
 				} else {
+					if (preg_match("/^DTEND;TZID=/i", $field)) {
+						$tz_tmp = explode('=', $field);
+						$tz_dtend = $tz_tmp[1];
+						unset($tz_tmp);
+					}
 					ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
 					$end_date = $regs[1] . $regs[2] . $regs[3];
 					$end_time = $regs[4] . $regs[5];
+					$end_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+
+					$dlst = date('I', $end_unixtime);
+					$server_offset_tmp = date('O', $start_unixtime);
+					if (isset($tz_dtend)) {
+						$offset_tmp = $tz_array[$tz_dtend][$dlst];
+					} elseif (isset($calendar_tz)) {
+						$offset_tmp = $tz_array[$calendar_tz][$dlst];
+					} else {
+						$offset_tmp = $server_offset_tmp;
+					}
+					$end_unixtime = calcTime($offset_tmp, $server_offset_tmp, $end_unixtime);
+					$end_date = date('Ymd', $end_unixtime);
+					$end_time = date('Hi', $end_unixtime);
+					unset($server_offset_tmp);
+
 				}
 				
 			} elseif (preg_match("/^EXDATE/i", $field)) {
@@ -458,7 +494,9 @@ if ($parse_file) {
 			} elseif (preg_match("/^X-WR-CALNAME/i", $field)) {
 				$calendar_name = $data;
 				$master_array['calendar_name'] = $calendar_name;
-				
+			} elseif (preg_match("/^X-WR-TIMEZONE/i", $field)) {
+				$calendar_tz = $data;
+				$master_array['calendar_tz'] = $calendar_tz;
 			} elseif (preg_match("/^DURATION/i", $field)) {
 				
 				if (($first_duration = TRUE) && (!stristr($field, '=DURATION'))) {

@@ -6,21 +6,20 @@
 //jared.20021003 I think we're always going to make sure these are extracted by hand
 //so I'll comment this out for now, otherwise, uncomment this
 //chad - navigation breaks after 4.2.0 without this.
+// jared-2002.10.19; Re-enabled code at line 32 of this file. Shouldn't need this now.
+// if we're going to use this, we should just extract them for all versions in case
+// someone has manually turned of $register_globals, Otherwise we'll just do it by hand
+// for the vars we care about
+/*
 if(phpversion() >= '4.2.0') 
 
 	{
 		extract($HTTP_GET_VARS);	
 		extract($HTTP_POST_VARS);
 	}
+*/
 include('./config.inc.php');
 include('./functions/error.php');
-
-// subscribe link prefix, doesn't need to be user configureable
-
-// cheap trick... until timezones are implemented, make the server think we're at
-// central time.
-
-putenv("TZ=US/Central");
 
 // language support
 $language = strtolower($language);
@@ -32,13 +31,14 @@ if (file_exists($lang_file)) {
 	exit(error('The requested language "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
 }
 
-/*
-if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
-	$getdate = $HTTP_GET_VARS['getdate'];
-} else {
-	$getdate = date('Ymd');
+if (!isset($getdate)) {
+	if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
+		$getdate = $HTTP_GET_VARS['getdate'];
+	} else {
+		$getdate = date('Ymd');
+	}
 }
-*/
+
 if (ini_get('max_execution_time') < 60) {
 	ini_set('max_execution_time', '60');
 }
