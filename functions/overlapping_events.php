@@ -60,7 +60,7 @@ function checkOverlap() {
 							if ($overlapRange["start"] < $drawTimes["draw_start"]) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["start"] = $drawTimes["draw_start"];
 							if ($overlapRange["end"] > $drawTimes["draw_end"]) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["end"] = $drawTimes["draw_end"];
 							$newOverlapRange = FALSE;
-							break;
+		//					break;
 						}
 					}
 					if ($newOverlapRange) {
@@ -81,7 +81,7 @@ function checkOverlap() {
 										if ($overlapRange["start"] < $overlap_start) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["start"] = $overlap_start;
 										if ($overlapRange["end"] > $overlap_end) $overlap_array[($start_date)][($loopBlockKey)]["overlapRanges"][($keyOverlap)]["end"] = $overlap_end;
 										$newOverlapRange2 = FALSE;
-										break;
+			//							break;
 									}
 								}
 								if ($newOverlapRange2) {
@@ -107,7 +107,6 @@ function checkOverlap() {
 		}
 		if (!$newEventAdded) {
 			if (isset($master_array[($start_date)])) {
-				$newBlockKey = "";
 				foreach ($master_array[($start_date)] as $keyTime => $eventTime) {
 					foreach ($eventTime as $keyEvent => $event) {
 						$entryDrawTimes =  drawEventTimes($event["event_start"], $event["event_end"]);
@@ -128,7 +127,7 @@ function checkOverlap() {
 								$overlap_end = $entryDrawTimes["draw_end"];
 								$overlapBlock_end = $drawTimes["draw_end"];
 							}
-							if ($newBlockKey == "") {
+							if (!isset($newBlockKey)) {
 								$overlap_array[($start_date)][] = array ("blockStart" => $overlapBlock_start, "blockEnd" => $overlapBlock_end, "maxOverlaps" => 1, "events" => array (array ("time" => $keyTime, "key" => $keyEvent), array ("time" => $newMasterTime, "key" => $newMasterEventKey)), "overlapRanges" => array (array ("count" => 1, "start" => $overlap_start, "end" => $overlap_end)));
 								$maxOverlaps = 1;
 								end($overlap_array[($start_date)]);
