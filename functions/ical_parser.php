@@ -979,8 +979,8 @@ foreach ($cal_filelist as $filename) {
 						$uid = $data;
 						break;
 					case 'X-WR-CALNAME':
-						$calendar_name = $data;
-						$master_array['calendar_name'] = $calendar_name;
+						$actual_calname = $data;
+						$master_array['calendar_name'] = $actual_calname;
 						break;
 					case 'X-WR-TIMEZONE':
 						$calendar_tz = $data;
@@ -1006,12 +1006,10 @@ foreach ($cal_filelist as $filename) {
 							$rrule_array[$regs[1]] = $regs[2];
 						}
 						break;
-					// Attendee support only testing in Apple iCal 1.0.2	
 					case 'ATTENDEE':
 						$field 		= ereg_replace("ATTENDEE;CN=", "", $field);
 						$data 		= ereg_replace ("mailto:", "", $data);
 						$attendee[] = array ('name' => $field, 'email' => $data);
-						#print_r($attendee);
 						break;
 					case 'ORGANIZER':
 						$field 		 = ereg_replace("ORGANIZER;CN=", "", $field);
