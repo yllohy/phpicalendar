@@ -464,8 +464,13 @@ if ($parse_file) {
 				}
 			}
 		
-
-	
+		// Begin VTODO Support
+		} elseif ($line == 'END:VTODO') {
+			$master_array['-2'][][$uid] = array ('start_date' => $start_date, 'start_time' => $start_time, 'summary' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $vtodo_status, 'class' => $vtodo_class, 'categories' => $vtodo_categories);
+			unset ($due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $vtodo_status, $vtodo_class, $vtodo_categories, $summary);
+			$vtodo_set = FALSE;
+		} elseif ($line == 'BEGIN:VTODO') {
+			$vtodo_set = TRUE;
 		} elseif ($line == 'BEGIN:VALARM') {
 			$valarm_set = TRUE;
 		} elseif ($line == 'END:VALARM') {
@@ -480,8 +485,122 @@ if ($parse_file) {
 			$property = $field;
 			$prop_pos = strpos($property,';');
 			if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
+			$property = strtoupper($property);
 			
 			switch ($property) {
+				
+				// Start VTODO Parsing
+				//
+				case 'DUE':
+					$zulu_time = false;
+					if (substr($data,-1) == 'Z') $zulu_time = true;
+					$data = ereg_replace('T', '', $data);
+					$data = ereg_replace('Z', '', $data);
+					if (preg_match("/^DUE;VALUE=DATE/i", $field))  {
+						$allday_start = $data;
+						$start_date = $allday_start;
+					} else {
+						if (preg_match("/^DUE;TZID=/i", $field)) {
+							$tz_tmp = explode('=', $field);
+							$tz_due = $tz_tmp[1];
+							unset($tz_tmp);
+						} elseif ($zulu_time) {
+							$tz_due = 'GMT';
+						}
+		
+						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+						$start_date = $regs[1] . $regs[2] . $regs[3];
+						$start_time = $regs[4] . $regs[5];
+						$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+		
+						$dlst = date('I', $start_unixtime);
+						$server_offset_tmp = chooseOffset($start_unixtime);
+						if (isset($tz_due)) {
+							if (array_key_exists($tz_due, $tz_array)) {
+								$offset_tmp = $tz_array[$tz_due][$dlst];
+							} else {
+								$offset_tmp = '+0000';
+							}
+						} elseif (isset($calendar_tz)) {
+							if (array_key_exists($calendar_tz, $tz_array)) {
+								$offset_tmp = $tz_array[$calendar_tz][$dlst];
+							} else {
+								$offset_tmp = '+0000';
+							}
+						} else {
+							$offset_tmp = $server_offset_tmp;
+						}
+						$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
+						$due_date = date('Ymd', $start_unixtime);
+						$due_time = date('Hi', $start_unixtime);
+						unset($server_offset_tmp);
+					}
+					break;
+					
+				case 'COMPLETED':
+					$zulu_time = false;
+					if (substr($data,-1) == 'Z') $zulu_time = true;
+					$data = ereg_replace('T', '', $data);
+					$data = ereg_replace('Z', '', $data);
+					if (preg_match("/^COMPLETED;VALUE=DATE/i", $field))  {
+						$allday_start = $data;
+						$start_date = $allday_start;
+					} else {
+						if (preg_match("/^COMPLETED;TZID=/i", $field)) {
+							$tz_tmp = explode('=', $field);
+							$tz_completed = $tz_tmp[1];
+							unset($tz_tmp);
+						} elseif ($zulu_time) {
+							$tz_completed = 'GMT';
+						}
+		
+						ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
+						$start_date = $regs[1] . $regs[2] . $regs[3];
+						$start_time = $regs[4] . $regs[5];
+						$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+		
+						$dlst = date('I', $start_unixtime);
+						$server_offset_tmp = chooseOffset($start_unixtime);
+						if (isset($tz_completed)) {
+							if (array_key_exists($tz_completed, $tz_array)) {
+								$offset_tmp = $tz_array[$tz_completed][$dlst];
+							} else {
+								$offset_tmp = '+0000';
+							}
+						} elseif (isset($calendar_tz)) {
+							if (array_key_exists($calendar_tz, $tz_array)) {
+								$offset_tmp = $tz_array[$calendar_tz][$dlst];
+							} else {
+								$offset_tmp = '+0000';
+							}
+						} else {
+							$offset_tmp = $server_offset_tmp;
+						}
+						$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
+						$completed_date = date('Ymd', $start_unixtime);
+						$completed_time = date('Hi', $start_unixtime);
+						unset($server_offset_tmp);
+					}
+					break;	
+				
+				case 'PRIORITY':
+					$vtodo_priority = "$data";
+					break;
+					
+				case 'STATUS':
+					$vtodo_status = "$data";
+					break;
+					
+				case 'CLASS':
+					$vtodo_class = "$data";
+					break;
+					
+				case 'CATEGORIES':
+					$vtodo_categories = "$data";
+					break;		
+				//
+				// End VTODO Parsing				
+					
 				case 'DTSTART':
 					$zulu_time = false;
 					if (substr($data,-1) == 'Z') $zulu_time = true;
@@ -490,7 +609,6 @@ if ($parse_file) {
 					if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
 						$allday_start = $data;
 						$start_date = $allday_start;
-						//echo "$summary - $allday_start<br>";
 					} else {
 						if (preg_match("/^DTSTART;TZID=/i", $field)) {
 							$tz_tmp = explode('=', $field);
