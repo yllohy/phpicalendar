@@ -20,6 +20,7 @@ if ($printview == 'day') {
 	$print_title = localizeDate ($dateFormat_day, strtotime($getdate));
 	$next = date("Ymd", strtotime("+1 day", $unix_time));
 	$prev = date("Ymd", strtotime("-1 day", $unix_time));
+	$zero_events = $no_events_day_lang;
 } elseif ($printview == 'week') {
 	$start_week = localizeDate($dateFormat_week, $start_week_time);
 	$end_week =  localizeDate($dateFormat_week, $end_week_time);
@@ -28,10 +29,12 @@ if ($printview == 'day') {
 	$week_end = date("Ymd", $end_week_time);
 	$next = date("Ymd", strtotime("+1 week", $unix_time));
 	$prev = date("Ymd", strtotime("-1 week", $unix_time));
+	$zero_events = $no_events_week_lang;
 } elseif ($printview == 'month') {
 	$print_title = localizeDate ($dateFormat_month, strtotime($getdate));
 	$next = date("Ymd", strtotime("+1 month", $unix_time));
 	$prev = date("Ymd", strtotime("-1 month", $unix_time));
+	$zero_events = $no_events_month_lang;
 }
 
 	?>
@@ -40,7 +43,7 @@ if ($printview == 'day') {
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$goprint_lang"; ?></title>
+	<title><?php echo "$calendar_name: $print_title"; ?></title>
   	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
 </head>
 <body bgcolor="#FFFFFF">
@@ -92,6 +95,7 @@ if ($printview == 'day') {
 										// Pull out only this months
 										ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
 										if ((($regs[1] == $parse_month) && ($printview == "month")) || (($key == $getdate) && ($printview == "day")) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == "week"))) {
+											$events_week++;
 											$dayofmonth = strtotime ($key);
 											$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
@@ -144,12 +148,19 @@ if ($printview == 'day') {
 											}
 										}
 									}
+									
+									if ($events_week < 1) {
+										echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
+										echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><br><center><b>$zero_events</b></center></font><br></td></tr>";
+										echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\"></td></tr>\n";
+									}
 								
 								?>
-							</table>
-						</td>
-					</tr>
-				</table>		
+						</table>
+					</td>
+				</tr>
+			</table>		
 		</td>
 	</tr>
 </table>
+<?php include (BASE.'footer.inc.php'); ?>
