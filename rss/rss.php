@@ -10,6 +10,7 @@ $end_week =  localizeDate($dateFormat_week, $end_week_time);
 $parse_month = date ("Ym", strtotime($getdate));
 $rssview = $HTTP_GET_VARS['rssview'];
 $cal_displayname = str_replace("32", " ", $cal);
+$events_week = 0;
 
 
 if ($rssview == "day") {
@@ -48,17 +49,19 @@ if ($rssview == 'day') {
 				$rss .= '<link>'.$default_path.'/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
 				$rss .= '<description>'.$description.'</description>'."\n";
 				$rss .= '</item>'."\n";
+				$events_week++;
 			}
 		}
-	} else {
+	}
+	if ($events_week < 1) {
 		$rss .= '<item>'."\n";
 		$rss .= '<title>'.$no_events_day_lang.'</title>'."\n";
+		$rss .= '<link>'.$default_path.'</link>'."\n";
 		$rss .= '</item>'."\n";
 	}
 }
 
 $thisdate = $start_week_time;
-$events_week = 0;
 $i = 0;
 if ($rssview == "week") {
 	do {
@@ -87,6 +90,7 @@ if ($rssview == "week") {
 		if ($events_week < 1) {
 			$rss .= '<item>'."\n";
 			$rss .= '<title>'.$no_events_week_lang.'</title>'."\n";
+			$rss .= '<link>'.$default_path.'</link>'."\n";
 			$rss .= '</item>'."\n";
 		}
 		$thisdate = ($thisdate + (25 * 60 * 60));
@@ -128,6 +132,7 @@ if ($rssview == "month") {
 					if ($events_week < 1) {
 						$rss .= '<item>'."\n";
 						$rss .= '<title>'.$no_events_month_lang.'</title>'."\n";
+						$rss .= '<link>'.$default_path.'</link>'."\n";
 						$rss .= '</item>'."\n";
 					}
 				}
@@ -140,6 +145,7 @@ if ($rssview == "month") {
 $rss .= '</channel>'."\n";
 $rss .= '</rss>'."\n";
 
+header ("Content-Type: text/xml");
 echo "$rss";
 
 
