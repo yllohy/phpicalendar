@@ -23,6 +23,8 @@ if ($printview == 'day') {
 	$zero_events = $no_events_day_lang;
 	$print_next_nav = $next_day_lang;
 	$print_prev_nav = $last_day_lang;
+	$week_start	= '';
+	$week_end	= '';
 } elseif ($printview == 'week') {
 	$start_week = localizeDate($dateFormat_week, $start_week_time);
 	$end_week =  localizeDate($dateFormat_week, $end_week_time);
@@ -41,6 +43,8 @@ if ($printview == 'day') {
 	$zero_events = $no_events_month_lang;
 	$print_next_nav = $next_month_lang;
 	$print_prev_nav = $last_month_lang;
+	$week_start	= '';
+	$week_end	= '';
 }
 
 	?>

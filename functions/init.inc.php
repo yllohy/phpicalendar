@@ -61,12 +61,16 @@ if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
 		$cal_filename = stripslashes($cal_decoded);
 	}
 } else {
-	$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
-	$calcheckopen = @fopen($calcheck, "r");
-	if ($calcheckopen == FALSE) {
-		$cal_filename = $default_cal;
+	if (isset($default_cal_check)) {
+		$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
+		$calcheckopen = @fopen($calcheck, "r");
+		if ($calcheckopen == FALSE) {
+			$cal_filename = $default_cal;
+		} else {
+			$cal_filename = $default_cal_check;
+		}
 	} else {
-		$cal_filename = $default_cal_check;
+		$cal_filename = $default_cal;
 	}
 }
 

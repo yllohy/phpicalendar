@@ -16,7 +16,7 @@ if($HTTP_POST_VARS) 	{extract($HTTP_POST_VARS, EXTR_PREFIX_SAME, "post_");}
 if($HTTP_GET_VARS)  	{extract($HTTP_GET_VARS, EXTR_PREFIX_SAME, "get_");}
 
 // Logout by clearing session variables
-if ($action == "logout") {
+if ((isset($action)) && ($action == "logout")) {
 	$HTTP_SESSION_VARS['phpical_loggedin'] = FALSE;
 	unset($HTTP_SESSION_VARS['phpical_username']);
 	unset($HTTP_SESSION_VARS['phpical_password']);
@@ -77,8 +77,11 @@ else {
 
 // If User is Not Logged In, Display The Login Page
 if ($is_loged_in == FALSE) {
-	if (isset($username))
+	if (isset($username)) {
 		$login_error =  "<font color=\"red\">$invalid_login_lang</font>";
+	} else {
+		$login_error = '';
+	}
 		
     echo <<<EOT
 	<form action="{$HTTP_SERVER_VARS['PHP_SELF']}" method="post">

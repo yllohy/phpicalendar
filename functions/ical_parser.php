@@ -91,7 +91,7 @@ if ($parse_file) {
 				$allday_start, $allday_end, $start, $end, $the_duration, 
 				$beginning, $rrule_array, $start_of_vevent, $description, 
 				$valarm_description, $start_unixtime, $end_unixtime,
-				$recurrence_id, $uid, $class, $attendee, $location, $organizer
+				$recurrence_id, $uid, $class, $location
 			);
 				
 			$except_dates 	= array();
@@ -99,6 +99,8 @@ if ($parse_file) {
 			$first_duration = TRUE;
 			$count 			= 1000000;
 			$valarm_set 	= FALSE;
+			$attendee		= array();
+			$organizer	= array();
 			
 			unset(
 				$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
@@ -141,7 +143,7 @@ if ($parse_file) {
 				if (!isset($length)) $length = $master_array[$old_start_date][$old_start_time][$uid]['event_length'];
 				if (!isset($description)) $description = $master_array[$old_start_date][$old_start_time][$uid]['description'];
 				removeOverlap($start_date_tmp, $old_start_time, $uid);
-				unset($master_array[$start_date_tmp][$old_start_time]);
+				if (isset($master_array[$start_date_tmp][$old_start_time])) unset($master_array[$start_date_tmp][$old_start_time]);
 				$write_processed = false;
 			} else {
 				$write_processed = true;
