@@ -154,6 +154,11 @@ foreach ($cal_filelist as $filename) {
 					if (!isset($summary)) $summary = $master_array[$old_start_date][$old_start_time][$uid]['event_text'];
 					if (!isset($length)) $length = $master_array[$old_start_date][$old_start_time][$uid]['event_length'];
 					if (!isset($description)) $description = $master_array[$old_start_date][$old_start_time][$uid]['description'];
+					if (!isset($location)) $location = $master_array[$old_start_date][$old_start_time][$uid]['location'];
+					if (!isset($organizer)) $organizer = $master_array[$old_start_date][$old_start_time][$uid]['organizer'];
+					if (!isset($status)) $status = $master_array[$old_start_date][$old_start_time][$uid]['status'];
+					if (!isset($attendee)) $attendee = $master_array[$old_start_date][$old_start_time][$uid]['attendee'];
+					if (!isset($url)) $url = $master_array[$old_start_date][$old_start_time][$uid]['url'];
 					removeOverlap($start_date_tmp, $old_start_time, $uid);
 					if (isset($master_array[$start_date_tmp][$old_start_time][$uid])) {
 						unset($master_array[$start_date_tmp][$old_start_time][$uid]);  // SJBO added $uid twice here
@@ -1029,6 +1034,8 @@ foreach ($cal_filelist as $filename) {
 						$organizer[] = array ('name' => $field, 'email' => $data);
 						break;
 					case 'LOCATION':
+						$data = str_replace("\\n", "<br>", $data);
+						$data = str_replace("\\r", "<br>", $data);
 						$location = $data;
 						break;
 					case 'URL':

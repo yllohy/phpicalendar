@@ -90,6 +90,8 @@ Changes:
 	-Fixed a bug with HTTP authentication.
 	-Fixed a bug with multiple timezones in the same calendar.
 	-Added workarounds for dates prior to 1970.
+	-Fix for moving event information.
+	-Fix for adding newlines in Location field.
 
 1.0
 	-Added return false to popups
