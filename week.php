@@ -153,7 +153,12 @@ for ($i=0;$i<7;$i++) {
 							
 								// $master_array[($getdate)]["$day_time"]
 								
-
+								$thisdate = $start_week_time;
+								for ($i=0;$i<7;$i++) {
+									$thisday = date("Ymd", $thisdate);
+									$event_length[$thisday] = array ();
+									$thisdate = ($thisdate + (25 * 60 * 60));
+								}
 								foreach ($day_array as $key) {
 									$cal_time = $key;	
 									$key = strtotime ("$key");
@@ -174,29 +179,31 @@ for ($i=0;$i<7;$i++) {
 									$thisdate = $start_week_time;
 									
 									// loop this part 7 times, one for each day
+									
 									for ($week_loop=0; $week_loop<7; $week_loop++) {
-									$thisday = date("Ymd", $thisdate);
-									$dayborder = 0;
-										$event_length=array();
+										$thisday = date("Ymd", $thisdate);
+										$dayborder = 0;
+										
 										
 										// check for eventstart 
 										if (sizeof($master_array[($thisday)]["$cal_time"]) > 0) {
 											foreach ($master_array[($thisday)]["$cal_time"] as $eventKey => $loopevent) {
 												$drawEvent = drawEventTimes ($loopevent["event_start"], $loopevent["event_end"]);
 												$j = 0;
-												while ($event_length[$j]) {
-													if ($event_length[$j]["state"] == "ended") {
-														$event_length[$j] = array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+												while ($event_length[$thisday][$j]) {
+													if ($event_length[$thisday][$j]["state"] == "ended") {
+														$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
 														break;
 													}
 													$j++;
 												}
-												if ($j == sizeof($event_length)) {
-													array_push ($event_length, array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
+												if ($j == sizeof($event_length[$thisday])) {
+													array_push ($event_length[$thisday], array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
 												}
 											}
 										}
-										if (sizeof($event_length) == 0) {
+										
+										if (sizeof($event_length[$thisday]) == 0) {
 											if ($dayborder == 0) {
 												$class = " class=\"weekborder\"";
 												$dayborder++;
@@ -204,30 +211,33 @@ for ($i=0;$i<7;$i++) {
 												$class = "";
 												$dayborder = 0;
 											}
+											
 											echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols[$thisday] . "\" $class>&nbsp;</td>\n";
 											
 										} else {
 											$emptyWidth = $nbrGridCols[$thisday];
-											for ($i=0;$i<sizeof($event_length);$i++) {
+											for ($i=0;$i<sizeof($event_length[$thisday]);$i++) {
 											
-											//echo $master_array[($thisday)]["$cal_time"][($event_length[$i]["key"])]["event_text"] . " ind: " . $i . " / anz: " . $event_length[$i]["overlap"] . " = " . eventWidth($i,$event_length[$i]["overlap"]) . "<br />";
-												$drawWidth = $nbrGridCols[$thisday] / ($event_length[$i]["overlap"] + 1);
+											//echo $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"] . " ind: " . $i . " / anz: " . $event_length[$thisday][$i]["overlap"] . " = " . eventWidth($i,$event_length[$thisday][$i]["overlap"]) . "<br />";
+												$drawWidth = $nbrGridCols[$thisday] / ($event_length[$thisday][$i]["overlap"] + 1);
 												$emptyWidth = $emptyWidth - $drawWidth;
-												switch ($event_length[$i]["state"]) {
+												switch ($event_length[$thisday][$i]["state"]) {
 													case "begin":
-														$event_length[$i]["state"] = "started";
-														$event_text 	= $master_array[($thisday)]["$cal_time"][($event_length[$i]["key"])]["event_text"];
-														$event_text2 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$i]["key"])]["event_text"]);
+													
+														$event_length[$thisday][$i]["state"] = "started";
+														$event_text 	= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"];
+														$event_text2 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]);
 														$event_text2 	= str_replace("\"", "&quot;", $event_text2);
-														$event_start 	= $master_array[($thisday)]["$cal_time"][($event_length[$i]["key"])]["event_start"];
-														$event_end		= $master_array[($thisday)]["$cal_time"][($event_length[$i]["key"])]["event_end"];
-														$description 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$i]["key"])]["description"]);
+														$event_start 	= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_start"];
+														$event_end		= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_end"];
+														$description 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["description"]);
 														$description 	= str_replace("\"", "&quot;", $description);
 														$event_start 	= strtotime ("$event_start");
 														$event_start 	= date ($timeFormat, $event_start);
 														$event_end 		= strtotime ("$event_end");
 														$event_end 		= date ($timeFormat, $event_end);
-														echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2week\">\n";
+														$calendar_name2	= addslashes($calendar_name);
+														echo "<td rowspan=\"" . $event_length[$thisday][$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2week\">\n";
 														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
 														echo "<tr>\n";
 														echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b></font></td>\n";
@@ -236,7 +246,7 @@ for ($i=0;$i<7;$i++) {
 														echo "<td>\n";
 														echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 														echo "<tr>\n";
-														echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
+														echo "<td class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
 														echo "</tr>\n";
 														echo "</table>\n";
 														echo "</td>\n";           
@@ -250,19 +260,18 @@ for ($i=0;$i<7;$i++) {
 														echo "<td bgcolor=\"#ffffff\" colspan=\"" . $drawWidth . "\">&nbsp;</td>\n";
 														break;
 												}
-												$event_length[$i]["length"]--;
-												if ($event_length[$i]["length"] == 0) {
-													$event_length[$i]["state"] = "ended";
+												$event_length[$thisday][$i]["length"]--;
+												if ($event_length[$thisday][$i]["length"] == 0) {
+													$event_length[$thisday][$i]["state"] = "ended";
 												}
 											}
 											//fill emtpy space on the right
 											if ($emptyWidth > 0) {
 												echo "<td bgcolor=\"#ffffff\" colspan=\"" . $emptyWidth . "\">&nbsp;</td>\n";
 											}
-											while ($event_length[(sizeof($event_length) - 1)]["state"] == "ended") {
-												array_pop($event_length);
+											while ($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
+												array_pop($event_length[$thisday]);
 											}
-											
 										}
 										$thisdate = ($thisdate + (25 * 60 * 60));
 									}
