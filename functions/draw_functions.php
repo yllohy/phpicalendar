@@ -4,7 +4,7 @@
 function drawEventTimes ($start, $end) {
 	global $gridLength;
 	
-	ereg ("([0-9]{2})([0-9]{2})", $start, $time);
+	preg_match ('/([0-9]{2})([0-9]{2})/', $start, $time);
 	$sta_h = $time[1];
 	$sta_min = $time[2];
 	$sta_min = sprintf("%02d", floor($sta_min / $gridLength) * $gridLength);
@@ -13,7 +13,7 @@ function drawEventTimes ($start, $end) {
 		$sta_min = "00";
 	}
 	
-	ereg ("([0-9]{2})([0-9]{2})", $end, $time);
+	preg_match ('/([0-9]{2})([0-9]{2})/', $end, $time);
 	$end_h = $time[1];
 	$end_min = $time[2];
 	$end_min = sprintf("%02d", floor($end_min / $gridLength) * $gridLength);

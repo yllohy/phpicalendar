@@ -204,7 +204,7 @@ foreach ($cal_filelist as $filename) {
 				}
 				if (isset($start_time) && $start_time != '') {
 					preg_match ('/([0-9]{2})([0-9]{2})/', $start_time, $time);
-					preg_match ('([0-9]{2})([0-9]{2})', $end_time, $time2);
+					preg_match ('/([0-9]{2})([0-9]{2})/', $end_time, $time2);
 					if (isset($start_unixtime) && isset($end_unixtime)) {
 						$length = $end_unixtime - $start_unixtime;
 					} else {
@@ -212,7 +212,7 @@ foreach ($cal_filelist as $filename) {
 					}
 					
 					$drawKey = drawEventTimes($start_time, $end_time);
-					ereg ('([0-9]{2})([0-9]{2})', $drawKey['draw_start'], $time3);
+					preg_match ('/([0-9]{2})([0-9]{2})/', $drawKey['draw_start'], $time3);
 					$hour = $time3[1];
 					$minute = $time3[2];
 				}
@@ -949,7 +949,7 @@ foreach ($cal_filelist as $filename) {
 						foreach ($data as $exdata) {
 							$exdata = str_replace('T', '', $exdata);
 							$exdata = str_replace('Z', '', $exdata);
-							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $exdata, $regs);
+							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $exdata, $regs);
 							$except_dates[] = $regs[1] . $regs[2] . $regs[3];
 							$except_times[] = $regs[4] . $regs[5];
 						}
