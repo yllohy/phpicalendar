@@ -1,9 +1,4 @@
 <?php 
-// jared-2002.10.30, I want to make sure my published calendars are world-read/writeable
-// so I have this making sure they all are. This should be commented out/deleted
-// for shipping versions. This is a convenience so when I commit, changes are made and
-// I don't get errors.
-//chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
 error_reporting (E_ERROR | E_WARNING | E_PARSE);
@@ -55,7 +50,7 @@ if ($action == 'logout' || $invalid_login) {
 $language = strtolower($language);
 $lang_file = BASE.'/languages/'.$language.'.inc.php';
 
-if (file_exists($lang_file)) {
+if (file_exists(realpath($lang_file))) {
 	include($lang_file);
 } else {
 	exit(error('The requested language "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
