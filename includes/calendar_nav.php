@@ -152,7 +152,7 @@
 												if ($cal != $ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
 												if (isset($username)) {
 													$querys = preg_replace("/action=[^&]+/", "action=logout", $QUERY_STRING);
-													if ($querys == $QUERY_STRING) $querys .= '&action=logout";
+													if ($querys == $QUERY_STRING) $querys .= "&action=logout";
 													$querys = preg_replace("/(username|password)=[^&]+/", "", $querys);
 													echo "<a class=\"psf\" href=\"$SCRIPT_NAME?$querys\">Logout $username</a><br>\n";
 												}
