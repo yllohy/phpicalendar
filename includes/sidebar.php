@@ -12,7 +12,7 @@
 	
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
@@ -37,7 +37,7 @@
 										<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$today_today\">$goweek_lang</a><br>\n
 										<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$today_today\">$gomonth_lang</a><br>\n
 										<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a><br>\n
-										<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&printview=$current_view\">$goprint_lang</a><br>\n
+										<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n
 										<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n
 										<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>\n
 									"; ?>
@@ -56,7 +56,7 @@
 	<br>
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
@@ -132,7 +132,7 @@
 <?php if (isset($master_array[($tomorrows_date)]) && sizeof($master_array[($tomorrows_date)]) > 0) { ?>
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
@@ -195,7 +195,7 @@
 if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
@@ -267,7 +267,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 ?>	
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 
@@ -348,7 +348,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 	<br>
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
@@ -428,7 +428,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 	<br>
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>

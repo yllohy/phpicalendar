@@ -55,7 +55,7 @@ for ($i=0;$i<7;$i++) {
 		// if RSS is enabled, set the RSS auto-discovery link
 		if ($enable_rss == 'yes') 
 		{
-    		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&rssview=week\">";
+    		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=week\">";
 		} 
 	?>
 	<?php include (BASE.'functions/event.js'); ?>

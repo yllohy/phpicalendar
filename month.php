@@ -54,7 +54,7 @@ $num_of_events = 0;
 		// if RSS is enabled, set the RSS auto-discovery link
 		if ($enable_rss == 'yes') 
 		{
-    		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&rssview=month\">";
+    		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=month\">";
 		} 
 	?>
 	<?php include (BASE.'functions/event.js'); ?>

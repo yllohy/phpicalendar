@@ -1,1 +1,14 @@
-<?php echo "<center><font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/nuke/\">PHP iCalendar 0.9 CVS</a>";if ($enable_rss == 'yes') {	echo "<br>\n";	if ($current_view == 'rssindex') {		echo '<a style="color:gray" href="http://feeds.archive.org/validator/check?url='.$footer_check.'"><img src="'.BASE.'images/valid-rss.png" alt="[Valid RSS]" title="Validate my RSS feed" width="88" height="31" border="1" vspace="3" />';	} else {		echo $this_site_is_lang.' <a class="psf" href="'.BASE.'rss/index.php?cal='.$cal.'&amp;getdate='.$getdate.'"">RSS-Enabled</a></font></center>';	}}echo '</font></center>';?>
+<?php 
+
+echo "<center><font class=\"V9\"><br>$powered_by_lang <a class=\"psf\" href=\"http://phpicalendar.sourceforge.net/nuke/\">PHP iCalendar 0.9 CVS</a>";
+if ($enable_rss == 'yes') {
+	echo "<br>\n";
+	if ($current_view == 'rssindex') {
+		echo '<a style="color:gray" href="http://feeds.archive.org/validator/check?url='.$footer_check.'"><img src="'.BASE.'images/valid-rss.png" alt="[Valid RSS]" title="Validate my RSS feed" width="88" height="31" border="1" vspace="3" />';
+	} else {
+		echo $this_site_is_lang.' <a class="psf" href="'.BASE.'rss/index.php?cal='.$cal.'&amp;getdate='.$getdate.'">RSS-Enabled</a>';
+	}
+}
+echo '</font></center>';
+
+?>

@@ -58,18 +58,18 @@ if ($printview == 'day') {
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
-								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$prev&printview=$printview\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
+								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$prev&amp;printview=$printview\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
 								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $print_title; ?></font></td>
-      							<td align="left" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$next&printview=$printview\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
+      							<td align="left" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$next&amp;printview=$printview\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
       						</tr>
       					</table>
       				</td>
       				<td align="right" width="90" class="navback">	
       					<table width="90" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&amp;getdate='.$getdate.'&printview=day"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&amp;getdate='.$getdate.'&printview=week"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&amp;getdate='.$getdate.'&printview=month"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&amp;getdate='.$getdate.'&amp;printview=day"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&amp;getdate='.$getdate.'&amp;printview=week"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&amp;getdate='.$getdate.'&amp;printview=month"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
 							</tr>
 						</table>
 					</td>

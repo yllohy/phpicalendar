@@ -1,4 +1,4 @@
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
 <!--
 	function openEventInfo(event, calendarname, start, end, description)
 	{	

@@ -25,7 +25,7 @@
 		<td width="1%" valign="top" align="right">
 			<table cellpadding="0" cellspacing="0" border="0" width="160">
 				<tr>
-					<td valign="center" align="center">
+					<td valign="middle" align="center">
 						<table width="160" border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
@@ -108,7 +108,7 @@
 					<td width="160" valign="top">
 						<table cellpadding="0" cellspacing="0" border="0" width="160">
 							<tr>
-								<td valign="center" align="center">
+								<td valign="middle" align="center">
 									<table width="160" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td colspan="3" bgcolor="#FFFFFF" align="left">
@@ -176,7 +176,7 @@
 					<td width="160" valign="top">
 						<table cellpadding="0" cellspacing="0" border="0" width="160">
 							<tr>
-								<td valign="center" align="left" valign="top">
+								<td valign="middle" align="left" valign="top">
 									<table width="160" border="0" cellpadding="0" cellspacing="0">
 										<tr>
 											<td colspan="3" bgcolor="#FFFFFF" align="left" valign="top">
@@ -196,7 +196,7 @@
 															<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$today_today\">$goweek_lang</a><br>\n
 															<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$today_today\">$gomonth_lang</a><br>\n
 															<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a><br>\n
-															<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&printview=$current_view\">$goprint_lang</a><br>\n
+															<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n
 															<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n
 															<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$filename\">$download_lang</a>\n
 														"; ?>
@@ -219,7 +219,7 @@
 		<td width="1%" valign="top" align="left">
 	<table cellpadding="0" cellspacing="0" border="0" width="160">
 		<tr>
-			<td valign="center" align="center">
+			<td valign="middle" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>

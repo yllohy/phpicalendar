@@ -1,5 +1,5 @@
 
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
 <!--
 	function openTodoInfo(vtodo, calendarname, start, due, description, status, priority)
 	{	
