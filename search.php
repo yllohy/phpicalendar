@@ -16,9 +16,6 @@ if (isset($HTTP_GET_VARS['query']) && $HTTP_GET_VARS['query'] != '') {
 	$search_valid = true;
 }
 
-$formatted_start_range = localizeDate($dateFormat_week, $start_range_time);
-$formatted_end_range = localizeDate($dateFormat_week, $end_range_time);
-
 $search_box = '';
 // yet to be implemented
 switch($HTTP_GET_VARS['mode']) {
@@ -266,8 +263,6 @@ $search_took = number_format(($search_ended-$search_started),3);
 								<tr>
 									<td colspan="3" class="G10B" align="center">
 									<?php 
-										echo 'Recurring events searched in range:<br>';
-										echo '<b>'.$formatted_start_range.' - '.$formatted_end_range.'</b><br>'; 
 										echo '<font class="V9G">Search took '.$search_took.' seconds</font><br><br>';
 									?>
 									</td>

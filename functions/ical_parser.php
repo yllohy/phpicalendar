@@ -72,15 +72,7 @@ if ($parse_file) {
 	// using $uid to set specific points in array, if $uid is not in the 
 	// .ics file, we need to have some unique place in the array
 	$uid_counter = 0;
-	
-	// for custom search ranges of recurring events
-	$search_range = false;
-	if (isset($HTTP_GET_VARS['start']) && isset($HTTP_GET_VARS['end']) && $HTTP_GET_VARS['start'] != '' && $HTTP_GET_VARS['end'] != '') {
-		$search_range_start = strtotime($HTTP_GET_VARS['start']);
-		$search_range_end = strtotime($HTTP_GET_VARS['end']);
-		$search_range = true;
-	}
-	
+		
 // read file in line by line
 // XXX end line is skipped because of the 1-line readahead
 	while (!feof($ifile)) {
@@ -226,13 +218,6 @@ if ($parse_file) {
 				if ($save_parsed_cals == 'yes' && !$is_webcal) {
 					$start_range_time = strtotime($this_year.'-01-01 -1 month -2 days');
 					$end_range_time = strtotime($this_year.'-12-31 +1 month +2 days');
-					if ($search_range) {
-						if ($start_range_time > $search_range_start) $start_range_time = $search_range_start;
-						if ($end_range_time < $search_range_end) $end_range_time = $search_range_end;
-					}
-				} elseif ($search_range) {
-					$start_range_time = $search_range_start;
-					$end_range_time = $search_range_end;
 				} else {
 					$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
 					$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
