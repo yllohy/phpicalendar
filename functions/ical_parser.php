@@ -146,6 +146,7 @@ if ($parse_file) {
 				}
 				
 				// If the events go past midnight
+				// Needs to be re-thunk
 				if ($end_time < $start_time) $end_time = 2359;
 			}
 			
@@ -165,9 +166,9 @@ if ($parse_file) {
 				
 			// handle single changes in recurring events
 			// Maybe this is no longer need since done at bottom of parser? - CL 11/20/02
-			//if ($uid_valid && $write_processed) {
-			//	$processed[$uid] = array($start_date,($hour.$minute));
-			//}
+			if ($uid_valid && $write_processed) {
+				$processed[$uid] = array($start_date,($hour.$minute));
+			}
 						
 			// Handling of the all day events
 			if ((isset($allday_start) && $allday_start != '')) {
