@@ -343,7 +343,7 @@ for ($i=0;$i<7;$i++) {
 		</td>
 		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
 		<td width="160" valign="top">
-			<?php include (BASE.'sidebar.php'); ?>
+			<?php include (BASE.'includes/sidebar.php'); ?>
 			<?php include (BASE.'includes/footer.inc.php'); ?>
 		</td>
 	</tr>
