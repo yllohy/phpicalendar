@@ -27,8 +27,6 @@ $subscribe_lang		= '追加';
 $download_lang		= 'ダウンロード';
 $published_lang		= '公開日：';
 $powered_by_lang 	= 'Powered by';
-
-$version_lang		= '0.8';
 $event_lang			= '件名';
 $event_start_lang	= '開始日';
 $event_end_lang		= '終了日';
@@ -36,7 +34,6 @@ $date_lang			= '日付';
 $summary_lang		= '件名';
 $all_day_lang		= '終日イベント';
 $notes_lang			= '注釈';
-
 $todays_lang		= '今日の予定';
 $this_weeks_lang	= '今週の予定';
 $this_months_lang	= '今月の予定';
@@ -45,22 +42,19 @@ $today_lang			= '今日';
 $this_week_lang		= '今週';
 $this_month_lang	= '今月';
 $this_year_lang		= '今年';
-
 $jump_lang			= '移動';
 $tomorrows_lang		= '翌日の予定';
 $goday_lang			= '今日に移動';
 $goweek_lang		= '今週に移動';
 $gomonth_lang		= '今月に移動';
 $goyear_lang		= '今年に移動';
-
 $search_lang		= '検索'; // the verb
 $results_lang		= '検索結果';
 $query_lang			= '検索キーワード'; // will be followed by the search query
 $no_results_lang	= '一致する予定はありませんでした。';
-
 $goprint_lang		= '印刷できる';
 $time_lang			= '時間';
-//$summary_lang		= '結言';
+$summary_lang		= '結言';
 $description_lang	= 'メモ';
 
 // RSS text for 0.8
@@ -109,6 +103,7 @@ $monthsofyearshort_lang		= $monthsofyear_lang;
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'g:i A';
+$timeFormat_small = 'g:i';
 
 // For date formatting, see note below
 $dateFormat_day = '%B%e日 %A';

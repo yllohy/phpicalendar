@@ -75,9 +75,7 @@ $select_time_lang		= 'Select your default start time:';
 $select_day_lang		= 'Select your default start day of week:';
 $select_style_lang		= 'Select your default style:';
 $set_prefs_lang			= 'Set preferences';
-
-//To-dos
-$completed_date_lang	= 'Completed on ';
+$completed_date_lang	= 'Completed on';
 $completed_lang			= 'Completed';
 $created_lang			= 'Created:';
 $due_lang				= 'Due:';

@@ -1,7 +1,7 @@
 <?php
 
 // Finnish language include
-// For version 0.8 PHP iCalendar
+// For version 0.9 PHP iCalendar
 //
 // Translation by Kari Somby (kari.somby@ramk.fi)
 //
@@ -43,17 +43,14 @@ $goday_lang			= 'Mene T&auml;h&auml;n P&auml;iv&auml;&auml;n';
 $goweek_lang		= 'Mene T&auml;h&auml;n Viikkoon';
 $gomonth_lang		= 'Mene T&auml;h&auml;n Kuukauteen';
 $goyear_lang		= 'Mene T&auml;h&auml;n Vuoteen';
-
 $search_lang		= 'Etsi'; // the verb
 $results_lang		= 'Etsinn&auml;n Tulokset';
 $query_lang			= 'Kysely'; // will be followed by the search query
 $no_results_lang	= 'Tapahtumia ei l&ouml;ytynyt';
-
 $goprint_lang		= 'Tulostettava versio';
 $time_lang			= 'Aika';
 $summary_lang		= 'Yhteenveto';
 $description_lang	= 'Selitys';
-
 $this_site_is_lang		= 'T&auml;m&auml; sivusto on';
 $no_events_day_lang		= 'Ei tapahtumia t&auml;n&auml;&auml;n.';
 $no_events_week_lang	= 'Ei tapahtumia t&auml;ll&auml; viikolla.';
@@ -69,6 +66,27 @@ $search_took_lang		= 'Etsimiseen meni %s sekuntia';
 $recurring_event_lang	= 'Toistuva tapahtuma';
 $exception_lang			= 'Poikkeus';
 $no_query_lang			= 'Kysely&auml; ei annettu';
+$preferences_lang		= 'Preferences';
+$printer_lang			= 'Printer';
+$select_lang_lang		= 'Select your default language:';
+$select_cal_lang		= 'Select your default calendar:';
+$select_view_lang		= 'Select your default view:';
+$select_time_lang		= 'Select your default start time:';
+$select_day_lang		= 'Select your default start day of week:';
+$select_style_lang		= 'Select your default style:';
+$set_prefs_lang			= 'Set preferences';
+$completed_date_lang	= 'Completed on';
+$completed_lang			= 'Completed';
+$created_lang			= 'Created:';
+$due_lang				= 'Due:';
+$priority_lang			= 'Priority:';
+$priority_high_lang		= 'High';
+$priority_low_lang		= 'Low';
+$priority_medium_lang	= 'Medium';
+$priority_none_lang		= 'None';
+$status_lang			= 'Status:';
+$todo_lang				= 'To do items';
+$unfinished_lang		= 'Unfinished';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
@@ -94,8 +112,7 @@ $format_recur_lang['byday']			= 'Viikonp&auml;iv&auml;t: %list%';			// ie, 'On d
 $daysofweek_lang			= array ('Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai');
 $daysofweekshort_lang		= array ('Su','Ma','Ti','Ke','To','Pe','La');
 $daysofweekreallyshort_lang	= array ('S','M','T','K','T','P','L');
-$monthsofyear_lang			= array
-('Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kes&auml;kuu','Hein&auml;kuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu');
+$monthsofyear_lang			= array ('Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kes&auml;kuu','Hein&auml;kuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu');
 $monthsofyearshort_lang		= array ('Tammi','Helmi','Maalis','Huhti','Touko','Kes&auml;','Hein&auml;','Elo','Syys','Loka','Marras','Joulu');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php

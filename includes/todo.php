@@ -28,7 +28,7 @@ if (isset($vtodo_array['status']) && ($vtodo_array['status'] !== '') ) {
 	$status = $vtodo_array['status'];
 }
 if ((!isset($status) || $status == "COMPLETED") && isset($completed_date)) {
-	$status = $completed_date_lang . $completed_date;
+	$status = "$completed_date_lang $completed_date";
 } else if ($status == "COMPLETED") {
 	$status = $completed_lang;
 } else {

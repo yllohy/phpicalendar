@@ -1,7 +1,7 @@
 <?php
 
 // Polish language include
-// For version 0.8 PHP iCalendar
+// For version 0.9 PHP iCalendar
 //
 // Translation by Stanislaw Cieslicki (stahoo@poczta.onet.pl)
 //
@@ -25,7 +25,6 @@ $last_year_lang		= 'Zeszły rok';
 $subscribe_lang		= 'Subskrybuj';
 $download_lang		= 'Pobierz';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.8';
 $event_lang			= 'Zadanie';
 $event_start_lang	= 'Początek';
 $event_end_lang		= 'Koniec';
@@ -44,19 +43,14 @@ $goday_lang			= 'Idź do dnia dzisiejszego';
 $goweek_lang		= 'Idź do bieżącego tygodnia';
 $gomonth_lang		= 'Idź do bieżącego miesiąca';
 $goyear_lang		= 'Idź do bieżącego roku';
-
-// new in 0.8 -------------
 $search_lang		= 'Szukaj'; // the verb
 $results_lang		= 'Wyniki poszukiwania';
 $query_lang			= 'Pytanie: '; // will be followed by the search query
 $no_results_lang	= 'Brak poszukiwanych zadań';
-
 $goprint_lang		= 'Do druku';
 $time_lang			= 'Czas';
 $summary_lang		= 'Podsumowanie';
 $description_lang	= 'Opis';
-
-// RSS text for 0.8
 $this_site_is_lang		= 'Ta strona jest';
 $no_events_day_lang		= 'Brak zadań na dziś.';
 $no_events_week_lang	= 'Brak zadań na ten tydzień.';
@@ -65,7 +59,55 @@ $rss_day_date			= 'G:i A';  // Lists just the time
 $rss_week_date			= '%A, %e %B';  // Lists just the day
 $rss_month_date			= '%A, %e %B';  // Lists just the day
 $rss_language			= 'en-us';
-// -------------------------
+
+// new in 0.9 ----------------------
+
+$search_took_lang		= 'Search took %s seconds';
+$recurring_event_lang	= 'Recurring event';
+$exception_lang			= 'Exception';
+$no_query_lang			= 'No query given';
+$preferences_lang		= 'Preferences';
+$printer_lang			= 'Printer';
+$select_lang_lang		= 'Select your default language:';
+$select_cal_lang		= 'Select your default calendar:';
+$select_view_lang		= 'Select your default view:';
+$select_time_lang		= 'Select your default start time:';
+$select_day_lang		= 'Select your default start day of week:';
+$select_style_lang		= 'Select your default style:';
+$set_prefs_lang			= 'Set preferences';
+$completed_date_lang	= 'Completed on';
+$completed_lang			= 'Completed';
+$created_lang			= 'Created:';
+$due_lang				= 'Due:';
+$priority_lang			= 'Priority:';
+$priority_high_lang		= 'High';
+$priority_low_lang		= 'Low';
+$priority_medium_lang	= 'Medium';
+$priority_none_lang		= 'None';
+$status_lang			= 'Status:';
+$todo_lang				= 'To do items';
+$unfinished_lang		= 'Unfinished';
+
+// $format_recur, items enclosed in % will be substituted with variables
+$format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
+
+$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
+$format_recur_lang['monthly']		= array('month','months');		// and plural forms
+$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
+$format_recur_lang['daily']			= array('day','days');			// in the replacement below
+$format_recur_lang['hourly']		= array('hour','hours');
+$format_recur_lang['minutely']		= array('minute','minutes');
+$format_recur_lang['secondly']		= array('second','seconds');
+
+$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+
+$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+
+// ---------------------------------
 
 $daysofweek_lang			= array ('Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota');
 $daysofweekshort_lang		= array ('Nie','Pon','Wt','Śr','Czw','Pt','Sob');
@@ -75,6 +117,7 @@ $monthsofyearshort_lang		= array ('Sty','Luty','Marz','Kwie','Maj','Czer','Lip',
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'G:i';
+$timeFormat_small = 'G:i';
 
 // For date formatting, see note below
 $dateFormat_day = '%A, %e %B';

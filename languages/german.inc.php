@@ -44,19 +44,14 @@ $goday_lang			= 'Gehe zum heutigen Tag';
 $goweek_lang		= 'Gehe zur aktuellen Woche';
 $gomonth_lang		= 'Gehe zum aktuellen Monat';
 $goyear_lang		= 'Gehe zum aktuellen Jahr';
-
-// new in 0.8 -------------
 $search_lang		= 'Suchen'; // the verb
 $results_lang		= 'Suchresultate';
 $query_lang			= 'Suche: '; // will be followed by the search query
 $no_results_lang	= 'Keine Eintr&auml;ge gefunden';
-
 $goprint_lang		= 'Druckversion';
 $time_lang			= 'Zeit';
 $summary_lang		= 'Zusammenfassung';
 $description_lang	= 'Beschreibung';
-
-// RSS text for 0.8
 $this_site_is_lang		= 'Diese Site ist';
 $no_events_day_lang		= 'Keine Eintr&auml;ge f&uuml;r heute.';
 $no_events_week_lang	= 'Keine Eintr&auml;ge in dieser Woche.';
@@ -65,7 +60,55 @@ $rss_day_date			= 'H:i';  // Lists just the time
 $rss_week_date			= '%e. %b';  // Lists just the day
 $rss_month_date			= '%e. %b';  // Lists just the day
 $rss_language			= 'en-us';
-// -------------------------
+
+// new in 0.9 ----------------------
+
+$search_took_lang		= 'Search took %s seconds';
+$recurring_event_lang	= 'Recurring event';
+$exception_lang			= 'Exception';
+$no_query_lang			= 'No query given';
+$preferences_lang		= 'Preferences';
+$printer_lang			= 'Printer';
+$select_lang_lang		= 'Select your default language:';
+$select_cal_lang		= 'Select your default calendar:';
+$select_view_lang		= 'Select your default view:';
+$select_time_lang		= 'Select your default start time:';
+$select_day_lang		= 'Select your default start day of week:';
+$select_style_lang		= 'Select your default style:';
+$set_prefs_lang			= 'Set preferences';
+$completed_date_lang	= 'Completed on';
+$completed_lang			= 'Completed';
+$created_lang			= 'Created:';
+$due_lang				= 'Due:';
+$priority_lang			= 'Priority:';
+$priority_high_lang		= 'High';
+$priority_low_lang		= 'Low';
+$priority_medium_lang	= 'Medium';
+$priority_none_lang		= 'None';
+$status_lang			= 'Status:';
+$todo_lang				= 'To do items';
+$unfinished_lang		= 'Unfinished';
+
+// $format_recur, items enclosed in % will be substituted with variables
+$format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
+
+$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
+$format_recur_lang['monthly']		= array('month','months');		// and plural forms
+$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
+$format_recur_lang['daily']			= array('day','days');			// in the replacement below
+$format_recur_lang['hourly']		= array('hour','hours');
+$format_recur_lang['minutely']		= array('minute','minutes');
+$format_recur_lang['secondly']		= array('second','seconds');
+
+$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+
+$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+
+// ---------------------------------
 
 $daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
 $daysofweekshort_lang		= array ('Son','Mon','Die','Mit','Don','Fre','Sam');
@@ -75,6 +118,7 @@ $monthsofyearshort_lang		= array ('Jan','Feb','M&auml;r','Apr','Mai','Jun','Jul'
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'H:i';
+$timeFormat_small = 'H:i';
 
 // For date formatting, see note below
 $dateFormat_day = '%A, %e. %B';
