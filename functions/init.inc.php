@@ -11,6 +11,16 @@
 if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
+if ($HTTP_COOKIE_VARS['phpicalendar']) {
+	$phpicalendar 		= unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
+	$language 			= $phpicalendar['cookie_language'];
+	$default_cal	 	= $phpicalendar['cookie_calendar'];
+	$default_view 		= $phpicalendar['cookie_view'];
+	$style_sheet 		= $phpicalendar['cookie_style'];
+	// Need to fix this below
+	#$week_start_day		= $phpicalendar['cookie_startday'];
+}
+
 
 // language support
 $language = strtolower($language);

@@ -1,5 +1,5 @@
 <?php
-$cookie_uri = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
+$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 define('BASE','./');
 $current_view = "preferences";
 $default_view = "$default_view" . ".php";
@@ -13,22 +13,21 @@ if ($action == 'setcookie') {
 	$cookie_startday	= $HTTP_POST_VARS['cookie_startday'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style");
 	$the_cookie 		= serialize($the_cookie);
-	setcookie("phpicalendar","$the_cookie",0,"/","$cookie_uri",0);
+	setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
 	unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
 }
 
-if ($phpicalendar) {
-	#$phpicalendar 		= $_COOKIE['phpicalendar'];
-	$phpicalendar 		= unserialize($phpicalendar);
+if ($HTTP_COOKIE_VARS['phpicalendar']) {
+	$phpicalendar 		= unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	$cookie_language 	= $phpicalendar['cookie_language'];
 	$cookie_calendar 	= $phpicalendar['cookie_calendar'];
 	$cookie_view 		= $phpicalendar['cookie_view'];
 	$cookie_style 		= $phpicalendar['cookie_style'];
 	$cookie_startday	= $phpicalendar['cookie_startday'];
-	echo "Cookie read";
 }
-echo "$cookie_uri";
-print_r($HTTP_COOKIE_VARS);
+#echo "$cookie_uri";
+#print_r(unserialize($HTTP_COOKIE_VARS['phpicalendar']));
+#print_r($phpicalendar);
 include(BASE.'functions/ical_parser.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -79,7 +78,7 @@ include(BASE.'functions/ical_parser.php');
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
 							<?php
 							
-							if ($phpicalendar) { ?>
+							if ($action == 'setcookie') { ?>
 							<tr>
 								<td colspan="2" align="center"><font class="G10BOLD">Your preferences have been set.</font></td>
 							</tr>
