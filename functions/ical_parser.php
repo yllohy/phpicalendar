@@ -395,7 +395,7 @@ foreach ($cal_filelist as $filename) {
 							if (!isset($number)) $number = 1;
 							// if $until isn't set yet, we set it to the end of our range we're looking at
 							// The FREQ switch array will always kick our early, so lets try this workaround.
-							if (isset($until)) $until = strtotime('+'.$interval.' '.$freq_type, $until);;
+							// if (isset($until)) $until = strtotime('+'.$interval.' '.$freq_type, $until);;
 							
 							if (!isset($until)) $until = $end_range_time;
 							$end_date_time = $until;

@@ -7,6 +7,9 @@ if ($display_ical_list == "yes") {
 	} else {
 		$query="";
 	}	
+	echo "<select name=\"action\" class=\"query_style\" onChange=\"window.location=(this.options[this.selectedIndex].value+'";
+	if (isset($query)) echo $query;
+	echo "');\">";
 	// open file
 	$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
 	
