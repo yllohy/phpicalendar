@@ -1,8 +1,8 @@
 {HEADER}
 <center>
-<table border="0" width="520" cellspacing="0" cellpadding="0">
+<table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="520" valign="top" align="center">
+		<td width="700" valign="top" align="center">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="calborder">
 				<tr>
 					<td align="center" valign="middle">
@@ -26,7 +26,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="dayborder"><img src="../images/spacer.gif" width="1" height="5" alt=" "></td>
+					<td class="dayborder"><img src="../images/spacer.gif" width="1" height="5" alt=" " /></td>
 				</tr>
 				<tr>
 					<td>
@@ -48,7 +48,7 @@
 		</td>
 	</tr>
 </table>
-<table width="520" border="0" cellpadding="0" cellspacing="0">
+<table width="700" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="tbll"><img src="../images/spacer.gif" alt="" width="8" height="4" /></td>
 		<td class="tblbot"><img src="../images/spacer.gif" alt="" width="8" height="4" /></td>
