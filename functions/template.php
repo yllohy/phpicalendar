@@ -287,9 +287,9 @@ class Page {
 						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 						  $daydisplay .= '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
 						  $daydisplay .= '<tr>'."\n";
-						  $daydisplay .= '<td class="eventborder"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
+						  $daydisplay .= '<td class="eventbg_'.$event_calno.'"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
 						  if ($event_status != '') {
-							$daydisplay .= '<td class="eventborder" width="9" align="right" valign="center"><font class="eventfont">';
+							$daydisplay .= '<td class="eventbg_'.$event_calno.'" width="9" align="right" valign="center"><font class="eventfont">';
 							$daydisplay .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">';
 							$daydisplay .= '</font></td>'."\n";
 						  }
@@ -298,7 +298,7 @@ class Page {
 						  $daydisplay .= '<td colspan="2">'."\n";
 						  $daydisplay .= '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
 						  $daydisplay .= '<tr>'."\n";
-						  $daydisplay .= '<td class="eventbg_'.$event_calno.'">';
+						  $daydisplay .= '<td>';
 						  $event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
 						  $event_url   = $this_time_arr[($event_length[$i]['key'])]['url'];
 						  $daydisplay .= openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$i]['key'])], '', 0, '<font class="eventfont">', '</font>', 'psf', $event_url);
@@ -312,7 +312,7 @@ class Page {
 						case 'started':
 							break;
 						case 'ended':
-							$daydisplay .= '<td bgcolor="#eeeeee" colspan="' . $drawWidth . '" ' . $class . '>&nbsp;</td>'."\n";
+							$daydisplay .= '<td bgcolor="#ffffff" colspan="' . $drawWidth . '" ' . $class . '>&nbsp;</td>'."\n";
 							break;
 					}
 					$event_length[$i]['length']--;
