@@ -44,6 +44,13 @@ $goday_lang			= 'G&aring; till dagens datum';
 $goweek_lang		= 'G&aring; till denna vecka';
 $gomonth_lang		= 'G&aring; till denna m&aring;nad';
 $goyear_lang		= 'G&aring; till detta &aring;r';
+
+// new in 0.8 -------------
+$search_lang		= 'Search'; // the verb
+$results_lang		= 'Search Results';
+$query_lang			= 'Query: '; // will be followed by the search query
+$no_results_lang	= 'No events found';
+
 $goprint_lang		= 'Printer Friendly';
 $time_lang			= 'Time';
 $summary_lang		= 'Summary';
@@ -57,8 +64,7 @@ $no_events_month_lang	= 'No events this month.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
-
-
+// -------------------------
 
 $daysofweek_lang			= array ('S&ouml;ndag','M&aring;ndag','Tisdag','Onsdag','Torsdag','Fredag','L&ouml;rdag');
 $daysofweekshort_lang		= array ('S&ouml;n','M&aring;n','Tis','Ons','Tor','Fre','L&ouml;r');

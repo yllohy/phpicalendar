@@ -43,6 +43,13 @@ $goday_lang			= 'Gehe zu Heute';
 $goweek_lang		= 'Gehe zur aktuellen Woche';
 $gomonth_lang		= 'Gehe zum aktuellen Monat';
 $goyear_lang		= 'Gehe zum aktuellen Jahr';
+
+// new in 0.8 -------------
+$search_lang		= 'Search'; // the verb
+$results_lang		= 'Search Results';
+$query_lang			= 'Query: '; // will be followed by the search query
+$no_results_lang	= 'No events found';
+
 $goprint_lang		= 'Printer Friendly';
 $time_lang			= 'Time';
 $summary_lang		= 'Summary';
@@ -56,8 +63,7 @@ $no_events_month_lang	= 'No events this month.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
-
-
+// -------------------------
 
 $daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
 $daysofweekshort_lang		= array ('Son','Mon','Die','Mit','Don','Fre','Sam');
