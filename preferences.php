@@ -13,11 +13,13 @@ if ($action == 'setcookie') {
 	$cookie_startday	= $HTTP_POST_VARS['cookie_startday'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style");
 	$the_cookie 		= serialize($the_cookie);
-	setcookie("phpicalendar","$the_cookie",time()+6604800,"/","$cookie_uri",0);
+	setcookie("phpicalendar","$the_cookie",0,"/","$cookie_uri",0);
 	unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
-} elseif ($HTTP_COOKIE_VARS['phpicalendar']) {
-	$phpicalendar 		= $HTTP_COOKIE_VARS['phpicalendar'];
-	$phpicalendar 		= explode($phpicalendar);
+}
+
+if ($phpicalendar) {
+	#$phpicalendar 		= $_COOKIE['phpicalendar'];
+	$phpicalendar 		= unserialize($phpicalendar);
 	$cookie_language 	= $phpicalendar['cookie_language'];
 	$cookie_calendar 	= $phpicalendar['cookie_calendar'];
 	$cookie_view 		= $phpicalendar['cookie_view'];
@@ -25,7 +27,8 @@ if ($action == 'setcookie') {
 	$cookie_startday	= $phpicalendar['cookie_startday'];
 	echo "Cookie read";
 }
-#echo "$cookie_uri";
+echo "$cookie_uri";
+print_r($HTTP_COOKIE_VARS);
 include(BASE.'functions/ical_parser.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -194,7 +197,7 @@ include(BASE.'functions/ical_parser.php');
 								closedir($dir_handle);
 								print "</select>\n";
 								echo '<br><br>';
-								 
+								#echo '<hidden name="action" value="setcookie"><br>';
 								echo '<button type="submit" name="set" value="true" class=\"query_style\">Set Cookie</button>';
 								echo '</form><br>'; 
 								 ?>
