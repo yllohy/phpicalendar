@@ -27,10 +27,10 @@ $rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "ht
 $rss .= '<rss version="0.91">'."\n";
 $rss .= '<channel>'."\n";
 $rss .= '<title>'.$cal_displayname.' - '.$theview.'</title>'."\n";
-$rss .= '<link>'.$default_path.'</link>'."\n";
+$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 $rss .= '<description>'.$cal_displayname.' '.$calendar_lang.' - '.$theview.'</description>'."\n";
 $rss .= '<language>'.$rss_language.'</language>'."\n";
-$rss .= '<copyright>Copyright 2002, '.$default_path.'</copyright>'."\n";
+$rss .= '<copyright>Copyright 2002, '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 
 
 if ($rssview == 'day') {
@@ -44,10 +44,13 @@ if ($rssview == 'day') {
 				$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
 				$description 	= stripslashes(urldecode($val["description"]));
 				$description 	= strip_tags($description, '<b><i><u>');
+				$rss_title		= htmlspecialchars ("$event_start $event_text");
+				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
+				$rss_decription	= htmlspecialchars ("$description");
 				$rss .= '<item>'."\n";
-				$rss .= '<title>'.$event_start.' '.$event_text.'</title>'."\n";
-				$rss .= '<link>'.$default_path.'/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
-				$rss .= '<description>'.$description.'</description>'."\n";
+				$rss .= '<title>'.$rss_title.'</title>'."\n";
+				$rss .= '<link>'.$rss_link.'</link>'."\n";
+				$rss .= '<description>'.$rss_description.'</description>'."\n";
 				$rss .= '</item>'."\n";
 				$events_week++;
 			}
@@ -56,7 +59,7 @@ if ($rssview == 'day') {
 	if ($events_week < 1) {
 		$rss .= '<item>'."\n";
 		$rss .= '<title>'.$no_events_day_lang.'</title>'."\n";
-		$rss .= '<link>'.$default_path.'</link>'."\n";
+		$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 		$rss .= '</item>'."\n";
 	}
 }
@@ -78,10 +81,13 @@ if ($rssview == "week") {
 					$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
 					$description 	= stripslashes(urldecode($val["description"]));
 					$description 	= strip_tags($description, '<b><i><u>');
+					$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
+					$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
+					$rss_decription	= htmlspecialchars ("$dayofweek $event_start: $description");
 					$rss .= '<item>'."\n";
-					$rss .= '<title>'.$dayofweek.': '.$event_text.'</title>'."\n";
-					$rss .= '<link>'.$default_path.'/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
-					$rss .= '<description>'.$dayofweek.' '.$event_start.': '.$description.'</description>'."\n";
+					$rss .= '<title>'.$rss_title.'</title>'."\n";
+					$rss .= '<link>'.$rss_link.'</link>'."\n";
+					$rss .= '<description>'.$rss_description.'</description>'."\n";
 					$rss .= '</item>'."\n";
 					$events_week++;
 				}
@@ -90,7 +96,7 @@ if ($rssview == "week") {
 		if ($events_week < 1) {
 			$rss .= '<item>'."\n";
 			$rss .= '<title>'.$no_events_week_lang.'</title>'."\n";
-			$rss .= '<link>'.$default_path.'</link>'."\n";
+			$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 			$rss .= '</item>'."\n";
 		}
 		$thisdate = ($thisdate + (25 * 60 * 60));
@@ -121,10 +127,13 @@ if ($rssview == "month") {
 						$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines);
 						$description 	= stripslashes(urldecode($val["description"]));
 						$description 	= strip_tags($description, '<b><i><u>');
+						$rss_title		= htmlspecialchars ("$dayofmonth: $event_text");
+						$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal");
+						$rss_decription	= htmlspecialchars ("$dayofmonth $event_start: $description");
 						$rss .= '<item>'."\n";
-						$rss .= '<title>'.$dayofmonth.': '.$event_text.'</title>'."\n";
-						$rss .= '<link>'.$default_path.'/day.php?getdate='.$getdate.'&cal='.$cal.'</link>'."\n";
-						$rss .= '<description>'.$dayofmonth.' '.$event_start.': '.$description.'</description>'."\n";
+						$rss .= '<title>'.$rss_title.'</title>'."\n";
+						$rss .= '<link>'.$rss_link.'</link>'."\n";
+						$rss .= '<description>'.$rss_description.'</description>'."\n";
 						$rss .= '</item>'."\n";
 						$events_week++;
 					}
@@ -132,7 +141,7 @@ if ($rssview == "month") {
 					if ($events_week < 1) {
 						$rss .= '<item>'."\n";
 						$rss .= '<title>'.$no_events_month_lang.'</title>'."\n";
-						$rss .= '<link>'.$default_path.'</link>'."\n";
+						$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 						$rss .= '</item>'."\n";
 					}
 				}
