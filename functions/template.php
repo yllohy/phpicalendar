@@ -1,6 +1,7 @@
 <?php
 
 function draw_month($template, $offset = '+0') {
+	global $getdate, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $daysofweekreallyshort_lang;
 	ob_start();
 	include($template);
 	$template = ob_get_contents();
@@ -21,8 +22,9 @@ function draw_month($template, $offset = '+0') {
 	$startweek 			= trim($match6[1]);
 	$endweek 			= trim($match7[1]);
 	$fake_getdate_time 	= strtotime($this_year.'-'.$this_month.'-15');
+	$fake_getdate_time	= strtotime("$offset month", $fake_getdate_time);
 	$start_day 			= strtotime($week_start_day);
-	$month_title 		= localizeDate ($dateFormat_month, strtotime($getdate));
+	$month_title 		= localizeDate ($dateFormat_month, $fake_getdate_time);
 	
 	for ($i=0; $i<7; $i++) {
 		$day_num 		= date("w", $start_day);
@@ -32,27 +34,26 @@ function draw_month($template, $offset = '+0') {
 		$weekday_loop  .= $loop_tmp;
 	}
 	
-	$minical_time 		= $fake_getdate_time;
-	$minical_month 		= date("m", $minical_time);
-	$minical_year 		= date("Y", $minical_time);
+	$minical_month 		= date("m", $fake_getdate_time);
+	$minical_year 		= date("Y", $fake_getdate_time);
 	$first_of_month 	= $minical_year.$minical_month."01";
 	$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
 	$i 					= 0;
 	$whole_month 		= TRUE;
 	$to_replace			= array('{DAY}', '{CAL}', '{DAYLINK}', '{MINICAL_VIEW}');
 	
-	
 	do {
 		if ($i == 0) $middle .= $startweek;
 		$day 			= date ("j", $start_day);
 		$daylink 		= date ("Ymd", $start_day);
 		$check_month 	= date ("m", $start_day);
+		$replace_with 	= array($day, $cal, $daylink, $minical_view);
 		if ($check_month != $minical_month) { 
-			$middle .= str_replace($to_replace, array($day, $cal, $daylink, $minical_view) , $notthismonth);
+			$middle .= str_replace($to_replace, $replace_with, $notthismonth);
 		} elseif (isset($master_array[$daylink]) && ($check_month == $minical_month)) {
-			$middle .= str_replace($to_replace, array($day, $cal, $daylink, $minical_view) , $isevent);
+			$middle .= str_replace($to_replace, $replace_with, $isevent);
 		} else {
-			$middle .= str_replace($to_replace, array($day, $cal, $daylink, $minical_view) , $notevent);
+			$middle .= str_replace($to_replace, $replace_with, $notevent);
 		}
 		
 		$start_day = strtotime("+1 day", $start_day); 
@@ -68,6 +69,7 @@ function draw_month($template, $offset = '+0') {
 	
 	$return = eregi_replace('<!-- loop weekday on -->(.*)<!-- loop weekday off -->', $weekday_loop, $template);
 	$return = eregi_replace('<!-- loop monthweeks on -->(.*)<!-- loop monthweeks off -->', $middle, $return);
+	$return = str_replace('{MONTH_TITLE}', $month_title, $return);
 	
 	return $return;
 	
@@ -117,13 +119,14 @@ class Page {
 	}
 	
 	function output() {
+		global $template;
 		preg_match_all ('!(\{MONTH_SMALL\|[+|-][0-9]\})!is', $this->page, $match);
 		if (sizeof($match) > 0) {
 			foreach ($match[1] as $key => $val) {
-				$template = 'templates/default/month_small.tpl';
+				$template_file = 'templates/'.$template.'/month_small.tpl';
 				$offset = str_replace('}', '', $val);
 				$offset = str_replace('{MONTH_SMALL|', '', $offset);
-				$data = draw_month($template, $offset);
+				$data = draw_month($template_file, $offset);
 				$this->page = str_replace($val, $data, $this->page);
 			}
 		}

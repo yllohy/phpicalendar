@@ -6,6 +6,7 @@ include_once(BASE.'functions/date_functions.php');
 include_once(BASE.'functions/draw_functions.php');
 include_once(BASE.'functions/overlapping_events.php');
 include_once(BASE.'functions/timezones.php');
+include_once(BASE.'functions/list_functions.php');
 
 $fillTime = $day_start;
 $day_array = array ();
