@@ -84,14 +84,16 @@ $priority_none_lang		= 'None';
 $status_lang			= 'Status:';
 $todo_lang				= 'To do items';
 $unfinished_lang		= 'Unfinished';
+$prefs_set_lang 		= 'Your preferences have been set.';
+$prefs_unset_lang 		= 'Preferences unset. Changes will take place next page load.';
+$unset_prefs_lang 		= 'Unset preferences:';
 
-// ----- New for 0.9.1
+// ----- New for 0.9.2
 
-$prefs_set_lang = 'Your preferences have been set.';
-$prefs_unset_lang = 'Preferences unset. Changes will take place next page load.';
-$unset_prefs_lang = 'Unset preferences:';
-
-// - administration
+$organizer_lang			= 'Organizer';
+$attendee_lang			= 'Attendee';
+$status_lang			= 'Status';
+$location_lang			= 'Location';
 $admin_header_lang		= 'PHP iCalendar Administration';
 $username_lang			= 'Username';
 $password_lang			= 'Password';

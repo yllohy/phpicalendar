@@ -160,5 +160,48 @@ function chooseOffset($time) {
 	return $offset;
 }
 
+function openevent($cal, $st, $end, $arr, $lines, $wrap, $clic, $fclic) { 
+	$event_text = stripslashes(urldecode($arr["event_text"]));
+	# for iCal pseudo tag <http> comptability
+	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$reg)) { 
+		$ev = $reg[1] . $reg[2]; 
+		$event_text = $reg[2];
+	} else { 
+		$ev = $arr["event_text"];
+		$event_text = strip_tags($event_text, '<b><i><u>');
+	}
+	if ($arr["organizer"]) {
+		$organizer = urlencode(addslashes($arr["organizer"]));
+	}
+	if ($arr["attendee"]) {
+		$attendee = urlencode(addslashes($arr["attendee"]));
+	}
+	if ($arr["location"]) {
+		$organizer = $arr["location"];
+	}
+	if ($arr["status"]) {
+		$organizer = $arr["status"];
+	}
+	if ($event_text != "") {	
+		if ($lines) $event_text = word_wrap($event_text, $wrap, $lines);
+		$dsc  =urlencode(addslashes($arr["description"]));
+		echo "<a class=\"psf\" href=\"";
+		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $ev, $res))) || ($dsc)) {
+			echo "javascript:w=window.open('";
+			echo "includes/event.php?event=";
+			echo urlencode(addslashes($ev));
+			echo "&cal=";
+			echo urlencode(addslashes($cal));
+			echo "&start=$st&end=$end&description=$dsc&status=$status&location=$location&organizer=$organizer&attendee=$attendee";
+			echo "','Popup','";
+			echo "scrollbars=yes,width=460,height=275";
+			echo "');w.focus()";
+		} else {
+			echo $res[1];
+		}
+	echo "\">$clic$event_text</a>";
+	}
+}
+
 
 ?>

@@ -58,8 +58,8 @@ if (is_array($master_array[($getdate)])) {
     		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=day\">";
 		} 
 	?>
-	<?php include (BASE.'functions/event.js'); ?>
-	<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
+
+<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
 <?php include (BASE.'includes/header.inc.php'); ?>
@@ -102,23 +102,25 @@ if (is_array($master_array[($getdate)])) {
 				<?php
 					// The all day events returned here.
 					if ($master_array[($getdate)]['-1']) {
-						echo '<tr>'."\n";
-						echo '<td colspan="3" height="24">'."\n";
-						echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
-						foreach($master_array[($getdate)]['-1'] as $allday) {
-							$event_text 	= stripslashes(urldecode($allday['event_text']));
-							$description 	= addslashes(urlencode($allday['description']));
-							$event_text2 	= rawurlencode(addslashes($allday['event_text']));
-							$status			= $allday['status'];
-							$event_start 	= '';
-							$event_end		= '';					
-							echo '<tr>'."\n";
-							echo '<td valign="top" align="center" class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\', \''.$status.'\')"><font color="#ffffff"><i>'.$event_text.'</i></font></a></td>'."\n";
-							echo '</tr>'."\n";
-						}
-						echo '</table>'."\n";
-						echo '</td>'."\n";
-						echo '</tr>'."\n";
+					   echo "<tr>\n";
+					   echo '<td colspan="3" height="24">'."\n";
+					   echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
+					   foreach($master_array[($getdate)]['-1'] as $allday) {
+						 echo "<tr>\n";
+						 echo '<td valign="top" align="center" class="eventbg">';
+						 openevent("$calendar_name",
+							   "",
+							   "",
+							   $allday,
+							   0,
+							   "",
+							   '<font color="#ffffff"><i>',
+							   "</i></font>");
+						 echo "</td>\n</tr>\n";
+					   }
+					   echo '</table>'."\n";
+					   echo '</td>'."\n";
+					   echo '</tr>'."\n";
 					}
 					if ($daysofweek_dayview == 'yes') {
 				?>
@@ -238,33 +240,37 @@ if (is_array($master_array[($getdate)])) {
 											$emptyWidth = $emptyWidth - $drawWidth;
 											switch ($event_length[$i]['state']) {
 												case 'begin':
-													$event_length[$i]['state'] = 'started';
-													$event_text 	= stripslashes(urldecode($this_time_arr[($event_length[$i]['key'])]['event_text']));
-													$event_text2 	= rawurlencode(addslashes($this_time_arr[($event_length[$i]['key'])]['event_text']));
-													$event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
-													$event_end		= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
-													$description 	= addslashes(urlencode($this_time_arr[($event_length[$i]['key'])]['description']));
-													$event_start 	= date ($timeFormat, $event_start);
-													$event_end 		= date ($timeFormat, $event_end);
-													$calendar_name2	= rawurlencode(addslashes($calendar_name));
-													$status			= $this_time_arr[($event_length[$i]['key'])]['status'];
-													echo '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2">'."\n";
-													echo '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
-													echo '<tr>'."\n";
-													echo '<td class="eventborder"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
-													echo '</tr>'."\n";
-													echo '<tr>'."\n";
-													echo '<td>'."\n";
-													echo '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
-													echo '<tr>'."\n";
-													echo '<td class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name2.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\', \''.$status.'\')"><font class="eventfont">'.$event_text.'</font></a></td>'."\n";
-													echo '</tr>'."\n";
-													echo '</table>'."\n";
-													echo '</td>'."\n";           
-													echo '</tr>'."\n";
-													echo '</table>'."\n";
-													echo '</td>'."\n";
-													break;
+												  $event_length[$i]['state'] = 'started';
+												  $event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
+												  $event_end	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
+												  $event_start 	= date ($timeFormat, $event_start);
+												  $event_end	= date ($timeFormat, $event_end);
+								
+												  echo '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2">'."\n";
+												  echo '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
+												  echo '<tr>'."\n";
+												  echo '<td class="eventborder"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
+												  echo '</tr>'."\n";
+												  echo '<tr>'."\n";
+												  echo '<td>'."\n";
+												  echo '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
+												  echo '<tr>'."\n";
+												  echo '<td class="eventbg">';
+										  		  openevent("$calendar_name",
+												  "$event_start",
+												  "$event_end",
+												  $this_time_arr[($event_length[$i]['key'])],
+												  "",
+												  0,
+												  "<font class=\"eventfont\">",
+												  "</font>");
+												  echo '</td></tr>'."\n";
+												  echo '</table>'."\n";
+												  echo '</td>'."\n";           
+												  echo '</tr>'."\n";
+												  echo '</table>'."\n";
+												  echo '</td>'."\n";
+												  break;
 												case 'started':
 													break;
 												case 'ended':
