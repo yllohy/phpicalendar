@@ -6,7 +6,6 @@ include_once(BASE.'functions/date_functions.php');
 include_once(BASE.'functions/draw_functions.php');
 include_once(BASE.'functions/overlapping_events.php');
 include_once(BASE.'functions/timezones.php');
-include_once(BASE.'functions/list_functions.php');
 
 $php_started = getmicrotime();
 
@@ -77,7 +76,7 @@ foreach ($cal_filelist as $filename) {
 	
 		// Set default calendar name - can be overridden by X-WR-CALNAME
 		$calendar_name = $cal_filename;
-		$master_array['calendar_name'] = $calendar_name;
+		$master_array['calendar_name'] 	= $calendar_name;
 		
 	// read file in line by line
 	// XXX end line is skipped because of the 1-line readahead
@@ -118,6 +117,8 @@ foreach ($cal_filelist as $filename) {
 				);
 				
 			} elseif ($line == 'END:VEVENT') {
+				
+				if (!isset($master_array[-3][$calnumber])) $master_array[-3][$calnumber] = $actual_calname;
 				
 				// Handle DURATION
 				if (!isset($end_unixtime) && isset($the_duration)) {

@@ -9,7 +9,8 @@ PHP iCalendar is a PHP-based iCal file viewer/parser to display iCals in a Web b
 Its based on v2.0 of the IETF spec. It displays iCal files in a nice logical, 
 clean manner with day, week, month, and year navigation. It is available in 13
 languages and includes support for printing, searching and RSS news feeds. 
-If you need a Calendar applicaion, please check the 'Calendar Links' section of our website.
+If you need a Calendar application (for creating calendar files), please check 
+the 'Supported Calendar Applications' section of the README.
 
 Contact:
 --------

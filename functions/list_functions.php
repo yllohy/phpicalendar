@@ -1,6 +1,24 @@
 <?php
 
+function list_jumps() {
+	global $second_offset, $lang, $cal;
+	$today = date('Ymd', strtotime("now + $second_offset seconds"));
+	$return = '<option value="day.php?cal='.$cal.'&amp;getdate='.$today.'">'.$lang['l_goday'].'</option>';
+	$return .= '<option value="week.php?cal='.$cal.'&amp;getdate='.$today.'">'.$lang['l_goweek'].'</option>';
+	$return .= '<option value="month.php?cal='.$cal.'&amp;getdate='.$today.'">'.$lang['l_gomonth'].'</option>';
+	$return .= '<option value="year.php?cal='.$cal.'&amp;getdate='.$today.'">'.$lang['l_goyear'].'</option>';
+	
+	return $return;
+}
 
+function list_calcolors() {
+	global $template, $master_array;
+	foreach ($master_array[-3] as $key => $val) {
+		$return .= '<img src="templates/'.$template.'/images/monthdot_'.$key.'.gif"> '.$val.'<br>';
+	}
+	
+	return $return;
+}
 
 function list_months() {
 	global $getdate, $this_year, $cal, $dateFormat_month;
@@ -23,7 +41,7 @@ function list_months() {
 
 
 function list_years() {
-	global $getdate, $this_year, $cal, $dateFormat_month;
+	global $getdate, $this_year, $cal;
 	$year_time = strtotime($getdate);
 	for ($i=0; $i < $num_years; $i++) {
 		$offset = $num_years - $i;

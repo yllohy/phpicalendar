@@ -10,6 +10,7 @@ if (isset($HTTP_GET_VARS['jumpto_day'])) {
 define('BASE', './');
 $current_view = 'day';
 require_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
 if ($minical_view == 'current') $minical_view = 'day';
 
@@ -28,6 +29,8 @@ $list_icals 	= display_ical_list(availableCalendars($username, $password, $ALL_C
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
+$list_jumps 	= list_jumps();
+$list_calcolors = list_calcolors();
 
 $page = new Page(BASE.'templates/'.$template.'/DAY.tpl');
 
@@ -54,6 +57,8 @@ $page->replace_tags(array(
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,
 	'list_weeks' 		=> $list_weeks,
+	'list_jumps' 		=> $list_jumps,
+	'legend'	 		=> $list_calcolors,
 	'style_select' 		=> $style_select			
 	));
 	

@@ -22,6 +22,7 @@
 								<td>
 									<div style="padding: 5px;">
 										<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="GET">
+											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_JUMPS}</select><br>
 											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_ICALS}</select><br>
 											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br>
 											<select name="action" class="query_style" onChange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br>
@@ -59,11 +60,9 @@
 							</tr>
 							<tr>
 								<td>
-									<div style="padding: 5px;">
-										<a class="psf" href="day.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GODAY}</a><br>
-										<a class="psf" href="week.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GOWEEK}</a><br>
-										<a class="psf" href="month.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GOMONTH}</a><br>
-										<a class="psf" href="year.php?cal={CAL}&amp;getdate={REALLY_TODAY_TODAY}">{L_GOYEAR}</a><br>
+									<div style="padding-left: 5px;">
+										<b>{L_LEGEND}:</b><br>
+										{LEGEND}
 										<a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview={CURRENT_VIEW}">{L_GOPRINT}</a><br>
 										<!-- switch allow_preferences on -->
 										<a class="psf" href="preferences.php?cal={CAL}&amp;getdate={GETDATE}">{L_PREFERENCES}</a><br>

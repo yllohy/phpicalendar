@@ -1,6 +1,7 @@
 <?php 
 define('BASE', './');
-include_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
 $current_view = "month";
 if ($minical_view == 'current') $minical_view = 'month';
@@ -43,6 +44,8 @@ $list_icals 	= display_ical_list(availableCalendars($username, $password, $ALL_C
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
+$list_jumps 	= list_jumps();
+$list_calcolors = list_calcolors();
 
 $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 
@@ -65,10 +68,12 @@ $page->replace_tags(array(
 	'prev_month'	 	=> $prev_month,
 	'show_goto' 		=> '',
 	'is_logged_in' 		=> '',
+	'list_jumps' 		=> $list_jumps,
 	'list_icals' 		=> $list_icals,
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,
 	'list_weeks' 		=> $list_weeks,
+	'legend'	 		=> $list_calcolors,
 	'style_select' 		=> $style_select			
 	));
 	

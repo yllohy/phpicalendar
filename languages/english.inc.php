@@ -113,9 +113,10 @@ $delete_success_lang	= 'was deleted successfully.';
 $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
-
-// ----- New for 1.0
 $all_cal_comb_lang		= 'All calendars combined';
+
+// New for 2.0
+$lang['l_legend']		= 'Legend';
 
 // - navigation
 $back_lang = 'Back';
