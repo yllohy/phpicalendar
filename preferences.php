@@ -6,9 +6,11 @@ include(BASE.'functions/ical_parser.php');
 if ($cookie_uri == '') {
 	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 }
+
 $current_view = "preferences";
-$default_view = "$default_view" . ".php";
-if ($allow_preferences == 'no') header("Location: $default_view");
+$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
+if ($allow_preferences == 'no') header("Location: $back_page");
+
 $action = $HTTP_GET_VARS['action'];
 $startdays = array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 
@@ -57,7 +59,6 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 	$cookie_time = $day_start;
 }
 
-$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
