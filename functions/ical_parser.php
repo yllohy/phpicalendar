@@ -187,7 +187,7 @@ if ($parse_file) {
 			// Handling regular events
 			if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
 				$nbrOfOverlaps = checkOverlap($start_date, $start_time, $end_time);
-				$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+				$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status);
 				if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
 			}
 			
@@ -452,7 +452,7 @@ if ($parse_file) {
 												}
 											} else {
 												$nbrOfOverlaps = checkOverlap($recur_data_date, $start_time, $end_time);
-												$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description);
+												$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_text' => $summary, 'event_end' => $end_time, 'event_length' => $length, 'event_overlap' => $nbrOfOverlaps, 'description' => $description, 'status' => $status);
 											}
 										}
 									}
@@ -466,7 +466,7 @@ if ($parse_file) {
 		
 		// Begin VTODO Support
 		} elseif ($line == 'END:VTODO') {
-			$master_array['-2'][][$uid] = array ('start_date' => $start_date, 'start_time' => $start_time, 'event_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $vtodo_status, 'class' => $vtodo_class, 'categories' => $vtodo_categories);
+			$master_array['-2'][][$uid] = array ('start_date' => $start_date, 'start_time' => $start_time, 'event_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $vtodo_class, 'categories' => $vtodo_categories);
 			unset ($due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $vtodo_status, $vtodo_class, $vtodo_categories, $summary);
 			$vtodo_set = FALSE;
 		} elseif ($line == 'BEGIN:VTODO') {
@@ -588,7 +588,7 @@ if ($parse_file) {
 					break;
 					
 				case 'STATUS':
-					$vtodo_status = "$data";
+					$status = "$data";
 					break;
 					
 				case 'CLASS':
