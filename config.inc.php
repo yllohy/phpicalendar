@@ -1,6 +1,6 @@
 <?php
 
-// Configuration file for PHP iCalendar 0.9
+// Configuration file for PHP iCalendar 0.9.1
 //
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information
@@ -9,7 +9,7 @@ $style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, gr
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal 			= 'School';			// Exact filename of calendar without .ics
-$language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese'
+$language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese'
 $week_start_day 		= 'Sunday';			// Day of the week your week starts on
 $day_start 				= '0700';			// Start time for day grid
 $gridLength 			= '15';				// Grid distance in minutes for day view, multiples of 15 preferred
