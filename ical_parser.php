@@ -133,8 +133,13 @@ foreach($contents as $line) {
 					$count = $val;
 				
 				} elseif ($key == "UNTIL") 		{
-					$until = $val;
-				
+					$until = ereg_replace("T", "", $val);
+					ereg ("([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})", $until, $regs);
+					$year = $regs[1];
+					$month = $regs[2];
+					$day = $regs[3];
+					$until = strtotime("$year$month$day");
+					
 				} elseif ($key == "INTERVAL")	{
 					$number = $val;
 				
@@ -186,13 +191,14 @@ foreach($contents as $line) {
 						// $parse_to_year is the year we are parsing, January 10th, next year.
 						// $start_of_vevent is the date the recurring event starts.
 						// $end_of_vevent is the date the recurring event stops.
+						// $count and $count_to check for the COUNT feature
+						// $until checks for the UNTIL feature, makes sure we don't recur past it.
 						 
 						$parse_to_year = $this_year + 1;
 						$parse_to_year  = mktime(0,0,0,1,10,$parse_to_year);						
 						$start_of_vevent = strtotime("$allday_start");
 						$end_of_vevent = strtotime("$allday_end");
-						//echo "End = $start_of_vevent, $parse_to_year - $summary, $interval, $number<br>";
-
+						$count_to = 0;
 						if ($start_of_vevent < $parse_to_year) {
 							do {
 								// This steps through each day of a multiple all-day event and adds to master array
@@ -201,14 +207,13 @@ foreach($contents as $line) {
 								$end = $end_of_vevent;
 								do {
 									$start_date = date("Ymd", $start);
-//									$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
-// drei 20020921: changed array for allday event
 									$master_array[($start_date)][("-1")][]= array ("event_text" => "$summary");
 									$start = ($start + (24*3600));
 								} while ($start < $end);
 								$start_of_vevent = DateAdd ($interval,  $number, $start_of_vevent);
 								$end_of_vevent = DateAdd ($interval,  $number, $end_of_vevent);
-							} while ($start_of_vevent < $parse_to_year); 
+								$count_to++;
+							} while (($start_of_vevent < $parse_to_year) && ($count != $count_to) && ($start_of_vevent < $until)); 
 						}
 					
 					// Let's take care of recurring events that are not all day events
