@@ -35,48 +35,48 @@
 				<!-- switch message off -->
 				<tr>
 					<td valign="top" align="left">
-					<form action="preferences.php?action=setcookie" METHOD="post">
+					<form action="preferences.php?action=setcookie" method="post">
 					<table border="0" width="100%" cellspacing="2" cellpadding="2" align="center">
 						<tr align="left" valign="top">
-							<td width="80%" nowrap>{L_SELECT_LANG}:</td>
+							<td width="80%" nowrap="nowrap">{L_SELECT_LANG}:</td>
 							<td width="10%"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td width="10%"><select name="cookie_language" class="query_style">{LANGUAGE_SELECT}</select></td>
 						</tr>
 						<tr align="left" valign="top">
-							<td nowrap>{L_SELECT_CAL}:</td>
+							<td nowrap="nowrap">{L_SELECT_CAL}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><select name="cookie_calendar" class="query_style">{CALENDAR_SELECT}</select></td>
 						</tr>
 						<tr align="left" valign="top">
-							<td nowrap>{L_SELECT_VIEW}:</td>
+							<td nowrap="nowrap">{L_SELECT_VIEW}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><select name="cookie_view" class="query_style">{VIEW_SELECT}</select></td>
 						</tr>
 						<tr align="left" valign="top">
-							<td nowrap>{L_SELECT_TIME}:</td>
+							<td nowrap="nowrap">{L_SELECT_TIME}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><select name="cookie_time" class="query_style">{TIME_SELECT}</select></td>
 						</tr>
 						<tr align="left" valign="top">
-							<td nowrap>{L_SELECT_DAY}:</td>
+							<td nowrap="nowrap">{L_SELECT_DAY}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><select name="cookie_startday" class="query_style">{STARTDAY_SELECT}</select></td>
 						</tr>
 						<tr align="left" valign="top">
-							<td nowrap>{L_SELECT_STYLE}:</td>
+							<td nowrap="nowrap">{L_SELECT_STYLE}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><select name="cookie_style" class="query_style">{STYLE_SELECT}</select></td>
 						</tr>
 						<!-- switch cookie_already_set on -->
 						<tr align="left" valign="top">
-							<td nowrap>{L_UNSET_PREFS}:</td>
+							<td nowrap="nowrap">{L_UNSET_PREFS}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
-							<td><INPUT TYPE="checkbox" NAME="unset" VALUE="true"></td>
+							<td><input type="checkbox" name="unset" value="true" /></td>
 						</tr>
 						<!-- switch cookie_already_set off -->
 						<!-- switch cookie_not_set on -->
 						<tr align="left" valign="top">
-							<td nowrap>&nbsp;</td>
+							<td nowrap="nowrap">&nbsp;</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><input type="submit" name="set" value="{L_SET_PREFS}" /></td>
 						</tr>

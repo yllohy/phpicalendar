@@ -79,9 +79,9 @@ while ($file = readdir($dir_handle)) {
 	if (substr($file, -8) == ".inc.php") {
 		$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
 		if ($language_tmp == $cookie_language) {
-			$language_select .= "<option value=\"$language_tmp\" selected>$language_tmp</option>\n";
+			$language_select .= '<option value="'.$language_tmp.'" selected="selected">'.$language_tmp.'</option>';
 		} else {
-			$language_select .= "<option value=\"$language_tmp\">$language_tmp</option>\n";
+			$language_select .= '<option value="'.$language_tmp.'">'.$language_tmp.'</option>';
 		}
 	}
 }
@@ -91,16 +91,16 @@ closedir($dir_handle);
 $calendar_select = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
 
 // select for dayview
-$view_select 	= ($cookie_view == 'day') ? '<option value="day" selected>{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
-$view_select    .= ($cookie_view == 'week') ? '<option value="week" selected>{L_WEEK}</option>' : '<option value="week">{L_WEEK}</option>';
-$view_select    .= ($cookie_view == 'month') ? '<option value="month" selected>{L_MONTH}</option>' : '<option value="month">{L_MONTH}</option>';
+$view_select 	= ($cookie_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
+$view_select    .= ($cookie_view == 'week') ? '<option value="week" selected="selected">{L_WEEK}</option>' : '<option value="week">{L_WEEK}</option>';
+$view_select    .= ($cookie_view == 'month') ? '<option value="month" selected="selected">{L_MONTH}</option>' : '<option value="month">{L_MONTH}</option>';
 
 // select for time
 for ($i = 000; $i <= 1200; $i += 100) {
 	$s = sprintf("%04d", $i);
-	$time_select .= "<option value=\"$s\"";
+	$time_select .= '<option value="'.$s.'"';
 	if ($s == $cookie_time) {
-		$time_select .= " selected";
+		$time_select .= ' selected="selected"';
 	}
 	$time_select .= ">$s</option>\n";
 }
@@ -108,10 +108,10 @@ for ($i = 000; $i <= 1200; $i += 100) {
 // select for day of week
 $i=0;
 foreach ($daysofweek_lang as $daysofweek) {
-	if ($startdays[$i] == "$cookie_startday") {
-		$startday_select .= "<option value=\"$startdays[$i]\" selected>$daysofweek</option>\n";
+	if ($startdays[$i] == $cookie_startday) {
+		$startday_select .= '<option value="'.$startdays[$i].'" selected="selected">'.$daysofweek.'</option>';
 	} else {
-		$startday_select .= "<option value=\"$startdays[$i]\">$daysofweek</option>\n";
+		$startday_select .= '<option value="'.$startdays[$i].'">'.$daysofweek.'</option>';
 	}
 	$i++;
 }
@@ -121,7 +121,7 @@ while ($file = readdir($dir_handle)) {
 	if (($file != ".") && ($file != "..") && ($file != "CVS")) {
 		if (!is_file($file)) {
 			$file_disp = ucfirst($file);
-			$style_select .= ($file == "$cookie_style") ? "<option value=\"$file\" selected>$file_disp</option>\n" : "<option value=\"$file\">$file_disp</option>\n";
+			$style_select .= ($file == "$cookie_style") ? "<option value=\"$file\" selected=\"selected\">$file_disp</option>\n" : "<option value=\"$file\">$file_disp</option>\n";
 		}
 	}
 }
