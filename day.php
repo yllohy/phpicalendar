@@ -33,6 +33,12 @@ $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
 
+// login/logout
+$is_logged_in = ($username != '' && !$invalid_login) ? true : false;
+$show_user_login = (!$is_logged_in && $allow_login);
+$login_querys = login_querys();
+$logout_querys = logout_querys();
+
 $page = new Page(BASE.'templates/'.$template.'/day.tpl');
 
 $page->replace_tags(array(
@@ -56,7 +62,12 @@ $page->replace_tags(array(
 	'next_day' 			=> $next_day,
 	'prev_day'	 		=> $prev_day,
 	'show_goto' 		=> '',
-	'is_logged_in' 		=> '',
+	'show_user_login'	=> $show_user_login,
+	'invalid_login'		=> $invalid_login,
+	'login_querys'		=> $login_querys,
+	'is_logged_in' 		=> $is_logged_in,
+	'username'			=> $username,
+	'logout_querys'		=> $logout_querys,
 	'list_icals' 		=> $list_icals,
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,

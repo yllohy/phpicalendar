@@ -44,6 +44,7 @@ $printview_default		= 'no';				// Set print view as the default view. day, week,
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 $show_completed			= 'no';				// Show completed todos on your todo list.
 $allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
+$login_cookies			= 'no';			// Set to yes to store authentication information via (unencrypted) cookies. Set to no to use sessions.
 
 // Webdav style publishing
 $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;

@@ -869,4 +869,4 @@ class Page {
 		print($this->page);
 	}
 }
-?> 
+?>

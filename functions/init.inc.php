@@ -21,6 +21,7 @@ if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'config.inc.php');
 include_once(BASE.'functions/error.php');
 include_once(BASE.'functions/calendar_functions.php');
+include_once(BASE.'functions/userauth_functions.php');
 if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	$phpicalendar = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
@@ -38,47 +39,16 @@ if ($cookie_uri == '') {
 
 if ($bleed_time == '') $bleed_time = $day_start;
 
-// If not HTTP authenticated, try login via cookies or the web page.
-$username = ''; $password = '';
-if (!isset($_SERVER['PHP_AUTH_USER'])) {
-	// Look for a login cookie.
-	if (isset($HTTP_COOKIE_VARS['phpicalendar_login'])) {
-		$login_cookie = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar_login']));
-		if (isset($login_cookie['username']))	$username = $login_cookie['username'];
-		if (isset($login_cookie['password']))	$password = $login_cookie['password'];
-	}
-
-	// Look for a new username and password.
-	if (isset($HTTP_GET_VARS['username']))			$username = $HTTP_GET_VARS['username'];
-	else if (isset($HTTP_POST_VARS['username']))	$username = $HTTP_POST_VARS['username'];
-	if (isset($HTTP_GET_VARS['password']))			$password = $HTTP_GET_VARS['password'];
-	else if (isset($HTTP_POST_VARS['password']))	$password = $HTTP_POST_VARS['password'];
-
-	// Grab the action (login or logout).
-	if (isset($HTTP_GET_VARS['action']))			$action = $HTTP_GET_VARS['action'];
-	else if (isset($HTTP_POST_VARS['action']))		$action = $HTTP_POST_VARS['action'];
-	else											$action = '';
-
-	// Check to make sure the username and password is valid.
-	if ($action == 'login' && !key_exists("$username:$password", $locked_map)) {
-		// Don't login, instead logout.
-		$action = 'logout';
-
-		// Remember the invalid login, because we may want to
-		// display a message elsewhere.
-		$invalid_login = true;
-	} else {
-		$invalid_login = false;
-	}
-
-	// Set the login cookie if logging in. Clear it if logging out.
-	if ($action == 'login') {
-		$the_cookie = serialize(array('username' => $username, 'password' => $password));
-		setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
-	} else if ($action == 'logout') {
-		setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $cookie_uri, 0);
-		$username = ''; $password = '';
-	}
+// Grab the action (login or logout).
+if (isset($HTTP_GET_VARS['action']))			$action = $HTTP_GET_VARS['action'];
+else if (isset($HTTP_POST_VARS['action']))		$action = $HTTP_POST_VARS['action'];
+else											$action = '';
+	
+// Login and/or logout.
+list($username, $password, $invalid_login) = user_login();
+if ($action != 'login') $invalid_login = false;
+if ($action == 'logout' || $invalid_login) {
+	list($username, $password) = user_logout();
 }
 
 // language support

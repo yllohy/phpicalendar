@@ -1,3 +1,38 @@
+<!-- switch show_user_login on -->
+<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php?{LOGIN_QUERYS}" method="GET">
+<input type="hidden" name="action" value="login">
+<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+	<tr>
+		<td colspan="2" align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{L_LOGIN}</div></td>
+	</tr>
+	<!-- switch invalid_login on -->
+	<tr>
+		<td colspan="2" bgcolor="#FFFFFF" align="left">
+			<div style="padding-left: 5px; padding-top: 5px; padding-right: 5px;">
+				<font color="red">{L_INVALID_LOGIN}</font>
+			</div>
+		</td>
+	</tr>
+	<!-- switch invalid_login off -->
+	<tr>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-top: 5px;">Username:</div></td>
+		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-top: 5px;"><input type="text" name="username" size="10"></div></td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">Password:</div></td>
+		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;"><input type="password" name="password" size="10"></div></td>
+	</tr>
+</table>
+</form>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
+<!-- switch show_user_login off -->
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="24" class="sideback"><a class="psf" href="day.php?cal={CAL}&amp;getdate={PREV_DAY}"><img src="templates/{TEMPLATE}/images/left_arrows.gif" alt="{L_PREV}" width="16" height="20" border="0" align="left"></a></td>
@@ -17,7 +52,7 @@
 				<a class="psf" href="{SUBSCRIBE_PATH}">{L_SUBSCRIBE}</a>&nbsp;|&nbsp;<a class="psf" href="{DOWNLOAD_FILENAME}">{L_DOWNLOAD}</a><br>
 				<!-- switch display_download off -->
 				<!-- switch is_logged_in on -->
-				<a class="psf" href="{SCRIPT_NAME}?{QUERYS}">Logout {USERNAME}</a>
+				<a class="psf" href="{CURRENT_VIEW}.php?{LOGOUT_QUERYS}">{L_LOGOUT} {USERNAME}</a>
 				<!-- switch is_logged_in off -->
 			</div>
 		</td>
