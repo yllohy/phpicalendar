@@ -59,7 +59,8 @@ foreach($contents as $line) {
 	if (strstr($line, "BEGIN:VEVENT")) {
 		$start_time = "";
 		$end_time = "";
-		$end_day = "";
+		$start_date = "";
+		$end_date = "";
 		$summary = "";
 		$allday_start = "";
 		$allday_end = "";
@@ -509,7 +510,7 @@ foreach($contents as $line) {
 		}
 	
 	// Let's write all the data to the master array
-	if ($start_time != "") {
+	if (($start_time != "") && ($allday_start == "")) {
 // check for overlapping events
 		$nbrOfOverlaps = checkOverlap();
 
@@ -549,7 +550,7 @@ foreach($contents as $line) {
 			$hour = $regs[4];
 			$minute = $regs[5];
 		
-			$end_day = $year . $month . $day;
+			$end_date = $year . $month . $day;
 			$end_time = $hour . $minute;
 			
 		} elseif (strstr($field, "EXDATE;TZID")) {
