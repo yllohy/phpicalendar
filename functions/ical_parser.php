@@ -261,7 +261,7 @@ foreach($contents as $line) {
 						*/
 						
 						// if $until isn't set yet, we set it to the end of our range we're looking at
-						if (!$until) $until = $end_range_time;
+						if (!isset($until)) $until = $end_range_time;
 						$end_date_time = $until;
 						
 						// If the $end_range_time is less than the $start_date_time, or $start_range_time is greater
@@ -287,7 +287,7 @@ foreach($contents as $line) {
 									// use weekCompare to see if we even have this event this week
 									$diff_weeks = weekCompare(date('Ymd',$next_range_time), $start_date);
 									if ($diff_weeks < $count) {
-										if ($week_diff % $number == 0) {
+										if ($diff_weeks % $number == 0) {
 											$interval = $number;
 											// loop through the days on which this event happens
 											foreach($byday as $day) {
@@ -582,9 +582,12 @@ foreach($contents as $line) {
 				ereg ('^P([0-9]{1,2})?([W,D]{0,1}[T])?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration);
 				if ($duration[2] = 'W') {
 					$weeks = $duration[1];
+					$days = 0;
 				} else {
 					$days = $duration[1];
+					$weeks = 0;
 				}
+// DOUBLE CHECK THIS, IS SETTING $weeks OR $days EQUAL TO 0 ACCEPTABLE??
 				$hours = ereg_replace('H', '', $duration[3]);
 				$minutes = ereg_replace('M', '', $duration[4]);
 				$seconds = ereg_replace('S', '', $duration[5]);

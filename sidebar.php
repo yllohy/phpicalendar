@@ -134,7 +134,7 @@
 		</tr>
 	</table>
 	<br>
-<?php if (sizeof($master_array[($tomorrows_date)]) > 0) { ?>
+<?php if (isset($master_array[($tomorrows_date)]) && sizeof($master_array[($tomorrows_date)]) > 0) { ?>
 	<table cellpadding="0" cellspacing="0" border="0" width="160">
 		<tr>
 			<td valign="center" align="center">
@@ -162,10 +162,10 @@
 											$description 	= $val["description"];
 											$description 	= addslashes($val["description"]);
 											$description	= urlencode($description);
-											$event_start 	= $val["event_start"];
-											$event_end 		= $val["event_end"];
-											$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-											$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+											$event_start 	= @$val["event_start"];
+											$event_end 		= @$val["event_end"];
+											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
 											$calendar_name2	= addslashes($calendar_name);
 											$calendar_name2 = urlencode($calendar_name2);
 											if (strlen($event_text) > 21) {
@@ -175,14 +175,16 @@
 											echo "<tr>\n";
 											echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
 											echo "<td colspan=\"6\" class=\"G10B\">\n";
-											if (!$event_start == $val["event_start"]) {
+											if (!isset($val["event_start"])) {
+												$event_start = 'All';
+												$event_end = 'Day';
 												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a>\n";
 											} else {	
 												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
 											}
 											echo "</td>\n";
 											echo "</tr>\n";
-											$num_of_events++;
+											//$num_of_events++;
 										}
 									}
 								}
@@ -250,7 +252,7 @@
 										$check_month = date ("m", $start_day);
 										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
-										if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
 											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
@@ -330,7 +332,7 @@
 										$check_month = date ("m", $start_day);
 										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
-										if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
 											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
@@ -410,7 +412,7 @@
 										$check_month = date ("m", $start_day);
 										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
-										if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
 											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";

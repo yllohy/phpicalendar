@@ -58,7 +58,7 @@
 											$minical_month = date("m", $minical_time);
 											$minical_year = date("Y", $minical_time);
 											$first_of_month = $minical_year.$minical_month."01";
-											$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
+											$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
 											$i = 0;
 											$whole_month = TRUE;
 											$num_of_events = 0;
@@ -68,7 +68,7 @@
 												$check_month = date ("m", $start_day);
 												if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 												if ($i == 0) echo "<tr>\n";
-												if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+												if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 													echo "<td align=\"center\" class=\"G10B\">\n";
 													echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 													echo "</td>\n";
@@ -264,7 +264,7 @@
 									$minical_month = date("m", $minical_time);
 									$minical_year = date("Y", $minical_time);
 									$first_of_month = $minical_year.$minical_month."01";
-									$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
+									$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
 									$i = 0;
 									$whole_month = TRUE;
 									$num_of_events = 0;
@@ -274,7 +274,7 @@
 										$check_month = date ("m", $start_day);
 										if ($check_month != $minical_month) $day= "<font class=\"G10B\">$day</font>";
 										if ($i == 0) echo "<tr>\n";
-										if (($master_array[("$daylink")]) && ($check_month == $minical_month)) {
+										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											echo "<td align=\"center\" class=\"G10B\">\n";
 											echo "<a class=\"ps2\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";

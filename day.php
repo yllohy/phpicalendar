@@ -118,6 +118,9 @@ if ($master_array[($getdate)]) {
 						foreach($master_array[($getdate)]['-1'] as $allday) {
 							$all_day_text = $allday['event_text'];
 							$description = $allday['description'];
+							$event_text2 = urlencode(addslashes($all_day_text));
+							$event_start = 'All';
+							$event_end = 'Day';
 					
 							echo '<tr>'."\n";
 							echo '<td valign="top" align="center" bgcolor="#6699CC"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\')"><font color="#ffffff"><i>'.$all_day_text.'</i></font></a></td>'."\n";
@@ -149,7 +152,7 @@ if ($master_array[($getdate)]) {
 									$key = date ($timeFormat, $key);
 																		
 									// check for eventstart 
-									if (sizeof($master_array[($getdate)][$cal_time]) > 0) {
+									if (isset($master_array[($getdate)][$cal_time]) && sizeof($master_array[($getdate)][$cal_time]) > 0) {
 										foreach ($master_array[($getdate)][$cal_time] as $eventKey => $loopevent) {
 											$drawEvent = drawEventTimes ($loopevent['event_start'], $loopevent['event_end']);
 											$j = 0;

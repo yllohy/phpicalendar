@@ -21,7 +21,7 @@
 	$display_month = localizeDate ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_of_month = $this_year.$this_month."01";
-	$start_month_day = dateOfWeek($first_of_month, $start_week_day);
+	$start_month_day = dateOfWeek($first_of_month, $week_start_day);
 	$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
 
@@ -119,7 +119,7 @@
 							}
 						}
 						if ($i == 0) echo "<tr height=\"105\">\n";
-						if (($master_array[("$daylink")]) && ($check_month == $this_month)) {
+						if (isset($master_array[("$daylink")]) && ($check_month == $this_month)) {
 							echo "<td align=\"center\" valign=\"top\" bgcolor=\"$bgcolor\" width=\"105\" height=\"105\">\n";
 							echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"1\">\n";
 							echo "<tr>\n";
@@ -137,10 +137,10 @@
 											$event_text2 	= urlencode($event_text2);
 											$description 	= addslashes($val["description"]);
 											$description	= urlencode($description);
-											$event_start 	= $val["event_start"];
-											$event_end 		= $val["event_end"];
-											$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-											$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+											$event_start 	= @$val["event_start"];
+											$event_end 		= @$val["event_end"];
+											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
 											$calendar_name2	= addslashes($calendar_name);
 											$calendar_name2 = urlencode($calendar_name2);
 											if (strlen($event_text) > 12) {
@@ -152,7 +152,9 @@
 											echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 											echo "<tr>\n";
 											echo "<td>\n";
-											if (!$event_start == $val["event_start"]) {
+											if (!isset($val["event_start"])) {
+												$event_start = 'All';
+												$event_end = 'Day';
 												echo "<center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center>\n";
 											} else {	
 												echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</a>\n";

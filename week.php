@@ -42,7 +42,7 @@ $thisdate = $start_week_time;
 for ($i=0;$i<7;$i++) {
 	$thisday = date("Ymd", $thisdate);
 	$nbrGridCols[$thisday] = 1;
-	if ($master_array[($thisday)]) {
+	if (isset($master_array[$thisday])) {
 		foreach($master_array[($thisday)] as $ovlKey => $ovlValue) {
 			if ($ovlKey != "-1") {
 				foreach($ovlValue as $ovl2Value) {
@@ -138,7 +138,7 @@ for ($i=0;$i<7;$i++) {
 							$thisdate = $start_week_time;
 							for ($i=0;$i<7;$i++) {
 								$thisday = date("Ymd", $thisdate);
-								if ($master_array[($thisday)]["-1"]) {
+								if (isset($master_array[($thisday)]["-1"])) {
 									$allday_events_this_week = true;
 									break;
 								}
@@ -152,11 +152,14 @@ for ($i=0;$i<7;$i++) {
 								do {
 									$thisday = date("Ymd", $thisdate);
 									echo "<td bgcolor=\"#f5f5f5\" height=\"24\">\n";
-									if ($master_array[($thisday)]["-1"]) {
+									if (isset($master_array[($thisday)]["-1"])) {
 										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
 										foreach($master_array[($thisday)]["-1"] as $allday) {
 											$all_day_text = $allday["event_text"];
+											$event_text2 = urlencode(addslashes($all_day_text));
 											$description = $allday["description"];
+											$event_start = 'All';
+											$event_end = 'Day';
 											echo "<tr>\n";
 											echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
 											echo "</tr>\n";
@@ -204,11 +207,11 @@ for ($i=0;$i<7;$i++) {
 										
 										
 										// check for eventstart 
-										if (sizeof($master_array[($thisday)]["$cal_time"]) > 0) {
+										if (isset($master_array[($thisday)]["$cal_time"]) && sizeof($master_array[($thisday)]["$cal_time"]) > 0) {
 											foreach ($master_array[($thisday)]["$cal_time"] as $eventKey => $loopevent) {
 												$drawEvent = drawEventTimes ($loopevent["event_start"], $loopevent["event_end"]);
 												$j = 0;
-												while ($event_length[$thisday][$j]) {
+												while (isset($event_length[$thisday][$j])) {
 													if ($event_length[$thisday][$j]["state"] == "ended") {
 														$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
 														break;
@@ -305,7 +308,7 @@ for ($i=0;$i<7;$i++) {
 											if ($emptyWidth > 0) {
 												echo "<td bgcolor=\"#ffffff\" colspan=\"" . $emptyWidth . "\">&nbsp;</td>\n";
 											}
-											while ($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
+											while (isset($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"]) && $event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
 												array_pop($event_length[$thisday]);
 											}
 										}
