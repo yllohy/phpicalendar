@@ -3,6 +3,7 @@ define('BASE', './');
 require_once(BASE.'functions/admin_functions.php');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
+header("Content-Type: text/html; charset=$charset");
 
 // Redirect if administration is not allowed
 if ($allow_admin != "yes") {
@@ -47,6 +48,8 @@ $page->replace_tags(array(
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
 	'event_js'			=> BASE.'functions/event.js',
+	'todo_js'			=> BASE.'functions/todo.js',
+	'charset'			=> $charset,
 	'default_path'		=> '',
 	'template'			=> $template,
 	'cal'				=> $cal,

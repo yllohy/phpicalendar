@@ -3,6 +3,7 @@ define('BASE', './');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
+header("Content-Type: text/html; charset=$charset");
 $current_view = "month";
 if ($minical_view == 'current') $minical_view = 'month';
 
@@ -53,6 +54,8 @@ $page->replace_tags(array(
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'calendar_nav'		=> BASE.'templates/'.$template.'/calendar_nav.tpl',
 	'event_js'			=> BASE.'functions/event.js',
+	'todo_js'			=> BASE.'functions/todo.js',
+	'charset'			=> $charset,
 	'template'			=> $template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,

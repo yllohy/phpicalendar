@@ -3,6 +3,7 @@
 define('BASE','./');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
+header("Content-Type: text/html; charset=$charset");
 $display_date = $preferences_lang;
 
 if ($cookie_uri == '') {

@@ -2,27 +2,14 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
 	<title>{CALENDAR_NAME} - {DISPLAY_DATE}</title>
   	<link rel="stylesheet" type="text/css" href="{DEFAULT_PATH}templates/{TEMPLATE}/default.css" />
 	<!-- switch rss_available on -->
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="{DEFAULT_VIEW}/rss/rss.php?cal={CAL}&amp;rssview={CURRENT_VIEW}">
 	<!-- switch rss_available off -->		
 	{EVENT_JS}
-	<script language="JavaScript" type="text/javascript">
-	<!--
-		function openTodoInfo(vtodo_array)
-		{	
-			var windowW = 460;
-			var windowH = 275;
-			var url = "includes/todo.php?vtodo_array="+vtodo_array;
-			options = "scrollbars=yes,width="+windowW+",height="+windowH;
-			info = window.open(url, "Popup", options);
-			info.focus();
-		}
-	
-	//-->
-	</script>
+	{TODO_JS}
 </head>
 <body>
 <form name="eventPopupForm" id="eventPopupForm" method="post" action="includes/event.php" style="display: none;">

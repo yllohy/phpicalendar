@@ -96,6 +96,8 @@ Changes:
 	-Support for 7 colors and 14 calendars by default.
 	-Italian and Spanish translations added.
 	-Some authentication issues resolved.
+	-Change your charset in config.
+	-Better Evolution compatibility.
 
 2.0 alpha
 	-New templating system.
