@@ -65,7 +65,7 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 	   		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<?php 
 				if (($start) && ($end)) $event_times = ' - <font class="V9">(<i>'.$start.' - '.$end.'</i>)</font>'; 
-				if ($start != '' && $end == '' && isset($start, $end)) $event_times = ' - <font class="V9">(<i>'.$start.'</i>)</font>';
+				if ($start == '' && $end == '' && isset($start, $end)) $event_times = ' - <font class="V9">(<i>'.$all_day_lang.'</i>)</font>';
 				?>
 				<tr>
 					 <td width="1%"><img src="images/spacer.gif" width="6" height="1"></td>

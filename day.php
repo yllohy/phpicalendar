@@ -107,8 +107,6 @@ if (is_array($master_array[($getdate)])) {
 							$all_day_text = $allday['event_text'];
 							$description = $allday['description'];
 							$event_text2 = urlencode(addslashes($all_day_text));
-							$event_start = 'All';
-							$event_end = 'Day';
 					
 							echo '<tr>'."\n";
 							echo '<td valign="top" align="center" class="eventbg"><a class="psf" href="javascript:openEventInfo(\''.$event_text2.'\', \''.$calendar_name.'\', \''.$event_start.'\', \''.$event_end.'\', \''.$description.'\')"><font color="#ffffff"><i>'.$all_day_text.'</i></font></a></td>'."\n";

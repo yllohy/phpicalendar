@@ -355,16 +355,21 @@
 													$event_end 		= $new_val2["event_end"];
 													$event_start 	= date ($timeFormat, strtotime ("$event_start"));
 													$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-													$event_text = str_replace ("<br>", "", $event_text);
+													$event_text 	= str_replace ("<br>", "", $event_text);
+													$event_start2	= $event_start;
 													if (strlen($event_text) > 70) {
 														$event_text = substr("$event_text", 0, 65);
 														$event_text = $event_text . "...";
 													}
-													if (!$new_val2["event_start"]) $event_start = "$all_day_lang";
+													if (!$new_val2["event_start"]) { 
+														$event_start = "$all_day_lang";
+														$event_start2 = '';
+														$event_end = '';
+													}
 													echo "<tr>\n";
 													echo "<td width =\"160\" class=\"montheventline\" nowrap><font $fontclass>&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$key\">$dayofmonth</a></font> <font class=\"V9G\">($event_start)</font></td>\n";
 													echo "<td colspan=\"2\">\n";
-													echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a>\n";
+													echo "&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start2', '$event_end', '$description')\"><font class=\"G10B\">$event_text</font></a>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}
