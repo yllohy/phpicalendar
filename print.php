@@ -37,12 +37,35 @@ if ($printview == 'day') {
   	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
 </head>
 <body bgcolor="#FFFFFF">
-<center><table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
+<center>
+<table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" height=\"22\" border=\"0\" align=\"left\">"; ?></td>
-		<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo $print_title; ?></font></td>
-		<td align="right" valign="top" width="1%"  class="sideback">&nbsp;</td>
-	</tr>
+		<td>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      			<tr>
+      				<td align="left" width="90" class="navback">&nbsp;</td>
+      				<td class="navback">
+      					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      						<tr>
+								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$prev&printview=$printview\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
+								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $print_title; ?></font></td>
+      							<td align="left" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&getdate=$next&printview=$printview\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
+      						</tr>
+      					</table>
+      				</td>
+      				<td align="right" width="90" class="navback">	
+      					<table width="90" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&getdate='.$getdate.'&printview=day"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&getdate='.$getdate.'&printview=week"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></td>'; ?>
+								<td><?php echo '<a class="psf" href="print.php?cal='.$cal.'&getdate='.$getdate.'&printview=month"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></td>'; ?>
+							</tr>
+						</table>
+					</td>
+      			</tr>
+      		</table>
+      	</td>
+    </tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
 	</tr>
