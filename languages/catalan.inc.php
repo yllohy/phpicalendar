@@ -1,7 +1,7 @@
 <?php
 
 // Catalan language include
-// For version 0.9.5 PHP iCalendar
+// For version 1.0 PHP iCalendar
 //
 // Translation by Oriol Ferrer Mesia; (tm05788@salleurl.edu)
 
@@ -113,7 +113,7 @@ $action_success_lang	= 'L\'acci&oacute; ha acabat satisfact&ograve;riament.';
 $submit_lang			= 'Envia';
 $delete_lang			= 'Esborra';
 
-// ----- New for 0.9.5
+// ----- New for 1.0
 $all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation

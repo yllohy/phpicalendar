@@ -1,7 +1,7 @@
 ﻿<?php
 
 // Korean language include
-// For version 0.9.5 PHP iCalendar
+// For version 1.0 PHP iCalendar
 //
 // Translation by TaeYoung Oh (spier@hybird.net)
 //

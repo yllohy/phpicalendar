@@ -1,7 +1,7 @@
 <?php
 
 // Norwegian language include
-// For version 0.9.5 PHP iCalendar
+// For version 1.0 PHP iCalendar
 //
 // Translation by Geir Kielland (kielland@mac.com)
 //
@@ -113,7 +113,7 @@ $action_success_lang	= 'Din handling ble utf&oslash;rt.';
 $submit_lang			= 'Legg inn';
 $delete_lang			= 'Slett';
 
-// ----- New for 0.9.5
+// ----- New for 1.0
 $all_cal_comb_lang		= 'Alle kalenderne samlet';
 
 // - navigation

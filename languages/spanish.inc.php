@@ -1,7 +1,7 @@
 <?php
 
 // Spanish language include
-// For version 0.9.5 PHP iCalendar
+// For version 1.0 PHP iCalendar
 //
 // Translation by Javier Navarro from XIPS (jnavarro@xips.es)
 
@@ -55,7 +55,7 @@ $no_events_month_lang	= 'No hay eventos para este mes.';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%e de %b';  // Lists just the day
 $rss_month_date			= '%e de %b';  // Lists just the day
-$rss_language			= 'en-us';
+$rss_language			= 'es-es';
 $search_took_lang		= 'La busqeda tard&oacute; %s segundos';
 $recurring_event_lang	= 'Evento peri&ocaute;dico';
 $exception_lang			= 'Excepci&oacute;n';
@@ -69,7 +69,7 @@ $select_time_lang		= 'Elija su hora de inicio por defecto:';
 $select_day_lang		= 'Escoja su dia de la semana de inicio:';
 $select_style_lang		= 'Seleccione su estilo por defecto:';
 $set_prefs_lang			= 'Guardar preferencias';
-$completed_date_lang	= 'Finalizado a';
+$completed_date_lang	= 'Finalizado el';
 $completed_lang			= 'Finalizado';
 $created_lang			= 'Creado:';
 $due_lang				= 'Hasta:';
@@ -81,40 +81,40 @@ $priority_none_lang		= 'Ninguna';
 $status_lang			= 'Estado:';
 $todo_lang				= 'Por hacer';
 $unfinished_lang		= 'Sin terminar';
-$prefs_set_lang 		= 'Sus preferencias han sido activadas.';
+$prefs_set_lang 		= 'Sus preferencias han sido guardadas.';
 $prefs_unset_lang 		= 'Preferencias no activas. Los cambios se activaran al recargar la p&aacute;gina.';
 $unset_prefs_lang 		= 'Preferencias sin activar:';
-$organizer_lang			= 'Organizer';
-$attendee_lang			= 'Attendee';
-$status_lang			= 'Status';
-$location_lang			= 'Location';
-$admin_header_lang		= 'PHP iCalendar Administration';
-$username_lang			= 'Username';
-$password_lang			= 'Password';
-$login_lang				= 'Login';
-$invalid_login_lang		= 'Wrong username or password.';
-$addupdate_cal_lang		= 'Add or Update a Calendar';
-$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
-$delete_cal_lang		= 'Delete a Calendar';
-$logout_lang			= 'Logout';
-$cal_file_lang			= 'Calendar File';
-$php_error_lang			= 'PHP Error';
-$upload_error_gen_lang	= 'There was a problem with your upload.';
-$upload_error_lang[0]	= 'There was a problem with your upload.';
-$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
-$upload_error_lang[4]	= 'You must select a file for upload.';
-$upload_error_type_lang = 'Only .ics files may be uploaded.';
-$copy_error_lang		= 'Failed to copy file';
-$delete_error_lang		= 'Failed to delete file';
-$delete_success_lang	= 'was deleted successfully.';
-$action_success_lang	= 'Your action was successful.';
-$submit_lang			= 'Submit';
-$delete_lang			= 'Delete';
+$organizer_lang			= 'Organizador';
+$attendee_lang			= 'Invitado';
+$status_lang			= 'Estado';
+$location_lang			= 'Lugar';
+$admin_header_lang		= 'Administraci&oacute;n de PHP iCalendar';
+$username_lang			= 'Usuario';
+$password_lang			= 'Contrase&ntilde;a';
+$login_lang				= 'Registro';
+$invalid_login_lang		= 'Usuario o contrase&ntilde;a incorrectos.';
+$addupdate_cal_lang		= 'A&ntilde;adir o actualizar un calendario';
+$addupdate_desc_lang	= 'A&ntilde;ade un calendario enviando un nuevo fichero. Actualiza un calendario enviando un fichero existente.';
+$delete_cal_lang		= 'Borra un calendario';
+$logout_lang			= 'Salir';
+$cal_file_lang			= 'Fichero de Calendario';
+$php_error_lang			= 'Error PHP';
+$upload_error_gen_lang	= 'Hubo un problema con su env&iacute;o.';
+$upload_error_lang[0]	= 'Hubo un problema con su env&iacute;o.';
+$upload_error_lang[1]	= 'El fichero que intenta enviar es demasiado grande.';
+$upload_error_lang[2]	= 'El fichero que intenta enviar es demasiado grande.';
+$upload_error_lang[3]	= 'Solo se ha recibido una parte del fichero que intentaba enviar.';
+$upload_error_lang[4]	= 'Debe elegir un fichero para enviar.';
+$upload_error_type_lang = 'Solo se aceptan ficheros de calendario (.ics).';
+$copy_error_lang		= 'Fall&oacute; la copia del fichero';
+$delete_error_lang		= 'Fall&oacute; el borrado del fichero';
+$delete_success_lang	= 'se borr&oacute; correctamente.';
+$action_success_lang	= 'Su acci&oacute;n fu&eacute; correcta.';
+$submit_lang			= 'Enviar';
+$delete_lang			= 'Borrar';
 
 // ----- New for 0.9.5
-$all_cal_comb_lang		= 'All calendars combined';
+$all_cal_comb_lang		= 'Todos los calendarios combinados';
 
 // - navigation
 $back_lang = 'Atr&aacute;s';

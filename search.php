@@ -105,158 +105,130 @@ include (BASE.'includes/header.inc.php');
       	</td>
     </tr>
 	<tr>
-		<td colspan="3"  class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
+		<td class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
 	</tr>
 	<tr>
-		<td colspan="3">
-				<table border="0" cellspacing="0" cellpadding="0" width="100%">
-					<tr>
-						<td align="center" valign="top">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td colspan="3" height="1"></td>
-								</tr>							
-								<tr>
-									<td colspan="3" class="G10B" align="center"><?php echo $query_lang.': '.$formatted_search; ?></td>
-								</tr>
-								<tr>
-									<td colspan="3" class="G10B">&nbsp;</td>
-								</tr>								
-								<?php	
-									if (isset($the_arr) && is_array($the_arr)) {
-										foreach($the_arr as $val) {
-											$key = $val['date'];
-											$dayofmonth = strtotime ($key);
-											$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
-											echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><b><a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></b></font></td></tr>";
-											echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\" alt=\" \"></td></tr>\n";
-											
-											if ($val["event_text"]) {	
-												$event_text 	= stripslashes(urldecode($val["event_text"]));
-												$description 	= stripslashes(urldecode($val["description"]));
-												$event_start 	= $val["event_start"];
-												$event_end 		= $val["event_end"];
-												$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-												$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-												$event_start 	= "$event_start - $event_end";
-												if (!$val["event_start"]) { 
-													$event_start = "$all_day_lang";
-													$event_start2 = '';
-													$event_end = '';
-												}
-												echo "<tr>\n";
-												echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
-												echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
-												echo "<td align=\"left\">\n";
-												echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
-												echo "<tr>\n";
-												echo "<td width=\"120\" class=\"G10BOLD\">$time_lang:</td>\n";
-												echo "<td align=\"left\" class=\"G10B\">$event_start</td>\n";
-												echo "</tr>\n";
-												echo "<tr>\n";
-												echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$summary_lang:</td>\n";
-												echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$event_text</td>\n";
-												echo "</tr>\n";
-												if (isset($val['recur'])) {
-													$recur = $val['recur'];
-													echo "<tr>\n";
-													echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">Recurring event:</td>\n";
-													echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$recur</td>\n";
-													echo "</tr>\n";
-												}
-												if ($val["description"]) {
-													echo "<tr>\n";
-													echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$description_lang:</td>\n";
-													echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$description</td>\n";
-													echo "</tr>\n";
-												}
-												echo "</table>\n";
-												echo "</td>\n";
-												echo "</tr>\n";			
-												echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\" alt=\" \"></td></tr>\n";
-												if (isset($val['exceptions'])) {
-													echo "<tr><td colspan=\"3\"><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-													foreach($val['exceptions'] as $val2) {
-														$key = $val2['date'];
-														$dayofmonth = strtotime ($key);
-														$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-														echo "<tr><td width=\"20\"><img src=\"images/spacer.gif\" width=\"20\" height=\"1\" alt=\" \"></td>\n";
-														echo "<td align=\"left\" colspan=\"2\"><font class=\"V10\"><i>$exception_lang</i>: <a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font></td></tr>";
-														echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\" alt=\" \"></td></tr>\n";
-														
-														if ($val2["event_text"]) {	
-															$event_text 	= stripslashes(urldecode($val2["event_text"]));
-															$description 	= stripslashes(urldecode($val2["description"]));
-															$event_start 	= $val2["event_start"];
-															$event_end 		= $val2["event_end"];
-															$event_start 	= date ($timeFormat, strtotime ("$event_start"));
-															$event_end 		= date ($timeFormat, strtotime ("$event_end"));
-															$event_start 	= "$event_start - $event_end";
-															if (!$val2["event_start"]) { 
-																$event_start = "$all_day_lang";
-																$event_start2 = '';
-																$event_end = '';
-															}
-															echo "<tr>\n";
-															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
-															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
-															echo "<td align=\"left\">\n";
-															echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
-															echo "<tr>\n";
-															echo "<td width=\"100\" class=\"V10\">$time_lang:</td>\n";
-															echo "<td align=\"left\" class=\"V10\">$event_start</td>\n";
-															echo "</tr>\n";
-															echo "<tr>\n";
-															echo "<td valign=\"top\" width=\"100\" class=\"V10\">$summary_lang:</td>\n";
-															echo "<td valign=\"top\" align=\"left\" class=\"V10\">$event_text</td>\n";
-															echo "</tr>\n";
-															if (isset($val2['recur'])) {
-																$recur = $val2['recur'];
-																echo "<tr>\n";
-																echo "<td valign=\"top\" width=\"100\" class=\"V10\">$recurring_event_lang:</td>\n";
-																echo "<td valign=\"top\" align=\"left\" class=\"V10\">$recur</td>\n";
-																echo "</tr>\n";
-															}
-															if ($val2["description"]) {
-																echo "<tr>\n";
-																echo "<td valign=\"top\" width=\"100\" class=\"V10\">$description_lang:</td>\n";
-																echo "<td valign=\"top\" align=\"left\" class=\"V10\">$description</td>\n";
-																echo "</tr>\n";
-															}
-															echo "</table>\n";
-															echo "</td>\n";
-															echo "</tr>\n";			
-															echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\" alt=\" \"></td></tr>\n";
-														}
-													}
-													echo "</table></td><tr>\n";
-												}
-											}
-										}
-									} else {
-										echo '<tr><td colspan="3" class="G10B" align="center">';
-										echo $no_results_lang;
-										echo '</td></tr><tr><td class="G10B">&nbsp;</td></tr>';
-									}
-										
+		<td align="left">
+			<div style="padding: 10px;">
+				<?php 
+				
+				echo '<div align="center"><p class="V12">'.$query_lang.': '.$formatted_search.'</p></div>';
+				
+				if (isset($the_arr) && is_array($the_arr)) {
+					foreach($the_arr as $val) {
+						$key = $val['date'];
+						$dayofmonth = strtotime ($key);
+						$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
+						echo '<font class="V12"><b><a class="ps3" href="day.php?cal='.$cal.'&amp;getdate='.$key.'">'.$dayofmonth.'</a></b></font><br>';
+						
+						if ($val["event_text"]) {	
+							$event_text 	= stripslashes(urldecode($val["event_text"]));
+							$description 	= stripslashes(urldecode($val["description"]));
+							$event_start 	= $val["event_start"];
+							$event_end 		= $val["event_end"];
+							$event_calna 	= $val["calname"];
+							$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+							$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+							$event_start 	= "$event_start - $event_end";
+							if (!$val["event_start"]) { 
+								$event_start = "$all_day_lang";
+								$event_start2 = '';
+								$event_end = '';
+							}
+							echo '<div style="margin-left: 10px;">';
+							echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
+							echo "<tr>\n";
+							echo "<td width=\"120\" class=\"G10BOLD\">$time_lang:</td>\n";
+							echo "<td align=\"left\" class=\"G10B\">$event_start</td>\n";
+							echo "</tr>\n";
+							echo "<tr>\n";
+							echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$summary_lang:</td>\n";
+							echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$event_text</td>\n";
+							echo "</tr>\n";
+							if (isset($val['recur'])) {
+								$recur = $val['recur'];
+								echo "<tr>\n";
+								echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">Recurring event:</td>\n";
+								echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$recur</td>\n";
+								echo "</tr>\n";
+							}
+							if ($val["description"]) {
+								echo "<tr>\n";
+								echo "<td valign=\"top\" width=\"100\" class=\"G10BOLD\">$description_lang:</td>\n";
+								echo "<td valign=\"top\" align=\"left\" class=\"G10B\">$description</td>\n";
+								echo "</tr>\n";
+							}
+							echo "</table>\n";
+							echo '</div>';
+							if (isset($val['exceptions'])) {
+								echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+								foreach($val['exceptions'] as $val2) {
+									$key = $val2['date'];
+									$dayofmonth = strtotime ($key);
+									$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
+									echo "<td align=\"left\" colspan=\"2\"><font class=\"V10\"><i>$exception_lang</i>: <a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font></td></tr>";
 									
-								
-								?>
-								<tr>
-									<td colspan="3" class="G10B" align="center"><?php echo $search_box; ?></td>
-								</tr>	
-								<tr>
-									<td colspan="3" class="G10B" align="center">
-									<?php 
-										echo '<font class="V9G">'.sprintf($search_took_lang,$search_took).'</font><br><br>';
-									?>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</table>		
+									if ($val2["event_text"]) {	
+										$event_text 	= stripslashes(urldecode($val2["event_text"]));
+										$description 	= stripslashes(urldecode($val2["description"]));
+										$event_start 	= $val2["event_start"];
+										$event_end 		= $val2["event_end"];
+										$event_start 	= date ($timeFormat, strtotime ("$event_start"));
+										$event_end 		= date ($timeFormat, strtotime ("$event_end"));
+										$event_start 	= "$event_start - $event_end";
+										if (!$val2["event_start"]) { 
+											$event_start = "$all_day_lang";
+											$event_start2 = '';
+											$event_end = '';
+										}
+										echo "<tr>\n";
+										echo "<td align=\"left\">\n";
+										echo '<div style="margin-left: 10px;">';
+										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
+										echo "<tr>\n";
+										echo "<td width=\"100\" class=\"V10\">$time_lang:</td>\n";
+										echo "<td align=\"left\" class=\"V10\">$event_start</td>\n";
+										echo "</tr>\n";
+										echo "<tr>\n";
+										echo "<td valign=\"top\" width=\"100\" class=\"V10\">$summary_lang:</td>\n";
+										echo "<td valign=\"top\" align=\"left\" class=\"V10\">$event_text</td>\n";
+										echo "</tr>\n";
+										if (isset($val2['recur'])) {
+											$recur = $val2['recur'];
+											echo "<tr>\n";
+											echo "<td valign=\"top\" width=\"100\" class=\"V10\">$recurring_event_lang:</td>\n";
+											echo "<td valign=\"top\" align=\"left\" class=\"V10\">$recur</td>\n";
+											echo "</tr>\n";
+										}
+										if ($val2["description"]) {
+											echo "<tr>\n";
+											echo "<td valign=\"top\" width=\"100\" class=\"V10\">$description_lang:</td>\n";
+											echo "<td valign=\"top\" align=\"left\" class=\"V10\">$description</td>\n";
+											echo "</tr>\n";
+										}
+										echo "</table>";
+										echo '</div><br>';
+		
+									}
+								}
+							}
+						}
+					}
+				} else {
+					echo '<div align="center">';
+					echo '<p class="V12">'.$no_results_lang.'</p>';
+					echo '</div>';
+				}
+					
+					echo '<div align="center">';
+					echo $search_box;
+					echo '<p class="V9G">'.sprintf($search_took_lang,$search_took).'</p></div>';
+					echo '</div>';
+				?>
+
+					</td>
+				</tr>
+			</table>		
 		</td>
 	</tr>
 </table>

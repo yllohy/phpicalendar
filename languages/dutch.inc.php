@@ -1,7 +1,7 @@
 <?php
 
 // Dutch language include
-// For version 0.9.5 PHP iCalendar
+// For version 1.0 PHP iCalendar
 //
 // Translation by Lieven Gekiere (Lieven@gekiere.com)
 //
@@ -42,7 +42,7 @@ $goweek_lang		= 'Ga Naar Deze Week';
 $gomonth_lang		= 'Ga Naar Deze Maand';
 $goyear_lang		= 'Ga Naar Dit Jaar';
 $search_lang		= 'Zoeken'; // the verb
-$results_lang		= 'Zoek Resultaten';
+$results_lang		= 'Zoekresultaten';
 $query_lang			= 'Zoekopdracht: '; // will be followed by the search query
 $no_results_lang	= 'Geen activiteiten gevonden';
 $goprint_lang		= 'Makkelijk Printbaar';
@@ -115,16 +115,16 @@ $submit_lang			= 'Verzenden';
 $delete_lang			= 'Verwijder';
 
 // ----- New for 0.9.5
-$all_cal_comb_lang		= 'All calendars combined';
+$all_cal_comb_lang		= 'Alle Kalenders samen';
 
 // - navigation
 $back_lang = 'Terug';
 $next_lang = 'Volgende';
 $prev_lang = 'Vorige';
-$day_view_lang = 'Dag overzicht';
-$week_view_lang = 'Week overzicht';
-$month_view_lang = 'Maand overzicht';
-$year_view_lang = 'Jaar overzicht';
+$day_view_lang = 'Dagoverzicht';
+$week_view_lang = 'Weekoverzicht';
+$month_view_lang = 'Maandoverzicht';
+$year_view_lang = 'Jaaroverzicht';
 
 // ---------------------------------
 

@@ -1,7 +1,7 @@
 <?php
 
 // Brazilian Portuguese language include
-// For version 0.9.5 PHP iCalendar
+// For version 1.0 PHP iCalendar
 //
 // Translation by Wilton, Bennet (suporte@bennetworks.com.br) 
 // 01-nov-2002 02:42 PM
@@ -114,7 +114,7 @@ $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
 
-// ----- New for 0.9.5
+// ----- New for 1.0
 $all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
