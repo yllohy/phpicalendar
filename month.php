@@ -20,7 +20,8 @@
 	$prev_month = date("Ymd", DateAdd ("m", "-1", $date));
 	$display_month = localizeDate ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
-	$first_sunday = sundayOfWeek($this_year, $this_month, "1");
+	$first_of_month = $this_year.$this_month."01";
+	$start_month_day = dateOfWeek($first_of_month, $start_week_day);
 	$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
 
@@ -56,9 +57,13 @@
 				</tr>
 				<tr>
 					<?php
-						// Runs through the days of the week, should use array_push or pop to set correct beginning day. ?
-						foreach ($daysofweek_lang as $daysofweek) {
-							echo "<td valign=\"top\" width=\"105\" height=\"12\" bgcolor=\"#eeeeee\" class=\"V9\"><center><b>$daysofweek</b></center></td>";
+						// loops through 7 times, starts with $week_start_day
+						$start_day = strtotime($week_start_day);
+						for ($i=0; $i<7; $i++) {
+							$day_num = date("w", $start_day);
+							$day = $daysofweek_lang[$day_num];
+							print "<td valign=\"top\" width=\"105\" height=\"12\" bgcolor=\"#eeeeee\" class=\"V9\"><center><b>$day</b></center></td>";
+							$start_day = ($start_day + (24.5 * 60 * 60));
 						}
 					?>	
 				</tr>
@@ -79,7 +84,7 @@
 			<table width="100%" border="0" cellspacing="1" cellpadding="0" class="G10B" bgcolor="#A1A5A9">
 				<tr>	
 				<?php 	 
-					$sunday = strtotime("$first_sunday");
+					$sunday = strtotime("$start_month_day");
 					$i = 0;
 					$whole_month = TRUE;
 					$num_of_events = 0;
