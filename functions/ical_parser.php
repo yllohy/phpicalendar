@@ -481,8 +481,6 @@ foreach ($cal_filelist as $filename) {
 													}
 													break;
 												case 'YEARLY':
-													echo $summary;
-													print_r($bymonth);
 													if (!isset($bymonth)) $bymonth[] = date('m', $start_date_time);
 													foreach($bymonth as $month) {
 														$year = date('Y', $next_range_time);
