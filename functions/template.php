@@ -21,8 +21,7 @@ class Page {
 		if (sizeof($tags) > 0)
 			foreach ($tags as $tag => $data) {
 				$data = (file_exists($data)) ? $this->parse($data) : $data;
-				$this->page = eregi_replace('{' . $tag . '}', $data,
-				$this->page);
+				$this->page = eregi_replace('{' . $tag . '}', $data, $this->page);
 			}
 		else
 			die('No tags designated for replacement.');

@@ -55,9 +55,8 @@ if ($attendee) {
 if ($location) {
 	if ($url != '') $location = '<a href="'.$url.'" target="_blank">'.$location.'</a>';
 }
-$sheet_href = BASE.'styles/'.$style_sheet.'/default.css';
 
-$page = new Page(BASE.'templates/default/event.tpl');
+$page = new Page(BASE.'templates/'.$template.'/event.tpl');
 
 $page->replace_tags(array(
 	'cal' 				=> $cal,
@@ -73,11 +72,12 @@ $page->replace_tags(array(
 	'location_lang' 	=> $location_lang,
 	'location' 			=> $location,
 	'sheet_href'		=> $sheet_href,
-	'cal_title_full'	=> $cal_title_full
-	
+	'cal_title_full'	=> $cal_title_full,
+	'base'				=> BASE,
+	'template'			=> $template
+		
 	));
 
 $page->output();
-
 
 ?>

@@ -6,6 +6,7 @@
 // Follow instructions to the right for detailed information
 
 $style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, grey, tan
+$template 				= 'default';
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal 			= $ALL_CALENDARS_COMBINED;		// Exact filename of calendar without .ics. Or set to $ALL_CALENDARS_COMBINED to open all calenders combined into one.
