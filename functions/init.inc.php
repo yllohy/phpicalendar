@@ -17,8 +17,7 @@ if ($HTTP_COOKIE_VARS['phpicalendar']) {
 	$default_cal	 	= $phpicalendar['cookie_calendar'];
 	$default_view 		= $phpicalendar['cookie_view'];
 	$style_sheet 		= $phpicalendar['cookie_style'];
-	// Need to fix this below
-	#$week_start_day		= $phpicalendar['cookie_startday'];
+	$week_start_day		= $phpicalendar['cookie_startday'];
 }
 
 

@@ -5,6 +5,8 @@ $current_view = "preferences";
 $default_view = "$default_view" . ".php";
 if ($allow_preferences == 'no') header("Location: $default_view");
 $action = $HTTP_GET_VARS['action'];
+$startdays = array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+
 if ($action == 'setcookie') { 
 	$cookie_language 	= $HTTP_POST_VARS['cookie_language'];
 	$cookie_calendar 	= $HTTP_POST_VARS['cookie_calendar'];
@@ -164,12 +166,12 @@ include(BASE.'functions/ical_parser.php');
 								//
 								echo 'Select your start day of week:<br><br>';
 								print "<select name=\"cookie_startday\" class=\"query_style\">\n";
-								$i=1;
+								$i=0;
 								foreach ($daysofweek_lang as $daysofweek) {
-									if ($i == "$cookie_startday") {
-										print "<option value=\"$i\" selected>$daysofweek</option>\n";
+									if ($startdays[$i] == "$cookie_startday") {
+										print "<option value=\"$startdays[$i]\" selected>$daysofweek</option>\n";
 									} else {
-										print "<option value=\"$i\">$daysofweek</option>\n";
+										print "<option value=\"$startdays[$i]\">$daysofweek</option>\n";
 									}
 									$i++;
 								}
