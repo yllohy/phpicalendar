@@ -20,7 +20,16 @@ class Page {
 	function replace_tags($tags = array()) {
 		if (sizeof($tags) > 0)
 			foreach ($tags as $tag => $data) {
+				
+				// This opens up another template and parses it as well.
 				$data = (file_exists($data)) ? $this->parse($data) : $data;
+				
+				// This removes any unfilled tags
+				if ($data == '') {
+					$this->page = eregi_replace('<!-- switch ' . $tag . ' on -->(.*)<!-- switch ' . $tag . ' off -->', '', $this->page);
+				}
+				
+				// This replaces any tags
 				$this->page = eregi_replace('{' . $tag . '}', $data, $this->page);
 			}
 		else

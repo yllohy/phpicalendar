@@ -26,10 +26,10 @@ $cal_title_full	= $cal.' '.$calendar_lang;
 
 // Format event time
 if (($start) && ($end)) {
-	$event_times=' - <font class="V9">(<i>' . $start . ' - ' . $end . '</i>)</font>'; 
+	$event_times = $start . ' - ' . $end; 
 }
 if ($start == '' && $end == '' && (isset($start) && isset($end))) {
-	$event_times=' - <font class="V9">(<i>' . $all_day_lang . '</i>)</font>';
+	$event_times = $all_day_lang;
 }
 
 if ($description) $description = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$description);
@@ -55,6 +55,9 @@ if ($attendee) {
 if ($location) {
 	if ($url != '') $location = '<a href="'.$url.'" target="_blank">'.$location.'</a>';
 }
+
+if (sizeof($attendee) == 0) $attendee = '';
+if (sizeof($organizer) == 0) $organizer = '';
 
 $page = new Page(BASE.'templates/'.$template.'/event.tpl');
 

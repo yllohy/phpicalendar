@@ -15,22 +15,22 @@
 		<tr>
 			<td align="left" class="V12">
 				<div style="margin-left: 10px; margin-bottom:10px;">
-					<p>{EVENT}  {EVENT_TIMES}</p>
-					<!-- Switch Description On -->
+					<p>{EVENT} - <span class="V9">(<i>{EVENT_TIMES}</i>)</font></p>
+					<!-- switch description on -->
 					<p>{DESCRIPTION}</p>
-					<!-- Switch Description Off -->
-					<!-- Switch Organizer On -->
-					<p>{ORGANIZER_LANG}: {ORGANIZER}</p>
-					<!-- Switch Organizer Off -->
-					<!-- Switch Attendee On -->
-					<p>{ATTENDEE_LANG}: {ATTENDEE}</p>
-					<!-- Switch Attendee Off -->
-					<!-- Switch Status On -->
-					<p>{STATUS_LANG}: {STATUS}</p>
-					<!-- Switch Status Off -->
-					<!-- Switch Location On -->
-					<p>{LOCATION_LANG}: {LOCATION}</p>
-					<!-- Switch Location Off -->
+					<!-- switch description off -->
+					<!-- switch organizer on -->
+					<p><b>{ORGANIZER_LANG}</b>: {ORGANIZER}</p>
+					<!-- switch organizer off -->
+					<!-- switch attendee on -->
+					<p><b>{ATTENDEE_LANG}</b>: {ATTENDEE}</p>
+					<!-- switch attendee off -->
+					<!-- switch status on -->
+					<p><b>{STATUS_LANG}</b>: {STATUS}</p>
+					<!-- switch status off -->
+					<!-- switch location on -->
+					<p><b>{LOCATIon_LANG}</b>: {LOCATIon}</p>
+					<!-- switch location off -->
 				</div>
 			</td>
 		</tr>
