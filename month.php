@@ -123,6 +123,7 @@
 											echo "</tr>\n";
 											if ($master_array[("$daylink")]["0001"]["event_text"]) {
 												foreach ($master_array[("$daylink")]["0001"]["event_text"] as $event_text) {
+													$event_text2 = addslashes($event_text);
 													if (strlen($event_text) > 15) {
 														$event_text = substr("$event_text", 0, 12);
 														$event_text = $event_text . "...";
@@ -130,7 +131,7 @@
 													echo "<tr height=\"15\">\n";
 													echo "<td height=\"15\" valign=\"middle\" align=\"center\" bgcolor=\"#ffffff\">\n";
 													//echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
-													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a>\n";
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 												}
@@ -138,7 +139,7 @@
 												foreach ($master_array[("$daylink")] as $event_times) {
 													foreach ($event_times as $val) {
 														$event_text = $val["event_text"];
-														$event_text2 = $val["event_text"];
+														$event_text2 = addslashes($val["event_text"]);
 														if (strlen($event_text) > 12) {
 															$event_text = substr("$event_text", 0, 10);
 															$event_text = $event_text . "...";
@@ -264,7 +265,7 @@
 												if (!$new_val2["event_text"]) {
 													foreach ($new_val2 as $all_day) {
 														$event_text = $all_day;
-														$event_text2 = $all_day;
+														$event_text2 = addslashes($all_day);
 														$event_text = str_replace ("<br>", "", $event_text);
 														if (strlen($event_text) > 70) {
 															$event_text = substr("$event_text", 0, 65);
@@ -283,7 +284,7 @@
 													}
 												} elseif ($new_val2["event_text"]) {	
 													$event_text = $new_val2["event_text"];
-													$event_text2 = $new_val2["event_text"];
+													$event_text2 = addslashes($new_val2["event_text"]);
 													$event_start = $new_val2["event_start"];
 													$event_end = $new_val2["event_end"];
 													$event_start = strtotime ("$event_start");

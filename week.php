@@ -31,6 +31,7 @@ $prev_week = date("Ymd", $prev_week2);
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><? echo "$calendar_name"; ?></title> 
 	<link rel="stylesheet" type="text/css" href="styles/default.css">
+	<? include "functions/event.js"; ?>
 </head>
 <body bgcolor="#FFFFFF">
 <center>
@@ -116,6 +117,7 @@ $prev_week = date("Ymd", $prev_week2);
 											if ($master_array[("$thisday")]["0001"]["event_text"]) {
 												echo "<td colspan=\"2\" valign=\"top\" align=\"center\" bgcolor=\"#ffffff\">\n";
 												foreach ($master_array[("$thisday")]["0001"]["event_text"] as $event_text) {
+													$event_text2 = addslashes($event_text);
 													if (strlen($event_text) > 14) {
 														$event_text = substr("$event_text", 0, 11);
 														$event_text = $event_text . "...";
@@ -126,7 +128,7 @@ $prev_week = date("Ymd", $prev_week2);
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 													echo "<tr>\n";
 													echo "<td valign=\"top\" align=\"center\">\n";
-													echo "<font class=\"eventfont\"><i>$event_text</i></font>\n";
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\"><i>$event_text</i></font></a>\n";
 													echo "</td>\n";
 													echo "</tr>\n";
 													echo "</table>\n";
@@ -229,11 +231,23 @@ $prev_week = date("Ymd", $prev_week2);
 										do {
 											if ($master_array["$thisday"]["$cal_time"]) {
 												$event_text = $master_array["$thisday"]["$cal_time"][$k]["event_text"];
+												$event_text2 = addslashes($master_array["$thisday"]["$cal_time"][$k]["event_text"]);
+												$event_start = $master_array["$thisday"]["$cal_time"][$k]["event_start"];
+												$event_end = $master_array["$thisday"]["$cal_time"][$k]["event_end"];
+												$event_start = strtotime ("$event_start");
+												$event_end = strtotime ("$event_end");
+												if ($time_format == "24") {
+													$event_start = date ("G:i", $event_start);
+													$event_end = date ("G:i", $event_end);
+												} else {
+													$event_start = date ("g:i a", $event_start);
+													$event_end = date ("g:i a", $event_end);
+												}
 												if (strlen($event_text) > 14) {
 													$event_text = substr("$event_text", 0, 11);
 													$event_text = $event_text . "...";
 												}
-												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$event_text</a></td>\n";
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></td>\n";
 											} else {
 												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
 											}
@@ -257,12 +271,24 @@ $prev_week = date("Ymd", $prev_week2);
 										$thisday = date("Ymd", $thisdate);
 										do {
 											if ($master_array["$thisday"]["$cal_time"]) {
+												$event_start = $master_array["$thisday"]["$cal_time"][$k]["event_start"];
+												$event_end = $master_array["$thisday"]["$cal_time"][$k]["event_end"];
+												$event_start = strtotime ("$event_start");
+												$event_end = strtotime ("$event_end");
+												if ($time_format == "24") {
+													$event_start = date ("G:i", $event_start);
+													$event_end = date ("G:i", $event_end);
+												} else {
+													$event_start = date ("g:i a", $event_start);
+													$event_end = date ("g:i a", $event_end);
+												}
 												$event_text = $master_array["$thisday"]["$cal_time"][$k]["event_text"];
+												$event_text2 = addslashes($master_array["$thisday"]["$cal_time"][$k]["event_text"]);
 												if (strlen($event_text) > 14) {
 													$event_text = substr("$event_text", 0, 11);
 													$event_text = $event_text . "...";
 												}
-												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$event_text</a></td>\n";
+												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\">$event_text</a></td>\n";
 											} else {
 												echo "<td colspan=\"2\" bgcolor=\"#ffffff\">&nbsp;</td>\n";
 											}

@@ -33,6 +33,7 @@ if ($getdate == (date("Ymd"))) {
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><? echo "$calendar_name"; ?></title>
   	<link rel="stylesheet" type="text/css" href="styles/<? echo "$style_sheet"; ?>">
+	<? include "functions/event.js"; ?>
 </head>
 <body bgcolor="#FFFFFF">
 <center>
@@ -88,13 +89,14 @@ if ($getdate == (date("Ymd"))) {
 								echo "<td colspan=\"3\" height=\"30\" valign=\"middle\" align=\"center\" class=\"eventbg\">\n";
 								echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\">\n";										  
 								foreach($master_array[($getdate)]["0001"]["event_text"] as $all_day_text) {
+									$event_text2 = addslashes($all_day_text); 
 									if ($i > 0) {
 										echo "<tr>\n";
 										echo "<td bgcolor=\"#eeeeee\" height=\"1\"></td>\n";
 										echo "</tr>\n";
 									}
 									echo "<tr>\n";
-									echo "<td valign=\"top\" align=\"center\"><font class=\"eventfont\"><i>$all_day_text</i></font></td>\n";
+									echo "<td valign=\"top\" align=\"center\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\"><i>$all_day_text</i></font></a></td>\n";
 									echo "</tr>\n";
 									$i++;
 								}
@@ -138,6 +140,7 @@ if ($getdate == (date("Ymd"))) {
 										} elseif ($event_started != TRUE) {
 											$event_started = TRUE;
 											$event_text = $master_array[($getdate)]["$cal_time"][$k]["event_text"];
+											$event_text2 = addslashes($master_array[($getdate)]["$cal_time"][$k]["event_text"]);
 											$event_start = $master_array[($getdate)]["$cal_time"][$k]["event_start"];
 											$event_end = $master_array[($getdate)]["$cal_time"][$k]["event_end"];
 											$event_length = $master_array[($getdate)]["$cal_time"][$k]["event_length"];
@@ -162,7 +165,7 @@ if ($getdate == (date("Ymd"))) {
 											echo "<td>\n";
 											echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 											echo "<tr>\n";
-											echo "<td bgcolor=\"#68aaef\"><font class=\"eventfont\">$event_text</font></td>\n";
+											echo "<td bgcolor=\"#68aaef\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
 											echo "</tr>\n";
 											echo "</table>\n";
 											echo "</td>\n";           
@@ -202,6 +205,7 @@ if ($getdate == (date("Ymd"))) {
 										} else {
 											$event_started = TRUE;
 											$event_text = $master_array[($getdate)]["$cal_time"][$k]["event_text"];
+											$event_text2 = addslashes($master_array[($getdate)]["$cal_time"][$k]["event_text"]);
 											$event_start = $master_array[($getdate)]["$cal_time"][$k]["event_start"];
 											$event_end = $master_array[($getdate)]["$cal_time"][$k]["event_end"];
 											$event_length = $master_array[($getdate)]["$cal_time"][$k]["event_length"];
@@ -225,7 +229,7 @@ if ($getdate == (date("Ymd"))) {
 											echo "<td>\n";
 											echo "<table width=\"100%\" border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\n";
 											echo "<tr>\n";
-											echo "<td bgcolor=\"#68aaef\"><font class=\"eventfont\">$event_text</font></td>\n";
+											echo "<td bgcolor=\"#68aaef\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"eventfont\">$event_text</font></a></td>\n";
 											echo "</tr>\n";
 											echo "</table>\n";
 											echo "</td>\n";           

@@ -3,7 +3,7 @@
 	function openEventInfo(event, calendarname, start, end)
 	{	
 		var windowW = 450;
-		var windowH = 250;
+		var windowH = 175;
 	
 		var url = "event.php?event="+escape(event)+
 			"&calendar_name="+escape(calendarname)+
