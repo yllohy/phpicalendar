@@ -191,10 +191,8 @@
 		</td>
 	</tr>
 </table>
-<?php include "./month_bottom.php"; ?>
-
-<br>
-<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?>
+<?php include (BASE.'month_bottom.php'); ?>
+<?php include (BASE.'footer.inc.php'); ?>
 </center>
 </body>
 </html>

@@ -184,9 +184,6 @@ if (isset($master_array) && is_array($master_array)) {
 </head>
 <body>
 <center>
-<table border="0" width="700" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="520" valign="top">
 <table border="0" width="520" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="1"  class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"1\" height=\"20\" border=\"0\" align=\"left\">"; ?></td>
@@ -272,12 +269,7 @@ if (isset($master_array) && is_array($master_array)) {
 		</td>
 	</tr>
 </table>
-</td>
-		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
-		<td width="160" valign="top"><?php include('./sidebar.php'); ?><center>
-		<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?></center></td>
-	</tr>
-</table>
+<?php include (BASE.'footer.inc.php'); ?>
 </center>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 
 // English language include
-// For version 0.7 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Chad Little (chad@chadsdomain.com)
 //
@@ -25,7 +25,7 @@ $last_year_lang		= 'Previous Year';
 $subscribe_lang		= 'Subscribe';
 $download_lang		= 'Download';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.7';
+$version_lang		= '0.8';
 $event_lang			= 'Event';
 $event_start_lang	= 'Start Time';
 $event_end_lang		= 'End Time';

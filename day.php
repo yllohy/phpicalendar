@@ -258,8 +258,10 @@ if (is_array($master_array[($getdate)])) {
 </table>
 </td>
 		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
-		<td width="160" valign="top"><?php include('./sidebar.php'); ?><center>
-		<?php echo '<font class="V9"><br>'.$powered_by_lang.' <a class="psf" href="http://phpicalendar.sourceforge.net/">PHP iCalendar '.$version_lang.'</a></font>'; ?></center></td>
+		<td width="160" valign="top">
+			<?php include (BASE.'sidebar.php'); ?>
+			<?php include (BASE.'footer.inc.php'); ?>
+		</td>
 	</tr>
 </table>
 </center>
