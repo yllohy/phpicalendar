@@ -83,6 +83,7 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=day<br>';
 												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=week<br>';
 												echo $default_path.'/rss/rss.php?cal='.$cal_tmp.'&rssview=month<br>';
+												$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&rssview='.$default_view;
 												echo '<br><br>';		
 											}	
 										}
