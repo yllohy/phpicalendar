@@ -220,7 +220,7 @@ if ($master_array[($getdate)]) {
 														$event_start 	= date ($timeFormat, $event_start);
 														$event_end 		= strtotime ("$event_end");
 														$event_end 		= date ($timeFormat, $event_end);
-														echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2\">\n";
+														echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2week\">\n";
 														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
 														echo "<tr>\n";
 														echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b></font></td>\n";
