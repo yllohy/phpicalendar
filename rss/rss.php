@@ -13,16 +13,19 @@ if (empty($default_path)) {
 	} else {
 		$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
 	}
+} else {
+	$default_path = $default_path.'rss/';
 }
 
-$start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
-$end_week_time = $start_week_time + (6 * 25 * 60 * 60);
-$start_week = localizeDate($dateFormat_week, $start_week_time);
-$end_week =  localizeDate($dateFormat_week, $end_week_time);
-$parse_month = date ("Ym", strtotime($getdate));
-$rssview = $_GET['rssview'];
-$cal_displayname = str_replace("32", " ", $cal);
-$events_week = 0;
+$start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
+$end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
+$start_week 		= localizeDate($dateFormat_week, $start_week_time);
+$end_week 			=  localizeDate($dateFormat_week, $end_week_time);
+$parse_month 		= date ("Ym", strtotime($getdate));
+$rssview 			= $_GET['rssview'];
+$cal_displayname 	= str_replace("32", " ", $cal);
+$events_week 		= 0;
+$view_path	 		= $default_path.$rss_view.'.php'; 
 
 // calculate a value for Last Modified and ETag
 $cal = urldecode($cal);
@@ -56,7 +59,7 @@ $rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "ht
 $rss .= '<rss version="0.91">'."\n";
 $rss .= '<channel>'."\n";
 $rss .= '<title>'.$cal_displayname.' - '.$theview.'</title>'."\n";
-$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
+$rss .= '<link>'.htmlspecialchars ($view_path).'</link>'."\n";
 $rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
 $rss .= '<language>'.$rss_language.'</language>'."\n";
 $rss .= '<copyright>Copyright 2004, '.htmlspecialchars ("$default_path").'</copyright>'."\n";

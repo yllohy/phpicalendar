@@ -164,6 +164,11 @@ function chooseOffset($time) {
 
 function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text, $post_text, $link_class, $url) { 
 	$event_text = stripslashes(urldecode($arr["event_text"]));
+	if (empty($start)) {
+		$title = $event_text;
+	} else {
+		$title = $start.' - '.$end.': '.$event_text;
+	}
 	# for iCal pseudo tag <http> comptability
 	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) { 
 		$full_event_text = $matches[1] . $matches[2]; 
@@ -198,10 +203,10 @@ $return = "
     document.popup_data[$popup_data_index] = eventData;
     // --></script>";
 
-			$return .= '<a class="'.$link_class.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
+			$return .= '<a class="'.$link_class.'" title="'.$title.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
 			$popup_data_index++;
 		} else {
-			$return .= '<a class="'.$link_class.'" href="'.$res[1].'">';
+			$return .= '<a class="'.$link_class.'" title="'.$title.'" href="'.$res[1].'">';
 		}
 		$return .= $pre_text.$event_text.$post_text.'</a>'."\n";
 	}

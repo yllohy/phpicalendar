@@ -20,7 +20,8 @@
 						<table width="100%" border="0" cellspacing="0" cellpadding="10" class="G10B">	
 							<tr>
 								<td align="center" valign="top" class="V12">
-									{ERROR_MSG}
+									{ERROR_MSG}<br />
+									[<span class="G10"><a href="http://phpicalendar.net/documentation/index.php?title=Error_message_meanings">What does this mean?</a></span>]
 									<br />
 									<br />
 									{ERROR_CALENDAR}
@@ -28,6 +29,7 @@
 									<br />
 									{L_ERROR_BACK}
 									<br />
+									
 								</td>
 							</tr>
 						</table>

@@ -1,6 +1,6 @@
                  ______________________________________
                 |            PHP iCalendar             |
-                | http://phpicalendar.sourceforge.net/ |
+                | http://www.phpicalendar.net/         |
                 |______________________________________|
 
 Introduction:
@@ -83,6 +83,9 @@ Changes:
 --------
 2.0
 	-Enhanced error messaging system.
+	-New Open Source Documentation.
+		http://phpicalendar.net/documentation
+	-All links now have titles for mouseovers.
 	-Added Afrikaans Language.
 	-Todos can be turned off again.
 	-Month bottom can be turned off again.
