@@ -11,7 +11,7 @@ clean manner with day, week, and month navigation.
 
 Contact:
 --------
-E-mail the developers and othere on the list at:
+E-mail the developers and others on the list at:
 phpicalendar-devel@lists.sourceforge.net
 
 Installation:
@@ -32,8 +32,16 @@ tell you what each setting does. Change the values between the quotation
 marks to change the setting of that variable. If there are restrictions 
 as to what that variable can be set to, the comment behind will specify
 them. If you have difficulty with your configuration, you can ask the 
-developers and other PHP iCalendar users at the PHP iCalendar forums 
+developers and other PHP iCalendar users at the PHP iCalendar forums: 
 http://phpicalendar.sourceforge.net/phpBB2/
+
+Bugs:
+-----
+If you find a bug, please let us know. The easiest way for you to do this
+is to visit our Bug Tracker on SourceForge. This guarantees that we both 
+look at it and take time to figure out what is causing it. You can submit
+bugs at the following URL:
+http://sourceforge.net/tracker/?group_id=62270&atid=500017
 
 Licensing: 
 ----------
@@ -44,7 +52,7 @@ Changes:
 --------
 
 0.6
-    -Greatly improved CSS for "themes", theme SDK avaiable.
+    -Greatly improved CSS for "themes", theme SDK available.
     -HTML bug fixes specific to Windows browsers
     -All-day and Regular recurring event both support all types
     -Bottom of month view updated
@@ -72,7 +80,7 @@ Changes:
     -New UI
         -Mini-calendars in all views
         -Jump-to pop-ups for Weeks and Months
-        -Subsribe works properly
+        -Subscribe works properly
         -Color coding on month view
         -Week view colors the length of the time like day
     -Support for event notes/descriptions
