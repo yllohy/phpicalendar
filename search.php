@@ -117,10 +117,11 @@ include (BASE.'includes/header.inc.php');
 				if (isset($the_arr) && is_array($the_arr)) {
 					foreach($the_arr as $val) {
 						$key = $val['date'];
-						$dayofmonth = strtotime ($key);
-						$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-						echo '<font class="V12"><b><a class="ps3" href="day.php?cal='.$cal.'&amp;getdate='.$key.'">'.$dayofmonth.'</a></b></font><br>';
-						
+						if ($key > 1) { 
+							$dayofmonth = strtotime ($key);
+							$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
+							echo '<font class="V12"><b><a class="ps3" href="day.php?cal='.$cal.'&amp;getdate='.$key.'">'.$dayofmonth.'</a></b></font><br>';
+						}
 						if ($val["event_text"]) {	
 							$event_text 	= stripslashes(urldecode($val["event_text"]));
 							$description 	= stripslashes(urldecode($val["description"]));
