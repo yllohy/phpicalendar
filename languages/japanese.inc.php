@@ -37,7 +37,7 @@ $summary_lang		= '一覧';
 $all_day_lang		= '終日イベント';
 $notes_lang			= '注釈';
 
-$todays_lang		= '今日今週の予定';
+$todays_lang		= '今日の予定';
 $this_weeks_lang	= '今週の予定';
 $this_months_lang	= '今月の予定';
 $this_years_lang	= '今年の予定';
@@ -46,15 +46,15 @@ $this_week_lang		= '今週';
 $this_month_lang	= '今月';
 $this_year_lang		= '今年';
 
-$jump_lang			= '行く';
+$jump_lang			= '移動';
 $tomorrows_lang		= '翌日の予定';
-$goday_lang			= '今日に行く';
-$goweek_lang		= '今週に行く';
-$gomonth_lang		= '今月に行く';
-$goyear_lang		= '今年に行く';
+$goday_lang			= '今日に移動';
+$goweek_lang		= '今週に移動';
+$gomonth_lang		= '今月に移動';
+$goyear_lang		= '今年に移動';
 
 $daysofweek_lang			= array ('日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日');
-$daysofweekshort_lang		= array ('日曜','月曜','火曜','水曜','木曜','金曜','土曜');
+$daysofweekshort_lang		= array ('日','月','火','水','木','金','土');
 $daysofweekreallyshort_lang	= array ('日','月','火','水','木','金','土');
 $monthsofyear_lang			= array ('1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月');
 $monthsofyearshort_lang		= $monthsofyear_lang;
@@ -65,7 +65,7 @@ $timeFormat = 'g:i A';
 // For date formatting, see note below
 $dateFormat_day = '%B %e日 %A';
 $dateFormat_week = '%B %e日';
-$dateFormat_week_list = '%b %e日 %a';
+$dateFormat_week_list = '%b %e日 (%a)';
 $dateFormat_week_jump = '%b %e日';
 $dateFormat_month = '%Y年 %B';
 $dateFormat_month_list = '%B %e日 %A';
@@ -88,13 +88,13 @@ Notes about dateFormat_*
 
 // Error messages - %s will be replaced with a variable
 $error_title_lang = 'Error!';
-$error_window_lang = '間違いがありました!';
-$error_calendar_lang = 'この間違いが起こましたきない、「%s」カレンダーを処理て居ました。';
-$error_path_lang = 'ディレクトリを開けることない:「%s」';
-$error_back_lang = '戻るに「Back」ボタンを用いて下さい。';
-$error_remotecal_lang = 'このサーバーは遠隔カレンダーを妨げる承認されなかった。';
-$error_restrictedcal_lang = 'あなたはカレンダーにアクセスすることを試みたこのサーバーで 限られている';
-$error_invalidcal_lang = 'カレンダーファイルは無効であること。 別のカレンダーを試みなさい。';
+$error_window_lang = 'エラーがありました!';
+$error_calendar_lang = 'エラーがおきたとき、「%s」カレンダーを処理していました。';
+$error_path_lang = '「%s」ディレクトリを開けることはできません。';
+$error_back_lang = '前のページに戻るには「Back」ボタンをクリックして下さい。';
+$error_remotecal_lang = '承認された遠隔カレンダーのみこのサーバーで使用できます。';
+$error_restrictedcal_lang = 'このサーバーで 限られているカレンダーにアクセスしようとしました。';
+$error_invalidcal_lang = 'カレンダーファイルは無効です。 別のカレンダーを使用して下さい。';
 
 
 ?>

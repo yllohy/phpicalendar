@@ -10,8 +10,8 @@ $calendar_path = './calendars';			// Path to directory with calendars
 $default_view = 'day';					// Default view for calendars = 'day', 'week', 'month'
 $minical_view = 'current';				// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal = 'Home';					// Exact filename of calendar without .ics
-$language = 'english';					// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish'
-$week_start_day = 'sunday';				// Day of the week your week starts on
+$language = 'English';					// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish'
+$week_start_day = 'Sunday';				// Day of the week your week starts on
 $day_start = '0700';					// Start time for day grid
 $gridLength = '15';						// Grid distance in minutes for day view, multiples of 15 preferred
 $month_event_lines = '1';				// Number of lines to wrap each event title in month view, 0 means display all lines.
