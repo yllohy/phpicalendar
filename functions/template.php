@@ -79,10 +79,15 @@ class Page {
 					}
 				}
 			}
-		}
 		
-		$this->page = ereg_replace('<!-- switch t_allday on -->(.*)<!-- switch t_allday off -->', $replace_ad, $this->page);
-		$this->page = ereg_replace('<!-- switch t_event on -->(.*)<!-- switch t_event off -->', $replace_e, $this->page);		
+			$this->page = ereg_replace('<!-- switch t_allday on -->(.*)<!-- switch t_allday off -->', $replace_ad, $this->page);
+			$this->page = ereg_replace('<!-- switch t_event on -->(.*)<!-- switch t_event off -->', $replace_e, $this->page);		
+	
+		} else {
+		
+			$this->page = ereg_replace('<!-- switch tomorrows_events on -->(.*)<!-- switch tomorrows_events off -->', '', $this->page);
+		
+		}
 	}
 	
 	function draw_month($template_p, $offset = '+0', $type) {

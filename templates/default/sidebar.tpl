@@ -25,16 +25,16 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+<img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
 
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-	<tr height="20">
-		<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{L_JUMP}</div></td>
+	<tr>
+		<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{L_JUMP}</div></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
@@ -62,18 +62,18 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+<img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
 
 <!-- switch tomorrows_events on -->
 
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-	<tr height="20">
-		<td align="center" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{L_TOMORROWS}</div></td>
+	<tr>
+		<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{L_TOMORROWS}</div></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
@@ -90,20 +90,20 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+<img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
 
 <!-- switch tomorrows_events off -->
 
 <!-- switch todo on -->
 
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
-	<tr height="20">
-		<td align="center" width="98%" class="sideback"><div style="height: 20px; margin-top: 3px;" class="G10BOLD">{L_TODO}</div></td>
+	<tr>
+		<td align="center" width="98%" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{L_TODO}</div></td>
 	</tr>
 	<tr>
 		<td bgcolor="#FFFFFF" align="left">
@@ -137,12 +137,12 @@
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+<img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
 
 
 <!-- switch todo off -->
@@ -150,28 +150,28 @@
 {MONTH_SMALL|-1}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+<img src="images/spacer.gif" width="1" height="10" alt=" "><br />
 
 {MONTH_SMALL|+0}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
-<img src="images/spacer.gif" width="1" height="10" alt=" "><br>
+<img src="images/spacer.gif" width="1" height="10" alt=" "><br />
 
 {MONTH_SMALL|+1}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4"></td>
+		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" / ></td>
+		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
