@@ -49,6 +49,7 @@
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo "$calendar_name - $display_month"; ?></title>
 	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $default_path.'/rss/rss.php?cal='.$cal.'&rssview=month'; ?>">
 	<?php include (BASE.'functions/event.js'); ?>
 </head>
 <body>
