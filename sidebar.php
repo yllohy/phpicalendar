@@ -80,7 +80,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "Jump to"; ?></b></td>
+						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "$jump_lang"; ?></b></td>
 						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>
@@ -141,7 +141,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "Tomorrow's Events"; ?></b></td>
+						<td bgcolor="#DDDDDD" align="center" width="98%" background="images/side_bg.gif"><font class="G10B"><b><?php echo "$tomorrows_lang"; ?></b></font></td>
 						<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
 					</tr>
 					<tr>

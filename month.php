@@ -55,27 +55,12 @@
 					<td colspan="7" width="735"><img src="images/spacer.gif" width="735" height="1" alt=""></td>
 				</tr>
 				<tr>
-					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
-						<center><b>Sunday</b></center>
-					</td>
-					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
-						<center><b>Monday</b></center>
-					</td>
-					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
-						<center><b>Tuesday</b></center>
-					</td>
-					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
-						<center><b>Wednesday</b></center>
-					</td>
-					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
-						<center><b>Thursday</b></center>
-					</td>
-					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
-						<center><b>Friday</b></center>
-					</td>
-					<td valign="top" width="105" height="12" bgcolor="#eeeeee" class="V9">
-						<center><b>Saturday</b></center>
-					</td>
+					<?php
+						// Runs through the days of the week, should use array_push or pop to set correct beginning day. ?
+						foreach ($daysofweek_lang as $daysofweek) {
+							echo "<td valign=\"top\" width=\"105\" height=\"12\" bgcolor=\"#eeeeee\" class=\"V9\"><center><b>$daysofweek</b></center></td>";
+						}
+					?>	
 				</tr>
 				<tr>
 					<td width="105"><img src="images/spacer.gif" width="105" height="1" alt=""></td>

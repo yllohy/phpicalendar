@@ -35,21 +35,6 @@ $this_day = $day_array2[3];
 $this_month = $day_array2[2];
 $this_year = $day_array2[1];
 
-$date = strtotime($getdate);
-$month1 = date("m", DateAdd ("m", "-1", $date));
-$month2 = date("m", $date);
-$month3 = date("m", DateAdd ("m", "+1", $date));
-$year1 = date("Y", DateAdd ("m", "-1", $date));
-$year2 = date("Y", $date);
-$year3 = date("Y", DateAdd ("m", "+1", $date));
-$first_sunday1 = sundayOfWeek($year1, $month1, "1");
-$first_sunday2 = sundayOfWeek($year2, $month2, "1");
-$first_sunday3 = sundayOfWeek($year3, $month3, "1");
-$display_month1 = strftime ($dateFormat_month, strtotime("-1 month", $date));
-$display_month2 = strftime ($dateFormat_month, $date);
-$display_month3 = strftime ($dateFormat_month, strtotime("+1 month", $date));
-$parse_month = date ("Ym", $date);
-$thisday2 = strftime($dateFormat_week_list, $date);
 
 $dayborder = 0;
 
