@@ -29,7 +29,6 @@
 </head>
 <body bgcolor="#FFFFFF">
 <center>
-<? include('./list_icals.php'); ?>
 <table width="760" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
