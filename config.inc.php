@@ -5,7 +5,7 @@
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information
 
-$style_sheet = 'silver';				// Themes support
+$style_sheet = 'red';				// Themes support
 $calendar_path = './calendars';			// Path to directory with calendars
 $default_view = 'day';					// Default view for calendars = 'day', 'week', 'month'
 $default_cal = 'Home';					// Exact filename of calendar without .ics

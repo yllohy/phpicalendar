@@ -162,7 +162,7 @@ for ($i=0;$i<7;$i++) {
 											$event_start = 'All';
 											$event_end = 'Day';
 											echo "<tr>\n";
-											echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#6699CC\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
+											echo "<td colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"eventbg\"><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end', '$description')\"><font color=\"#ffffff\">$all_day_text</font></a></td>\n";
 											echo "</tr>\n";
 										}
 										echo "</table>\n";
