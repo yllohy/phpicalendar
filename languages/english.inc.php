@@ -53,6 +53,7 @@ $monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'g:i A';
+$timeFormat_small = 'g:i';
 
 // For date formatting, see note below
 $dateFormat_day = '%A, %B %e';

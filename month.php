@@ -140,6 +140,7 @@
 											$event_start 	= @$val["event_start"];
 											$event_end 		= @$val["event_end"];
 											$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
+											$event_start2 	= date ($timeFormat_small, @strtotime ("$event_start"));
 											$event_end 		= date ($timeFormat, @strtotime ("$event_end"));
 											$calendar_name2	= addslashes($calendar_name);
 											$calendar_name2 = urlencode($calendar_name2);
@@ -151,9 +152,9 @@
 											if (!isset($val["event_start"])) {
 												$event_start = 'All';
 												$event_end = 'Day';
-												echo "<td><font class=\"G10B\"><center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center></font></td>\n";
+												echo "<td><font class=\"V10\"><center><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><i>$event_text</i></a></center></font></td>\n";
 											} else {	
-												echo "<td><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a></td>\n";
+												echo "<td><a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"V9\">&nbsp;$event_start2 $event_text</font></a></td>\n";
 											}
 											echo "</tr>\n";
 											echo "</table>\n";
