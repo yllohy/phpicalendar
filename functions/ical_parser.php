@@ -478,6 +478,8 @@ foreach ($cal_filelist as $filename) {
 													}
 													break;
 												case 'YEARLY':
+													echo $summary;
+													print_r($bymonth);
 													if (!isset($bymonth)) $bymonth[] = date('m', $start_date_time);
 													foreach($bymonth as $month) {
 														$year = date('Y', $next_range_time);
@@ -497,8 +499,8 @@ foreach ($cal_filelist as $filename) {
 																}
 															}
 														} else {
-															$day = date('d', $start_date_time);
-															$next_date_time = mktime(0,0,0,$month,$day,$year);
+															$day 	= date('d', $start_date_time);
+															$next_date_time = mktime(0,0,0,$month,$day,$this_year);
 														}
 														$recur_data[] = $next_date_time;
 													}
