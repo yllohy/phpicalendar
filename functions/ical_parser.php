@@ -796,7 +796,7 @@ foreach ($cal_filelist as $filename) {
 					// End VTODO Parsing				
 						
 					case 'DTSTART':
-						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
+						$field = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $field);
 						$zulu_time = false;
 						if (substr($data,-1) == 'Z') $zulu_time = true;
 						$data = ereg_replace('T', '', $data);
@@ -845,7 +845,7 @@ foreach ($cal_filelist as $filename) {
 							$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
 							$start_date = date('Ymd', $start_unixtime);
 							$start_time = date('Hi', $start_unixtime);
-							unset($server_offset_tmp);
+							unset($server_offset_tmp, $offset_tmp, $tz_dtstart);
 						}
 						break;
 						
