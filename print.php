@@ -115,6 +115,7 @@ include (BASE.'includes/header.inc.php');
 													$description 	= stripslashes(urldecode($new_val2["description"]));
 													$event_start 	= $new_val2["event_start"];
 													$event_end 		= $new_val2["event_end"];
+													if (isset($new_val2["display_end"])) $event_end = $new_val2["display_end"];
 													$event_start 	= date ($timeFormat, strtotime ("$event_start"));
 													$event_end 		= date ($timeFormat, strtotime ("$event_end"));
 													$event_start 	= "$event_start - $event_end";
