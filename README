@@ -100,6 +100,7 @@ Changes:
 	-RSS supports ports other than 80.
 	-RSS respects $calendar_path.
 	-YEARLY repeating events display better.
+	-All Calendars Combined can now be cached for greater performance.
 	-Various bug fixes.
 	
 1.1
