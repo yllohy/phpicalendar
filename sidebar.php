@@ -230,10 +230,12 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 												if ($val['status'] == 'COMPLETED') {
 													if ($show_completed == 'yes') {
 														$event_text = "<S>$event_text</S>";
-														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a><br>\n";
+														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $event_text</font></a><br>\n";
 													}
+												} elseif ($val['priority'] > 0) {
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $event_text</font></a><br>\n";
 												} else {
-													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\">&#149; $event_text</font></a><br>\n";
+													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name2', '$event_start', '$event_end', '$description')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $event_text</font></a><br>\n";
 												}
 											}
 										}
