@@ -1,6 +1,6 @@
 	<?php
 	
-	$cal_displayname2 = $cal_displayname . " $calendar_lang";
+	$cal_displayname2 = $calendar_name . " $calendar_lang";
 	if (strlen($cal_displayname2) > 24) {
 		$cal_displayname2 = substr("$cal_displayname2", 0, 21);
 		$cal_displayname2 = $cal_displayname2 . "...";
@@ -53,9 +53,9 @@
 								</tr>
 								<tr>
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
-									<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\"><img src=\"styles/$style_sheet/smallicon.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
+									<td width="1%" align="middle"><?php echo "<a class=\"psf\" href=\"$subscribe_path\"><img src=\"styles/$style_sheet/smallicon.gif\" alt=\"\" width=\"13\" height=\"16\" border=\"0\" align=\"middle\"></a>"; ?></td>
 									<td width="1%"><img src="images/spacer.gif" width="3" height="1"></td>
-									<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$fullpath$cal.ics\">$subscribe_lang</a>"; ?></td>
+									<td colspan="4" class="G10B"><?php echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>"; ?></td>
 								</tr>
 								<tr>
 									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
@@ -240,7 +240,7 @@
 									$minical_month = date("m", $minical_time);
 									$minical_year = date("Y", $minical_time);
 									$first_of_month = $minical_year.$minical_month."01";
-									$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
+									$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
 									$i = 0;
 									$whole_month = TRUE;
 									$num_of_events = 0;
@@ -320,7 +320,7 @@
 									$minical_month = date("m", $minical_time);
 									$minical_year = date("Y", $minical_time);
 									$first_of_month = $minical_year.$minical_month."01";
-									$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
+									$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
 									$i = 0;
 									$whole_month = TRUE;
 									$num_of_events = 0;
@@ -400,7 +400,7 @@
 									$minical_month = date("m", $minical_time);
 									$minical_year = date("Y", $minical_time);
 									$first_of_month = $minical_year.$minical_month."01";
-									$start_day = strtotime(dateOfWeek($first_of_month, $start_week_day));
+									$start_day = strtotime(dateOfWeek($first_of_month, $week_start_day));
 									$i = 0;
 									$whole_month = TRUE;
 									$num_of_events = 0;

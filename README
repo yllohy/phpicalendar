@@ -1,5 +1,7 @@
-PHP iCalendar
-http://phpicalendar.sourceforge.net/
+                 ______________________________________
+                |            PHP iCalendar             |
+                | http://phpicalendar.sourceforge.net/ |
+                |______________________________________|
 
 Introduction:
 -------------
@@ -15,13 +17,23 @@ phpicalendar-devel@lists.sourceforge.net
 Installation:
 -------------
 - Put PHP iCalendar into your Sites folder (or another web directory)
-- Edit the file "config.inc.php"
+- Edit the file "config.inc.php" and see section below called "Configuration"
 - Put your iCal files into the directory you specify in config.inc.php
   (default is "calendars")
 - Turn on Web sharing (if not already on)
 - View calendars in your web browser
   If it is in your Sites folder, the URL would be:
-     http://localhost/~username/phpicalendar
+  <http://localhost/~username/phpicalendar>
+
+Configuration:
+--------------
+View config.inc.php. The comments behind each variable definition will
+tell you what each setting does. Change the values between the quotation
+marks to change the setting of that variable. If there are restrictions 
+as to what that variable can be set to, the comment behind will specify
+them. If you have difficulty with your configuration, you can ask the 
+developers and other PHP iCalendar users at the PHP iCalendar forums 
+(get the link from our home page).
 
 Licensing: 
 ----------
@@ -32,55 +44,65 @@ Changes:
 --------
 
 0.6
-	-Better CSS support, coloring not hard-coded
-	-HTML bug fixes specific to Windows browsers
-	-All-day and Regular recurring event both support all types
-	-Bottom of month view updated
-	-Localization update
-	-Bug fixes
+    -Better CSS support, coloring not hard-coded
+    -HTML bug fixes specific to Windows browsers
+    -All-day and Regular recurring event both support all types
+    -Bottom of month view updated
+    -Localization update
+    	-Localized dates and times work with Mac OS X as well as
+    	 other *nixes.
+    	-Almost all text has been translated for supported languages
+    -Added ability to turn off the pop-up menu calendar list
+    -Added "black-listing" of specific local calendars
+    -Added remote calendar support
+        -Subscribe to calendars hosted remotely and have them show 
+         up in your popup
+        -Allow any URL of a calendar to be parsed by your server
+    -Added custom error page for user-friendly error messages.
+    -Bug fixes
 
 0.5
-	-Improved recurring event support
-		-All-day and Regular recurring events now obey ending dates and counts
-		-Regular recurring events for monthly
-	-New UI
-		-Mini-calendars in all views
-		-Jump-to pop-ups for Weeks and Months
-		-Subsribe works properly
-		-Color coding on month view
-		-Week view colors the length of the time like day
-	-Support for event notes/descriptions
-	-More language support
-		-Danish
-		-Dutch
-		-Italian
-		-Japanese
-		-Norwegian
-	-Bug fixes
-	
+    -Improved recurring event support
+        -All-day and Regular recurring events now obey ending dates and counts
+        -Regular recurring events for monthly
+    -New UI
+        -Mini-calendars in all views
+        -Jump-to pop-ups for Weeks and Months
+        -Subsribe works properly
+        -Color coding on month view
+        -Week view colors the length of the time like day
+    -Support for event notes/descriptions
+    -More language support
+        -Danish
+        -Dutch
+        -Italian
+        -Japanese
+        -Norwegian
+    -Bug fixes
+    
 0.4
-	-Improved recurring event support
-		-All-day recurring for all types
-		-Regular recurring events for daily, weekly
-	-Event pop-ups
-	-More style sheets
-	-Multiple language support
-		-English
-		-French
-		-German
-		-Polish
-	-24-hour clock support
-	-Bug fixes
+    -Improved recurring event support
+        -All-day recurring for all types
+        -Regular recurring events for daily, weekly
+    -Event pop-ups
+    -More style sheets
+    -Multiple language support
+        -English
+        -French
+        -German
+        -Polish
+    -24-hour clock support
+    -Bug fixes
 
 0.3
-	-Calendar list popup
-	-All-day yearly recurring support
-	-Bug fixes
-	
+    -Calendar list popup
+    -All-day yearly recurring support
+    -Bug fixes
+    
 0.2
-	-All-day event support
-	-Added month and week views
-	-Bug fixes
+    -All-day event support
+    -Added month and week views
+    -Bug fixes
 
 0.1
-	-Initial Release
+    -Initial Release

@@ -46,7 +46,7 @@ for ($i=0;$i<7;$i++) {
 		foreach($master_array[($thisday)] as $ovlKey => $ovlValue) {
 			if ($ovlKey != "-1") {
 				foreach($ovlValue as $ovl2Value) {
-					$nbrGridCols[$thisday] = kgv($nbrGridCols[$thisday], ($ovl2Value["event_overlap"] + 1));
+					$nbrGridCols[($thisday)] = kgv($nbrGridCols[($thisday)], ($ovl2Value["event_overlap"] + 1));
 				}
 			}
 		} 

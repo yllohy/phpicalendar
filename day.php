@@ -112,7 +112,7 @@ if ($master_array[($getdate)]) {
 				<?php
 					// The all day events returned here.
 					if ($master_array[($getdate)]['-1']) {
-						echo '<tr>\n';
+						echo '<tr>'."\n";
 						echo '<td colspan="3" height="24">'."\n";
 						echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
 						foreach($master_array[($getdate)]['-1'] as $allday) {
