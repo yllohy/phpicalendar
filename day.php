@@ -27,6 +27,7 @@ $this_year = $day_array2[1];
 
 $parse_month = date ('Ym', $date);
 $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
+$start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 
 $dayborder = 0;
 
@@ -106,8 +107,33 @@ if (is_array($master_array[($getdate)])) {
 						echo '</td>'."\n";
 						echo '</tr>'."\n";
 					}
-					?>
-
+					if ($daysofweek_dayview == 'yes') {
+				?>
+		<tr>	
+			<td>
+      			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      			<?php
+					echo "<tr>";
+					$thisdate = $start_week_time;
+					$start_day = strtotime($week_start_day);
+					$i = 0;
+					do {
+						$day_num = date("w", $start_day);
+						$day = $daysofweek_lang[$day_num];
+						$thisday = date("Ymd", $thisdate);
+						echo "<td width=\"74\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
+						echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$day</a></font>\n";
+						echo "</td>\n";
+						$start_day = strtotime("+1 day", $start_day);
+						$thisdate = strtotime("+1 day", $thisdate);
+						$i++;
+					} while ($i < 7);
+					echo '</tr>';			
+		      		echo '</table>';
+      				echo '</td>';
+      				echo '</tr>';
+      				}
+      				?>
       			<tr>
 					<td align="center" valign="top" colspan="3">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
