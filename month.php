@@ -231,7 +231,7 @@
 						<td align="center" valign="top">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr height="25">
-									<td colspan="3" align="center" valign="middle" class="eventborder" width="825" height="25">
+									<td colspan="3" align="center" valign="middle" class="eventborder" width="760" height="25">
 										<font class="V12" color="#FFFFFF"><b>This Month's Events</b></font>
 									</td>
 								</tr>
@@ -268,13 +268,18 @@
 												if (!$new_val2["event_text"]) {
 													foreach ($new_val2 as $all_day) {
 														$event_text = $all_day;
+														$event_text = str_replace ("<br>", "", $event_text);
+														if (strlen($event_text) > 70) {
+															$event_text = substr("$event_text", 0, 65);
+															$event_text = $event_text . "...";
+														}
 														echo "<tr height=\"20\">\n";
-														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"150\" height=\"20\">\n";
+														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"200\" height=\"20\">\n";
 														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$dayofmonth</font></a>\n";
 														echo "</td>\n";
 														echo "<td width=\"1\" height=\"20\">\n";
 														echo "</td>\n";
-														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"551\" height=\"20\">\n";
+														echo "<td valign=\"middle\" bgcolor=\"white\" width=\"525\" height=\"20\">\n";
 														echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$event_text</font></a> <font class=\"V9\">(All day event)</font>\n";
 														echo "</td>\n";
 														echo "</tr>\n";
@@ -287,13 +292,18 @@
 													$event_start = date ("g:i a", $event_start);
 													$event_end = strtotime ("$event_end");
 													$event_end = date ("g:i a", $event_end);
+													$event_text = str_replace ("<br>", "", $event_text);
+													if (strlen($event_text) > 70) {
+														$event_text = substr("$event_text", 0, 65);
+														$event_text = $event_text . "...";
+													}
 													echo "<tr height=\"20\">\n";
-													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"150\" height=\"20\">\n";
+													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"200\" height=\"20\">\n";
 													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$dayofmonth</font></a>\n";
 													echo "</td>\n";
 													echo "<td width=\"1\" height=\"20\">\n";
 													echo "</td>\n";
-													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"551\" height=\"20\">\n";
+													echo "<td valign=\"middle\" bgcolor=\"white\" width=\"525\" height=\"20\">\n";
 													echo "<font class=\"G10B\">&nbsp;<a class=\"psf\" href=\"day.php?getdate=$key\">$event_text</a></font> <font class=\"V9\">($event_start - $event_end)</font>\n";
 													echo "</td>\n";
 													echo "</tr>\n";

@@ -120,27 +120,36 @@ foreach($contents as $line) {
 				
 				} elseif ($key == "BYSECOND") 	{
 					$bysecond = $val;
+					$bysecond = split (",", $bysecond);
 				
 				} elseif ($key == "BYMINUTE") 	{
 					$byminute = $val;
+					$byminute = split (",", $byminute);
 				
 				} elseif ($key == "BYHOUR")		{
 					$byhour = $val;
+					$byhour = split (",", $byhour);
 				
 				} elseif ($key == "BYDAY") 		{
 					$byday = $val;
+					$byday = split (",", $byday);
 				
 				} elseif ($key == "BYMONTHDAY") {
 					$bymonthday = $val;
+					$bymonthday = split (",", $bymonthday);
+					//print_r ($bymonthday);
 				
 				} elseif ($key == "BYYEARDAY") 	{
 					$byyearday = $val;
+					$byyearday = split (",", $byyearday);
 				
 				} elseif ($key == "BYWEEKNO") 	{
 					$byweekno = $val;
+					$byweekno = split (",", $byweekno);
 				
 				} elseif ($key == "BYMONTH") 	{
 					$bymonth = $val;
+					$bymonth = split (",", $bymonth);
 				
 				} elseif ($key == "BYSETPOS") 	{
 					$bysetpos = $val;
@@ -149,36 +158,48 @@ foreach($contents as $line) {
 					$wkst = $val;
 				
 				} elseif ($key == "END")		{
-					// Since we hit the end of the RRULE array, lets do something.
-					$recur_year = date("Y", strtotime("$allday_start"));
-					$date = strtotime("$allday_start");
-					$end_date = strtotime("$allday_end");
-					if (($this_year != $recur_year) && ($this_year > $recur_year)) {
-						do {
-							$date = DateAdd ($interval,  $number, $date);
-							$end_date = DateAdd ($interval,  $number, $end_date);
-							$recur_year = date ("Y", $date);
-							//echo "$this_year:$recur_year  ";
-						} while (($this_year != $recur_year) && ($this_year > $recur_year));
-						
-						$allday_start = date ("Ymd", $date);
-						$allday_end = date ("Ymd", $end_date);
-						//echo "$allday_start, $allday_end";
-					}
-					//echo "$interval - $number - $date - $recur_year - $this_year - $next<br>\n";
-						
+					
 					if ($allday_start != "") {
-						$start = strtotime("$allday_start");
-						$end = strtotime("$allday_end");
+						
+						// Since we hit the end of the RRULE array, lets do something.
+						// Below handles yearly all day events only.
+						// $this_year is the year we are parsing.
+						// $recur_year is the date the recurring event starts.
+						// $end_date is the date the recurring event stops.
+						 
+						$recur_year = date("Y", strtotime("$allday_start"));
+						$date = strtotime("$allday_start");
+						$end_date = strtotime("$allday_end");
+						if ($this_year > $recur_year) {
+							do {
+								$date = DateAdd ($interval,  $number, $date);
+								$end_date = DateAdd ($interval,  $number, $end_date);
+								$recur_year = date ("Y", $date);
+							} while ($this_year > $recur_year);
+							
+							$allday_start = date ("Ymd", $date);
+							$allday_end = date ("Ymd", $end_date);
+							echo "$allday_start, $allday_end ---- ";
+						}
+						echo "$interval - $number - $date - $recur_year - $this_year - ";
+						
+						// This steps through each day of a multiple all-day event
+						$start_of_vevent = strtotime("$allday_start");
+						$end_of_vevent = strtotime("$allday_end");
 						do {
-							$start_date = date("Ymd", $start);
-							$check_year = date("Y", $start);
+							$start_date = date("Ymd", $start_of_vevent);
+							$check_year = date("Y", $start_of_vevent);
 							// Only write the current year
 							if ($this_year == $check_year) {
+								echo "date_written<br>";
 								$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
 							}
-							$start = ($start + (24*3600));
-						} while ($start != $end);
+							$start_of_vevent = ($start_of_vevent + (24*3600));
+						} while ($start_of_vevent != $end_of_vevent);
+					
+					
+					// Let's take care of recurring events that are not all day events
+					// Nothing is here yet, Jared seems to way to play, so I'll let him do these... muahahahaha.
 					} else {
 						$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
 					}
