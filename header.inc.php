@@ -1,0 +1,1 @@
+<?php$header_always = 'no';   // Set to 'yes' if you want the header on EVERY page, even print view.?><-- Add what html you want to appear on the top of every page below -->
