@@ -1,5 +1,7 @@
 <?php
 if (!defined('BASE')) define('BASE','../');
+$current_view = 'error';
+$display_date = $error_title_lang;
 
 function error($error_msg='There was an error processing the request.', $file='NONE') {
 	global $style_sheet, $powered_by_lang, $version_lang, $error_title_lang, $error_window_lang, $error_calendar_lang, $error_back_lang, $enable_rss, $this_site_is_lang;
@@ -14,16 +16,10 @@ function error($error_msg='There was an error processing the request.', $file='N
 	if (!isset($this_site_is_lang))		$this_site_is_lang = 'This site is';
 		
 	$error_calendar = sprintf($error_calendar_lang, $file);
+	include (BASE.'includes/header.inc.php'); 
+	
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo $error_title_lang; ?></title>
-  	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
-</head>
-<body bgcolor="#FFFFFF">
+
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
@@ -64,11 +60,11 @@ function error($error_msg='There was an error processing the request.', $file='N
 		</td>
 	</tr>
 </table>
-<?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
-</body>
-</html>
+<?php 
 
-<?php
+	include (BASE.'includes/footer.inc.php');
+
 }
+
 ?>

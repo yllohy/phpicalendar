@@ -2,6 +2,7 @@
 
 define('BASE','./');
 $current_view = 'search';
+$display_date = $results_lang;
 include('./functions/ical_parser.php');
 
 if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'] != '') {
