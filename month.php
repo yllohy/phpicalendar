@@ -18,10 +18,10 @@
 	$date = mktime(0,0,0,"$this_month","$this_day","$this_year");
 	$next_month = date("Ymd", DateAdd ("m", "1", $date));
 	$prev_month = date("Ymd", DateAdd ("m", "-1", $date));
-	$display_month = strftime ($dateFormat_month, $date);
+	$display_month = localizeDate ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_sunday = sundayOfWeek($this_year, $this_month, "1");
-	$thisday2 = strftime($dateFormat_week_list, $unix_time);
+	$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
 
 ?>

@@ -11,7 +11,7 @@
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
 		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$prev_month\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
-		<td align="center" class="sideback"><font class="G10B"><b><?php print (strftime ($dateFormat_day, strtotime($getdate))); ?></b></font></td>
+		<td align="center" class="sideback"><font class="G10B"><b><?php print (localizeDate ($dateFormat_day, strtotime($getdate))); ?></b></font></td>
 		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$next_month\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
 	</tr>
 	<tr>
@@ -25,7 +25,7 @@
 						<table width="160" border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-								<td align="center" class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></td>
+								<td align="center" class="G10B"><b><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></td>
 								<td align="right" valign="top" width="1"></td>
 							</tr>
 							<tr>
@@ -231,7 +231,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td align="center" class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></td>
+						<td align="center" class="G10B"><b><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></td>
 						<td align="right" valign="top" width="1"></td>
 					</tr>
 					<tr>

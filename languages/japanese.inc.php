@@ -46,17 +46,47 @@ $this_week_lang		= "今週";
 $this_month_lang	= "今月";
 $this_year_lang		= "今年";
 
+$jump_lang			= "Jump to";
+$tomorrows_lang		= "Tomorrow's Events";
+$goday_lang			= "Go to Today";
+$goweek_lang		= "Go to This Week";
+$gomonth_lang		= "Go to This Month";
+$goyear_lang		= "Go to This Year";
+
+$daysofweek_lang			= array ("日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日");
+$daysofweekshort_lang		= array ("日曜","月曜","火曜","水曜","木曜","金曜","土曜");
+$daysofweekreallyshort_lang	= array ("日","月","火","水","木","金","土");
+$monthsofyear_lang			= array ("1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月");
+$monthsofyearshort_lang		= $monthsofyear_lang;
+
 // Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
 setlocale (LC_TIME, 'ja_JP');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
-$timeFormat = "g:iA";
+$timeFormat = "g:i A";
 
-// For date formatting, cehck out: http://www.php.net/manual/en/function.strftime.php
-$dateFormat_day = "%B %e %A";
-$dateFormat_week = "%B %e";
-$dateFormat_week_list = "%b %e %a";
-$dateFormat_month = "%Y %B";
-$dateFormat_month_list = "%B %e %A";
+// For date formatting, see note below
+$dateFormat_day = "%B %e日 %A";
+$dateFormat_week = "%B %e日";
+$dateFormat_week_list = "%b %e日 %a";
+$dateFormat_week_jump = "%b %e日";
+$dateFormat_month = "%Y年 %B";
+$dateFormat_month_list = "%B %e日 %A";
+
+/*
+Notes about dateFormat_*
+	The pieces are similar to that of the PHP function strftime(), 
+	however only the following is supported at this time:
+	
+	%A - the full week day name as specified in $daysofweek_lang
+	%a - the shortened week day name as specified in $daysofweekshort_lang
+	%B - the full month name as specified in $monthsofyear_lang
+	%b - the shortened month name as specified in $monthsofyearshort_lang
+	%e - the day of the month as a decimal number (1 to 31)
+	%Y - the 4-digit year
+
+	If this causes problems with representing your language accurately, let
+	us know. We will be happy to modify this if needed.
+*/
 
 ?>

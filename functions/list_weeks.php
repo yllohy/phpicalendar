@@ -16,8 +16,8 @@ print "<form>\n<select name=\"action\" class=\"query_style\" onChange=\"window.l
 // build the <option> tags
 do {
 	$weekdate = date ("Ymd", $start_week_time);
-	$select_week1 = strftime($dateFormat_week_jump, $start_week_time);
-	$select_week2 = strftime($dateFormat_week_jump, $end_week_time);
+	$select_week1 = localizeDate($dateFormat_week_jump, $start_week_time);
+	$select_week2 = localizeDate($dateFormat_week_jump, $end_week_time);
 
 	if (($check_week >= $start_week_time) && ($check_week <= $end_week_time)) {
 		print "<option value=\"week.php?cal=$cal&getdate=$weekdate\" selected>$select_week1 - $select_week2</option>\n";

@@ -26,7 +26,7 @@ $unix_time = strtotime($getdate);
 $today_today = date ("Ymd");
 $tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
 $yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
-$display_date = strftime($dateFormat_day, $unix_time);
+$display_date = localizeDate($dateFormat_day, $unix_time);
 
 // For the side months
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
@@ -44,11 +44,11 @@ $year3 = date("Y", DateAdd ("m", "+1", $date));
 $first_sunday1 = sundayOfWeek($year1, $month1, "1");
 $first_sunday2 = sundayOfWeek($year2, $month2, "1");
 $first_sunday3 = sundayOfWeek($year3, $month3, "1");
-$display_month1 = strftime ($dateFormat_month, strtotime("-1 month", $date));
-$display_month2 = strftime ($dateFormat_month, $date);
-$display_month3 = strftime ($dateFormat_month, strtotime("+1 month", $date));
+$display_month1 = localizeDate ($dateFormat_month, strtotime("-1 month", $date));
+$display_month2 = localizeDate ($dateFormat_month, $date);
+$display_month3 = localizeDate ($dateFormat_month, strtotime("+1 month", $date));
 $parse_month = date ("Ym", $date);
-$thisday2 = strftime($dateFormat_week_list, $date);
+$thisday2 = localizeDate($dateFormat_week_list, $date);
 
 $dayborder = 0;
 

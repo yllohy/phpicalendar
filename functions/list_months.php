@@ -8,7 +8,7 @@ $getdate_month = date("m", strtotime($getdate));
 for ($i=0; $i<12; $i++) {
 	$monthdate = date ("Ymd", $month_time);
 	$month_month = date("m", $month_time);
-	$select_month = strftime($dateFormat_month, $month_time);
+	$select_month = localizeDate($dateFormat_month, $month_time);
 	if ($month_month == $getdate_month) {
 		print "<option value=\"month.php?cal=$cal&getdate=$monthdate\" selected>$select_month</option>\n";
 	} else {

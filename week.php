@@ -23,8 +23,8 @@ $yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time = $start_week_time + (6 * 25 * 60 * 60);
 
-$start_week = strftime($dateFormat_week, $start_week_time);
-$end_week =  strftime($dateFormat_week, $end_week_time);
+$start_week = localizeDate($dateFormat_week, $start_week_time);
+$end_week =  localizeDate($dateFormat_week, $end_week_time);
 
 $display_date = "$start_week - $end_week";
 
@@ -108,7 +108,7 @@ for ($i=0;$i<7;$i++) {
 							echo "<td bgcolor=\"#eeeeee\" width=\"1\"></td>";
 							do {
 								$thisday = date("Ymd", $thisdate);
-								$thisday2 = strftime($dateFormat_week_list, $thisdate);
+								$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
 								echo "<td width=\"70\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" bgcolor=\"#eeeeee\" class=\"V9\">\n";
 								echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a>\n";
 								echo "</td>\n";

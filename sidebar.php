@@ -204,8 +204,9 @@
 			<td valign="center" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
+
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td align="center" class="sideback"><b><font class="G10B"><?php print (strftime ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></font></td>
+						<td align="center" class="sideback"><b><font class="G10B"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", strtotime($getdate)))); ?></b></font></td>
 						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
 					<tr>
@@ -224,7 +225,8 @@
 								<?php
 									$start_day = strtotime($week_start_day);
 									for ($i=0; $i<7; $i++) {
-										$day = substr(date("D", $start_day), 0, 2);
+										$day_num = date("w", $start_day);
+										$day = $daysofweekreallyshort_lang[$day_num];
 										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
 										$start_day = ($start_day + (24.5 * 60 * 60));
 									}
@@ -284,7 +286,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td align="center" class="sideback"><font class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime($getdate))); ?></b></font></td>
+						<td align="center" class="sideback"><font class="G10B"><b><?php print (localizeDate ($dateFormat_month, strtotime($getdate))); ?></b></font></td>
 						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
 					<tr>
@@ -303,7 +305,8 @@
 								<?php
 									$start_day = strtotime($week_start_day);
 									for ($i=0; $i<7; $i++) {
-										$day = substr(date("D", $start_day), 0, 2);
+										$day_num = date("w", $start_day);
+										$day = $daysofweekreallyshort_lang[$day_num];
 										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
 										$start_day = ($start_day + (24.5 * 60 * 60));
 									}
@@ -363,7 +366,7 @@
 				<table width="160" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
-						<td align="center" class="sideback"><font class="G10B"><b><?php print (strftime ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></font></td>
+						<td align="center" class="sideback"><font class="G10B"><b><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></b></font></td>
 						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
 					<tr>
@@ -382,7 +385,8 @@
 								<?php
 									$start_day = strtotime($week_start_day);
 									for ($i=0; $i<7; $i++) {
-										$day = substr(date("D", $start_day), 0, 2);
+										$day_num = date("w", $start_day);
+										$day = $daysofweekreallyshort_lang[$day_num];
 										print "<td align=\"center\" class=\"G10B\"><b>$day</b></td>\n";
 										$start_day = ($start_day + (24.5 * 60 * 60));
 									}
