@@ -65,8 +65,6 @@ $rss_week_date			= '%b %e日';  // Lists just the day
 $rss_month_date			= '%b %e日';  // Lists just the day
 $rss_language			= 'ja';
 
-// new in 0.9 ----------------------
-
 $search_took_lang		= '検索に%s秒かかりました。';
 $recurring_event_lang	= '引き続く予定';
 $exception_lang			= '特例';
@@ -120,9 +118,6 @@ $format_recur_lang['count']		= '%int%回';		// ie, 'for a count of 5'
 $format_recur_lang['bymonth']		= '月：%list%';			// ie, 'In months: January, February, March'
 $format_recur_lang['bymonthday']	= '日：%list%';			// ie, 'On dates: 1, 2, 3, 4'
 $format_recur_lang['byday']			= '曜日：%list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
-
-// ---------------------------------
-
 
 $daysofweek_lang			= array ('日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日');
 $daysofweekshort_lang		= array ('日','月','火','水','木','金','土');
