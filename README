@@ -88,7 +88,16 @@ functions folder.
 
 Changes:
 --------
-2.0 beta
+2.0 alpha 2
+	-Mozilla calendars work again.
+	-Todos work again.
+	-Enhanced error messaging system.
+	-Webcals can be cached for greater performance.
+	-Support for 7 colors and 14 calendars by default.
+	-Italian and Spanish translations added.
+	-Some authentication issues resolved.
+
+2.0 alpha
 	-New templating system.
 	-Workaround for events starting between 0000 and 0100.
 	-Removed all styles except for default.
@@ -102,7 +111,6 @@ Changes:
 	-RSS respects $calendar_path.
 	-YEARLY repeating events display better.
 	-All Calendars Combined can now be cached for greater performance.
-	-Webcals can be cached for greater performance.
 	-Parsing engine now twice as fast.
 	-Various bug fixes.
 	
