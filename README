@@ -54,7 +54,7 @@ Changes:
 
 0.7
 	-Added Year view.
-	-New themes, Green, Orange, and Grey.
+	-New themes, Green, Orange, Grey, and Tan.
 	-Parses calendars much faster.
 	-Page titles added for bookmarking. 
 	-Fixed bug not letting notes to fully display.
@@ -62,8 +62,9 @@ Changes:
 	-Fixed a bug for showing &'s and #'s in the javascript.
 	-Greatly improved Mozilla Calendar support.
 	-Overlapping events now display better.
-	-Added timezone support.
-	-Other various bug fixes.
+	-Added complete timezone support (See TIMEZONE file for details).
+	-A new website for PHP iCalendar.
+	-Many bug fixes.
 
 0.6
 	-Added this README!
