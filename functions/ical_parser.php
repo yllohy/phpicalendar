@@ -691,7 +691,7 @@ if ($parse_file) {
 		// sort the sub (day) arrays so the times are in order
 		foreach (array_keys($master_array) as $k) {
 			if (isset($master_array[$k]) && is_array($master_array[$k])) {
-				ksort($master_array[$k]);
+				krsort($master_array[$k]);
 				reset($master_array[$k]);
 			}
 		}
@@ -709,12 +709,12 @@ if ($parse_file) {
 
 
 //If you want to see the values in the arrays, uncomment below.
-//print '<pre>';
-//print_r($master_array);
+print '<pre>';
+print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
 //print_r($rrule);	
-//print '</pre>';
+print '</pre>';
 	
 					
 ?>

@@ -72,6 +72,7 @@ Changes:
 		-Upload new calendars (ftp)
 	-Calendars folder can now be outside your web space.	
 	-Print view can now be set for your default view.
+	-Calendars can now be store outside of phpicalendar's installation.
 	-Minor bug fixes
 
 0.8.1
