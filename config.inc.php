@@ -5,7 +5,7 @@
 // To set values, change the text between the single quotes
 // Follow instructions to the right for detailed information
 
-$style_sheet 			= 'silver';			// Themes support
+$style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, grey, tan
 $calendar_path 			= './calendars';	// Path to directory with calendars
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
@@ -21,7 +21,7 @@ $allday_week_lines 		= '1';				// Number of lines to wrap each event title in al
 $week_events_lines 		= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
 $default_path			= 'http://ical.silter.org/phpicalendar';
-$tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including OS X)
+$tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
@@ -31,7 +31,7 @@ $display_ical_list 		= 'yes';			// In the 'Jump To' box, display the pop-up menu
 $allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
 $this_months_events 	= 'yes';			// Display "This month's events" at the bottom off the month page.
 $use_color_cals 		= 'yes';			// Display each calendar in the pop-up as a different color.
-$daysofweek_dayview 	= 'no';			// Display the days of the week in day.php view.
+$daysofweek_dayview 	= 'no';				// Display the days of the week in day.php view.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
 										
 $blacklisted_cals[] = '';					// Fill in between the quotes the name of the calendars 
