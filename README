@@ -91,6 +91,7 @@ Changes:
 	-Swedish and French translations added.
 	-Added iCal specific publish.php.
 	-Fixed stat bug.
+	-PHP5 support added.
 	-Various Bug fixes.
 
 2.0 alpha 2
