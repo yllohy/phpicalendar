@@ -526,7 +526,6 @@ foreach ($cal_filelist as $filename) {
 																}
 															}
 															$next_date = date('Ymd', $next_date_time);
-															//$recur_data[] = $next_date_time;
 														}
 													}
 													break;
@@ -537,13 +536,19 @@ foreach ($cal_filelist as $filename) {
 														$bymonth = array("$m");
 													}	
 													foreach($bymonth as $month) {
+														// Something is wrong with this range
 														$year = date('Y', $next_range_time);
 														if ((isset($byday)) && (is_array($byday))) {
 															$checkdate_time = mktime(0,0,0,$month,1,$year);
 															foreach($byday as $day) {
 																ereg ('([-\+]{0,1})?([0-9]{1})?([A-Z]{2})', $day, $byday_arr);
-																$nth = $byday_arr[2]-1;
+																if ($byday_arr[2] != '') {
+																	$nth = $byday_arr[2]-1;
+																} else {
+																	$nth = 0;
+																}
 																$on_day = two2threeCharDays($byday_arr[3]);
+																$on_day_num = two2threeCharDays($byday_arr[3],false);
 																if ($byday_arr[1] == '-') {
 																	$last_day_tmp = date('t',$checkdate_time);
 																	$checkdate_time = strtotime(date('Y-m-'.$last_day_tmp, $checkdate_time));
@@ -556,6 +561,7 @@ foreach ($cal_filelist as $filename) {
 														} else {
 															$day 	= date('d', $start_date_time);
 															$next_date_time = mktime(0,0,0,$month,$day,$year);
+															//echo date('Ymd',$next_range_time).$summary.'<br>';
 														}
 														$recur_data[] = $next_date_time;
 													}
@@ -573,7 +579,7 @@ foreach ($cal_filelist as $filename) {
 															}
 															$recur_data[] = $next_date_time;
 														}
-													}
+													} 
 													break;
 												default:
 													// anything else we need to end the loop
