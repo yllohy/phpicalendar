@@ -109,7 +109,7 @@ if ($rssview == "week") {
 				}
 			}
 		}
-		if ($events_week < 1) {
+		if (($events_week < 1) && ($i == 6)) {
 			$rss .= '<item>'."\n";
 			$rss .= '<title>'.$no_events_week_lang.'</title>'."\n";
 			$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
