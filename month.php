@@ -14,8 +14,25 @@
 	$tomorrows_date = date( "Ymd", strtotime("+1 day",  $unix_time));
 	$yesterdays_date = date( "Ymd", strtotime("-1 day",  $unix_time));
 	$date = mktime(0,0,0,"$this_month","$this_day","$this_year");
-	$next_month = date("Ymd", DateAdd ("m", "1", $date));
-	$prev_month = date("Ymd", DateAdd ("m", "-1", $date));
+	
+	// find out next month
+	$next_month_month = ($this_month+1 == '13') ? '1' : ($this_month+1);
+	$next_month_day = $this_day;
+	$next_month_year = ($next_month_month == '1') ? ($this_year+1) : $this_year;
+	while (!checkdate($next_month_month,$next_month_day,$next_month_year)) $next_month_day--;
+	$next_month_time = mktime(0,0,0,$next_month_month,$next_month_day,$next_month_year);
+
+	// find out last month
+	$prev_month_month = ($this_month-1 == '0') ? '12' : ($this_month-1);
+	$prev_month_day = $this_day;
+	$prev_month_year = ($prev_month_month == '12') ? ($this_year-1) : $this_year;
+	while (!checkdate($prev_month_month,$prev_month_day,$prev_month_year)) $prev_month_day--;
+	$prev_month_time = mktime(0,0,0,$prev_month_month,$prev_month_day,$prev_month_year);
+
+
+	$next_month = date("Ymd", $next_month_time);
+	$prev_month = date("Ymd", $prev_month_time);
+	
 	$display_month = localizeDate ($dateFormat_month, $date);
 	$parse_month = date ("Ym", $date);
 	$first_of_month = $this_year.$this_month."01";

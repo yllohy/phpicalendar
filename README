@@ -42,7 +42,7 @@ If you find a bug, please let us know. The easiest way for you to do this
 is to visit our Bug Tracker on SourceForge. This guarantees that we both 
 look at it and take time to figure out what is causing it. You can submit
 bugs at the following URL:
-http://sourceforge.net/tracker/?group_id=62270&atid=500017
+http://phpicalendar.sourceforge.net/bugs
 
 Requests:
 ---------
@@ -51,7 +51,7 @@ on SourceForge. Please use that to sumbit feature requests. That way, you can
 see what others have suggested so you don't duplicate requests, and it will give
 us a chance to keep the features that haven't been implemented in one central
 place that we can find later. The tracker can be found at the following URL:
-http://sourceforge.net/tracker/?group_id=62270&atid=500020
+http://phpicalendar.sourceforge.net/requests
 
 Licensing: 
 ----------
