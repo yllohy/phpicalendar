@@ -409,6 +409,9 @@ foreach ($cal_filelist as $filename) {
 								// initialze the time we will increment
 								$next_range_time = $start_range_time_tmp;
 								
+								// FIXME: This is a hack to fix repetitions with $interval > 1 
+								if ($count > 1 && $number > 1) $count = 1 + ($count - 1) * $number; 
+								
 								$count_to = 0;
 								// start at the $start_range and go until we hit the end of our range.
 								while (($next_range_time >= $start_range_time_tmp) && ($next_range_time <= $end_range_time_tmp) && ($count_to != $count)) {
