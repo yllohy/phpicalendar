@@ -80,6 +80,7 @@ $page->replace_tags(array(
 $page->draw_day($this->page);
 $page->tomorrows_events($this->page);
 $page->get_vtodo($this->page);
+$page->draw_subscribe($this->page);
 
 $page->output();
 

@@ -4,6 +4,18 @@
 
 class Page {
 	var $page;
+	function draw_subscribe($template_p) {
+		global $template, $getdate, $cal, $ALL_CALENDARS_COMBINED, $subscribe_path, $download_filename;
+		preg_match("!<\!-- switch display_download on -->(.*)<\!-- switch display_download off -->!is", $this->page, $match1);
+		$subscribe = trim($match2[1]);
+		if ($cal != $ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') {
+			$this->page 	= str_replace('{SUBSCRIBE_PATH}', $subscribe_path, $this->page);
+			$this->page 	= str_replace('{DOWNLOAD_FILENAME}', $download_filename, $this->page);
+		} else {
+			$this->page = preg_replace('!<\!-- switch display_download on -->(.*)<\!-- switch display_download off -->!is', '', $this->page);
+		}
+	}
+	
 	function draw_print($template_p) {
 		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day;
 		foreach($master_array as $key => $val) {

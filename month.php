@@ -79,6 +79,7 @@ $page->replace_tags(array(
 	));
 	
 $page->monthbottom($this->page);
+$page->draw_subscribe($this->page);
 
 $page->output();
 
