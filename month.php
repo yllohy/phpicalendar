@@ -34,32 +34,16 @@ $prev_month_time = mktime(0,0,0,$prev_month_month,$prev_month_day,$prev_month_ye
 $next_month = date("Ymd", $next_month_time);
 $prev_month = date("Ymd", $prev_month_time);
 
-$display_month = localizeDate ($dateFormat_month, $date);
+$display_date = localizeDate ($dateFormat_month, $date);
 $parse_month = date ("Ym", $date);
 $first_of_month = $this_year.$this_month."01";
 $start_month_day = dateOfWeek($first_of_month, $week_start_day);
 $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 $num_of_events = 0;
 
+include (BASE.'includes/header.inc.php'); 
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$calendar_name - $display_month"; ?></title>
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
-   <?php 
-		// if RSS is enabled, set the RSS auto-discovery link
-		if ($enable_rss == 'yes') 
-		{
-    		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$default_path."/rss/rss.php?cal=".$cal."&amp;rssview=month\">";
-		} 
-	?>
-</head>
-<body>
-<?php include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table width="735" border="0" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>

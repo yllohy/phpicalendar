@@ -8,56 +8,48 @@ if (strlen($cal_displayname2) > 24) {
 	$cal_displayname2 = $cal_displayname2 . "...";
 }
 
-$start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
-$end_week_time = $start_week_time + (6 * 25 * 60 * 60);
-$parse_month = date ("Ym", strtotime($getdate));
-$printview = $HTTP_GET_VARS['printview'];
-$cal_displayname = str_replace("32", " ", $cal);
-$events_week = 0;
-$unix_time = strtotime("$getdate");
+$start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
+$end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
+$parse_month 		= date ("Ym", strtotime($getdate));
+$printview 			= $HTTP_GET_VARS['printview'];
+$cal_displayname 	= str_replace("32", " ", $cal);
+$events_week 		= 0;
+$unix_time 			= strtotime("$getdate");
 
 if ($printview == 'day') {
-	$print_title = localizeDate ($dateFormat_day, strtotime($getdate));
-	$next = date("Ymd", strtotime("+1 day", $unix_time));
-	$prev = date("Ymd", strtotime("-1 day", $unix_time));
-	$zero_events = $no_events_day_lang;
+	$display_date 	= localizeDate ($dateFormat_day, strtotime($getdate));
+	$next 			= date("Ymd", strtotime("+1 day", $unix_time));
+	$prev 			= date("Ymd", strtotime("-1 day", $unix_time));
+	$zero_events 	= $no_events_day_lang;
 	$print_next_nav = $next_day_lang;
 	$print_prev_nav = $last_day_lang;
-	$week_start	= '';
-	$week_end	= '';
+	$week_start		= '';
+	$week_end		= '';
 } elseif ($printview == 'week') {
-	$start_week = localizeDate($dateFormat_week, $start_week_time);
-	$end_week =  localizeDate($dateFormat_week, $end_week_time);
-	$print_title = "$start_week - $end_week";
-	$week_start = date("Ymd", $start_week_time);
-	$week_end = date("Ymd", $end_week_time);
-	$next = date("Ymd", strtotime("+1 week", $unix_time));
-	$prev = date("Ymd", strtotime("-1 week", $unix_time));
-	$zero_events = $no_events_week_lang;
+	$start_week 	= localizeDate($dateFormat_week, $start_week_time);
+	$end_week 		= localizeDate($dateFormat_week, $end_week_time);
+	$display_date 	= "$start_week - $end_week";
+	$week_start 	= date("Ymd", $start_week_time);
+	$week_end 		= date("Ymd", $end_week_time);
+	$next 			= date("Ymd", strtotime("+1 week", $unix_time));
+	$prev 			= date("Ymd", strtotime("-1 week", $unix_time));
+	$zero_events 	= $no_events_week_lang;
 	$print_next_nav = $next_week_lang;
 	$print_prev_nav = $last_week_lang;
 } elseif ($printview == 'month') {
-	$print_title = localizeDate ($dateFormat_month, strtotime($getdate));
-	$next = date("Ymd", strtotime("+1 month", $unix_time));
-	$prev = date("Ymd", strtotime("-1 month", $unix_time));
-	$zero_events = $no_events_month_lang;
+	$print_title 	= localizeDate ($dateFormat_month, strtotime($getdate));
+	$next 			= date("Ymd", strtotime("+1 month", $unix_time));
+	$prev 			= date("Ymd", strtotime("-1 month", $unix_time));
+	$zero_events 	= $no_events_month_lang;
 	$print_next_nav = $next_month_lang;
 	$print_prev_nav = $last_month_lang;
-	$week_start	= '';
-	$week_end	= '';
+	$week_start		= '';
+	$week_end		= '';
 }
 
-	?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$calendar_name: $print_title"; ?></title>
-  	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
-</head>
-<body bgcolor="#FFFFFF">
-<?php if ($header_always == 'yes') include (BASE.'includes/header.inc.php'); ?>
+include (BASE.'includes/header.inc.php'); 
+
+?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
@@ -69,7 +61,7 @@ if ($printview == 'day') {
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
 								<td align="right" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$prev&amp;printview=$printview\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"[$print_prev_nav]\" border=\"0\" align=\"right\"></a>"; ?></td>
-								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $print_title; ?></font></td>
+								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $display_date; ?></font></td>
       							<td align="left" width="40%" class="navback"><?php echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$next&amp;printview=$printview\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"[$print_next_nav]\" border=\"0\" align=\"left\"></a>"; ?></td>
       						</tr>
       					</table>

@@ -7,7 +7,7 @@ ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day = $day_array2[3]; 
 $this_month = $day_array2[2];
 $this_year = $day_array2[1]. '01'. '01';
-$this_year2 = $day_array2[1];
+$display_date = $day_array2[1];
 
 $unix_time = strtotime($getdate);
 $startYear = strtotime ($this_year);
@@ -20,19 +20,9 @@ $prev_year = date ("Ymd", $prev_year);
 
 $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
+include (BASE.'includes/header.inc.php'); 
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title><?php echo "$calendar_name - $this_year2"; ?></title>
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo $style_sheet.'/default.css'; ?>">
-	<meta name="generator" content="BBEdit 6.5.3">
-</head>
-<body>
-<?php include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table width="676" border="0" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
@@ -44,7 +34,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
 								<td align="right" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$prev_year\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"[$last_year_lang]\" border=\"0\" align=\"right\"></a>"; ?></td>
-								<td align="center" width="10%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $this_year2; ?></font></td>
+								<td align="center" width="10%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $display_date; ?></font></td>
       							<td align="left" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$next_year\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"[$next_year_lang]\" border=\"0\" align=\"left\"></a>"; ?></td>
       						</tr>
       					</table>

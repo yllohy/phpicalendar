@@ -64,17 +64,9 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 	$cookie_time = $day_start;
 }
 
+include (BASE.'includes/header.inc.php'); 
+
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$calendar_lang - $preferences_lang"; ?></title>
-  	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
-</head>
-<body bgcolor="#FFFFFF">
-<?php include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
