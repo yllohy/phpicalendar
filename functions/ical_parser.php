@@ -152,19 +152,19 @@ if ($parse_file) {
 				foreach ($rrule_array as $key => $val) {
 					if ($key == 'FREQ') {
 						if ($val == 'YEARLY') {
-							$interval = 'yyyy';
+							$freq_type = 'year';
 						} elseif ($val == 'MONTHLY') {
-							$interval = 'm';
+							$freq_type = 'month';
 						} elseif ($val == 'WEEKLY') {
-							$interval = 'ww';
+							$freq_type = 'week';
 						} elseif ($val == 'DAILY') {
-							$interval = 'd';
+							$freq_type = 'day';
 						} elseif ($val == 'HOURLY') {
-							$interval = 'h';
+							$freq_type = 'hour';
 						} elseif ($val == 'MINUTELY') {
-							$interval = 'n';
+							$freq_type = 'minute';
 						} elseif ($val == 'SECONDLY') {
-							$interval = 's';
+							$freq_type = 'second';
 						}		
 					} elseif ($key == 'COUNT') 		{
 						$count = $val;
@@ -259,134 +259,85 @@ if ($parse_file) {
 							$count_to = 0;
 							// start at the $start_range and go until we hit the end of our range.
 							while (($next_range_time >= $start_range_time) && ($next_range_time <= $end_range_time) && ($count_to != $count)) {
-								// handling WEEKLY events here
-								if ($rrule_array['FREQ'] == 'WEEKLY') {
-									// use weekCompare to see if we even have this event this week
-									
-									$diff_weeks = weekCompare(date('Ymd',$next_range_time), $start_date);
-									if ($diff_weeks < $count) {
-										if ($diff_weeks % $number == 0) {
-											$interval = $number;
-											// loop through the days on which this event happens
-											foreach($byday as $day) {
-											
-												// use my fancy little function to get the date of each day
-												$day = two2threeCharDays($day);
-												#$thedate = date ("r", $next_range_time);
-												$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
-												#echo "$day -- $summary -- $thedate -- $next_date<br>";
-												$next_date_time = strtotime($next_date);
-												//print date('Y-m-d  ', $next_date_time);
-												$recur_data[] = $next_date_time;
-											}
-										} else {
-											$interval = 1;
-										}
-										$next_range_time = strtotime('+'.$interval.' week', $next_range_time);
-									} else {
-										// end the loop because we aren't going to write this event anyway
-										$count_to = $count;
-									}
-								// handling DAILY events here
-								} elseif ($rrule_array['FREQ'] == 'DAILY') {
-									// use dayCompare to see if we even have this event this day
-									$diff_days = dayCompare(date('Ymd',$next_range_time), $start_date);
-									if ($diff_days < $count) {
-										if ($diff_days % $number == 0) {
-											$interval = $number;
-											$next_date = date('Ymd', $next_range_time);
-											$next_date_time = strtotime($next_date);
-											$recur_data[] = $next_date_time;
-										} else {
-											$interval = 1;
-										}
-										$next_range_time = strtotime('+'.$interval.' day', $next_range_time);
-									} else {
-										// end the loop because we aren't going to write this event anyway
-										$count_to = $count;
-									}
-									
-									
-								// handling MONTHLY events here
-								} elseif ($rrule_array['FREQ'] == 'MONTHLY') {
-									$next_range_time = strtotime(date('Y-m-01', $next_range_time));
-									// use monthCompare to see if we even have this event this month
-								
-									$diff_months = monthCompare(date('Ymd',$next_range_time), $start_date);
-									if ($diff_months < $count) {
-										if ($diff_months % $number == 0) {
-											$interval = $number;
-											
-											// month has two cases, either $bymonthday or $byday
-											if (is_array($bymonthday)) {
-											
-												// loop through the days on which this event happens
-												foreach($bymonthday as $day) {
-													if ($day != '0') {
-														$day = str_pad($day, 2, '0', STR_PAD_LEFT);
-														$next_date_time = strtotime(date('Y-m-',$next_range_time).$day);
-														$next_date = date('Ymd', $next_date_time);
-														$recur_data[] = $next_date_time;
-													}
-												}
-												
-											// our other case
-											} else {
+								$func = $freq_type.'Compare';
+								$diff = $func(date('Ymd',$next_range_time), $start_date);
+								if ($diff < $count) {
+									if ($diff % $number == 0) {
+										$interval = $number;
+										switch ($rrule_array['FREQ']) {
+											case 'WEEKLY':
 												// loop through the days on which this event happens
 												foreach($byday as $day) {
-													ereg ('([0-9]{1})([A-Z]{2})', $day, $byday_arr);
-													$nth = $byday_arr[1]-1;
-													$on_day = two2threeCharDays($byday_arr[2]);
-													$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
-													$next_date = date('Ymd', $next_date_time);
+													// use my fancy little function to get the date of each day
+													$day = two2threeCharDays($day);
+													#$thedate = date ("r", $next_range_time);
+													$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
+													#echo "$day -- $summary -- $thedate -- $next_date<br>";
+													$next_date_time = strtotime($next_date);
+													//print date('Y-m-d  ', $next_date_time);
 													$recur_data[] = $next_date_time;
 												}
-											}
-										} else {
-											$interval = 1;
-										}
-										$next_range_time = strtotime('+'.$interval.' month', $next_range_time);
-									} else {
-										// end the loop because we aren't going to write this event anyway
-										$count_to = $count;
-									}
-								
-								// handle yearly events
-								} elseif ($rrule_array['FREQ'] == 'YEARLY') {
-									// use yearCompare to see if we even have this event this year
-									$the_month_day = date('d', $start_date_time);
-									$diff_years = yearCompare(date('Ymd',$next_range_time), $start_date);
-									if ($diff_years < $count) {
-										if ($diff_years % $number == 0) {
-											foreach($bymonth as $month) {
-												$month = str_pad($month, 2, '0', STR_PAD_LEFT);
-												if (is_array($byday)) {
-													
-													$next_range_time = strtotime($this_year.$month.'01');
+											break;
+											case 'DAILY':
+												$next_date_time = $next_range_time;
+												$recur_data[] = $next_date_time;
+											break;
+											case 'MONTHLY':
+												$next_range_time = strtotime(date('Y-m-01', $next_range_time));
+												// month has two cases, either $bymonthday or $byday
+												if (is_array($bymonthday)) {
+													// loop through the days on which this event happens
+													foreach($bymonthday as $day) {
+														if ($day != '0') {
+															$day = str_pad($day, 2, '0', STR_PAD_LEFT);
+															$next_date_time = strtotime(date('Y-m-',$next_range_time).$day);
+															$next_date = date('Ymd', $next_date_time);
+															$recur_data[] = $next_date_time;
+														}
+													}
+												// our other case
+												} else {
+													// loop through the days on which this event happens
 													foreach($byday as $day) {
 														ereg ('([0-9]{1})([A-Z]{2})', $day, $byday_arr);
 														$nth = $byday_arr[1]-1;
 														$on_day = two2threeCharDays($byday_arr[2]);
 														$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
-														
+														$next_date = date('Ymd', $next_date_time);
+														$recur_data[] = $next_date_time;
 													}
-												} else {
-													$next_date_time = strtotime($this_year.$month.$the_month_day, $next_range_time);
 												}
-												$recur_data[] = $next_date_time;
-											}
-										} else {
-											$interval = 1;
+											break;
+											case 'YEARLY':
+												foreach($bymonth as $month) {
+													$year = date('Y', $next_range_time);
+													$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+													if (is_array($byday)) {
+														$checkdate_time = strtotime($year.$month.'01');
+														foreach($byday as $day) {
+															ereg ('([0-9]{1})([A-Z]{2})', $day, $byday_arr);
+															$nth = $byday_arr[1]-1;
+															$on_day = two2threeCharDays($byday_arr[2]);
+															$next_date_time = strtotime($on_day.' +'.$nth.' week', $checkdate_time);
+														}
+													} else {
+														$day = date('d', $start_date_time);
+														$next_date_time = strtotime($year.$month.$day);
+													}
+													$recur_data[] = $next_date_time;
+												}
+											break;
+											default:
+												// anything else we need to end the loop
+												$next_range_time = $end_range_time + 100;
+												$count_to = $count;
 										}
-										$next_range_time = strtotime('+'.$interval.' year', $next_range_time);
 									} else {
-										// end the loop because we aren't going to write this event anyway
-										$count_to = $count;
+										$interval = 1;
 									}
-								
-								// anything else we need to end the loop
+									$next_range_time = strtotime('+'.$interval.' '.$freq_type, $next_range_time);
 								} else {
-									$next_range_time = $end_range_time + 100;
+									// end the loop because we aren't going to write this event anyway
 									$count_to = $count;
 								}
 								// use the same code to write the data instead of always changing it 5 times						
@@ -520,13 +471,13 @@ if ($parse_file) {
 	}
 	
 	// Sort the array by absolute date.
-	if (is_array($master_array)) { 
+	if (isset($master_array) && is_array($master_array)) { 
 		ksort($master_array);
 		reset($master_array);
 		
 		// sort the sub (day) arrays so the times are in order
 		foreach (array_keys($master_array) as $k) {
-			if (is_array($master_array[$k])) {
+			if (isset($master_array[$k]) && is_array($master_array[$k])) {
 				ksort($master_array[$k]);
 				reset($master_array[$k]);
 			}
