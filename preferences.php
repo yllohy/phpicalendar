@@ -120,9 +120,9 @@ if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 													if (substr($file, -8) == ".inc.php") {
 														$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
 														if ($language_tmp == $cookie_language) {
-															print "<option value=\"$language_tmp\" selected>in $language_tmp</option>\n";
+															print "<option value=\"$language_tmp\" selected>$language_tmp</option>\n";
 														} else {
-															print "<option value=\"$language_tmp\">in $language_tmp</option>\n";
+															print "<option value=\"$language_tmp\">$language_tmp</option>\n";
 														}
 													}
 												}
@@ -196,9 +196,9 @@ if (!isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 												print "<option value=\"month\"";
 												if ($cookie_view == "month") print " selected";
 												print ">$month_lang</option>\n";
-												print "<option value=\"print\"";
-												if ($cookie_view == "print") print " selected";
-												print ">$printer_lang</option>\n";
+												//print "<option value=\"print\"";
+												//if ($cookie_view == "print") print " selected";
+												//print ">$printer_lang</option>\n";
 												print "</select>\n";
 											?>
 										</td>
