@@ -63,7 +63,9 @@ if (is_array($master_array[($getdate)])) {
      	<td align="center" valign="middle">
       		<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
-      				<td align="left" width="90" class="navback">&nbsp;</td>
+      				<td align="left" width="90" class="navback">
+      					<img src="styles/silver/printer.gif" alt="" width="26" height="22" border="0">
+      				</td>
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
