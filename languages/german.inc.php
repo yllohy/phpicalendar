@@ -31,35 +31,24 @@ $event_end_lang		= 'Ende';
 $this_months_lang	= 'Alle Eintr√§ge in diesem Monat';
 $date_lang			= 'Datum';
 $summary_lang		= 'Beschreibung';
+$all_day_lang		= 'Tagesereignis';
+$notes_lang			= 'Notiz';
+$this_years_lang	= 'Einträge in diesem Jahr';
+$today_lang			= 'Heute';
+$this_week_lang		= 'Diese Woche';
+$this_month_lang	= 'Diesen Monat';
+$jump_lang			= 'Gehe zu';
+$tomorrows_lang		= 'Morgige Einträge';
+$goday_lang			= 'Gehe zu Heute';
+$goweek_lang		= 'Gehe zur aktuellen Woche';
+$gomonth_lang		= 'Gehe zum aktuellen Monat';
+$goyear_lang		= 'Gehe zum aktuellen Jahr';
 
-// new since last translation
-$all_day_lang		= 'All day event';
-$notes_lang			= 'Notes';
-$this_years_lang	= 'This Year\'s Events';
-$today_lang			= 'Today';
-$this_week_lang		= 'This Week';
-$this_month_lang	= 'This Month';
-$jump_lang			= 'Jump to';
-$tomorrows_lang		= 'Tomorrow\'s Events';
-$goday_lang			= 'Go to Today';
-$goweek_lang		= 'Go to This Week';
-$gomonth_lang		= 'Go to This Month';
-$goyear_lang		= 'Go to This Year';
-
-// Date display since setlocale isnt perfect. // new since last translation
-$daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-$daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
-$daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
-$monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
-$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
-
-// Set Location for date formatting, check out: http://www.php.net/manual/en/function.setlocale.php
-// for Switzerland
-setlocale (LC_TIME, 'ch_DE');
-// for Germany
-// setlocale (LC_TIME, 'de_DE');
-// for Austria
-// setlocale (LC_TIME, 'at_DE');
+$daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
+$daysofweekshort_lang		= array ('Son','Mon','Die','Mit','Don','Fre','Sam');
+$daysofweekreallyshort_lang	= array ('S','M','D','M','D','F','S');
+$monthsofyear_lang			= array ('Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember');
+$monthsofyearshort_lang		= array ('Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'H:i';
@@ -68,7 +57,7 @@ $timeFormat = 'H:i';
 $dateFormat_day = '%A, %e. %B';
 $dateFormat_week = '%B %e';
 $dateFormat_week_list = '%a, %e. %b';
-$dateFormat_week_jump = '%b %e';// new since last translation
+$dateFormat_week_jump = ' %e. %b';
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A, %e. %B';
 
