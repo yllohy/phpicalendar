@@ -40,7 +40,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		while (($file = readdir($dir_handle)) != false) {
 			// Make sure this is not a dot file and it ends with .ics,
 			// and that it is not blacklisted.
-			if (!preg_match("/^[^.].+\.ics$/i", $file)) continue;
+			if (!preg_match("/^[^.].*\.ics$/i", $file)) continue;
 			$cal_name = substr($file, 0, -4);
 			if (in_array($cal_name, $blacklisted_cals)) continue;
 
