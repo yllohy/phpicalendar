@@ -25,7 +25,7 @@ while ($file = readdir($dir_handle)) {
 		if ($cal_tmp == $cal) {
 			print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_displayname Calendar</option>\n";
 		} else {
-			print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_filename Calendar</option>\n";	
+			print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_displayname Calendar</option>\n";	
 		}
 		
 	}

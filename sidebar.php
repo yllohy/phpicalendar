@@ -1,6 +1,6 @@
 	<?php
 	
-	$cal_displayname2 = urldecode($cal) . " $calendar_lang";
+	$cal_displayname2 = $cal_displayname . " $calendar_lang";
 	if (strlen($cal_displayname2) > 24) {
 		$cal_displayname2 = substr("$cal_displayname2", 0, 21);
 		$cal_displayname2 = $cal_displayname2 . "...";
