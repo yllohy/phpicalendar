@@ -892,15 +892,18 @@ if ($parse_file) {
 					break;
 				// Attendee support only testing in Apple iCal 1.0.2	
 				case 'ATTENDEE':
-					$field = ereg_replace("ATTENDEE;CN=", "", $field);
-					$data = ereg_replace ("mailto:", "", $data);
+					$field 		= ereg_replace("ATTENDEE;CN=", "", $field);
+					$data 		= ereg_replace ("mailto:", "", $data);
 					$attendee[] = array ('name' => $field, 'email' => $data);
 					#print_r($attendee);
 					break;
 				case 'ORGANIZER':
-					$field = ereg_replace("ORGANIZER;CN=", "", $field);
-					$data = ereg_replace ("mailto:", "", $data);
+					$field 		 = ereg_replace("ORGANIZER;CN=", "", $field);
+					$data 		 = ereg_replace ("mailto:", "", $data);
 					$organizer[] = array ('name' => $field, 'email' => $data);
+					break;
+				case 'LOCATION':
+					$data = $location;
 					break;
 			}
 		}

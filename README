@@ -74,17 +74,20 @@ Changes:
 --------
 0.9.2
 	-Fixed an extra .php on the preferences page.
-	-Increased validations on many pages.y
+	-Increased validations on many pages.
 	-Added support for CLASS (public, private, and confidential).
 	-Added support for LOCATION
 	-Added support for ATTENDEE
+	-Added support for STATUS
 
 0.9.1
 	-Added unset preferences
 	-Cookies now fall back to defaults if data is bad.
 	-Fixed a bug with the latest version of Ximian.
 	-Added the ability to hard-set cookie-uri and download-uri.
+	-Added Catalan and Tranditional Chinese languages.
 	-Back button on preferences page now works.
+	-Allow_Preferences option now works.
 
 0.9
 	-Added complete VTODO support.
