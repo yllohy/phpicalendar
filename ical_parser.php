@@ -408,12 +408,14 @@ foreach($contents as $line) {
 		}
 	}
 }
- 
-ksort($master_array);
-reset($master_array);
+// Sort the array by absolute date.
+if (is_array($master_array)) { 
+	ksort($master_array);
+	reset($master_array);
+}
 //If you want to see the values in the arrays, uncomment below.
 //print "<pre>";
-print_r($master_array);
+//print_r($master_array);
 //print_r($day_array);
 //print_r($rrule);			
 //print "</pre>";
