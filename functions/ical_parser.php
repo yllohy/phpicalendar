@@ -105,7 +105,9 @@ foreach ($cal_filelist as $filename) {
 		if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
 		
 		//Mod time
-		$actual_mtime = filemtime($filename);
+		if ($is_webcal == false) {
+			$actual_mtime = filemtime($filename);
+		}
 		
 		// Set a value so we can check to make sure $master_array contains valid data
 		$master_array['-1'] = 'valid cal file';
