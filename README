@@ -1,1 +1,23 @@
-Go conifure the file "config.inc.php".
+PHP iCalendar
+http://sourceforge.net/projects/phpicalendar
+
+Introduction:
+-------------
+This suite of PHP scripts was written to allow every day users to display
+their iCal files on the Web by themselves.
+
+Contact:
+--------
+E-mail the developers and othere on the list at:
+phpicalendar-devel@lists.sourceforge.net
+
+Installation:
+-------------
+Edit the file "config.inc.php"
+Put your iCal files into the directory you specify in config.inc.php
+  (default is "calendars")
+
+Licensing: 
+----------
+This product is distributed under the GPL.  Please read through the file
+COPYING for more information about our license.
