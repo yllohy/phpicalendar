@@ -160,8 +160,9 @@ $num_of_events = 0;
 										echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">";
 										echo "<tr>\n";
 										if (!isset($val["event_start"])) {
-											 echo "<td align=center>";
-											 openevent("$calendar_name", "", "", $val,
+											 echo '<td align="center">';
+											 openevent("$calendar_name", "", "", $val, $month_event_lines,
+											12,
 											"<font class=\"V10\"><i>",
 											"</i></font>");
 										} else {	
@@ -171,7 +172,7 @@ $num_of_events = 0;
 											$start2	 = date($timeFormat_small,@strtotime("$event_start"));
 											$event_end   = date($timeFormat, @strtotime ("$event_end"));
 											echo "<td align=\"left\" valign=\"top\">";
-											openevent("$calendar_name",
+											@openevent("$calendar_name",
 											"$event_start",
 											"$event_end",
 											$val,
