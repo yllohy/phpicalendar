@@ -233,17 +233,18 @@ include (BASE.'includes/header.inc.php');
 												  $event_end	= date ($timeFormat, $event_end);
 												  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];
 												  $event_status = strtolower($this_time_arr[($event_length[$i]['key'])]['status']);
-												  if ($event_calno < 1) $event_calno=1;
-												  if ($event_calno > 7) $event_calno=7;
+												  if ($event_calno < 1) $event_calno = 1;
+												  if ($event_calno > 7) $event_calno = 7;
 								
 												  echo '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 												  echo '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
 												  echo '<tr>'."\n";
 												  echo '<td class="eventborder"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
-												  echo '<td class="eventborder" width="9" align="right" valign="center"><font class="eventfont">';
-												  if ($event_status == '') echo '&nbsp;';
-                                                  else echo '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">';
-												  echo '</font></td>'."\n";
+												  if ($event_status != '') {
+												  	echo '<td class="eventborder" width="9" align="right" valign="center"><font class="eventfont">';
+												  	echo '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">';
+												  	echo '</font></td>'."\n";
+												  }
 												  echo '</tr>'."\n";
 												  echo '<tr>'."\n";
 												  echo '<td colspan="2">'."\n";
