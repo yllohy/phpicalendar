@@ -6,16 +6,16 @@
 <!--
 	function openEventInfo(event, calendarname, start, end, description)
 	{	
-		var windowW = 450;
+		var windowW = 460;
 		var windowH = 275;
 	
 		var url = "includes/event.php?event="+event+
-			"&calendar_name="+calendarname+
+			"&cal="+calendarname+
 			"&start="+start+
 			"&end="+end+
 			"&description="+description;
 				
-		options = "width="+windowW+",height="+windowH; //"scrollbars=no"+",
+		options = "scrollbars=yes,width="+windowW+",height="+windowH;
 	
 		info = window.open(url, "Popup", options);
 		

@@ -35,8 +35,8 @@ if ((!isset($status) || $status == "COMPLETED") && isset($completed_date)) {
 	$status = $unfinished_lang;
 }
 
-if (isset($vtodo_array['calendar_name']) && ($vtodo_array['calendar_name'] !== '') ) {
-	$calendar_name = $vtodo_array['calendar_name'];
+if (isset($vtodo_array['cal']) && ($vtodo_array['cal'] !== '') ) {
+	$calendar_name = $vtodo_array['cal'];
 } else {
 	$calendar_name = '';
 }

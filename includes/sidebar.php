@@ -213,10 +213,10 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 									echo "<tr>\n";
 									echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\" alt=\" \"></td>";
 									echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
+									echo "<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
 									foreach ($master_array['-2'] as $vtodo_times) {
 										foreach ($vtodo_times as $val) {
 											$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
-											$vtodo_text = strip_tags($vtodo_text, '<b><i><u>');
 											if ($vtodo_text != "") {	
 												$description 	= $val["description"];
 												$completed_date = $val['completed_date'];
@@ -225,7 +225,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 												$start_date 	= $val["start_date"];
 												$due_date 		= $val['due_date'];
 												$vtodo_array 	= array(
-													'calendar_name' => $calendar_name,
+													'cal'			=> $calendar_name,
 													'completed_date'=> $completed_date,
 													'description'	=> $description,
 													'due_date'		=> $due_date,
@@ -236,21 +236,26 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 
 												$vtodo_array 	= base64_encode(serialize($vtodo_array));
 												
-												$vtodo_text 	= word_wrap($vtodo_text, 21, $tomorrows_events_lines);
+												$vtodo_text 	= word_wrap(strip_tags(str_replace('<br>',' ',$vtodo_text), '<b><i><u>'), 21, $tomorrows_events_lines);
+														$vtodo_link = "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\">";
 												
 												if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
 													if ($show_completed == 'yes') {
 														$vtodo_text = "<S>$vtodo_text</S>";
-														echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+														echo "<tr><td>$vtodo_link<img src=\"images/completed.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"></a></td>\n";
+														echo "<td><img src=\"images/spacer.gif\" width=\"2\" height=\"1\" border\"0\" /></td><td>$vtodo_link<font class=\"G10B\"> $vtodo_text</font></a></td></tr>\n";
 													}
 												} elseif (isset($val['priority']) && ($val['priority'] != 0) && ($val['priority'] <= 5)) {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<tr><td>$vtodo_link<img src=\"images/important.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"></a></td>\n";
+													echo "<td><img src=\"images/spacer.gif\" width=\"2\" height=\"1\" border\"0\" /></td><td>$vtodo_link<font class=\"G10B\"> $vtodo_text</font></a></td></tr>\n";
 												} else {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<tr><td>$vtodo_link<img src=\"images/not_completed.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"></a></td>\n";
+													echo "<td><img src=\"images/spacer.gif\" width=\"2\" height=\"1\" border\"0\" /></td><td>$vtodo_link<font class=\"G10B\"> $vtodo_text</font></a></td></tr>\n";
 												}
 											}
 										}
 									}
+									echo "</table>\n";
 									echo "</td>\n";
 									echo "</tr>\n";
 								?>

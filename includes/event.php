@@ -12,8 +12,8 @@ if (isset($HTTP_GET_VARS['description']) && ($HTTP_GET_VARS['description'] !== '
 } else {
 	$description = '';
 }
-if (isset($HTTP_GET_VARS['calendar_name']) && ($HTTP_GET_VARS['calendar_name'] !== '') ) {
-	$calendar_name = $HTTP_GET_VARS['calendar_name'];
+if (isset($HTTP_GET_VARS['cal']) && ($HTTP_GET_VARS['cal'] !== '') ) {
+	$calendar_name = $HTTP_GET_VARS['cal'];
 } else {
 	$calendar_name = '';
 }
@@ -62,7 +62,7 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 	</tr>
 	<tr>
 		<td colspan="3">  
-	   		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	   		<table width="430" border="0" cellspacing="0" cellpadding="0">
 				<?php 
 				if (($start) && ($end)) $event_times = ' - <font class="V9">(<i>'.$start.' - '.$end.'</i>)</font>'; 
 				if ($start == '' && $end == '' && isset($start, $end)) $event_times = ' - <font class="V9">(<i>'.$all_day_lang.'</i>)</font>';
