@@ -38,7 +38,9 @@ function dateOfWeek($Ymd, $day) {
 	$num = date('w', strtotime($week_start_day));
 	$start_day_time = strtotime((date('w',$timestamp)==$num ? "$week_start_day" : "last $week_start_day"), $timestamp);
 	$ret_unixtime = strtotime($day,$start_day_time);
-	$ret_unixtime = strtotime('+12 hours', $ret_unixtime);
+	// Fix for 992744
+	// $ret_unixtime = strtotime('+12 hours', $ret_unixtime);
+	$ret_unixtime += (12 * 60 * 60);
 	$ret = date('Ymd',$ret_unixtime);
 	return $ret;
 }
