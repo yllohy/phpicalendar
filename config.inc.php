@@ -33,6 +33,7 @@ $this_months_events 	= 'yes';			// Display "This month's events" at the bottom o
 $use_color_cals 		= 'yes';			// Display each calendar in the pop-up as a different color.
 $daysofweek_dayview 	= 'no';				// Display the days of the week in day.php view.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
+$show_search			= 'yes';			// Show the search box in the sidebar.
 										
 $blacklisted_cals[] = '';					// Fill in between the quotes the name of the calendars 
 $blacklisted_cals[] = '';					// you wish to 'blacklist' or that you don't want to show up in your calendar

@@ -39,7 +39,7 @@ $search_box .=
 	'<form action="search.php" method="GET">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
-	'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
+	'<input type="text" size="15" class="search_style" name="query" value="'.$query.'">'."\n".
 	'<INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
 	'</form>';
 

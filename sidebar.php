@@ -6,6 +6,9 @@
 		$cal_displayname2 = $cal_displayname2 . "...";
 	}
 	
+	$search_box .= 
+	'<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" size="15" class="search_style" name="query" value="'.$search_lang.'"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search"></form>';
+	
 	?>
 	
 	<table cellpadding="0" cellspacing="0" border="0" width="170">
@@ -143,7 +146,15 @@
 								</tr>
 								<?php
 								}
-								?>
+								if ($show_search == 'yes') { ?>
+								<tr>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
+								</tr>
+								<tr>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td colspan="6" valign="middle" align="left"><?php echo "$search_box"; ?></td>
+								</tr>
+								<?php } ?>
 							</table>
 						</td>
 					</tr>
