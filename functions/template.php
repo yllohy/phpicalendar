@@ -727,6 +727,7 @@ class Page {
 		
 		$start_day 			= strtotime($week_start_day);
 		$month_title 		= localizeDate ($dateFormat_month, $fake_getdate_time);
+		$month_date 		= date ('Ymd', $fake_getdate_time);
 
 		if ($type == 'small') {
 			$langtype = $daysofweekreallyshort_lang;
@@ -818,12 +819,13 @@ class Page {
 				$checkagain = date ("m", $start_day);
 				if ($checkagain != $minical_month) $whole_month = FALSE;	
 			}
-		} while ($whole_month == TRUE);
+		} while ($whole_month == TRUE); 
 		
 		$return = str_replace('<!-- loop weekday on -->'.$match1[1].'<!-- loop weekday off -->', $weekday_loop, $template_p);
 		$return = preg_replace('!<\!-- loop monthweeks on -->(.*)<\!-- loop monthweeks off -->!is', $middle, $return);
 		$return = str_replace('{MONTH_TITLE}', $month_title, $return);
 		$return = str_replace('{CAL}', $cal, $return);
+		$return = str_replace('{MONTH_DATE}', $month_date, $return);
 		
 		return $return;	
 	}
