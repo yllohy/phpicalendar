@@ -104,7 +104,7 @@ $search_took = number_format(($search_ended-$search_started),3);
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
-      				<td align="left" width="120" class="navback"><?php echo '<a href="'.$back_page.'"><img src="styles/'.$style_sheet.'/back.gif" alt="" border="0" align="left"></a>'; ?></td>
+      				<td align="left" width="120" class="navback"><?php echo '<a href="'.$back_page.'"><img src="styles/'.$style_sheet.'/back.gif" alt="['.$back_lang.']" border="0" align="left"></a>'; ?></td>
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
@@ -115,10 +115,10 @@ $search_took = number_format(($search_ended-$search_started),3);
       				<td align="right" width="120" class="navback">	
       					<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="'.$day_view_lang.'" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="'.$week_view_lang.'" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="'.$month_view_lang.'" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="'.$year_view_lang.'" border="0"></a></td>'; ?>
 							</tr>
 						</table>
 					</td>
@@ -127,7 +127,7 @@ $search_took = number_format(($search_ended-$search_started),3);
       	</td>
     </tr>
 	<tr>
-		<td colspan="3"  class="dayborder"><img src="images/spacer.gif" width="1" height="5"></td>
+		<td colspan="3"  class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
 	</tr>
 	<tr>
 		<td colspan="3">
@@ -150,9 +150,9 @@ $search_took = number_format(($search_ended-$search_started),3);
 											$key = $val['date'];
 											$dayofmonth = strtotime ($key);
 											$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
+											echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
 											echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><b><a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></b></font></td></tr>";
-											echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\"></td></tr>\n";
+											echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\" alt=\" \"></td></tr>\n";
 											
 											if ($val["event_text"]) {	
 												$event_text 	= stripslashes(urldecode($val["event_text"]));
@@ -168,8 +168,8 @@ $search_took = number_format(($search_ended-$search_started),3);
 													$event_end = '';
 												}
 												echo "<tr>\n";
-												echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
-												echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
+												echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
+												echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
 												echo "<td align=\"left\">\n";
 												echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
 												echo "<tr>\n";
@@ -196,16 +196,16 @@ $search_took = number_format(($search_ended-$search_started),3);
 												echo "</table>\n";
 												echo "</td>\n";
 												echo "</tr>\n";			
-												echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\"></td></tr>\n";
+												echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\" alt=\" \"></td></tr>\n";
 												if (isset($val['exceptions'])) {
 													echo "<tr><td colspan=\"3\"><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
 													foreach($val['exceptions'] as $val2) {
 														$key = $val2['date'];
 														$dayofmonth = strtotime ($key);
 														$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-														echo "<tr><td width=\"20\"><img src=\"images/spacer.gif\" width=\"20\" height=\"1\"></td>\n";
+														echo "<tr><td width=\"20\"><img src=\"images/spacer.gif\" width=\"20\" height=\"1\" alt=\" \"></td>\n";
 														echo "<td align=\"left\" colspan=\"2\"><font class=\"V10\"><i>$exception_lang</i>: <a class=\"ps3\" href=\"day.php?cal=$cal&amp;getdate=$key\">$dayofmonth</a></font></td></tr>";
-														echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\"></td></tr>\n";
+														echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\" alt=\" \"></td></tr>\n";
 														
 														if ($val2["event_text"]) {	
 															$event_text 	= stripslashes(urldecode($val2["event_text"]));
@@ -221,8 +221,8 @@ $search_took = number_format(($search_ended-$search_started),3);
 																$event_end = '';
 															}
 															echo "<tr>\n";
-															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
-															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\"></td>\n";
+															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
+															echo "<td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
 															echo "<td align=\"left\">\n";
 															echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"1\">\n";
 															echo "<tr>\n";
@@ -249,7 +249,7 @@ $search_took = number_format(($search_ended-$search_started),3);
 															echo "</table>\n";
 															echo "</td>\n";
 															echo "</tr>\n";			
-															echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\"></td></tr>\n";
+															echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"10\" alt=\" \"></td></tr>\n";
 														}
 													}
 													echo "</table></td><tr>\n";

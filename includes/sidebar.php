@@ -15,22 +15,22 @@
 			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+						<td align="left" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$yesterdays_date\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"[$prev_lang]\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
 						<td align="center" width="112" class="sideback"><font class="G10BOLD"><?php echo "$thisday2"; ?></font></td>
-						<td align="right" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+						<td align="right" valign="top" width="24" class="sideback"><?php echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$tomorrows_date\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"[$next_lang]\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
 					</tr>
 					<tr>
 						<td colspan="3" bgcolor="#FFFFFF" align="left">
 							<table border="0" cellspacing="0" cellpadding="1" bgcolor="#FFFFFF" width="100%">
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="2"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="2" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6"><font class="G10BOLD"><?php echo "$cal_displayname2"; ?></font></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6" class="G10B">
 									<?php echo "
 										<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$today_today\">$goday_lang</a><br>\n
@@ -47,7 +47,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3"><img src="images/spacer.gif" width="1" height="6"></td>
+						<td colspan="3"><img src="images/spacer.gif" width="1" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>
@@ -59,7 +59,7 @@
 			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
 						<td align="right" valign="top" width="1%" class="sideback"></td>
 					</tr>
@@ -67,38 +67,38 @@
 						<td colspan="3" bgcolor="#FFFFFF" align="left">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6"><?php include('./functions/list_icals.php'); ?></td>
 								</tr>
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6"><?php include('./functions/list_years.php'); ?></td>
 								</tr>
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6"><?php include('./functions/list_months.php'); ?></td>
 								</tr>
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6"><?php include('./functions/list_weeks.php'); ?></td>
 								</tr>
 								<?php
 								if ($display_custom_goto == "yes") {
 								?>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6" class="G10B">
 										<form action="day.php" method="GET">
 											<input type="hidden" name="cal" value="<?php print urlencode($cal); ?>">
@@ -111,10 +111,10 @@
 								}
 								if ($show_search == 'yes') { ?>
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
 								</tr>
 								<tr>
-									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 									<td colspan="6" valign="middle" align="left"><?php echo "$search_box"; ?></td>
 								</tr>
 								<?php } ?>
@@ -122,7 +122,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>
@@ -135,7 +135,7 @@
 			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$tomorrows_lang"; ?></font></td>
 						<td align="right" valign="top" width="1%" class="sideback"></td>
 					</tr>
@@ -143,12 +143,12 @@
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>
 								</tr>
 								
 								<?php
 									echo "<tr>\n";
-									echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
+									echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\" alt=\" \"></td>";
 									echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
 									foreach ($master_array[("$tomorrows_date")] as $event_times) {
 										foreach ($event_times as $val) {
@@ -183,7 +183,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>
@@ -198,7 +198,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$todo_lang"; ?></font></td>
 						<td align="right" valign="top" width="1%" class="sideback"></td>
 					</tr>
@@ -206,12 +206,12 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 								<tr>
-									<td colspan="7"><img src="images/spacer.gif" width="21" height="6"></td>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="6" alt=" "></td>
 								</tr>
 								
 								<?php
 									echo "<tr>\n";
-									echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\"></td>";
+									echo "<td width=\"1%\"><img src=\"images/spacer.gif\" width=\"4\" height=\"1\" alt=\" \"></td>";
 									echo "<td colspan=\"6\" class=\"G10B\" align=\"left\">\n";
 									foreach ($master_array['-2'] as $vtodo_times) {
 										foreach ($vtodo_times as $val) {
@@ -241,12 +241,12 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 												if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
 													if ($show_completed == 'yes') {
 														$vtodo_text = "<S>$vtodo_text</S>";
-														echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+														echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 													}
 												} elseif (isset($val['priority']) && ($val['priority'] != 0) && ($val['priority'] <= 5)) {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 												} else {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\" \" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 												}
 											}
 										}
@@ -258,7 +258,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>
@@ -274,7 +274,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
 
-						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", $fake_getdate_time))); ?></font></td>
 						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
@@ -282,13 +282,13 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
+									<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
 								</tr>
 								<tr>
 								<?php
@@ -302,7 +302,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 								?>
 								</tr>
 								<tr height="3">
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("-1 month", $fake_getdate_time);
@@ -342,7 +342,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>
@@ -354,7 +354,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime($getdate))); ?></font></td>
 						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
@@ -362,13 +362,13 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
+									<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
 								</tr>
 								<tr>
 								<?php
@@ -382,7 +382,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 								?>
 								</tr>
 								<tr height="3">
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 								</tr>
 								<?php
 									$minical_time = $fake_getdate_time;
@@ -422,7 +422,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>
@@ -434,7 +434,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 			<td valign="middle" align="center">
 				<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 					<tr>
-						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="left" valign="top" width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td align="center" class="sideback"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", strtotime($getdate)))); ?></font></td>
 						<td align="right" valign="top" width="1" class="sideback"></td>
 					</tr>
@@ -442,13 +442,13 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
-									<td><img src="images/spacer.gif" width="21" height="1"></td>
+									<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
 								</tr>
 								<tr>
 								<?php
@@ -462,7 +462,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 								?>
 								</tr>
 								<tr height="3">
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("+1 month", $fake_getdate_time);
@@ -502,7 +502,7 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>

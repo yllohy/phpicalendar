@@ -53,12 +53,12 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 <body bgcolor="#eeeeee"><center>
 <table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+		<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 		<td align="center" width="98%" class="sideback"><font class="G10BOLD"><?php echo "$calendar_name2 $calendar_lang"; ?></font></td>
 		<td align="right" valign="top" width="1%" class="sideback"></td>
 	</tr>
 	<tr>
-		<td colspan="3"><img src="images/spacer.gif" width="1" height="6"></td>
+		<td colspan="3"><img src="images/spacer.gif" width="1" height="6" alt=" "></td>
 	</tr>
 	<tr>
 		<td colspan="3">  
@@ -68,13 +68,13 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 				if ($start == '' && $end == '' && isset($start, $end)) $event_times = ' - <font class="V9">(<i>'.$all_day_lang.'</i>)</font>';
 				?>
 				<tr>
-					 <td width="1%"><img src="images/spacer.gif" width="6" height="1"></td>
+					 <td width="1%"><img src="images/spacer.gif" width="6" height="1" alt=" "></td>
 		 			 <td align="left" colspan="2" class="V12"><?php echo $event.' '.$event_times.'<br><br>'; ?></td>
 				</tr>
 				
 				<?php if ($description) { ?>    
 					<tr>
-					 <td width="1%"><img src="images/spacer.gif" width="6" height="1"></td>
+					 <td width="1%"><img src="images/spacer.gif" width="6" height="1" alt=" "></td>
 					 <td align="left" colspan="2" class="V12">
 					 <?php echo ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",
 							'<a target="_new" href="\0">\0</a>', $description); ?></td>

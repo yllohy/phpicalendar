@@ -33,7 +33,7 @@ function error($error_msg='There was an error processing the request.', $file='N
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
 							<tr>
-								<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+								<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 								<td align="center" valign="middle" width="98%" class="sideback"><b><?php echo $error_window_lang; ?></b></td>
 								<td class="sideback" width="1%"></td>
 							</tr>

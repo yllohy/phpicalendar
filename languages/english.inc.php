@@ -90,6 +90,15 @@ $status_lang			= 'Status:';
 $todo_lang				= 'To do items';
 $unfinished_lang		= 'Unfinished';
 
+// - navigation
+$back_lang = 'Back';
+$next_lang = 'Next';
+$prev_lang = 'Prev';
+$day_view_lang = 'Day View';
+$week_view_lang = 'Week View';
+$month_view_lang = 'Month View';
+$year_view_lang = 'Year View';
+
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 

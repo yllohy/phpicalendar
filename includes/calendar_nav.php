@@ -14,12 +14,12 @@
 <br>
 <table border="0" width="737" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" class="calborder">
 	<tr>
-		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$prev_day\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"right\" border=\"0\" align=\"left\"></a>"; ?></td>
+		<td align="left" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$prev_day\"><img src=\"styles/$style_sheet/left_arrows.gif\" alt=\"[$last_day_lang]\" border=\"0\" align=\"left\"></a>"; ?></td>
 		<td align="center" class="sideback"><font class="G10B"><b><?php print (localizeDate ($dateFormat_day, strtotime($getdate))); ?></b></font></td>
-		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$next_day\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"right\" border=\"0\" align=\"right\"></a>"; ?></td>
+		<td align="right" valign="top" width="1%"  class="sideback"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$next_day\"><img src=\"styles/$style_sheet/right_arrows.gif\" alt=\"[$next_day_lang]\" border=\"0\" align=\"right\"></a>"; ?></td>
 	</tr>
 	<tr>
-		<td colspan="3"><img src="images/spacer.gif" width="1" height="5"></td>
+		<td colspan="3"><img src="images/spacer.gif" width="1" height="5" alt=" "></td>
 	</tr>
 	<tr>
 		<td width="1%" valign="top" align="right">
@@ -28,7 +28,7 @@
 					<td valign="middle" align="center">
 						<table width="160" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
+								<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 								<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("-1 month", $fake_getdate_time))); ?></font></td>
 								<td align="right" valign="top" width="1"></td>
 							</tr>
@@ -36,13 +36,13 @@
 								<td colspan="3" bgcolor="#FFFFFF" align="center">
 									<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 										<tr>
-											<td><img src="images/spacer.gif" width="21" height="3"></td>
-											<td><img src="images/spacer.gif" width="21" height="1"></td>
-											<td><img src="images/spacer.gif" width="21" height="1"></td>
-											<td><img src="images/spacer.gif" width="21" height="1"></td>
-											<td><img src="images/spacer.gif" width="21" height="1"></td>
-											<td><img src="images/spacer.gif" width="21" height="1"></td>
-											<td><img src="images/spacer.gif" width="21" height="1"></td>
+											<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
+											<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+											<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+											<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+											<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+											<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+											<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
 										</tr>
 										<tr>
 										<?php
@@ -56,7 +56,7 @@
 										?>
 										</tr>
 										<tr height="3">
-											<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
+											<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 										</tr>
 										<?php
 											$minical_time = strtotime("-1 month", $fake_getdate_time);
@@ -95,7 +95,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+								<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 							</tr>
 						</table>
 					</td>
@@ -114,42 +114,42 @@
 											<td colspan="3" bgcolor="#FFFFFF" align="left">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6"><font class="G10BOLD"><?php echo "$jump_lang"; ?></font></td>
 													</tr>
 													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="3"></td>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
 													</tr>
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6"><?php include('./functions/list_icals.php'); ?></td>
 													</tr>
 													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
 													</tr>
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6"><?php include('./functions/list_years.php'); ?></td>
 													</tr>
 													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
 													</tr>
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6"><?php include('./functions/list_months.php'); ?></td>
 													</tr>
 													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="5" alt=" "></td>
 													</tr>
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6"><?php include('./functions/list_weeks.php'); ?></td>
 													</tr>
 													<?php
 													if ($display_custom_goto == "yes") {
 													?>
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6" class="G10B">
 															<form action="day.php" method="GET">
 																<input type="hidden" name="cal" value="<?php print urlencode($cal); ?>">
@@ -165,14 +165,14 @@
 											</td>
 										</tr>
 										<tr>
-											<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+											<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 										</tr>
 									</table>
 								</td>
 							</tr>
 						</table>
 					</td>
-					<td><img src="images/spacer.gif" width="10" height="1"></td>
+					<td><img src="images/spacer.gif" width="10" height="1" alt=" "></td>
 					<td width="160" valign="top">
 						<table cellpadding="0" cellspacing="0" border="0" width="160">
 							<tr>
@@ -182,14 +182,14 @@
 											<td colspan="3" bgcolor="#FFFFFF" align="left" valign="top">
 												<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
 													<tr>
-														<td colspan="7"><img src="images/spacer.gif" width="21" height="2"></td>
+														<td colspan="7"><img src="images/spacer.gif" width="21" height="2" alt=" "></td>
 													</tr>
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6"><font class="G10BOLD"><?php echo "$cal_displayname2"; ?></font></td>
 													</tr>
 													<tr>
-														<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6" class="G10B">
 														<?php echo "
 															<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$today_today\">$goday_lang</a><br>\n
@@ -206,7 +206,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6"></td>
+											<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 										</tr>
 									</table>
 								</td>
@@ -222,7 +222,7 @@
 			<td valign="middle" align="center">
 				<table width="160" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20"></td>
+						<td align="left" valign="top" width="1"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 						<td align="center"><font class="G10BOLD"><?php print (localizeDate ($dateFormat_month, strtotime("+1 month", $fake_getdate_time))); ?></font></td>
 						<td align="right" valign="top" width="1"></td>
 					</tr>
@@ -230,13 +230,13 @@
 						<td colspan="3" bgcolor="#FFFFFF" align="center">
 							<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 								<tr>
-									<td><img src="images/spacer.gif" width="21" height="3" alt=""></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
-									<td><img src="images/spacer.gif" width="21" height="1" alt=""></td>
+									<td><img src="images/spacer.gif" width="21" height="3" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
+									<td><img src="images/spacer.gif" width="21" height="1" alt=" "></td>
 								</tr>
 								<tr>
 								<?php
@@ -250,7 +250,7 @@
 								?>
 								</tr>
 								<tr height="3">
-									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=""></td>
+									<td colspan="7"><img src="images/spacer.gif" width="1" height="3" alt=" "></td>
 								</tr>
 								<?php
 									$minical_time = strtotime("+1 month", $fake_getdate_time);
@@ -289,7 +289,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=""></td>
+						<td colspan="3" bgcolor="#FFFFFF"><img src="images/spacer.gif" width="148" height="6" alt=" "></td>
 					</tr>
 				</table>
 			</td>

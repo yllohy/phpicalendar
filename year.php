@@ -43,19 +43,19 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
       				<td class="navback">
       					<table width="100%" border="0" cellspacing="0" cellpadding="0">
       						<tr>
-								<td align="right" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$prev_year\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"\" border=\"0\" align=\"right\"></a>"; ?></td>
+								<td align="right" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$prev_year\"><img src=\"styles/$style_sheet/left_day.gif\" alt=\"[$last_year_lang]\" border=\"0\" align=\"right\"></a>"; ?></td>
 								<td align="center" width="10%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $this_year2; ?></font></td>
-      							<td align="left" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$next_year\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"\" border=\"0\" align=\"left\"></a>"; ?></td>
+      							<td align="left" width="45%" class="navback"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$next_year\"><img src=\"styles/$style_sheet/right_day.gif\" alt=\"[$next_year_lang]\" border=\"0\" align=\"left\"></a>"; ?></td>
       						</tr>
       					</table>
       				</td>
       				<td align="right" width="120" class="navback">	
       					<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr>
-								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="" border="0"></a></td>'; ?>
-								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" alt="'.$day_view_lang.'" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" alt="'.$week_view_lang.'" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" alt="'.$month_view_lang.'" border="0"></a></td>'; ?>
+								<td><?php echo '<a class="psf" href="year.php?cal='.$cal.'&amp;getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/year_on.gif" alt="'.$year_view_lang.'" border="0"></a></td>'; ?>
 							</tr>
 						</table>
 					</td>
@@ -79,7 +79,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 					<td colspan="7">
 						<table border="0" width="210" cellspacing="0" cellpadding="0">
 							<tr>
-								<td width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=""></td>
+								<td width="1" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
 								<?php 
 									$monthlink = date("Ym", $startYear); 
 									$monthlink = $monthlink . $this_day;
@@ -122,11 +122,11 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 										if (isset($master_array[("$daylink")]) && ($check_month == $minical_month)) {
 											foreach ($master_array[("$daylink")] as $event_times) {
 												foreach ($event_times as $val) {
-												if (!isset($val["event_start"])) $image1 = '<img src="styles/'. $style_sheet . '/allday_dot.gif" alt="" width="11" height="10" border="0">';
-												if (isset($val["event_start"])) $image2 = '<img src="styles/'. $style_sheet . '/event_dot.gif" alt="" width="11" height="10" border="0">';
+												if (!isset($val["event_start"])) $image1 = '<img src="styles/'. $style_sheet . '/allday_dot.gif" alt=" " width="11" height="10" border="0">';
+												if (isset($val["event_start"])) $image2 = '<img src="styles/'. $style_sheet . '/event_dot.gif" alt=" " width="11" height="10" border="0">';
 												}
 											}	
-											if (isset($master_array[("$daylink")][-1])) $image2 = '<img src="styles/silver/allday_dot.gif" alt="" border="0">';
+											if (isset($master_array[("$daylink")][-1])) $image2 = '<img src="styles/silver/allday_dot.gif" alt=" " border="0">';
 											echo '<td width="30" height="30" align="right" valign="top" class="monthreg" onMouseOver=this.style.backgroundColor="#DDDDDD" onMouseOut=this.style.backgroundColor="#FFFFFF" onclick="window.location.href=\'day.php?cal=' . $cal . '&amp;getdate=' . $daylink . '\'">' . "\n";
 											echo '<table width="100%" border="0" cellspacing="0" cellpadding="1">' . "\n";
 											echo '<tr>' . "\n";
@@ -164,13 +164,13 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 			</table>
 		</td>
 		<?php 
-				if ($m < 2) echo '<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>';
+				if ($m < 2) echo '<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=" "></td>';
 				$m++;
 				$n++;
 				if (($m == 3) && ($n < 12)) {
 					$m = 0;
 					echo '</tr><tr>';
-					echo '<td colspan="5"><img src="images/spacer.gif" width="1" height="20" alt=""></td>';
+					echo '<td colspan="5"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>';
 					echo '</tr><tr>';
 				}
 			} while (($m < 3) && ($n < 12)); 
