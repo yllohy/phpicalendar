@@ -1,7 +1,7 @@
 <?php
 
 // French language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by La Shampouineuse (info@lashampoo.com)
 //
@@ -25,15 +25,13 @@ $last_year_lang		= 'Ann&eacute;e pr&eacute;c&eacute;dente';
 $subscribe_lang		= 'Souscrire';
 $download_lang		= 'T&eacute;l&eacute;charger';
 $powered_by_lang 	= 'Produit avec';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= '&Eacute;v&eacute;nement';
 $event_start_lang	= 'D&eacute;but';
 $event_end_lang		= 'Fin';
 $this_months_lang	= '&Eacute;v&eacute;nements de ce mois';
 $date_lang			= 'Date';
 $summary_lang		= 'R&eacute;sum&eacute;';
-
-// new since last translation
 $all_day_lang		= '&Eacute;v&eacute;nement quotidien';
 $notes_lang			= 'Notes';
 $this_years_lang	= '&Eacute;v&eacute;nements de cette ann&eacute;';
@@ -46,6 +44,21 @@ $goday_lang			= 'Voir aujourd\'hui';
 $goweek_lang		= 'Voir cette semaine';
 $gomonth_lang		= 'Voir ce mois';
 $goyear_lang		= 'Voir cette ann&eacute;e';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 // Date display since setlocale isnt perfect. // new since last translation
 $daysofweek_lang			= array ('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');

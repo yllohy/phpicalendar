@@ -1,7 +1,7 @@
 <?php
 
 // Spanish language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Javier Navarro from XIPS (jnavarro@xips.es)
 
@@ -22,9 +22,7 @@ $last_year_lang		= "A&ntilde;o anterior";
 $subscribe_lang		= "Suscribir";
 $download_lang		= "Descargar";
 $powered_by_lang 	= "Powered by";
-$version_lang		= "0.6";
-
-// from here down, translate
+$version_lang		= "0.8";
 $event_lang			= 'Evento';
 $event_start_lang	= 'Inicio';
 $event_end_lang		= 'Fin';
@@ -43,6 +41,21 @@ $goday_lang			= 'Ir a Hoy';
 $goweek_lang		= 'Ir a Esta semana';
 $gomonth_lang		= 'Ir a Este Mes';
 $goyear_lang		= 'Ir a Este A&ntilde;o';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 $daysofweek_lang			= array ('Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado');
 $daysofweekshort_lang		= array ('Dom','Lun','Mar','Mie','Jue','Vie','Sab');

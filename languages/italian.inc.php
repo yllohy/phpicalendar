@@ -1,7 +1,7 @@
 <?php
 
 // Italian language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // First translation by Luca Cacciagrano (clooka@clac.it)
 // Updated translation by Daniele Nicolucci (jollino@discussioni.org)
@@ -26,7 +26,7 @@ $last_year_lang		= 'Anno Precedente';
 $subscribe_lang		= 'Sottoscrivi';
 $download_lang		= 'Scarica';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= 'Evento';
 $event_start_lang	= 'Inizio';
 $event_end_lang		= 'Fine';
@@ -45,6 +45,21 @@ $goday_lang			= 'Vai a oggi';
 $goweek_lang		= 'Vai a questa settimana';
 $gomonth_lang		= 'Vai a questo mese';
 $goyear_lang		= 'Vai a quest\'anno';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 // Date display since setlocale isnt perfect. // new since last translation
 $daysofweek_lang			= array ('Domenica','Luned&iacute;','Marted&igrave;','Mercoled&igrave;','Gioved&igrave;','Venerd&igrave;','Sabato');

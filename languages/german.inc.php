@@ -1,7 +1,7 @@
 <?php
 
 // German language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by David Reindl (dre@andare.ch)
 //
@@ -24,7 +24,7 @@ $last_year_lang		= 'Vorhergehendes Jahr';
 $subscribe_lang		= 'Abonnieren';
 $download_lang		= 'Herunterladen';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= 'Eintrag';
 $event_start_lang	= 'Beginn';
 $event_end_lang		= 'Ende';
@@ -43,6 +43,21 @@ $goday_lang			= 'Gehe zu Heute';
 $goweek_lang		= 'Gehe zur aktuellen Woche';
 $gomonth_lang		= 'Gehe zum aktuellen Monat';
 $goyear_lang		= 'Gehe zum aktuellen Jahr';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 $daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
 $daysofweekshort_lang		= array ('Son','Mon','Die','Mit','Don','Fre','Sam');

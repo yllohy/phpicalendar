@@ -1,7 +1,7 @@
 <?php
 
 // Polish language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Stanislaw Cieslicki (stahoo@poczta.onet.pl)
 //
@@ -25,15 +25,13 @@ $last_year_lang		= 'Zeszły rok';
 $subscribe_lang		= 'Subskrybuj';
 $download_lang		= 'Pobierz';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= 'Zadanie';
 $event_start_lang	= 'Początek';
 $event_end_lang		= 'Koniec';
 $this_months_lang	= 'Zadania miesiąca';
 $date_lang			= 'Data';
 $summary_lang		= 'Info';
-
-// new since last translation
 $all_day_lang		= 'Zadanie na cały dzień';
 $notes_lang			= 'Notes';
 $this_years_lang	= 'Zadania tego roku';
@@ -46,6 +44,21 @@ $goday_lang			= 'Idź do dnia dzisiejszego';
 $goweek_lang		= 'Idź do bieżącego tygodnia';
 $gomonth_lang		= 'Idź do bieżącego miesiąca';
 $goyear_lang		= 'Idź do bieżącego roku';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 $daysofweek_lang			= array ('Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota');
 $daysofweekshort_lang		= array ('Nie','Pon','Wt','Śr','Czw','Pt','Sob');

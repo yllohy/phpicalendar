@@ -1,7 +1,7 @@
 <?php
 
 // English language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Jared Wangen (jared@silter.org)
 // With the help of Eri Hayashiguchi
@@ -28,7 +28,7 @@ $download_lang		= 'ダウンロード';
 $published_lang		= '公開日：';
 $powered_by_lang 	= 'Powered by';
 
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= '件名';
 $event_start_lang	= '開始日';
 $event_end_lang		= '終了日';
@@ -52,6 +52,21 @@ $goday_lang			= '今日に移動';
 $goweek_lang		= '今週に移動';
 $gomonth_lang		= '今月に移動';
 $goyear_lang		= '今年に移動';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 $daysofweek_lang			= array ('日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日');
 $daysofweekshort_lang		= array ('日','月','火','水','木','金','土');

@@ -1,7 +1,7 @@
 <?php
 
 // Swedish language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Jonas Hjelm (jonas@hnet.se)
 //
@@ -25,7 +25,7 @@ $last_year_lang		= 'F&ouml;reg&aring;ende &aring;r';
 $subscribe_lang		= 'Prenumerera';
 $download_lang		= 'H&auml;mta fil';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= 'H&auml;ndelse';
 $event_start_lang	= 'Start tid';
 $event_end_lang		= 'Slut tid';
@@ -44,6 +44,21 @@ $goday_lang			= 'G&aring; till dagens datum';
 $goweek_lang		= 'G&aring; till denna vecka';
 $gomonth_lang		= 'G&aring; till denna m&aring;nad';
 $goyear_lang		= 'G&aring; till detta &aring;r';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 $daysofweek_lang			= array ('S&ouml;ndag','M&aring;ndag','Tisdag','Onsdag','Torsdag','Fredag','L&ouml;rdag');
 $daysofweekshort_lang		= array ('S&ouml;n','M&aring;n','Tis','Ons','Tor','Fre','L&ouml;r');

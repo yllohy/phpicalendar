@@ -1,7 +1,7 @@
 <?php
 
 // Dutch language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Lieven Gekiere (Lieven@gekiere.com)
 //
@@ -25,15 +25,13 @@ $last_year_lang		= 'Vorig Jaar';
 $subscribe_lang		= 'Abonneer';
 $download_lang		= 'Download';
 $powered_by_lang 	= 'Gemaakt met';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= 'Activiteit';
 $event_start_lang	= 'Start Tijd';
 $event_end_lang		= 'Eind Tijd';
 $this_months_lang	= 'Activiteiten Deze Maand';
 $date_lang			= 'Datum';
 $summary_lang		= 'Overzicht';
-
-// new since last translation
 $all_day_lang		= 'Dag Activiteit';
 $notes_lang			= 'Opmerkingen';
 $this_years_lang	= 'Activiteiten Dit Jaar';
@@ -46,6 +44,21 @@ $goday_lang			= 'Ga Naar Vandaag';
 $goweek_lang		= 'Ga Naar Deze Week';
 $gomonth_lang		= 'Ga Naar Deze Maand';
 $goyear_lang		= 'Ga Naar Dit Jaar';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 // new since last translation
 $daysofweek_lang			= array ('Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag');

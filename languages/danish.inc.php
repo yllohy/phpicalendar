@@ -1,7 +1,7 @@
 <?php
 
 // Danish language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Henrik H¿jmark (styxx@worldonline.dk)
 //            and Jakob PeterhŠnsel (marook@creepers.org)
@@ -26,15 +26,13 @@ $last_year_lang		= 'Forrige &aring;r';
 $subscribe_lang		= 'Abonn&eacute;r';
 $download_lang		= 'Hent';
 $powered_by_lang 	= 'Drevet af';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= 'Aftale';
 $event_start_lang	= 'Start tidspunkt';
 $event_end_lang		= 'Slut tidspunkt';
 $this_months_lang	= 'Denne m&aring;neds aftaler';
 $date_lang			= 'Dato';
 $summary_lang		= 'Opsummering';
-
-// new since last translation
 $all_day_lang		= 'Heldags aftale';
 $notes_lang			= 'Noter';
 $this_years_lang	= 'Dette &aring;s aftaler';
@@ -47,6 +45,21 @@ $goday_lang			= 'G&aring; til i dag';
 $goweek_lang		= 'G&aring; til denne uge';
 $gomonth_lang		= 'G&aring; til denne m&aring;ned';
 $goyear_lang		= 'G&aring; til dette &aring;r';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 // new since last translation
 $daysofweek_lang			= array ('S&oslash;ndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','L&oslash;rdag');

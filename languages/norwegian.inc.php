@@ -1,7 +1,7 @@
 <?php
 
 // Norwegian language include
-// For version 0.6 PHP iCalendar
+// For version 0.8 PHP iCalendar
 //
 // Translation by Geir Kielland (geir.kielland@jus.uio.no)
 //
@@ -25,7 +25,7 @@ $last_year_lang		= 'Forrige &aring;r';
 $subscribe_lang		= 'Abonn&eacute;r';
 $download_lang		= 'Last ned';
 $powered_by_lang 	= 'Powered by';
-$version_lang		= '0.6';
+$version_lang		= '0.8';
 $event_lang			= 'Hendelse';
 $event_start_lang	= 'Start tid';
 $event_end_lang		= 'Slutt tid';
@@ -44,6 +44,21 @@ $goday_lang			= 'G&aring; til i dag';
 $goweek_lang		= 'G&aring; til denne uken';
 $gomonth_lang		= 'G&aring; til denne m&aring;neden';
 $goyear_lang		= 'G&aring; til dette &aring;ret';
+$goprint_lang		= 'Printer Friendly';
+$time_lang			= 'Time';
+$summary_lang		= 'Summary';
+$description_lang	= 'Description';
+
+// RSS text for 0.8
+$this_site_is_lang		= 'This site is';
+$no_events_day_lang		= 'No events today.';
+$no_events_week_lang	= 'No events this week.';
+$no_events_month_lang	= 'No events this month.';
+$rss_day_date			= 'g:i A';  // Lists just the time
+$rss_week_date			= '%b %e';  // Lists just the day
+$rss_month_date			= '%b %e';  // Lists just the day
+
+
 
 $daysofweek_lang			= array('S&oslash;ndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','L&oslash;rdag');
 $daysofweekshort_lang		= array ('S&oslash;n','Man','Tir','Ons','Tor','Fre','L&oslash;r');
