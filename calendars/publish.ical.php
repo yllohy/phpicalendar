@@ -26,6 +26,11 @@ Usage (Apple iCal):
 2. Select "Publish" from the "Calendar" menu
 3. Configure to your liking, and set the URL to (eg): http://localhost/~dietricha/calendar/calendars/publish.php
 4. Click the "Publish" button
+5. Some PHP versions require a '?' at the end of the URL (eg): http://localhost/~dietricha/calendar/calendars/publish.php?
+
+Hints:
+1. PHP 4.3.0 or greater is required
+2. safe_mode = Off needs to be in php.ini
 
 Security:
 The calendars directory should be configured to require authentication. This can be done via any methods
