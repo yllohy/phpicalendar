@@ -60,50 +60,50 @@ $rss_language			= 'en-us';
 
 // new in 0.9 ----------------------
 
-$search_took_lang		= 'Search took %s seconds';
-$recurring_event_lang	= 'Recurring event';
-$exception_lang			= 'Exception';
-$no_query_lang			= 'No query given';
-$preferences_lang		= 'Preferences';
-$printer_lang			= 'Printer';
-$select_lang_lang		= 'Select your default language:';
-$select_cal_lang		= 'Select your default calendar:';
-$select_view_lang		= 'Select your default view:';
-$select_time_lang		= 'Select your default start time:';
-$select_day_lang		= 'Select your default start day of week:';
-$select_style_lang		= 'Select your default style:';
-$set_prefs_lang			= 'Set preferences';
-$completed_date_lang	= 'Completed on';
-$completed_lang			= 'Completed';
-$created_lang			= 'Created:';
-$due_lang				= 'Due:';
-$priority_lang			= 'Priority:';
-$priority_high_lang		= 'High';
-$priority_low_lang		= 'Low';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'None';
-$status_lang			= 'Status:';
-$todo_lang				= 'To do items';
-$unfinished_lang		= 'Unfinished';
+$search_took_lang		= 'La busqeda tard&oacute; %s segundos';
+$recurring_event_lang	= 'Evento peri&ocaute;dico';
+$exception_lang			= 'Excepci&oacute;n';
+$no_query_lang			= 'Sin consulta';
+$preferences_lang		= 'Preferencias';
+$printer_lang			= 'Impresora';
+$select_lang_lang		= 'Escoja su idioma por defecto:';
+$select_cal_lang		= 'Escoja su calendario por defecto:';
+$select_view_lang		= 'Elija su vista por defecto:';
+$select_time_lang		= 'Elija su hora de inicio por defecto:';
+$select_day_lang		= 'Escoja su dia de la semana de inicio:';
+$select_style_lang		= 'Seleccione su estilo por defecto:';
+$set_prefs_lang			= 'Guardar preferencias';
+$completed_date_lang	= 'Finalizado a';
+$completed_lang			= 'Finalizado';
+$created_lang			= 'Creado:';
+$due_lang				= 'Hasta:';
+$priority_lang			= 'Prioridad:';
+$priority_high_lang		= 'Alta';
+$priority_low_lang		= 'Baja';
+$priority_medium_lang	= 'Media';
+$priority_none_lang		= 'Ninguna';
+$status_lang			= 'Estado:';
+$todo_lang				= 'Por hacer';
+$unfinished_lang		= 'Sin terminar';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 
-$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
-$format_recur_lang['monthly']		= array('month','months');		// and plural forms
-$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
-$format_recur_lang['daily']			= array('day','days');			// in the replacement below
-$format_recur_lang['hourly']		= array('hour','hours');
-$format_recur_lang['minutely']		= array('minute','minutes');
-$format_recur_lang['secondly']		= array('second','seconds');
+$format_recur_lang['yearly']		= array('a&ntilde;o','a&ntilde;os');		// for these, put singular
+$format_recur_lang['monthly']		= array('mes','meses');		// and plural forms
+$format_recur_lang['weekly']		= array('semana','semanas');		// these will be %freq%
+$format_recur_lang['daily']			= array('dia','dias');			// in the replacement below
+$format_recur_lang['hourly']		= array('hora','horas');
+$format_recur_lang['minutely']		= array('minuto','minutos');
+$format_recur_lang['secondly']		= array('segundo','segundos');
 
-$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
-$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+$format_recur_lang['start']			= 'Cada %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'hasta %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= 'durante %int% veces';		// ie, 'for 5 times'
 
-$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
-$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
-$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+$format_recur_lang['bymonth']		= 'En los meses: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'En los dias: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'En los dias de la semana: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
 
 // ---------------------------------
 
