@@ -21,7 +21,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 
 	// Grab any HTTP authentication.
 	unset($http_user);
-	if (isset($_SERVER['PHP_AUTH_USER'])) {
+	if ((isset($_SERVER['PHP_AUTH_USER'])) && ($allow_login == 'yes')) {
 		$http_user = $_SERVER['PHP_AUTH_USER'];
 	}
 

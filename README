@@ -86,6 +86,9 @@ functions folder.
 
 Changes:
 --------
+1.1
+	-Fixed a bug with HTTP authentication
+
 1.0
 	-Added return false to popups
 	-Added workaround for improperly set DTSTART dates.
