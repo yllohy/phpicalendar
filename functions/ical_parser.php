@@ -60,12 +60,12 @@ if ($parse_file) {
 
 // open the iCal file, read it into a string
 // Then turn it into an array after we pull every wrapped line up a level.
-// Error thingy doens't seem to work now though.
+
 $contents = @file($filename);
-$contents = implode("", $contents);
-$contents = ereg_replace("\n ", "", $contents);
+$contents = implode('', $contents);
+$contents = ereg_replace("\n ", '', $contents);
 $contents = split ("\n", $contents);
-// if ($contents[0] != 'BEGIN:VCALENDAR'."\n") exit(error($error_invalidcal_lang, $filename));
+if ($contents[0] != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
 // echo "$contents[0]";
 
 // Set a value so we can check to make sure $master_array contains valid data

@@ -34,25 +34,27 @@ $date_lang			= 'Date';
 $summary_lang		= 'R&eacute;sum&eacute;';
 
 // new since last translation
-$all_day_lang		= 'All day event';
+$all_day_lang		= '&Eacute;v&eacute;nement quotidien';
 $notes_lang			= 'Notes';
-$this_years_lang	= 'This Year\'s Events';
-$today_lang			= 'Today';
-$this_week_lang		= 'This Week';
-$this_month_lang	= 'This Month';
-$jump_lang			= 'Jump to';
-$tomorrows_lang		= 'Tomorrow\'s Events';
-$goday_lang			= 'Go to Today';
-$goweek_lang		= 'Go to This Week';
-$gomonth_lang		= 'Go to This Month';
-$goyear_lang		= 'Go to This Year';
+$this_years_lang	= '&Eacute;v&eacute;nements de cette ann&eacute;';
+$today_lang			= 'Aujourd\'hui';
+$this_week_lang		= 'Cette semaine';
+$this_month_lang	= 'Ce mois';
+$jump_lang			= 'Voir';
+$tomorrows_lang		= '&Eacute;v&eacute;nements de demain';
+$goday_lang			= 'Voir aujourd\'hui';
+$goweek_lang		= 'Voir cette semaine';
+$gomonth_lang		= 'Voir ce mois';
+$goyear_lang		= 'Voir cette ann&eacute;e';
 
 // Date display since setlocale isnt perfect. // new since last translation
-$daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-$daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');
-$daysofweekreallyshort_lang	= array ('S','M','T','W','T','F','S');
-$monthsofyear_lang			= array ('January','February','March','April','May','June','July','August','September','October','November','December');
-$monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+$daysofweek_lang			= array ('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
+$daysofweekshort_lang		= array ('Dim','Lun','Mar','Mer','Jeu','Ven','Sam');
+$daysofweekreallyshort_lang	= array ('D','L','M','M','J','V','S');
+$monthsofyear_lang			= array ('Janvier','F&eacute;vrier','Mars','Avril','Mai','Juin','Juillet','Ao&ucirc;t','Septembre','Octobre','Novembre','D&eacute;cembre');
+$monthsofyearshort_lang		= array ('jan','f&eacute;v','mar','avr','mai','juin','juil','ao&ucirc;','sep','oct','nov','d&eacute;c');
+
+
 
 // For time formatting, check out: http://www.php.net/manual/fr/function.date.php
 $timeFormat = 'H:i';
@@ -61,7 +63,7 @@ $timeFormat = 'H:i';
 $dateFormat_day = '%A %e %B';
 $dateFormat_week = '%e %B';
 $dateFormat_week_list = '%a %e %b';
-$dateFormat_week_jump = '%b %e';// new since last translation
+$dateFormat_week_jump = '%e %b';// new since last translation
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A %e %B';
 
@@ -82,14 +84,14 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$error_title_lang = 'Erreur!';
+$error_window_lang = 'Une erreur s\'est produite!';
+$error_calendar_lang = 'L\'erreur s\'est produite lors du traitement du calendrier "%s".';
+$error_path_lang = 'Impossible d\'ouvrir le chemin: "%s"';
+$error_back_lang = 'Veuillez utiliser le bouton "Retour" pour revenir en arri&egrave;re.';
+$error_remotecal_lang = 'Ce serveur refuse les calendriers distants non approuv&eacute;s.';
+$error_restrictedcal_lang = 'Vous avez essay&eacute; d\'utiliser un calendrier dont les permissions sont restreintes sur ce serveur.';
+$error_invalidcal_lang = 'Fichier calendrier invalide. Veuillez utiliser un autre calendrier.';
 
 
 ?>
