@@ -7,7 +7,7 @@ Introduction:
 -------------
 PHP iCalendar is a PHP-based iCal file parser to display iCals in a Web browser. 
 Its based on v2.0 of the IETF spec. It displays iCal files in a nice logical, 
-clean manner with day, week, and month navigation.
+clean manner with day, week, month, and year navigation.
 
 Contact:
 --------
@@ -43,6 +43,15 @@ is to visit our Bug Tracker on SourceForge. This guarantees that we both
 look at it and take time to figure out what is causing it. You can submit
 bugs at the following URL:
 http://sourceforge.net/tracker/?group_id=62270&atid=500017
+
+Requests:
+---------
+Got an idea? Great! Just like with Bugs, there is a Features Tracker over
+on SourceForge. Please use that to sumbit feature requests. That way, you can
+see what others have suggested so you don't duplicate requests, and it will give
+us a chance to keep the features that haven't been implemented in one central
+place that we can find later. The tracker can be found at the following URL:
+http://sourceforge.net/tracker/?group_id=62270&atid=500020
 
 Licensing: 
 ----------
