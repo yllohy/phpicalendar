@@ -867,8 +867,8 @@ foreach ($cal_filelist as $filename) {
 						$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
 						if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
 							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtend_check);
-							if ($dtstart_check[1] < 1969) { 
-								$dtstart_check[1] = '1990';
+							if ($dtend_check[1] < 1969) { 
+								$dtend_check[1] = '1990';
 								$data = $dtend_check[1].$dtend_check[2].$dtend_check[3];
 							}
 							$allday_end = $data;

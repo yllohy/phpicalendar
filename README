@@ -87,7 +87,9 @@ functions folder.
 Changes:
 --------
 1.1
-	-Fixed a bug with HTTP authentication
+	-Fixed a bug with HTTP authentication.
+	-Fixed a bug with multiple timezones in the same calendar.
+	-Added workarounds for dates prior to 1970.
 
 1.0
 	-Added return false to popups
