@@ -99,7 +99,7 @@
 
 <!-- switch tomorrows_events off -->
 
-<!-- switch todo on -->
+<!-- switch vtodo on -->
 
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
@@ -129,7 +129,7 @@
 						<td><img src="images/spacer.gif" width="2" height="1" border="0" alt="" /></td>
 						<td><a class="psf" href="javascript:openTodoInfo('{VTODO_ARRAY}')"><font class="G10B"> {VTODO_TEXT}</font></a></td>
 					</tr>
-					<!-- switch show_normal on -->
+					<!-- switch show_normal off -->
 				</table>
 			</div>
 		</td>
@@ -145,7 +145,7 @@
 <img src="images/spacer.gif" width="1" height="10" alt=" " /><br />
 
 
-<!-- switch todo off -->
+<!-- switch vtodo off -->
 
 {MONTH_SMALL|-1}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">

@@ -90,6 +90,68 @@ class Page {
 		}
 	}
 	
+	function get_vtodo() {
+		global $template, $getdate, $master_array, $next_day, $timeFormat;
+		
+		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!is", $this->page, $match1);
+		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!is", $this->page, $match2);
+		preg_match("!<\!-- switch show_normal on -->(.*)<\!-- switch show_normal off -->!is", $this->page, $match3);
+		$completed 	= trim($match1[1]);
+		$important 	= trim($match2[1]);
+		$normal 	= trim($match3[1]);
+		$comp_data	= '';
+		$impt_data	= '';
+		$norm_data	= '';
+		
+		if (is_array($master_array['-2'])) {
+			foreach ($master_array['-2'] as $vtodo_times) {
+				foreach ($vtodo_times as $val) {
+					$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
+					if ($vtodo_text != "") {	
+						if (isset($val["description"])) { 
+							$description 	= urldecode($val["description"]);
+						} else {
+							$description = ""; 
+						}
+						$completed_date = $val['completed_date'];
+						$event_calna 	= $val['calname'];
+						$status 		= $val["status"];
+						$priority 		= $val['priority'];
+						$start_date 	= $val["start_date"];
+						$due_date 		= $val['due_date'];
+						$vtodo_array 	= array(
+							'cal'			=> $event_calna,
+							'completed_date'=> $completed_date,
+							'description'	=> $description,
+							'due_date'		=> $due_date,
+							'priority'		=> $priority,
+							'start_date'	=> $start_date,
+							'status'		=> $status,
+							'vtodo_text' 	=> $vtodo_text);
+
+						$vtodo_array 	= base64_encode(serialize($vtodo_array));
+						$vtodo_text 	= word_wrap(strip_tags(str_replace('<br>',' ',$vtodo_text), '<b><i><u>'), 21, $tomorrows_events_lines);
+						$data 			= array ('{VTODO_TEXT}', '{VTODO_ARRAY}');
+						$rep			= array ($vtodo_text, $vtodo_array);
+						
+						if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
+							if ($show_completed == 'yes') {
+								$temp = $completed;
+							}
+						} elseif (isset($val['priority']) && ($val['priority'] != 0) && ($val['priority'] <= 5)) {
+							$temp = $important;
+						} else {
+							$temp = $normal;
+						}
+						$nugget1 = str_replace($data, $rep, $temp);
+						$nugget2 .= $nugget1;
+					}
+				}
+			$this->page = ereg_replace('<!-- switch show_completed on -->(.*)<!-- switch show_normal off -->', $nugget2, $this->page);
+			}	
+		}
+	}
+	
 	function draw_month($template_p, $offset = '+0', $type) {
 		global $template, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $week_start_day, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
 		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template_p, $match1);
