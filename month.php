@@ -121,40 +121,54 @@
 											echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\">$day</a>\n";
 											echo "</td>\n";
 											echo "</tr>\n";
-											if ($master_array[("$daylink")]["0001"]["event_text"]) {
-												foreach ($master_array[("$daylink")]["0001"]["event_text"] as $event_text) {
-													$event_text2 = addslashes($event_text);
-													if (strlen($event_text) > 15) {
-														$event_text = substr("$event_text", 0, 12);
-														$event_text = $event_text . "...";
+											if ($master_array[("$daylink")]) {
+												if ($master_array[("$daylink")]["0001"]["event_text"]) {
+													foreach ($master_array[("$daylink")]["0001"]["event_text"] as $event_text) {
+														$event_text2 = addslashes($event_text);
+														if (strlen($event_text) > 15) {
+															$event_text = substr("$event_text", 0, 12);
+															$event_text = $event_text . "...";
+														}
+														echo "<tr height=\"15\">\n";
+														echo "<td height=\"15\" valign=\"middle\" align=\"center\" bgcolor=\"#ffffff\">\n";
+														//echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
+														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a>\n";
+														echo "</td>\n";
+														echo "</tr>\n";
 													}
-													echo "<tr height=\"15\">\n";
-													echo "<td height=\"15\" valign=\"middle\" align=\"center\" bgcolor=\"#ffffff\">\n";
-													//echo "<a class=\"psf\" href=\"day.php?cal=$cal&getdate=$daylink\"><i>$event_text</i></a>\n";
-													echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><i>$event_text</i></a>\n";
-													echo "</td>\n";
-													echo "</tr>\n";
 												}
-											} else {
 												foreach ($master_array[("$daylink")] as $event_times) {
 													foreach ($event_times as $val) {
 														$event_text = $val["event_text"];
-														$event_text2 = addslashes($val["event_text"]);
-														if (strlen($event_text) > 12) {
-															$event_text = substr("$event_text", 0, 10);
-															$event_text = $event_text . "...";
-														}	
-														echo "<tr>\n";
-														echo "<td>\n";
-														echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-														echo "<tr>\n";
-														echo "<td>\n";
-														echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
-														echo "</td>\n";
-														echo "</tr>\n";
-														echo "</table>\n";
-														echo "</td>\n";
-														echo "</tr>\n";
+														if ($event_text != "") {	
+															$event_text2 = addslashes($val["event_text"]);
+															$event_start = $val["event_start"];
+															$event_end = $val["event_end"];
+															$event_start = strtotime ("$event_start");
+															$event_end = strtotime ("$event_end");
+															if ($time_format == "24") {
+																$event_start = date ("G:i", $event_start);
+																$event_end = date ("G:i", $event_end);
+															} else {
+																$event_start = date ("g:i a", $event_start);
+																$event_end = date ("g:i a", $event_end);
+															}
+															if (strlen($event_text) > 12) {
+																$event_text = substr("$event_text", 0, 10);
+																$event_text = $event_text . "...";
+															}	
+															echo "<tr>\n";
+															echo "<td>\n";
+															echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
+															echo "<tr>\n";
+															echo "<td>\n";
+															echo "<a class=\"psf\" href=\"javascript:openEventInfo('$event_text2', '$calendar_name', '$event_start', '$event_end')\"><font class=\"G10B\">&#149; $event_text</font></a>\n";
+															echo "</td>\n";
+															echo "</tr>\n";
+															echo "</table>\n";
+															echo "</td>\n";
+															echo "</tr>\n";
+														}
 													}
 												}
 											}
