@@ -387,6 +387,7 @@ foreach ($cal_filelist as $filename) {
 								break;
 							case 'END':
 						
+							if (!isset($number)) $number = 1;
 							// if $until isn't set yet, we set it to the end of our range we're looking at
 							// The FREQ switch array will always kick our early, so lets try this workaround.
 							if (isset($until)) $until = strtotime('+'.$interval.' '.$freq_type, $until);;
@@ -494,7 +495,11 @@ foreach ($cal_filelist as $filename) {
 													}
 													break;
 												case 'YEARLY':
-													if (!isset($bymonth)) $bymonth[] = date('m', $start_date_time);
+												
+													if (!isset($bymonth)) {
+														$m = date('m', $start_date_time);
+														$bymonth = array("$m");
+													}	
 													foreach($bymonth as $month) {
 														$year = date('Y', $next_range_time);
 														if ((isset($byday)) && (is_array($byday))) {
@@ -764,6 +769,11 @@ foreach ($cal_filelist as $filename) {
 						$data = ereg_replace('Z', '', $data);
 						$field = ereg_replace(';VALUE=DATE-TIME', '', $field); 
 						if (preg_match("/^DTSTART;VALUE=DATE/i", $field))  {
+							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtstart_check);
+							if ($dtstart_check[1] < 1969) { 
+								$dtstart_check[1] = '1990';
+								$data = $dtstart_check[1].$dtstart_check[2].$dtstart_check[3];
+							}
 							$allday_start = $data;
 							$start_date = $allday_start;
 							$start_unixtime = strtotime($data);
