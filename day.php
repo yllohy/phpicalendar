@@ -167,7 +167,7 @@ if ($master_array[($getdate)]) {
 									}
 									if (ereg('([0-9]{1,2}):00', $key)) {
 										echo '<tr height="' . $gridLength . '">'."\n";
-										echo '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" background="images/time_bg.gif" width="60" class="timeborder">'.$key.'</td>'."\n";
+										echo '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'."\n";
 										echo '<td width="1" height="' . $gridLength . '"></td>'."\n";
 									} else {
 
