@@ -226,9 +226,9 @@ $num_of_events = 0;
 		<td align="center" valign="top">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td align="left" valign="top" width="160" class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\"></a>"; ?></td>
+					<td align="left" valign="top" width="160" class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"left\">"; ?></td>
 					<td align="center" class="sideback" width="417" nowrap><font class="G10BOLD"><?php echo "$this_months_lang"; ?></font></td>
-					<td align="right" valign="top" width="160" class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\"></a>"; ?></td>
+					<td align="right" valign="top" width="160" class="sideback"><?php echo "<img src=\"images/spacer.gif\" alt=\"right\" width=\"16\" height=\"20\" border=\"0\" align=\"right\">"; ?></td>
 				</tr>
 				<tr>
 					<td colspan="3" height="1"></td>
