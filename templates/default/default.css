@@ -82,30 +82,30 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 /* Link colors and attributes */
 /* This is the main link style */
 a.psf			{ text-decoration:	none; }
-a.psf:link		{ color: #0066FF; background-color: transparent; }
-a.psf:visited	{ color: #0066FF; background-color: transparent; }
-a.psf:active	{ color: #3366CC; background-color: transparent; }
-a.psf:hover		{ color: #000099; background-color: transparent; }
+a.psf:link		{ color: #0066FF; }
+a.psf:visited	{ color: #0066FF; }
+a.psf:active	{ color: #3366CC; }
+a.psf:hover		{ color: #000099; text-decoration: underline; }
 
 /* This is the link style for the mini-cals */	
 a.ps2			{ text-decoration:	underline; }
-a.ps2:link		{ color: #0066FF; background-color: transparent; }
-a.ps2:visited	{ color: #0066FF; background-color: transparent; }
-a.ps2:active	{ color: #3366CC; background-color: transparent; }
-a.ps2:hover		{ color: #000099; background-color: transparent; }
+a.ps2:link		{ color: #0066FF; }
+a.ps2:visited	{ color: #0066FF; }
+a.ps2:active	{ color: #3366CC; }
+a.ps2:hover		{ color: #000099; }
 
 /* This is the link style for year months */	
 a.ps3			{ text-decoration:	none; }
-a.ps3:link		{ color: #000; background-color: transparent; }
-a.ps3:visited	{ color: #000; background-color: transparent; }
-a.ps3:active	{ color: #000; background-color: transparent; }
-a.ps3:hover		{ color: #000; background-color: transparent; }
+a.ps3:link		{ color: #000; }
+a.ps3:visited	{ color: #000; }
+a.ps3:active	{ color: #000; }
+a.ps3:hover		{ color: #000; text-decoration: underline; }
 
 /* This is the link style for events */	
 a.ps			{ text-decoration:	none; }
-a.ps:link		{ color: #fff; background-color: transparent; }
-a.ps:visited	{ color: #fff; background-color: transparent; }
-a.ps:active		{ color: #fff; background-color: transparent; }
+a.ps:link		{ color: #fff; }
+a.ps:visited	{ color: #fff; }
+a.ps:active		{ color: #fff; }
 a.ps:hover		{ color: #fff; text-decoration: underline; }
 	
 /* Body attributes */

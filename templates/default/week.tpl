@@ -44,26 +44,27 @@
 												<td align="right" valign="top" width="15" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={NEXT_WEEK}'">
 													<div class="V12"><a class="psf" href="week.php?cal={CAL}&amp;getdate={NEXT_WEEK}">&raquo;</a>&nbsp;</div>
 												</td>
+												<td width="1"></td>
 												<!-- loop daysofweek on -->
-												<td width="80" align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={DAYLINK}'">
+												<td width="80" {COLSPAN} align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={DAYLINK}'">
 													<a class="ps3" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9BOLD">{DAY}</span></a> 
 												</td>
 												<!-- loop daysofweek off -->
 											</tr>
 											<tr valign="top">
-												<td width="60" class="rowOff2" colspan="4">
+												<td width="60" class="rowOff2" colspan="4"><img src="images/spacer.gif" width="60" height="1" alt=" " /></td>
+												<td width="1"></td>
 												<!-- loop alldaysofweek on -->
-												<td width="80" class="rowOff">
+												<td width="80" {COLSPAN} class="rowOff">
 													<!-- loop allday on -->
 													<div class="alldaybg_{CALNO}">
 														<b>{EVENT}</b>
+														<img src="images/spacer.gif" width="80" height="1" alt=" " />
 													</div>
 													<!-- loop allday off -->
 												</td>
 												<!-- loop alldaysofweek off -->
 											</tr>
-										</table>
-										<table width="100%" border="0" cellspacing="0" cellpadding="0">
 											<!-- loop row on -->
 											<tr>
 												<td rowspan="4" align="center" valign="top" width="60" class="timeborder">9:00 AM</td>
@@ -105,7 +106,7 @@
 				</table>
 			</td>
 			<td width="10">
-				<img src="images/spacer.gif" width="10" height="1" alt=" ">
+				<img src="images/spacer.gif" width="10" height="1" alt=" " />
 			</td>
 			<td width="170" valign="top">
 				{SIDEBAR}
