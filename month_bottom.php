@@ -357,7 +357,7 @@
 											$dayofmonth = strtotime ($key);
 											$dayofmonth = localizeDate ($dateFormat_week_list, $dayofmonth);
 											$i = 0;
-											if ($getdate == $key) {
+											if ($today_today == $key) {
 												$fontclass="class=\"G10BOLD\"";
 											} else {
 												$fontclass="class=\"G10B\"";

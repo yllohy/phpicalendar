@@ -136,7 +136,7 @@ if ($parse_file) {
 			if (!isset($description)) $description = '';
 			
 			$mArray_begin = mktime (0,0,0,1,1,$this_year);
-			$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
+			$mArray_end = mktime (0,0,0,1,12,($this_year + 1));
 			//if ((!$allday_end) && (!$end_time)) $allday_end = $mArray_end;	
 			
 			if (isset($start_time) && isset($end_time)) {
