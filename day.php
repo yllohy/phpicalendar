@@ -81,11 +81,27 @@ if ($master_array[($getdate)]) {
 <table width="520" border="0" cellspacing="0" cellpadding="0" class="calborder">
     <tr>
      	<td align="center" valign="middle">
-      		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
+      		<table width="100%" border="0" cellspacing="0" cellpadding="0">
       			<tr>
-      				<td align="left" width="75" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$yesterdays_date.'"><img src="styles/'.$style_sheet.'/left_day.gif" alt="" width="28" height="28" border="0" align="left"></a>'; ?></td>
-					<td align="center" class="navback"><font class="H20"><?php echo $display_date; ?></font></td>
-      				<td align="right" width="75" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$tomorrows_date.'"><img src="styles/'.$style_sheet.'/right_day.gif" alt="" width="28" height="28" border="0" align="right"></a>'; ?></td>
+      				<td align="left" width="90" class="navback">&nbsp;</td>
+      				<td>
+      					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      						<tr>
+								<td align="right" width="40%" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$yesterdays_date.'"><img src="styles/'.$style_sheet.'/left_day.gif" alt="" width="28" height="28" border="0" align="right"></a>'; ?></td>
+								<td align="center" width="20%" class="navback" nowrap valign="middle"><font class="H20"><?php echo $display_date; ?></font></td>
+      							<td align="left" width="40%" class="navback"><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$tomorrows_date.'"><img src="styles/'.$style_sheet.'/right_day.gif" alt="" width="28" height="28" border="0" align="left"></a>'; ?></td>
+      						</tr>
+      					</table>
+      				</td>
+      				<td align="right" width="90" class="navback">	
+      					<table width="90" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><?php echo '<a class="psf" href="day.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/day_on.gif" width="30" height="24" alt=""></td>'; ?>
+								<td><?php echo '<a class="psf" href="week.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/week_on.gif" width="30" height="24" alt=""></td>'; ?>
+								<td><?php echo '<a class="psf" href="month.php?cal='.$cal.'&getdate='.$getdate.'"><img src="styles/'.$style_sheet.'/month_on.gif" width="30" height="24" alt=""></td>'; ?>
+							</tr>
+						</table>
+					</td>
       			</tr>
       		</table>
       	</td>

@@ -48,14 +48,14 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <title><?php echo $calendar_name2; ?></title>
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet"; ?>">
+	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
 </head>
 <body bgcolor="#eeeeee"><center>
 <table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
-		<td align="left" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"><img src="images/spacer.gif" width="1" height="20"></td>
-		<td bgcolor="#DDDDDD" align="center" class="G10B" width="98%" background="images/side_bg.gif"><b><?php echo "$calendar_name2 $calendar_lang"; ?></b></td>
-		<td align="right" valign="top" bgcolor="#DDDDDD" width="1%" background="images/side_bg.gif"></td>
+		<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20"></td>
+		<td align="center" width="98%" class="sideback"><font class="G10B"><b><?php echo "$calendar_name2 $calendar_lang"; ?></b></font></td>
+		<td align="right" valign="top" width="1%" class="sideback"></td>
 	</tr>
 	<tr>
 		<td colspan="3"><img src="images/spacer.gif" width="1" height="6"></td>
