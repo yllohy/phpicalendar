@@ -2,8 +2,34 @@
 
 .eventborder	{ background-color: #979A65; border: 1px #616339 solid; }
 .eventbg	 	{ background-color: #A6A978; }
+
+.eventbg_1	 		{ background-color: #A6A978; }
+.eventbg_2	 		{ background-color: #CC8B00; }
+.eventbg_3	 		{ background-color: #CC9966; }
+.eventbg_4	 		{ background-color: #999900; }
+.eventbg_5	 		{ background-color: #CC6600; }
+.eventbg_6	 		{ background-color: #CCCC99; }
+.eventbg_7	 		{ background-color: #666666; }
+
 .eventbg2 	 	{ background-color: #A6A978; border-right: 1px solid #FFFFFF; }
+
+.eventbg2_1	 		{ background-color: #A6A978; border-right: 1px solid #FFFFFF; }
+.eventbg2_2	 		{ background-color: #CC8B00; border-right: 1px solid #FFFFFF; }
+.eventbg2_3	 		{ background-color: #CC9966; border-right: 1px solid #FFFFFF; }
+.eventbg2_4	 		{ background-color: #999900; border-right: 1px solid #FFFFFF; }
+.eventbg2_5	 		{ background-color: #CC6600; border-right: 1px solid #FFFFFF; }
+.eventbg2_6	 		{ background-color: #CCCC99; border-right: 1px solid #FFFFFF; }
+.eventbg2_7	 		{ background-color: #666666; border-right: 1px solid #FFFFFF; }
 .eventbg2week 	{ background-color: #A6A978; border-right: 1px solid #A1A5A9; }
+
+.eventbg2week_1	 	{ background-color: #A6A978; border-right: 1px solid #A1A5A9; }
+.eventbg2week_2	 	{ background-color: #CC8B00; border-right: 1px solid #A1A5A9; }
+.eventbg2week_3	 	{ background-color: #CC9966; border-right: 1px solid #A1A5A9; }
+.eventbg2week_4	 	{ background-color: #999900; border-right: 1px solid #A1A5A9; }
+.eventbg2week_5	 	{ background-color: #CC6600; border-right: 1px solid #A1A5A9; }
+.eventbg2week_6	 	{ background-color: #CCCC99; border-right: 1px solid #A1A5A9; }
+.eventbg2week_7	 	{ background-color: #666666; border-right: 1px solid #A1A5A9; }
+
 .calborder 		{ background-color: #FFFFFF; border: 1px #A1A5A9 solid; }
 .dateback		{ background-color: #EEEEEE; }
 .dayborder 		{ border-top: 1px solid #A1A5A9; }
