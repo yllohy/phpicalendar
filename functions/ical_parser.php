@@ -239,7 +239,7 @@ foreach ($cal_filelist as $filename) {
 					if ($start < $mArray_end) {
 						while (($start != $end) && ($start < $mArray_end)) {
 							$start_date2 = date('Ymd', $start);
-							$master_array[($start_date2)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description, 'calnumber' => $calnumber, 'calname' => $actual_calname );
+							$master_array[($start_date2)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'status' => $status, 'class' => $class );
 							$start = strtotime('+1 day', $start);
 						}
 						if (!$write_processed) $master_array[($start_date)]['-1'][$uid]['exception'] = true;
@@ -593,7 +593,7 @@ foreach ($cal_filelist as $filename) {
 													$end_time2 = strtotime('+'.$diff_allday_days.' days', $recur_data_time);
 													while ($start_time2 < $end_time2) {
 														$start_date2 = date('Ymd', $start_time2);
-														$master_array[($start_date2)][('-1')][]= array ('event_text' => $summary, 'description' => $description, 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url );
+														$master_array[($start_date2)][('-1')][] = array ('event_text' => $summary, 'description' => $description, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'status' => $status, 'class' => $class );
 														$start_time2 = strtotime('+1 day', $start_time2);
 													}
 												} else {

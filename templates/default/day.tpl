@@ -7,17 +7,19 @@
 				<tr>
 					<td align="center" valign="middle">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td align="left" width="90%" class="navback"><div style="padding: 5px;" class="H20">&nbsp;{DISPLAY_DATE}</div></td>
-								<td align="right" width="10%" class="navback">	
+							<tr valign="top">
+								<td align="left" width="400" class="navback"><div style="padding: 5px;"><span class="H20">{DISPLAY_DATE}</span><br /><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></div></td>
+								<td valign="top" align="right" width="120" class="navback">	
+									<div style="padding-top: 3px;">
 									<table width="120" border="0" cellpadding="0" cellspacing="0">
-										<tr>
+										<tr valign="top">
 											<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
 											<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
 											<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
 											<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
 										</tr>
 									</table>
+									</div>
 								</td>
 							</tr>
 							<tr>	
@@ -56,7 +58,7 @@
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<!-- loop row on -->
 							<tr>
-								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">11:00 AM</td>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">9:00 AM</td>
 								<td width="1" height="15"></td>
 								<td class="dayborder">&nbsp;</td>
 							</tr>
@@ -74,7 +76,177 @@
 							</tr>
 							<!-- loop row off -->
 							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">10:00 AM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">11:00 AM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
 								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">12:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">1:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">2:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">3:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">4:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">5:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">6:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">7:00 PM</td>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder">&nbsp;</td>
+							</tr>
+							<tr>
+								<td width="1" height="15"></td>
+								<td class="dayborder2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td rowspan="4" align="center" valign="top" width="60" class="timeborder">8:00 PM</td>
 								<td width="1" height="15"></td>
 								<td class="dayborder">&nbsp;</td>
 							</tr>
