@@ -56,7 +56,7 @@ if ($parse_file) {
 	$ifile = fopen($filename, "r");
 	if ($ifile == FALSE) exit(error($error_invalidcal_lang, $filename));
 	$nextline = fgets($ifile, 1024);
-	if (!preg_match("/^BEGIN:VCALENDAR/i", $nextline)) exit(error($error_invalidcal_lang, $filename));
+	if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($error_invalidcal_lang, $filename));
 	
 	// Set a value so we can check to make sure $master_array contains valid data
 	$master_array['-1'] = 'valid cal file';
@@ -84,7 +84,7 @@ if ($parse_file) {
 			$nextline = ereg_replace("[\r\n]", "", $nextline);
 		}
 		$line = trim($line);
-		if (stristr($line, 'BEGIN:VEVENT')) {
+		if ($line == 'BEGIN:VEVENT') {
 			// each of these vars were being set to an empty string
 			unset (
 				$start_time, $end_time, $start_date, $end_date, $summary, 
@@ -106,7 +106,7 @@ if ($parse_file) {
 				$interval, $number
 			);
 			
-		} elseif (stristr($line, 'END:VEVENT')) {
+		} elseif ($line == 'END:VEVENT') {
 			// make sure we have some value for $uid
 			if (!isset($uid)) {
 				$uid = $uid_counter;
@@ -466,9 +466,9 @@ if ($parse_file) {
 		
 
 	
-		} elseif (stristr($line, "BEGIN:VALARM")) {
+		} elseif ($line == 'BEGIN:VALARM') {
 			$valarm_set = TRUE;
-		} elseif (stristr($line, "END:VALARM")) {
+		} elseif ($line == 'END:VALARM') {
 			$valarm_set = FALSE;
 		} else {
 	
