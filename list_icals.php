@@ -20,9 +20,8 @@ while ($file = readdir($dir_handle)) {
 		$cal_filename = substr($file,0,-4);
 		$cal = urlencode($cal_filename);
 		
-		if ($_COOKIE["last_view"][$cal]) {
-			$last_view = $_COOKIE["last_view"][$cal];
-			print "<option value=\"$last_view.php?cal=$cal\">$cal_filename</option>\n";
+		if ($current_view) {
+			print "<option value=\"$current_view.php?cal=$cal\">$cal_filename</option>\n";
 		} else {
 			print "<option value=\"$default_view.php?cal=$cal\">$cal_filename</option>\n";	
 		}

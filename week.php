@@ -1,5 +1,9 @@
 <? include "ical_parser.php"; 
 
+//might not need this, depending on implimentation, doesn't work correctly in current form anyway
+//setcookie("last_view", "week");
+$current_view = "week";
+
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day = $day_array2[3];
 $this_week = $day_array2[2];
@@ -30,6 +34,7 @@ $prev_week = date("Ymd", $prev_week2);
 </head>
 <body bgcolor="#FFFFFF">
 <center>
+<? include('./list_icals.php'); ?>
 	<table width="700" border="0" cellspacing="0" cellpadding="0" class="V12">
 	<tr>
 		<td align="left" width="5%"><!--[[a class="psf" href="day.php"]]Today[[/a]]--></td>
