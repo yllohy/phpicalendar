@@ -29,15 +29,17 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .eventbg_3	 	{ background-color: #E84F25; padding: 2px;}
 .eventbg_4	 	{ background-color: #B257A2; padding: 2px;}
 .eventbg_5	 	{ background-color: #D42020; padding: 2px;}
-.eventbg_6	 	{ background-color: #CCB21F; padding: 2px;}
+.eventbg_6	 	{ background-color: #B88F0B; padding: 2px;}
 .eventbg_7	 	{ background-color: #73738C; padding: 2px;}
+#allday a		{ font-size: 9px; color: #fff; font-weight: 900; text-decoration:none;}
+#allday a:hover	{ text-decoration:underline;}
 
 .eventbg2_1	 		{ background-color: #6699CC; border: 1px solid #557CA3; }
 .eventbg2_2	 		{ background-color: #4FC464; border: 1px solid #53A062; }
 .eventbg2_3	 		{ background-color: #FF6D3B; border: 1px solid #E84F25; }
 .eventbg2_4	 		{ background-color: #EA62D4; border: 1px solid #B257A2; }
 .eventbg2_5	 		{ background-color: #FF5E56; border: 1px solid #D42020; }
-.eventbg2_6	 		{ background-color: #FFEB4A; border: 1px solid #CCB21F; }
+.eventbg2_6	 		{ background-color: #CCB21F; border: 1px solid #B88F0B; }
 .eventbg2_7	 		{ background-color: #9292A1; border: 1px solid #73738C; }
 
 .dayborder 		{ background-color: #fff; border-top: 1px solid #A1A5A9; }

@@ -44,11 +44,11 @@
 						</table>
 					</td>
 				</tr>
-				<tr>
+				<tr id="allday">
 					<td>
 						<!-- loop allday on -->
 						<div class="alldaybg_{CALNO}">
-							{EVENT}
+							{ALLDAY}
 						</div>
 						<!-- loop allday off -->
 					</td>

@@ -22,8 +22,8 @@ class Page {
 		$loop_day 	= trim($match3[1]);
 		
 		foreach($master_array as $key => $val) {
-			ereg ("([0-9]{6})([0-9]{2})", $key, $regs);
-			if ((($regs[1] == $parse_month) && ($printview == "month")) || (($key == $getdate) && ($printview == "day")) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == "week"))) {
+			preg_match ('/([0-9]{6})([0-9]{2})/', $key, $regs);
+			if ((($regs[1] == $parse_month) && ($printview == 'month')) || (($key == $getdate) && ($printview == 'day')) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == 'week'))) {
 				$events_week++;
 				$dayofmonth = strtotime ($key);
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
@@ -34,16 +34,16 @@ class Page {
 				// Pull out each day
 				foreach ($val as $new_val) {
 					foreach ($new_val as $new_key2 => $new_val2) {
-					if ($new_val2["event_text"]) {	
-						$event_text 	= stripslashes(urldecode($new_val2["event_text"]));
-						$description 	= stripslashes(urldecode($new_val2["description"]));
-						$event_start 	= $new_val2["event_start"];
-						$event_end 		= $new_val2["event_end"];
-						if (isset($new_val2["display_end"])) $event_end = $new_val2["display_end"];
+					if ($new_val2['event_text']) {	
+						$event_text 	= stripslashes(urldecode($new_val2['event_text']));
+						$description 	= stripslashes(urldecode($new_val2['description']));
+						$event_start 	= $new_val2['event_start'];
+						$event_end 		= $new_val2['event_end'];
+						if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
 							$event_start 	= date ($timeFormat, strtotime ($event_start));
 							$event_end 		= date ($timeFormat, strtotime ($event_end));
-							$event_start 	= "$event_start - $event_end";
-							if (!$new_val2["event_start"]) { 
+							$event_start 	= $event_start .' - '.$event_end;
+							if (!$new_val2['event_start']) { 
 								$event_start = $lang['l_all_day'];
 								$event_start2 = '';
 								$event_end = '';
@@ -121,8 +121,8 @@ class Page {
 					$event_url	   	= $allday['url'];
 					if ($event_calno < 1) $event_calno=1;
 					if ($event_calno > 7) $event_calno=7;
-					$event 			= openevent($event_calna, '', '', $allday, 1, 11, '<span class="V9W">', '</span>', 'psf', $event_url);
-					$loop_tmp 		= str_replace('{EVENT}', $event, $loop_ad);
+					$event 			= openevent($event_calna, '', '', $allday, 1, 11, '', '', 'psf', $event_url);
+					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 					$replace		.= $loop_tmp;
 				}
@@ -173,7 +173,7 @@ class Page {
 
 		$event_length = array ();
 		$border = 0;
-		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $getdate, $day_array2);
+		preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $getdate, $day_array2);
 		$this_day = $day_array2[3]; 
 		$this_month = $day_array2[2];
 		$this_year = $day_array2[1];
@@ -185,7 +185,7 @@ class Page {
 		}
 		foreach ($day_array as $key) {
 			$cal_time = $key;	
-			ereg('([0-9]{2})([0-9]{2})', $key, $regs_tmp);
+			preg_match('/([0-9]{2})([0-9]{2})/', $key, $regs_tmp);
 			$key = mktime($regs_tmp[1],$regs_tmp[2],0,$this_month,$this_day,$this_year);
 			$key = date ($timeFormat, $key);
 												
@@ -216,7 +216,7 @@ class Page {
 					$this_time_arr = $master_array[$thisday][$cal_time];
 				}
 					
-				if ("$day_start" == "$cal_time" && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
+				if ($day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
 					foreach($master_array[$thisday] as $time_key => $time_arr) {
 						if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
 							foreach($time_arr as $event_tmp) {
@@ -345,8 +345,8 @@ class Page {
 				$event_url	   	= $allday['url'];
 				if ($event_calno < 1) $event_calno=1;
 				if ($event_calno > 7) $event_calno=7;
-				$event 			= openevent($event_calna, '', '', $allday, 0, '', '<span class="V10WB">', '</span>', 'psf', $event_url);
-				$loop_tmp 		= str_replace('{EVENT}', $event, $loop_ad);
+				$event 			= openevent($event_calna, '', '', $allday, 0, '', '', '', '', $event_url);
+				$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 				$replace		.= $loop_tmp;
 			}
@@ -404,12 +404,12 @@ class Page {
 
 		$event_length = array ();
 		$border = 0;
-		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $getdate, $day_array2);
+		preg_match('/([0-9]{4})([0-9]{2})([0-9]{2})/', $getdate, $day_array2);
 		$this_day = $day_array2[3]; 
 		$this_month = $day_array2[2];
 		$this_year = $day_array2[1];
 		foreach ($day_array as $key) {
-			ereg('([0-9]{2})([0-9]{2})', $key, $regs_tmp);
+			preg_match('/([0-9]{2})([0-9]{2})/', $key, $regs_tmp);
 			$cal_time = $key;
 			$key = mktime($regs_tmp[1],$regs_tmp[2],0,$this_month,$this_day,$this_year);
 			$key = date ($timeFormat, $key);
@@ -452,11 +452,11 @@ class Page {
 					}
 				}
 			}
-			if (ereg('([0-9]{1,2}):00', $key)) {
+			if (preg_match('/([0-9]{1,2}):00/', $key)) {
 				$daydisplay .= '<tr>'."\n";
 				$daydisplay .= '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'."\n";
 				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>'."\n";
-			} elseif("$cal_time" == "$day_start") {
+			} elseif($cal_time == $day_start) {
 				$size_tmp = 60 - (int)substr($cal_time,2,2);
 				$daydisplay .= '<tr>'."\n";
 				$daydisplay .= "<td rowspan=\"" . ($size_tmp / $gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
