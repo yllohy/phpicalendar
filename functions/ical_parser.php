@@ -435,10 +435,12 @@ if ($parse_file) {
 				$except_times[] = $regs[4] . $regs[5];
 				
 			} elseif (stristr($field, 'SUMMARY')) {
+				$data = str_replace("\\n", "<br>", $data);
 				$data = htmlentities(urlencode($data));
 				$summary = $data;
 				
 			} elseif (stristr($field, 'DESCRIPTION')) {
+				$data = str_replace("\\n", "<br>", $data);
 				$data = htmlentities(urlencode($data));
 				if ($valarm_set = FALSE) { 
 					$description = $data;
