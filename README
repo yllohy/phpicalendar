@@ -88,7 +88,8 @@ download.
 Changes:
 --------
 2.0 beta
-	-Swedish translation added.
+	-Swedish and French translations added.
+	-Added iCal specific publish.php.
 	-Fixed stat bug.
 	-Various Bug fixes.
 

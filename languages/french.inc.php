@@ -1,148 +1,155 @@
 <?php
 
 // French language include
-// For version 1.0 PHP iCalendar
+// For version 2.0 PHP iCalendar
 //
-// Translation by La Shampouineuse (info@lashampoo.com)
+// Translation by Einbert (einbert@einbert.net)
+// And some sentences form version 1.0 made by La Shampouineuse (info@lashampoo.com)
 //
 // Submit new translations to chad@chadsdomain.com
 
-$day_lang			= 'Jour';
-$week_lang			= 'Semaine';
-$month_lang			= 'Mois';
-$year_lang			= 'AnnÃ©e';
-$calendar_lang		= 'Calendrier';
-$next_day_lang		= 'Jour suivant';
-$next_month_lang	= 'Mois suivant';
-$next_week_lang		= 'Semaine suivante';
-$next_year_lang		= 'AnnÃ©e suivante';
-$last_day_lang		= 'Jour prÃ©cÃ©dent';
-$last_month_lang	= 'Mois prÃ©cÃ©dent';
-$last_week_lang		= 'Semaine prÃ©cÃ©dente';
-$last_year_lang		= 'AnnÃ©e prÃ©cÃ©dente';
-$subscribe_lang		= 'Souscrire';
-$download_lang		= 'TÃ©lÃ©charger';
-$powered_by_lang 	= 'Produit avec';
-$event_lang			= 'Ã‰vÃ©nement';
-$event_start_lang	= 'DÃ©but';
-$event_end_lang		= 'Fin';
-$this_months_lang	= 'Ã‰vÃ©nements de ce mois';
-$date_lang			= 'Date';
-$summary_lang		= 'RÃ©sumÃ©';
-$all_day_lang		= 'Ã‰vÃ©nement quotidien';
-$notes_lang			= 'Notes';
-$this_years_lang	= 'Ã‰vÃ©nements de cette annÃ©';
-$today_lang			= 'Aujourd\'hui';
-$this_week_lang		= 'Cette semaine';
-$this_month_lang	= 'Ce mois';
-$jump_lang			= 'Voir';
-$tomorrows_lang		= 'Ã‰vÃ©nements de demain';
-$goday_lang			= 'Voir aujourd\'hui';
-$goweek_lang		= 'Voir cette semaine';
-$gomonth_lang		= 'Voir ce mois';
-$goyear_lang		= 'Voir cette annÃ©e';
-$search_lang		= 'Recherche'; // the verb
-$results_lang		= 'RÃ©sultats de la recherche';
-$query_lang			= 'RequÃªte: '; // will be followed by the search query
-$no_results_lang	= 'Aucun Ã©vÃ©nement trouvÃ©';
-$goprint_lang		= 'Version imprimable';
-$time_lang			= 'Heure';
-$summary_lang		= 'RÃ©sumÃ©';
-$description_lang	= 'Description';
-$this_site_is_lang		= 'Ce site est';
-$no_events_day_lang		= 'Pas d\'Ã©vÃ©nement aujourd\'hui.';
-$no_events_week_lang	= 'Pas d\'Ã©vÃ©nement cette semaine.';
-$no_events_month_lang	= 'Pas d\'Ã©vÃ©nement ce mois-ci.';
-$rss_day_date			= 'H:i';  // Lists just the time
-$rss_week_date			= '%e %b';  // Lists just the day
-$rss_month_date			= '%e %b';  // Lists just the day
-$rss_language			= 'fr-fr';
-$search_took_lang		= 'La recherche a pris %s secondes';
-$recurring_event_lang	= 'Ã‰vÃ©nement rÃ©curent';
-$exception_lang			= 'Exception';
-$no_query_lang			= 'Aucune requÃªte';
-$preferences_lang		= 'PrÃ©fÃ©rences';
-$printer_lang			= 'Imprimante';
-$select_lang_lang		= 'Choisissez votre language par dÃ©faut:';
-$select_cal_lang		= 'Choisissez votre calendrier par dÃ©faut:';
-$select_view_lang		= 'Choisissez votre vue par dÃ©faut:';
-$select_time_lang		= 'Choisissez votre heure de dÃ©but par dÃ©faut:';
-$select_day_lang		= 'Choisissez votre jour de dÃ©but de semaine:';
-$select_style_lang		= 'Choisissez votre style par dÃ©faut:';
-$set_prefs_lang			= 'Enregistrer les prÃ©fÃ©rences';
-$completed_date_lang	= 'TerminÃ© le';
-$completed_lang			= 'TerminÃ©';
-$created_lang			= 'CrÃ©Ã©:';
-$due_lang				= 'Fin:';
-$priority_lang			= 'PrioritÃ©:';
-$priority_high_lang		= 'Haute';
-$priority_low_lang		= 'Basse';
-$priority_medium_lang	= 'Moyenne';
-$priority_none_lang		= 'Aucune';
-$status_lang			= 'Status:';
-$todo_lang				= 'TÃ¢ches Ã  faire';
-$unfinished_lang		= 'Non faites';
-$organizer_lang			= 'Organizer';
-$attendee_lang			= 'Attendee';
-$status_lang			= 'Status';
-$location_lang			= 'Location';
-$admin_header_lang		= 'Administration de PHP iCalendar';
-$username_lang			= 'Utilisateur';
-$password_lang			= 'Mot de passe';
-$login_lang				= 'Connexion';
-$invalid_login_lang		= 'Mauvais utilisateur ou mot de passe.';
-$addupdate_cal_lang		= 'Ajouter ou mettre Ã  jour un calendrier';
-$addupdate_desc_lang	= 'Ajout d\'un calendrier en tÃ©lÃ©chargeant un nouveau fichier. Mettre Ã  jour un calendrier en tÃ©lÃ©chargeant un fichier du mÃªme nom.';
-$delete_cal_lang		= 'Effacer un calendrier';
-$logout_lang			= 'Deconnexion';
-$cal_file_lang			= 'Fichier calendrier';
-$php_error_lang			= 'Erreur PHP';
-$upload_error_gen_lang	= 'Il y a eut un problÃ¨me avec votre tÃ©lÃ©chargement.';
-$upload_error_lang[0]	= 'Il y a eut un problÃ¨me avec votre tÃ©lÃ©chargement.';
-$upload_error_lang[1]	= 'Le fichier que vous envoyez est trop gros.';
-$upload_error_lang[2]	= 'Le fichier que vous envoyez est trop gros.';
-$upload_error_lang[3]	= 'Le fichier que vous envoyez a Ã©tÃ© partiellement envoyÃ©.';
-$upload_error_lang[4]	= 'Vous devez selectionner un fichier Ã  envoyer.';
-$upload_error_type_lang = 'Seuls les fichiers en .ics peuvent Ãªtre ajoutÃ©s.';
-$copy_error_lang		= 'La copie du fichier a Ã©chouÃ©';
-$delete_error_lang		= 'La suppression du fichier a Ã©chouÃ©';
-$delete_success_lang	= 'a Ã©tÃ© effacÃ© avec succÃ¨s.';
-$action_success_lang	= 'Action effectuÃ©e avec succÃ¨s.';
-$submit_lang			= 'Envoyer';
-$delete_lang			= 'Supprimer';
+$lang['l_day'] 				= 'Jour';
+$lang['l_week'] 			= 'Semaine';
+$lang['l_month'] 			= 'Mois';
+$lang['l_year'] 			= 'Année';
+$lang['l_calendar'] 		= 'Calendrier';
+$lang['l_next_day'] 		= 'Jour suivant';
+$lang['l_next_month'] 		= 'Mois suivant';
+$lang['l_next_week'] 		= 'Semaine suivante';
+$lang['l_next_year'] 		= 'Année suivante';
+$lang['l_last_day'] 		= 'Jour précédent';
+$lang['l_last_month'] 		= 'Mois précédent';
+$lang['l_last_week'] 		= 'Semaine précédente';
+$lang['l_last_year'] 		= 'Année précédente';
+$lang['l_subscribe'] 		= 'Souscrire';
+$lang['l_download'] 		= 'Télécharger';
+$lang['l_powered_by'] 		= 'Produit avec';
+$lang['l_event'] 			= 'Evénement';
+$lang['l_event_start'] 		= 'Début';
+$lang['l_event_end'] 		= 'Fin';
+$lang['l_this_months'] 		= 'Evénements de ce mois';
+$lang['l_date'] 			= 'Date';
+$lang['l_summary'] 			= 'Résumé';
+$lang['l_all_day'] 			= 'Evénements de ce jour';
+$lang['l_notes'] 			= 'Notes';
+$lang['l_this_years'] 		= 'Evénements de cette année';
+$lang['l_today'] 			= 'Aujourd\'hui';
+$lang['l_this_week'] 		= 'Cette semaine';
+$lang['l_this_month'] 		= 'Ce mois';
+$lang['l_jump'] 			= 'Voir';
+$lang['l_tomorrows'] 		= 'Evénement de demain';
+$lang['l_goday'] 			= 'Voir aujourd\'hui';
+$lang['l_goweek'] 			= 'Voir cette semaine';
+$lang['l_gomonth'] 			= 'Voir ce mois';
+$lang['l_goyear'] 			= 'Voir cette année';
+$lang['l_search'] 			= 'Rechercher'; // the verb
+$lang['l_results'] 			= 'Résultats de la recherche';
+$lang['l_query'] 			= 'Requète'; // will be followed by the search query
+$lang['l_no_results'] 		= 'Aucun événement trouvé';
+$lang['l_goprint'] 			= 'Version imprimable';
+$lang['l_time'] 			= 'Heure';
+$lang['l_summary'] 			= 'Résumé';
+$lang['l_description'] 		= 'Description';
+$lang['l_this_site_is']		= 'Ce site est';
+$lang['l_no_events_day']	= 'Pas d\'événements aujourd\'hui.';
+$lang['l_no_events_week']	= 'Pas d\'événements cette semaine.';
+$lang['l_no_events_month']	= 'Pas d\'événements ce mois.';
+$lang['l_rss_day_date']		= 'H:i';  // Lists just the time
+$lang['l_rss_week_date	']	= '%e %b';  // Lists just the day
+$lang['l_rss_month_date	']	= '%e %b';  // Lists just the day
+$lang['l_rss_language']		= 'fr-fr';
+$lang['l_search_took']		= 'La recherche a pris %s seconds';
+$lang['l_recurring_event']	= 'Evénement récurent';
+$lang['l_exception']		= 'Exception';
+$lang['l_no_query']			= 'Aucune requète';
+$lang['l_preferences']		= 'Préférences';
+$lang['l_printer']			= 'Imprimante';
+$lang['l_select_lang']		= 'Choisissez votre langage par défaut';
+$lang['l_select_cal']		= 'Choisissez votre calendrier par défaut';
+$lang['l_select_view']		= 'Choisissez votre vue par défaut';
+$lang['l_select_time']		= 'Choisissez votre heure de début par défaut';
+$lang['l_select_day']		= 'Choisissez votre jour de début de semaine par défaut';
+$lang['l_select_style']		= 'Choisissez votre style par défaut';
+$lang['l_set_prefs']		= 'Enregistrer les préférences';
+$lang['l_completed_date']	= 'Terminé le';
+$lang['l_completed']		= 'Terminé';
+$lang['l_created']			= 'Créé';
+$lang['l_due']				= 'Fin:';
+$lang['l_priority']			= 'Priorité';
+$lang['l_priority_high']	= 'Haute';
+$lang['l_priority_low']		= 'Basse';
+$lang['l_priority_medium']	= 'Moyenne';
+$lang['l_priority_none']	= 'Aucune';
+$lang['l_status']			= 'Status:';
+$lang['l_todo']				= 'Tâches à réaliser';
+$lang['l_unfinished']		= 'Non faites';
+$lang['l_prefs_set'] 		= 'Vos préférences ont été modifiées.';
+$lang['l_prefs_unset'] 		= 'Préférences supprimées. Changement au prochain chargement de la page.';
+$lang['l_unset_prefs'] 		= 'Supprimez les préférences';
+$lang['l_organizer']		= 'Organizer';
+$lang['l_attendee']			= 'Attendee';
+$lang['l_status']			= 'Status';
+$lang['l_location']			= 'Location';
+$lang['l_admin_header']		= 'Administration de PHP iCalendar';
+$lang['l_username']			= 'Utilisateur';
+$lang['l_password']			= 'Mot de passe';
+$lang['l_login']			= 'Authentification';
+$lang['l_invalid_login']	= 'Utilisateur ou mot de passe erroné.';
+$lang['l_addupdate_cal']	= 'Ajoutez ou modifiez un calendrier';
+$lang['l_addupdate_desc']	= 'Ajoutez un calendrier en chargeant un nouveau fichier. Modifiez un calendrier en chargeant un fichier de même nom.';
+$lang['l_delete_cal']		= 'Effacez un calendrier';
+$lang['l_logout']			= 'Logout';
+$lang['l_cal_file']			= 'Fichier calendrier';
+$lang['l_php_error']		= 'Erreur PHP';
+$upload_error_gen_lang		= 'Une erreur lors du téléchargement s\'est produite.';
+$upload_error_lang[0]		= 'Une erreur lors du téléchargement s\'est produite.';
+$upload_error_lang[1]		= 'Le fichier que vous tentez de télécharger est trop grand.';
+$upload_error_lang[2]		= 'Le fichier que vous tentez de télécharger est trop grand.';
+$upload_error_lang[3]		= 'Le fichier n\'a été que partiellement téléchargé.';
+$upload_error_lang[4]		= 'Vous devez choisir un fichier à télécharger.';
+$lang['l_upload_error_type'] = 'Seuls des fichiers au format .ics peuvent être téléchargés.';
+$lang['l_copy_error']			= 'La copie du fichier a échoué';
+$lang['l_delete_error']			= 'La suppression du fichier a échoué';
+$lang['l_delete_success']		= 'a été supprimé avec succès.';
+$lang['l_action_success']		= 'Action effectuée avec succès.';
+$lang['l_submit']				= 'Envoyer';
+$lang['l_delete']				= 'Supprimer';
+$all_cal_comb_lang			= 'Tous les calendriers';
 
-// ----- New for 0.9.4
-$all_cal_comb_lang		= 'Tous les calendriers';
+// New for 2.0
+$lang['l_legend']			= 'Légende';
+$lang['l_admin_subhead']	= 'Contrôlez vos calendriers à partir de cette page';
+$lang['l_prefs_subhead']	= 'Stock un cookie pour la visite de ce site';
+$lang['l_rss_info']			= 'Information RSS';
+$lang['l_rss_subhead']		= 'RSS feeds basic disponible pour chaque calendrier';
+$lang['l_rss_notenabled']	= 'RSS n\'est pas disponible sur ce site';
 
 // - navigation
-$back_lang = 'Retour';
-$next_lang = 'Suivant';
-$prev_lang = 'PrÃ©cÃ©dent';
-$day_view_lang = 'Vue Journaliere';
-$week_view_lang = 'Vue Hebdomadaire';
-$month_view_lang = 'Vue Mensuelle';
-$year_view_lang = 'Vue Annuelle';
-$prefs_set_lang = 'Vos prÃ©fÃ©rences ont Ã©tÃ© enregistrÃ©es';
-$prefs_unset_lang = 'PrÃ©fÃ©rences non dÃ©finies. Les Changements seront pris en compte au prochain chargement de la page.';
-$unset_prefs_lang = 'PrÃ©fÃ©rences non dÃ©finies:';
-
+$lang['l_back'] 		= 'Retour';
+$lang['l_next'] 		= 'Suivant';
+$lang['l_prev'] 		= 'Précédent';
+$lang['l_day_view'] 	= 'Vue Journalière';
+$lang['l_week_view'] 	= 'Vue Hebdomadaire';
+$lang['l_month_view'] 	= 'Vue Mensuelle';
+$lang['l_year_view'] 	= 'Vue annuelle';
 
 // ---------------------------------
+
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
 
 $format_recur_lang['yearly']		= array('an','ans');		// for these, put singular
 $format_recur_lang['monthly']		= array('mois','mois');		// and plural forms
-$format_recur_lang['weekly']		= array('semaines','semaines');		// these will be %freq%
+$format_recur_lang['weekly']		= array('semaine','semaines');		// these will be %freq%
 $format_recur_lang['daily']			= array('jour','jours');			// in the replacement below
 $format_recur_lang['hourly']		= array('heure','heures');
-$format_recur_lang['minutely']		= array('minute','minutes');
+$format_recur_lang['minutely']		= array('minutes','minutes');
 $format_recur_lang['secondly']		= array('seconde','secondes');
 
-$format_recur_lang['start']			= 'Tou(te)s les %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= 'jusqu\'au %date%';			// ie, 'until January 4'
-$format_recur_lang['count']			= 'pendant %int% fois';		// ie, 'for 5 times'
+$format_recur_lang['start']			= 'Tou(te)s %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'jusqu\'au %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= 'pendant %int%';		// ie, 'for 5 times'
 
 $format_recur_lang['bymonth']		= 'Aux mois: %list%';			// ie, 'In months: January, February, March'
 $format_recur_lang['bymonthday']	= 'Aux dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
@@ -153,12 +160,10 @@ $format_recur_lang['byday']			= 'Aux jours: %list%';			// ie, 'On days: Mon, Tue
 $daysofweek_lang			= array ('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi');
 $daysofweekshort_lang		= array ('Dim','Lun','Mar','Mer','Jeu','Ven','Sam');
 $daysofweekreallyshort_lang	= array ('D','L','M','M','J','V','S');
-$monthsofyear_lang			= array ('Janvier','FÃ©vrier','Mars','Avril','Mai','Juin','Juillet','AoÃ»t','Septembre','Octobre','Novembre','DÃ©cembre');
-$monthsofyearshort_lang		= array ('jan','fÃ©v','mar','avr','mai','juin','juil','aoÃ»','sep','oct','nov','dÃ©c');
+$monthsofyear_lang			= array ('Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre');
+$monthsofyearshort_lang		= array ('Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc');
 
-
-
-// For time formatting, check out: http://www.php.net/manual/fr/function.date.php
+// For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'H:i';
 $timeFormat_small = 'g:i';
 
@@ -187,14 +192,15 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Erreur!';
-$error_window_lang = 'Une erreur s\'est produite!';
-$error_calendar_lang = 'L\'erreur s\'est produite lors du traitement du calendrier "%s".';
-$error_path_lang = 'Impossible d\'ouvrir le chemin: "%s"';
-$error_back_lang = 'Veuillez utiliser le bouton "Retour" pour revenir en arriÃ¨re.';
-$error_remotecal_lang = 'Ce serveur refuse les calendriers distants non approuvÃ©s.';
-$error_restrictedcal_lang = 'Vous avez essayÃ© d\'utiliser un calendrier dont les permissions sont restreintes sur ce serveur.';
-$error_invalidcal_lang = 'Fichier calendrier invalide. Veuillez utiliser un autre calendrier.';
-
+$lang['l_error_title'] 			= 'Erreur!';
+$lang['l_error_window'] 		= 'Une erreur s\'est produite!';
+$lang['l_error_calendar'] 		= 'Une erreur s\'est produite lors du traitement du calendrier "%s".';
+$lang['l_error_path'] 			= 'Impossible d\'ouvrir le chemin: "%s"';
+$lang['l_error_back'] 			= 'Veuillez utiliser le bouton "Retour" pour revenir en arrière.';
+$lang['l_error_remotecal'] 		= 'Ce serveur refuse les calendriers distants non approuvés.';
+$lang['l_error_restrictedcal'] 	= 'Vous avez essayé d\'utiliser un calendrier dont les permissions sont restreintes sur ce serveur.';
+$lang['l_error_invalidcal'] 	= 'Fichier calendrier invalide. Veuillez essayer un calendrier différent.';
+$lang['l_error_cantopen'] 		= 'Unable to open calendar.';
+$lang['l_error_cache']			= 'Unable to write to cache directory. Please check your config.';
 
 ?>
