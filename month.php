@@ -136,7 +136,7 @@ $num_of_events = 0;
 										$num_of_events++;
 										if (!isset($val["event_start"])) {
 											 openevent("$calendar_name", "", "", $val, $month_event_lines,
-											12,
+											11,
 											"<div align=\"center\" class=\"V10\"><i>",
 											"</i></div>",
 											"psf");
@@ -151,7 +151,7 @@ $num_of_events = 0;
 											"$event_end",
 											$val,
 											$month_event_lines,
-											12,
+											11,
 											"<div align=\"left\" class=\"V9\">&nbsp;$start2 ",
 											"</div>",
 											"ps3");
