@@ -1,5 +1,5 @@
 <!-- switch show_user_login on -->
-<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php?{LOGIN_QUERYS}" method="get">
+<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php?{LOGIN_QUERYS}" method="post">
 <input type="hidden" name="action" value="login" />
 <table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
 	<tr>
