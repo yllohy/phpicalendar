@@ -140,7 +140,7 @@
 												echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$really_today_today\">$goyear_lang</a><br>\n";
 												echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
 												if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
-												if ($cal != $ALL_CALENDARS_COMBINED) echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+												if ($cal != $ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
 											 ?>
 											</td>
 										</tr>
