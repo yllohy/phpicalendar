@@ -191,15 +191,15 @@
 													<tr>
 														<td width="1%"><img src="images/spacer.gif" width="4" height="1" alt=" "></td>
 														<td colspan="6" class="G10B">
-														<?php echo "
-															<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$today_today\">$goday_lang</a><br>\n
-															<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$today_today\">$goweek_lang</a><br>\n
-															<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$today_today\">$gomonth_lang</a><br>\n
-															<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a><br>\n
-															<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n
-															<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n
-															<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n
-														"; ?>
+														<?php 
+															echo "<a class=\"psf\" href=\"day.php?cal=$cal&amp;getdate=$today_today\">$goday_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"week.php?cal=$cal&amp;getdate=$today_today\">$goweek_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"month.php?cal=$cal&amp;getdate=$today_today\">$gomonth_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"year.php?cal=$cal&amp;getdate=$today_today\">$goyear_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"print.php?cal=$cal&amp;getdate=$getdate&amp;printview=$current_view\">$goprint_lang</a><br>\n";
+															if ($allow_preferences != 'no') echo "<a class=\"psf\" href=\"preferences.php?cal=$cal&amp;getdate=$getdate\">$preferences_lang</a><br>\n";
+															echo "<a class=\"psf\" href=\"$subscribe_path\">$subscribe_lang</a>&nbsp;|&nbsp;<a class=\"psf\" href=\"$download_filename\">$download_lang</a>\n";
+														 ?>
 														</td>
 													</tr>
 												</table>
