@@ -90,4 +90,4 @@ $error_remotecal_lang = 'Ten serwer blokuje dostęp do niezatwierdzonych zdalnyc
 $error_restrictedcal_lang = 'Dostęp do kalendarza, który próbujesz otworzyć, jest zabroniony przez serwer.';
 $error_invalidcal_lang = 'Zły plik kalendarza. Spróbuj innego.';
 
-?>)
+?>

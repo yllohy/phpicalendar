@@ -91,4 +91,3 @@ $error_invalidcal_lang = 'Ugyldig kalenderfil. Vennligst pr&oslash;v en annen ka
 
 
 ?>
-)

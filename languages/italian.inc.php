@@ -92,4 +92,3 @@ $error_invalidcal_lang = 'File di calendario non valido. Prova un calendario div
 
 
 ?>
-)
