@@ -75,6 +75,12 @@
 								<td class="dayborder2">&nbsp;</td>
 							</tr>
 							<!-- loop row off -->
+							<!-- loop event on -->
+							<div class="eventfont">
+								<div class="eventbg_{EVENT_CALNO}">{CONFIRMED}<b>{EVENT_START}</b> - {EVENT_END}</div>
+								<div class="padd">{EVENT}</div>
+							</div>
+							<!-- loop event off -->
 						</table>
 					</td>
 				</tr>

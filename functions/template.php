@@ -191,7 +191,9 @@ class Page {
 			} 
 		}
 		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!is", $this->page, $match2);
+		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!is", $this->page, $match3);
 		$loop_hours = trim($match2[1]);
+		$loop_event = trim($match3[1]);
 
 		$event_length = array ();
 		$border = 0;
@@ -264,7 +266,7 @@ class Page {
 				$dayborder = 0;
 			}
 			if (sizeof($event_length) == 0) {
-				$daydisplay .= '<td bgcolor="#ffffff" colspan="' . $nbrGridCols . '" '.$class.'>&nbsp;</td>'."\n";
+				$daydisplay .= '<td colspan="' . $nbrGridCols . '" '.$class.'>&nbsp;</td>'."\n";
 				
 			} else {
 				$emptyWidth = $nbrGridCols;
@@ -283,36 +285,30 @@ class Page {
 						  $event_status = strtolower($this_time_arr[($event_length[$i]['key'])]['status']);
 						  if ($event_calno < 1) $event_calno = 1;
 						  if ($event_calno > 7) $event_calno = 7;
-		
-						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
-						  $daydisplay .= '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
-						  $daydisplay .= '<tr>'."\n";
-						  $daydisplay .= '<td class="eventbg_'.$event_calno.'"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
 						  if ($event_status != '') {
-							$daydisplay .= '<td class="eventbg_'.$event_calno.'" width="9" align="right" valign="center"><font class="eventfont">';
-							$daydisplay .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">';
-							$daydisplay .= '</font></td>'."\n";
+						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0">&nbsp;';
 						  }
-						  $daydisplay .= '</tr>'."\n";
-						  $daydisplay .= '<tr>'."\n";
-						  $daydisplay .= '<td colspan="2">'."\n";
-						  $daydisplay .= '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
-						  $daydisplay .= '<tr>'."\n";
-						  $daydisplay .= '<td>';
+						  
+						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
+						  
+						  // Start drawing the event
+						  $event_temp  = $loop_event;
 						  $event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
 						  $event_url   = $this_time_arr[($event_length[$i]['key'])]['url'];
-						  $daydisplay .= openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$i]['key'])], '', 0, '<font class="eventfont">', '</font>', 'psf', $event_url);
-						  $daydisplay .= '</td></tr>'."\n";
-						  $daydisplay .= '</table>'."\n";
-						  $daydisplay .= '</td>'."\n";           
-						  $daydisplay .= '</tr>'."\n";
-						  $daydisplay .= '</table>'."\n";
-						  $daydisplay .= '</td>'."\n";
+						  $event 	   = openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$i]['key'])], '', 0, '', '', 'ps', $event_url);
+						  $event_temp   = str_replace('{EVENT}', $event, $event_temp);
+						  $event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
+						  $event_temp   = str_replace('{EVENT_END}', $event_end, $event_temp);
+						  $event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
+						  $event_temp   = str_replace('{EVENT_CALNO}', $event_calno, $event_temp);
+						  $daydisplay .= $event_temp;
+						  // End event drawing
+						  
 						  break;
 						case 'started':
 							break;
 						case 'ended':
-							$daydisplay .= '<td bgcolor="#ffffff" colspan="' . $drawWidth . '" ' . $class . '>&nbsp;</td>'."\n";
+							$daydisplay .= '<td colspan="' . $drawWidth . '" ' . $class . '>&nbsp;</td>'."\n";
 							break;
 					}
 					$event_length[$i]['length']--;
@@ -322,7 +318,7 @@ class Page {
 				}
 				//fill emtpy space on the right
 				if ($emptyWidth > 0) {
-					$daydisplay .= '<td bgcolor="#ffffff" colspan="' . $emptyWidth . '" ' . $class . '>&nbsp;</td>'."\n";
+					$daydisplay .= '<td colspan="' . $emptyWidth . '" ' . $class . '>&nbsp;</td>'."\n";
 				}
 				while (isset($event_length[(sizeof($event_length) - 1)]) && $event_length[(sizeof($event_length) - 1)]['state'] == 'ended') {
 					array_pop($event_length);
@@ -332,7 +328,7 @@ class Page {
 			$daydisplay .= '</tr>'."\n";
 		}
 		
-		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop row off -->!is', $daydisplay, $this->page);
+		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!is', $daydisplay, $this->page);
 	
 	
 	}
