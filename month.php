@@ -120,6 +120,8 @@ if ($allow_login == 'yes') {
 	
 if ($this_months_events == 'yes') {	
 	$page->monthbottom($page);
+} else {
+	$page->nomonthbottom($page);
 }
 $page->draw_subscribe($page);
 

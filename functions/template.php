@@ -829,6 +829,10 @@ class Page {
 		return $return;	
 	}
 	
+	function nomonthbottom() {
+		$this->page = preg_replace('!<\!-- switch showbottom on -->(.*)<\!-- switch showbottom off -->!is','', $this->page);
+	}
+	
 	function monthbottom() {
 		global $template, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $timeFormat_small, $dateFormat_week_list, $lang;
 		preg_match("!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!is", $this->page, $match1);
