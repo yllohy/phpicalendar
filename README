@@ -87,10 +87,19 @@ functions folder.
 
 Changes:
 --------
-1.2
-	-Workaround for events starting between 0000 and 0100
-	-Started templating system
-	-Removed all styles except for defualt
+2.0 beta
+	-New templating system.
+	-Workaround for events starting between 0000 and 0100.
+	-Removed all styles except for default.
+	-Moved all HTML to XHTML.
+	-Revamped CSS.
+	-Added legends and calendar colors.
+	-HTTP authentication added for admin.php.
+	-Sessions added for locked calendars.
+	-Mozilla calendar support added to publish.php.
+	-RSS supports ports other than 80.
+	-RSS respects $calendar_path.
+	-Various bug fixes.
 	
 1.1
 	-Fixed a bug with HTTP authentication.
@@ -100,7 +109,7 @@ Changes:
 	-Fix for adding newlines in Location field.
 
 1.0
-	-Added return false to popups
+	-Added return false to popups.
 	-Added workaround for improperly set DTSTART dates.
 
 1.0 RC-2
