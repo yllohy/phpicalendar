@@ -133,7 +133,7 @@
 								foreach ($master_array[("$daylink")] as $event_times) {
 									foreach ($event_times as $val) {
 										$num_of_events++;
-										$event_text = $val["event_text"];
+										$event_text = urldecode($val["event_text"]);
 										$event_text = strip_tags($event_text, '<b><i><u>');
 										if ($event_text != "") {	
 											$event_text2 	= addslashes($val["event_text"]);

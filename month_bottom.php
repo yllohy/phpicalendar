@@ -360,9 +360,10 @@
 												// Pull out each time
 												foreach ($new_val as $new_key2 => $new_val2) {
 												if ($new_val2["event_text"]) {	
-													$event_text 	= $new_val2["event_text"];
+													$event_text 	= urldecode($new_val2["event_text"]);
 													$event_text2 	= addslashes($new_val2["event_text"]);
 													$event_text2 	= str_replace("\"", "&quot;", $event_text2);
+													$event_text2 	= urlencode($event_text2);
 													$description 	= addslashes($new_val2["description"]);
 													$description 	= str_replace("\"", "&quot;", $description);
 													$event_start 	= $new_val2["event_start"];

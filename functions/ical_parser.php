@@ -461,9 +461,11 @@ if ($parse_file) {
 				$except_times[] = $regs[4] . $regs[5];
 				
 			} elseif (stristr($field, 'SUMMARY')) {
+				$data = htmlentities(urlencode($data));
 				$summary = $data;
 				
 			} elseif (stristr($field, 'DESCRIPTION')) {
+				$data = htmlentities(urlencode($data));
 				if ($valarm_set = FALSE) { 
 					$description = $data;
 				} else {
@@ -502,7 +504,6 @@ if ($parse_file) {
 				}	
 				
 			} elseif (stristr($field, 'RRULE')) {
-				// $data = 'RRULE:FREQ=YEARLY;INTERVAL=2;BYMONTH=1;BYDAY=SU;BYHOUR=8,9;BYMINUTE=30';
 				$data = ereg_replace ('RRULE:', '', $data);
 				$rrule = split (';', $data);
 				foreach ($rrule as $recur) {

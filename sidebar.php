@@ -168,7 +168,7 @@
 								<?php
 								foreach ($master_array[("$tomorrows_date")] as $event_times) {
 									foreach ($event_times as $val) {
-										$event_text = $val["event_text"];
+										$event_text = urldecode($val["event_text"]);
 										$event_text = strip_tags($event_text, '<b><i><u>');
 										if ($event_text != "") {	
 											$event_text2 	= addslashes($val["event_text"]);

@@ -173,7 +173,7 @@ for ($i=0;$i<7;$i++) {
 									if (isset($master_array[($thisday)]["-1"])) {
 										echo "<table width=\"100%\" border=\"0\" cellspacing=\"1\" cellpadding=\"4\" class=\"V9\">\n";
 										foreach($master_array[($thisday)]["-1"] as $allday) {
-											$all_day_text 	= $allday["event_text"];
+											$all_day_text 	= urldecode($allday["event_text"]);
 											$all_day_text 	= word_wrap($all_day_text, 12, $allday_week_lines);
 											$event_text2 	= urlencode(addslashes($all_day_text));
 											$description 	= $allday["description"];
@@ -263,7 +263,7 @@ for ($i=0;$i<7;$i++) {
 													case "begin":
 													
 														$event_length[$thisday][$i]["state"] = "started";
-														$event_text 	= $master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"];
+														$event_text 	= urldecode($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]);
 														$event_text 	= word_wrap($event_text, 25, $week_events_lines);
 														$event_text2 	= addslashes($master_array[($thisday)]["$cal_time"][($event_length[$thisday][$i]["key"])]["event_text"]);
 														$event_text2 	= urlencode($event_text2);

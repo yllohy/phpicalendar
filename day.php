@@ -11,18 +11,8 @@ $current_view = 'day';
 include('./functions/ical_parser.php');
 if ($minical_view == "current") $minical_view = "day";
 
-
-
-//if ($use_sessions == 'yes') {
-//	session_start();
-//	if (is_array($aArray)) $master_array = $aArray;
-//	echo 'using sessions';
-//}
-
 $starttime = '0500';
 $weekstart = 1;
-// dpr 20020926: moved variable gridLength to config.inc.php
-//$gridLength = 30;
 $unix_time = strtotime($getdate);
 $today_today = date ('Ymd');
 $tomorrows_date = date( 'Ymd', strtotime('+1 day',  $unix_time));
@@ -184,7 +174,7 @@ if (is_array($master_array[($getdate)])) {
 											switch ($event_length[$i]['state']) {
 												case 'begin':
 													$event_length[$i]['state'] = 'started';
-													$event_text 	= $master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text'];
+													$event_text 	= urldecode($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']);
 													$event_text2 	= addslashes($master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_text']);
 													$event_text2 	= rawurlencode($event_text2);
 													$event_start 	= $master_array[($getdate)][$cal_time][($event_length[$i]['key'])]['event_start'];
