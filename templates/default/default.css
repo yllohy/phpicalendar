@@ -15,9 +15,11 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .alldaybg_6 {background: url(images/allday_6.gif) repeat-x; height: 19px; padding-top: 5px; text-align: center;}
 .alldaybg_7 {background: url(images/allday_7.gif) repeat-x; height: 19px; padding-top: 5px; text-align: center;}
 
-.rowOn			{ background-color: #cfc; }
-.rowOff			{ background-color: #E1E8F1; }
-.rowToday		{ background-color: #cff; }
+.rowOn			{ background-color: #cfc; border-top: 1px solid #fff; border-left: 1px solid #fff; }
+.rowOn2			{ background-color: #cfc; border-top: 1px solid #fff; }
+.rowOff			{ background-color: #E1E8F1; border-top: 1px solid #fff; border-left: 1px solid #fff; }
+.rowOff2		{ background-color: #E1E8F1; border-top: 1px solid #fff; border-left: }
+.rowToday		{ background-color: #cff; border-top: 1px solid #fff; border-left: 1px solid #fff; }
 
 
 
@@ -92,7 +94,7 @@ a.ps3			{ text-decoration:	none; }
 a.ps3:link		{ color: #000000; background-color: transparent; }
 a.ps3:visited	{ color: #000000; background-color: transparent; }
 a.ps3:active	{ color: #000000; background-color: transparent; }
-a.ps3:hover		{ color: #000000; background-color: transparent; text-decoration:	underline;}
+a.ps3:hover		{ color: #000000; background-color: transparent; }
 	
 /* Body attributes */
 

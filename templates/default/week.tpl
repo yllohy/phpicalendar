@@ -30,124 +30,130 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
 								<tr>
 									<td align="center" valign="top">
-										<table width="100%" border="0" cellspacing="0" cellpadding="2">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
 											<tr>
-												<td align="left" valign="top" width="30" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={PREV_WEEKK}'">
-													<span class="V12">&nbsp;&nbsp;<a class="psf" href="week.php?cal={CAL}&amp;getdate={PREV_WEEK}">&laquo;</a></span>
+												<td align="left" valign="top" width="15" class="rowOff2" onmouseover="this.className='rowOn2'" onmouseout="this.className='rowOff2'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={PREV_WEEK}'">
+													<div class="V12">&nbsp;<a class="psf" href="week.php?cal={CAL}&amp;getdate={PREV_WEEK}">&laquo;</a></div>
 												</td>
-												<td align="right" valign="top" width="30" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={NEXT_WEEK}'">
-													<span class="V12"><a class="psf" href="week.php?cal={CAL}&amp;getdate={NEXT_WEEK}">&raquo;</a>&nbsp;&nbsp;</span>
+												<td align="left" valign="top" width="15" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={PREV_DAY}'">
+													<div class="V12">&nbsp;<a class="psf" href="week.php?cal={CAL}&amp;getdate={PREV_DAY}">&lsaquo;</a></div>
+												</td>
+												<td align="right" valign="top" width="15" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={NEXT_DAY}'">
+													<div class="V12"><a class="psf" href="week.php?cal={CAL}&amp;getdate={NEXT_DAY}">&rsaquo;</a>&nbsp;</div>
+												</td>
+												<td align="right" valign="top" width="15" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={NEXT_WEEK}'">
+													<div class="V12"><a class="psf" href="week.php?cal={CAL}&amp;getdate={NEXT_WEEK}">&raquo;</a>&nbsp;</div>
 												</td>
 												<!-- loop daysofweek on -->
-												<td width="80" align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='day.php?cal={CAL}&amp;getdate={DAYLINK}'">
-													<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9">{DAY}</span></a> 
+												<td width="80" align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={DAYLINK}'">
+													<a class="ps3" href="week.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9BOLD">{DAY}</span></a> 
 												</td>
 												<!-- loop daysofweek off -->
 											</tr>
-											<tr>
-												<td width="60" class="rowOff" colspan="2">
+											<tr valign="top">
+												<td width="60" class="rowOff2" colspan="4">
 												<!-- loop alldaysofweek on -->
-												<td>
+												<td width="80" class="rowOff">
 													<!-- loop allday on -->
 													<div class="alldaybg_{CALNO}">
-														{EVENT}
+														<b>{EVENT}</b>
 													</div>
 													<!-- loop allday off -->
 												</td>
 												<!-- loop alldaysofweek off -->
 											</tr>
 											<tr>
-												<td rowspan="4" align="center" valign="top" width="60" class="timeborder" colspan="2">
+												<td colspan="4" rowspan="4" align="center" valign="top" width="60" class="timeborder">
 													8:00 AM
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80" colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80" colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80" colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80" colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-											</tr>
-											<tr>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
-													&nbsp;
-												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
 											</tr>
 											<tr>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
 											</tr>
 											<tr>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
-												<td bgcolor="#ffffff" colspan="1" class="weekborder">
+												<td width="80"colspan="1" class="weekborder">
+													&nbsp;
+												</td>
+											</tr>
+											<tr>
+												<td width="80"colspan="1" class="weekborder">
+													&nbsp;
+												</td>
+												<td width="80"colspan="1" class="weekborder">
+													&nbsp;
+												</td>
+												<td width="80"colspan="1" class="weekborder">
+													&nbsp;
+												</td>
+												<td width="80"colspan="1" class="weekborder">
+													&nbsp;
+												</td>
+												<td width="80"colspan="1" class="weekborder">
+													&nbsp;
+												</td>
+												<td width="80"colspan="1" class="weekborder">
+													&nbsp;
+												</td>
+												<td width="80"colspan="1" class="weekborder">
 													&nbsp;
 												</td>
 											</tr>

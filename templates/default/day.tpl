@@ -24,9 +24,9 @@
 							</tr>
 							<tr>	
 								<td colspan="2">
-									<table width="100%" border="0" cellspacing="1" cellpadding="2">
+									<table width="100%" border="0" cellspacing="0" cellpadding="2">
 										<tr>
-											<td align="left" valign="top" width="20" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'" onclick="window.location.href='day.php?cal={CAL}&amp;getdate={PREV_DAY}'">
+											<td align="left" valign="top" width="20" class="rowOff2" onmouseover="this.className='rowOn2'" onmouseout="this.className='rowOff2'" onclick="window.location.href='day.php?cal={CAL}&amp;getdate={PREV_DAY}'">
 												<span class="V12"><a class="psf" href="day.php?cal={CAL}&amp;getdate={PREV_DAY}">&laquo;</a></span>
 											</td>
 											<!-- loop daysofweek on -->

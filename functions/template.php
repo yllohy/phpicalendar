@@ -12,9 +12,6 @@ class Page {
 				$events_week++;
 				$dayofmonth = strtotime ($key);
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
-				echo "<tr><td width=\"10\"><img src=\"images/spacer.gif\" width=\"10\" height=\"1\" alt=\" \"></td>\n";
-				echo "<td align=\"left\" colspan=\"2\"><font class=\"V12\"><b>$dayofmonth</b></font></td></tr>";
-				echo "<tr><td colspan=\"3\"><img src=\"images/spacer.gif\" width=\"1\" height=\"5\" alt=\" \"></td></tr>\n";
 				
 				// Pull out each day
 				foreach ($val as $new_val) {
@@ -51,28 +48,42 @@ class Page {
 		}	
 	}	
 	
-	function draw_day($template_p) {
-		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day;
+	function draw_week($template_p) {
+		global $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view;
 		
+		for ($i=0; $i<7; $i++) {
+			$thisdate 			= date ('Ymd', $start_week_time); 
+			$weekarray[$i] 		= $thisdate;
+			$start_week_time 	= strtotime('+1 day', $start_week_time);
+		}	
+				
 		// Replaces the allday events
-		$replace = '';
-		if (is_array($master_array[$getdate]['-1'])) {
-			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
-			$loop_ad = trim($match1[1]);
-			foreach ($master_array[$getdate]['-1'] as $allday) {
-				$event_calno  	= $allday['calnumber'];
-				$event_calna  	= $allday['calname'];
-				$event_url	   	= $allday['url'];
-				if ($event_calno < 1) $event_calno=1;
-				if ($event_calno > 7) $event_calno=7;
-				$event 			= openevent($event_calna, '', '', $allday, 0, '', '<span class="V10WB">', '</span>', 'psf', $event_url);
-				$loop_tmp 		= str_replace('{EVENT}', $event, $loop_ad);
-				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
-				$replace		.= $loop_tmp;
+		preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
+		preg_match("!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!is", $this->page, $match2);
+		preg_match("!<\!-- loop allday off -->(.*)<\!-- loop alldaysofweek off -->!is", $this->page, $match3);
+		$loop_ad 	= trim($match1[1]);
+		$loop_begin = trim($match2[1]);
+		$loop_end 	= trim($match3[1]);
+		foreach ($weekarray as $key => $get_date) {
+			$replace = $loop_begin;
+			if (is_array($master_array[$get_date]['-1'])) {
+				foreach ($master_array[$get_date]['-1'] as $allday) {
+					$event_calno  	= $allday['calnumber'];
+					$event_calna  	= $allday['calname'];
+					$event_url	   	= $allday['url'];
+					if ($event_calno < 1) $event_calno=1;
+					if ($event_calno > 7) $event_calno=7;
+					$event 			= openevent($event_calna, '', '', $allday, 1, 11, '<span class="V9W">', '</span>', 'psf', $event_url);
+					$loop_tmp 		= str_replace('{EVENT}', $event, $loop_ad);
+					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
+					$replace		.= $loop_tmp;
+				}
 			}
+			$replace .= $loop_end;
+			$weekreplace .= $replace;
 		}
-		$this->page = ereg_replace('<!-- loop allday on -->(.*)<!-- loop allday off -->', $replace, $this->page);
-	
+		$this->page = preg_replace('!<\!-- loop alldaysofweek on -->(.*)<\!-- loop alldaysofweek off -->!is', $weekreplace, $this->page);
+		
 		// Replaces the daysofweek
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
@@ -80,8 +91,13 @@ class Page {
 		$start_day 			= strtotime($week_start_day);
 		for ($i=0; $i<7; $i++) {
 			$day_num 		= date("w", $start_day);
-			$weekday 		= $daysofweek_lang[$day_num];
 			$daylink		= date('Ymd', $start_wt);
+			if ($current_view == 'day') {
+				$weekday 		= $daysofweek_lang[$day_num];
+			} else {
+				$weekday = localizeDate($dateFormat_week_list, strtotime($daylink));
+			}	
+			
 			if ($daylink == $getdate) {
 				$row1 = 'rowToday';
 				$row2 = 'rowOn';
@@ -100,7 +116,65 @@ class Page {
 			$loop_tmp 		= str_replace('{ROW3}', $row3, $loop_tmp);
 			$weekday_loop  .= $loop_tmp;
 		}
-		$this->page = ereg_replace('<!-- loop daysofweek on -->(.*)<!-- loop daysofweek off -->', $weekday_loop, $this->page);
+		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is', $weekday_loop, $this->page);
+	
+		
+	}
+	
+	function draw_day($template_p) {
+		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view;
+		
+		// Replaces the allday events
+		$replace = '';
+		if (is_array($master_array[$getdate]['-1'])) {
+			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
+			$loop_ad = trim($match1[1]);
+			foreach ($master_array[$getdate]['-1'] as $allday) {
+				$event_calno  	= $allday['calnumber'];
+				$event_calna  	= $allday['calname'];
+				$event_url	   	= $allday['url'];
+				if ($event_calno < 1) $event_calno=1;
+				if ($event_calno > 7) $event_calno=7;
+				$event 			= openevent($event_calna, '', '', $allday, 0, '', '<span class="V10WB">', '</span>', 'psf', $event_url);
+				$loop_tmp 		= str_replace('{EVENT}', $event, $loop_ad);
+				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
+				$replace		.= $loop_tmp;
+			}
+		}
+		$this->page = preg_replace('!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is', $replace, $this->page);
+	
+		// Replaces the daysofweek
+		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
+		$loop_dof = trim($match1[1]);
+		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
+		$start_day 			= strtotime($week_start_day);
+		for ($i=0; $i<7; $i++) {
+			$day_num 		= date("w", $start_day);
+			$daylink		= date('Ymd', $start_wt);
+			if ($current_view == 'day') {
+				$weekday 		= $daysofweek_lang[$day_num];
+			} else {
+				$weekday = localizeDate($dateFormat_week_list, strtotime($daylink));
+			}	
+			if ($daylink == $getdate) {
+				$row1 = 'rowToday';
+				$row2 = 'rowOn';
+				$row3 = 'rowToday';
+			} else {
+				$row1 = 'rowOff';
+				$row2 = 'rowOn';
+				$row3 = 'rowOff';
+			}
+			$start_day 		= strtotime("+1 day", $start_day);
+			$start_wt 		= strtotime("+1 day", $start_wt);
+			$loop_tmp 		= str_replace('{DAY}', $weekday, $loop_dof);
+			$loop_tmp 		= str_replace('{DAYLINK}', $daylink, $loop_tmp);
+			$loop_tmp 		= str_replace('{ROW1}', $row1, $loop_tmp);
+			$loop_tmp 		= str_replace('{ROW2}', $row2, $loop_tmp);
+			$loop_tmp 		= str_replace('{ROW3}', $row3, $loop_tmp);
+			$weekday_loop  .= $loop_tmp;
+		}
+		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is', $weekday_loop, $this->page);
 	
 	}
 	
@@ -139,12 +213,12 @@ class Page {
 				}
 			}
 		
-			$this->page = ereg_replace('<!-- switch t_allday on -->(.*)<!-- switch t_allday off -->', $replace_ad, $this->page);
-			$this->page = ereg_replace('<!-- switch t_event on -->(.*)<!-- switch t_event off -->', $replace_e, $this->page);		
+			$this->page = preg_replace('!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!is', $replace_ad, $this->page);
+			$this->page = preg_replace('!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!is', $replace_e, $this->page);		
 	
 		} else {
 		
-			$this->page = ereg_replace('<!-- switch tomorrows_events on -->(.*)<!-- switch tomorrows_events off -->', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch tomorrows_events on -->(.*)<\!-- switch tomorrows_events off -->!is', '', $this->page);
 		
 		}
 	}
@@ -203,7 +277,7 @@ class Page {
 						$nugget2 .= $nugget1;
 					}
 				}
-			$this->page = ereg_replace('<!-- switch show_completed on -->(.*)<!-- switch show_normal off -->', $nugget2, $this->page);
+			$this->page = preg_replace('!<\!-- switch show_completed on -->(.*)<\!-- switch show_normal off -->!is', $nugget2, $this->page);
 			}	
 		}
 	}
@@ -328,7 +402,7 @@ class Page {
 		} while ($whole_month == TRUE);
 		
 		$return = preg_replace('!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is', $weekday_loop, $template_p);
-		$return = ereg_replace('<!-- loop monthweeks on -->(.*)<!-- loop monthweeks off -->', $middle, $return);
+		$return = preg_replace('!<\!-- loop monthweeks on -->(.*)<\!-- loop monthweeks off -->!is', $middle, $return);
 		$return = str_replace('{MONTH_TITLE}', $month_title, $return);
 		$return = str_replace('{CAL}', $cal, $return);
 		
@@ -385,7 +459,7 @@ class Page {
 			unset ($switch);
 		} while ($this_month == $check_month);
 		
-		$this->page = ereg_replace('<!-- loop showbottomevents_odd on -->(.*)<!-- loop showbottomevents_even off -->', $middle, $this->page);
+		$this->page = preg_replace('!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_even off -->!is', $middle, $this->page);
 			
 	}
 	
@@ -413,7 +487,7 @@ class Page {
 				
 				// This removes any unfilled tags
 				if (!$data) {
-					$this->page = ereg_replace('<!-- switch ' . $tag . ' on -->(.*)<!-- switch ' . $tag . ' off -->', '', $this->page);
+					$this->page = preg_replace('!<\!-- switch ' . $tag . ' on -->(.*)<\!-- switch ' . $tag . ' off -->!is', '', $this->page);
 				}
 				
 				// This replaces any tags
