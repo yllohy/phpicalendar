@@ -21,7 +21,7 @@ $allday_week_lines = '1';				// Number of lines to wrap each event title in all-
 $week_events_lines = '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
-$save_parsed_cals = 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$save_parsed_cals = 'yes';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
 $use_sessions = 'yes';					// This has not yet been implemented.
 $display_custom_goto = 'no';			// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list = 'yes';				// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.

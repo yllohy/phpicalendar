@@ -3,8 +3,8 @@
 // Danish language include
 // For version 0.6 PHP iCalendar
 //
-// Translation by Henrik H√∏jmark (styxx@worldonline.dk)
-//            and Jakob Peterh√§nsel (marook@creepers.org)
+// Translation by Henrik Højmark (styxx@worldonline.dk)
+//            and Jakob Peterhänsel (marook@creepers.org)
 //
 // Submit new translations to chad@chadsdomain.com
 
@@ -14,39 +14,39 @@ $day_lang			= 'Dag';
 $week_lang			= 'Uge';
 $month_lang			= 'M&aring;ned';
 $year_lang			= '&Aring;r';
-$calendar_lang		= 'Kalender';
-$next_day_lang		= 'N&aelig;ste Dag';
-$next_month_lang	= 'N&aelig;ste M&aring;ned';
-$next_week_lang		= 'N&aelig;ste Uge';
-$next_year_lang		= 'N&aelig;ste &Aring;r';
-$last_day_lang		= 'Forrige Dag';
-$last_month_lang	= 'Forrige M&aring;ned';
-$last_week_lang		= 'Forrige Uge';
-$last_year_lang		= 'Forrige &Aring;r';
+$calendar_lang		= 'kalender';
+$next_day_lang		= 'N&aelig;ste dag';
+$next_month_lang	= 'N&aelig;ste m&aring;ned';
+$next_week_lang		= 'N&aelig;ste uge';
+$next_year_lang		= 'N&aelig;ste &aring;r';
+$last_day_lang		= 'Forrige dag';
+$last_month_lang	= 'Forrige m&aring;ned';
+$last_week_lang		= 'Forrige uge';
+$last_year_lang		= 'Forrige &aring;r';
 $subscribe_lang		= 'Abonn&eacute;r';
 $download_lang		= 'Hent';
 $powered_by_lang 	= 'Drevet af';
 $version_lang		= '0.6';
 $event_lang			= 'Aftale';
-$event_start_lang	= 'Start Tidspunkt';
-$event_end_lang		= 'Slut Tidspunkt';
-$this_months_lang	= 'Denne M&aring;neds Aftaler';
+$event_start_lang	= 'Start tidspunkt';
+$event_end_lang		= 'Slut tidspunkt';
+$this_months_lang	= 'Denne m&aring;neds aftaler';
 $date_lang			= 'Dato';
 $summary_lang		= 'Opsummering';
 
 // new since last translation
-$all_day_lang		= 'Heldags Aftale';
+$all_day_lang		= 'Heldags aftale';
 $notes_lang			= 'Noter';
-$this_years_lang	= 'Dette &Aring;s Aftaler';
-$today_lang			= 'I Dag';
-$this_week_lang		= 'Denne Uge';
-$this_month_lang	= 'Denne M&aring;ned';
-$jump_lang			= 'G&aring; Til';
-$tomorrows_lang		= 'N&aelig;ste Dags Aftaler';
-$goday_lang			= 'G&aring; Til Idag';
-$goweek_lang		= 'G&aring; Til Denne Uge';
-$gomonth_lang		= 'G&aring; Til Denne M&aring;ned';
-$goyear_lang		= 'G&aring; Til Dette &Aring;r';
+$this_years_lang	= 'Dette &aring;s aftaler';
+$today_lang			= 'I dag';
+$this_week_lang		= 'Denne uge';
+$this_month_lang	= 'Denne m&aring;ned';
+$jump_lang			= 'G&aring; til';
+$tomorrows_lang		= 'N&aelig;ste dags aftaler';
+$goday_lang			= 'G&aring; til i dag';
+$goweek_lang		= 'G&aring; til denne uge';
+$gomonth_lang		= 'G&aring; til denne m&aring;ned';
+$goyear_lang		= 'G&aring; til dette &aring;r';
 
 // new since last translation
 $daysofweek_lang			= array ('S&oslash;ndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','L&oslash;rdag');

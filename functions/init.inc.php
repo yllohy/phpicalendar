@@ -39,7 +39,7 @@ if (isset($HTTP_GET_VARS['getdate']) && ($HTTP_GET_VARS['getdate'] !== '')) {
 	$getdate = date('Ymd');
 }
 */
-
+ini_set('max_execution_time', '60');
 
 $is_webcal = FALSE;
 if (isset($HTTP_GET_VARS['cal']) && $HTTP_GET_VARS['cal'] != '') {
