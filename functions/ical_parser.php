@@ -524,7 +524,7 @@ foreach ($cal_filelist as $filename) {
 															}
 														} else {
 															$day 	= date('d', $start_date_time);
-															$next_date_time = mktime(0,0,0,$month,$day,$this_year);
+															$next_date_time = mktime(0,0,0,$month,$day,$year);
 														}
 														$recur_data[] = $next_date_time;
 													}
