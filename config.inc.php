@@ -8,10 +8,10 @@
 $style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, grey, tan
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
-$default_cal 			= 'Home';			// Exact filename of calendar without .ics
-$language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese'
-$week_start_day 		= 'Sunday';			// Day of the week your week starts on
-$day_start 				= '0700';			// Start time for day grid
+$default_cal 			= 'all_calenders_combined971';		// Exact filename of calendar without .ics. Or set to 'all_calenders_combined971' to open all calenders combined into one.
+$language 				= 'Esperanto';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto'
+$week_start_day 		= 'Saturday';			// Day of the week your week starts on
+$day_start 				= '0800';			// Start time for day grid
 $gridLength 			= '15';				// Grid distance in minutes for day view, multiples of 15 preferred
 $num_years 				= '3';				// Number of years to display in 'Jump to'
 $month_event_lines 		= '1';				// Number of lines to wrap each event title in month view, 0 means display all lines.
@@ -47,7 +47,7 @@ $show_todos				= 'yes';			// Show your todo list on the side of day and week vie
 $show_completed			= 'yes';			// Show completed todos on your todo list.
 
 // Administration settings
-$allow_admin			= 'yes';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
+$allow_admin			= 'no';				// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
 $auth_method			= 'ftp';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
 $auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.
 $auth_internal_password	= 'default';		// Only used if $auth_method='internal'. The password for the administrator.

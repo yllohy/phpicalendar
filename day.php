@@ -15,7 +15,7 @@ if ($minical_view == 'current') $minical_view = 'day';
 $starttime = '0500';
 $weekstart = 1;
 $unix_time = strtotime($getdate);
-$today_today = date('Ymd', strtotime("now + $second_offset seconds"));
+$today_today = date('Ymd', strtotime("now + $second_offset seconds")); 
 $tomorrows_date = date( 'Ymd', strtotime('+1 day',  $unix_time));
 $yesterdays_date = date( 'Ymd', strtotime('-1 day',  $unix_time));
 $display_date = localizeDate($dateFormat_day, $unix_time);
@@ -107,7 +107,10 @@ if (isset($master_array[($getdate)])) {
 					   echo '<table width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
 					   foreach($master_array[($getdate)]['-1'] as $allday) {
 						 echo "<tr>\n";
-						 echo '<td valign="top" align="center" class="eventbg">';
+						 $event_calno  = $allday['calnumber'];
+						 if ($event_calno < 1) $event_calno=1;
+						 if ($event_calno > 7) $event_calno=7;
+						 echo '<td valign="top" align="center" class="eventbg_'.$event_calno.'">';
 						 openevent("$calendar_name",
 							   "",
 							   "",
@@ -245,8 +248,11 @@ if (isset($master_array[($getdate)])) {
 												  $event_end	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
 												  $event_start 	= date ($timeFormat, $event_start);
 												  $event_end	= date ($timeFormat, $event_end);
+												  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];
+												  if ($event_calno < 1) $event_calno=1;
+												  if ($event_calno > 7) $event_calno=7;
 								
-												  echo '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2">'."\n";
+												  echo '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 												  echo '<table width="100%" border="0" cellspacing="0" cellpadding="2">'."\n";
 												  echo '<tr>'."\n";
 												  echo '<td class="eventborder"><font class="eventfont"><b>'.$event_start.'</b> - '.$event_end.'</font></td>'."\n";
@@ -255,8 +261,10 @@ if (isset($master_array[($getdate)])) {
 												  echo '<td>'."\n";
 												  echo '<table width="100%" border="0" cellpadding="1" cellspacing="0">'."\n";
 												  echo '<tr>'."\n";
-												  echo '<td class="eventbg">';
-										  		  openevent("$calendar_name",
+												  echo '<td class="eventbg_'.$event_calno.'">';
+												  // Todo: keep track of where the event comes from, and indicate that to openevent instead of "all_calenders_combined971"
+												  if ($cal == 'all_calenders_combined971') $calendar_name2=$cal; else $calendar_name2=$calendar_name;
+										  		  openevent("$calendar_name2",
 												  "$event_start",
 												  "$event_end",
 												  $this_time_arr[($event_length[$i]['key'])],

@@ -64,14 +64,13 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 	$cookie_time = $day_start;
 }
 
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-	<title><?php echo "$cal $calendar_lang - $preferences_lang"; ?></title>
+	<title><?php echo "$calendar_lang - $preferences_lang"; ?></title>
   	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
 </head>
 <body bgcolor="#FFFFFF">
@@ -184,7 +183,15 @@ if ((!isset($HTTP_COOKIE_VARS['phpicalendar'])) || ($cookie_unset)) {
 															print "<option value=\"$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
 														}		
 													}	
-												}			
+												}
+												// add option to open all (non-web) calenders together
+												// Todo: add $all_calenders_combined_lang (plural) in the language-specific files and use it here
+												if ($cookie_calendar == 'all_calenders_combined971') {
+													print "<option value=\"all_calenders_combined971\" selected>$all_cal_comb_lang</option>\n";
+												} else {
+													print "<option value=\"all_calenders_combined971\">$all_cal_comb_lang</option>\n";
+												}
+			
 												foreach($list_webcals as $cal_tmp) {
 													if ($cal_tmp != '') {
 														$cal_displayname_tmp = basename($cal_tmp);
