@@ -1,13 +1,11 @@
 <?php
 
 // Esperanto language include
-// For version 0.9.1 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Sjoerd Bosga (sjoerd@esperanto.se)
 //
 // Submit new translations to chad@chadsdomain.com
-
-
 
 $day_lang			= 'Tago';
 $week_lang			= 'Semajno';
@@ -87,9 +85,6 @@ $unfinished_lang		= 'Nekompletigita';
 $prefs_set_lang 		= 'Viaj preferoj estas konservitaj.';
 $prefs_unset_lang 		= 'Viaj preferoj malkonservi&#285;is. &#348;an&#285;oj videblos venontan fojon kiam vi malfermos pa&#285;on.';
 $unset_prefs_lang 		= 'Malkonservu miajn preferojn:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizanto:';
 $attendee_lang			= '&#264;eestanto:';
 $status_lang			= 'Stato:';
@@ -119,8 +114,7 @@ $action_success_lang	= 'Via peto plenumi&#285;is.';
 $submit_lang			= 'En&#349;uti';
 $delete_lang			= 'Forigi';
 
-
-// ----- New after 0.9.2
+// ----- New after 0.9.4
 $all_cal_comb_lang		= '&#264;iuj kalendaroj kune';
 
 

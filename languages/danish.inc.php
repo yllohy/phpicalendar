@@ -1,14 +1,12 @@
 <?php
 
 // Danish language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Henrik H�jmark (styxx@worldonline.dk)
 //            and Jakob Peterh�nsel (marook@creepers.org)
 //
 // Submit new translations to chad@chadsdomain.com
-
-
 
 $day_lang			= 'Dag';
 $week_lang			= 'Uge';
@@ -87,9 +85,6 @@ $unfinished_lang		= 'Uafsluttet';
 $prefs_set_lang 		= 'Dine indstillinger er gemt.'; //Your preferences have been set.
 $prefs_unset_lang 		= 'Indstillinger fjernet. &AElig;ndringer er synlig ved n&aelig;ste sidevisning.'; //Preferences unset. Changes will take place next page load.
 $unset_prefs_lang 		= 'Unset preferences:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
 $status_lang			= 'Status';
@@ -118,6 +113,9 @@ $delete_success_lang	= 'was deleted successfully.';
 $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Tilbage';

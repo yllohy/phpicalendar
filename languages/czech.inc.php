@@ -1,13 +1,11 @@
 <?php
 
 // Czech language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Whit, studio jižák (whit@studio.jizak.cz)
 //
 // Submit new translations to chad@chadsdomain.com
-
-
 
 $day_lang			= 'Den';
 $week_lang			= 'Týden';

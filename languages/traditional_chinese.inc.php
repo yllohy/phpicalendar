@@ -1,7 +1,7 @@
 <?php
 
 // Trad. Chinese language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Kevin Fyure (digdog@mac.com)
 //
@@ -87,9 +87,6 @@ $unfinished_lang		= '尚未完成';
 $prefs_set_lang 		= '您的偏好設定已設定。';
 $prefs_unset_lang 		= '設定已還原。更動的部份會在讀取下一頁時生效。';
 $unset_prefs_lang 		= '還原設定:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
 $status_lang			= 'Status';
@@ -118,6 +115,9 @@ $delete_success_lang	= 'was deleted successfully.';
 $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = '回去';

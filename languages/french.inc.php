@@ -7,8 +7,6 @@
 //
 // Submit new translations to chad@chadsdomain.com
 
-
-
 $day_lang			= 'Jour';
 $week_lang			= 'Semaine';
 $month_lang			= 'Mois';
@@ -84,9 +82,6 @@ $priority_none_lang		= 'Aucune';
 $status_lang			= 'Status:';
 $todo_lang				= 'T&acirc;ches &agrave; faire';
 $unfinished_lang		= 'Non faites';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
 $status_lang			= 'Status';
@@ -115,6 +110,9 @@ $delete_success_lang	= 'was deleted successfully.';
 $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Retour';

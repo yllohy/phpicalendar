@@ -1,13 +1,11 @@
 <?php
 
 // Finnish language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Kari Somby (kari.somby@ramk.fi)
 //
 // Submit new translations to chad@chadsdomain.com
-
-
 
 $day_lang			= 'P&auml;iv&auml;';
 $week_lang			= 'Viikko';
@@ -87,9 +85,6 @@ $unfinished_lang		= 'P&auml;&auml;ttym&auml;tt&ouml;m&auml;t';
 $prefs_set_lang 		= 'Asetukset p&auml;ivitetty';
 $prefs_unset_lang 		= 'Asetuksia ei p&auml;ivitetty. Muutokset p&auml;ivitet&auml;&auml;n seuraavan sivun ladattua';
 $unset_prefs_lang 		= 'Asetukset peruttu';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organisoija';
 $attendee_lang			= 'Osanottajat';
 $status_lang			= 'Status';
@@ -118,6 +113,9 @@ $delete_success_lang	= 'Tuhoaminen onnistui.';
 $action_success_lang	= 'Toiminta onnistui.';
 $submit_lang			= 'L&aumlhet&auml';
 $delete_lang			= 'Tuhoa';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Takaisin';

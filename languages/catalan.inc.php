@@ -1,10 +1,9 @@
 <?php
 
 // Catalan language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Oriol Ferrer Mesia; (tm05788@salleurl.edu)
-
 
 $day_lang			= "Dia";
 $week_lang			= "Setmana";
@@ -85,9 +84,6 @@ $unfinished_lang		= 'Sense acabar';
 $prefs_set_lang 		= 'Your preferences have been set.';
 $prefs_unset_lang 		= 'Preferences unset. Changes will take place next page load.';
 $unset_prefs_lang 		= 'Unset preferences:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organitzador';
 $attendee_lang			= 'Persones presents';
 $status_lang			= 'Estat';
@@ -116,6 +112,9 @@ $delete_success_lang	= 'ha estat eliminat.';
 $action_success_lang	= 'L\'acci&oacute; ha acabat satisfact&ograve;riament.';
 $submit_lang			= 'Envia';
 $delete_lang			= 'Esborra';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Endarrera';

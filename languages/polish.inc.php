@@ -1,13 +1,11 @@
 <?php
 
 // Polish language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Stanisław Cieślicki (stahoo@poczta.onet.pl)
 //
 // Submit new translations to chad@chadsdomain.com
-
-
 
 $day_lang			= 'Dzień';
 $week_lang			= 'Tydzień';
@@ -87,9 +85,6 @@ $unfinished_lang		= 'Niewykonane';
 $prefs_set_lang 		= 'Twoje preferencje zostały ustawione.';
 $prefs_unset_lang 		= 'Preferencje przywrócone. Zmiany będą widoczne po ponownym załadowaniu strony.';
 $unset_prefs_lang 		= 'Przywróć preferencje:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
 $status_lang			= 'Status';
@@ -119,6 +114,9 @@ $action_success_lang	= 'Zakończono sukcesem.';
 $submit_lang			= 'Wyślij';
 $delete_lang			= 'Wymaż';
 
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
+
 // - navigation
 $back_lang = 'Wstecz';
 $next_lang = 'Nast.';
@@ -137,9 +135,7 @@ $format_recur_lang['yearly']		= array('rok','lat');		// for these, put singular
 $format_recur_lang['monthly']		= array('miesiąc','miesięcy');		// and plural forms
 $format_recur_lang['weekly']		= array('tydzień','tygodni');		// these will be %freq%
 $format_recur_lang['daily']			= array('dzień','dni');			// in the replacement below
-$format_recur_lang['hourly']		= array('godzina','godzin');
-$format_recur_lang['minutely']		= array('minuta','minut');
-$format_recur_lang['secondly']		= array('sekunda','sekund');
+$format_recur_lang['hourly']		= array('godzina','godzin');$format_recur_lang['minutely']		= array('minuta','minut');$format_recur_lang['secondly']		= array('sekunda','sekund');
 
 $format_recur_lang['start']			= 'Każdego %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
 $format_recur_lang['until']			= 'do %date%';				// ie, 'until January 4'
@@ -187,8 +183,7 @@ Notes about $dateFormat_*
 
 // Error messages - %s will be replaced with a variable
 $error_title_lang = 'Błąd!';
-$error_window_lang = 'Wystąpił błąd!';
-$error_calendar_lang = 'Podczas przetwarzania pliku kalendarza „%s”, wystąpił błąd.';
+$error_window_lang = 'Wystąpił błąd!';$error_calendar_lang = 'Podczas przetwarzania pliku kalendarza „%s”, wystąpił błąd.';
 $error_path_lang = 'Nie mogę otworzyć ścieżki: "%s"';
 $error_back_lang = 'Proszę użyć przycisku „Wstecz” aby wrócić.';
 $error_remotecal_lang = 'Ten serwer blokuje dostęp do niezatwierdzonych zdalnych kalendarzy.';

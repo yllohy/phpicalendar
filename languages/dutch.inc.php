@@ -1,13 +1,11 @@
 <?php
 
 // Dutch language include
-// For version 0.9.1 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Lieven Gekiere (Lieven@gekiere.com)
 //
 // Submit new translations to chad@chadsdomain.com
-
-
 
 $day_lang			= 'Dag';
 $week_lang			= 'Week';
@@ -84,12 +82,9 @@ $priority_none_lang		= 'Geen';
 $status_lang			= 'Status:';
 $todo_lang				= 'Nog af te werken items';
 $unfinished_lang		= 'Niet afgewerkt';
-$prefs_set_lang = 'Uw voorkeuren zijn bewaard.';
-$prefs_unset_lang = 'Voorkeuren niet bewaard. Aanpassingen zijn actief de volgende keer u de pagina laadt.';
-$unset_prefs_lang = 'Niet bewaarde voorkeuren:';
-
-// ----- New for 0.9.2
-
+$prefs_set_lang 		= 'Uw voorkeuren zijn bewaard.';
+$prefs_unset_lang 		= 'Voorkeuren niet bewaard. Aanpassingen zijn actief de volgende keer u de pagina laadt.';
+$unset_prefs_lang 		= 'Niet bewaarde voorkeuren:';
 $organizer_lang			= 'Organisator';
 $attendee_lang			= 'Aanwezige';
 $status_lang			= 'Status';
@@ -118,6 +113,9 @@ $delete_success_lang	= 'is succesvol verwijderd.';
 $action_success_lang	= 'uw actie was succesvol.';
 $submit_lang			= 'Verzenden';
 $delete_lang			= 'Verwijder';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Terug';

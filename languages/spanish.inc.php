@@ -1,10 +1,9 @@
 <?php
 
 // Spanish language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Javier Navarro from XIPS (jnavarro@xips.es)
-
 
 $day_lang			= "D&iacute;a";
 $week_lang			= "Semana";
@@ -85,9 +84,6 @@ $unfinished_lang		= 'Sin terminar';
 $prefs_set_lang 		= 'Sus preferencias han sido activadas.';
 $prefs_unset_lang 		= 'Preferencias no activas. Los cambios se activaran al recargar la p&aacute;gina.';
 $unset_prefs_lang 		= 'Preferencias sin activar:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
 $status_lang			= 'Status';
@@ -116,6 +112,9 @@ $delete_success_lang	= 'was deleted successfully.';
 $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Atr&aacute;s';

@@ -1,13 +1,11 @@
 <?php
 
 // English language include
-// For version 0.9.1 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by Chad Little (chad@chadsdomain.com)
 //
 // Submit new translations to chad@chadsdomain.com
-
-
 
 $day_lang			= 'Day';
 $week_lang			= 'Week';
@@ -87,9 +85,6 @@ $unfinished_lang		= 'Unfinished';
 $prefs_set_lang 		= 'Your preferences have been set.';
 $prefs_unset_lang 		= 'Preferences unset. Changes will take place next page load.';
 $unset_prefs_lang 		= 'Unset preferences:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
 $status_lang			= 'Status';
@@ -119,10 +114,8 @@ $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
 
-
-// ----- New after 0.9.2
+// ----- New for 0.9.4
 $all_cal_comb_lang		= 'All calendars combined';
-
 
 // - navigation
 $back_lang = 'Back';

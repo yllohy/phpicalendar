@@ -7,8 +7,6 @@
 //
 // Submit new translations to chad@chadsdomain.com
 
-
-
 $day_lang			= 'Dag';
 $week_lang			= 'Uke';
 $month_lang			= 'M&aring;ned';
@@ -86,9 +84,6 @@ $unfinished_lang		= 'Uferdig';
 $prefs_set_lang 		= 'Dine valg er satt.';
 $prefs_unset_lang 		= 'Valgene er tilbakestilt. Endringene vil vises neste gang siden lastes.';
 $unset_prefs_lang 		= 'Tilbakestill valgene:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organisator';
 $attendee_lang			= 'Deltaker';
 $status_lang			= 'Status';
@@ -117,6 +112,9 @@ $delete_success_lang	= 'ble slettet.';
 $action_success_lang	= 'Din handling ble utf&oslash;rt.';
 $submit_lang			= 'Legg inn';
 $delete_lang			= 'Slett';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Tilbake';

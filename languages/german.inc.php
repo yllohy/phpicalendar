@@ -1,7 +1,7 @@
 <?php
 
 // German language include
-// For version 0.9.2 PHP iCalendar
+// For version 0.9.4 PHP iCalendar
 //
 // Translation by David Reindl (dre@andare.ch)
 // Corrected by whippersnapper slomo (mail@slomo.de)
@@ -88,9 +88,6 @@ $unfinished_lang		= 'Pendent';
 $prefs_set_lang 		= 'Your preferences have been set.';
 $prefs_unset_lang 		= 'Preferences unset. Changes will take place next page load.';
 $unset_prefs_lang 		= 'Unset preferences:';
-
-// ----- New for 0.9.2
-
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
 $status_lang			= 'Status';
@@ -119,6 +116,9 @@ $delete_success_lang	= 'was deleted successfully.';
 $action_success_lang	= 'Your action was successful.';
 $submit_lang			= 'Submit';
 $delete_lang			= 'Delete';
+
+// ----- New for 0.9.4
+$all_cal_comb_lang		= 'All calendars combined';
 
 // - navigation
 $back_lang = 'Back';
