@@ -2,7 +2,6 @@
 
 define('BASE','./');
 include(BASE.'functions/ical_parser.php');
-include(BASE.'functions/calendar_functions.php');
 $display_date = $preferences_lang;
 
 if ($cookie_uri == '') {
@@ -158,41 +157,7 @@ include (BASE.'includes/header.inc.php');
 												// Begin Calendar Selection
 												//
 												print "<select name=\"cookie_calendar\" class=\"query_style\">\n";
-												$filelist = availableCalendarNames($username, $password, $ALL_CALENDARS_COMBINED);
-												foreach ($filelist as $file) {
-													$cal_filename_tmp = substr($file,0,-4);
-													$cal_tmp = urlencode($cal_filename_tmp);
-													$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
-													if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
-														if ($cal_tmp == $cookie_calendar) {
-															print "<option value=\"$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
-														} else {
-															print "<option value=\"$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
-														}		
-													}	
-												}
-												// add option to open all (non-web) calenders together
-												// Todo: add $all_calenders_combined_lang (plural) in the language-specific files and use it here
-												if ($cookie_calendar == $ALL_CALENDARS_COMBINED) {
-													print "<option value=\"$ALL_CALENDARS_COMBINED\" selected>$all_cal_comb_lang</option>\n";
-												} else {
-													print "<option value=\"$ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>\n";
-												}
-			
-												foreach($list_webcals as $cal_tmp) {
-													if ($cal_tmp != '') {
-														$cal_displayname_tmp = basename($cal_tmp);
-														$cal_displayname_tmp = str_replace("32", " ", $cal_displayname_tmp);
-														$cal_displayname_tmp = substr($cal_displayname_tmp,0,-4);
-														$cal_encoded_tmp = urlencode($cal_tmp);
-														if ($cal_tmp == $cal_httpPrefix || $cal_tmp == $cal_webcalPrefix) {
-															print "<option value=\"$cal_encoded_tmp\" selected>$cal_displayname_tmp Webcal</option>\n";
-														} else {
-															print "<option value=\"$cal_encoded_tmp\">$cal_displayname_tmp Webcal</option>\n";	
-														}		
-													}
-												}
-												closedir($dir_handle);
+												display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
 												print "</select>\n";
 											?>
 										</td>

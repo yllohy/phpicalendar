@@ -6,9 +6,17 @@
 //chmod(BASE.'calendars/School.ics',0666);
 
 // uncomment when developing, comment for shipping version
-error_reporting (E_WARNING);
+error_reporting (E_ERROR | E_WARNING);
 
+// Older versions of PHP do not define $_SERVER. Define it here instead.
+if (!isset($_SERVER) && isset($HTTP_SERVER_VARS)) {
+	$_SERVER = &$HTTP_SERVER_VARS;
+}
+
+// Define some magic strings.
 $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
+
+// Pull in the configuration and some functions.
 if (!defined('BASE')) define('BASE', './');
 include(BASE.'config.inc.php');
 include(BASE.'functions/error.php');
@@ -23,33 +31,36 @@ if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
 }
 
+// Set the cookie URI.
 if ($cookie_uri == '') {
 	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
 }
 
-// Look for a login cookie.
-unset($username, $password);
-if (isset($HTTP_COOKIE_VARS['phpicalendar_login'])) {
-	$login_cookie = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar_login']));
-	if (isset($login_cookie['username']))	$username = $login_cookie['username'];
-	if (isset($login_cookie['password']))	$password = $login_cookie['password'];
-}
+// If not HTTP authenticated, try login via cookies or the web page.
+$username = ''; $password = '';
+if (!isset($_SERVER['PHP_AUTH_USER'])) {
+	// Look for a login cookie.
+	if (isset($HTTP_COOKIE_VARS['phpicalendar_login'])) {
+		$login_cookie = unserialize(stripslashes($HTTP_COOKIE_VARS['phpicalendar_login']));
+		if (isset($login_cookie['username']))	$username = $login_cookie['username'];
+		if (isset($login_cookie['password']))	$password = $login_cookie['password'];
+	}
 
-// Look for a new username and password.
-if (isset($HTTP_GET_VARS['username']))			$username = $HTTP_GET_VARS['username'];
-else if (isset($HTTP_POST_VARS['username']))	$username = $HTTP_POST_VARS['username'];
-if (isset($HTTP_GET_VARS['password']))			$password = $HTTP_GET_VARS['password'];
-else if (isset($HTTP_POST_VARS['password']))	$password = $HTTP_POST_VARS['password'];
+	// Look for a new username and password.
+	if (isset($HTTP_GET_VARS['username']))			$username = $HTTP_GET_VARS['username'];
+	else if (isset($HTTP_POST_VARS['username']))	$username = $HTTP_POST_VARS['username'];
+	if (isset($HTTP_GET_VARS['password']))			$password = $HTTP_GET_VARS['password'];
+	else if (isset($HTTP_POST_VARS['password']))	$password = $HTTP_POST_VARS['password'];
 
-// Set the login cookie if logging in. Clear it if logging out.
-$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
-
-if ($action == 'login') {
-	$the_cookie = serialize(array('username' => $username, 'password' => $password));
-	setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
-} else if ($action == 'logout') {
-	setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $cookie_uri, 0);
-	unset($username, $password);
+	// Set the login cookie if logging in. Clear it if logging out.
+	$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
+	if ($action == 'login') {
+		$the_cookie = serialize(array('username' => $username, 'password' => $password));
+		setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
+	} else if ($action == 'logout') {
+		setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $cookie_uri, 0);
+		$username = ''; $password = '';
+	}
 }
 
 // language support

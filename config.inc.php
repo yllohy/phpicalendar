@@ -43,7 +43,7 @@ $allow_preferences		= 'yes';			// Allow visitors to change various preferences v
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 $show_completed			= 'no';				// Show completed todos on your todo list.
-$show_login				= 'no';				// Set to yes to prompt for login to unlock calendars.
+$allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
 
 // Webdav style publishing
 $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
@@ -80,5 +80,9 @@ $locked_map['user3:pass'] = array('');		// listed in the $locked_cals, again wit
 $locked_map['user4:pass'] = array('');		// Example: $locked_map['username:password'] = array('Locked1', 'Locked2');
 // add more lines as necessary
 
-
+$apache_map['user1'] = array('');			// Map HTTP authenticated users to specific calendars. Users listed here and
+$apache_map['user2'] = array('');			// authenticated via HTTP will not see the public calendars, and will not be
+$apache_map['user3'] = array('');			// given any login/logout options. Calendar names not include the .ics suffix.
+$apache_map['user4'] = array('');			// Example: $apache_map['username'] = array('Calendar1', 'Calendar2');
+// add more lines as necessary
 ?>

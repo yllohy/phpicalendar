@@ -1,6 +1,7 @@
 <?php
-	// Hide the login block if logged in or there are no lock usernames.
-	if (!isset($username) && $show_login == 'yes') {
+	// Hide the login block if logged in, there are no lock usernames,
+	// or if authenticated via HTTP.
+	if ($username == '' && $allow_login == 'yes' && !isset($_SERVER['PHP_AUTH_USER'])) {
 		// Set the login table width if not set.
 		if (!isset($login_width)) $login_width = "100%";
 
