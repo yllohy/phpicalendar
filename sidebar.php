@@ -49,6 +49,13 @@
 									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"month.php?cal=$cal&getdate=$today_today\">$gomonth_lang</a>"; ?></td>
 								</tr>
 								<tr>
+									<td colspan="7"><img src="images/spacer.gif" width="21" height="1"></td>
+								</tr>
+								<tr>
+									<td width="1%"><img src="images/spacer.gif" width="4" height="1"></td>
+									<td colspan="6" class="G10B"><?php echo "<a class=\"psf\" href=\"year.php?cal=$cal&getdate=$today_today\">$goyear_lang</a>"; ?></td>
+								</tr>
+								<tr>
 									<td colspan="7"><img src="images/spacer.gif" width="21" height="5"></td>
 								</tr>
 								<tr>

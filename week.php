@@ -15,6 +15,7 @@ $weekstart = 1;
 // dpr 20020926: moved variable gridLength to config.inc.php
 //$gridLength = 30;
 $unix_time = strtotime($getdate);
+$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 $today_today = date ("Ymd");
 $next_week = date("Ymd", strtotime("+1 week",  $unix_time));
 $prev_week = date("Ymd", strtotime("-1 week",  $unix_time));
@@ -28,7 +29,6 @@ $start_week = localizeDate($dateFormat_week, $start_week_time);
 $end_week =  localizeDate($dateFormat_week, $end_week_time);
 
 $display_date = "$start_week - $end_week";
-$thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 
 
 // For the side months
@@ -112,13 +112,10 @@ for ($i=0;$i<7;$i++) {
 								$thisdate = $start_week_time;
 								$i = 0;
 								do {
-									$thisday = date("Ymd", $thisdate);
-									$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
 									$colWidth = round(70 / $nbrGridCols[$thisday]);
 									for ($j=0;$j < $nbrGridCols[$thisday];$j++) {
 										echo "<td width=\"" . $colWidth . "\"><img src=\"images/spacer.gif\" width=\"" . $colWidth . "\" height=\"1\" alt=\"\"></td>\n";
 									}
-									$thisdate = ($thisdate + (25 * 60 * 60));
 									$i++;
 								} while ($i < 7);
 								?>
@@ -133,9 +130,9 @@ for ($i=0;$i<7;$i++) {
 							echo "<td class=\"dateback\" width=\"1\"></td>";
 							do {
 								$thisday = date("Ymd", $thisdate);
-								$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
+								$thisday3 = localizeDate($dateFormat_week_list, $thisdate);
 								echo "<td width=\"120\" colspan=\"" . $nbrGridCols[$thisday] . "\" valign=\"top\" align=\"center\" class=\"dateback\">\n";
-								echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday2</a></font>\n";
+								echo "<font class=\"V9\"><a class=\"psf\" href=\"day.php?cal=$cal&getdate=$thisday\">$thisday3</a></font>\n";
 								echo "</td>\n";
 								$thisdate = ($thisdate + (25 * 60 * 60));
 								$i++;

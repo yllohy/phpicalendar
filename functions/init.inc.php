@@ -3,15 +3,15 @@
 //error_reporting (E_ALL);
 
 // Retain some compatibility backwards like.
-/* jared.20021003 I think we're always going to make sure these are extracted by hand
-so I'll comment this out for now, otherwise, uncomment this
+//jared.20021003 I think we're always going to make sure these are extracted by hand
+//so I'll comment this out for now, otherwise, uncomment this
+//chad - navigation breaks after 4.2.0 without this.
 if(phpversion() >= '4.2.0') 
 
 	{
 		extract($HTTP_GET_VARS);	
 		extract($HTTP_POST_VARS);
 	}
-*/
 include('./config.inc.php');
 include('./functions/error.php');
 

@@ -7,7 +7,7 @@
 
 $style_sheet = 'silver';				// Themes support
 $calendar_path = './calendars';			// Path to directory with calendars
-$default_view = 'day';					// Default view for calendars = 'day', 'week', 'month'
+$default_view = 'day';					// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view = 'current';				// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 $default_cal = 'Home';					// Exact filename of calendar without .ics
 $language = 'English';					// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish'
@@ -20,7 +20,7 @@ $tomorrows_events_lines = '1';			// Number of lines to wrap each event title in 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $save_parsed_cals = 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
 $use_sessions = 'yes';					// This has not yet been implemented.
-$display_custom_goto = 'yes';			// In the 'Jump To' box, display the custom 'go to day' box.
+$display_custom_goto = 'no';			// In the 'Jump To' box, display the custom 'go to day' box.
 $display_ical_list = 'yes';				// In the 'Jump To' box, display the pop-up menu with the list of all calendars in the $calendar_path directory.
 $allow_webcals = 'no';					// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
 $this_months_events = 'yes';			// Display "This month's events" at the bottom off the month page.
