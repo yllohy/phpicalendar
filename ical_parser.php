@@ -1,8 +1,29 @@
 <?
+// note from Jared: the _time suffix has been applied to all variables 
+// that are timestamps to distinguish between them and Ymd format
+// I did not change other variables to use this convention yet
 
-include "./init.inc.php";
-include "./functions/date_add.php";
+// I started commenting the line above where $master_array gets written to
+// I did this because I kept scrolling through looking for them so I decided to mark them
 
+include("./init.inc.php");
+include("./functions/date_add.php");
+
+// dateOfWeek() takes a date in Ymd and a day of week as iCal knows them (ie: SU, MO, TU, etc)
+// and returns the date of that day. This function may be specific to WEEKLY recurring events.
+
+function dateOfWeek($Ymd, $day) {
+	$timestamp = strtotime($Ymd);
+	$sunday = strtotime((date("w",$timestamp)==0 ? "sun" : "last sun"), $timestamp);
+	if ($day == "SU") $day_longer = "sun";
+	elseif ($day == "MO") $day_longer = "mon";
+	elseif ($day == "TU") $day_longer = "tue";
+	elseif ($day == "WE") $day_longer = "wed";
+	elseif ($day == "TH") $day_longer = "thu";
+	elseif ($day == "FR") $day_longer = "fri";
+	elseif ($day == "SA") $day_longer = "sat";
+	return date("Ymd",strtotime($day_longer,$sunday));
+}
 
 $day_array = array ("0700", "0730", "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930", "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330");
 
@@ -13,7 +34,6 @@ ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day = $day_array2[3];
 $this_month = $day_array2[2];
 $this_year = $day_array2[1];
-
 
 // open the iCal file, read it into a string
 $fp = @fopen($filename, "r");
@@ -44,6 +64,8 @@ foreach($contents as $line) {
 		$end_of_vevent = "";
 		$interval = "";
 		$number = "";
+		$except_dates = array();
+		$except_times = array();
 	} elseif (strstr($line, "END:VEVENT")) {
 		
 		// Clean out \n's and other slashes
@@ -201,7 +223,66 @@ foreach($contents as $line) {
 					// Let's take care of recurring events that are not all day events
 					// Nothing is here yet, Jared seems to way to play, so I'll let him do these... muahahahaha.
 					} else {
-						$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+					
+						// handling weekly events here, maybe it can be more general, but for now it handles weekly only
+						if ($rrule_array["FREQ"] == "WEEKLY") {
+							// again, $parse_to_year is set to January 10 of the upcoming year
+							$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
+							$start_date_time = strtotime($start_date);
+							
+							// initializing my range. it takes noticeable time to process the entire year so lets only process
+							// what we're looking at. We start out initializing for the year, but hopefully we won't do that.
+							$start_range_time = $start_date_time;
+							$end_range_time = $parse_to_year_time;
+							
+							// depending on which view we're looking at, we do one month or one week
+							// one day is more difficult, I think, so I wrapped that into the week. We'll have to
+							// add another case for "year" once that's added.
+							if ($current_view == "month") {
+								$start_range_time = strtotime("$this_year-$this_month-01");
+								$end_range_time = strtotime("+1 month", $start_range_time);
+							} else {
+								$start_range_time = strtotime("$this_year-$this_month-$this_day");
+								$end_range_time = strtotime("+1 weeks", $start_range_time);
+							}
+							
+							// If the $end_range_time is less than the $start_date_time, we may as well forget the whole thing
+							// It doesn't do us any good to spend time adding data we aren't even looking at
+							// this will prevent the year view from taking way longer than it needs to
+							if ($end_range_time >= $start_date_time) {
+							
+								// if the beginning of our range is less than the start of the item, we may as well set it equal to it
+								if ($start_range_time < $start_date_time) $start_range_time = $start_date_time;
+					
+								// initialze the time we will increment
+								$next_range_time = $start_range_time;
+								
+								// start at the $start_range and go week by week until we hit the end of our range.
+								while ($next_range_time >= $start_range_time && $next_range_time <= $end_range_time) {
+								
+									// loop through the days on which this event happens
+									foreach($byday as $day) {
+									
+										// use my fancy little function to get the date of each day
+										$next_date = dateOfWeek(date("Ymd", $next_range_time),$day);
+										if (strtotime($next_date) > $start_date_time && !in_array($next_date, $except_dates)) {
+											// add it to the array if it passes inspection, it allows the first time to be
+											// written by the master data writer (hence the > instead of >=) otherwise we can special case these
+											// before, the first one would get entered twice and show up twice
+											// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
+// writes to $master array here				// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
+											// on days that have been deleted by the user
+											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+										}
+									}
+									$next_range_time = strtotime("+1 week", $next_range_time);
+								}
+							}
+	
+						} else {
+// writes to $master array here
+							$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+						}
 					}
 				}	
 			}
@@ -209,6 +290,7 @@ foreach($contents as $line) {
 	
 	// Let's write all the data to the master array
 	if ($start_time != "") {
+// writes to $master array here
 		$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
 	}
 		
@@ -246,7 +328,19 @@ foreach($contents as $line) {
 		
 			$end_day = $year . $month . $day;
 			$end_time = $hour . $minute;
-
+			
+		} elseif (strstr($field, "EXDATE;TZID")) {
+			$data = ereg_replace("T", "", $data);
+			ereg ("([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})", $data, $regs);
+			$year = $regs[1];
+			$month = $regs[2];
+			$day = $regs[3];
+			$hour = $regs[4];
+			$minute = $regs[5];
+		
+			$except_dates[] = $year . $month . $day;
+			$except_times[] = $hour . $minute;
+			
 		} elseif (strstr($field, "SUMMARY")) {
 			$summary = $data;
 		
@@ -263,7 +357,7 @@ foreach($contents as $line) {
 		} elseif (strstr($field, "DURATION")) {
 			ereg ("^P([0-9]{1,2})?([W,D]{0,1})?(T)?([0-9]{1,2})?(H)?([0-9]{1,2})?(M)?([0-9]{1,2})?(S)?", $data, $duration);
 			
-			if ($durartion[2] = "W") {
+			if ($duration[2] = "W") {
 				$weeks = $duration[1];
 			} else {
 				$days = $duration[1];
@@ -296,11 +390,11 @@ foreach($contents as $line) {
 ksort($master_array);
 reset($master_array);
 //If you want to see the values in the arrays, uncomment below.
+//print "<pre>";
 //print_r($master_array);
 //print_r($day_array);
 //print_r($rrule);			
-		
-	
+//print "</pre>";
 	
 					
 ?>

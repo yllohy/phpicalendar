@@ -1,10 +1,11 @@
 <? 
 
-include "ical_parser.php";
+$current_view = "day";
+include("./ical_parser.php");
 
 //might not need this, depending on implimentation, doesn't work correctly in current form anyway
 //setcookie("last_view", "day");
-$current_view = "day";
+
 
 if ($getdate == (date("Ymd"))) {
 	$display_date = date ("l, F d");

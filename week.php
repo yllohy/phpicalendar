@@ -1,8 +1,10 @@
-<? include "ical_parser.php"; 
+<? 
+$current_view = "week";
+include("ical_parser.php"); 
 
 //might not need this, depending on implimentation, doesn't work correctly in current form anyway
 //setcookie("last_view", "week");
-$current_view = "week";
+
 
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day = $day_array2[3];

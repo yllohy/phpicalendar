@@ -1,5 +1,20 @@
 <? 
+// Retain some compatibility backwards like.
+if(phpversion() >= "4.2.0") 
+
+	{
+		extract($HTTP_POST_VARS);
+		extract($HTTP_GET_VARS);	
+	}
+
 include('./config.inc.php');
+
+// define supported languages
+if ($language == "English") { 	
+	include "languages/english.inc.php";
+} else {
+	include "languages/english.inc.php";
+}
 
 // $cal_filename should always be the filename of the calendar without .ics
 if (isset($_GET["cal"])) {
