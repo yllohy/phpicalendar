@@ -89,7 +89,7 @@ $thisday2 = localizeDate($dateFormat_week_list, $unix_time);
 					for ($i=0; $i<7; $i++) {
 						$day_num = date("w", $start_day);
 						$day = $daysofweekshort_lang[$day_num];
-						print '<td width="30" height="14" class="monthoff" align="center"><font class="V9BOLD">' . $day . '</td>' . "\n";
+						print '<td width="30" height="14" class="dateback" align="center"><font class="V9BOLD">' . $day . '</td>' . "\n";
 						$start_day = ($start_day + (24.5 * 60 * 60));
 					}
 				?>

@@ -1,11 +1,11 @@
-/* Style sheet for the silver calendar (default) */
+/* Style sheet for the green calendar */
 
-.eventborder	{ background-color: #336699; border: 1px #006699 solid; }
-.eventbg	 	{ background-color: #6699CC; }
-.eventbg2 	 	{ background-color: #6699CC; border-right: 1px solid #FFFFFF; }
-.eventbg2week 	{ background-color: #6699CC; border-right: 1px solid #A1A5A9; }
+.eventborder	{ background-color: #006600; border: 1px #003300 solid; }
+.eventbg	 	{ background-color: #339933; }
+.eventbg2 	 	{ background-color: #339933; border-right: 1px solid #FFFFFF; }
+.eventbg2week 	{ background-color: #339933; border-right: 1px solid #A1A5A9; }
 .calborder 		{ background-color: #FFFFFF; border: 1px #A1A5A9 solid; }
-.dateback		{ background-color: #EEEEEE; }
+.dateback		{ background-color: #F5FCF5; }
 .dayborder 		{ border-top: 1px solid #A1A5A9; }
 .dayborder2 	{ border-top: 1px dashed #CCCCCC; }
 .weekborder 	{ border-top: 1px dashed #A1A5A9; border-right: 1px solid #A1A5A9; }
@@ -17,7 +17,7 @@
 .monthback		{ background-color: #A1A5A9; }
 .monthreg		{ background-color: #FFFFFF; }
 .monthoff		{ background-color: #F2F2F2; }
-.monthon		{ background-color: #F2F9FF; }
+.monthon		{ background-color: #E3FCE3; }
 .montheventtop	{ background-image: url(side_bg.gif); border-top: 1px solid #A1A5A9; }
 .montheventline	{ border-right: 1px dotted #A1A5A9; }
 .yearmonth		{ background: #CCCCCC; }
@@ -25,17 +25,17 @@
 /* Link colors and attributes */
 /* This is the main link style */
 a.psf			{ text-decoration:	none; }
-a.psf:link		{ color: #0066FF; background-color: transparent; }
-a.psf:visited	{ color: #0066FF; background-color: transparent; }
-a.psf:active	{ color: #3366CC; background-color: transparent; }
-a.psf:hover		{ color: #000099; background-color: transparent; }
+a.psf:link		{ color: #009900; background-color: transparent; }
+a.psf:visited	{ color: #009900; background-color: transparent; }
+a.psf:active	{ color: #009900; background-color: transparent; }
+a.psf:hover		{ color: #003300; background-color: transparent; }
 
 /* This is the link style for the mini-cals */	
 a.ps2			{ text-decoration:	underline; }
-a.ps2:link		{ color: #0066FF; background-color: transparent; }
-a.ps2:visited	{ color: #0066FF; background-color: transparent; }
-a.ps2:active	{ color: #3366CC; background-color: transparent; }
-a.ps2:hover		{ color: #000099; background-color: transparent; }
+a.ps2:link		{ color: #009900; background-color: transparent; }
+a.ps2:visited	{ color: #009900; background-color: transparent; }
+a.ps2:active	{ color: #009900; background-color: transparent; }
+a.ps2:hover		{ color: #003300; background-color: transparent; }
 	
 /* Body attributes */
 
