@@ -122,8 +122,8 @@ for ($i=0;$i<7;$i++) {
 							echo "<tr>";
 							$thisdate = $start_week_time;
 							$i = 0;
-							echo "<td bgcolor=\"#eeeeee\" width=\"60\"><img src=\"images/spacer.gif\" width=\"1\" height=\"12\" alt=\"\"></td>";
-							echo "<td bgcolor=\"#eeeeee\" width=\"1\"></td>";
+							echo "<td class=\"dateback\" width=\"60\"><img src=\"images/spacer.gif\" width=\"1\" height=\"12\" alt=\"\"></td>";
+							echo "<td class=\"dateback\" width=\"1\"></td>";
 							do {
 								$thisday = date("Ymd", $thisdate);
 								$thisday2 = localizeDate($dateFormat_week_list, $thisdate);
@@ -134,7 +134,19 @@ for ($i=0;$i<7;$i++) {
 								$i++;
 							} while ($i < 7);
 							echo "</tr>";
-							
+							?>
+							<tr>
+								<td width="60"><img src="images/spacer.gif" width="60" height="1" alt=""></td>
+								<td width="1"></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+								<td width="70"><img src="images/spacer.gif" width="70" height="1" alt=""></td>
+							</tr>
+							<?php
 							// The all day events returned here.
 							$allday_events_this_week = false;
 							$thisdate = $start_week_time;
