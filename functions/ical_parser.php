@@ -534,6 +534,7 @@ foreach ($cal_filelist as $filename) {
 													$next_date_time = $next_date_time;
 													if ((isset($bymonthday)) && (!isset($byday))) {
 														foreach($bymonthday as $day) {
+															if ($day < 0) $day = ((date('t', $next_range_time)) + ($day)) + 1;
 															$year = date('Y', $next_range_time);
 															$month = date('m', $next_range_time);
 															if (checkdate($month,$day,$year)) {
