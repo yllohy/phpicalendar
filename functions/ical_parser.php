@@ -102,6 +102,12 @@ if ($parse_file) {
 			$mArray_begin = mktime (0,0,0,1,1,$this_year);
 			$mArray_end = mktime (0,0,0,1,10,($this_year + 1));
 					
+			// Mozilla style all-day events or just really long events
+			if (($end_time - $start_time) > 2345) {
+				$allday_start = $start_date;
+				$allday_end = ($start_date + 1);
+			}
+			
 			if (isset($start_time) && $start_time != '') {
 				ereg ('([0-9]{2})([0-9]{2})', $start_time, $time);
 				ereg ('([0-9]{2})([0-9]{2})', $end_time, $time2);
@@ -115,7 +121,6 @@ if ($parse_file) {
 			
 			// Handling of the all day events
 			if ((isset($allday_start) && $allday_start != '')) {
-				$allday_written = TRUE;
 				$start = strtotime($allday_start);
 				$end = strtotime($allday_end);
 				if (($end > $mArray_begin) && ($end < $mArray_end)) {
