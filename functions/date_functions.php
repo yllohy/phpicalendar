@@ -14,11 +14,6 @@ if (phpversion() < '4.1') {
 	}
 }
 
-function getmicrotime() { 
-	list($usec, $sec) = explode(' ',microtime()); 
-	return ((float)$usec + (float)$sec); 
-}
-
 // takes iCalendar 2 day format and makes it into 3 characters
 // if $txt is true, it returns the 3 letters, otherwise it returns the
 // integer of that day; 0=Sun, 1=Mon, etc.

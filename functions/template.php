@@ -208,7 +208,7 @@ class Page {
 			$this->page = str_replace('{' . strtoupper($tag) . '}', $data, $this->page);
 		}
 		
-		$php_ended = getmicrotime();
+		$php_ended = @getmicrotime();
 		$generated = number_format(($php_ended-$php_started),3);
 		$this->page = str_replace('{GENERATED}', $generated, $this->page);
 		print($this->page);

@@ -179,4 +179,9 @@ if ($is_webcal) {
 
 $rss_powered = ($enable_rss == 'yes') ? 'yes' : '';
 
+function getmicrotime() { 
+	list($usec, $sec) = explode(' ',microtime()); 
+	return ((float)$usec + (float)$sec); 
+}
+
 ?>
