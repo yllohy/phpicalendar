@@ -43,17 +43,14 @@ $goday_lang			= 'Go to Today';
 $goweek_lang		= 'Go to This Week';
 $gomonth_lang		= 'Go to This Month';
 $goyear_lang		= 'Go to This Year';
-
 $search_lang		= 'Search'; // the verb
 $results_lang		= 'Search Results';
 $query_lang			= 'Query'; // will be followed by the search query
 $no_results_lang	= 'No events found';
-
 $goprint_lang		= 'Printer Friendly';
 $time_lang			= 'Time';
 $summary_lang		= 'Summary';
 $description_lang	= 'Description';
-
 $this_site_is_lang		= 'This site is';
 $no_events_day_lang		= 'No events today.';
 $no_events_week_lang	= 'No events this week.';
@@ -71,6 +68,12 @@ $exception_lang			= 'Exception';
 $no_query_lang			= 'No query given';
 $preferences_lang		= 'Preferences';
 $printer_lang			= 'Printer';
+$select_lang_lang		= 'Select your default language:';
+$select_cal_lang		= 'Select your default calendar:';
+$select_view_lang		= 'Select your default view:';
+$select_time_lang		= 'Select your default start time:';
+$select_day_lang		= 'Select your default start day of week:';
+$select_style_lang		= 'Select your default style:';
 
 // $format_recur, items enclosed in % will be substituted with variables
 $format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'

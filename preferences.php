@@ -92,130 +92,166 @@ include(BASE.'functions/ical_parser.php');
 								<td width="2%"></td>
 								<td width="98%" valign="top" align="left">
 								<form action="preferences.php?action=setcookie" METHOD="post">
-								<?php 
-								
-								
-								
-								
-								// Begin Language Selection
-								//
-								echo 'Select your default language:<br><br>';
-								print "<select name=\"cookie_language\" class=\"query_style\">\n";
-								$dir_handle = @opendir(BASE.'languages/');
-								$tmp_pref_language = urlencode(ucfirst($language));
-								while ($file = readdir($dir_handle)) {
-									if (substr($file, -8) == ".inc.php") {
-										$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
-										if ($language_tmp == $cookie_language) {
-											print "<option value=\"$language_tmp\" selected>in $language_tmp</option>\n";
-										} else {
-											print "<option value=\"$language_tmp\">in $language_tmp</option>\n";
-										}
-									}
-								}
-								closedir($dir_handle);
-								print "</select>\n";
-								echo '<br><br>';
-								
-								// Begin Calendar Selection
-								//
-								echo 'Select your default calendar:<br><br>';
-								print "<select name=\"cookie_calendar\" class=\"query_style\">\n";
-								$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
-								while ($file = readdir($dir_handle)) {
-									if (substr($file, -4) == ".ics") {
-										$cal_filename_tmp = substr($file,0,-4);
-										$cal_tmp = urlencode($cal_filename_tmp);
-										$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
-										if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
-											if ($cal_tmp == $cookie_calendar) {
-												print "<option value=\"$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
-											} else {
-												print "<option value=\"$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
-											}		
-										}	
-									}
-								}			
-								foreach($list_webcals as $cal_tmp) {
-									if ($cal_tmp != '') {
-										$cal_displayname_tmp = basename($cal_tmp);
-										$cal_displayname_tmp = str_replace("32", " ", $cal_displayname_tmp);
-										$cal_displayname_tmp = substr($cal_displayname_tmp,0,-4);
-										$cal_encoded_tmp = urlencode($cal_tmp);
-										if ($cal_tmp == $cal_httpPrefix || $cal_tmp == $cal_webcalPrefix) {
-											print "<option value=\"$cal_encoded_tmp\" selected>$cal_displayname_tmp Webcal</option>\n";
-										} else {
-											print "<option value=\"$cal_encoded_tmp\">$cal_displayname_tmp Webcal</option>\n";	
-										}		
-									}
-								}
-								closedir($dir_handle);
-								print "</select>\n";
-								echo '<br><br>';
-								
-								// Begin View Selection
-								//
-								echo 'Select your default view:<br><br>';
-								print "<select name=\"cookie_view\" class=\"query_style\">\n";
-								print "<option value=\"day\">$day_lang</option>\n";
-								print "<option value=\"week\">$week_lang</option>\n";
-								print "<option value=\"month\">$month_lang</option>\n";
-								print "<option value=\"print\">$printer_lang</option>\n";
-								print "</select>\n";
-								echo '<br><br>';
-								
-								// Begin Time Selection
-								//
-								echo 'Select your default start time:<br><br>';
-								print "<select name=\"cookie_time\" class=\"query_style\">\n";
-								print "<option value=\"0500\">0500</option>\n";
-								print "<option value=\"0600\">0600</option>\n";
-								print "<option value=\"0700\">0700</option>\n";
-								print "<option value=\"0800\">0800</option>\n";
-								print "<option value=\"0900\">0900</option>\n";
-								print "</select>\n";
-								echo '<br><br>';
-								
-								// Begin Day Start Selection
-								//
-								echo 'Select your start day of week:<br><br>';
-								print "<select name=\"cookie_startday\" class=\"query_style\">\n";
-								$i=0;
-								foreach ($daysofweek_lang as $daysofweek) {
-									if ($startdays[$i] == "$cookie_startday") {
-										print "<option value=\"$startdays[$i]\" selected>$daysofweek</option>\n";
-									} else {
-										print "<option value=\"$startdays[$i]\">$daysofweek</option>\n";
-									}
-									$i++;
-								}
-								print "</select>\n";
-								echo '<br><br>';
-								
-								// Begin Style Selection
-								//
-								echo 'Select your default style:<br><br>';
-								print "<select name=\"cookie_style\" class=\"query_style\">\n";
-								$dir_handle = @opendir(BASE.'styles/');
-								while ($file = readdir($dir_handle)) {
-									if (($file != ".") && ($file != "..") && ($file != "CVS")) {
-										if (!is_file($file)) {
-											$file = ucfirst($file);
-											if ($file == "$cookie_style") {
-												print "<option value=\"$file\" selected>$file</option>\n";
-											} else {
-												print "<option value=\"$file\">$file</option>\n";
-											}
-										}
-									}
-								}
-								closedir($dir_handle);
-								print "</select>\n";
-								echo '<br><br>';
-								#echo '<hidden name="action" value="setcookie"><br>';
-								echo '<button type="submit" name="set" value="true" class=\"query_style\">Set Cookie</button>';
-								echo '</form><br>'; 
-								 ?>
+								<table border="0" width="620" cellspacing="2" cellpadding="2" align="center">
+									<tr>
+										<td align="left" valign="top" width="300" nowrap><?php echo "$select_lang_lang"; ?></td>
+										<td align="left" valign="top" width="20"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+										<td align="left" valign="top" with="300">
+											<?php
+											
+												// Begin Language Selection
+												//
+												print "<select name=\"cookie_language\" class=\"query_style\">\n";
+												$dir_handle = @opendir(BASE.'languages/');
+												$tmp_pref_language = urlencode(ucfirst($language));
+												while ($file = readdir($dir_handle)) {
+													if (substr($file, -8) == ".inc.php") {
+														$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
+														if ($language_tmp == $cookie_language) {
+															print "<option value=\"$language_tmp\" selected>in $language_tmp</option>\n";
+														} else {
+															print "<option value=\"$language_tmp\">in $language_tmp</option>\n";
+														}
+													}
+												}
+												closedir($dir_handle);
+												print "</select>\n";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td align="left" valign="top" width="300" nowrap><?php echo "$select_cal_lang"; ?></td>
+										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+										<td align="left" valign="top">
+											<?php
+											
+												// Begin Calendar Selection
+												//
+												print "<select name=\"cookie_calendar\" class=\"query_style\">\n";
+												$dir_handle = @opendir($calendar_path) or die(error(sprintf($error_path_lang, $calendar_path), $cal_filename));
+												while ($file = readdir($dir_handle)) {
+													if (substr($file, -4) == ".ics") {
+														$cal_filename_tmp = substr($file,0,-4);
+														$cal_tmp = urlencode($cal_filename_tmp);
+														$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+														if (!in_array($cal_filename_tmp, $blacklisted_cals)) {
+															if ($cal_tmp == $cookie_calendar) {
+																print "<option value=\"$cal_tmp\" selected>$cal_displayname_tmp $calendar_lang</option>\n";
+															} else {
+																print "<option value=\"$cal_tmp\">$cal_displayname_tmp $calendar_lang</option>\n";	
+															}		
+														}	
+													}
+												}			
+												foreach($list_webcals as $cal_tmp) {
+													if ($cal_tmp != '') {
+														$cal_displayname_tmp = basename($cal_tmp);
+														$cal_displayname_tmp = str_replace("32", " ", $cal_displayname_tmp);
+														$cal_displayname_tmp = substr($cal_displayname_tmp,0,-4);
+														$cal_encoded_tmp = urlencode($cal_tmp);
+														if ($cal_tmp == $cal_httpPrefix || $cal_tmp == $cal_webcalPrefix) {
+															print "<option value=\"$cal_encoded_tmp\" selected>$cal_displayname_tmp Webcal</option>\n";
+														} else {
+															print "<option value=\"$cal_encoded_tmp\">$cal_displayname_tmp Webcal</option>\n";	
+														}		
+													}
+												}
+												closedir($dir_handle);
+												print "</select>\n";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td align="left" valign="top" width="300" nowrap><?php echo "$select_view_lang"; ?></td>
+										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+										<td align="left" valign="top">
+											<?php
+											
+												// Begin View Selection
+												//
+												print "<select name=\"cookie_view\" class=\"query_style\">\n";
+												print "<option value=\"day\">$day_lang</option>\n";
+												print "<option value=\"week\">$week_lang</option>\n";
+												print "<option value=\"month\">$month_lang</option>\n";
+												print "<option value=\"print\">$printer_lang</option>\n";
+												print "</select>\n";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td align="left" valign="top" width="300" nowrap><?php echo "$select_time_lang"; ?></td>
+										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+										<td align="left" valign="top">
+											<?php
+											
+												// Begin Time Selection
+												//
+												print "<select name=\"cookie_time\" class=\"query_style\">\n";
+												print "<option value=\"0500\">0500</option>\n";
+												print "<option value=\"0600\">0600</option>\n";
+												print "<option value=\"0700\">0700</option>\n";
+												print "<option value=\"0800\">0800</option>\n";
+												print "<option value=\"0900\">0900</option>\n";
+												print "</select>\n";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td align="left" valign="top" width="300" nowrap><?php echo "$select_day_lang"; ?></td>
+										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+										<td align="left" valign="top">
+											<?php
+												
+												// Begin Day Start Selection
+												//
+												print "<select name=\"cookie_startday\" class=\"query_style\">\n";
+												$i=0;
+												foreach ($daysofweek_lang as $daysofweek) {
+													if ($startdays[$i] == "$cookie_startday") {
+														print "<option value=\"$startdays[$i]\" selected>$daysofweek</option>\n";
+													} else {
+														print "<option value=\"$startdays[$i]\">$daysofweek</option>\n";
+													}
+													$i++;
+												}
+												print "</select>\n";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td align="left" valign="top" width="300" nowrap><?php echo "$select_style_lang"; ?></td>
+										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+										<td align="left" valign="top">
+											<?php
+											
+												// Begin Style Selection
+												//
+												print "<select name=\"cookie_style\" class=\"query_style\">\n";
+												$dir_handle = @opendir(BASE.'styles/');
+												while ($file = readdir($dir_handle)) {
+													if (($file != ".") && ($file != "..") && ($file != "CVS")) {
+														if (!is_file($file)) {
+															$file = ucfirst($file);
+															if ($file == "$cookie_style") {
+																print "<option value=\"$file\" selected>$file</option>\n";
+															} else {
+																print "<option value=\"$file\">$file</option>\n";
+															}
+														}
+													}
+												}
+												closedir($dir_handle);
+												print "</select>\n";
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td align="left" valign="top" nowrap>&nbsp;</td>
+										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
+										<td align="left" valign="top"<button type="submit" name="set" value="true" class=\"query_style\">Set Cookie</button></form></td>
+									</tr>
+								</table>
+								<br>
 								</td>
 							</tr>
 						</table>
