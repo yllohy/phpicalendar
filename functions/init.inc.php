@@ -23,6 +23,10 @@ if (isset($HTTP_COOKIE_VARS['phpicalendar'])) {
 	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
 }
 
+if ($cookie_uri == '') {
+	$cookie_uri = $HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/'));
+}
+
 // Look for a login cookie.
 unset($username, $password);
 if (isset($HTTP_COOKIE_VARS['phpicalendar_login'])) {
@@ -38,11 +42,8 @@ if (isset($HTTP_GET_VARS['password']))			$password = $HTTP_GET_VARS['password'];
 else if (isset($HTTP_POST_VARS['password']))	$password = $HTTP_POST_VARS['password'];
 
 // Set the login cookie if logging in. Clear it if logging out.
-if (isset($HTTP_GET_VARS['action'])) {
-	$action = $HTTP_GET_VARS['action'];
-} else {
-	$action = '';
-}
+$action = (isset($_REQUEST['action'])) ? $_REQUEST['action'] : '';
+
 if ($action == 'login') {
 	$the_cookie = serialize(array('username' => $username, 'password' => $password));
 	setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
@@ -133,10 +134,10 @@ if ($is_webcal) {
 		}
 		
 		// Sets the download and subscribe paths from the config if present.
-		if ($download_uri == '' && preg_match('/(^\/|..\/)/', $filename) == 0) {
+		if ($download_uri == '') {
 			$subscribe_path = 'webcal://'.$HTTP_SERVER_VARS['SERVER_NAME'].dirname($HTTP_SERVER_VARS['PHP_SELF']).'/'.$filename;
 			$download_filename = $filename;
-		} else if ($download_uri != '') {
+		} elseif ($download_uri != '') {
 			$newurl = eregi_replace("^(http://)", "", $download_uri); 
 			$subscribe_path = 'webcal://'.$newurl.'/'.$cal_filename.'.ics';
 			$download_filename = $download_uri.'/'.$cal_filename.'.ics';

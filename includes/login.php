@@ -27,8 +27,8 @@ echo <<<END
 				<div style="padding: 5px;">
 				<table border="0" width="100%" cellspacing="0" cellpadding="2">
 					<tr>
-						<td>Username:</td>
-						<td><input class="login_style" type="text" size="8" name="username"></td>
+						<td width="5%">Username:</td>
+						<td width="95%"><input class="login_style" type="text" size="8" name="username"></td>
 					</tr>
 					<tr>
 						<td>Password:</td>

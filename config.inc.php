@@ -20,16 +20,13 @@ $tomorrows_events_lines = '1';				// Number of lines to wrap each event title in
 $allday_week_lines 		= '1';				// Number of lines to wrap each event title in all-day events in week view, 0 means display all lines.
 $week_events_lines 		= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
-$default_path			= 'http://www.example.com/phpicalendar'; 	// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 $calendar_path 			= '';				// Leave this blank on most installs, place your full path to calendars if they are outside the phpicalendar folder.
 $second_offset			= '0';				// The time in seconds between your time and your server's time.
-$bleed_time				= '0400';			// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359'
-
-// Advanced settings for custom installs, cookies, etc.
-// In most cases these will not need to be set.
+$bleed_time				= '';				// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359'. Is automatically set to $day_start if left blank.
 $cookie_uri				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http://www.example.com/phpicalendar/calendars
+$default_path			= 'http://www.example.com/phpicalendar'; 						// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $save_parsed_cals 		= 'no';				// Recommended 'yes'. Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
@@ -75,10 +72,10 @@ $locked_cals[] = '';						// exact calendar filename without the .ics suffix.
 $locked_cals[] = '';						//
 // add more lines as necessary
 
-$locked_map[] = '';							// Map username:password accounts to locked calendars that should be
-$locked_map[] = '';							// unlocked if logged in. Calendar names should be the same as what is
-$locked_map[] = '';							// listed in the $locked_cals, again without the .ics suffix.
-$locked_map[] = '';							// Example: $locked_map['username:password'] = array('Locked1', 'Locked2');
+$locked_map['user1:pass'] = array('');		// Map username:password accounts to locked calendars that should be
+$locked_map['user2:pass'] = array('');		// unlocked if logged in. Calendar names should be the same as what is
+$locked_map['user3:pass'] = array('');		// listed in the $locked_cals, again without the .ics suffix.
+$locked_map['user4:pass'] = array('');		// Example: $locked_map['username:password'] = array('Locked1', 'Locked2');
 // add more lines as necessary
 
 
