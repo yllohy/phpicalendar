@@ -11,19 +11,19 @@ print "<form>\n<select name=\"action\" class=\"V12\" onChange=\"window.location=
 
 // open file
 $dir_handle = @opendir($calendar_path) or die("Unable to open $calendar_path");
-$current_cal = $cal;
+
 // build the <option> tags
 while ($file = readdir($dir_handle)) {
 	if (strstr ($file, ".ics")) {
 		// $cal_filename is the filename of the calendar without .ics
 		// $cal is a urlencoded version of $cal_filename
 		$cal_filename = substr($file,0,-4);
-		$cal = urlencode($cal_filename);
+		$cal_tmp = urlencode($cal_filename);
 		
-		if ($current_cal == $cal) {
-			print "<option value=\"$current_view.php?cal=$cal\" selected>$cal_filename Calendar</option>\n";
+		if ($cal_tmp == $cal) {
+			print "<option value=\"$current_view.php?cal=$cal_tmp\" selected>$cal_filename Calendar</option>\n";
 		} else {
-			print "<option value=\"$current_view.php?cal=$cal\">$cal_filename Calendar</option>\n";	
+			print "<option value=\"$current_view.php?cal=$cal_tmp\">$cal_filename Calendar</option>\n";	
 		}
 		
 	}
