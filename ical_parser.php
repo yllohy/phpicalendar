@@ -8,40 +8,7 @@
 
 include("./init.inc.php");
 include("./functions/date_add.php");
-
-// dateOfWeek() takes a date in Ymd and a day of week as iCal knows them (ie: SU, MO, TU, etc)
-// and returns the date of that day. This function may be specific to WEEKLY recurring events.
-
-function dateOfWeek($Ymd, $day) {
-	global $week_start_day;
-	$timestamp = strtotime($Ymd);
-	$sunday = strtotime((date("w",$timestamp)==0 ? "$week_start_day" : "last $week_start_day"), $timestamp);
-	if ($day == "SU") $day_longer = "sun";
-	elseif ($day == "MO") $day_longer = "mon";
-	elseif ($day == "TU") $day_longer = "tue";
-	elseif ($day == "WE") $day_longer = "wed";
-	elseif ($day == "TH") $day_longer = "thu";
-	elseif ($day == "FR") $day_longer = "fri";
-	elseif ($day == "SA") $day_longer = "sat";
-	return date("Ymd",strtotime($day_longer,$sunday));
-}
-
-// function to compare to dates in Ymd and return the number of weeks that differ between them
-// requires dateOfWeek()
-function weekCompare($now, $then) {
-	global $week_start_day;
-	$day = substr($week_start_day, 0, 2);
-	$sun_now = dateOfWeek($now, $day);
-	$sun_then = dateOfWeek($then, $day);
-	$seconds_now = strtotime($sun_now);
-	$seconds_then =  strtotime($sun_then);
-	$diff_seconds = $seconds_now - $seconds_then;
-	$diff_minutes = $diff_seconds/60;
-	$diff_hours = $diff_minutes/60;
-	$diff_days = round($diff_hours/24);
-	$diff_weeks = $diff_days/7;
-	return $diff_weeks;
-}
+include("./functions/date_functions.php");
 
 $day_array = array ("0700", "0730", "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930", "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330");
 
@@ -225,6 +192,7 @@ foreach($contents as $line) {
 								$end = $end_of_vevent;
 								do {
 									$start_date = date("Ymd", $start);
+// writes to $master array here
 									$master_array[($start_date)][("0001")]["event_text"][] = "$summary";
 									$start = ($start + (24*3600));
 								} while ($start < $end);
@@ -234,45 +202,47 @@ foreach($contents as $line) {
 						}
 					
 					// Let's take care of recurring events that are not all day events
-					// Nothing is here yet, Jared seems to way to play, so I'll let him do these... muahahahaha.
+					// DAILY and WEEKLY recurrences seem to work fine. Need feedback.
+					// Known bug, doesn't look at UNTIL or COUNT yet.
 					} else {
 					
-						// handling weekly events here, maybe it can be more general, but for now it handles weekly only
-						if ($rrule_array["FREQ"] == "WEEKLY") {
-							// again, $parse_to_year is set to January 10 of the upcoming year
-							$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
-							$start_date_time = strtotime($start_date);
+						// again, $parse_to_year is set to January 10 of the upcoming year
+						$parse_to_year_time  = mktime(0,0,0,1,10,($this_year + 1));
+						$start_date_time = strtotime($start_date);
+						
+						// initializing my range. it takes noticeable time to process the entire year so lets only process
+						// what we're looking at. We start out initializing for the year, but hopefully we won't do that.
+						$start_range_time = $start_date_time;
+						$end_range_time = $parse_to_year_time;
+						
+						// depending on which view we're looking at, we do one month or one week
+						// one day is more difficult, I think, so I wrapped that into the week. We'll have to
+						// add another case for "year" once that's added.
+						if ($current_view == "month") {
+							$start_range_time = strtotime("$this_year-$this_month-01");
+							$end_range_time = strtotime("+1 month +1 week", $start_range_time);
+						} else {
+							$start_range_time = strtotime(dateOfWeek($getdate, substr($week_start_day, 0, 2)));
+							$end_range_time = strtotime("+1 week", $start_range_time);
+						}
+						
+						// If the $end_range_time is less than the $start_date_time, we may as well forget the whole thing
+						// It doesn't do us any good to spend time adding data we aren't even looking at
+						// this will prevent the year view from taking way longer than it needs to
+						if ($end_range_time >= $start_date_time) {
+						
+							// if the beginning of our range is less than the start of the item, we may as well set it equal to it
+							if ($start_range_time < $start_date_time) $start_range_time = $start_date_time;
+				
+							// initialze the time we will increment
+							$next_range_time = $start_range_time;
 							
-							// initializing my range. it takes noticeable time to process the entire year so lets only process
-							// what we're looking at. We start out initializing for the year, but hopefully we won't do that.
-							$start_range_time = $start_date_time;
-							$end_range_time = $parse_to_year_time;
+							// start at the $start_range and go until we hit the end of our range.
+							while ($next_range_time >= $start_range_time && $next_range_time <= $end_range_time) {
 							
-							// depending on which view we're looking at, we do one month or one week
-							// one day is more difficult, I think, so I wrapped that into the week. We'll have to
-							// add another case for "year" once that's added.
-							if ($current_view == "month") {
-								$start_range_time = strtotime("$this_year-$this_month-01");
-								$end_range_time = strtotime("+1 month +1 week", $start_range_time);
-							} else {
-								$start_range_time = strtotime("$this_year-$this_month-$this_day");
-								$end_range_time = strtotime("+1 week", $start_range_time);
-							}
-							
-							// If the $end_range_time is less than the $start_date_time, we may as well forget the whole thing
-							// It doesn't do us any good to spend time adding data we aren't even looking at
-							// this will prevent the year view from taking way longer than it needs to
-							if ($end_range_time >= $start_date_time) {
-							
-								// if the beginning of our range is less than the start of the item, we may as well set it equal to it
-								if ($start_range_time < $start_date_time) $start_range_time = $start_date_time;
-					
-								// initialze the time we will increment
-								$next_range_time = $start_range_time;
-								
-								// start at the $start_range and go week by week until we hit the end of our range.
-								while ($next_range_time >= $start_range_time && $next_range_time <= $end_range_time) {
-								
+								// handling WEEKLY events here
+								if ($rrule_array["FREQ"] == "WEEKLY") {
+
 									// use weekCompare to see if we even have this event this week
 									if (weekCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
 										$interval = $number;
@@ -287,8 +257,8 @@ foreach($contents as $line) {
 												// written by the master data writer (hence the > instead of >=) otherwise we can special case these
 												// before, the first one would get entered twice and show up twice
 												// $next_date can fall up to a week behind $next_range_time because of how dateOfWeek works
-// writes to $master array here					// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
-												// on days that have been deleted by the user
+												// so we have to check this again. It uses $except_dates so it doesn't add to $master_array
+// writes to $master array here					// on days that have been deleted by the user
 												$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
 											}
 										}
@@ -296,12 +266,33 @@ foreach($contents as $line) {
 										$interval = 1;
 									}
 									$next_range_time = strtotime("+$interval week", $next_range_time);
+								
+								// handling DAILY events here
+								} elseif ($rrule_array["FREQ"] == "DAILY") {
+									
+									//print dayCompare(date("Ymd",$next_range_time), $start_date)."<br>";
+									//print $next_range_time." - ".date("Y-m-d",$next_range_time)."<br>";
+									
+									// use dayCompare to see if we even have this event this day
+									if (dayCompare(date("Ymd",$next_range_time), $start_date) % $number == 0) {
+										$interval = $number;
+										$next_date = date("Ymd", $next_range_time);
+										
+										if (strtotime($next_date) > $start_date_time && !in_array($next_date, $except_dates)) {
+// writes to $master array here				// same general concept as the WEEKLY recurrence
+											$master_array[($next_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
+										}
+									} else {
+										$interval = 1;
+									}
+									$next_range_time = strtotime("+$interval day", $next_range_time);
+									
+								// anything else we need to end the loop
+								} else {
+									$next_range_time = $end_range_time + 100;
 								}
+
 							}
-	
-						} else {
-// writes to $master array here
-							$master_array[($start_date)][($hour.$minute)][] = array ("event_start" => $start_time, "event_text" => $summary, "event_end" => $end_time, "event_length" => $length);
 						}
 					}
 				}	

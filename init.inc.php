@@ -3,21 +3,25 @@
 if(phpversion() >= "4.2.0") 
 
 	{
-		extract($HTTP_POST_VARS);
 		extract($HTTP_GET_VARS);	
+		extract($HTTP_POST_VARS);
 	}
 
 include('./config.inc.php');
 
 // define supported languages
-if ($language == "German") { 	
-	include "languages/german.inc.php";
-} elseif ($language == "Polish") {
-	include "languages/polish.inc.php";
-} elseif ($language == "French") {
-	include "languages/french.inc.php";
-} else {
-	include "languages/english.inc.php";
+switch ($language) {
+	case "German":
+		include("./languages/german.inc.php");
+		break;
+	case "Polish":
+		include("./languages/polish.inc.php");
+		break;
+	case "French":
+		include("./languages/french.inc.php");
+		break;
+	default:
+		include("./languages/english.inc.php");
 }
 
 // $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
