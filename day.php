@@ -149,7 +149,7 @@ if ($master_array[($getdate)]) {
 											$class = " class=\"dayborder\"";
 											$dayborder++;
 										} else {
-											$class = "";
+											$class = " class=\"dayborder2\"";
 											$dayborder = 0;
 										}
 										echo "<td bgcolor=\"#ffffff\" colspan=\"" . $nbrGridCols . "\" $class>&nbsp;</td>\n";
@@ -177,7 +177,7 @@ if ($master_array[($getdate)]) {
 													echo "<td rowspan=\"" . $event_length[$i]["length"] . "\" colspan=\"" . $drawWidth . "\" align=\"left\" valign=\"top\" class=\"eventbg2\">\n";
 													echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\">\n";
 													echo "<tr>\n";
-													echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b></font></td>\n";
+													echo "<td class=\"eventborder\"><font class=\"eventfont\"><b>$event_start</b> - $event_end</font></td>\n";
 													echo "</tr>\n";
 													echo "<tr>\n";
 													echo "<td>\n";
