@@ -315,7 +315,7 @@ for ($i=0;$i<7;$i++) {
 													case "started":
 														break;
 													case "ended":
-														echo "<td bgcolor=\"#ffffff\" colspan=\"" . $drawWidth . "\">&nbsp;</td>\n";
+														echo "<td bgcolor=\"#ffffff\" colspan=\"" . $drawWidth . "\" $class>&nbsp;</td>\n";
 														break;
 												}
 												$event_length[$thisday][$i]["length"]--;
@@ -325,7 +325,7 @@ for ($i=0;$i<7;$i++) {
 											}
 											//fill emtpy space on the right
 											if ($emptyWidth > 0) {
-												echo "<td bgcolor=\"#ffffff\" colspan=\"" . $emptyWidth . "\">&nbsp;</td>\n";
+												echo "<td bgcolor=\"#ffffff\" colspan=\"" . $emptyWidth . "\" $class>&nbsp;</td>\n";
 											}
 											while (isset($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"]) && $event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
 												array_pop($event_length[$thisday]);
