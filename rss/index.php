@@ -3,7 +3,7 @@
 define('BASE','../');
 $current_view = "rssindex";
 include(BASE.'functions/ical_parser.php');
-
+$default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">

@@ -2,6 +2,7 @@
 
 define('BASE', '../');
 include(BASE.'functions/ical_parser.php');
+$default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'], '/rss/'));
 
 $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time = $start_week_time + (6 * 25 * 60 * 60);

@@ -6,7 +6,7 @@
 		$cal_displayname2 = $cal_displayname2 . "...";
 	}
 	
-	$search_box .= '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\'Search\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\'Search\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search"></form>';
+	$search_box .= '<form action="search.php" method="GET"><input type="hidden" name="cal" value="'.$cal.'"><input type="hidden" name="getdate" value="'.$getdate.'"><input type="text" size="15" class="search_style" name="query" value="'.$search_lang.'" onfocus="javascript:if(this.value==\''.$search_lang.'\') {this.value=\'\';}" onblur="javascript:if(this.value==\'\') {this.value=\''.$search_lang.'\'}"><INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search"></form>';
 	
 	?>
 	

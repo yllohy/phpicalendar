@@ -45,10 +45,9 @@ $goweek_lang		= 'Go to This Week';
 $gomonth_lang		= 'Go to This Month';
 $goyear_lang		= 'Go to This Year';
 
-// new in 0.8 -------------
 $search_lang		= 'Search'; // the verb
 $results_lang		= 'Search Results';
-$query_lang			= 'Query: '; // will be followed by the search query
+$query_lang			= 'Query'; // will be followed by the search query
 $no_results_lang	= 'No events found';
 
 $goprint_lang		= 'Printer Friendly';
@@ -56,7 +55,6 @@ $time_lang			= 'Time';
 $summary_lang		= 'Summary';
 $description_lang	= 'Description';
 
-// RSS text for 0.8
 $this_site_is_lang		= 'This site is';
 $no_events_day_lang		= 'No events today.';
 $no_events_week_lang	= 'No events this week.';
@@ -65,7 +63,34 @@ $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e';  // Lists just the day
 $rss_month_date			= '%b %e';  // Lists just the day
 $rss_language			= 'en-us';
-// -------------------------
+
+// new in 0.9 ----------------------
+
+$search_took_lang		= 'Search took %s seconds';
+$recurring_event_lang	= 'Recurring event';
+$exception_lang			= 'Exception';
+$no_query_lang			= 'No query given';
+
+// $format_recur, items enclosed in % will be substituted with variables
+$format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
+
+$format_recur_lang['yearly']		= array('year','years');		// for these, put singular
+$format_recur_lang['monthly']		= array('month','months');		// and plural forms
+$format_recur_lang['weekly']		= array('week','weeks');		// these will be %freq%
+$format_recur_lang['daily']			= array('day','days');			// in the replacement below
+$format_recur_lang['hourly']		= array('hour','hours');
+$format_recur_lang['minutely']		= array('minute','minutes');
+$format_recur_lang['secondly']		= array('second','seconds');
+
+$format_recur_lang['start']			= 'Every %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= 'until %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+
+$format_recur_lang['bymonth']		= 'In months: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'On dates: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'On days: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+
+// ---------------------------------
 
 $daysofweek_lang			= array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 $daysofweekshort_lang		= array ('Sun','Mon','Tue','Wed','Thu','Fri','Sat');

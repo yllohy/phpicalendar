@@ -232,7 +232,7 @@ if ($parse_file) {
 								case 'MINUTELY':	$freq_type = 'minute';	break;
 								case 'SECONDLY':	$freq_type = 'second';	break;
 							}
-							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = ucfirst($freq_type);
+							$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = strtolower($val);
 							break;
 						case 'COUNT':
 							$count = $val;

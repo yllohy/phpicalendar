@@ -53,10 +53,9 @@ $goweek_lang		= '今週に移動';
 $gomonth_lang		= '今月に移動';
 $goyear_lang		= '今年に移動';
 
-// new in 0.8 -------------
 $search_lang		= '探す'; // the verb
 $results_lang		= 'サーチリザルト';
-$query_lang			= '問い: '; // will be followed by the search query
+$query_lang			= '問い'; // will be followed by the search query
 $no_results_lang	= '予定を見つけません。';
 
 $goprint_lang		= '印刷できる';
@@ -72,8 +71,35 @@ $no_events_month_lang	= '今月は予定がありません';
 $rss_day_date			= 'g:i A';  // Lists just the time
 $rss_week_date			= '%b %e日';  // Lists just the day
 $rss_month_date			= '%b %e日';  // Lists just the day
-$rss_language			= 'en-us';
-// -------------------------
+$rss_language			= 'ja';
+
+// new in 0.9 ----------------------
+
+$search_took_lang		= 'Search took %s seconds';
+$recurring_event_lang	= 'Recurring event';
+$exception_lang			= '特例';
+
+// $format_recur, items enclosed in % will be substituted with variables
+$format_recur_lang['delimiter']	= '、';								// ie, 'one, two, three'
+
+$format_recur_lang['yearly']		= array('年','年');		// for these, put singular
+$format_recur_lang['monthly']		= array('か月','か月');		// and plural forms
+$format_recur_lang['weekly']		= array('週','週');		// these will be %freq%
+$format_recur_lang['daily']			= array('日','日');			// in the replacement below
+$format_recur_lang['hourly']		= array('時間','時間');
+$format_recur_lang['minutely']		= array('分','分');
+$format_recur_lang['secondly']		= array('秒','秒');
+
+$format_recur_lang['start']			= '%int%%freq%毎に%for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
+$format_recur_lang['until']			= '%date%まで';				// ie, 'until January 4'
+$format_recur_lang['count']			= 'for a count of %int%';		// ie, 'for 5 times'
+
+$format_recur_lang['bymonth']		= '月：%list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= '幾日：%list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= '週の日：%list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
+
+// ---------------------------------
+
 
 $daysofweek_lang			= array ('日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日');
 $daysofweekshort_lang		= array ('日','月','火','水','木','金','土');
@@ -85,12 +111,12 @@ $monthsofyearshort_lang		= $monthsofyear_lang;
 $timeFormat = 'g:i A';
 
 // For date formatting, see note below
-$dateFormat_day = '%B %e日 %A';
-$dateFormat_week = '%B %e日';
-$dateFormat_week_list = '%b %e日 (%a)';
-$dateFormat_week_jump = '%b %e日';
-$dateFormat_month = '%Y年 %B';
-$dateFormat_month_list = '%B %e日 %A';
+$dateFormat_day = '%B%e日 %A';
+$dateFormat_week = '%B%e日';
+$dateFormat_week_list = '%b%e日（%a）';
+$dateFormat_week_jump = '%b%e日';
+$dateFormat_month = '%Y年%B';
+$dateFormat_month_list = '%B%e日 %A';
 
 /*
 Notes about dateFormat_*
