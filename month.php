@@ -54,7 +54,7 @@ $num_of_events = 0;
 	<?php include (BASE.'functions/event.js'); ?>
 </head>
 <body>
-<?php include (BASE.'header.inc.php'); ?>
+<?php include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table width="735" border="0" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
@@ -212,7 +212,7 @@ $num_of_events = 0;
 		</td>
 	</tr>
 </table>
-<?php include (BASE.'calendar_nav.php'); ?>
+<?php include (BASE.'includes/calendar_nav.php'); ?>
 <?php if (($num_of_events != 0) && ($this_months_events == "yes")) { ?>	
 <br>
 <table border="0" cellspacing="0" cellpadding="0" width="737" bgcolor="#FFFFFF" class="calborder">
@@ -290,7 +290,7 @@ $num_of_events = 0;
 	</tr>
 </table>		
 <?php } ?>
-<?php include (BASE.'footer.inc.php'); ?>
+<?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
 </body>
 </html>

@@ -20,7 +20,7 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
   	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
 </head>
 <body bgcolor="#FFFFFF">
-<?php include (BASE.'header.inc.php'); ?>
+<?php include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
@@ -99,7 +99,7 @@ if (isset($HTTP_SERVER_VARS['HTTP_REFERER']) && $HTTP_SERVER_VARS['HTTP_REFERER'
 		</td>
 	</tr>
 </table>
-<?php include (BASE.'footer.inc.php'); ?>
+<?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
 </body>
 </html>

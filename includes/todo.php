@@ -1,6 +1,7 @@
 <?php 
 
-include ('./functions/init.inc.php'); 
+define('BASE', '../');
+include (BASE.'functions/init.inc.php'); 
 
 if (isset($HTTP_GET_VARS['vtodo']) && ($HTTP_GET_VARS['vtodo'] !== '') ) {
 	$vtodo = $HTTP_GET_VARS['vtodo'];
@@ -57,7 +58,7 @@ $calendar_name2 = str_replace('\\', '', $calendar_name2);
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title><?php echo $calendar_name2; ?></title>
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo "$style_sheet/default.css"; ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE."styles/$style_sheet/default.css"; ?>">
 </head>
 <body bgcolor="#eeeeee"><center>
 <table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">

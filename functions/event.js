@@ -5,7 +5,7 @@
 		var windowW = 450;
 		var windowH = 275;
 	
-		var url = "event.php?event="+event+
+		var url = "includes/event.php?event="+event+
 			"&calendar_name="+calendarname+
 			"&start="+start+
 			"&end="+end+

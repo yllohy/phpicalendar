@@ -64,7 +64,7 @@ function error($error_msg='There was an error processing the request.', $file='N
 		</td>
 	</tr>
 </table>
-<?php include (BASE.'footer.inc.php'); ?>
+<?php include (BASE.'includes/footer.inc.php'); ?>
 </center>
 </body>
 </html>

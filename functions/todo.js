@@ -6,7 +6,7 @@
 		var windowW = 450;
 		var windowH = 275;
 	
-		var url = "todo.php?vtodo="+vtodo+
+		var url = "includes/todo.php?vtodo="+vtodo+
 			"&calendar_name="+calendarname+
 			"&start="+start+
 			"&due="+due+

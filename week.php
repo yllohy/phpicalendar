@@ -56,7 +56,7 @@ for ($i=0;$i<7;$i++) {
 	<?php if (is_array($master_array['-2'])) include (BASE.'functions/todo.js'); ?>
 </head>
 <body bgcolor="#FFFFFF">
-<?php include (BASE.'header.inc.php'); ?>
+<?php include (BASE.'includes/header.inc.php'); ?>
 <center>
 <table border="0" width="720" cellspacing="0" cellpadding="0">
 	<tr>
@@ -344,7 +344,7 @@ for ($i=0;$i<7;$i++) {
 		<td width="20"><img src="images/spacer.gif" width="20" height="1" alt=""></td>
 		<td width="160" valign="top">
 			<?php include (BASE.'sidebar.php'); ?>
-			<?php include (BASE.'footer.inc.php'); ?>
+			<?php include (BASE.'includes/footer.inc.php'); ?>
 		</td>
 	</tr>
 </table>
