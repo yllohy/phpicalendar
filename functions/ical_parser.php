@@ -533,7 +533,7 @@ foreach ($cal_filelist as $filename) {
 													}
 													break;
 												case 'MONTHLY':
-													if (!isset($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
+													if (empty($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
 													$next_range_time = strtotime(date('Y-m-01', $next_range_time));
 													$next_date_time = $next_date_time;
 													if ((isset($bymonthday)) && (!isset($byday))) {
@@ -565,7 +565,7 @@ foreach ($cal_filelist as $filename) {
 																if (in_array($month, $bymonth)) {
 																	$recur_data[] = $next_date_time;
 																}
-															} elseif (isset($bymonthday)) {
+															} elseif (isset($bymonthday) && (!empty($bymonthday))) {
 																// This supports MONTHLY where BYDAY and BYMONTH are both set
 																foreach($bymonthday as $day) {
 																	$year 	= date('Y', $next_range_time);
