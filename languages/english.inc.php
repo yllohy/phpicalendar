@@ -182,13 +182,13 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Error!';
-$error_window_lang = 'There was an error!';
-$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-$error_path_lang = 'Unable to open the path: "%s"';
-$error_back_lang = 'Please use the "Back" button to return.';
-$error_remotecal_lang = 'This server blocks remote calendars which have not been approved.';
-$error_restrictedcal_lang = 'You have tried to access a calendar that is restricted on this server.';
-$error_invalidcal_lang = 'Invalid calendar file. Please try a different calendar.';
+$lang['l_error_title'] = 'Error!';
+$lang['l_error_window'] = 'There was an error!';
+$lang['l_error_calendar'] = 'The calendar "%s" was being processed when this error occurred.';
+$lang['l_error_path'] = 'Unable to open the path: "%s"';
+$lang['l_error_back'] = 'Please use the "Back" button to return.';
+$lang['l_error_remotecal'] = 'This server blocks remote calendars which have not been approved.';
+$lang['l_error_restrictedcal'] = 'You have tried to access a calendar that is restricted on this server.';
+$lang['l_error_invalidcal'] = 'Invalid calendar file. Please try a different calendar.';
 
 ?>

@@ -1,5 +1,7 @@
 <?php
 
+
+
 function list_months() {
 	global $getdate, $this_year, $cal, $dateFormat_month;
 	$month_time 	= strtotime("$this_year-01-01");

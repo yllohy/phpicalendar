@@ -130,7 +130,7 @@ class Page {
 				$data = (file_exists($data)) ? $this->parse($data) : $data;
 				
 				// This removes any unfilled tags
-				if ($data == '') {
+				if (!$data) {
 					$this->page = ereg_replace('<!-- switch ' . $tag . ' on -->(.*)<!-- switch ' . $tag . ' off -->', '', $this->page);
 				}
 				

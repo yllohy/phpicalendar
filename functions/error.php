@@ -1,69 +1,49 @@
 <?php
 if (!defined('BASE')) define('BASE','../');
+require_once(BASE.'config.inc.php');
+require_once(BASE.'functions/init.inc.php');
+require_once(BASE.'functions/template.php');
 
 function error($error_msg='There was an error processing the request.', $file='NONE') {
-	global $style_sheet, $powered_by_lang, $version_lang, $error_title_lang, $error_window_lang, $error_calendar_lang, $error_back_lang, $enable_rss, $this_site_is_lang;
-	if (!isset($style_sheet))			$style_sheet = 'silver';
-	if (!isset($powered_by_lang))		$powered_by_lang = 'Powered by';
-	if (!isset($error_title_lang))		$error_title_lang = 'Error!';
-	if (!isset($error_window_lang))		$error_window_lang = 'There was an error!';
-	if (!isset($error_calendar_lang))	$error_calendar_lang = 'The calendar "%s" was being processed when this error occurred.';
-	if (!isset($error_back_lang))		$error_back_lang = 'Please use the "Back" button to return.';
-	if (!isset($enable_rss))			$enable_rss = 'no';
-	if (!isset($this_site_is_lang))		$this_site_is_lang = 'This site is';
+	global $template, $language, $enable_rss, $lang;
+	if (!isset($template))					$template = 'default';
+	if (!isset($lang['l_powered_by']))		$lang['l_powered_by'] = 'Powered by';
+	if (!isset($lang['l_error_title']))		$lang['l_error_title'] = 'Error!';
+	if (!isset($lang['l_error_window']))	$lang['l_error_window'] = 'There was an error!';
+	if (!isset($lang['l_error_calendar']))	$lang['l_error_calendar'] = 'The calendar "%s" was being processed when this error occurred.';
+	if (!isset($lang['l_error_back']))		$lang['l_error_back'] = 'Please use the "Back" button to return.';
+	if (!isset($lang['l_this_site_is']))	$lang['l_this_site_is'] = 'This site is';
+	if (!isset($enable_rss))				$enable_rss = 'no';
 		
-	$error_calendar = sprintf($error_calendar_lang, $file);
-	$current_view = 'error';
-	$display_date = $error_title_lang;
-	$calendar_name = $error_title_lang;
-	include (BASE.'includes/header.inc.php'); 
+	$error_calendar 	= sprintf($lang['l_error_calendar'], $file);
+	$current_view 		= 'error';
+	$display_date 		= $lang['l_error_title'];
+	$calendar_name 		= $lang['l_error_title'];	
 	
-?>
+	$page = new Page(BASE.'templates/'.$template.'/error.tpl');
 
-<center>
-<table border="0" width="700" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="520" valign="top" align="center">
-			<table width="520" border="0" cellspacing="0" cellpadding="0" class="calborder">
-				<tr>
-					<td align="center" valign="middle">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
-							<tr>
-								<td align="left" valign="top" width="1%" class="sideback"><img src="images/spacer.gif" width="1" height="20" alt=" "></td>
-								<td align="center" valign="middle" width="98%" class="sideback"><b><?php echo $error_window_lang; ?></b></td>
-								<td class="sideback" width="1%"></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">	
-							<tr>
-								<td align="center" valign="top">
-									<br>
-									<?php echo $error_msg; ?>
-									<br>
-									<br>
-									<?php echo $error_calendar; ?>
-									<br>
-									<br>
-									<?php echo $error_back_lang; ?>
-									<br>
-									<br>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-</center>
-<?php 
+	$page->replace_tags(array(
+		'header'			=> BASE.'templates/'.$template.'/header.tpl',
+		'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+		'calendar_nav'		=> BASE.'templates/'.$template.'/calendar_nav.tpl',
+		'template'			=> $template,
+		'cal'				=> $cal,
+		'getdate'			=> $getdate,
+		'calendar_name'		=> $calendar_name,
+		'display_date'		=> $display_date,
+		'rss_powered'	 	=> $rss_powered,
+		'rss_available' 	=> '',
+		'todo_available' 	=> '',
+		'rss_valid' 		=> '',
+		'error_msg'	 		=> $error_msg,
+		'error_calendar' 	=> $error_calendar,
+		'generated'	 		=> $generated
+				
+		));
+		
+	$page->output();
 
-	include (BASE.'includes/footer.inc.php');
+	
 
 }
 
