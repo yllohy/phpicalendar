@@ -9,8 +9,8 @@ $style_sheet 			= 'silver';			// Themes support - silver, red, green, orange, gr
 $calendar_path 			= './calendars';	// Path to directory with calendars
 $default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
-$default_cal 			= 'Jareds32Classes';			// Exact filename of calendar without .ics
-$language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish'
+$default_cal 			= 'Home';			// Exact filename of calendar without .ics
+$language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese'
 $week_start_day 		= 'Sunday';			// Day of the week your week starts on
 $day_start 				= '0700';			// Start time for day grid
 $gridLength 			= '15';				// Grid distance in minutes for day view, multiples of 15 preferred
@@ -20,7 +20,7 @@ $tomorrows_events_lines = '1';				// Number of lines to wrap each event title in
 $allday_week_lines 		= '1';				// Number of lines to wrap each event title in all-day events in week view, 0 means display all lines.
 $week_events_lines 		= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 $timezone 				= '';				// Set timezone. Read TIMEZONES file for more information
-$default_path			= 'http://ical.silter.org/phpicalendar';
+$default_path			= 'http://www.example.com/phpicalendar'; // The HTTP URL to the PHP iCalendar directory
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X)
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
