@@ -12,7 +12,7 @@
 		<!-- switch notthismonth on -->
 		<td class="monthoff">
 			<div align="right">
-				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><font class="G10G">{DAY}</font></a>
+				<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 			</div>
 			{ALLDAY}
 			{EVENT}	
