@@ -179,16 +179,18 @@ function display_ical_list($cals) {
 		// trying to figure out if this is the selected calendar.
 		$cal_httpPrefix_tmp = str_replace('webcal://', 'http://', $cal_tmp);
 		if ($cal_httpPrefix_tmp == urldecode($cal)) {
-			print "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\" selected>$cal_displayname_tmp</option>";
+			$return .= "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\" selected>$cal_displayname_tmp</option>";
 		} else {
-			print "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\">$cal_displayname_tmp</option>";	
+			$return .= "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\">$cal_displayname_tmp</option>";	
 		}
 	}			
 
 	// option to open all (non-web) calenders together
 	if ($cal == $ALL_CALENDARS_COMBINED) {
-		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\" selected>$all_cal_comb_lang</option>";
+		$return .=  "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\" selected>$all_cal_comb_lang</option>";
 	} else {
-		print "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\">$all_cal_comb_lang</option>";
+		$return .=  "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\">$all_cal_comb_lang</option>";
 	}
+	
+	return $return;
 }

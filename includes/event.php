@@ -65,17 +65,12 @@ $page->replace_tags(array(
 	'event' 			=> $event,
 	'event_times' 		=> $event_times,
 	'description' 		=> $description,
-	'organizer_lang' 	=> $organizer_lang,
 	'organizer' 		=> $organizer,
-	'attendee_lang' 	=> $attendee_lang,
 	'attendee'	 		=> $attendee,
-	'status_lang' 		=> $status_lang,
 	'status'	 		=> $status,
-	'location_lang' 	=> $location_lang,
 	'location' 			=> $location,
-	'sheet_href'		=> $sheet_href,
 	'cal_title_full'	=> $cal_title_full,
-	'template'			=> $template,
+	'template'			=> $template
 		
 	));
 

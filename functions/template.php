@@ -35,7 +35,13 @@ class Page {
 		else
 			die('No tags designated for replacement.');
 		}
-
+	
+	function replace_langs($langs = array()) {
+		foreach ($langs as $tag => $data) {
+			$this->page = eregi_replace('{' . $tag . '}', $data, $this->page);
+		}
+	}
+	
 	function output() {
 		print($this->page);
 	}

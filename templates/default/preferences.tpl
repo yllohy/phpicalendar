@@ -1,3 +1,4 @@
+{HEADER}
 <center>
 <table border="0" width="700" cellspacing="0" cellpadding="0">
 	<tr>
@@ -11,7 +12,7 @@
 								<td class="navback">
 									<table width="100%" border="0" cellspacing="0" cellpadding="0">
 										<tr>
-											<td align="center" class="navback" nowrap valign="middle"><font class="H20">{PREFERENCES_LANG}</font></td>
+											<td align="center" class="navback" nowrap valign="middle"><font class="H20">{L_PREFERENCES}</font></td>
 										</tr>
 									</table>
 								</td>
@@ -46,38 +47,38 @@
 								<form action="preferences.php?action=setcookie" METHOD="post">
 								<table border="0" width="620" cellspacing="2" cellpadding="2" align="center">
 									<tr>
-										<td align="left" valign="top" width="300" nowrap>{SELECT_LANG_LANG}</td>
+										<td align="left" valign="top" width="300" nowrap>{L_SELECT_LANG}</td>
 										<td align="left" valign="top" width="20"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><select name="cookie_language" class="query_style">{COOKIE_LANGUAGE}</select></td>
+										<td align="left" valign="top"><select name="cookie_language" class="query_style">{LANGUAGE_SELECT}</select></td>
 									</tr>
 									<tr>
-										<td align="left" valign="top" width="300" nowrap>{SELECT_CAL_LANG}</td>
+										<td align="left" valign="top" width="300" nowrap>{L_SELECT_CAL}</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><select name="cookie_calendar" class="query_style">{COOKIE_CALENDAR}</select></td>
+										<td align="left" valign="top"><select name="cookie_calendar" class="query_style">{CALENDAR_SELECT}</select></td>
 									</tr>
 									<tr>
-										<td align="left" valign="top" width="300" nowrap>{SELECT_VIEW_LANG}</td>
+										<td align="left" valign="top" width="300" nowrap>{L_SELECT_VIEW}</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><select name="cookie_view" class="query_style">{COOKIE_VIEW}</select></td>
+										<td align="left" valign="top"><select name="cookie_view" class="query_style">{VIEW_SELECT}</select></td>
 									</tr>
 									<tr>
-										<td align="left" valign="top" width="300" nowrap>{SELECT_TIME_LANG}</td>
+										<td align="left" valign="top" width="300" nowrap>{L_SELECT_TIME}</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><select name="cookie_time" class="query_style">{COOKIE_TIME}</select></td>
+										<td align="left" valign="top"><select name="cookie_time" class="query_style">{TIME_SELECT}</select></td>
 									</tr>
 									<tr>
-										<td align="left" valign="top" width="300" nowrap>{SELECT_DAY_LANG}</td>
+										<td align="left" valign="top" width="300" nowrap>{L_SELECT_DAY}</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><select name="cookie_startday" class="query_style">{COOKIE_STARTDAY}</select></td>
+										<td align="left" valign="top"><select name="cookie_startday" class="query_style">{STARTDAY_SELECT}</select></td>
 									</tr>
 									<tr>
-										<td align="left" valign="top" width="300" nowrap>{SELECT_STYLE_LANG}</td>
+										<td align="left" valign="top" width="300" nowrap>{L_SELECT_STYLE}</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><select name="cookie_style" class="query_style">{COOKIE_STYLE}</select></td>
+										<td align="left" valign="top"><select name="cookie_style" class="query_style">{STYLE_SELECT}</select></td>
 									</tr>
 									<!-- switch cookie_already_set on -->
 									<tr>
-										<td align="left" valign="top" nowrap>{UNSET_PREFS_LANG}</td>
+										<td align="left" valign="top" nowrap>{L_UNSET_PREFS}</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
 										<td align="left" valign="top"><INPUT TYPE="checkbox" NAME="unset" VALUE="true"></td>
 									</tr>
@@ -86,7 +87,7 @@
 									<tr>
 										<td align="left" valign="top" nowrap>&nbsp;</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><input type="submit" name="set" value="{SET_PREFS_LANG}"></button></td>
+										<td align="left" valign="top"><input type="submit" name="set" value="{L_SET_PREFS}"></button></td>
 									</tr>
 									<!-- switch cookie_not_set off -->
 								</table>
@@ -102,3 +103,4 @@
 	</tr>
 </table>
 </center>
+{FOOTER}

@@ -176,4 +176,7 @@ if ($is_webcal) {
 		}
 	}
 }
+
+$rss_powered = ($enable_rss == 'yes') ? 'yes' : '';
+
 ?>

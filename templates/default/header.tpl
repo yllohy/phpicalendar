@@ -4,10 +4,12 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 	<title>{CALENDAR_NAME} - {DISPLAY_DATE}</title>
-  	<link rel="stylesheet" type="text/css" href="{BASE}styles/{STYLE_SHEET}/default.css">
-	<!-- Switch RSS On -->
+  	<link rel="stylesheet" type="text/css" href="templates/{TEMPLATE}/default.css">
+	<!-- switch rss_available on -->
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="{DEFAULT_VIEW}/rss/rss.php?cal={CAL}&amp;rssview={CURRENT_VIEW}">
-	<!-- Switch RSS Off -->		
+	<!-- switch rss_available off -->		
+	<!-- switch todo_available on -->
 	{TODO_JS}
+	<!-- switch todo_available off -->
 </head>
 <body>

@@ -21,16 +21,16 @@
 					<!-- switch description off -->
 					<p>
 					<!-- switch status on -->
-					<b>{STATUS_LANG}</b>: {STATUS}<br>
+					<b>{L_STATUS}</b>: {STATUS}<br>
 					<!-- switch status off -->
 					<!-- switch priority on -->
-					<b>{PRIORITY_LANG}</b>: {PRIORITY}<br>
+					<b>{L_PRIORITY}</b>: {PRIORITY}<br>
 					<!-- switch priority off -->
 					<!-- switch start_date on -->
-					<b>{CREATED_LANG}</b>: {START_DATE}<br>
+					<b>{L_CREATED}</b>: {START_DATE}<br>
 					<!-- switch start_date off -->
 					<!-- switch due_date on -->
-					<b>{DUE_LANG}</b>: {DUE_DATE}<br>
+					<b>{L_DUE}</b>: {DUE_DATE}<br>
 					<!-- switch due_date off -->
 					</p>
 				</div>
