@@ -249,7 +249,7 @@ include(BASE.'functions/ical_parser.php');
 									<tr>
 										<td align="left" valign="top" nowrap>&nbsp;</td>
 										<td align="left" valign="top"><img src="images/spacer.gif" alt="" width="20" height="1" border="0"></td>
-										<td align="left" valign="top"><button type="submit" name="set" value="true" class="query_style">Set Cookie</button></td>
+										<td align="left" valign="top"><button type="submit" name="set" value="true"><?php echo "$set_prefs_lang"; ?></button></td>
 									</tr>
 								</table>
 								</form>

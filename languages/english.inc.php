@@ -74,13 +74,18 @@ $select_view_lang		= 'Select your default view:';
 $select_time_lang		= 'Select your default start time:';
 $select_day_lang		= 'Select your default start day of week:';
 $select_style_lang		= 'Select your default style:';
+$set_prefs_lang			= 'Set preferences';
 
 //To-dos
-$completed_lang			= 'Completed on ';
+$completed_date_lang	= 'Completed on ';
+$completed_lang			= 'Completed';
 $created_lang			= 'Created: ';
 $due_lang				= 'Due: ';
-$no_priority_lang		= 'None';
 $priority_lang			= 'Priority: ';
+$priority_high_lang		= 'High';
+$priority_low_lang		= 'Low';
+$priority_medium_lang	= 'Medium';
+$priority_none_lang		= 'None';
 $status_lang			= 'Status: ';
 $todo_lang				= 'To do items';
 $unfinished_lang		= 'Unfinished';

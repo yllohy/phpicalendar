@@ -218,32 +218,35 @@ if ((isset($master_array['-2'])) && ($show_todos == 'yes')) { ?>
 											$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
 											$vtodo_text = strip_tags($vtodo_text, '<b><i><u>');
 											if ($vtodo_text != "") {	
-												$vtodo_text2 	= rawurlencode(addslashes($val["vtodo_text"]));
-												$description 	= addslashes(urlencode($val["description"]));
-												$completed 		= $val['completed_date'];
-												if(isset($completed)) $completed = localizeDate($dateFormat_day, strtotime($completed));
+												$description 	= $val["description"];
+												$completed_date = $val['completed_date'];
 												$status 		= $val["status"];
-												if ((!isset($status) || $status == "COMPLETED") && isset($completed)) $status = $completed_lang . $completed;
-
 												$priority 		= $val['priority'];
-												
 												$start_date 	= $val["start_date"];
-												$start_date = localizeDate ($dateFormat_day, strtotime($start_date));
-												if(isset($val['due_date']) && strtotime($val['due_date']) != strtotime("+1 year",strtotime($start_date))) $due_date = localizeDate ($dateFormat_day, strtotime($val['due_date']));
-												else $due_date 	= '';
+												$due_date 		= $val['due_date'];
+												$vtodo_array 	= array(
+													'calendar_name' => $calendar_name,
+													'completed_date'=> $completed_date,
+													'description'	=> $description,
+													'due_date'		=> $due_date,
+													'priority'		=> $priority,
+													'start_date'	=> $start_date,
+													'status'		=> $status,
+													'vtodo_text' 	=> $vtodo_text);
 
-												$calendar_name2	= addslashes($calendar_name);
-												$calendar_name2 = urlencode($calendar_name2);
-												$vtodo_text = word_wrap($vtodo_text, 21, $tomorrows_events_lines);
+												$vtodo_array 	= base64_encode(serialize($vtodo_array));
+												
+												$vtodo_text 	= word_wrap($vtodo_text, 21, $tomorrows_events_lines);
+												
 												if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
 													if ($show_completed == 'yes') {
 														$vtodo_text = "<S>$vtodo_text</S>";
-														echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status', '$priority')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+														echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 													}
 												} elseif (isset($val['priority']) && ($val['priority'] != 0) && ($val['priority'] <= 5)) {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status', '$priority')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/important.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 												} else {
-													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_text2', '$calendar_name2', '$start_date', '$due_date', '$description', '$status', '$priority')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
+													echo "<a class=\"psf\" href=\"javascript:openTodoInfo('$vtodo_array')\"><font class=\"G10B\"><img src=\"images/not_completed.gif\" alt=\"\" width=\"13\" height=\"11\" border=\"0\" align=\"middle\"> $vtodo_text</font></a><br>\n";
 												}
 											}
 										}

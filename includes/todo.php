@@ -1,66 +1,72 @@
 <?php 
 
 define('BASE', '../');
-include (BASE.'functions/init.inc.php'); 
+include (BASE.'functions/init.inc.php');
+include (BASE.'functions/date_functions.php');
 
-if (isset($HTTP_GET_VARS['vtodo']) && ($HTTP_GET_VARS['vtodo'] !== '') ) {
-	$vtodo = $HTTP_GET_VARS['vtodo'];
+// Unserialize the array so that we can use it.
+$vtodo_array = unserialize(base64_decode($HTTP_GET_VARS['vtodo_array']));
+
+// Set the variables from the array
+if (isset($vtodo_array['vtodo_text']) && ($vtodo_array['vtodo_text'] !== '') ) {
+	$vtodo_text = $vtodo_array['vtodo_text'];
 } else {
-	$vtodo = '';
+	$vtodo_text = '';
 }
 
-if (isset($HTTP_GET_VARS['description']) && ($HTTP_GET_VARS['description'] !== '') ) {
-	$description = $HTTP_GET_VARS['description'];
+if (isset($vtodo_array['description']) && ($vtodo_array['description'] !== '') ) {
+	$description = $vtodo_array['description'];
 } else {
 	$description = '';
 }
 
-if (isset($HTTP_GET_VARS['status']) && ($HTTP_GET_VARS['status'] !== '') ) {
-	$status = $HTTP_GET_VARS['status'];
+if (isset($vtodo_array['completed_date']) && ($vtodo_array['completed_date'] !== '') ) {
+	$completed_date = localizeDate ($dateFormat_day, strtotime($vtodo_array['completed_date']));
+}
+
+if (isset($vtodo_array['status']) && ($vtodo_array['status'] !== '') ) {
+	$status = $vtodo_array['status'];
+}
+if ((!isset($status) || $status == "COMPLETED") && isset($completed_date)) {
+	$status = $completed_date_lang . $completed_date;
+} else if ($status == "COMPLETED") {
+	$status = $completed_lang;
 } else {
 	$status = $unfinished_lang;
 }
 
-if (isset($HTTP_GET_VARS['calendar_name']) && ($HTTP_GET_VARS['calendar_name'] !== '') ) {
-	$calendar_name = $HTTP_GET_VARS['calendar_name'];
+if (isset($vtodo_array['calendar_name']) && ($vtodo_array['calendar_name'] !== '') ) {
+	$calendar_name = $vtodo_array['calendar_name'];
 } else {
 	$calendar_name = '';
 }
 
-if (isset($HTTP_GET_VARS['start']) && ($HTTP_GET_VARS['start'] !== '') ) {
-	$start = $HTTP_GET_VARS['start'];
-} else {
-	$start = '';
+if (isset($vtodo_array['start_date']) && ($vtodo_array['start_date'] !== '') ) {
+	$start_date = localizeDate ($dateFormat_day, strtotime($vtodo_array['start_date']));
 }
 
-if (isset($HTTP_GET_VARS['due']) && ($HTTP_GET_VARS['due'] !== '') ) {
-	$due = $HTTP_GET_VARS['due'];
+if (isset($vtodo_array['due_date']) && ($vtodo_array['due_date'] !== '') && strtotime($vtodo_array['due_date']) != strtotime("+1 year", strtotime($start_date))) {
+	$due_date = localizeDate ($dateFormat_day, strtotime($vtodo_array['due_date']));
 } else {
-	$due = '';
+	$due_date = '';
 }
 
-if (isset($HTTP_GET_VARS['priority']) && ($HTTP_GET_VARS['priority'] !== '') && ($HTTP_GET_VARS['priority'] < 10)) {
-	$priority = $HTTP_GET_VARS['priority'];
+if (isset($vtodo_array['priority']) && ($vtodo_array['priority'] !== '')) {
+	$priority = $vtodo_array['priority'];
+
+	if ($priority >= 1 && $priority <= 4) {
+		$priority = $priority_high_lang;
+	} else if ($priority == 5) {
+		$priority = $priority_medium_lang;
+	} else if ($priority >= 6 && $priority <= 9) {
+		$priority = $priority_low_lang;
+	} else {
+		$priority = $priority_none_lang;
+	}
 } else {
-	$priority = $no_priority_lang;
+	$priority = $priority_none_lang;
 }
 
-$vtodo = rawurldecode($vtodo);
-$vtodo = stripslashes($vtodo);
-$vtodo = str_replace('\\', '', $vtodo);
-//$vtodo = htmlspecialchars($vtodo);
-$description = rawurldecode($description);
-$description = stripslashes($description);
-$description = str_replace('\\', '', $description);
-//$description = htmlspecialchars($description);
-$calendar_name = rawurldecode($calendar_name);
-$calendar_name = stripslashes($calendar_name);
-$calendar_name = str_replace('\\', '', $calendar_name);
-//$calendar_name = htmlspecialchars($calendar_name);
-$status = rawurldecode($status);
-$status = stripslashes($status);
-$status = str_replace('\\', '', $status);
-//$status = htmlspecialchars($status);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
@@ -85,7 +91,7 @@ $status = str_replace('\\', '', $status);
 	   		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					 <td width="1%"><img src="images/spacer.gif" width="6" height="1"></td>
-		 			 <td align="left" colspan="2" class="V12"><?php echo ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$vtodo).'<br /><br />'; ?></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$vtodo_text).'<br /><br />'; ?></td>
 				</tr>
 				
 				<?php if ($description) { ?>    
@@ -110,13 +116,13 @@ $status = str_replace('\\', '', $status);
 
 				<tr>
 					 <td></td>
-		 			 <td align="left" colspan="2" class="V12"><?php echo $created_lang . $start; ?></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo $created_lang . $start_date; ?></td>
 				</tr>
 
-				<?php if ($due) { ?>
+				<?php if ($due_date) { ?>
 				<tr>
 					 <td></td>
-		 			 <td align="left" colspan="2" class="V12"><?php echo $due_lang . $due; ?></td>
+		 			 <td align="left" colspan="2" class="V12"><?php echo $due_lang . $due_date; ?></td>
 				</tr>
 				<?php } ?>
 				

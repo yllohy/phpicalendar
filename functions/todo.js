@@ -1,18 +1,12 @@
 
 <script language="JavaScript" type="text/javascript">
 <!--
-	function openTodoInfo(vtodo, calendarname, start, due, description, status, priority)
+	function openTodoInfo(vtodo_array)
 	{	
 		var windowW = 450;
 		var windowH = 275;
 	
-		var url = "includes/todo.php?vtodo="+vtodo+
-			"&calendar_name="+calendarname+
-			"&start="+start+
-			"&due="+due+
-			"&description="+description+
-			"&status="+status+
-			"&priority="+priority;
+		var url = "includes/todo.php?vtodo_array="+vtodo_array;
 				
 		options = "scrollbars=no"+",width="+windowW+",height="+windowH;
 	
