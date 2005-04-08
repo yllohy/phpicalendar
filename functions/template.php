@@ -116,6 +116,82 @@ class Page {
 		}
 	}	
 	
+	function draw_search($template_p) {
+		global $template, $getdate, $cal, $the_arr, $daysofweek_lang, $week_start_day, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
+
+		preg_match("!<\!-- switch results on -->(.*)<\!-- switch results off -->!is", $this->page, $match1);
+		preg_match("!<\!-- switch recur on -->(.*)<\!-- loop recur off -->!is", $this->page, $match2);
+		preg_match("!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is", $this->page, $match3);
+		$loop_event		= trim($match1[1]);
+		$loop_recur 	= trim($match2[1]);
+		$loop_except 	= trim($match3[1]);
+		$parse_month 	= date ("Ym", strtotime($getdate));
+		
+		// Pull out each event
+		foreach($the_arr as $key => $val) {
+			
+			$events_found++;
+			$dayofmonth = strtotime($val['date']);
+			$dayofmonth = localizeDate ('%A, %B %e %Y', $dayofmonth);
+			$events_tmp = $loop_event;
+			$recur_tmp	= $loop_recur;
+				
+			if ($val['event_text']) {	
+				$event_text 	= stripslashes(urldecode($val['event_text']));
+				$description 	= stripslashes(urldecode($val['description']));
+				$event_start 	= $val['event_start'];
+				$event_end 		= $val['event_end'];
+				if (isset($val['display_end'])) $event_end = $val['display_end'];
+					if (!$val['event_start']) { 
+						$event_start = $lang['l_all_day'];
+						$event_start2 = '';
+						$event_end = '';
+					} else {
+							$event_start    = date ($timeFormat, strtotime ($event_start));
+							$event_end      = date ($timeFormat, strtotime ($event_end));
+							$event_start    = $event_start .' - '.$event_end;
+					}							
+				}
+				
+				if ($description == '') {
+					$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!is', '', $events_tmp);
+				}
+				if (!$val['exception']) {
+					$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is', '', $events_tmp);
+				}else{
+					foreach ($val['exception'] as $except_val){
+					}
+				}
+				
+				if (!$val['recur']) {
+					$events_tmp = preg_replace('!<\!-- switch recur on -->(.*)<\!-- switch recur off -->!is', '', $events_tmp);
+				}else{
+					$events_tmp = str_replace('{RECUR}', $val['recur'], $events_tmp);
+				}
+				
+				$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}');
+				$replace	= array($event_start, $event_text, $description);
+				$events_tmp = str_replace($search, $replace, $events_tmp);
+				$some_events .= $events_tmp;
+				$events_tmp	= $loop_event;
+				
+			
+			$some_events  = str_replace('{DAYOFMONTH}', $dayofmonth, $some_events);
+			$final   .= $day_tmp.$some_events;
+			unset ($day_tmp, $some_events);
+
+		}
+		
+		if ($events_found < 1) {
+			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!is', '', $this->page);
+		} else {
+			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!is', $final, $this->page);
+			$this->page = preg_replace('!<\!-- switch no_results on -->(.*)<\!-- switch no_results off -->!is', '', $this->page);
+			#echo "<hr>this->page: $this->page<br><hr>";
+
+		}
+	}#end draw_search
+	
 	function draw_week($template_p) {
 		global $unique_colors, $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small, $day_start;
 		
