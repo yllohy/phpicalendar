@@ -23,10 +23,11 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 $search_box = '';
 $search_box .= 
 	'<form action="search.php" method="GET">'."\n".
+        '<input type="hidden" name="cpath" value="'.$cpath.'">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
 	'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
-	'<INPUT type="image" src="styles/'.$style_sheet.'/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
+        '<INPUT type="image" src="templates/'.$template.'/images/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
 	'</form>';
 
 $search_started = getmicrotime();
@@ -45,7 +46,10 @@ if ($search_valid) {
 						foreach ($time_tmp as $uid_tmp => $event_tmp) {
 							if (is_array($event_tmp)) {
 								if (!isset($the_arr[$uid_tmp]) || isset($event_tmp['exception'])) {
+                                                                        #print_r($format_search_arr);
+                                                                        #echo "<br>this event:".$event_tmp['event_text']."<br>";
 									$results1 = search_boolean($format_search_arr,$event_tmp['event_text']);
+                                                                        
 									if (!$results1) {
 										$results2 = search_boolean($format_search_arr,$event_tmp['description']);
 									}
@@ -181,6 +185,7 @@ function search_boolean($needle_arr, $haystack) {
 	
 	// check against the AND
 	foreach($and_arr as $s) {
+			#echo "haystack: $haystack<br>needle: $s<br>";
 		if (is_string(strstr($haystack,$s)) == false) {
 			return false;
 		}
@@ -203,6 +208,7 @@ function search_boolean($needle_arr, $haystack) {
 		if ($is_false) return false;	
 	}
 	// if we haven't returned false, then we return true
+       # echo "return true<br>";
 	return true;
 }
 
@@ -270,9 +276,13 @@ function format_recur($arr) {
 	return $print;
 }
 
+
 $page = new Page(BASE.'templates/'.$template.'/search.tpl');
 
-$page->replace_tags(array(
+$page->draw_search($page);
+
+	
+$page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
@@ -292,6 +302,64 @@ $page->replace_tags(array(
 	'show_search' 		=> ''		
 	));
 
-$page->output();
 
+$page->replace_tags(array(
+	'formatted_search'	=> $formatted_search,
+	'l_results'			=> $lang['l_results'],
+	'l_query'			=> $lang['l_query'],
+	'l_time'			=> $lang['l_time'],
+	'l_summary'			=> $lang['l_summary'],
+	'l_description'		=> $lang['l_description'],
+	'l_recurring_event'	=> $lang['l_recurring_event'],
+	'l_exception'		=> $lang['l_exception'],
+	'l_no_results'		=> $lang['l_no_results'],
+	'search_box'		=> $search_box,
+	'charset'			=> $charset,
+	'template'			=> $template,
+	'cal'				=> $cal,
+	'getdate'			=> $getdate,
+	'calendar_name'		=> $calendar_name,
+	'display_date'		=> $display_date,
+	'rss_powered'	 	=> $rss_powered,
+	'default_path'		=> '',
+	'rss_available' 	=> '',
+	'rss_valid' 		=> '',
+	'show_search' 		=> '',
+	'next_month' 		=> $next_month,
+	'prev_month'	 	=> $prev_month,
+	'show_goto' 		=> '',
+	'is_logged_in' 		=> '',
+	'list_jumps' 		=> $list_jumps,
+	'list_icals' 		=> $list_icals,
+	'list_years' 		=> $list_years,
+	'list_months' 		=> $list_months,
+	'list_weeks' 		=> $list_weeks,
+	'legend'	 		=> $list_calcolors,
+	'current_view'		=> $current_view,
+	'style_select' 		=> $style_select,
+        'sidebar_date'          => $sidebar_date,
+	'l_goprint'			=> $lang['l_goprint'],
+	'l_preferences'		=> $lang['l_preferences'],
+	'l_calendar'		=> $lang['l_calendar'],
+	'l_legend'			=> $lang['l_legend'],
+	'l_tomorrows'		=> $lang['l_tomorrows'],
+	'l_jump'			=> $lang['l_jump'],
+	'l_todo'			=> $lang['l_todo'],
+	'l_day'				=> $lang['l_day'],
+	'l_week'			=> $lang['l_week'],
+	'l_month'			=> $lang['l_month'],
+	'l_year'			=> $lang['l_year'],
+	'l_subscribe'		=> $lang['l_subscribe'],
+	'l_download'		=> $lang['l_download'],
+	'l_this_months'		=> $lang['l_this_months'],
+	'l_powered_by'		=> $lang['l_powered_by'],
+	'l_this_site_is'	=> $lang['l_this_site_is']			
+	));
+
+
+
+$page->output();
+#echo "<pre>";
+#print_r($the_arr);
+#echo "</pre>";
 ?>
