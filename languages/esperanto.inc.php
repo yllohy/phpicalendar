@@ -1,7 +1,7 @@
 <?php
 
 // Esperanto language include
-// For version 1.0 PHP iCalendar
+// For version 1.0 PHP iCalendar 
 //
 // Translation by Sjoerd Bosga (sjoerd@esperanto.se)
 //
