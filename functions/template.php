@@ -127,6 +127,8 @@ class Page {
 		$loop_except 	= trim($match3[1]);
 		$parse_month 	= date ("Ym", strtotime($getdate));
 		
+		if (isset($the_arr)){
+		
 		// Pull out each event
 		foreach($the_arr as $key => $val) {
 			
@@ -156,11 +158,28 @@ class Page {
 				if ($description == '') {
 					$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!is', '', $events_tmp);
 				}
-				if (!$val['exception']) {
+					if (!$val['exception'] || !isset($val['exceptions'])) {
 					$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is', '', $events_tmp);
 				}else{
-					foreach ($val['exception'] as $except_val){
-					}
+						$some_exceptions = "";
+						foreach ($val['exceptions'] as $except_val){
+							$except_tmp	= $loop_except;
+							$except_date = strtotime($except_val['date']);
+							$except_date = localizeDate ('%A, %B %e %Y', $except_date);
+
+							$except_tmp = str_replace('{DAYOFMONTH}', $except_date, $except_tmp);
+							$except_tmp = str_replace('{EXCEPT_DESCRIPTION}', stripslashes(urldecode($except_val['event_text'])), $except_tmp);
+							if (!$except_val['recur']) {
+								$except_tmp = preg_replace('!<\!-- switch except_recur on -->(.*)<\!-- switch except_recur off -->!is', '', $except_tmp);
+							}else{
+								$except_tmp = str_replace('{EXCEPT_RECUR}', $except_val['recur'], $except_tmp);
+							}
+							$some_exceptions .= $except_tmp;
+	
+						}
+						$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is', $some_exceptions,$events_tmp );
+
+	
 				}
 				
 				if (!$val['recur']) {
@@ -181,7 +200,7 @@ class Page {
 			unset ($day_tmp, $some_events);
 
 		}
-		
+		}		
 		if ($events_found < 1) {
 			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!is', '', $this->page);
 		} else {
