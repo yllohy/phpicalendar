@@ -53,6 +53,7 @@ $page->replace_tags(array(
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
 	'current_view'		=> $current_view,
+        'printview'          => $printview,
 	'display_date'		=> $display_date,
 	'sidebar_date'		=> $sidebar_date,
 	'rss_powered'	 	=> $rss_powered,
