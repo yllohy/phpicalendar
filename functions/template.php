@@ -141,6 +141,7 @@ class Page {
 			if ($val['event_text']) {	
 				$event_text 	= stripslashes(urldecode($val['event_text']));
 				$description 	= stripslashes(urldecode($val['description']));
+					$location 	= stripslashes(urldecode($val['location']));
 				$event_start 	= $val['event_start'];
 				$event_end 		= $val['event_end'];
 				if (isset($val['display_end'])) $event_end = $val['display_end'];
@@ -158,21 +159,38 @@ class Page {
 				if ($description == '') {
 					$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!is', '', $events_tmp);
 				}
-					if (!$val['exception'] || !isset($val['exceptions'])) {
+					if (!isset($val['exceptions'])) {
 					$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is', '', $events_tmp);
 				}else{
 						$some_exceptions = "";
 						foreach ($val['exceptions'] as $except_val){
 							$except_tmp	= $loop_except;
+							
 							$except_date = strtotime($except_val['date']);
 							$except_date = localizeDate ('%A, %B %e %Y', $except_date);
-
 							$except_tmp = str_replace('{DAYOFMONTH}', $except_date, $except_tmp);
-							$except_tmp = str_replace('{EXCEPT_DESCRIPTION}', stripslashes(urldecode($except_val['event_text'])), $except_tmp);
+
+							$except_event_start    	= date ($timeFormat, strtotime ($except_val['event_start']));
+							$except_event_end    	= date ($timeFormat, strtotime ($except_val['event_end']));
+							$except_event_start    	= $except_event_start .' - '.$except_event_end;
+
+							$except_tmp = str_replace('{EVENT_START}', $except_event_start, $except_tmp);
+
+							$except_event_text 	= stripslashes(urldecode($except_val['event_text']));
+							$except_tmp = str_replace('{EVENT_TEXT}', $except_event_text, $except_tmp);
+
+							#is there a recur in the exception?
 							if (!$except_val['recur']) {
 								$except_tmp = preg_replace('!<\!-- switch except_recur on -->(.*)<\!-- switch except_recur off -->!is', '', $except_tmp);
 							}else{
 								$except_tmp = str_replace('{EXCEPT_RECUR}', $except_val['recur'], $except_tmp);
+							}
+							#is there a description in the exception?
+							if (!$except_val['description']) {
+								$except_tmp = preg_replace('!<\!-- switch except_description on -->(.*)<\!-- switch except_description off -->!is', '', $except_tmp);
+							}else{
+								$except_description = stripslashes(urldecode($except_val['description']));
+								$except_tmp = str_replace('{EXCEPT_DESCRIPTION}', $except_description, $except_tmp);
 							}
 							$some_exceptions .= $except_tmp;
 	
@@ -188,8 +206,8 @@ class Page {
 					$events_tmp = str_replace('{RECUR}', $val['recur'], $events_tmp);
 				}
 				
-				$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}');
-				$replace	= array($event_start, $event_text, $description);
+					$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}','{LOCATION}');
+					$replace	= array($event_start, $event_text, $description, $location);
 				$events_tmp = str_replace($search, $replace, $events_tmp);
 				$some_events .= $events_tmp;
 				$events_tmp	= $loop_event;
@@ -347,13 +365,10 @@ class Page {
 				$thisday = date("Ymd", $thisdate);
 				$dayborder = 0;
 				unset($this_time_arr);
-				if (isset($master_array[$thisday][$cal_time]) && sizeof($master_array[$thisday][$cal_time]) > 0) {
-					$this_time_arr = $master_array[$thisday][$cal_time];
-				}
 					
 				if ($day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
 					foreach($master_array[$thisday] as $time_key => $time_arr) {
-						if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
+						if ((int)$time_key <= (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
 							foreach($time_arr as $event_tmp) {
 								if ((int)$event_tmp['event_end'] > (int)$cal_time) {
 									$this_time_arr[] = $event_tmp;
@@ -363,11 +378,18 @@ class Page {
 							break;
 						}
 					}
+				}else{
+				if (isset($master_array[$thisday][$cal_time]) && sizeof($master_array[$thisday][$cal_time]) > 0) {
+					$this_time_arr = $master_array[$thisday][$cal_time];
 				}
-				
+				}
 				
 				// check for eventstart 
 				if (isset($this_time_arr) && sizeof($this_time_arr) > 0) {
+					#print "<pre>";
+					#print_r ($this_time_arr);
+					#print "</pre>";
+
 					foreach ($this_time_arr as $eventKey => $loopevent) {
 						$drawEvent = drawEventTimes ($cal_time, $loopevent["event_end"]);
 						$j = 0;
@@ -548,15 +570,11 @@ class Page {
 			$key = date ($timeFormat, $key);
 			unset($this_time_arr);
 			
-			// add events that overlap the start time
-			if (isset($master_array[$getdate][$cal_time]) && sizeof($master_array[$getdate][$cal_time]) > 0) {
-				$this_time_arr = $master_array[$getdate][$cal_time];
-			}
 			
 			// add events that overlap $day_start instead of cutting them out completely
 			if (($day_start == $cal_time) && (isset($master_array[$getdate]))) {
 				foreach($master_array[$getdate] as $time_key => $time_arr) {
-					if ((int)$time_key < (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
+					if ((int)$time_key <= (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
 						foreach($time_arr as $event_tmp) {
 							if ((int)$event_tmp['event_end'] > (int)$cal_time) {
 								$this_time_arr[] = $event_tmp;
@@ -566,6 +584,11 @@ class Page {
 						break;
 					}
 				}
+			}else{
+			// add events that overlap the start time
+			if (isset($master_array[$getdate][$cal_time]) && sizeof($master_array[$getdate][$cal_time]) > 0) {
+				$this_time_arr = $master_array[$getdate][$cal_time];
+			}
 			}																		
 			
 			// check for eventstart 
