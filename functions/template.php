@@ -368,17 +368,19 @@ class Page {
 					
 				if ($day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
 					foreach($master_array[$thisday] as $time_key => $time_arr) {
-						if ((int)$time_key <= (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
-							foreach($time_arr as $event_tmp) {
-								if ((int)$event_tmp['event_end'] > (int)$cal_time) {
-									$this_time_arr[] = $event_tmp;
+						if ((int)$time_key <= (int)$cal_time) {
+							if (is_array($time_arr) && $time_key != '-1') {
+								foreach($time_arr as $uid => $event_tmp) {
+									if ((int)$event_tmp['event_end'] > (int)$cal_time) {
+										$this_time_arr[$uid] = $event_tmp;
+									}
 								}
 							}
 						} else {
-							#break;
+							break;
 						}
 					}
-				}else{
+				} else {
 					if (isset($master_array[$thisday][$cal_time]) && sizeof($master_array[$thisday][$cal_time]) > 0) {
 						$this_time_arr = $master_array[$thisday][$cal_time];
 					}
@@ -570,21 +572,22 @@ class Page {
 			$key = date ($timeFormat, $key);
 			unset($this_time_arr);
 			
-			
 			// add events that overlap $day_start instead of cutting them out completely
 			if (($day_start == $cal_time) && (isset($master_array[$getdate]))) {
 				foreach($master_array[$getdate] as $time_key => $time_arr) {
-					if ((int)$time_key <= (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
-						foreach($time_arr as $event_tmp) {
-							if ((int)$event_tmp['event_end'] > (int)$cal_time) {
-								$this_time_arr[] = $event_tmp;
+					if ((int)$time_key <= (int)$cal_time) {
+						if (is_array($time_arr) && $time_key != '-1') {
+							foreach($time_arr as $uid => $event_tmp) {
+								if ((int)$event_tmp['event_end'] > (int)$cal_time) {
+									$this_time_arr[$uid] = $event_tmp;
+								}
 							}
 						}
 					} else {
-						#break;
+						break;
 					}
 				}
-			}else{
+			} else {
 			// add events that overlap the start time
 			if (isset($master_array[$getdate][$cal_time]) && sizeof($master_array[$getdate][$cal_time]) > 0) {
 				$this_time_arr = $master_array[$getdate][$cal_time];
