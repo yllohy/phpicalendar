@@ -18,7 +18,7 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .rowOn			{ background-color: #cfc; border-top: 1px solid #fff; border-left: 1px solid #fff; }
 .rowOn2			{ background-color: #cfc; border-top: 1px solid #fff; }
 .rowOff			{ background-color: #E1E8F1; border-top: 1px solid #fff; border-left: 1px solid #fff; }
-.rowOff2		{ background-color: #E1E8F1; border-top: 1px solid #fff; border-left: }
+.rowOff2		{ background-color: #E1E8F1; border-top: 1px solid #fff; }
 .rowToday		{ background-color: #cff; border-top: 1px solid #fff; border-left: 1px solid #fff; }
 
 .padd			{ padding: 2px; }
