@@ -375,13 +375,13 @@ class Page {
 								}
 							}
 						} else {
-							break;
+							#break;
 						}
 					}
 				}else{
-				if (isset($master_array[$thisday][$cal_time]) && sizeof($master_array[$thisday][$cal_time]) > 0) {
-					$this_time_arr = $master_array[$thisday][$cal_time];
-				}
+					if (isset($master_array[$thisday][$cal_time]) && sizeof($master_array[$thisday][$cal_time]) > 0) {
+						$this_time_arr = $master_array[$thisday][$cal_time];
+					}
 				}
 				
 				// check for eventstart 
@@ -581,7 +581,7 @@ class Page {
 							}
 						}
 					} else {
-						break;
+						#break;
 					}
 				}
 			}else{
