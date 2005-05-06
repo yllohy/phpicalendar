@@ -47,10 +47,10 @@ function login ($username, $password) {
 // arg1: string password
 // returns boolean was login successful
 function login_ftp ($username, $password) {
-	global $ftp_server;
+	global $ftp_server, $ftp_port;
 	
 	// set up basic connection
-	$conn_id = @ftp_connect($ftp_server); 
+	$conn_id = @ftp_connect($ftp_server, $ftp_port); 
 	if (!$conn_id) exit(error('Cannot connect to FTP server', $filename));
 	// login with username and password
 	$login_result = @ftp_login($conn_id, $username, $password); 
