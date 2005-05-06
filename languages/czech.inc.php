@@ -79,7 +79,7 @@ $priority_high_lang		= 'Vysoká';
 $priority_low_lang		= 'Nízká';
 $priority_medium_lang	= 'Střední';
 $priority_none_lang		= 'Žádná';
-$status_lang			= 'Status:';
+$status_lang			= 'Status';
 $todo_lang				= 'Seznam úkolů';
 $unfinished_lang		= 'Nedokončeno';
 $prefs_set_lang 		= 'Your preferences have been set.';
@@ -90,7 +90,6 @@ $unset_prefs_lang 		= 'Unset preferences:';
 
 $organizer_lang			= 'Organizer';
 $attendee_lang			= 'Attendee';
-$status_lang			= 'Status';
 $location_lang			= 'Location';
 $admin_header_lang		= 'PHP iCalendar Administration';
 $username_lang			= 'Username';

@@ -87,7 +87,6 @@ $lang['l_prefs_unset'] 		= 'Preferences unset. Changes will take place next page
 $lang['l_unset_prefs'] 		= 'Unset preferences';
 $lang['l_organizer']		= 'Organizer';
 $lang['l_attendee']			= 'Attendee';
-$lang['l_status']			= 'Status';
 $lang['l_location']			= 'Location';
 $lang['l_admin_header']		= 'PHP iCalendar Administration';
 $lang['l_username']			= 'Username';

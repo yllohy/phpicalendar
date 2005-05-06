@@ -87,7 +87,6 @@ $lang['l_prefs_unset'] 		= 'Voorkeuren gewist. Aanpassingen zijn actief bij de v
 $lang['l_unset_prefs'] 		= 'Voorkeuren wissen';
 $lang['l_organizer']		= 'Organisator';
 $lang['l_attendee']			= 'Aanwezige';
-$lang['l_status']			= 'Status';
 $lang['l_location']			= 'Locatie';
 $lang['l_admin_header']		= 'PHP iCalendar Administratie';
 $lang['l_username']			= 'Gebruikersnaam';

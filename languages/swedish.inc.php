@@ -87,7 +87,6 @@ $lang['l_prefs_unset'] 		= 'Nya inställningar. Förändringarna kommer att visa
 $lang['l_unset_prefs'] 		= 'Återställ inställningar';
 $lang['l_organizer']		= 'Organizer';
 $lang['l_attendee']			= 'Närvarande';
-$lang['l_status']			= 'Status';
 $lang['l_location']			= 'Plats';
 $lang['l_admin_header']		= 'PHP iCalendar Administration';
 $lang['l_username']			= 'Användarnamn';

@@ -91,7 +91,6 @@ $lang['l_prefs_unset'] 		= 'U voorkeure is bygewerk. Die veranderinge sal aansko
 $lang['l_unset_prefs'] 		= 'Verwyder voorkeure';
 $lang['l_organizer']		= 'Organiseerder';
 $lang['l_attendee']			= 'Bywoner';
-$lang['l_status']			= 'Status';
 $lang['l_location']			= 'Plek';
 $lang['l_admin_header']		= 'PHP iCalendar Administrasie';
 $lang['l_username']			= 'Gebruikersnaam';

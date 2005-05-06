@@ -89,7 +89,6 @@ $lang['l_prefs_unset'] 		= 'Preferenze annullate. Le modifiche avranno effetto a
 $lang['l_unset_prefs'] 		= 'Ripristina le impostazioni iniziali';
 $lang['l_organizer']		= 'Organizzatore';
 $lang['l_attendee']			= 'Invitato';
-$lang['l_status']			= 'Stato';
 $lang['l_location']			= 'Luogo';
 $lang['l_admin_header']		= 'Amministrazione PHP iCalendar';
 $lang['l_username']			= 'Nome utente';
