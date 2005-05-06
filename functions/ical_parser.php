@@ -591,12 +591,15 @@ foreach ($cal_filelist as $filename) {
 														$m = date('m', $start_date_time);
 														$bymonth = array("$m");
 													}	
+
 													foreach($bymonth as $month) {
-														// FIXME: Jan 1 does not display in December
-														$year = date('Y', $next_range_time);
-														if (($year != $this_year) && ($month < 3)) {
-															$year = $this_year;
+														// Make sure the month & year used is within the start/end_range.
+														if ($month < date('m', $next_range_time)) {
+															$year = date('Y', strtotime('+1 years', $next_range_time));
+														} else {
+															$year = date('Y', $next_range_time);
 														}
+
 														if ((isset($byday)) && (is_array($byday))) {
 															$checkdate_time = mktime(0,0,0,$month,1,$year);
 															foreach($byday as $day) {
