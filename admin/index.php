@@ -66,7 +66,7 @@ if ($_POST['action'] == 'delete') {
 $addupdate_msg 	= '';
 if ((isset($_POST['action']))  && ($_POST['action'] == 'addupdate')) {
 	for ($filenumber = 1; $filenumber < 6; $filenumber++) {
-		$file = $HTTP_POST_FILES['calfile'];
+		$file = $_FILES['calfile'];
 		$addupdate_success = FALSE;
 
 		if (!is_uploaded_file_v4($file['tmp_name'][$filenumber])) {

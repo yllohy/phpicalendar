@@ -239,7 +239,7 @@ function is_uploaded_file_v4 ($filename) {
 
 // return the appropriate error message if the file upload had an error
 //
-// arg0: array error number from $HTTP_POST_FILES[file]['error']
+// arg0: array error number from $_FILES[file]['error']
 // returns string error message
 function get_upload_error ($upload_error) {
 	global $php_error_lang;
