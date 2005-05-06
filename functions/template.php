@@ -845,6 +845,15 @@ class Page {
 			$fake_getdate_time 	= strtotime($this_year.'-'.$offset.'-15');
 		}
 		
+		$minical_month 		= date("m", $fake_getdate_time);
+		$minical_year 		= date("Y", $fake_getdate_time);
+		$first_of_month 	= $minical_year.$minical_month."01";
+		$first_of_year 		= $minical_year."0101";
+
+		// Add links in to the month/year views.
+		$dateFormat_month = str_replace("%B", "<a class=\"ps3\" href=\"month.php?cal=$cal&amp;getdate=$first_of_month\">%B</a>", $dateFormat_month);
+		$dateFormat_month = str_replace("%Y", "<a class=\"ps3\" href=\"year.php?cal=$cal&amp;getdate=$first_of_year\">%Y</a>", $dateFormat_month);
+
 		//$start_day 			= strtotime($week_start_day);
 		$start_day			= strtotime(dateOfWeek($getdate, $week_start_day));
 		$month_title 		= localizeDate ($dateFormat_month, $fake_getdate_time);
@@ -866,9 +875,6 @@ class Page {
 			$weekday_loop  .= $loop_tmp;
 		}
 		
-		$minical_month 		= date("m", $fake_getdate_time);
-		$minical_year 		= date("Y", $fake_getdate_time);
-		$first_of_month 	= $minical_year.$minical_month."01";
 		$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
 		$i 					= 0;
 		$whole_month 		= TRUE;
