@@ -759,6 +759,18 @@ foreach ($cal_filelist as $filename) {
 				} else {
 					$vtodo_sort = $vtodo_priority;
 				}
+				
+				// CLASS support
+				if (isset($class)) {
+					if ($class == 'PRIVATE') {
+						$summary = '**PRIVATE**';
+						$description = '**PRIVATE**';
+					} elseif ($class == 'CONFIDENTIAL') {
+						$summary = '**CONFIDENTIAL**';
+						$description = '**CONFIDENTIAL**';
+					}
+				}
+				
 				$master_array['-2']["$vtodo_sort"]["$uid"] = array ('start_date' => $start_date, 'start_time' => $start_time, 'vtodo_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories, 'description' => $description, 'calname' => $actual_calname);
 				unset ($start_date, $start_time, $due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary, $description);
 				$vtodo_set = FALSE;
