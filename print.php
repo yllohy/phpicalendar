@@ -9,10 +9,10 @@ header("Content-Type: text/html; charset=$charset");
 $start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $parse_month 		= date ("Ym", strtotime($getdate));
-$printview 			= $_GET['printview'];
 $cal_displayname 	= str_replace("32", " ", $cal);
 $events_week 		= 0;
 $unix_time 			= strtotime($getdate);
+if (!$printview)	$printview = $_GET['printview'];
 
 if ($printview == 'day') {
 	$display_date 	= localizeDate ($dateFormat_day, strtotime($getdate));

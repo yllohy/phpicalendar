@@ -7,7 +7,8 @@ if (isset($_COOKIE['phpicalendar'])) {
 	$default_view 		= $phpicalendar['cookie_view'];
 }
 if ($printview_default == 'yes') {
-	$default_view = "print.php?printview=$default_view";
+	$printview = $default_view;
+	$default_view = "print.php";
 } else {
 	$default_view = "$default_view" . ".php";
 }
