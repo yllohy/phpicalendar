@@ -273,7 +273,7 @@ class Page {
 					$event_calno  	= $allday['calnumber'];
 					$event_calna  	= $allday['calname'];
 					$event_url	   	= $allday['url'];
-					if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
+					$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
 					$event 			= openevent($event_calna, '', '', $allday, 1, 11, '', '', 'psf', $event_url);
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
@@ -436,7 +436,7 @@ class Page {
 								$event_calna  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['calname'];
 								$event_url  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['url'];
 								$event_status	= strtolower($this_time_arr[($event_length[$thisday][$i]['key'])]['status']);
-								if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
+								$event_calno = (($event_calno - 1) % $unique_colors) + 1;
 								if ($event_status != '') {
 						  			$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
@@ -501,7 +501,7 @@ class Page {
 				$event_calno  	= $allday['calnumber'];
 				$event_calna  	= $allday['calname'];
 				$event_url	   	= $allday['url'];
-				if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
+				$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
 				$event 			= openevent($event_calna, '', '', $allday, 0, '', '', '', '', $event_url);
 				$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
@@ -650,7 +650,7 @@ class Page {
 						  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];
 						  $event_recur  = $this_time_arr[($event_length[$i]['key'])]['recur'];
 						  $event_status = strtolower($this_time_arr[($event_length[$i]['key'])]['status']);
-						  if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
+						  $event_calno  = (($event_calno - 1) % $unique_colors) + 1;
 						  if ($event_status != '') {
 						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  } elseif (is_array($event_recur)) {
@@ -899,7 +899,7 @@ class Page {
 					foreach ($master_array[$daylink] as $event_times) {
 						foreach ($event_times as $val) {
 							$event_calno 	= $val['calnumber'];
-							if ($event_calno > $unique_colors) $event_calno = ($event_calno - $unique_colors);
+							$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
 							$event_calna 	= $val['calname'];
 							$event_url 		= $val['url'];
 							if (!isset($val['event_start'])) {
