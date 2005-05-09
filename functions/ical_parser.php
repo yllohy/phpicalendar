@@ -515,15 +515,20 @@ foreach ($cal_filelist as $filename) {
 													$recur_data[] = $next_date_time;
 													break;
 												case 'WEEKLY':
+													// Populate $byday with the default day if it's not set.
 													if (!isset($byday)) {
-														$next_date = dateOfWeek(date('Ymd', $next_range_time),$bd);
-														$next_date_time = strtotime($next_date);
-														$recur_data[] = $next_date_time;
-													} elseif (is_array($byday)) {
+														$byday[] = strtoupper(substr($daysofweekshort_lang[date('w', $next_range_time)], 0, 2));
+													}
+													if (is_array($byday)) {
 														foreach($byday as $day) {
 															$day = two2threeCharDays($day);	
-															$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
-															$next_date_time = strtotime($next_date);
+															$next_date_time = strtotime($day,$next_range_time) + (12 * 60 * 60);
+															// Since this renders events from $next_range_time to $next_range_time + 1 week, I need to handle intervals
+															// as well. This checks to see if $next_date_time is after $day_start (i.e., "next week"), and thus
+															// if we need to add $interval weeks to $next_date_time.
+															if ($next_date_time > strtotime($week_start_day, $next_range_time) && $interval > 1) {
+																$next_date_time = strtotime('+'.($interval - 1).' '.$freq_type, $next_date_time);
+															}
 															$recur_data[] = $next_date_time;
 														}
 													}
