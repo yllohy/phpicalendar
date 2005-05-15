@@ -30,7 +30,7 @@ switch ($rssview){
 		$theview = $day_lang;
 		break;
 	case 'month':
-$parse_month 		= date ("Ym", strtotime($getdate));
+		$parse_month = date ("Ym", strtotime($getdate));
 		$fromdate = ($parse_month *100) + 1;
 		$nextmonth = ($parse_month +1) * 100;   #should give the 0th day of following month
 		$todate = date('Ymd',strtotime($nextmonth));	
@@ -64,7 +64,7 @@ $parse_month 		= date ("Ym", strtotime($getdate));
 //Note that this depends on other modifications I've made to 
 //allow phpicalendar to use calendar subdirectories - see bbs
 
-$cal_displayname 	= str_replace("32", " ", $cal);
+$cal_displayname = str_replace("32", " ", $cal);
 if ($cal == $ALL_CALENDARS_COMBINED) {
 	$temp = explode("/",$calendar_path);
 	$cal_displayname = str_replace("32"," ",ucfirst(array_pop($temp)));
@@ -105,7 +105,7 @@ $rss .= '<language>'.$rss_language.'</language>'."\n";
 $rss .= '<copyright>Copyright '.date(Y).', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 
 //generate the items
-$numdays = $todate - $fromdate;	
+$numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24)-1);
 $thisdate = $fromdate; 	#	start at beginning of date range, 
 						# 	note that usage of $thisdate is different from distribution
 						# 	I use it as a date, dist uses it as a time
@@ -126,12 +126,18 @@ $i = 0;  #day counter
 				}	
 				$event_text 	= stripslashes(urldecode($val["event_text"]));
 				$event_text 	= strip_tags($event_text, '<b><i><u>');
-				$event_text 	= str_replace("& ","&amp;", $event_text);
+				$event_text		= str_replace('&','&amp;',$event_text);
+				$event_text		= str_replace('&amp;amp;','&amp;',$event_text);
+				$event_text		= urlencode($event_text);
 			#uncomment for shorter event text with ...
 			#	$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines); 		
-					$description 	= stripslashes(urldecode($val["description"]));
-					$description 	= strip_tags($description, '<b><i><u>');
-					$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
+				$description 	= stripslashes(urldecode($val["description"]));
+				$description 	= strip_tags($description, '<b><i><u>');
+				$description		= str_replace('&','&amp;',$description);
+				$description		= str_replace('&amp;amp;','&amp;',$description);
+
+
+				$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
 				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal&cpath=$cpath");
 				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
@@ -149,7 +155,11 @@ $i = 0;  #day counter
 
 				$rss .= '<link>'.$rss_link.'</link>'."\n";
 				$rss .= '<description>'.$rss_description.'</description>'."\n";
-				$rss .= '<location>'.$val['location'].'</location>';
+				$location		= str_replace('&','&amp;',$val['location']);
+				$location		= str_replace('&amp;amp;','&amp;',$location);
+
+
+				$rss .= '<location>'.$location.'</location>';
 				$rss .= '</item>'."\n";
 				$events_count++;
 			}
@@ -162,7 +172,7 @@ $i = 0;  #day counter
 		$rss .= '</item>'."\n";
 	}
 	$thisdate++;
-		$i++;
+	$i++;	
 	} while ($i <= $numdays);
 
 $rss .= '</channel>'."\n";
