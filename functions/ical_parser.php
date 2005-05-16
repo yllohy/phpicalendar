@@ -462,7 +462,9 @@ foreach ($cal_filelist as $filename) {
 								$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $wkst;
 								break;
 							case 'END':
-							
+
+							$recur = $master_array[($start_date)][($hour.$minute)][$uid]['recur'];
+
 							// Modify the COUNT based on BYDAY
 							if ((is_array($byday)) && (isset($count))) {
 								$blah = sizeof($byday);
@@ -677,7 +679,7 @@ foreach ($cal_filelist as $filename) {
 													$end_time2 = strtotime('+'.$diff_allday_days.' days', $recur_data_time);
 													while ($start_time2 < $end_time2) {
 														$start_date2 = date('Ymd', $start_time2);
-														$master_array[($start_date2)][('-1')][] = array ('event_text' => $summary, 'description' => $description, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'status' => $status, 'class' => $class );
+														$master_array[($start_date2)][('-1')][$uid] = array ('event_text' => $summary, 'description' => $description, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'status' => $status, 'class' => $class, 'recur' => $recur );
 														$start_time2 = strtotime('+1 day', $start_time2);
 													}
 												} else {
@@ -706,7 +708,7 @@ foreach ($cal_filelist as $filename) {
 															// Let's double check the until to not write past it
 															$until_check = $start_date_tmp.$time_tmp.'00';
 															if ($abs_until > $until_check) {
-																$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url) ;
+																$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'recur' => $recur);
 																checkOverlap($start_date_tmp, $time_tmp, $uid);
 															}
 															$start_tmp = strtotime('+1 day',$start_tmp);
@@ -722,7 +724,7 @@ foreach ($cal_filelist as $filename) {
 														// Let's double check the until to not write past it
 														$until_check = $recur_data_date.$hour.$minute.'00';
 														if ($abs_until > $until_check) {
-															$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time_tmp1, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url);
+															$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time_tmp1, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'recur' => $recur);
 															checkOverlap($recur_data_date, ($hour.$minute), $uid);
 														}
 													}
@@ -1196,7 +1198,7 @@ if ($parse_file) {
 //print_r($overlap_array);
 //print_r($day_array);
 //print_r($rrule_array);
-//print_r($recurrence_delete);	
+//print_r($recurrence_delete);
 //print '</pre>';
 
 // Set a calender name for all calenders combined
@@ -1205,5 +1207,5 @@ if ($cal == $ALL_CALENDARS_COMBINED) {
 }
 
 $template_started = getmicrotime();
-					
+
 ?>

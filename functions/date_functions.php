@@ -162,44 +162,38 @@ function chooseOffset($time) {
 	return $offset;
 }
 
-function openevent($calendar_name, $start, $end, $arr, $lines, $wrap, $pre_text, $post_text, $link_class, $url) { 
+function openevent($event_date, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
+
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	if (empty($start)) {
 		$title = $event_text;
 	} else {
-		$title = $start.' - '.$end.': '.$event_text;
+		$title = $arr['event_start'].' - '.$arr['event_end'].': '.$event_text;
 	}
 	# for iCal pseudo tag <http> comptability
-	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) { 
-		$full_event_text = $matches[1] . $matches[2]; 
+	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) {
+		$full_event_text = $matches[1] . $matches[2];
 		$event_text = $matches[2];
-	} else { 
+	} else {
 		$full_event_text = $event_text;
 		$event_text = strip_tags($event_text, '<b><i><u>');
 	}
 
-	if (isset($arr["organizer"])) $organizer = addslashes($arr["organizer"]);
-	if (isset($arr["attendee"])) $attendee = addslashes($arr["attendee"]);
-	if (isset($arr["location"])) $location = addslashes($arr["location"]);
-	if (isset($arr["status"])) $status = addslashes($arr["status"]);
-	if (isset($arr["description"])) $description = addslashes(stripslashes(urldecode($arr["description"])));
-    if (isset($arr["url"])) $url = addslashes(stripslashes(urldecode($arr["url"])));
-
-	if (!empty($event_text)) {	
+	if (!empty($event_text)) {
 		if ($lines > 0) {
-			$event_text = word_wrap($event_text, $wrap, $lines);
+			$event_text = word_wrap($event_text, $length, $lines);
 		}
 
-		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $full_event_text, $res))) || ($description)) {
-			$escaped_event = addslashes($full_event_text);
-			$escaped_calendar = addslashes($calendar_name);
-			$escaped_start = addslashes($start);
-			$escaped_end = addslashes($end);
+		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $full_event_text, $res))) || ($arr['description'])) {
+			$escaped_date = addslashes($event_date);
+			$escaped_time = addslashes($arr['event_start']);
+			if (!$escaped_time) $escaped_time = -1;
+			$escaped_uid = addslashes($uid);
 			// fix for URL-length bug in IE: populate and submit a hidden form on click
 			static $popup_data_index = 0;
 $return = "
     <script language=\"Javascript\" type=\"text/javascript\"><!--
-    var eventData = new EventData('$escaped_event', '$escaped_calendar', '$escaped_start', '$escaped_end', '$description', '$status', '$location', '$organizer', '$attendee', '$url');
+    var eventData = new EventData('$escaped_date', '$escaped_time', '$escaped_uid');
     document.popup_data[$popup_data_index] = eventData;
     // --></script>";
 
@@ -210,9 +204,7 @@ $return = "
 		}
 		$return .= $pre_text.$event_text.$post_text.'</a>'."\n";
 	}
-	
+
 	return $return;
 }
-
-
 ?>

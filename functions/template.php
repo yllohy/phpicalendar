@@ -264,17 +264,15 @@ class Page {
 		$loop_ad 	= trim($match1[1]);
 		$loop_begin = trim($match2[1]);
 		$loop_end 	= trim($match3[1]);
-		foreach ($weekarray as $key => $get_date) {
+		foreach ($weekarray as $get_date) {
 			$replace 	= $loop_begin;
 			$colspan	= 'colspan="'.$nbrGridCols[$get_date].'"';
 			$replace 	= str_replace('{COLSPAN}', $colspan, $replace);
 			if (is_array($master_array[$get_date]['-1'])) {
-				foreach ($master_array[$get_date]['-1'] as $allday) {
+				foreach ($master_array[$get_date]['-1'] as $uid => $allday) {
 					$event_calno  	= $allday['calnumber'];
-					$event_calna  	= $allday['calname'];
-					$event_url	   	= $allday['url'];
 					$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
-					$event 			= openevent($event_calna, '', '', $allday, 1, 11, '', '', 'psf', $event_url);
+ 					$event 			= openevent($get_date, $uid, $allday, 1, 11, 'psf');
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 					$replace		.= $loop_tmp;
@@ -365,7 +363,7 @@ class Page {
 				$thisday = date("Ymd", $thisdate);
 				$dayborder = 0;
 				unset($this_time_arr);
-					
+
 				if ($day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
 					foreach($master_array[$thisday] as $time_key => $time_arr) {
 						if ((int)$time_key <= (int)$cal_time) {
@@ -426,7 +424,7 @@ class Page {
 					// Used to "join" ended events, so the ended case below results in one colspan'd td instead of multiple tds.
 					$ended_counter = 0;
 					for ($i=0;$i<sizeof($event_length[$thisday]);$i++) {
-					
+
 						$drawWidth = $nbrGridCols[$thisday] / ($event_length[$thisday][$i]["overlap"] + 1);
 						$emptyWidth = $emptyWidth - $drawWidth;
 						switch ($event_length[$thisday][$i]["state"]) {
@@ -436,12 +434,11 @@ class Page {
 									$ended_counter = 0;
 								}
 								$event_length[$thisday][$i]["state"] = "started";
-								$event_start 	= $this_time_arr[($event_length[$thisday][$i]["key"])]['start_unixtime'];
+ 								$uid = $event_length[$thisday][$i]["key"];
+ 								$event_start 	= $this_time_arr[$uid]['start_unixtime'];
 								$event_start 	= date ($timeFormat_small, $event_start);
-								$event_calno  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['calnumber'];
-								$event_calna  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['calname'];
-								$event_url  	= $this_time_arr[($event_length[$thisday][$i]['key'])]['url'];
-								$event_status	= strtolower($this_time_arr[($event_length[$thisday][$i]['key'])]['status']);
+ 								$event_calno  	= $this_time_arr[$uid]['calnumber'];
+ 								$event_status	= strtolower($this_time_arr[$uid]['status']);
 								$event_calno = (($event_calno - 1) % $unique_colors) + 1;
 								if ($event_status != '') {
 						  			$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
@@ -449,13 +446,9 @@ class Page {
 								$colspan_width = round((80 / $nbrGridCols[$thisday]) * $drawWidth);
 								$weekdisplay .= '<td width="'.$colspan_width.'" rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 
-								$event_end	= $this_time_arr[($event_length[$thisday][$i]["key"])]["end_unixtime"];
-								 if (isset($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$thisday][$i]["key"])]['display_end']);
-								$event_end 	= date ($timeFormat, $event_end);
-							  
 								// Start drawing the event
-								$event_temp  = $loop_event;
-								$event 		 = openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$thisday][$i]["key"])], $week_events_lines, 25, '', '', 'ps', $event_url);
+								$event_temp   = $loop_event;
+								$event 		  = openevent($thisday, $uid, $this_time_arr[$uid], $week_events_lines, 25, 'ps');
 								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
 								$event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
 								$event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
@@ -463,7 +456,7 @@ class Page {
 								$weekdisplay .= $event_temp;
 								$weekdisplay .= '</td>';
 								// End event drawing
-						  
+
 								break;
 							case "started":
 								if ($ended_counter) {
@@ -495,34 +488,29 @@ class Page {
 			}
 			$weekdisplay .= "</tr>\n";
 		}
-		
+
 		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!is', $weekdisplay, $this->page);
-		
-		
-		
 	}
-	
+
 	function draw_day($template_p) {
 		global $template, $getdate, $cal, $master_array, $unique_colors, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $day_start;
-		
+
 		// Replaces the allday events
 		$replace = '';
 		if (is_array($master_array[$getdate]['-1'])) {
 			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
 			$loop_ad = trim($match1[1]);
-			foreach ($master_array[$getdate]['-1'] as $allday) {
+			foreach ($master_array[$getdate]['-1'] as $uid => $allday) {
 				$event_calno  	= $allday['calnumber'];
-				$event_calna  	= $allday['calname'];
-				$event_url	   	= $allday['url'];
 				$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
-				$event 			= openevent($event_calna, '', '', $allday, 0, '', '', '', '', $event_url);
+ 				$event 			= openevent($getdate, $uid, $allday);
 				$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 				$replace		.= $loop_tmp;
 			}
 		}
 		$this->page = preg_replace('!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is', $replace, $this->page);
-	
+
 		// Replaces the daysofweek
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
@@ -601,12 +589,12 @@ class Page {
 					}
 				}
 			} else {
-			// add events that overlap the start time
-			if (isset($master_array[$getdate][$cal_time]) && sizeof($master_array[$getdate][$cal_time]) > 0) {
-				$this_time_arr = $master_array[$getdate][$cal_time];
+				// add events that overlap the start time
+				if (isset($master_array[$getdate][$cal_time]) && sizeof($master_array[$getdate][$cal_time]) > 0) {
+					$this_time_arr = $master_array[$getdate][$cal_time];
+				}
 			}
-			}																		
-			
+
 			// check for eventstart 
 			if (isset($this_time_arr) && sizeof($this_time_arr) > 0) {
 				foreach ($this_time_arr as $eventKey => $loopevent) {
@@ -661,14 +649,15 @@ class Page {
 							$ended_counter = 0;
 						  }
 						  $event_length[$i]['state'] = 'started';
-						  $event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
-						  $event_end	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
-						  if (isset($this_time_arr[($event_length[$i]['key'])]['display_end'])) $event_end = strtotime ($this_time_arr[($event_length[$i]['key'])]['display_end']);
+ 						  $uid = $event_length[$i]['key'];
+ 						  $event_start 	= strtotime ($this_time_arr[$uid]['event_start']);
+ 						  $event_end	= strtotime ($this_time_arr[$uid]['event_end']);
+ 						  if (isset($this_time_arr[$uid]['display_end'])) $event_end = strtotime ($this_time_arr[$uid]['display_end']);
 						  $event_start 	= date ($timeFormat, $event_start);
 						  $event_end	= date ($timeFormat, $event_end);
-						  $event_calno  = $this_time_arr[($event_length[$i]['key'])]['calnumber'];
-						  $event_recur  = $this_time_arr[($event_length[$i]['key'])]['recur'];
-						  $event_status = strtolower($this_time_arr[($event_length[$i]['key'])]['status']);
+ 						  $event_calno  = $this_time_arr[$uid]['calnumber'];
+ 						  $event_recur  = $this_time_arr[$uid]['recur'];
+ 						  $event_status = strtolower($this_time_arr[$uid]['status']);
 						  $event_calno  = (($event_calno - 1) % $unique_colors) + 1;
 						  if ($event_status != '') {
 						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
@@ -680,14 +669,12 @@ class Page {
 						  
 						  // Start drawing the event
 						  $event_temp  = $loop_event;
-						  $event_calna = $this_time_arr[($event_length[$i]['key'])]['calname'];
-						  $event_url   = $this_time_arr[($event_length[$i]['key'])]['url'];
-						  $event 	   = openevent($event_calna, $event_start, $event_end, $this_time_arr[($event_length[$i]['key'])], '', 0, '', '', 'ps', $event_url);
-						  $event_temp   = str_replace('{EVENT}', $event, $event_temp);
-						  $event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
-						  $event_temp   = str_replace('{EVENT_END}', $event_end, $event_temp);
-						  $event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
-						  $event_temp   = str_replace('{EVENT_CALNO}', $event_calno, $event_temp);
+						  $event 	   = openevent($getdate, $uid, $this_time_arr[$uid], 0, 0, 'ps');
+						  $event_temp  = str_replace('{EVENT}', $event, $event_temp);
+						  $event_temp  = str_replace('{EVENT_START}', $event_start, $event_temp);
+						  $event_temp  = str_replace('{EVENT_END}', $event_end, $event_temp);
+						  $event_temp  = str_replace('{CONFIRMED}', $confirmed, $event_temp);
+						  $event_temp  = str_replace('{EVENT_CALNO}', $event_calno, $event_temp);
 						  $daydisplay .= $event_temp;
 						  $daydisplay .= '</td>';
 						  // End event drawing
@@ -737,40 +724,34 @@ class Page {
 		$loop_t_e 	= trim($match2[1]);
 		$return_adtmp	= '';
 		$return_etmp	= '';
-		
+
 		if (is_array($master_array[$next_day]) && sizeof($master_array[$next_day]) > 0) {
 			foreach ($master_array[$next_day] as $event_times) {
-				foreach ($event_times as $val) {
+				foreach ($event_times as $uid => $val) {
 					$event_text = stripslashes(urldecode($val["event_text"]));
 					$event_text = strip_tags($event_text, '<b><i><u>');
-					if ($event_text != "") {	
-						$event_calna 	= $val["calname"];
-						$event_url 		= $val["url"];
-						$event_start 	= date ($timeFormat, $val["start_unixtime"]);
-						$event_end 		= date ($timeFormat, $val["end_unixtime"]);
-						if (!isset($val["event_start"])) { 
-							$event_start = $lang['l_all_day']; 
-							$event_end = ''; 
-							$return_adtmp = openevent($event_calna, $event_start, $event_end, $val, $tomorrows_events_lines, 21, '', '', 'psf', $event_url); 
-							$replace_ad 	.= str_replace('{T_ALLDAY}', $return_adtmp, $loop_t_ad);
-						} else { 
-							$return_etmp 	= openevent($event_calna, $event_start, $event_end, $val, $tomorrows_events_lines, 21, '', '', 'ps3', $event_url); 
-							$replace_e 		.= str_replace('{T_EVENT}', $return_etmp, $loop_t_e);
+					if ($event_text != "") {
+						if (!isset($val["event_start"])) {
+							$return_adtmp = openevent($next_day, $uid, $val, $tomorrows_events_lines, 21, 'psf');
+							$replace_ad  .= str_replace('{T_ALLDAY}', $return_adtmp, $loop_t_ad);
+						} else {
+							$return_etmp  = openevent($next_day, $uid, $val, $tomorrows_events_lines, 21, 'ps3');
+							$replace_e   .= str_replace('{T_EVENT}', $return_etmp, $loop_t_e);
 						}
 					}
 				}
 			}
-		
+
 			$this->page = preg_replace('!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!is', $replace_ad, $this->page);
 			$this->page = preg_replace('!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!is', $replace_e, $this->page);		
-	
+
 		} else {
-		
+
 			$this->page = preg_replace('!<\!-- switch tomorrows_events on -->(.*)<\!-- switch tomorrows_events off -->!is', '', $this->page);
-		
+
 		}
 	}
-	
+
 	function get_vtodo() {
 		global $template, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines, $show_completed, $show_todos;
 		
@@ -923,28 +904,22 @@ class Page {
 			if ($master_array[$daylink]) {
 				if ($type != 'small') {
 					foreach ($master_array[$daylink] as $event_times) {
-						foreach ($event_times as $val) {
+						foreach ($event_times as $uid => $val) {
 							$event_calno 	= $val['calnumber'];
 							$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
-							$event_calna 	= $val['calname'];
-							$event_url 		= $val['url'];
 							if (!isset($val['event_start'])) {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
-									$switch['ALLDAY'] .= openevent($event_calna, '', '', $val, $month_event_lines, 15, '', '', 'psf', $event_url);
+ 									$switch['ALLDAY'] .= openevent($daylink, $uid, $val, $month_event_lines, 15, 'psf');
 									$switch['ALLDAY'] .= '</div>';
 								} else {
 									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							} else {	
-								$event_start = $val['start_unixtime'];
-								$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
-								$event_start = date($timeFormat, $val['start_unixtime']);
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
-								$event_end   = date($timeFormat, @strtotime ($event_end));
 								if ($type == 'large') {
 									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
-									$switch['EVENT'] .= openevent($event_calna, $event_start, $event_end, $val, $month_event_lines, 10, "$start2 ", '', 'ps3', $event_url).'<br />';
+ 									$switch['EVENT'] .= openevent($daylink, $uid, $val, $month_event_lines, 10, 'ps3', "$start2 ").'<br />';
 									$switch['EVENT'] .= '</div>';
 								} else {
 									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
@@ -1003,22 +978,22 @@ class Page {
 				foreach ($master_array[$m_start] as $event_times) {
 					$switch['CAL'] 			= $cal;
 					$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
-					foreach ($event_times as $val) {
+					foreach ($event_times as $uid => $val) {
 						$switch['CALNAME'] 	= $val['calname'];
-						$switch['URL'] 		= $val['url'];
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
+							$switch['EVENT_TEXT'] 	= openevent($m_start, $uid, $val, $month_event_lines, 15, 'psf');
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
-							$switch['EVENT_TEXT'] 	= openevent($switch['CALNAME'], '', '', $val, $month_event_lines, 15, '', '', 'psf', $switch['URL']);
-						} else {	
+						} else {
 							$event_start = $val['start_unixtime'];
 							$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
 							$event_start = date($timeFormat, $val['start_unixtime']);
 							$event_end   = date($timeFormat, @strtotime ($event_end));
 							$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
-							$switch['EVENT_TEXT'] 	= openevent($switch['CALNAME'], $event_start, $event_end, $val, 0, 15, '', '', 'psf', $switch['URL']);
+							$switch['EVENT_TEXT'] 	= openevent($m_start, $uid, $val, 0, 15, 'psf');
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						}
+
 						if ($switch['EVENT_TEXT'] != '') {
 							$switch['DAYLINK'] = $m_start;
 							$temp = $loop[$i];
@@ -1036,11 +1011,11 @@ class Page {
 			$check_month = date('m', $u_start);
 			unset ($switch);
 		} while ($this_month == $check_month);
-		
+
 		$this->page = preg_replace('!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_even off -->!is', $middle, $this->page);
-			
+
 	}
-	
+
 	function Page($template = 'std.tpl') {
 		if (file_exists($template))
 			$this->page = join('', file($template));

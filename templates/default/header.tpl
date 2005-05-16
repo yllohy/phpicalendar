@@ -12,14 +12,7 @@
 </head>
 <body>
 <form name="eventPopupForm" id="eventPopupForm" method="post" action="includes/event.php" style="display: none;">
-  <input type="hidden" name="event" id="event" value="" />
-  <input type="hidden" name="cal" id="cal" value="" />
-  <input type="hidden" name="start" id="start" value="" />
-  <input type="hidden" name="end" id="end" value="" />
-  <input type="hidden" name="description" id="description" value="" />
-  <input type="hidden" name="status" id="status" value="" />
-  <input type="hidden" name="location" id="location" value="" />
-  <input type="hidden" name="organizer" id="organizer" value="" />
-  <input type="hidden" name="attendee" id="attendee" value="" />
-  <input type="hidden" name="url" id="url" value="" />
+  <input type="hidden" name="date" id="date" value="" />
+  <input type="hidden" name="time" id="time" value="" />
+  <input type="hidden" name="uid" id="uid" value="" />
 </form>

@@ -4,16 +4,9 @@ function openEventWindow(num) {
 	// populate the hidden form
 	var data = document.popup_data[num];
 	var form = document.forms.eventPopupForm;
-	form.elements.event.value = data.event;
-	form.elements.cal.value = data.cal;
-	form.elements.start.value = data.start;
-	form.elements.end.value = data.end;
-	form.elements.description.value = data.description;
-	form.elements.status.value = data.status;
-	form.elements.location.value = data.location;
-	form.elements.organizer.value = data.organizer;
-	form.elements.attendee.value = data.attendee;    
-	form.elements.url.value = data.url;    
+	form.elements.date.value = data.date;
+	form.elements.time.value = data.time;
+	form.elements.uid.value = data.uid;
 	
 	// open a new window
 	var w = window.open('', 'Popup', 'scrollbars=yes,width=460,height=275');
@@ -21,17 +14,10 @@ function openEventWindow(num) {
 	form.submit();
 }
 
-function EventData(event, cal, start, end, description, status, location, organizer, attendee, url) {
-	this.event = event;
-	this.cal = cal;
-	this.start = start;
-	this.end = end;
-	this.description = description;
-	this.status = status;
-	this.location = location;
-	this.organizer = organizer;
-	this.attendee = attendee;
-	this.url = url;
+function EventData(date, time, uid) {
+	this.date = date;
+	this.time = time;
+	this.uid = uid;
 }
 
 function openTodoInfo(vtodo_array) {	
