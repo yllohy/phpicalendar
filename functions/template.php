@@ -423,12 +423,18 @@ class Page {
 					
 				} else {
 					$emptyWidth = $nbrGridCols[$thisday];
+					// Used to "join" ended events, so the ended case below results in one colspan'd td instead of multiple tds.
+					$ended_counter = 0;
 					for ($i=0;$i<sizeof($event_length[$thisday]);$i++) {
 					
 						$drawWidth = $nbrGridCols[$thisday] / ($event_length[$thisday][$i]["overlap"] + 1);
 						$emptyWidth = $emptyWidth - $drawWidth;
 						switch ($event_length[$thisday][$i]["state"]) {
 							case "begin":
+								if ($ended_counter) {
+									$weekdisplay .= '<td colspan="' . $ended_counter . '" '.$class.'>&nbsp;</td>';
+									$ended_counter = 0;
+								}
 								$event_length[$thisday][$i]["state"] = "started";
 								$event_start 	= $this_time_arr[($event_length[$thisday][$i]["key"])]['start_unixtime'];
 								$event_start 	= date ($timeFormat_small, $event_start);
@@ -460,9 +466,13 @@ class Page {
 						  
 								break;
 							case "started":
+								if ($ended_counter) {
+									$weekdisplay .= '<td colspan="' . $ended_counter . '" '.$class.'>&nbsp;</td>';
+									$ended_counter = 0;
+								}
 								break;
 							case "ended":
-								$weekdisplay .= '<td colspan="' . $drawWidth . '" '.$class.'>&nbsp;</td>';
+								$ended_counter += $drawWidth;
 								break;
 						}
 						$event_length[$thisday][$i]["length"]--;
@@ -470,7 +480,10 @@ class Page {
 							$event_length[$thisday][$i]["state"] = "ended";
 						}
 					}
-					//fill emtpy space on the right
+
+					// Clean up
+					$emptyWidth += $ended_counter;
+					//fill empty space on the right
 					if ($emptyWidth > 0) {
 						$weekdisplay .= "<td colspan=\"" . $emptyWidth . "\" $class>&nbsp;</td>\n";
 					}
@@ -636,11 +649,17 @@ class Page {
 				
 			} else {
 				$emptyWidth = $nbrGridCols;
+				// Used to "join" ended events, so the ended case below results in one colspan'd td instead of multiple tds.
+				$ended_counter = 0;
 				for ($i=0;$i<sizeof($event_length);$i++) {
 					$drawWidth = $nbrGridCols / ($event_length[$i]['overlap'] + 1);
 					$emptyWidth = $emptyWidth - $drawWidth;
 					switch ($event_length[$i]['state']) {
 						case 'begin':
+						  if ($ended_counter) {
+							$daydisplay .= '<td colspan="' . $ended_counter . '" '.$class.'>&nbsp;</td>';
+							$ended_counter = 0;
+						  }
 						  $event_length[$i]['state'] = 'started';
 						  $event_start 	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_start']);
 						  $event_end	= strtotime ($this_time_arr[($event_length[$i]['key'])]['event_end']);
@@ -675,6 +694,10 @@ class Page {
 						  
 						  break;
 						case 'started':
+							if ($ended_counter) {
+								$daydisplay .= '<td colspan="' . $ended_counter . '" '.$class.'>&nbsp;</td>';
+								$ended_counter = 0;
+							}
 							break;
 						case 'ended':
 							$daydisplay .= '<td colspan="' . $drawWidth . '" ' . $class . '>&nbsp;</td>'."\n";
@@ -685,7 +708,10 @@ class Page {
 						$event_length[$i]['state'] = 'ended';
 					}
 				}
-				//fill emtpy space on the right
+
+				// Clean up.
+				$emptyWidth += $ended_counter;
+				//fill empty space on the right
 				if ($emptyWidth > 0) {
 					$daydisplay .= '<td colspan="' . $emptyWidth . '" ' . $class . '>&nbsp;</td>'."\n";
 				}
