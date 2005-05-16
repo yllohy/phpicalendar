@@ -32,7 +32,7 @@ if ($cookie_uri == '') {
 	$cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
 }
 
-if ($bleed_time == '') $bleed_time = $day_start;
+if ($bleed_time == '') $bleed_time = -1;
 
 // Grab the action (login or logout).
 if (isset($_GET['action']))			$action = $_GET['action'];

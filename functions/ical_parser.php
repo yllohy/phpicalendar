@@ -309,7 +309,7 @@ foreach ($cal_filelist as $filename) {
 				
 				// Handling regular events
 				if ((isset($start_time) && $start_time != '') && (!isset($allday_start) || $allday_start == '')) {
-					if (($end_time > $bleed_time) && ($bleed_check == '-1')) {
+					if (($end_time >= $bleed_time) && ($bleed_check == '-1')) {
 						$start_tmp = strtotime(date('Ymd',$start_unixtime));
 						$end_date_tmp = date('Ymd',$end_unixtime);
 						while ($start_tmp < $end_unixtime) {
@@ -684,7 +684,7 @@ foreach ($cal_filelist as $filename) {
 													$start_unixtime_tmp = mktime($recur_data_hour,$recur_data_minute,0,$recur_data_month,$recur_data_day,$recur_data_year);
 													$end_unixtime_tmp = $start_unixtime_tmp + $length;
 													
-													if (($end_time > $bleed_time) && ($bleed_check == '-1')) {
+													if (($end_time >= $bleed_time) && ($bleed_check == '-1')) {
 														$start_tmp = strtotime(date('Ymd',$start_unixtime_tmp));
 														$end_date_tmp = date('Ymd',$end_unixtime_tmp);
 														while ($start_tmp < $end_unixtime_tmp) {
