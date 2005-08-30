@@ -11,6 +11,8 @@ function decode_popup ($item) {
 	return $item;
 }
 
+
+
 $event 			= $master_array[$_POST['date']][$_POST['time']][decode_popup($_POST['uid'])];
 $organizer 		= unserialize($event['organizer']);
 $attendee 		= unserialize($event['attendee']);
@@ -22,6 +24,8 @@ if ($_POST['time'] == -1) {
 } else {
 	$event_times = date($timeFormat, $event['start_unixtime']) . ' - ' .  date($timeFormat, $event['end_unixtime']); 
 }
+
+$event['description'] = urldecode($event['description']);
 
 if ($event['description']) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
 
@@ -46,6 +50,11 @@ if (is_array($attendee)) {
 
 if ($event['location']) {
 	if ($event['url'] != '') $event['location'] = '<a href="'.$event['url'].'" target="_blank">'.$event['location'].'</a>';
+}
+
+if (!$event['location'] && $event['url']) {
+	$event['location'] = '<a href="'.$event['url'].'" target="_blank">'.$event['url'].'</a>';
+	$lang['l_location'] = 'URL';
 }
 
 if (sizeof($attendee) == 0) $attendee = '';
