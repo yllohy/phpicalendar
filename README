@@ -81,6 +81,9 @@ COPYING for more information about our license.
 
 Changes:
 --------
+2.0	-Event URLs display without LOCATION.
+	-Fixed VTIMEZONE dates on Windows IIS.
+
 2.0 c
 	-Enhanced error messaging system.
 	-New Open Source Documentation.
