@@ -15,7 +15,7 @@ if ($cookie_uri == '') {
 }
 
 $current_view = "preferences";
-$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate;
+$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate.'&amp;cpath='.$cpath;
 if ($allow_preferences == 'no') header("Location: $back_page");
 
 if (isset($_GET['action'])) {

@@ -213,6 +213,7 @@ class Page {
 				$events_tmp	= $loop_event;
 				
 			
+			$some_events  = str_replace('{KEY}', $val['date'], $some_events);
 			$some_events  = str_replace('{DAYOFMONTH}', $dayofmonth, $some_events);
 			$final   .= $day_tmp.$some_events;
 			unset ($day_tmp, $some_events);
