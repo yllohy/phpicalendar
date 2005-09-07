@@ -15,4 +15,5 @@
   <input type="hidden" name="date" id="date" value="" />
   <input type="hidden" name="time" id="time" value="" />
   <input type="hidden" name="uid" id="uid" value="" />
+  <input type="hidden" name="cpath" id="cpath" value="" />
 </form>

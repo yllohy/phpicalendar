@@ -7,6 +7,7 @@ function openEventWindow(num) {
 	form.elements.date.value = data.date;
 	form.elements.time.value = data.time;
 	form.elements.uid.value = data.uid;
+	form.elements.cpath.value = data.cpath;
 	
 	// open a new window
 	var w = window.open('', 'Popup', 'scrollbars=yes,width=460,height=275');
@@ -14,10 +15,11 @@ function openEventWindow(num) {
 	form.submit();
 }
 
-function EventData(date, time, uid) {
+function EventData(date, time, uid, cpath) {
 	this.date = date;
 	this.time = time;
 	this.uid = uid;
+	this.cpath = cpath;
 }
 
 function openTodoInfo(vtodo_array) {	

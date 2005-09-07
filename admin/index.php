@@ -140,7 +140,3 @@ $page->draw_admin();
 $page->output();
 
 ?>
-
-
-
-

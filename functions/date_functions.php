@@ -163,7 +163,7 @@ function chooseOffset($time) {
 }
 
 function openevent($event_date, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
-
+	global $cpath;
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	if (empty($start)) {
 		$title = $event_text;
@@ -193,7 +193,7 @@ function openevent($event_date, $uid, $arr, $lines = 0, $length = 0, $link_class
 			static $popup_data_index = 0;
 $return = "
     <script language=\"Javascript\" type=\"text/javascript\"><!--
-    var eventData = new EventData('$escaped_date', '$escaped_time', '$escaped_uid');
+    var eventData = new EventData('$escaped_date', '$escaped_time', '$escaped_uid','$cpath');
     document.popup_data[$popup_data_index] = eventData;
     // --></script>";
 
