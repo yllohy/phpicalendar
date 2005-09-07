@@ -58,7 +58,7 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rssdisable'	 	=> '',
 	'rss_valid' 		=> '',
-	'show_search' 		=> '',
+	'show_search' 		=> $show_search,
 	'l_rss_info'		=> $lang['l_rss_info'],
 	'l_rss_subhead'		=> $lang['l_rss_subhead'],
 	'l_day'				=> $lang['l_day'],
