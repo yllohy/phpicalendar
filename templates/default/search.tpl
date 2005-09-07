@@ -36,6 +36,9 @@
 						<tr>
 							<td width="120" class="G10BOLD">{L_TIME}:</td>
 							<td align="left" class="G10B">{EVENT_START}</td>
+						</tr><tr>
+							<td width="120" class="G10BOLD">{L_LOCATION}:</td>
+							<td align="left" class="G10B">{LOCATION}</td>
 						</tr>
 						<tr>
 							<td valign="top" width="100" class="G10BOLD">{L_SUMMARY}:</td>
@@ -78,7 +81,7 @@
 							<td valign="top" width="100" class="V10">{L_DESCRIPTION}:</td>
 							<td valign="top" align="left" class="V10">{EXCEPT_DESCRIPTION}</td>
 						</tr>
-						<!-- switch except_description on -->
+						<!-- switch except_description off -->
 					</table>
 				</div>
 				<!-- switch exceptions off -->		
