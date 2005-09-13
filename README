@@ -87,7 +87,9 @@ Changes:
 	-Event popup respect CHARSET
 	-Tabs parsed into &nbsp;
 	-Search links work again.
+	-Search cleaned up.
 	-Weekly repeating events display better.
+	-Slashes stripped from event popups.
 
 2.0 c
 	-Enhanced error messaging system.
