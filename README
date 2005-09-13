@@ -81,8 +81,13 @@ COPYING for more information about our license.
 
 Changes:
 --------
-2.0	-Event URLs display without LOCATION.
+2.0.1	
+	-Event URLs display without LOCATION.
 	-Fixed VTIMEZONE dates on Windows IIS.
+	-Event popup respect CHARSET
+	-Tabs parsed into &nbsp;
+	-Search links work again.
+	-Weekly repeating events display better.
 
 2.0 c
 	-Enhanced error messaging system.

@@ -63,6 +63,7 @@ if (sizeof($organizer) == 0) $organizer = '';
 $page = new Page(BASE.'templates/'.$template.'/event.tpl');
 
 $page->replace_tags(array(
+	'charset'			=> $charset,
 	'cal' 				=> $event['calname'],
 	'event_text' 		=> urldecode($event['event_text']),
 	'event_times' 		=> $event_times,
