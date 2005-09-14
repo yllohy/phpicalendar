@@ -91,6 +91,13 @@
 					<input type="submit" value="Go">
 				</form>
 				<!-- switch show_goto off -->
+				<hr>
+				<div class = 'G10BOLD'>Pick Multiple:</div>
+				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
+					<input type="hidden" name="getdate" value="{GETDATE}">
+					<select name="cal[]" class="query_style" size="5" multiple="multiple">{LIST_ICALS_PICK}</select><br />
+					<input type="submit" value="go">
+				</form>
 			</div>
 		</td>
 	</tr>

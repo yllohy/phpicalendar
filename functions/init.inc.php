@@ -80,8 +80,21 @@ if ($calendar_path == '') {
 }
 
 $is_webcal = FALSE;
-if (isset($_GET['cal']) && $_GET['cal'] != '') {
+if (isset($_GET['cal'])) {
+	//if we get a comma-separated list of calendars, split into array
+	if(stristr($_GET['cal'], ",")) {
+		$_GET['cal'] = explode(",", $_GET['cal']);
+	} 
+	//if we have an array of calendard, decode each (though I'm not sure this is necessary)
+	if(is_array($_GET['cal'])) {
+		$cal_filename = array();
+		foreach($_GET['cal'] as $c) {
+			$cal_filename[] = urldecode($c);
+		}
+	}
+	else {
 	$cal_filename = urldecode($_GET['cal']);
+	}
 } else {
 	if (isset($default_cal_check)) {
 		if ($default_cal_check != $ALL_CALENDARS_COMBINED) {
@@ -100,7 +113,7 @@ if (isset($_GET['cal']) && $_GET['cal'] != '') {
 	}
 }
 
-if (substr($cal_filename, 0, 7) == 'http://' || substr($cal_filename, 0, 8) == 'https://' || substr($cal_filename, 0, 9) == 'webcal://') {
+if (!is_array($cal_filename) && (substr($cal_filename, 0, 7) == 'http://' || substr($cal_filename, 0, 8) == 'https://' || substr($cal_filename, 0, 9) == 'webcal://')) {
 	$is_webcal = TRUE;
 	$cal_webcalPrefix = str_replace('http://','webcal://',$cal_filename);
 	$cal_httpPrefix = str_replace('webcal://','http://',$cal_filename);
@@ -122,9 +135,22 @@ if ($is_webcal == TRUE) {
 		exit(error($lang['l_error_remotecal'], $_GET['cal']));
 	}
 } else {
-	$cal_displayname = str_replace('32', ' ', $cal_filename);
+	$cal_displayname = str_replace('32', ' ', (is_array($cal_filename) ? implode(", ", $cal_filename) : $cal_filename));
+	if(is_array($cal_filename)) {
+		$cal = array();
+		$blacklisted = FALSE;
+		foreach($cal_filename as $c) {
+			$cal[] = urlencode($c);
+			if(in_array($c, $blacklisted_cals)) $blacklisted = TRUE;
+		}
+		$cal = implode(",", $cal);
+	}
+	else {
 	$cal = urlencode($cal_filename);
-	if (in_array($cal_filename, $blacklisted_cals)) {
+		$blacklisted = in_array($cal_filename, $blacklisted_cals);
+	}
+
+	if ($blacklisted) {
 		exit(error($lang['l_error_restrictedcal'], $cal_filename));
 	} else {
 		if (!isset($filename)) {

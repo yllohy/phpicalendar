@@ -36,6 +36,7 @@ $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
+$list_icals_pick = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED), TRUE);
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
@@ -80,6 +81,7 @@ $page->replace_tags(array(
 	'username'			=> $username,
 	'logout_querys'		=> $logout_querys,
 	'list_icals' 		=> $list_icals,
+	'list_icals_pick' 		=> $list_icals_pick,
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,
 	'list_weeks' 		=> $list_weeks,

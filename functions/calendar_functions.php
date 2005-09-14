@@ -76,33 +76,43 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	
 	// Otherwise just include the requested calendar.
 	else {
+		if(!is_array($cal_filename)) {
+			$cal_filename_local = array($cal_filename);
+		}
+		else {
+			$cal_filename_local = $cal_filename;
+		}
+
+		foreach($cal_filename_local as $c) {
+
 		// Make sure this is not a blacklisted calendar. We don't have
 		// to remove a .ics suffix because it would not have been passed
 		// in the argument.
-		if (in_array($cal_filename, $blacklisted_cals))
-			exit(error($lang['l_error_restrictedcal'], $cal_filename));
+			if (in_array($c, $blacklisted_cals))
+				exit(error($lang['l_error_restrictedcal'], $c));
 
 		// If HTTP authenticated, make sure this calendar is available
 		// to the user.
 		if (isset($http_user)) {
-			if (!in_array($cal_filename, $apache_map[$http_user])) {
+				if (!in_array($c, $apache_map[$http_user])) {
 				// Use the invalid calendar message so that the user is
 				// not made aware of locked calendars.
-				exit(error($lang['l_error_invalidcal'], $cal_filename));
+					exit(error($lang['l_error_invalidcal'], $c));
 			}
 		}
 		
 		// Otherwise make sure this calendar is not locked.
-		else if (in_array($cal_filename, $locked_cals) &&
-			!in_array($cal_filename, $unlocked_cals))
+			else if (in_array($c, $locked_cals) &&
+				!in_array($c, $unlocked_cals))
 		{
 			// Use the invalid calendar message so that the user is
 			// not made aware of locked calendars.
-			exit(error($lang['l_error_invalidcal'], $cal_filename));
+				exit(error($lang['l_error_invalidcal'], $c));
 		}
 		
 		// Add this calendar.
-		array_push($calendars, "$calendar_path/$cal_filename.ics");
+			array_push($calendars, "$calendar_path/$c.ics");
+		}
 	}
 	
 	// Return the sorted calendar list.
@@ -139,7 +149,7 @@ function availableCalendarNames($username, $password, $cal_filename, $admin = fa
 // is not printed out by this function.
 //
 // $cals	= The calendars (entire path, e.g. from availableCalendars).
-function display_ical_list($cals) {
+function display_ical_list($cals, $pick=FALSE) {
 	global $cal, $ALL_CALENDARS_COMBINED, $current_view, $getdate, $calendar_lang, $all_cal_comb_lang;
 
 	// Print each calendar option.
@@ -177,12 +187,21 @@ function display_ical_list($cals) {
 		// The submitted calendar will be encoded, and always use http://
 		// if it is a webcal. So that is how we perform the comparison when
 		// trying to figure out if this is the selected calendar.
+		if($pick) {
+			if (in_array($cal_encoded_tmp, explode(",", $cal))) {
+					$return .= "<option value=\"$cal_encoded_tmp\" selected=\"selected\">$cal_displayname_tmp</option>\n";
+			} else {
+					$return .= "<option value=\"$cal_encoded_tmp\">$cal_displayname_tmp</option>\n";	
+			}
+		}
+		else {
 		$cal_httpPrefix_tmp = str_replace('webcal://', 'http://', $cal_tmp);
 		if ($cal_httpPrefix_tmp == urldecode($cal)) {
 			$return .= "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\" selected=\"selected\">$cal_displayname_tmp</option>";
 		} else {
 			$return .= "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\">$cal_displayname_tmp</option>";	
 		}
+	}			
 	}			
 
 	// option to open all (non-web) calenders together

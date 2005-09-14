@@ -48,6 +48,7 @@ $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
+$list_icals_pick = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED), TRUE);
 
 $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 
@@ -72,13 +73,13 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'show_search' 		=> $show_search,
-	'show_search' 		=> $show_search,
 	'next_month' 		=> $next_month,
 	'prev_month'	 	=> $prev_month,
 	'show_goto' 		=> '',
 	'is_logged_in' 		=> '',
 	'list_jumps' 		=> $list_jumps,
 	'list_icals' 		=> $list_icals,
+	'list_icals_pick'	=> $list_icals_pick,
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,
 	'list_weeks' 		=> $list_weeks,
