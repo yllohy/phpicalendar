@@ -1,10 +1,10 @@
 <?php
 
 define('BASE', './');
+$current_view = 'year';
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$charset");
-$current_view = 'year';
 
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day 	= $day_array2[3]; 
