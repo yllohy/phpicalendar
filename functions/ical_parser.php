@@ -150,7 +150,7 @@ foreach ($cal_filelist as $filename) {
 				unset (
 					$start_time, $end_time, $start_date, $end_date, $summary, 
 					$allday_start, $allday_end, $start, $end, $the_duration, 
-					$beginning, $rrule_array, $start_of_vevent, $description, $bd, $url, 
+					$beginning, $rrule_array, $start_of_vevent, $description, $url, 
 					$valarm_description, $start_unixtime, $end_unixtime, $display_end_tmp, $end_time_tmp1, 
 					$recurrence_id, $uid, $class, $location, $rrule, $abs_until, $until_check,
 					$until, $bymonth, $byday, $bymonthday, $byweek, $byweekno, 
@@ -481,12 +481,6 @@ foreach ($cal_filelist as $filename) {
 							$start_range_time_tmp = $start_range_time;
 							$end_range_time_tmp = $end_range_time;
 							
-							// For weekly's without a byday
-							if ((!isset($byday)) && ($rrule_array['FREQ'] == 'WEEKLY')) {
-								ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $start_date, $startregs);
-								$bd = strtolower(date ("l", mktime($hour,$minute,0,$startregs[2],$startregs[3],$startregs[1])));
-							}
-							
 							// If the $end_range_time is less than the $start_date_time, or $start_range_time is greater
 							// than $end_date_time, we may as well forget the whole thing
 							// It doesn't do us any good to spend time adding data we aren't even looking at
@@ -497,7 +491,7 @@ foreach ($cal_filelist as $filename) {
 								if ($start_range_time_tmp < $start_date_time) $start_range_time_tmp = $start_date_time;
 								if ($end_range_time_tmp > $end_date_time) $end_range_time_tmp = $end_date_time;
 					
-								// initialze the time we will increment
+								// initialize the time we will increment
 								$next_range_time = $start_range_time_tmp;
 								
 								// FIXME: This is a hack to fix repetitions with $interval > 1 
@@ -517,15 +511,20 @@ foreach ($cal_filelist as $filename) {
 													$recur_data[] = $next_date_time;
 													break;
 												case 'WEEKLY':
+													// Populate $byday with the default day if it's not set.
 													if (!isset($byday)) {
-														$next_date = dateOfWeek(date('Ymd', $next_range_time),$bd);
-														$next_date_time = strtotime($next_date);
-														$recur_data[] = $next_date_time;
-													} elseif (is_array($byday)) {
+														$byday[] = strtoupper(substr($daysofweekshort_lang[date('w', $start_date_time)], 0, 2));
+													}
+													if (is_array($byday)) {
 														foreach($byday as $day) {
 															$day = two2threeCharDays($day);	
-															$next_date = dateOfWeek(date('Ymd', $next_range_time),$day);
-															$next_date_time = strtotime($next_date);
+															$next_date_time = strtotime($day,$next_range_time) + (12 * 60 * 60);
+															// Since this renders events from $next_range_time to $next_range_time + 1 week, I need to handle intervals
+															// as well. This checks to see if $next_date_time is after $day_start (i.e., "next week"), and thus
+															// if we need to add $interval weeks to $next_date_time.
+															if ($next_date_time > strtotime($week_start_day, $next_range_time) && $interval > 1) {
+																$next_date_time = strtotime('+'.($interval - 1).' '.$freq_type, $next_date_time);
+															}
 															$recur_data[] = $next_date_time;
 														}
 													}
