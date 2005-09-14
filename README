@@ -81,6 +81,11 @@ COPYING for more information about our license.
 
 Changes:
 --------
+2.0.2
+	-Allows multiple calendar selection.
+	-Search box can be made to go away.
+	-Various bug fixes.
+
 2.0.1	
 	-Event URLs display without LOCATION.
 	-Fixed VTIMEZONE dates on Windows IIS.

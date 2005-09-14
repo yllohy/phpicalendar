@@ -962,6 +962,10 @@ class Page {
 	function nomonthbottom() {
 		$this->page = preg_replace('!<\!-- switch showbottom on -->(.*)<\!-- switch showbottom off -->!is','', $this->page);
 	}
+
+	function nosearch() {
+		$this->page = preg_replace('!<\!-- switch show_search on -->(.*)<\!-- switch show_search off -->!is','', $this->page);
+	}
 	
 	function monthbottom() {
 		global $template, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $timeFormat_small, $dateFormat_week_list, $lang;

@@ -120,6 +120,10 @@ if ($allow_login == 'yes') {
 	'l_login'			=> $lang['l_login'],
 	'l_logout'			=> $lang['l_logout']
 	));
+}
+
+if ($show_search != 'yes') {
+	$page->nosearch($page);
 }	
 	
 $page->draw_week($page);

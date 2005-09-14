@@ -122,6 +122,9 @@ if ($allow_login == 'yes') {
 	));
 }
 
+if ($show_search != 'yes') {
+	$page->nosearch($page);
+}
 	
 if ($this_months_events == 'yes') {	
 	$page->monthbottom($page);

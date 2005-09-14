@@ -117,6 +117,10 @@ if ($allow_login == 'yes') {
 	'l_logout'			=> $lang['l_logout']
 	));
 }
+
+if ($show_search != 'yes') {
+	$page->nosearch($page);
+}
 	
 $page->draw_day($page);
 $page->tomorrows_events($page);
