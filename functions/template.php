@@ -273,7 +273,7 @@ class Page {
 				foreach ($master_array[$get_date]['-1'] as $uid => $allday) {
 					$event_calno  	= $allday['calnumber'];
 					$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
- 					$event 			= openevent($get_date, $uid, $allday, 1, 11, 'psf');
+ 					$event 			= openevent($get_date, -1, $uid, $allday, 1, 11, 'psf');
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 					$replace		.= $loop_tmp;
@@ -449,7 +449,7 @@ class Page {
 
 								// Start drawing the event
 								$event_temp   = $loop_event;
-								$event 		  = openevent($thisday, $uid, $this_time_arr[$uid], $week_events_lines, 25, 'ps');
+								$event 		  = openevent($thisday, $cal_time, $uid, $this_time_arr[$uid], $week_events_lines, 25, 'ps');
 								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
 								$event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
 								$event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
@@ -504,7 +504,7 @@ class Page {
 			foreach ($master_array[$getdate]['-1'] as $uid => $allday) {
 				$event_calno  	= $allday['calnumber'];
 				$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
- 				$event 			= openevent($getdate, $uid, $allday);
+ 				$event 			= openevent($getdate, -1, $uid, $allday);
 				$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 				$replace		.= $loop_tmp;
@@ -670,7 +670,7 @@ class Page {
 						  
 						  // Start drawing the event
 						  $event_temp  = $loop_event;
-						  $event 	   = openevent($getdate, $uid, $this_time_arr[$uid], 0, 0, 'ps');
+						  $event 	   = openevent($getdate, $cal_time, $uid, $this_time_arr[$uid], 0, 0, 'ps');
 						  $event_temp  = str_replace('{EVENT}', $event, $event_temp);
 						  $event_temp  = str_replace('{EVENT_START}', $event_start, $event_temp);
 						  $event_temp  = str_replace('{EVENT_END}', $event_end, $event_temp);
@@ -727,16 +727,16 @@ class Page {
 		$return_etmp	= '';
 
 		if (is_array($master_array[$next_day]) && sizeof($master_array[$next_day]) > 0) {
-			foreach ($master_array[$next_day] as $event_times) {
+			foreach ($master_array[$next_day] as $cal_time => $event_times) {
 				foreach ($event_times as $uid => $val) {
 					$event_text = stripslashes(urldecode($val["event_text"]));
 					$event_text = strip_tags($event_text, '<b><i><u>');
 					if ($event_text != "") {
 						if (!isset($val["event_start"])) {
-							$return_adtmp = openevent($next_day, $uid, $val, $tomorrows_events_lines, 21, 'psf');
+							$return_adtmp = openevent($next_day, $cal_time, $uid, $val, $tomorrows_events_lines, 21, 'psf');
 							$replace_ad  .= str_replace('{T_ALLDAY}', $return_adtmp, $loop_t_ad);
 						} else {
-							$return_etmp  = openevent($next_day, $uid, $val, $tomorrows_events_lines, 21, 'ps3');
+							$return_etmp  = openevent($next_day, $cal_time, $uid, $val, $tomorrows_events_lines, 21, 'ps3');
 							$replace_e   .= str_replace('{T_EVENT}', $return_etmp, $loop_t_e);
 						}
 					}
@@ -904,14 +904,14 @@ class Page {
 			}
 			if ($master_array[$daylink]) {
 				if ($type != 'small') {
-					foreach ($master_array[$daylink] as $event_times) {
+					foreach ($master_array[$daylink] as $cal_time => $event_times) {
 						foreach ($event_times as $uid => $val) {
 							$event_calno 	= $val['calnumber'];
 							$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
 							if (!isset($val['event_start'])) {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
- 									$switch['ALLDAY'] .= openevent($daylink, $uid, $val, $month_event_lines, 15, 'psf');
+ 									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 15, 'psf');
 									$switch['ALLDAY'] .= '</div>';
 								} else {
 									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
@@ -920,7 +920,7 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								if ($type == 'large') {
 									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
- 									$switch['EVENT'] .= openevent($daylink, $uid, $val, $month_event_lines, 10, 'ps3', "$start2 ").'<br />';
+ 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 10, 'ps3', "$start2 ").'<br />';
 									$switch['EVENT'] .= '</div>';
 								} else {
 									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
@@ -980,14 +980,14 @@ class Page {
 		$i=0;
 		do {
 			if (isset($master_array[$m_start])) {
-				foreach ($master_array[$m_start] as $event_times) {
+				foreach ($master_array[$m_start] as $cal_time => $event_times) {
 					$switch['CAL'] 			= $cal;
 					$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
 					foreach ($event_times as $uid => $val) {
 						$switch['CALNAME'] 	= $val['calname'];
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
-							$switch['EVENT_TEXT'] 	= openevent($m_start, $uid, $val, $month_event_lines, 15, 'psf');
+							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, $month_event_lines, 15, 'psf');
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						} else {
 							$event_start = $val['start_unixtime'];
@@ -995,7 +995,7 @@ class Page {
 							$event_start = date($timeFormat, $val['start_unixtime']);
 							$event_end   = date($timeFormat, @strtotime ($event_end));
 							$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
-							$switch['EVENT_TEXT'] 	= openevent($m_start, $uid, $val, 0, 15, 'psf');
+							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, 0, 15, 'psf');
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						}
 

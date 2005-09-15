@@ -162,7 +162,7 @@ function chooseOffset($time) {
 	return $offset;
 }
 
-function openevent($event_date, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
+function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
 	global $cpath;
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	if (empty($start)) {
@@ -186,8 +186,7 @@ function openevent($event_date, $uid, $arr, $lines = 0, $length = 0, $link_class
 
 		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $full_event_text, $res))) || ($arr['description'])) {
 			$escaped_date = addslashes($event_date);
-			$escaped_time = addslashes($arr['event_start']);
-			if (!$escaped_time) $escaped_time = -1;
+			$escaped_time = addslashes($time);
 			$escaped_uid = addslashes($uid);
 			// fix for URL-length bug in IE: populate and submit a hidden form on click
 			static $popup_data_index = 0;
