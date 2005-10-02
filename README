@@ -82,6 +82,8 @@ COPYING for more information about our license.
 Changes:
 --------
 2.0.2
+	-Updated languages: Finnish
+	-Todo popup respects CHARSET
 	-Allows multiple calendar selection.
 	-Search box can be made to go away.
 	-Various bug fixes.
