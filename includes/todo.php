@@ -43,6 +43,7 @@ if ($priority >= 1 && $priority <= 4) {
 $page = new Page(BASE.'templates/'.$template.'/todo.tpl');
 
 $page->replace_tags(array(
+	'charset'			=> $charset,
 	'cal' 				=> $cal_title_full,
 	'vtodo_text' 		=> $vtodo_text,
 	'description' 		=> $description,
