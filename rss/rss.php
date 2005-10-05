@@ -27,7 +27,7 @@ switch ($rssview){
 	case 'day':
 		$fromdate = $getdate;
 		$todate = $getdate;
-		$theview = $day_lang;
+		$theview = $lang['l_day'];
 		break;
 	case 'month':
 		$parse_month = date ("Ym", strtotime($getdate));
@@ -119,7 +119,7 @@ $i = 0;  #day counter
 		foreach ($master_array[("$thisdate")] as $event_times) {
 			foreach ($event_times as $val) {
 				if(!$val["event_start"]){
-					$event_start = "all day";
+					$event_start = "All Day";
 				}else{	
 					$event_start 	= @$val["event_start"];	
 					$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
@@ -128,7 +128,6 @@ $i = 0;  #day counter
 				$event_text 	= strip_tags($event_text, '<b><i><u>');
 				$event_text		= str_replace('&','&amp;',$event_text);
 				$event_text		= str_replace('&amp;amp;','&amp;',$event_text);
-				$event_text		= urlencode($event_text);
 			#uncomment for shorter event text with ...
 			#	$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines); 		
 				$description 	= stripslashes(urldecode($val["description"]));
@@ -139,12 +138,13 @@ $i = 0;  #day counter
 
 				$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
 				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal&cpath=$cpath");
+				if ($description == '') $description = $event_text;
 				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
 				$rss .= '<item>'."\n";
-				$rss .= '<event_start>'.$event_start.'</event_start>'."\n";
 				$rss .= '<title>'.$rss_title.'</title>'."\n";
-				
+				/*
+				$rss .= '<event_start>'.$event_start.'</event_start>'."\n";
 				$rss .= '<seminardate>'.$dayofweek.'</seminardate>'."\n";
 				$rss .= '<seminarspeaker>'.$event_text.'</seminarspeaker>'."\n";
 				$rss .= '<seminartitle>'.$description.'</seminartitle>'."\n";
@@ -152,14 +152,12 @@ $i = 0;  #day counter
 				$rss .= '<seminarhost>'.$val['attendee'].'</seminarhost>'."\n";
 				$rss .= '<organizer>'.$val['organizer'].'</organizer>'."\n";
 				$rss .= '<status>'.$val['status'].'</status>'."\n";
-
-				$rss .= '<link>'.$rss_link.'</link>'."\n";
-				$rss .= '<description>'.$rss_description.'</description>'."\n";
 				$location		= str_replace('&','&amp;',$val['location']);
 				$location		= str_replace('&amp;amp;','&amp;',$location);
-
-
 				$rss .= '<location>'.$location.'</location>';
+				*/
+				$rss .= '<link>'.$rss_link.'</link>'."\n";
+				$rss .= '<description>'.$rss_description.'</description>'."\n";
 				$rss .= '</item>'."\n";
 				$events_count++;
 			}

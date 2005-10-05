@@ -1,7 +1,7 @@
 <?php 
 
 // uncomment when developing, comment for shipping version
-error_reporting (E_ERROR | E_WARNING | E_PARSE);
+//error_reporting (E_ERROR | E_WARNING | E_PARSE);
 
 // Older versions of PHP do not define $_SERVER. Define it here instead.
 if (!isset($_SERVER) && isset($_SERVER)) {
@@ -48,10 +48,10 @@ if ($action == 'logout' || $invalid_login) {
 
 // language support
 $language = strtolower($language);
-$lang_file = BASE.'/languages/'.$language.'.inc.php';
+$lang_file = BASE.'languages/'.$language.'.inc.php';
 
-if (file_exists(realpath($lang_file))) {
-	unset($lang);
+unset($lang);
+if (include($lang_file)) {
 	include($lang_file);
 } else {
 	exit(error('The requested language "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
