@@ -83,7 +83,7 @@ Changes:
 --------
 2.1
 	-RSS feeds display as previously indended.
-	-Updated languages: Finnish
+	-Updated languages: Finnish, Norwegian, French
 	-Todo popup respects CHARSET
 	-Allows multiple calendar selection.
 	-Search box can be made to go away.
