@@ -10,7 +10,12 @@ if ($printview_default == 'yes') {
 	$printview = $default_view;
 	$default_view = "print.php";
 } else {
-	$default_view = "$default_view" . ".php";
+	$check = array ('day', 'week', 'month');
+	if (in_array($default_view, $check)) {
+		$default_view = $default_view . '.php';
+	} else {
+		die;
+	}
 }
 /*header("Location: $default_view");*/
 

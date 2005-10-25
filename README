@@ -82,11 +82,13 @@ COPYING for more information about our license.
 Changes:
 --------
 2.1
+	-Updated languages: Finnish
 	-RSS feeds display as previously indended.
 	-Updated languages: Finnish, Norwegian, French
 	-Todo popup respects CHARSET
 	-Allows multiple calendar selection.
 	-Search box can be made to go away.
+	-Cookie vulnerbility fixed (credit: aScii)
 	-Fix for occasionally broken popups.
 	-Various bug fixes.
 
