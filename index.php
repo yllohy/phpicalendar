@@ -17,8 +17,6 @@ if ($printview_default == 'yes') {
 		die;
 	}
 }
-/*header("Location: $default_view");*/
-
-include( $default_view );
+header("Location: $default_view");
 
 ?>
