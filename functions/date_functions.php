@@ -206,4 +206,91 @@ $return = "
 
 	return $return;
 }
+
+// Returns an array of the date and time extracted from the data
+// passed in. This array contains (unixtime, date, time, allday).
+//
+// $data		= A string representing a date-time per RFC2445.
+// $property	= The property being examined, e.g. DTSTART, DTEND.
+// $field		= The full field being examined, e.g. DTSTART;TZID=US/Pacific
+function extractDateTime($data, $property, $field) {
+	global $tz_array;
+	
+	// Initialize values.
+	unset($unixtime, $date, $time, $allday);
+	
+	// What the heck is this doing in here?
+	$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
+
+	// Check for zulu time.
+	$zulu_time = false;
+	if (substr($data,-1) == 'Z') $zulu_time = true;
+	$data = str_replace('Z', '', $data);
+	
+	// Remove some substrings we don't want to look at.
+	$data = str_replace('T', '', $data);
+	$field = str_replace(';VALUE=DATE-TIME', '', $field); 
+	
+	// Extract date-only values.
+	if ((preg_match('/^'.$property.';VALUE=DATE/i', $field)) || (ereg ('^([0-9]{4})([0-9]{2})([0-9]{2})$', $data)))  {
+		// Pull out the date value. Minimum year is 1970.
+		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dt_check);
+		if ($dt_check[1] < 1970) { 
+			$data = '1971'.$dt_check[2].$dt_check[3];
+		}
+		
+		// Set the values.
+		$unixtime = strtotime($data);
+		$date = date('Ymd', $unixtime);
+		$allday = $data;
+	}
+	
+	// Extract date-time values.
+	else {
+		// Pull out the timezone, or use GMT if zulu time was indicated.
+		if (preg_match('/^'.$property.';TZID=/i', $field)) {
+			$tz_tmp = explode('=', $field);
+			$tz_dt = $tz_tmp[1];
+			unset($tz_tmp);
+		} elseif ($zulu_time) {
+			$tz_dt = 'GMT';
+		}
+
+		// Pull out the date and time values. Minimum year is 1970.
+		preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
+		if ($regs[1] < 1970) { 
+			$regs[1] = '1971';
+		}
+		$date = $regs[1] . $regs[2] . $regs[3];
+		$time = $regs[4] . $regs[5];
+		$unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+
+		// Check for daylight savings time.
+		$dlst = date('I', $unixtime);
+		$server_offset_tmp = chooseOffset($unixtime);
+		if (isset($tz_dt)) {
+			if (array_key_exists($tz_dt, $tz_array)) {
+				$offset_tmp = $tz_array[$tz_dt][$dlst];
+			} else {
+				$offset_tmp = '+0000';
+			}
+		} elseif (isset($calendar_tz)) {
+			if (array_key_exists($calendar_tz, $tz_array)) {
+				$offset_tmp = $tz_array[$calendar_tz][$dlst];
+			} else {
+				$offset_tmp = '+0000';
+			}
+		} else {
+			$offset_tmp = $server_offset_tmp;
+		}
+		
+		// Set the values.
+		$unixtime = calcTime($offset_tmp, $server_offset_tmp, $unixtime);
+		$date = date('Ymd', $unixtime);
+		$time = date('Hi', $unixtime);
+	}
+	
+	// Return the results.
+	return array($unixtime, $date, $time, $allday);
+}
 ?>

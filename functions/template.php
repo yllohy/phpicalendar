@@ -21,7 +21,7 @@ class Page {
 			// Print Calendar Checkboxes
 			$COLUMNS_TO_PRINT = 3;
 			$column = 1;
-			$filelist = availableCalendarNames('', '', '', true);
+			$filelist = availableCalendars('', '', '', true);
 			foreach ($filelist as $file) {
 				if ($column > $COLUMNS_TO_PRINT) {
 					$delete_table 	.= '</tr>';
@@ -31,7 +31,7 @@ class Page {
 					$delete_table .= '<tr>';
 				}
 				
-				$cal_filename_tmp = substr($file,0,-4);
+				$cal_filename_tmp = getCalendarName($file);
 				$cal_tmp = urlencode($file);
 				$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 				

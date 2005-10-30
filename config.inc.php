@@ -39,6 +39,8 @@ $show_todos				= 'yes';			// Show your todo list on the side of day and week vie
 $show_completed			= 'yes';				// Show completed todos on your todo list.
 $allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
 $login_cookies			= 'no';			// Set to yes to store authentication information via (unencrypted) cookies. Set to no to use sessions.
+$support_ical			= 'no';			// Set to yes to support the Apple iCal calendar database structure.
+$recursive_path			= 'no';			// Set to yes to recurse into subdirectories of the calendar path.
 
 // Calendar Caching (decreases page load times)
 $save_parsed_cals 		= 'no';				// Saves a copy of the cal in /tmp after it's been parsed. Improves performence.

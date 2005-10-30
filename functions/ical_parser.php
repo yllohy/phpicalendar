@@ -99,8 +99,7 @@ $calnumber = 1;
 foreach ($cal_filelist as $filename) {
 	
 	// Find the real name of the calendar.
-	$actual_calname = str_replace($calendar_path, '', $filename);
-	$actual_calname = str_replace('/', '', str_replace('.ics', '', $actual_calname));
+	$actual_calname = getCalendarName($filename);
 	
 	if ($parse_file) {	
 		
@@ -805,101 +804,17 @@ foreach ($cal_filelist as $filename) {
 					// Start VTODO Parsing
 					//
 					case 'DUE':
-						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
-						$zulu_time = false;
-						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = str_replace('T', '', $data);
-						$data = str_replace('Z', '', $data);
-						if (preg_match("/^DUE;VALUE=DATE/i", $field))  {
-							$allday_start = $data;
-							$start_date = $allday_start;
-							$start_unixtime = strtotime($data);
-                            $due_date = date('Ymd', $start_unixtime);
-						} else {
-							if (preg_match("/^DUE;TZID=/i", $field)) {
-								$tz_tmp = explode('=', $field);
-								$tz_due = $tz_tmp[1];
-								unset($tz_tmp);
-							} elseif ($zulu_time) {
-								$tz_due = 'GMT';
-							}
-			
-							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-							$due_date = $regs[1] . $regs[2] . $regs[3];
-							$due_time = $regs[4] . $regs[5];
-							$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-			
-							$dlst = date('I', $start_unixtime);
-							$server_offset_tmp = chooseOffset($start_unixtime);
-							if (isset($tz_due)) {
-								if (array_key_exists($tz_due, $tz_array)) {
-									$offset_tmp = $tz_array[$tz_due][$dlst];
-								} else {
-									$offset_tmp = '+0000';
-								}
-							} elseif (isset($calendar_tz)) {
-								if (array_key_exists($calendar_tz, $tz_array)) {
-									$offset_tmp = $tz_array[$calendar_tz][$dlst];
-								} else {
-									$offset_tmp = '+0000';
-								}
-							} else {
-								$offset_tmp = $server_offset_tmp;
-							}
-							$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
-							$due_date = date('Ymd', $start_unixtime);
-							$due_time = date('Hi', $start_unixtime);
-							unset($server_offset_tmp);
-						}
+						$datetime = extractDateTime($data, $property, $field);
+						$due_date = $datetime[1];
+						$due_time = $datetime[2];
 						break;
 						
 					case 'COMPLETED':
-						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
-						$zulu_time = false;
-						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = str_replace('T', '', $data);
-						$data = str_replace('Z', '', $data);
-						if (preg_match("/^COMPLETED;VALUE=DATE/i", $field))  {
-							$allday_start = $data;
-							$start_date = $allday_start;
-						} else {
-							if (preg_match("/^COMPLETED;TZID=/i", $field)) {
-								$tz_tmp = explode('=', $field);
-								$tz_completed = $tz_tmp[1];
-								unset($tz_tmp);
-							} elseif ($zulu_time) {
-								$tz_completed = 'GMT';
-							}
-			
-							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})', $data, $regs);
-							$completed_date = $regs[1] . $regs[2] . $regs[3];
-							$completed_time = $regs[4] . $regs[5];
-							$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-			
-							$dlst = date('I', $start_unixtime);
-							$server_offset_tmp = chooseOffset($start_unixtime);
-							if (isset($tz_completed)) {
-								if (array_key_exists($tz_completed, $tz_array)) {
-									$offset_tmp = $tz_array[$tz_completed][$dlst];
-								} else {
-									$offset_tmp = '+0000';
-								}
-							} elseif (isset($calendar_tz)) {
-								if (array_key_exists($calendar_tz, $tz_array)) {
-									$offset_tmp = $tz_array[$calendar_tz][$dlst];
-								} else {
-									$offset_tmp = '+0000';
-								}
-							} else {
-								$offset_tmp = $server_offset_tmp;
-							}
-							$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
-							$completed_date = date('Ymd', $start_unixtime);
-							$completed_time = date('Hi', $start_unixtime);
-							unset($server_offset_tmp);
-						}
-						break;	
-					
+						$datetime = extractDateTime($data, $property, $field);
+						$completed_date = $datetime[1];
+						$completed_time = $datetime[2];
+						break;
+						
 					case 'PRIORITY':
 						$vtodo_priority = "$data";
 						break;
@@ -914,111 +829,24 @@ foreach ($cal_filelist as $filename) {
 						
 					case 'CATEGORIES':
 						$vtodo_categories = "$data";
-						break;		
+						break;
 					//
 					// End VTODO Parsing				
 						
 					case 'DTSTART':
-						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
-						$zulu_time = false;
-						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = str_replace('T', '', $data);
-						$data = str_replace('Z', '', $data);
-						$field = str_replace(';VALUE=DATE-TIME', '', $field); 
-						if ((preg_match("/^DTSTART;VALUE=DATE/i", $field)) || (ereg ('^([0-9]{4})([0-9]{2})([0-9]{2})$', $data)))  {
-							ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dtstart_check);
-							if ($dtstart_check[1] < 1970) { 
-								$data = '1971'.$dtstart_check[2].$dtstart_check[3];
-							}
-							$allday_start = $data;
-							$start_date = $allday_start;
-							$start_unixtime = strtotime($data);
-						} else {
-							if (preg_match("/^DTSTART;TZID=/i", $field)) {
-								$tz_tmp = explode('=', $field);
-								$tz_dtstart = $tz_tmp[1];
-								unset($tz_tmp);
-							} elseif ($zulu_time) {
-								$tz_dtstart = 'GMT';
-							}
-			
-							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
-							if ($regs[1] < 1970) { 
-								$regs[1] = '1971';
-							}
-							$start_date = $regs[1] . $regs[2] . $regs[3];
-							$start_time = $regs[4] . $regs[5];
-							$start_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-			
-							$dlst = date('I', $start_unixtime);
-							$server_offset_tmp = chooseOffset($start_unixtime);
-							if (isset($tz_dtstart)) {
-								if (array_key_exists($tz_dtstart, $tz_array)) {
-									$offset_tmp = $tz_array[$tz_dtstart][$dlst];
-								} else {
-									$offset_tmp = '+0000';
-								}
-							} elseif (isset($calendar_tz)) {
-								if (array_key_exists($calendar_tz, $tz_array)) {
-									$offset_tmp = $tz_array[$calendar_tz][$dlst];
-								} else {
-									$offset_tmp = '+0000';
-								}
-							} else {
-								$offset_tmp = $server_offset_tmp;
-							}
-							$start_unixtime = calcTime($offset_tmp, $server_offset_tmp, $start_unixtime);
-							$start_date = date('Ymd', $start_unixtime);
-							$start_time = date('Hi', $start_unixtime);
-							unset($server_offset_tmp, $offset_tmp, $tz_dtstart);
-						}
+						$datetime = extractDateTime($data, $property, $field);
+						$start_unixtime = $datetime[0];
+						$start_date = $datetime[1];
+						$start_time = $datetime[2];
+						$allday_start = $datetime[3];
 						break;
 						
 					case 'DTEND':
-						$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
-						$zulu_time = false;
-						if (substr($data,-1) == 'Z') $zulu_time = true;
-						$data = str_replace('T', '', $data);
-						$data = str_replace('Z', '', $data);
-						$field = str_replace(';VALUE=DATE-TIME', '', $field); 
-						if (preg_match("/^DTEND;VALUE=DATE/i", $field))  {
-							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $data, $dtend_check);
-							if ($dtend_check[1] < 1970) { 
-								$data = '1971'.$dtend_check[2].$dtend_check[3];
-							}
-							$allday_end = $data;
-						} else {
-							if (preg_match("/^DTEND;TZID=/i", $field)) {
-								$tz_tmp = explode('=', $field);
-								$tz_dtend = $tz_tmp[1];
-								unset($tz_tmp);
-							} elseif ($zulu_time) {
-								$tz_dtend = 'GMT';
-							}
-							
-							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
-							if ($regs[1] < 1970) { 
-								$regs[1] = '1971';
-							}
-							$end_date = $regs[1] . $regs[2] . $regs[3];
-							$end_time = $regs[4] . $regs[5];
-							$end_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-																	
-							$dlst = date('I', $end_unixtime);
-							$server_offset_tmp = chooseOffset($end_unixtime);
-							if (isset($tz_dtend)) {
-								$offset_tmp = $tz_array[$tz_dtend][$dlst];
-							} elseif (isset($calendar_tz)) {
-								$offset_tmp = $tz_array[$calendar_tz][$dlst];
-							} else {
-								$offset_tmp = $server_offset_tmp;
-							}
-							$end_unixtime = calcTime($offset_tmp, $server_offset_tmp, $end_unixtime);
-							$end_date = date('Ymd', $end_unixtime);
-							$end_time = date('Hi', $end_unixtime);
-							unset($server_offset_tmp, $offset_tmp, $tz_dtend);
-			
-						}
+						$datetime = extractDateTime($data, $property, $field);
+						$end_unixtime = $datetime[0];
+						$end_date = $datetime[1];
+						$end_time = $datetime[2];
+						$allday_end = $datetime[3];
 						break;
 						
 					case 'EXDATE':
@@ -1042,6 +870,7 @@ foreach ($cal_filelist as $filename) {
 						$data = str_replace("\\t", "&nbsp;", $data);
 						$data = str_replace("\\r", "<br />", $data);
 						$data = str_replace('$', '&#36;', $data);
+						$data = stripslashes($data);
 						$data = htmlentities(urlencode($data));
 						if ($valarm_set == FALSE) { 
 							$summary = $data;
@@ -1055,6 +884,7 @@ foreach ($cal_filelist as $filename) {
 						$data = str_replace("\\t", "&nbsp;", $data);
 						$data = str_replace("\\r", "<br />", $data);
 						$data = str_replace('$', '&#36;', $data);
+						$data = stripslashes($data);
 						$data = htmlentities(urlencode($data));
 						if ($valarm_set == FALSE) { 
 							$description = $data;
@@ -1141,17 +971,18 @@ foreach ($cal_filelist as $filename) {
 					case 'ATTENDEE':
 						$field 		= str_replace("ATTENDEE;CN=", "", $field);
 						$data 		= str_replace ("mailto:", "", $data);
-						$attendee[] = array ('name' => $field, 'email' => $data);
+						$attendee[] = array ('name' => stripslashes($field), 'email' => stripslashes($data));
 						break;
 					case 'ORGANIZER':
 						$field 		 = str_replace("ORGANIZER;CN=", "", $field);
 						$data 		 = str_replace ("mailto:", "", $data);
-						$organizer[] = array ('name' => $field, 'email' => $data);
+						$organizer[] = array ('name' => stripslashes($field), 'email' => stripslashes($data));
 						break;
 					case 'LOCATION':
 						$data = str_replace("\\n", "<br />", $data);
 						$data = str_replace("\\t", "&nbsp;", $data);
 						$data = str_replace("\\r", "<br />", $data);
+						$data = stripslashes($data);
 						$location = $data;
 						break;
 					case 'URL':

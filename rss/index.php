@@ -19,12 +19,12 @@ if (empty($default_path)) {
 $current_view = "rssindex";
 $display_date = "RSS Info";
 
-$filelist = availableCalendarNames($username, $password, $ALL_CALENDARS_COMBINED);
+$filelist = availableCalendars($username, $password, $ALL_CALENDARS_COMBINED);
 foreach ($filelist as $file) {
 	// $cal_filename is the filename of the calendar without .ics
 	// $cal is a urlencoded version of $cal_filename
 	// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
-	$cal_filename_tmp = substr($file,0,-4);
+	$cal_filename_tmp = getCalendarName($file);
 	$cal_tmp = urlencode($cal_filename_tmp);
 	$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 	$rss_list .= '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br />';
