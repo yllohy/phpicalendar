@@ -15,9 +15,6 @@ if ($enable_rss != 'yes') {
 	die ("RSS feeds are not enabled on this site.");
 }
 
-$default_path = 'http://'.$HTTP_SERVER_VARS['SERVER_NAME'].':'.$HTTP_SERVER_VARS['SERVER_PORT'].substr($HTTP_SERVER_VARS['PHP_SELF'],0,strpos($HTTP_SERVER_VARS['PHP_SELF'],'/rss/'));
-
-
 //set the range of days to return based on the view chosen
 $rssview = $_GET['rssview'];
 
