@@ -134,7 +134,7 @@ $i = 0;  #day counter
 
 
 				$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
-				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$getdate&cal=$cal&cpath=$cpath");
+				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$thisdate&cal=$cal&cpath=$cpath");
 				if ($description == '') $description = $event_text;
 				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
