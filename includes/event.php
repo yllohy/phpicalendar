@@ -25,8 +25,8 @@ if ($_POST['time'] == -1) {
 	$event_times = date($timeFormat, $event['start_unixtime']) . ' - ' .  date($timeFormat, $event['end_unixtime']); 
 }
 
-$event['description'] 	= urldecode(stripslashes($event['description']));
-$event['event_text'] 	= urldecode(stripslashes($event['event_text']));
+$event['description'] 	= stripslashes(urldecode($event['description']));
+$event['event_text'] 	= stripslashes(urldecode($event['event_text']));
 
 if ($event['description']) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
 
@@ -72,7 +72,7 @@ $page->replace_tags(array(
 	'organizer' 		=> $organizer,
 	'attendee'	 		=> $attendee,
 	'status'	 		=> $event['status'],
-	'location' 			=> $event['location'],
+	'location' 			=> stripslashes($event['location']),
 	'cal_title_full'	=> $event['calname'].' '.$lang['l_calendar'],
 	'template'			=> $template,
 	'l_organizer'		=> $lang['l_organizer'],
