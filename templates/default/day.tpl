@@ -13,10 +13,10 @@
 									<div style="padding-top: 3px;">
 									<table width="120" border="0" cellpadding="0" cellspacing="0">
 										<tr valign="top">
-											<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
-											<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
-											<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
-											<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
+											<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}{GETCPATH}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
+											<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}{GETCPATH}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
+											<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}{GETCPATH}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
+											<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}{GETCPATH}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
 										</tr>
 									</table>
 									</div>
