@@ -80,6 +80,8 @@
 					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br />
 					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br />
 					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br />
+					<input type="hidden" name="cpath" value="{CPATH}">
+
 				</form>
 				<!-- switch show_search on -->
 				{SEARCH_BOX}
