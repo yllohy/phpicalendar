@@ -27,12 +27,15 @@
 											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_YEARS}</select><br />
 											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_MONTHS}</select><br />
 											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">{LIST_WEEKS}</select><br />
+										<input type="hidden" name="cpath" value="{CPATH}">
+
 										</form>
 										<!-- switch show_search on -->
 										{SEARCH_BOX}
 										<!-- switch show_search off -->
 										<!-- switch show_goto on -->
 										<form style="margin-bottom:0;" action="day.php" method="get">
+											<input type="hidden" name="cpath" value="{CPATH}">
 											<input type="hidden" name="cal" value="{URL_CAL}">
 											<input type="text" style="width:160px; font-size:10px" name="jumpto_day">
 											<input type="submit" value="Go">
@@ -42,6 +45,7 @@
 										<div class = 'G10BOLD'>Pick Multiple:</div>
 										<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
 											<input type="hidden" name="getdate" value="{GETDATE}">
+											<input type="hidden" name="cpath" value="{CPATH}">
 											<select name="cal[]" class="query_style" size="5" multiple="multiple">{LIST_ICALS_PICK}</select><br />
 											<input type="submit" value="go">
 										</form>
