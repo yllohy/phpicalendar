@@ -65,6 +65,7 @@ $page->replace_tags(array(
 	'template'			=> $template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
+	'getcpath'			=> "&cpath=$cpath",
 	'cpath'             => $cpath,
 	'calendar_name'		=> $calendar_name,
 	'display_date'		=> $display_date,

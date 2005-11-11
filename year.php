@@ -28,6 +28,8 @@ $page->replace_tags(array(
 	'charset'			=> $charset,
 	'default_path'		=> '',
 	'cal'				=> $cal,
+		'getcpath'			=> "&cpath=$cpath",
+        'cpath'                 => $cpath,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
 	'display_date'		=> $this_year,

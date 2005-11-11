@@ -58,6 +58,7 @@ $page->replace_tags(array(
 	'template'			=> $template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
+	'getcpath'			=> "&cpath=$cpath",
 	'cpath'				=> $cpath,
 	'calendar_name'		=> (is_array($calendar_name) ? "Multiple" : $calendar_name),
 	'current_view'		=> $current_view,
