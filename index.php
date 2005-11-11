@@ -17,6 +17,9 @@ if ($printview_default == 'yes') {
 		die;
 	}
 }
+if(isset($_GET['cpath'])){
+	$default_view .= '?cpath='.$_GET['cpath'];
+}
 header("Location: $default_view");
 
 ?>
