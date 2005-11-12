@@ -67,7 +67,13 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		$files = array();
 		
 		// Build the list of files we need to check.
-		if ($find_all || $recursive_path == 'yes') {
+		//
+		// We do a full directory search if we are supposed to find all
+		// calendars, the calendar we're looking for may be in a
+		// subdirectory, or we are supporting the iCal repository format.
+		// The latter is necessary because the calendar name cannot be
+		// used to identify the calendar filename.
+		if ($find_all || $recursive_path == 'yes' || $support_ical == 'yes') {
 			// Open the directory.
 			$dir_handle = @opendir($search_path)
 				or die(error(sprintf($lang['l_error_path'], $search_path), $cal_filename));
@@ -81,8 +87,10 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 				array_push($files, "$search_path/$file");
 			}
 		} else {
+			// The file process block below expects actual filenames. So
+			// we have to append '.ics' to the passed in calendar names.
 			foreach ($cal_filename_local as $filename) {
-				array_push($files, "$search_path/$filename");
+				array_push($files, "$search_path/$filename\.ics");
 			}
 		}
 		
