@@ -90,7 +90,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			// The file process block below expects actual filenames. So
 			// we have to append '.ics' to the passed in calendar names.
 			foreach ($cal_filename_local as $filename) {
-				array_push($files, "$search_path/$filename\.ics");
+				array_push($files, "$search_path/$filename".".ics");
 			}
 		}
 		
