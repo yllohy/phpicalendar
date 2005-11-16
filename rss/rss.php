@@ -7,8 +7,14 @@
 *		- change the rss generation method to conform to standards(not done)
 *	PHP note: #@ is error control operator to suppress execution halt on error
 *		- used below to deal with undef?
+*
+*	using rssview, RSS feeds can be specified to return events for a given day, week, month, or year 
+*	feeds can be specified for a number of days to or from a given date
+*	feeds can be specified for a range of dates
+*
 *********************************************************************************/
 define('BASE', '../');
+include(BASE.'functions/init.inc.php');
 
 include_once(BASE.'functions/date_functions.php');
 
@@ -39,6 +45,16 @@ switch ($rssview){
 		$todate = date('Ymd',strtotime($nextmonth));	
 		$theview = date('M Y',strtotime($fromdate));
 		break;
+	case 'year':
+		if(isset($_GET['year'])){
+			$theyear = $_GET['year'];
+		}else{
+			$theyear = date('Y');
+		}
+		$fromdate = ($theyear*10000)+101;	
+		$todate = date("Ymd", strtotime($fromdate) + 365*60*60*24);
+		$theview = $theyear;
+		break;
 	case 'daysfrom':
 		$fromdate = $getdate;
 		$todate = date("Ymd", strtotime($getdate) + $_GET['days']*60*60*24);
@@ -52,7 +68,11 @@ switch ($rssview){
 		$theview = $_GET['days']." days before ".date('n/d/Y',strtotime($todate));
 		break;
 	case 'range':
+		if(isset($_GET['from'])){
 		$fromdate = $_GET['from'];
+		}else{
+			$fromdate = $getdate;
+		}
 		$todate = $_GET['to'];
 		$theview = date('n/d/Y',strtotime($fromdate)).'-'.date('n/d/Y',strtotime($todate));
 		break;
@@ -131,6 +151,7 @@ $uid_arr = array();
 	if (isset($master_array[($thisdate)]) && sizeof($master_array[($thisdate)]) > 0) {
 		foreach ($master_array[("$thisdate")] as $event_times) {
 			foreach ($event_times as $uid=>$val) {
+				#handle multiday all day events
 				if(!$val["event_start"]){
 					if (isset($uid_arr[$uid])){
 						$uid_arr[$uid] .= "+$dayofweek" ;
@@ -164,8 +185,7 @@ $uid_arr = array();
 				$rss .= '<uid>'.$uid.'</uid>'."\n";
 				$rss .= '<event_start>'.$event_start.'</event_start>'."\n";
 				$rss .= '<title>'.$rss_title.'</title>'."\n";
-				/*
-				$rss .= '<event_start>'.$event_start.'</event_start>'."\n";
+				/* custom stuff for Jim Hu's RSS feeds. Deprecated
 				$rss .= '<seminardate>'.$dayofweek.'</seminardate>'."\n";
 				$rss .= '<seminarspeaker>'.$event_text.'</seminarspeaker>'."\n";
 				$rss .= '<seminartitle>'.$description.'</seminartitle>'."\n";
@@ -173,12 +193,12 @@ $uid_arr = array();
 				$rss .= '<seminarhost>'.$val['attendee'].'</seminarhost>'."\n";
 				$rss .= '<organizer>'.$val['organizer'].'</organizer>'."\n";
 				$rss .= '<status>'.$val['status'].'</status>'."\n";
-				$location		= str_replace('&','&amp;',$val['location']);
-				$location		= str_replace('&amp;amp;','&amp;',$location);
-				$rss .= '<location>'.$location.'</location>';
 				*/
 				$rss .= '<link>'.$rss_link.'</link>'."\n";
 				$rss .= '<description>'.$rss_description.'</description>'."\n";
+				$location		= str_replace('&','&amp;',$val['location']);
+				$location		= str_replace('&amp;amp;','&amp;',$location);
+				$rss .= '<location>'.$location.'</location>';
 				$rss .= '</item>'."\n";
 				$events_count++;
 			}
