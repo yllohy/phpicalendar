@@ -15,6 +15,12 @@ $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'config.inc.php');
 include_once(BASE.'error.php');
+if($_REQUEST['cpath']){
+	$cpath 	= $_REQUEST['cpath'];				
+	$calendar_path 	.= "/$cpath";				
+	$tmp_dir 	.= "/$cpath";				
+}
+
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
 if (isset($_COOKIE['phpicalendar'])) {
@@ -69,11 +75,7 @@ if (ini_get('max_execution_time') < 60) {
 	@ini_set('max_execution_time', '60');
 }
 
-if($_REQUEST['cpath']){
-	$cpath 	= $_REQUEST['cpath'];				
-	$calendar_path 	.= "/$cpath";				
-	$tmp_dir 	.= "/$cpath";				
-}
+
 
 if ($calendar_path == '') {
 	$calendar_path = BASE.'calendars';
@@ -85,14 +87,13 @@ if (isset($_GET['cal'])) {
 	if(stristr($_GET['cal'], ",")) {
 		$_GET['cal'] = explode(",", $_GET['cal']);
 	} 
-	//if we have an array of calendard, decode each (though I'm not sure this is necessary)
+	//if we have an array of calendars, decode each (though I'm not sure this is necessary)
 	if(is_array($_GET['cal'])) {
 		$cal_filename = array();
 		foreach($_GET['cal'] as $c) {
 			$cal_filename[] = urldecode($c);
 		}
-	}
-	else {
+	}else {
 	$cal_filename = urldecode($_GET['cal']);
 	}
 } else {
