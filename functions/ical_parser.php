@@ -71,7 +71,7 @@ if ($save_parsed_cals == 'yes') {
 	} else {
 		foreach ($cal_filelist as $filename) {
 			$realcal_mtime = filemtime($filename);
-			$parsedcal = $tmp_dir.'/parsedcal-'.$cal_filename.'-'.$this_year;
+			$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cal_filename).'-'.$this_year;
 			if (file_exists($parsedcal)) {
 				$parsedcal_mtime = filemtime($parsedcal);
 				if ($realcal_mtime == $parsedcal_mtime) {

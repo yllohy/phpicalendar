@@ -24,8 +24,12 @@ foreach ($filelist as $file) {
 	// $cal_filename is the filename of the calendar without .ics
 	// $cal is a urlencoded version of $cal_filename
 	// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
-	$cal_filename_tmp = getCalendarName($file);
-	$cal_tmp = urlencode($cal_filename_tmp);
+
+	if (substr($file, 0, 7) == 'http://' || substr($file, 0, 8) == 'https://' || substr($file, 0, 9) == 'webcal://') {
+		$cal_tmp = urlencode($file);
+	}else{
+		$cal_tmp = getCalendarName($file);	
+	}
 	$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
 	$rss_list .= '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br />';
 	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=day<br />';

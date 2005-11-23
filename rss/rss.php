@@ -95,7 +95,7 @@ if ($enable_rss != 'yes') {
 //Note that this depends on other modifications I've made to 
 //allow phpicalendar to use calendar subdirectories - see bbs
 
-$cal_displayname = str_replace("32", " ", $cal);
+$cal_displayname = getCalendarName(urldecode($cal));
 if ($cal == $ALL_CALENDARS_COMBINED) {
 	$temp = explode("/",$calendar_path);
 	$cal_displayname = str_replace("32"," ",ucfirst(array_pop($temp)));
