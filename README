@@ -81,7 +81,8 @@ COPYING for more information about our license.
 
 Changes:
 --------
-2.1
+2.2	-rss.php 		new feed types for different kinds of date ranges		changed handling of multi-day events	-bug fixes from 2.1 	 	handling of webcals		popup encoding		display when individual calendars displayed
+	-known bug: webcals don't work with multiple calendar selection2.1
 	-Updated languages: Finnish
 	-RSS feeds display as previously indended.
 	-Updated languages: Finnish, Norwegian, French
