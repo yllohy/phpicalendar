@@ -159,7 +159,7 @@ $uid_arr = array();
 					}else{
 						$uid_arr[$uid] = "$dayofweek" ;
 					}
-					$event_start = "All Day";
+					$event_start = $lang['l_all_day'];
 				}else{	
 					$event_start 	= @$val["event_start"];	
 					$event_start 	= date ($timeFormat, @strtotime ("$event_start"));
@@ -225,7 +225,7 @@ foreach ($uid_arr as $uid=>$date_range){
 		$temp = explode("+",$date_range);
 		$date_range = $temp[0].'-'.array_pop($temp);
 	}
-	$rss = str_replace("<uid>$uid</uid>\n<event_start>all day</event_start>","<uid>$uid</uid>\n<event_start>$date_range</event_start>", $rss);
+	$rss = str_replace("<uid>$uid</uid>\n<event_start>".$lang['l_all_day']."</event_start>","<uid>$uid</uid>\n<event_start>$date_range</event_start>", $rss);
 
 }
 header ("Content-Type: text/xml");
