@@ -72,7 +72,7 @@ $blacklisted_cals[] = '';					// list. This should be the exact calendar filenam
 $blacklisted_cals[] = '';					// the parser will *not* parse any cal that is in this list (it will not be Web accessible)
 // add more lines as necessary
 
-$list_webcals['US Holidays'] = 'http://ical.mac.com/ical/US32Holidays.ics';						// Fill in between the quotes exact URL of a calendar that you wish
+$list_webcals[] = '';						// Fill in between the quotes exact URL of a calendar that you wish
 $list_webcals[] = '';						// to show up in your calendar list. You must prefix the URL with http://
 $list_webcals[] = '';						// or webcal:// and the filename should contain the .ics suffix
 $list_webcals[] = '';						// $allow_webcals does *not* need to be "yes" for these to show up and work
