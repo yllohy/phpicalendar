@@ -14,7 +14,7 @@
 //					  returned.
 function availableCalendars($username, $password, $cal_filename, $admin = false) {
 	// Import globals.
-	global $allow_login, $calendar_path, $recursive_path, $support_ical, $blacklisted_cals, $list_webcals, $locked_cals, $locked_map, $apache_map, $lang, $ALL_CALENDARS_COMBINED, $_SERVER;
+	global $allow_webcals, $allow_login, $calendar_path, $recursive_path, $support_ical, $blacklisted_cals, $list_webcals, $locked_cals, $locked_map, $apache_map, $lang, $ALL_CALENDARS_COMBINED, $_SERVER;
 
 	// Create the list of available calendars.
 	$calendars = array();
@@ -43,7 +43,9 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	$search_paths = array($calendar_path);
 		
 	// Add web calendars.
-	if ($cal_filename == $ALL_CALENDARS_COMBINED || $admin) {
+	if ($allow_webcals == 'yes' &&
+		($cal_filename == $ALL_CALENDARS_COMBINED || $admin))
+	{
 		if (!isset($http_user) && !$admin) {
 			foreach ($list_webcals as $file) {
 				// Make sure the URL ends with .ics.
