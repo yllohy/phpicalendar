@@ -43,9 +43,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	$search_paths = array($calendar_path);
 		
 	// Add web calendars.
-	if ($allow_webcals == 'yes' &&
-		($cal_filename == $ALL_CALENDARS_COMBINED || $admin))
-	{
+	if ($cal_filename == $ALL_CALENDARS_COMBINED || $admin)	{
 		if (!isset($http_user) && !$admin) {
 			foreach ($list_webcals as $file) {
 				// Make sure the URL ends with .ics.
