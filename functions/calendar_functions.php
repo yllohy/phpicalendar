@@ -30,6 +30,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	if (isset($locked_map["$username:$password"])) {
 		$unlocked_cals = $locked_map["$username:$password"];
 	}
+	
 	// Make a local copy of the requested calendars.
 	if (!is_array($cal_filename))
 		$cal_filename_local = array($cal_filename);
@@ -43,7 +44,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	$search_paths = array($calendar_path);
 		
 	// Add web calendars.
-	if ($cal_filename == $ALL_CALENDARS_COMBINED || $admin)	{
+	if ($cal_filename_local[0] == $ALL_CALENDARS_COMBINED || $admin)	{
 		if (!isset($http_user) && !$admin) {
 			foreach ($list_webcals as $file) {
 				// Make sure the URL ends with .ics.
@@ -56,7 +57,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	}
 	
 	// Set some booleans that will dictate our search.
-	$find_all = ($cal_filename == $ALL_CALENDARS_COMBINED || $admin);
+	$find_all = ($cal_filename_local[0] == $ALL_CALENDARS_COMBINED || $admin);
 	
 	// Process all search paths.
 	while (!empty($search_paths)) {
@@ -76,9 +77,9 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		if ($find_all || $recursive_path == 'yes' || $support_ical == 'yes') {
 			// Open the directory.
 			$dir_handle = @opendir($search_path)
-				or die(error(sprintf($lang['l_error_path'], $search_path), $cal_filename));
+				or die(error(sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
 			if ($dir_handle === false)
-				die(error(sprintf($lang['l_error_path'], $search_path), $cal_filename));
+				die(error(sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
 				
 			// Add each file in the directory that does not begin with a dot.
 			while (false !== ($file = readdir($dir_handle))) {

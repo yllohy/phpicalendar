@@ -76,105 +76,147 @@ if (ini_get('max_execution_time') < 60) {
 }
 
 
-
 if ($calendar_path == '') {
 	$calendar_path = BASE.'calendars';
 }
 
-$is_webcal = FALSE;
+// Pull the calendars off the GET line if provided. The $cal_filename
+// is always an array, because this makes it easier to deal with below.
+$cal_filenames = array();
 if (isset($_GET['cal'])) {
-	//if we get a comma-separated list of calendars, split into array
-	if(stristr($_GET['cal'], ",")) {
-		$_GET['cal'] = explode(",", $_GET['cal']);
-	} 
-	//if we have an array of calendars, decode each (though I'm not sure this is necessary)
-	if(is_array($_GET['cal'])) {
-		$cal_filename = array();
-		foreach($_GET['cal'] as $c) {
-			$cal_filename[] = urldecode($c);
-		}
-	}else {
-	$cal_filename = urldecode($_GET['cal']);
-	}
+	// If the cal value is not an array, split it into an array on
+	// commas.
+	if (!is_array($_GET['cal']))
+		$_GET['cal'] = explode(',', $_GET['cal']);
+	
+	// Grab the calendar filenames off the cal value array.
+	$cal_filenames = array_map("urldecode", $_GET['cal']);
 } else {
 	if (isset($default_cal_check)) {
 		if ($default_cal_check != $ALL_CALENDARS_COMBINED) {
 			$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
 			$calcheckopen = @fopen($calcheck, "r");
 			if ($calcheckopen == FALSE) {
-				$cal_filename = $default_cal;
+				$cal_filenames[0] = $default_cal;
 			} else {
-				$cal_filename = $default_cal_check;
+				$cal_filenames[0] = $default_cal_check;
 			}
 		} else {
-			$cal_filename = $ALL_CALENDARS_COMBINED;
+			$cal_filenames[0] = $ALL_CALENDARS_COMBINED;
 		}
 	} else {
-		$cal_filename = $default_cal;
+		$cal_filenames[0] = $default_cal;
 	}
 }
 
-if (!is_array($cal_filename) && (substr($cal_filename, 0, 7) == 'http://' || substr($cal_filename, 0, 8) == 'https://' || substr($cal_filename, 0, 9) == 'webcal://')) {
-	$is_webcal = TRUE;
-	$cal_webcalPrefix = str_replace('http://','webcal://',$cal_filename);
-	$cal_httpPrefix = str_replace('webcal://','http://',$cal_filename);
-	$cal_httpsPrefix = str_replace('webcal://','https://',$cal_filename);
-	$cal_httpsPrefix = str_replace('http://','https://',$cal_httpsPrefix);
-	$cal_filename = $cal_httpPrefix;
-}
-
-if ($is_webcal == TRUE) {
-	if ($allow_webcals == 'yes' || in_array($cal_webcalPrefix, $list_webcals) || in_array($cal_httpPrefix, $list_webcals) || in_array($cal_httpsPrefix, $list_webcals)) {
-		$cal_displayname = substr(str_replace('32', ' ', basename($cal_filename)), 0, -4);
-		$cal = urlencode($cal_filename);
-		$filename = $cal_filename;
-		$subscribe_path = $cal_webcalPrefix;
-		// empty the filelist array
-		$cal_filelist = array();
-		array_push($cal_filelist,$filename);
-	} else {
-		exit(error($lang['l_error_remotecal'], $_GET['cal']));
+// Separate the calendar identifiers into web calendars and local
+// calendars.
+$web_cals = array();
+$local_cals = array();
+foreach ($cal_filenames as $cal_filename) {
+	// If the calendar identifier begins with a web protocol, this is a web
+	// calendar.
+	if (substr($cal_filename, 0, 7) == 'http://' ||
+		substr($cal_filename, 0, 8) == 'https://' ||
+		substr($cal_filename, 0, 9) == 'webcal://')
+	{
+		$web_cals[] = $cal_filename;
 	}
-} else {
-	$cal_displayname = str_replace('32', ' ', (is_array($cal_filename) ? implode(", ", $cal_filename) : $cal_filename));
-	if(is_array($cal_filename)) {
-		$cal = array();
-		$blacklisted = FALSE;
-		foreach($cal_filename as $c) {
-			$cal[] = urlencode($c);
-			if(in_array($c, $blacklisted_cals)) $blacklisted = TRUE;
-		}
-		$cal = implode(",", $cal);
-	}
+	
+	// Otherwise it is a local calendar.
 	else {
-	$cal = urlencode($cal_filename);
-		$blacklisted = in_array($cal_filename, $blacklisted_cals);
-	}
-
-	if ($blacklisted) {
-		exit(error($lang['l_error_restrictedcal'], $cal_filename));
-	} else {
-		if (!isset($filename)) {
-			$cal_filelist = availableCalendars($username, $password, $cal_filename);
-			if (count($cal_filelist) == 1) $filename = $cal_filelist[0];
+		// Check blacklisted.
+		if (in_array($cal_filename, $blacklisted_cals)) {
+			exit(error($lang['l_error_restrictedcal'], $cal_filename));
 		}
+		$local_cals[] = $cal_filename;
+	}
+}
+
+// We will build the calendar display name as we go. The final display
+// name will get constructed at the end.
+$cal_displaynames = array();
+
+// This is our list of final calendars.
+$cal_filelist = array();
+
+// This is our list of URL encoded calendars.
+$cals = array();
+
+// Process the web calendars.
+foreach ($web_cals as $web_cal) {
+	// Make some protocol alternatives, and set our real identifier to the
+	// HTTP protocol.
+	$cal_webcalPrefix = str_replace('http://','webcal://',$web_cal);
+	$cal_httpPrefix = str_replace('webcal://','http://',$web_cal);
+	$cal_httpsPrefix = str_replace('webcal://','https://',$web_cal);
+	$cal_httpsPrefix = str_replace('http://','https://',$web_cal);
+	$web_cal = $cal_httpPrefix;
 		
-		// Sets the download and subscribe paths from the config if present.
-		if (isset($filename)) {
-			if (($download_uri == '') && (preg_match('/(^\/|\.\.\/)/', $filename) == 0)) {
-				$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'."$cpath/".$filename;
-				$download_filename = $filename;
-			} elseif ($download_uri != '') {
-				$newurl = eregi_replace("^(http://)", "", $download_uri); 
-				$subscribe_path = 'webcal://'.$newurl.'/'."$cpath/".$cal_filename.'.ics';
-				$download_filename = $download_uri.'/'."$cpath/".$cal_filename.'.ics';
-			} else {
-				$subscribe_path = "$cpath/";
-				$download_filename = "$cpath/";
-			}
+	// We can only include this web calendar if we allow all web calendars
+	// (as defined by $allow_webcals) or if the web calendar shows up in the
+	// list of web calendars defined in config.inc.php.
+	if ($allow_webcals != 'yes' &&
+		!in_array($cal_webcalPrefix, $list_webcals) &&
+		!in_array($cal_httpPrefix, $list_webcals) &&
+		!in_array($cal_httpsPrefix, $list_webcals))
+	{
+		exit(error($lang['l_error_remotecal'], $web_cal));
+	}
+	
+	// Pull the display name off the URL.
+	$cal_displaynames[] = substr(str_replace('32', ' ', basename($web_cal)), 0, -4);
+	
+	// FIXME
+	$cals[] = urlencode($web_cal);
+	//$filename = $cal_filename;
+	$subscribe_path = $cal_webcalPrefix;
+	
+	// Add the webcal to the available calendars.
+	$cal_filelist[] = $web_cal;
+}
+
+// Process the local calendars.
+if (count($local_cals) > 0) {
+	$local_cals = availableCalendars($username, $password, $local_cals);
+	foreach ($local_cals as $local_cal) {
+		$cal_displaynames[] = str_replace('32', ' ', getCalendarName($local_cal));
+	}
+	$cal_filelist = array_merge($cal_filelist, $local_cals);
+	$cals = array_merge($cals, array_map("urlencode", array_map("getCalendarName", $local_cals)));
+	
+	// Set the download and subscribe paths from the config, if there is
+	// only one calendar being displayed and those paths are defined.
+	if (count($local_cals) == 1) {
+		$filename = $local_cals[0];
+		if (($download_uri == '') && (preg_match('/(^\/|\.\.\/)/', $filename) == 0)) {
+			$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'."$cpath/".$filename;
+			$download_filename = $filename;
+		} elseif ($download_uri != '') {
+			$newurl = eregi_replace("^(http://)", "", $download_uri); 
+			$subscribe_path = 'webcal://'.$newurl.'/'."$cpath/".$filename.'.ics';
+			$download_filename = $download_uri.'/'."$cpath/".$filename.'.ics';
+		} else {
+			$subscribe_path = "$cpath/";
+			$download_filename = "$cpath/";
 		}
 	}
 }
+
+// We should only allow a download filename and subscribe path if there is
+// only one calendar being displayed.
+if (count($cal_filelist) > 1) {
+	$subscribe_path = '';
+	$download_filename = '';
+}
+
+// Build the final cal list. This is a comma separated list of the
+// url-encoded calendar names and web calendar URLs.
+$cal = implode(',', $cals);
+
+// Build the final display name used for template substitution.
+asort($cal_displaynames);
+$cal_displayname = implode(', ', $cal_displaynames);
 
 $rss_powered = ($enable_rss == 'yes') ? 'yes' : '';
 

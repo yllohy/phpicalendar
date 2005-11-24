@@ -60,7 +60,7 @@ $page->replace_tags(array(
 	'getdate'			=> $getdate,
 	'getcpath'			=> "&cpath=$cpath",
 	'cpath'				=> $cpath,
-	'calendar_name'		=> (is_array($calendar_name) ? "Multiple" : $calendar_name),
+	'calendar_name'		=> $cal_displayname,
 	'current_view'		=> $current_view,
 	'display_date'		=> $display_date,
 	'sidebar_date'		=> $sidebar_date,

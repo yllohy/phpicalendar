@@ -51,7 +51,7 @@ $page->replace_tags(array(
 	'template'			=> $template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
-	'calendar_name'		=> $calendar_name,
+	'calendar_name'		=> $cal_displayname,
 	'current_view'		=> $current_view,
         'printview'          => $printview,
 	'display_date'		=> $display_date,

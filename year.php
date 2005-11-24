@@ -31,7 +31,7 @@ $page->replace_tags(array(
 		'getcpath'			=> "&cpath=$cpath",
         'cpath'                 => $cpath,
 	'getdate'			=> $getdate,
-	'calendar_name'		=> $calendar_name,
+	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $this_year,
 	'default_path'		=> '',
 	'rss_powered'	 	=> $rss_powered,
