@@ -35,7 +35,7 @@ $this_year = $day_array2[1];
 $parse_file = true;
 if ($save_parsed_cals == 'yes') {	
 	if (sizeof ($cal_filelist) > 1) {
-		$parsedcal = $tmp_dir.'/parsedcal-'.$cal_filename.'-'.$this_year;
+		$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cal_filename).'-'.$this_year;
 		if (file_exists($parsedcal)) {
 			$fd = fopen($parsedcal, 'r');
 			$contents = fread($fd, filesize($parsedcal));
