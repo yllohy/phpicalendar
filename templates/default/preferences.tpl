@@ -45,7 +45,8 @@
 						<tr align="left" valign="top">
 							<td nowrap="nowrap">{L_SELECT_CAL}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
-							<td><select name="cookie_calendar" class="query_style">{CALENDAR_SELECT}</select></td>
+							<td><select name="cookie_calendar" class="query_style">{CALENDAR_SELECT}</select>
+							<input type="hidden" name="cpath" value="{CPATH}"></td>
 						</tr>
 						<tr align="left" valign="top">
 							<td nowrap="nowrap">{L_SELECT_VIEW}:</td>

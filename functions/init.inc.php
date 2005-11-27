@@ -15,23 +15,31 @@ $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'config.inc.php');
 include_once(BASE.'error.php');
-if($_REQUEST['cpath']){
-	$cpath 	= $_REQUEST['cpath'];				
-	$calendar_path 	.= "/$cpath";				
-	$tmp_dir 	.= "/$cpath";				
-}
 
-include_once(BASE.'functions/calendar_functions.php');
-include_once(BASE.'functions/userauth_functions.php');
 if (isset($_COOKIE['phpicalendar'])) {
 	$phpicalendar = unserialize(stripslashes($_COOKIE['phpicalendar']));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
 	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal_check	= $phpicalendar['cookie_calendar'];
+	if (isset($phpicalendar['cookie_cpath'])) 		$default_cpath_check	= $phpicalendar['cookie_cpath'];
 	if (isset($phpicalendar['cookie_view'])) 		$default_view 		= $phpicalendar['cookie_view'];
-	if (isset($phpicalendar['cookie_style'])) 		$style_sheet 		= $phpicalendar['cookie_style'];
+	if (isset($phpicalendar['cookie_style'])) 		$template 			= $phpicalendar['cookie_style'];
 	if (isset($phpicalendar['cookie_startday'])) 	$week_start_day		= $phpicalendar['cookie_startday'];
 	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
 }
+if($_REQUEST['cpath']){
+	$cpath 	= $_REQUEST['cpath'];				
+	$calendar_path 	.= "/$cpath";				
+	$tmp_dir 	.= "/$cpath";				
+}elseif(isset($default_cpath_check)){
+	$cpath 	= $default_cpath_check;				
+	$calendar_path 	.= "/$cpath";				
+	$tmp_dir 	.= "/$cpath";
+}
+
+#these need cpath to be set
+include_once(BASE.'functions/calendar_functions.php');
+include_once(BASE.'functions/userauth_functions.php');
+
 
 // Set the cookie URI.
 if ($cookie_uri == '') {

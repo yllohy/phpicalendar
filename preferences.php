@@ -25,16 +25,18 @@ if (isset($_GET['action'])) {
 } 
 
 $startdays = array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+$cpath = $_REQUEST['cpath'];
 
 if ($action == 'setcookie') { 
 	$cookie_language 	= $_POST['cookie_language'];
+   	    $cookie_cpath     	    = $_POST['cpath'];
 	$cookie_calendar 	= $_POST['cookie_calendar'];
 	$cookie_view 		= $_POST['cookie_view'];
 	$cookie_style 		= $_POST['cookie_style'];
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
 	$cookie_unset		= $_POST['unset'];
-	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time");
+	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time", "cookie_cpath"=>"$cookie_cpath");
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 
 		setcookie("phpicalendar","$the_cookie",time()-(60*60*24*7) ,"/","$cookie_uri",0);
@@ -42,6 +44,8 @@ if ($action == 'setcookie') {
 		setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
 	}
 	$_COOKIE['phpicalendar'] = $the_cookie;
+    $cpath = $cookie_cpath;
+    $cal = $cookie_calendar;
 }
 
 if (isset($_COOKIE['phpicalendar'])) {
@@ -62,7 +66,7 @@ if ((!isset($_COOKIE['phpicalendar'])) || ($cookie_unset)) {
 	$cookie_language = ucfirst($language);
 	$cookie_calendar = $default_cal;
 	$cookie_view = $default_view;
-	$cookie_style = $style_sheet;
+	$cookie_style = $template;
 	$cookie_startday = $week_start_day;
 	$cookie_time = $day_start;
 }
@@ -93,7 +97,8 @@ while ($file = readdir($dir_handle)) {
 closedir($dir_handle);
 
 // select for calendars
-$calendar_select = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
+$calendar_select = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED),TRUE);
+$calendar_select .="<option value=\"$ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
 
 // select for dayview
 $view_select 	= ($cookie_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
@@ -146,6 +151,7 @@ $page->replace_tags(array(
 	'charset'			=> $charset,
 	'template'			=> $template,
 	'default_path'		=> '',
+	'cpath'				=> $cpath,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
