@@ -28,11 +28,11 @@ if (isset($_COOKIE['phpicalendar'])) {
 }
 #cpath modifies the calendar path based on the url or cookie values.  This allows you to run multiple calendar subsets from a single phpicalendar installation. Operations on cpath are largely hidden from the end user.
 if($_REQUEST['cpath']){
-	$cpath 	= str_replace('.','',$_REQUEST['cpath']);				
+	$cpath 	= str_replace('..','',$_REQUEST['cpath']);				
 	$calendar_path 	.= "/$cpath";				
 	$tmp_dir 	.= "/$cpath";				
 }elseif(isset($default_cpath_check)){
-	$cpath 	= str_replace('.','',$default_cpath_check);				
+	$cpath 	= str_replace('..','',$default_cpath_check);				
 	$calendar_path 	.= "/$cpath";				
 	$tmp_dir 	.= "/$cpath";
 }
