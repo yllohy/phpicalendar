@@ -269,7 +269,7 @@ class Page {
 			$replace 	= $loop_begin;
 			$colspan	= 'colspan="'.$nbrGridCols[$get_date].'"';
 			$replace 	= str_replace('{COLSPAN}', $colspan, $replace);
-			if (is_array($master_array[$get_date]['-1'])) {
+			if (is_array($master_array[$get_date]['-1']) && !empty($master_array[$get_date]['-1']) ) {
 				foreach ($master_array[$get_date]['-1'] as $uid => $allday) {
 					$event_calno  	= $allday['calnumber'];
 					$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
