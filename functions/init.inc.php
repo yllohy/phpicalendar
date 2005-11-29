@@ -26,16 +26,16 @@ if (isset($_COOKIE['phpicalendar'])) {
 	if (isset($phpicalendar['cookie_startday'])) 	$week_start_day		= $phpicalendar['cookie_startday'];
 	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
 }
+#cpath modifies the calendar path based on the url or cookie values.  This allows you to run multiple calendar subsets from a single phpicalendar installation. Operations on cpath are largely hidden from the end user.
 if($_REQUEST['cpath']){
-	$cpath 	= $_REQUEST['cpath'];				
+	$cpath 	= str_replace('.','',$_REQUEST['cpath']);				
 	$calendar_path 	.= "/$cpath";				
 	$tmp_dir 	.= "/$cpath";				
 }elseif(isset($default_cpath_check)){
-	$cpath 	= $default_cpath_check;				
+	$cpath 	= str_replace('.','',$default_cpath_check);				
 	$calendar_path 	.= "/$cpath";				
 	$tmp_dir 	.= "/$cpath";
 }
-
 #these need cpath to be set
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
@@ -75,7 +75,7 @@ if (!isset($getdate)) {
 	if (isset($_GET['getdate']) && ($_GET['getdate'] !== '')) {
 		$getdate = $_GET['getdate'];
 	} else {
-		$getdate = date('Ymd', strtotime("now + $second_offset seconds"));
+		$getdate = date('Ymd', time() + $second_offset);
 	}
 }
 
