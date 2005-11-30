@@ -2,7 +2,7 @@
 if (isset($_GET['jumpto_day'])) {
 	$jumpto_day_time = strtotime($_GET['jumpto_day']);
 	if ($jumpto_day_time == -1) {
-		$getdate = date('Ymd', strtotime("now + $second_offset seconds"));
+		$getdate = date('Ymd', time() + $second_offset); 
 	} else {
 		$getdate = date('Ymd', $jumpto_day_time);
 	}
@@ -18,7 +18,7 @@ if ($minical_view == 'current') $minical_view = 'day';
 
 $weekstart 		= 1;
 $unix_time 		= strtotime($getdate);
-$today_today 	= date('Ymd', strtotime("now + $second_offset seconds")); 
+$today_today 	= date('Ymd', time() + $second_offset);  
 $next_day		= date('Ymd', strtotime("+1 day",  $unix_time));
 $prev_day 		= date('Ymd', strtotime("-1 day",  $unix_time));
 

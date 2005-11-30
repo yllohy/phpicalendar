@@ -13,7 +13,7 @@ $this_month 			= $day_array2[2];
 $this_year 				= $day_array2[1];
 
 $unix_time 				= strtotime($getdate);
-$today_today 			= date('Ymd', strtotime("now + $second_offset seconds")); 
+$today_today 			= date('Ymd', time() + $second_offset); 
 $tomorrows_date 		= date('Ymd', strtotime("+1 day",  $unix_time));
 $yesterdays_date 		= date('Ymd', strtotime("-1 day",  $unix_time));
 $sidebar_date 			= localizeDate($dateFormat_week_list, $unix_time);

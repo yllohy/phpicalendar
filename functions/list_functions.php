@@ -3,7 +3,7 @@
 function list_jumps() {
 	global $second_offset, $lang, $cal;
 	$calName = getCalendarName($cal);
-	$today = date('Ymd', strtotime("now + $second_offset seconds"));
+	$today = date('Ymd', time() + $second_offset);
 	$return = '<option value="#">'.$lang['l_jump'].'</option>';
 	$return .= '<option value="day.php?cal='.$calName.'&amp;getdate='.$today.'">'.$lang['l_goday'].'</option>';
 	$return .= '<option value="week.php?cal='.$calName.'&amp;getdate='.$today.'">'.$lang['l_goweek'].'</option>';
