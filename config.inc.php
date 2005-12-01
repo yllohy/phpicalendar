@@ -11,6 +11,7 @@ $minical_view 			= 'current';		// Where do the mini-calendars go when clicked? =
 $default_cal 			= $ALL_CALENDARS_COMBINED;		// Exact filename of calendar without .ics. Or set to $ALL_CALENDARS_COMBINED to open all calenders combined into one.
 $language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto', 'Korean'
 $week_start_day 		= 'Sunday';			// Day of the week your week starts on
+$week_length			= '7';				// Number of days to display in the week view
 $day_start 				= '0700';			// Start time for day grid
 $day_end				= '2300';			// End time for day grid
 $gridLength 			= '15';				// Grid distance in minutes for day view, multiples of 15 preferred

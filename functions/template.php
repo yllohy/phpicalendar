@@ -231,7 +231,7 @@ class Page {
 	}#end draw_search
 	
 	function draw_week($template_p) {
-		global $unique_colors, $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small, $day_start;
+		global $unique_colors, $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small, $day_start, $week_length;
 		
 		// Figure out colspans
 		$dayborder 	= 0;
@@ -252,7 +252,7 @@ class Page {
 			$thisdate = ($thisdate + (25 * 60 * 60));
 		}
 		
-		for ($i=0; $i<7; $i++) {
+		for ($i=0; $i<$week_length; $i++) {
 			$thisdate 			= date ('Ymd', $start_week_time); 
 			$weekarray[$i] 		= $thisdate;
 			$start_week_time 	= strtotime('+1 day', $start_week_time);
@@ -289,7 +289,7 @@ class Page {
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
 		$start_day 			= strtotime($week_start_day);
-		for ($i=0; $i<7; $i++) {
+		for ($i=0; $i<$week_length; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
 			if ($current_view == 'day') {
@@ -360,7 +360,7 @@ class Page {
 			$thisdate = $swt;
 			
 			// loop this part 7 times, one for each day
-			for ($week_loop=0; $week_loop<7; $week_loop++) {
+			for ($week_loop=0; $week_loop<$week_length; $week_loop++) {
 				$thisday = date("Ymd", $thisdate);
 				$dayborder = 0;
 				unset($this_time_arr);
