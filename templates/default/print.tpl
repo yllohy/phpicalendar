@@ -38,6 +38,12 @@
 									<td width="100" class="G10BOLD">{L_TIME}:</td>
 									<td align="left" class="G10B">{EVENT_START}</td>
 								</tr>
+								<!-- switch location_events on -->
+								<tr>
+									<td valign="top" width="100" class="G10BOLD">{L_LOCATION}:</td>
+									<td valign="top" align="left" class="G10B">{LOCATION}</td>
+								</tr>
+								<!-- switch location_events off -->
 								<tr>
 									<td valign="top" width="100" class="G10BOLD">{L_SUMMARY}:</td>
 									<td valign="top" align="left" class="G10B">{EVENT_TEXT}</td>

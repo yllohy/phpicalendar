@@ -76,6 +76,7 @@ class Page {
 					foreach ($new_val as $new_key2 => $new_val2) {
 					if ($new_val2['event_text']) {	
 						$event_text 	= stripslashes(urldecode($new_val2['event_text']));
+						$location 	= stripslashes(urldecode($new_val2['location']));
 						$description 	= stripslashes(urldecode($new_val2['description']));
 						$event_start 	= $new_val2['event_start'];
 						$event_end 		= $new_val2['event_end'];
@@ -94,9 +95,13 @@ class Page {
 						if ($description == '') {
 							$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!is', '', $events_tmp);
 						}
+
+						if ($location == '') {
+							$events_tmp = preg_replace('!<\!-- switch location_events on -->(.*)<\!-- switch location_events off -->!is', '', $events_tmp);
+						}
 						
-						$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}');
-						$replace	= array($event_start, $event_text, $description);
+						$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}', '{LOCATION}');
+						$replace	= array($event_start, $event_text, $description, $location);
 						$events_tmp = str_replace($search, $replace, $events_tmp);
 						$some_events .= $events_tmp;
 						$events_tmp	= $loop_event;

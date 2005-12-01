@@ -79,6 +79,7 @@ $page->replace_tags(array(
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],
 	'l_year'			=> $lang['l_year'],
+	'l_location'			=> $lang['l_location'],	
 	'l_subscribe'		=> $lang['l_subscribe'],
 	'l_download'		=> $lang['l_download'],
 	'l_no_results'		=> $lang['l_no_results'],
