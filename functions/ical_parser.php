@@ -562,6 +562,9 @@ foreach ($cal_filelist as $filename) {
 																if (in_array($month, $bymonth)) {
 																	$recur_data[] = $next_date_time;
 																}
+																#reset next_range_time to start of month
+																$next_range_time = strtotime(date('Y-m-'.'1', $next_range_time));
+
 															} elseif (isset($bymonthday) && (!empty($bymonthday))) {
 																// This supports MONTHLY where BYDAY and BYMONTH are both set
 																foreach($bymonthday as $day) {
