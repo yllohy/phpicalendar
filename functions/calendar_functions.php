@@ -196,7 +196,7 @@ function getCalendarName($cal_path) {
 	}
 	
 	// At this point, just pull the name off the file.
-	return substr(basename($cal_path),0,4);
+	return substr(basename($cal_path),0,-4);
 }
 
 // This function prints out the calendars available to the user, for
