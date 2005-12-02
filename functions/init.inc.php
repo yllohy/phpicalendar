@@ -27,6 +27,10 @@ if (isset($_COOKIE['phpicalendar'])) {
 	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
 }
 #cpath modifies the calendar path based on the url or cookie values.  This allows you to run multiple calendar subsets from a single phpicalendar installation. Operations on cpath are largely hidden from the end user.
+if ($calendar_path == '') {
+	$calendar_path = BASE.'calendars';
+}
+
 if($_REQUEST['cpath']){
 	$cpath 	= str_replace('..','',$_REQUEST['cpath']);				
 	$calendar_path 	.= "/$cpath";				
@@ -83,10 +87,6 @@ if (ini_get('max_execution_time') < 60) {
 	@ini_set('max_execution_time', '60');
 }
 
-
-if ($calendar_path == '') {
-	$calendar_path = BASE.'calendars';
-}
 
 // Pull the calendars off the GET line if provided. The $cal_filename
 // is always an array, because this makes it easier to deal with below.
