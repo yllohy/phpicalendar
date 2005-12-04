@@ -14,7 +14,6 @@ $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 // Pull in the configuration and some functions.
 if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'config.inc.php');
-include_once(BASE.'error.php');
 
 if (isset($_COOKIE['phpicalendar'])) {
 	$phpicalendar = unserialize(stripslashes($_COOKIE['phpicalendar']));
@@ -41,6 +40,10 @@ if($_REQUEST['cpath']){
 	$tmp_dir 	.= "/$cpath";
 }
 #these need cpath to be set
+if (isset($user_template[$cpath])){ 
+Ê Ê Ê$template = $user_template[$cpath]; 
+}
+include_once(BASE.'error.php');
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
 
@@ -86,7 +89,6 @@ if (!isset($getdate)) {
 if (ini_get('max_execution_time') < 60) {
 	@ini_set('max_execution_time', '60');
 }
-
 
 // Pull the calendars off the GET line if provided. The $cal_filename
 // is always an array, because this makes it easier to deal with below.
