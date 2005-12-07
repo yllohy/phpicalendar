@@ -50,7 +50,9 @@ if (is_array($attendee)) {
 }
 
 if ($event['location']) {
-	if ($event['url'] != '') $event['location'] = '<a href="'.$event['url'].'" target="_blank">'.$event['location'].'</a>';
+	if ($event['url'] != '') $event['location'] = '<a href="'.$event['url'].'" target="_blank">'.stripslashes($event['location']).'</a>';
+}else{
+	$event['location'] = stripslashes($event['location']);
 }
 
 if (!$event['location'] && $event['url']) {

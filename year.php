@@ -33,7 +33,6 @@ $page->replace_tags(array(
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $this_year,
-	'default_path'		=> '',
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
