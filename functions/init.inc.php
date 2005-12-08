@@ -40,8 +40,8 @@ if($_REQUEST['cpath']){
 	$tmp_dir 	.= "/$cpath";
 }
 #these need cpath to be set
-if (isset($user_template[$cpath])){ 
-Ê Ê Ê$template = $user_template[$cpath]; 
+if (isset($user_template["$cpath"])){ 
+  $template = $user_template["$cpath"]; 
 }
 include_once(BASE.'error.php');
 include_once(BASE.'functions/calendar_functions.php');
