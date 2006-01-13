@@ -22,6 +22,9 @@
 		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">{L_PASSWORD}:</div></td>
 		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;"><input type="password" name="password" size="10" /></div></td>
 	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" align="center" valign="middle" colspan="2"><div style=padding-left: 5px; padding-bottom: 5px;"><input type="submit" value="{L_LOGIN}" /></div></td>
+	</tr>
 </table>
 </form>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
