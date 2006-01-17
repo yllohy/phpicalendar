@@ -44,7 +44,7 @@ $support_ical			= 'no';			// Set to yes to support the Apple iCal calendar datab
 $recursive_path			= 'no';			// Set to yes to recurse into subdirectories of the calendar path.
 
 // Calendar Caching (decreases page load times)
-$save_parsed_cals 		= 'no';				// Saves a copy of the cal in /tmp after it's been parsed. Improves performence.
+$save_parsed_cals 		= 'no';				// Saves a copy of the cal in /tmp after it's been parsed. Improves performance.
 $tmp_dir				= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X). Any php-writable folder works.
 $webcal_hours			= '24';				// Number of hours to cache webcals. Setting to '0' will always re-parse webcals.
 
