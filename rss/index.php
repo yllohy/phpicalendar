@@ -31,10 +31,12 @@ foreach ($filelist as $file) {
 		$cal_tmp = getCalendarName($file);	
 	}
 	$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+	$cal_tmp = str_replace(" ", "+", $cal_tmp);
 	$rss_list .= '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br />';
-	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=day<br />';
-	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=week<br />';
-	$rss_list .= $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=month<br /><br />';
+	$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=day>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=day</a><br />';
+	$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=week>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=week</a><br />';
+	$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=month>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=month</a><br />';
+		$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=year>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=year</a><br />';
 	$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&amp;rssview='.$default_view;
 }
 
