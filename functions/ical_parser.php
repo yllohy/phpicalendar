@@ -522,7 +522,7 @@ foreach ($cal_filelist as $filename) {
 															// as well. This checks to see if $next_date_time is after $day_start (i.e., "next week"), and thus
 															// if we need to add $interval weeks to $next_date_time.
 															if ($next_date_time > strtotime($week_start_day, $next_range_time) && $interval > 1) {
-																$next_date_time = strtotime('+'.($interval - 1).' '.$freq_type, $next_date_time);
+															#	$next_date_time = strtotime('+'.($interval - 1).' '.$freq_type, $next_date_time);
 															}
 															$recur_data[] = $next_date_time;
 														}
