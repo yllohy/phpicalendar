@@ -39,6 +39,7 @@
 									<br />
 									{RSS_LIST}
 									<br />
+									<p>RSS feeds can also be set up for a specified number of days before or after a given date, or between two dates.  See the <a href="http://phpicalendar.net/documentation/index.php/RSS_feeds">documentation</a> for how to set up the URLs</p>
 								</td>
 							</tr>
 						</table>
