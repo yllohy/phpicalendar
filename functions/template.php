@@ -864,12 +864,12 @@ class Page {
 		$first_of_year 		= $minical_year."0101";
 
 		// Add links in to the month/year views.
-		$dateFormat_month = str_replace("%B", "<a class=\"ps3\" href=\"month.php?cal=$cal&amp;getdate=$first_of_month\">%B</a>", $dateFormat_month);
-		$dateFormat_month = str_replace("%Y", "<a class=\"ps3\" href=\"year.php?cal=$cal&amp;getdate=$first_of_year\">%Y</a>", $dateFormat_month);
+		$dateFormat_month_local = str_replace("%B", "<a class=\"ps3\" href=\"month.php?cal=$cal&amp;getdate=$first_of_month\">%B</a>", $dateFormat_month);
+		$dateFormat_month_local = str_replace("%Y", "<a class=\"ps3\" href=\"year.php?cal=$cal&amp;getdate=$first_of_year\">%Y</a>", $dateFormat_month_local);
 
 		//$start_day 			= strtotime($week_start_day);
 		$start_day			= strtotime(dateOfWeek($getdate, $week_start_day));
-		$month_title 		= localizeDate ($dateFormat_month, $fake_getdate_time);
+		$month_title 		= localizeDate ($dateFormat_month_local, $fake_getdate_time);
 		$month_date 		= date ('Ymd', $fake_getdate_time);
 
 		if ($type == 'small') {

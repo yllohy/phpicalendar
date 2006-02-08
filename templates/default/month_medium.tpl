@@ -1,6 +1,6 @@
 <table border="0" width="210" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
-		<td align="center" class="medtitle"><a class="ps3" href="month.php?cal={CAL}&amp;getdate={MONTH_DATE}">{MONTH_TITLE}</a></td>
+		<td align="center" class="medtitle">{MONTH_TITLE}</td>
 	</tr>
 	<tr>
 		<td>
