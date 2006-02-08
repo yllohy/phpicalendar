@@ -287,19 +287,6 @@ $page->replace_files(array(
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
 	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
 	'event_js'			=> BASE.'functions/event.js',
-	'charset'			=> $charset,
-	'default_path'		=> '',
-	'template'			=> $template,
-	'cal'				=> $cal,
-	'getdate'			=> $getdate,
-	'calendar_name'		=> $cal_displayname,
-	'display_date'		=> $display_date,
-	'current_view'		=> $current_view,
-	'sidebar_date'		=> $sidebar_date,
-	'rss_powered'	 	=> $rss_powered,
-	'rss_available' 	=> '',
-	'rss_valid' 		=> '',
-	'show_search' 		=> ''		
 	));
 
 
