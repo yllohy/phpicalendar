@@ -34,7 +34,7 @@ switch ($rssview){
 		$theview = $lang['l_day'];
 		break;
 	case 'week':
-		$fromdate = dateOfWeek($getdate, $week_start_day);
+		$fromdate = dateOfWeek($getdate, 'Sunday');
 		$todate = $fromdate + 6;
 		$theview = $lang['l_week']." of ".date('n/d/Y',strtotime($fromdate));
 		break;
@@ -42,7 +42,7 @@ switch ($rssview){
 		$parse_month = date ("Ym", strtotime($getdate));
 		$fromdate = ($parse_month *100) + 1;
 		$nextmonth = ($parse_month +1) * 100;   #should give the 0th day of following month
-		$todate = date('Ymd',strtotime($nextmonth));	
+		$todate = date('Ymd',strtotime($nextmonth+1));	
 		$theview = date('M Y',strtotime($fromdate));
 		break;
 	case 'year':
@@ -78,7 +78,7 @@ switch ($rssview){
 		break;
 	default:
 		#default to week
-		$fromdate = dateOfWeek($getdate, $week_start_day);
+		$fromdate = dateOfWeek($getdate, 'Sunday');
 		$todate = $fromdate + 6;
 		$theview = "";
 
