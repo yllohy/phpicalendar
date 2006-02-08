@@ -102,7 +102,7 @@
 					<input type="hidden" name="cpath" value="{CPATH}"/>
 					<input type="hidden" name="getdate" value="{GETDATE}"/>
 					<select name="cal[]" class="query_style" size="5" multiple="multiple">{LIST_ICALS_PICK}</select><br />
-					<input type="submit" value="go">
+					<input type="submit" value="Go"/>
 				</form>
 			</div>
 		</td>
@@ -130,7 +130,7 @@
 				{T_ALLDAY}<br />
 				<!-- switch t_allday off -->
 				<!-- switch t_event on -->
-				&#149; {T_EVENT}<br />
+				&bull; {T_EVENT}<br />
 				<!-- switch t_event off -->
 			</div>
 		</td>
