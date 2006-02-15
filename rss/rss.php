@@ -147,7 +147,7 @@ $numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24))+1;
 $thisdate = $fromdate; 	#	start at beginning of date range, 
 						# 	note that usage of $thisdate is different from distribution
 						# 	I use it as a date, dist uses it as a time
-$i = 0;  #day counter
+$i = 1;  #day counter
 $uid_arr = array();
 	do {
 	$thisdate=date('Ymd', strtotime($thisdate));
