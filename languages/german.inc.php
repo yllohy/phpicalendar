@@ -157,7 +157,7 @@ $format_recur_lang['byday']			= 'An den Tagen: %list%';			// ie, 'On days: Mon, 
 
 // ---------------------------------
 
-$daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donerstag','Freitag','Samstag');
+$daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
 $daysofweekshort_lang		= array ('Son','Mon','Die','Mit','Don','Fre','Sam');
 $daysofweekreallyshort_lang	= array ('S','M','D','M','D','F','S');
 $monthsofyear_lang			= array ('Januar','Februar','M&auml;rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember');
