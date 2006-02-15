@@ -56,9 +56,8 @@ if ($cookie_uri == '') {
 if ($bleed_time == '') $bleed_time = -1;
 
 // Grab the action (login or logout).
-if (isset($_GET['action']))			$action = $_GET['action'];
-else if (isset($_POST['action']))		$action = $_POST['action'];
-else											$action = '';
+$action = '';
+if (isset($_REQUEST['action']))	$action = $_GET['action'];
 	
 // Login and/or logout.
 list($username, $password, $invalid_login) = user_login();

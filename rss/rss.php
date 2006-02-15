@@ -26,7 +26,7 @@ if (isset($_GET['getdate']) && $_GET['getdate'] !=''){
 }else{
 	$getdate = date("Ymd");
 }
-
+# for all views, $fromdate is the first day to be shown and $todate should be the last day.
 switch ($rssview){
 	case 'day':
 		$fromdate = $getdate;
@@ -48,22 +48,20 @@ switch ($rssview){
 		if(isset($_GET['year'])){
 			$theyear = $_GET['year'];
 		}else{
-			$theyear = date('Y');
+			$theyear = substr($getdate,0,4);
 		}
 		$fromdate = ($theyear*10000)+101;	
-		$todate = date("Ymd", strtotime($fromdate) + 365*60*60*24);
+		$todate = date("Ymd", strtotime($theyear*10000+1231));
 		$theview = $theyear;
 		break;
 	case 'daysfrom':
 		$fromdate = $getdate;
 		$todate = date("Ymd", strtotime($getdate) + $_GET['days']*60*60*24);
-		#print "from:$fromdate to: $todate<br>";
 		$theview = $_GET['days']." days from ".date('n/d/Y',strtotime($fromdate));
 		break;
 	case 'daysto':
 		$todate = $getdate;
 		$fromdate = date("Ymd", strtotime($getdate) - $_GET['days']*60*60*24);
-		#print "from:$fromdate to: $todate<br>";
 		$theview = $_GET['days']." days before ".date('n/d/Y',strtotime($todate));
 		break;
 	case 'range':
@@ -145,7 +143,7 @@ $rss .= '<language>'.$language.'</language>'."\n";
 $rss .= '<copyright>Copyright '.date('Y').', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 
 //generate the items
-$numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24)+1);
+$numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24))+1;
 $thisdate = $fromdate; 	#	start at beginning of date range, 
 						# 	note that usage of $thisdate is different from distribution
 						# 	I use it as a date, dist uses it as a time
