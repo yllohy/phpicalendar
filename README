@@ -81,6 +81,12 @@ COPYING for more information about our license.
 
 Changes:
 --------
+cvs
+	-patched security hole
+	-bug fixes from 2.2
+		Modified rss.php to improve compatibility
+		
+	-Modified templates to validate as XHTML 1.0 Transitional
 2.2
 	-Added Apple iCal native repository support.
 	-Added support for finding calendars in subdirectories.

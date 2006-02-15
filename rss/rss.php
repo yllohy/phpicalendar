@@ -41,8 +41,7 @@ switch ($rssview){
 	case 'month':
 		$parse_month = date ("Ym", strtotime($getdate));
 		$fromdate = ($parse_month *100) + 1;
-		$nextmonth = ($parse_month +1) * 100;   #should give the 0th day of following month
-		$todate = date('Ymd',strtotime($nextmonth+1));	
+		$todate = ($parse_month *100) + date("t",strtotime($getdate));
 		$theview = date('M Y',strtotime($fromdate));
 		break;
 	case 'year':
@@ -104,10 +103,18 @@ if ($cal == $ALL_CALENDARS_COMBINED) {
 $events_count = 0;
 
 // calculate a value for Last Modified and ETag
+$filemod = time(); #default to now in case filemtime can't find the mod date
+$cal = str_replace("+"," ",$cal);
+$calendar_path = str_replace("+"," ",$calendar_path);
+$filemod = time(); #default to now in case filemtime can't find the mod date
+$cal = str_replace("+"," ",$cal);
+$calendar_path = str_replace("+"," ",$calendar_path);
 if ($cal == $ALL_CALENDARS_COMBINED) {
 	$filemod = filemtime("$calendar_path");
 }else{
+	if (is_file("$calendar_path/$cal.ics")){
 	$filemod = filemtime("$calendar_path/$cal.ics");
+}	
 }	
 $filemodtime = date("r", $filemod);
 
@@ -134,11 +141,11 @@ if ($theview !=""){$rss .= ' - '.$theview;}
 $rss .= "</title>\n";
 $rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 $rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
-$rss .= '<language>'.$rss_language.'</language>'."\n";
-$rss .= '<copyright>Copyright '.date(Y).', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
+$rss .= '<language>'.$language.'</language>'."\n";
+$rss .= '<copyright>Copyright '.date('Y').', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 
 //generate the items
-$numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24)-1);
+$numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24)+1);
 $thisdate = $fromdate; 	#	start at beginning of date range, 
 						# 	note that usage of $thisdate is different from distribution
 						# 	I use it as a date, dist uses it as a time
@@ -177,7 +184,7 @@ $uid_arr = array();
 				$description		= str_replace('&amp;amp;','&amp;',$description);
 
 
-				$rss_title		= htmlspecialchars ("$dayofweek: $event_text");
+				$rss_title		= urldecode ("$dayofweek: $event_text");
 				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$thisdate&cal=$cal&cpath=$cpath");
 				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
