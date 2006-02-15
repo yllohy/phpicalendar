@@ -1036,12 +1036,11 @@ class Page {
 	function parse($file) {
 		global $template;
 		ob_start();
-		$file = str_replace("..","",$file);
-			if (strpos($file, "$template") > 0 || $file =='./functions/event.js'){
-		include($file);
-		$buffer = ob_get_contents();
-		ob_end_clean();
-		return $buffer;
+		if (strpos($file, "$template") > 0 || $file =='./functions/event.js'){
+			include($file);
+			$buffer = ob_get_contents();
+			ob_end_clean();
+			return $buffer;
 		}else{
 			die('breakin attempt');
 		}
