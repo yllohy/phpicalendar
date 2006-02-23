@@ -176,7 +176,7 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 		$event_text = $matches[2];
 	} else {
 		$full_event_text = $event_text;
-		$event_text = strip_tags($event_text, '<b><i><u>');
+		$event_text = strip_tags($event_text, '<b><i><u><img>');
 	}
 
 	if (!empty($event_text)) {
