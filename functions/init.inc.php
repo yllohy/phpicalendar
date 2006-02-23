@@ -29,7 +29,7 @@ if (isset($_COOKIE['phpicalendar'])) {
 if ($calendar_path == '') {
 	$calendar_path = BASE.'calendars';
 }
-
+$cpath = ''; #initialize cpath to prevent later undef warnings.
 if($_REQUEST['cpath']){
 	$cpath 	= str_replace('..','',$_REQUEST['cpath']);				
 	$calendar_path 	.= "/$cpath";				
@@ -57,7 +57,7 @@ if ($bleed_time == '') $bleed_time = -1;
 
 // Grab the action (login or logout).
 $action = '';
-if (isset($_REQUEST['action']))	$action = $_GET['action'];
+if (isset($_REQUEST['action']))	$action = $_REQUEST['action'];
 	
 // Login and/or logout.
 list($username, $password, $invalid_login) = user_login();
