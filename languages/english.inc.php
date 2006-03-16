@@ -5,7 +5,7 @@
 //
 // Translation by Chad Little (chad@chadsdomain.com)
 //
-// Submit new translations to chad@chadsdomain.com
+// Submit new translations to phpicalendar@gmail.com
 
 $lang['l_day'] 				= 'Day';
 $lang['l_week'] 			= 'Week';
@@ -81,6 +81,9 @@ $lang['l_priority_low']		= 'Low';
 $lang['l_priority_medium']	= 'Medium';
 $lang['l_priority_none']	= 'None';
 $lang['l_status']			= 'Status';
+$lang['l_status_confirmed'] = 'CONFIRMED' ; 
+$lang['l_status_cancelled'] = 'CANCELLED'; 
+$lang['l_status_tentative'] = 'TENTATIVE'; 
 $lang['l_todo']				= 'To do items';
 $lang['l_unfinished']		= 'Unfinished';
 $lang['l_prefs_set'] 		= 'Your preferences have been set.';

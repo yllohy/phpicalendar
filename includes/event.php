@@ -63,6 +63,18 @@ if (!$event['location'] && $event['url']) {
 if (sizeof($attendee) == 0) $attendee = '';
 if (sizeof($organizer) == 0) $organizer = '';
 
+switch ($event['status']){
+	case 'CONFIRMED':
+		$event['status'] =	$lang['l_status_confirmed'] ; 
+		break;
+	case 'CANCELLED':
+		$event['status'] =	$lang['l_status_cancelled'] ; 
+		break;
+	case 'TENTATIVE':
+		$event['status'] =	$lang['l_status_tentative'] ; 
+		break;
+}
+
 $page = new Page(BASE.'templates/'.$template.'/event.tpl');
 
 $page->replace_tags(array(
