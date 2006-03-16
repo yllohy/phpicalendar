@@ -1,4 +1,4 @@
-<center class="V9"><br />{L_POWERED_BY} <a class="psf" href="http://phpicalendar.net/">PHP iCalendar 2.2</a><br />
+<center class="V9"><br />{L_POWERED_BY} <a class="psf" href="http://phpicalendar.net/">PHP iCalendar 2.21</a><br />
 <!-- switch rss_valid on -->
 <p>
 <a style="color:gray" href="http://feeds.archive.org/validator/check?url={FOOTER_CHECK}">
