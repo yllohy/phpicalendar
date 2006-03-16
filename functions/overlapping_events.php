@@ -110,7 +110,7 @@ function flatten_ol_blocks($event_date, $ol_blocks, $new_block_key) {
 // Builds $overlap_array structure, and updates event_overlap in $master_array for the given events.
 function checkOverlap($event_date, $event_time, $uid) {
 	global $master_array, $overlap_array;
-
+	if (!isset($event_date)) return;
 	$event = $master_array[$event_date][$event_time][$uid];
 	// Copy out the array - we replace this at the end.
 	$ol_day_array = $overlap_array[$event_date];

@@ -30,7 +30,7 @@ if ($calendar_path == '') {
 	$calendar_path = BASE.'calendars';
 }
 $cpath = ''; #initialize cpath to prevent later undef warnings.
-if($_REQUEST['cpath']){
+if(isset($_REQUEST['cpath'])){
 	$cpath 	= str_replace('..','',$_REQUEST['cpath']);				
 	$calendar_path 	.= "/$cpath";				
 	$tmp_dir 	.= "/$cpath";				

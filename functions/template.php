@@ -907,7 +907,7 @@ class Page {
 			} else {
 				$temp = $t_month[2];
 			}
-			if ($master_array[$daylink]) {
+			if (isset($master_array[$daylink])) {
 				if ($type != 'small') {
 					foreach ($master_array[$daylink] as $cal_time => $event_times) {
 						foreach ($event_times as $uid => $val) {

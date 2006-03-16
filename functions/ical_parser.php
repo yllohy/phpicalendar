@@ -104,9 +104,9 @@ foreach ($cal_filelist as $filename) {
 	if ($parse_file) {	
 		
 		// Let's see if we're doing a webcal
-		$is_webcal == FALSE;
+		$is_webcal = FALSE;
 		if (substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://') {
-			$is_webcal == TRUE;
+			$is_webcal = TRUE;
 			$cal_webcalPrefix = str_replace('http://','webcal://',$filename);
 			$cal_httpPrefix = str_replace('webcal://','http://',$filename);
 			$cal_httpsPrefix = str_replace('webcal://','https://',$filename);
@@ -327,7 +327,27 @@ foreach ($cal_filelist as $filename) {
 								$display_end_tmp = $end_time;
 							}
 							
-							$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url );
+							$master_array[$start_date_tmp][$time_tmp][$uid] = array (
+								'event_start' => $start_time_tmp, 
+								'event_end' => $end_time_tmp, 
+								'start_unixtime' => $start_unixtime, 
+								'end_unixtime' => $end_unixtime, 
+								'event_text' => $summary, 
+								'event_length' => $length, 
+								'event_overlap' => 0, 
+								'description' => $description, 
+								'status' => $status, 
+								'class' => $class, 
+								'spans_day' => true, 
+								'location' => $location, 
+								'organizer' => serialize($organizer), 
+								'attendee' => serialize($attendee), 
+								'calnumber' => $calnumber, 
+								'calname' => $actual_calname, 
+								'url' => $url );
+							if (isset($display_end_tmp)){
+								$master_array[$start_date_tmp][$time_tmp][$uid]['display_end'] = $display_end_tmp;
+							}
 							checkOverlap($start_date_tmp, $time_tmp, $uid);
 							$start_tmp = strtotime('+1 day',$start_tmp);
 						}
@@ -342,7 +362,27 @@ foreach ($cal_filelist as $filename) {
 					
 						// This if statement should prevent writing of an excluded date if its the first recurrance - CL
 						if (!in_array($start_date, $except_dates)) {
-							$master_array[($start_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time_tmp1, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime, 'end_unixtime' => $end_unixtime, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url );
+							$master_array[($start_date)][($hour.$minute)][$uid] = array (
+								'event_start' => $start_time, 
+								'event_end' => $end_time_tmp1, 
+								'start_unixtime' => $start_unixtime, 
+								'end_unixtime' => $end_unixtime, 
+								'event_text' => $summary, 
+								'event_length' => $length, 
+								'event_overlap' => 0, 
+								'description' => $description, 
+								'status' => $status, 
+								'class' => $class, 
+								'spans_day' => false, 
+								'location' => $location, 
+								'organizer' => serialize($organizer), 
+								'attendee' => serialize($attendee), 
+								'calnumber' => $calnumber, 
+								'calname' => $actual_calname, 
+								'url' => $url );
+							if (isset($display_end_tmp)){
+								$master_array[($start_date)][($hour.$minute)][$uid]['display_end'] = $display_end_tmp;
+							}
 							checkOverlap($start_date, ($hour.$minute), $uid);
 							if (!$write_processed) $master_array[($start_date)][($hour.$minute)][$uid]['exception'] = true;
 						}
@@ -704,7 +744,28 @@ foreach ($cal_filelist as $filename) {
 															// Let's double check the until to not write past it
 															$until_check = $start_date_tmp.$time_tmp.'00';
 															if ($abs_until > $until_check) {
-																$master_array[$start_date_tmp][$time_tmp][$uid] = array ('event_start' => $start_time_tmp, 'event_end' => $end_time_tmp, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => true, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'recur' => $recur);
+																$master_array[$start_date_tmp][$time_tmp][$uid] = array (
+																	'event_start' => $start_time_tmp, 
+																	'event_end' => $end_time_tmp, 
+																	'start_unixtime' => $start_unixtime_tmp, 
+																	'end_unixtime' => $end_unixtime_tmp, 
+																	'event_text' => $summary, 
+																	'event_length' => $length, 
+																	'event_overlap' => 0, 
+																	'description' => $description, 
+																	'status' => $status, 
+																	'class' => $class, 
+																	'spans_day' => true, 
+																	'location' => $location, 
+																	'organizer' => serialize($organizer), 
+																	'attendee' => serialize($attendee), 
+																	'calnumber' => $calnumber, 
+																	'calname' => $actual_calname, 
+																	'url' => $url, 
+																	'recur' => $recur);
+																if (isset($display_end_tmp)){
+																	$master_array[$start_date_tmp][$time_tmp][$uid]['display_end'] = $display_end_tmp;
+																}
 																checkOverlap($start_date_tmp, $time_tmp, $uid);
 															}
 															$start_tmp = strtotime('+1 day',$start_tmp);
@@ -720,7 +781,28 @@ foreach ($cal_filelist as $filename) {
 														// Let's double check the until to not write past it
 														$until_check = $recur_data_date.$hour.$minute.'00';
 														if ($abs_until > $until_check) {
-															$master_array[($recur_data_date)][($hour.$minute)][$uid] = array ('event_start' => $start_time, 'event_end' => $end_time_tmp1, 'display_end' => $display_end_tmp, 'start_unixtime' => $start_unixtime_tmp, 'end_unixtime' => $end_unixtime_tmp, 'event_text' => $summary, 'event_length' => $length, 'event_overlap' => 0, 'description' => $description, 'status' => $status, 'class' => $class, 'spans_day' => false, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'recur' => $recur);
+															$master_array[($recur_data_date)][($hour.$minute)][$uid] = array (
+																'event_start' => $start_time, 
+																'event_end' => $end_time_tmp1, 
+																'start_unixtime' => $start_unixtime_tmp, 
+																'end_unixtime' => $end_unixtime_tmp, 
+																'event_text' => $summary, 
+																'event_length' => $length, 
+																'event_overlap' => 0, 
+																'description' => $description, 
+																'status' => $status, 
+																'class' => $class, 
+																'spans_day' => false, 
+																'location' => $location, 
+																'organizer' => serialize($organizer), 
+																'attendee' => serialize($attendee), 
+																'calnumber' => $calnumber, 
+																'calname' => $actual_calname, 
+																'url' => $url, 
+																'recur' => $recur);
+															if (isset($display_end_tmp)){
+																$master_array[($recur_data_date)][($hour.$minute)][$uid]['display_end'] = $display_end_tmp;
+															}
 															checkOverlap($recur_data_date, ($hour.$minute), $uid);
 														}
 													}
@@ -739,6 +821,7 @@ foreach ($cal_filelist as $filename) {
 				// Added for version 0.9.5
 				if (is_array($except_dates)) {
 					foreach ($except_dates as $key => $value) {
+						if (isset ($master_array[$value])){
 						$time = $except_times[$key];
 						unset($master_array[$value][$time][$uid]);
 						if (count($master_array[$value][$time]) < 1) {
@@ -748,6 +831,7 @@ foreach ($cal_filelist as $filename) {
 							}
 						}
 					}
+				}
 				}
 				
 			   // Clear event data now that it's been saved.
@@ -793,7 +877,7 @@ foreach ($cal_filelist as $filename) {
 			default:
 		
 				unset ($field, $data, $prop_pos, $property);
-				ereg ("([^:]+):(.*)", $line, $line);
+				if (ereg ("([^:]+):(.*)", $line, $line)){
 				$field = $line[1];
 				$data = $line[2];
 				
@@ -994,6 +1078,7 @@ foreach ($cal_filelist as $filename) {
 				}
 			}
 		}
+	}
 	}
 	if (!isset($master_array['-3'][$calnumber])) $master_array['-3'][$calnumber] = $actual_calname;
 	if (!isset($master_array['-4'][$calnumber]['mtime'])) $master_array['-4'][$calnumber]['mtime'] = $actual_mtime;

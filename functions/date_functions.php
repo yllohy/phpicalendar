@@ -219,9 +219,7 @@ function extractDateTime($data, $property, $field) {
 	// Initialize values.
 	unset($unixtime, $date, $time, $allday);
 	
-	// What the heck is this doing in here?
-	#$data = str_replace ('/softwarestudio.org/Olson_20011030_5/', '', $data);
-
+	$allday =''; #suppress error on returning undef.
 	// Check for zulu time.
 	$zulu_time = false;
 	if (substr($data,-1) == 'Z') $zulu_time = true;
