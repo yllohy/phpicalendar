@@ -42,7 +42,7 @@
 										</form>
 										<!-- switch show_goto off -->
 										<hr />
-										<div class = 'G10BOLD'>Pick Multiple:</div>
+										<div class = 'G10BOLD'>{L_PICK_MULTIPLE}:</div>
 										<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
 											<input type="hidden" name="getdate" value="{GETDATE}"/>
 											<input type="hidden" name="cpath" value="{CPATH}"/>

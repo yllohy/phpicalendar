@@ -103,6 +103,7 @@ $page->replace_tags(array(
 	'l_download'		=> $lang['l_download'],
 	'l_this_months'		=> $lang['l_this_months'],
 	'l_search'			=> $lang['l_search'],
+	'l_pick_multiple'	=> $lang['l_pick_multiple'],
 	'l_powered_by'		=> $lang['l_powered_by'],
 	'l_this_site_is'	=> $lang['l_this_site_is']			
 	));

@@ -45,6 +45,7 @@ $page->replace_tags(array(
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],
 	'l_year'			=> $lang['l_year'],
+	'l_pick_multiple'	=> $lang['l_pick_multiple'],
 	'l_powered_by'		=> $lang['l_powered_by'],
 	'l_this_site_is'	=> $lang['l_this_site_is']
 
