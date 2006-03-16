@@ -42,6 +42,7 @@ $lang['l_gomonth'] 			= 'Ir a este Mes';
 $lang['l_goyear'] 			= 'Ir a este A&ntilde;o';
 $lang['l_search'] 			= 'Buscar'; // the verb
 $lang['l_results'] 			= 'Resultados de la b&uacute;squeda';
+$lang['l_pick_multiple'] 	= 'Pick multiple';
 $lang['l_query'] 			= 'Consulta: '; // will be followed by the search query
 $lang['l_no_results'] 		= 'Ning&uacute;n evento encontrado';
 $lang['l_goprint'] 		= 'Formato de impresi&oacute;n';

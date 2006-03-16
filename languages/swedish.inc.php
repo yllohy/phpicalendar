@@ -43,6 +43,7 @@ $lang['l_gomonth'] 			= 'Gå till denna Månad';
 $lang['l_goyear'] 			= 'Gå till detta År';
 $lang['l_search'] 			= 'Sök'; // the verb
 $lang['l_results'] 			= 'Resultat av Sökning';
+$lang['l_pick_multiple'] 	= 'Pick multiple';
 $lang['l_query'] 			= 'Sökord'; // will be followed by the search query
 $lang['l_no_results'] 		= 'Inga kalenderhändelser funna';
 $lang['l_goprint'] 			= 'Utskriftsvänlig';

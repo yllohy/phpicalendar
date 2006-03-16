@@ -43,6 +43,7 @@ $lang['l_gomonth'] 			= 'Go to This Month';
 $lang['l_goyear'] 			= 'Go to This Year';
 $lang['l_search'] 			= 'Search'; // the verb
 $lang['l_results'] 			= 'Search Results';
+$lang['l_pick_multiple'] 	= 'Pick multiple';
 $lang['l_query'] 			= 'Query'; // will be followed by the search query
 $lang['l_no_results'] 		= 'No events found';
 $lang['l_goprint'] 			= 'Printer Friendly';

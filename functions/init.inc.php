@@ -2,7 +2,7 @@
 
 // uncomment when developing, comment for shipping version
 //error_reporting (E_ERROR | E_WARNING | E_PARSE);
-
+error_reporting(0);
 // Older versions of PHP do not define $_SERVER. Define it here instead.
 if (!isset($_SERVER) && isset($_SERVER)) {
 	$_SERVER = &$_SERVER;
@@ -43,6 +43,10 @@ if($_REQUEST['cpath']){
 if (isset($user_template["$cpath"])){ 
   $template = $user_template["$cpath"]; 
 }
+#set up specific webcals for a particular cpath
+if (is_array($more_webcals[$cpath])){
+	array_merge($list_webcals, $more_webcals["$cpath"]);
+}
 include_once(BASE.'error.php');
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
@@ -56,8 +60,9 @@ if ($cookie_uri == '') {
 if ($bleed_time == '') $bleed_time = -1;
 
 // Grab the action (login or logout).
-$action = '';
-if (isset($_REQUEST['action']))	$action = $_REQUEST['action'];
+if (isset($_GET['action']))			$action = $_GET['action'];
+else if (isset($_POST['action']))		$action = $_POST['action'];
+else											$action = '';
 	
 // Login and/or logout.
 list($username, $password, $invalid_login) = user_login();

@@ -79,6 +79,8 @@ $list_webcals[] = '';						// or webcal:// and the filename should contain the .
 $list_webcals[] = '';						// $allow_webcals does *not* need to be "yes" for these to show up and work
 // add more lines as necessary
 
+#$more_webcals['cpath'][] = ''				//add webcals that will show up only for a particular cpath.
+
 $locked_cals[] = '';						// Fill in-between the quotes the names of the calendars you wish to hide
 $locked_cals[] = '';						// unless unlocked by a username/password login. This should be the
 $locked_cals[] = '';						// exact calendar filename without the .ics suffix.
