@@ -818,16 +818,13 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 				}
 
 				// This should remove any exdates that were missed.
-				// Added for version 0.9.5
+				// Added for version 0.9.5 modified in 2.22 remove anything that doesn't have an event_start
 				if (is_array($except_dates)) {
 					foreach ($except_dates as $key => $value) {
 						if (isset ($master_array[$value])){
-						$time = $except_times[$key];
+							foreach ($master_array[$value] as $time => $value2){
+								if (!isset($value2[$uid]['event_start'])){
 						unset($master_array[$value][$time][$uid]);
-						if (count($master_array[$value][$time]) < 1) {
-							unset($master_array[$value][$time]);
-							if (count($master_array[$value]) < 1) {
-								unset($master_array[$value]);	
 							}
 						}
 					}
