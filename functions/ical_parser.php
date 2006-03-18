@@ -96,7 +96,7 @@ if ($parse_file) {
 }
 
 $calnumber = 1;
-foreach ($cal_filelist as $filename) {
+foreach ($cal_filelist as $cal_key=>$filename) {
 	
 	// Find the real name of the calendar.
 	$actual_calname = getCalendarName($filename);
@@ -1030,6 +1030,7 @@ foreach ($cal_filelist as $filename) {
 					case 'X-WR-CALNAME':
 						$actual_calname = $data;
 						$master_array['calendar_name'] = $actual_calname;
+							$cal_displaynames[$cal_key] = $actual_calname; #correct the default calname based on filename
 						break;
 					case 'X-WR-TIMEZONE':
 						$calendar_tz = $data;
@@ -1127,7 +1128,7 @@ if ($parse_file) {
 if ($cal == $ALL_CALENDARS_COMBINED) {
 	$calendar_name = $all_cal_comb_lang;
 }
-
+$cal_displayname = implode(', ', $cal_displaynames); #reset this with the correct names
 $template_started = getmicrotime();
 
 ?>
