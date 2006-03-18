@@ -2,7 +2,7 @@
 
 define('BASE','./');
 $current_view = 'search';
-$display_date = $results_lang;
+$display_date = $lang['l_results'];
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
