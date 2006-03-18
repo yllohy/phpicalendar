@@ -82,6 +82,14 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
+	allow image tags in events
+	use real calendar names instead of filenames
+	-bug fixes
+		Suppress lots of warnings and notices
+		all combined selection of webcals
+		passing of webcals in calendar links
+		More items controlled by language files
+2.21
 	-patched security hole
 	-bug fixes from 2.2
 		Modified rss.php to improve compatibility
