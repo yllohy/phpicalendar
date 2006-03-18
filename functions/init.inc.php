@@ -212,8 +212,8 @@ if (count($local_cals) > 0) {
 			$download_filename = $filename;
 		} elseif ($download_uri != '') {
 			$newurl = eregi_replace("^(http://)", "", $download_uri); 
-			$subscribe_path = 'webcal://'.$newurl.'/'."$cpath/".$filename.'.ics';
-			$download_filename = $download_uri.'/'."$cpath/".$filename.'.ics';
+				$subscribe_path = 'webcal://'.$newurl.'/'."$cpath/".basename($filename);
+				$download_filename = $download_uri.'/'."$cpath/".basename($filename);
 		} else {
 			$subscribe_path = "$cpath/";
 			$download_filename = "$cpath/";
