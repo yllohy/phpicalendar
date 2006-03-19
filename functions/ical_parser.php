@@ -299,7 +299,17 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					if (($start < $mArray_end) && ($start < $end)) {
 						while (($start != $end) && ($start < $mArray_end)) {
 							$start_date2 = date('Ymd', $start);
-							$master_array[($start_date2)][('-1')][$uid]= array ('event_text' => $summary, 'description' => $description, 'location' => $location, 'organizer' => serialize($organizer), 'attendee' => serialize($attendee), 'calnumber' => $calnumber, 'calname' => $actual_calname, 'url' => $url, 'status' => $status, 'class' => $class );
+							$master_array[($start_date2)][('-1')][$uid]= array (
+								'event_text' => $summary, 
+								'description' => $description, 
+								'location' => $location, 
+								'organizer' => serialize($organizer), 
+								'attendee' => serialize($attendee), 
+								'calnumber' => $calnumber, 
+								'calname' => $actual_calname, 
+								'url' => $url, 
+								'status' => $status, 
+								'class' => $class );
 							$start = strtotime('+1 day', $start);
 						}
 						if (!$write_processed) $master_array[($start_date)]['-1'][$uid]['exception'] = true;
@@ -527,7 +537,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							if ($end_range_time_tmp >= $start_date_time && $start_range_time_tmp <= $end_date_time) {
 							
 								// if the beginning of our range is less than the start of the item, we may as well set it equal to it
-								if ($start_range_time_tmp < $start_date_time) $start_range_time_tmp = $start_date_time;
+								if ($start_range_time_tmp < $start_date_time){
+									$start_range_time_tmp = $start_date_time;
+								}	
 								if ($end_range_time_tmp > $end_date_time) $end_range_time_tmp = $end_date_time;
 					
 								// initialize the time we will increment
@@ -557,7 +569,14 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 													if (is_array($byday)) {
 														foreach($byday as $day) {
 															$day = two2threeCharDays($day);	
-															$next_date_time = strtotime($day,$next_range_time) + (12 * 60 * 60);
+															#need to find the first day of the appropriate week.
+															$the_sunday = dateOfWeek(date("Ymd",$next_range_time), 'Sunday'); 
+															$next_date_time = strtotime($day,strtotime($the_sunday)) + (12 * 60 * 60);
+															
+															#reset $next_range_time to first instance in this week.
+															if ($next_date_time < $next_range_time){ 
+																$next_range_time = $next_date_time; 
+															}
 															// Since this renders events from $next_range_time to $next_range_time + 1 week, I need to handle intervals
 															// as well. This checks to see if $next_date_time is after $day_start (i.e., "next week"), and thus
 															// if we need to add $interval weeks to $next_date_time.

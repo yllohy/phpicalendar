@@ -49,16 +49,11 @@ function dateOfWeek($Ymd, $day) {
 // that differ between them. requires dateOfWeek()
 function weekCompare($now, $then) {
 	global $week_start_day;
-	$sun_now = dateOfWeek($now, $week_start_day);
-	$sun_then = dateOfWeek($then, $week_start_day);
+	$sun_now = dateOfWeek($now, "Sunday");
+	$sun_then = dateOfWeek($then, "Sunday");
 	$seconds_now = strtotime($sun_now);
 	$seconds_then =  strtotime($sun_then);
-	$diff_seconds = $seconds_now - $seconds_then;
-	$diff_minutes = $diff_seconds/60;
-	$diff_hours = $diff_minutes/60;
-	$diff_days = round($diff_hours/24);
-	$diff_weeks = $diff_days/7;
-	
+	$diff_weeks = round(($seconds_now - $seconds_then)/(60*60*24*7));
 	return $diff_weeks;
 }
 
