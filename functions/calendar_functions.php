@@ -205,8 +205,7 @@ function getCalendarName($cal_path) {
 //
 // $cals	= The calendars (entire path, e.g. from availableCalendars).
 function display_ical_list($cals, $pick=FALSE) {
-	global $cal, $ALL_CALENDARS_COMBINED, $current_view, $getdate, $calendar_lang, $all_cal_comb_lang;
-
+	global $cal, $ALL_CALENDARS_COMBINED, $current_view, $getdate, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames;
 	// Print each calendar option.
 	foreach ($cals as $cal_tmp) {
 		// Format the calendar path for display.
@@ -215,6 +214,34 @@ function display_ical_list($cals, $pick=FALSE) {
 		// and remove the .ics suffix.
 		$cal_displayname_tmp = getCalendarName($cal_tmp);
 		$cal_displayname_tmp = str_replace("32", " ", $cal_displayname_tmp);
+		#overwrite the display name if we already have a real name
+		if (is_numeric(array_search($cal_tmp, $cal_filelist))){
+			$cal_displayname_tmp = $cal_displaynames[array_search($cal_tmp,$cal_filelist)];
+		}else{
+			# pull the name from the $cal_tmp file
+			$ifile = @fopen($cal_tmp, "r");
+			if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $cal_tmp));
+			while (!feof($ifile)) {
+				$line = fgets($ifile, 1024);
+				$line = trim($line);
+				if (ereg ("([^:]+):(.*)", $line, $regs)){
+					$field = $regs[1];
+					$data = $regs[2];
+					$property = $field;
+					$prop_pos = strpos($property,';');
+					if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
+					$property = strtoupper($property);
+					if ($property == "X-WR-CALNAME"){
+						$cal_displayname_tmp = $data;
+						break;
+					}
+				}	
+				#stop reading if we find an event or timezone before there's a name
+				if ($line == "BEGIN:VTIMEZONE" ||$line == "BEGIN:VEVENT") break;
+			}
+			echo "</pre>";
+
+		}
 
 		// If this is a webcal, add 'Webcal' to the display name.
 		if (preg_match("/^(https?|webcal):\/\//i", $cal_tmp)) {

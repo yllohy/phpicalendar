@@ -105,7 +105,7 @@ if (isset($_GET['cal'])) {
 		$_GET['cal'] = explode(',', $_GET['cal']);
 	
 	// Grab the calendar filenames off the cal value array.
-	$cal_filenames = array_map("urldecode", $_GET['cal']);
+	$cal_filenames = $_GET['cal'];
 } else {
 	if (isset($default_cal_check)) {
 		if ($default_cal_check != $ALL_CALENDARS_COMBINED) {

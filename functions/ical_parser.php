@@ -1130,15 +1130,6 @@ if ($parse_file) {
 	}
 }
 
-//If you want to see the values in the arrays, uncomment below.
-
-//print '<pre>';
-//print_r($master_array);
-//print_r($overlap_array);
-//print_r($day_array);
-//print_r($rrule_array);
-//print_r($recurrence_delete);
-//print '</pre>';
 
 // Set a calender name for all calenders combined
 if ($cal == $ALL_CALENDARS_COMBINED) {
@@ -1147,4 +1138,15 @@ if ($cal == $ALL_CALENDARS_COMBINED) {
 $cal_displayname = implode(', ', $cal_displaynames); #reset this with the correct names
 $template_started = getmicrotime();
 
+//If you want to see the values in the arrays, uncomment below.
+
+//print '<pre>';
+//print_r($master_array);
+//print_r($overlap_array);
+//print_r($day_array);
+//print_r($rrule_array);
+//print_r($recurrence_delete);
+//print_r($cal_displaynames);
+//print_r($cal_filelist);
+//print '</pre>';
 ?>
