@@ -49,8 +49,11 @@ Don't forget to turn off logging when done!!
 // include PHP iCalendar configuration variables
 include('../config.inc.php');
 
-// set calendar path, or just use current directory
-$calendar_path = (isset($calendar_path) && $calendar_path != '') ? $calendar_path : '';
+// set calendar path, or just use current directory...make sure there's a trailing slash
+if(isset($calendar_path) && $calendar_path != ''){
+	if (substr($calendar_path, -1, 1) !='/') $calendar_path = $calendar_path.'/';
+}else{
+	$calendar_path = '';
 
 // allow/disallow publishing
 
