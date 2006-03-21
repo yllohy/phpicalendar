@@ -61,10 +61,11 @@ class Page {
 		$loop_event		= trim($match1[1]);
 		$loop_day 		= trim($match3[1]);
 		$parse_month 	= date ("Ym", strtotime($getdate));
+		$parse_year 	= date ("Y", strtotime($getdate));
 		
 		foreach($master_array as $key => $val) {
 			preg_match ('/([0-9]{6})([0-9]{2})/', $key, $regs);
-			if ((($regs[1] == $parse_month) && ($printview == 'month')) || (($key == $getdate) && ($printview == 'day')) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == 'week'))) {
+			if ((($regs[1] == $parse_month) && ($printview == 'month')) || (($key == $getdate) && ($printview == 'day')) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == 'week')) || ((substr($regs[1],0,4) == $parse_year) && ($printview == 'year'))) {
 				$events_week++;
 				$dayofmonth = strtotime ($key);
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);

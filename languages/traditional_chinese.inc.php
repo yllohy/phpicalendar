@@ -165,6 +165,7 @@ $dateFormat_week_list = '%a, %b%e日';
 $dateFormat_week_jump = '%b %e 日';
 $dateFormat_month = '%Y 年 %B';
 $dateFormat_month_list = '%A, %B %e 日';
+$dateFormat_year = '%Y';
 
 /*
 Notes about dateFormat_*

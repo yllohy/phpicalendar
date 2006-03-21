@@ -163,6 +163,7 @@ $dateFormat_week_list = '%b %e일, %a';
 $dateFormat_week_jump = '%b %e일';
 $dateFormat_month = '%Y년 %B';
 $dateFormat_month_list = '%B %e일, %A';
+$dateFormat_year = '%Y';
 
 /*
 Notes about dateFormat_*

@@ -15,6 +15,9 @@
 *********************************************************************************/
 define('BASE', '../');
 include(BASE.'functions/init.inc.php');
+if ($enable_rss != 'yes') {
+	die ("RSS feeds are not enabled on this site.");
+}
 
 include_once(BASE.'functions/date_functions.php');
 
@@ -83,36 +86,19 @@ switch ($rssview){
 #need to give ical_parser the most distant date to correctly set up master_array.
 $getdate = $todate;
 #echo "from:$fromdate to:$todate";
+
+#Note that ical_parser supplies cal_displayname.
 include(BASE.'functions/ical_parser.php');
-if ($enable_rss != 'yes') {
-	die ("RSS feeds are not enabled on this site.");
-}
-
-//Set calendar or calendar directory name for feed
-//Note that this depends on other modifications I've made to 
-//allow phpicalendar to use calendar subdirectories - see bbs
-
-$cal_displayname = urldecode($cal);
-if ($cal == $ALL_CALENDARS_COMBINED) {
-	$temp = explode("/",$calendar_path);
-	$cal_displayname = str_replace("32"," ",ucfirst(array_pop($temp)));
-}
 
 $events_count = 0;
 
 // calculate a value for Last Modified and ETag
-$filemod = time(); #default to now in case filemtime can't find the mod date
-$cal = str_replace("+"," ",$cal);
-$calendar_path = str_replace("+"," ",$calendar_path);
-$filemod = time(); #default to now in case filemtime can't find the mod date
-$cal = str_replace("+"," ",$cal);
-$calendar_path = str_replace("+"," ",$calendar_path);
-if ($cal == $ALL_CALENDARS_COMBINED) {
-	$filemod = filemtime("$calendar_path");
-}else{
-	if (is_file("$calendar_path/$cal.ics")){
-	$filemod = filemtime("$calendar_path/$cal.ics");
-}	
+$cal = implode(",",$cals);
+
+//get filemtime from master array
+$filemod = 0; #default to start of unix era, overwrite with most recent mtime from master array
+foreach ($master_array['-4'] as $calinfo){
+	if ($calinfo['mtime'] > $filemod) $filemod = $calinfo['mtime']; 
 }	
 $filemodtime = date("r", $filemod);
 
@@ -137,7 +123,13 @@ $rss .= '<channel>'."\n";
 $rss .= '<title>'.$cal_displayname;
 if ($theview !=""){$rss .= ' - '.$theview;} 
 $rss .= "</title>\n";
-$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
+
+$views = array('day','week','month','year');
+if (in_array($rssview, $views)) $default_path .= "/$rssview.php";
+$rss_link = $default_path."/";
+if (isset($cpath) && $cpath !='') $rss_link.="?cpath=$cpath";
+$rss .= "<link>$rss_link</link>\n";
+
 $rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
 $rss .= '<language>'.$language.'</language>'."\n";
 $rss .= '<copyright>Copyright '.date('Y').', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
@@ -183,7 +175,8 @@ $uid_arr = array();
 
 
 				$rss_title		= urldecode ("$dayofweek: $event_text");
-				$rss_link		= htmlspecialchars ("$default_path/day.php?getdate=$thisdate&cal=$cal&cpath=$cpath");
+				$rss_link		= "$default_path/day.php?getdate=$thisdate&amp;cal=$cal";
+				if (isset($cpath) && $cpath !='') $rss_link.="&amp;cpath=$cpath";
 				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
 				$rss .= '<item>'."\n";

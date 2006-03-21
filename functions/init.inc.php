@@ -134,6 +134,8 @@ $local_cals = array();
 foreach ($cal_filenames as $cal_filename) {
 	// If the calendar identifier begins with a web protocol, this is a web
 	// calendar.
+	$cal_filename = urldecode($cal_filename); #need to decode for substr statements to identify webcals
+	$cal_filename = str_replace(' ','%20', $cal_filename); #need to reencode blank spaces for matching with $list_webcals
 	if (substr($cal_filename, 0, 7) == 'http://' ||
 		substr($cal_filename, 0, 8) == 'https://' ||
 		substr($cal_filename, 0, 9) == 'webcal://')
@@ -147,7 +149,7 @@ foreach ($cal_filenames as $cal_filename) {
 		if (in_array($cal_filename, $blacklisted_cals)) {
 			exit(error($lang['l_error_restrictedcal'], $cal_filename));
 		}
-		$local_cals[] = str_replace(".ics", '', basename($cal_filename));
+		$local_cals[] = urldecode(str_replace(".ics", '', basename($cal_filename)));
 	}
 }
 

@@ -56,6 +56,10 @@
 			<td width="210" valign="top" align="left">
 				{MONTH_MEDIUM|03}
 			</td>
+			<td width="20" rowspan='8'>
+				<img src="images/spacer.gif" width="20" height="1" alt=" " />
+			</td>
+			<td rowspan='8' valign='top'>{SIDEBAR}</td>
 		</tr>
 		<tr>
 			<td colspan="5">

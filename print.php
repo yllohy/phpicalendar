@@ -1,18 +1,17 @@
 <?php
 	
 define('BASE', './');
-require_once(BASE.'functions/ical_parser.php');
-require_once(BASE.'functions/list_functions.php');
-require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
-
+require_once(BASE.'functions/date_functions.php');
+require_once(BASE.'functions/init.inc.php');
+$current_view 		='print';
 $start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $parse_month 		= date ("Ym", strtotime($getdate));
 $cal_displayname 	= str_replace("32", " ", $cal);
 $events_week 		= 0;
 $unix_time 			= strtotime($getdate);
-if (!$printview)	$printview = $_GET['printview'];
+$printview = 'month';
+if (isset($_GET['printview']))	$printview = $_GET['printview'];
 
 if ($printview == 'day') {
 	$display_date 	= localizeDate ($dateFormat_day, strtotime($getdate));
@@ -34,7 +33,18 @@ if ($printview == 'day') {
 	$prev 			= date("Ymd", strtotime("-1 month", $unix_time));
 	$week_start		= '';
 	$week_end		= '';
+} elseif ($printview == 'year') {
+	$display_date 	= localizeDate ($dateFormat_year, strtotime($getdate));
+	$next 			= date("Ymd", strtotime("+1 year", $unix_time));
+	$prev 			= date("Ymd", strtotime("-1 year", $unix_time));
+	$week_start		= '';
+	$week_end		= '';
 }
+require_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/list_functions.php');
+require_once(BASE.'functions/template.php');
+header("Content-Type: text/html; charset=$charset");
+
 
 $page = new Page(BASE.'templates/'.$template.'/print.tpl');
 

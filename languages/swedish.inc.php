@@ -176,6 +176,7 @@ $dateFormat_week_list = '%a, %e %b';
 $dateFormat_week_jump = '%e %b';
 $dateFormat_month = '%B %Y';
 $dateFormat_month_list = '%A, %B %e';
+$dateFormat_year = '%Y';
 
 /*
 Notes about dateFormat_*

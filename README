@@ -82,13 +82,18 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
+2.22rc1
 	allow image tags in events
 	use real calendar names instead of filenames
-	-bug fixes
+	Year printview
+	Added sidebar to year view
+	-bug fixes from 2.21
 		Suppress lots of warnings and notices
 		all combined selection of webcals
 		passing of webcals in calendar links
 		More items controlled by language files
+		Problem with webcals with encoded spaces in URL
+		Fixes related to various recurring event combinations
 2.21
 	-patched security hole
 	-bug fixes from 2.2

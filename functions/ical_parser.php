@@ -423,7 +423,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					
 					$start_date_time = strtotime($start_date);
 					$this_month_start_time = strtotime($this_year.$this_month.'01');
-					if ($current_view == 'year' || ($save_parsed_cals == 'yes' && !$is_webcal)) {
+					if ($current_view == 'year' || ($save_parsed_cals == 'yes' && !$is_webcal)|| $current_view == 'print' && $printview == 'year') {
 						$start_range_time = strtotime($this_year.'-01-01 -2 weeks');
 						$end_range_time = strtotime($this_year.'-12-31 +2 weeks');
 					} else {

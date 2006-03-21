@@ -13,6 +13,7 @@
 								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=day"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
 								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=week"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
 								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=month"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=year"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
 							</tr>
 						</table>
 						</div>

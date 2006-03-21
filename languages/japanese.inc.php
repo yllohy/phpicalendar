@@ -177,6 +177,7 @@ $dateFormat_week_list = '%b%e日（%a）';
 $dateFormat_week_jump = '%b%e日';
 $dateFormat_month = '%Y年%B';
 $dateFormat_month_list = '%B%e日 %A';
+$dateFormat_year = '%Y';
 
 /*
 Notes about dateFormat_*
