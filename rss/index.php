@@ -20,6 +20,10 @@ $current_view = "rssindex";
 $display_date = "RSS Info";
 
 $filelist = availableCalendars($username, $password, $ALL_CALENDARS_COMBINED);
+
+if (isset($cpath) && $cpath !=''){
+	$cpath_tmp = '&amp;cpath='.$cpath;
+}
 foreach ($filelist as $file) {
 	// $cal_filename is the filename of the calendar without .ics
 	// $cal is a urlencoded version of $cal_filename
@@ -30,13 +34,21 @@ foreach ($filelist as $file) {
 	}else{
 		$cal_tmp = getCalendarName($file);	
 	}
-	$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+	$cal_displayname_tmp = $cal_displaynames[array_search($file,$cal_filelist)];
 	$cal_tmp = str_replace(" ", "+", $cal_tmp);
-	$rss_list .= '<font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $calendar_lang.'</b></font><br />';
-	$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=day>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=day</a><br />';
-	$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=week>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=week</a><br />';
-	$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=month>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=month</a><br />';
-		$rss_list .= '<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=year>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.'&amp;cpath='.$cpath.'&amp;rssview=year</a><br />';
+	$rss_list .= '<br /><font class="V12"><b>'.$cal_displayname_tmp.' '. $lang['l_calendar'].'</b></font><br />';
+	$rss_list .= '<table><tr><td><font class="V12">'.$lang['l_day'].':</font></td><td>
+	<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=day>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=day</a></td></tr>';
+
+	$rss_list .= '<td><font class="V12">'.$lang['l_week'].':</font></td><td>
+	<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=week>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=week</a></td></tr>';
+
+	$rss_list .= '<td><font class="V12">'.$lang['l_month'].':</font></td><td>
+	<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=month>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=month</a></td></tr>';
+
+		$rss_list .= '<td><font class="V12">'.$lang['l_year'].':</font></td><td>
+		<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=year>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=year</a></td></tr>';
+		$rss_list .='</table>';
 	$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&amp;rssview='.$default_view;
 }
 
