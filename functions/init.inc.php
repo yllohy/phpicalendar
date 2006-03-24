@@ -21,7 +21,9 @@ if (isset($_COOKIE['phpicalendar'])) {
 	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal_check	= $phpicalendar['cookie_calendar'];
 	if (isset($phpicalendar['cookie_cpath'])) 		$default_cpath_check= $phpicalendar['cookie_cpath'];
 	if (isset($phpicalendar['cookie_view'])) 		$default_view 		= $phpicalendar['cookie_view'];
-	if (isset($phpicalendar['cookie_style'])) 		$template 			= $phpicalendar['cookie_style'];
+	if (isset($phpicalendar['cookie_style']) && is_dir(BASE.'templates/'.$phpicalendar['cookie_style'].'/')){ 
+		$template 			= $phpicalendar['cookie_style'];
+	}	
 	if (isset($phpicalendar['cookie_startday'])) 	$week_start_day		= $phpicalendar['cookie_startday'];
 	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
 }

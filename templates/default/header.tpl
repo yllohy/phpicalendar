@@ -6,7 +6,7 @@
 	<title>{CALENDAR_NAME} - {DISPLAY_DATE}</title>
   	<link rel="stylesheet" type="text/css" href="{DEFAULT_PATH}templates/{TEMPLATE}/default.css" />
 	<!-- switch rss_available on -->
-	<link rel="alternate" type="application/rss+xml" title="RSS" href="{DEFAULT_VIEW}/rss/rss.php?cal={CAL}&amp;rssview={CURRENT_VIEW}">
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="{DEFAULT_PATH}/rss/rss.php?cal={CAL}&amp;rssview={CURRENT_VIEW}">
 	<!-- switch rss_available off -->		
 	{EVENT_JS}
 </head>

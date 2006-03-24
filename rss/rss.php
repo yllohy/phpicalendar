@@ -12,9 +12,11 @@
 *	feeds can be specified for a number of days to or from a given date
 *	feeds can be specified for a range of dates
 *
+* Language encoding added by dyfrin  2006/03/08 19:09:28
 *********************************************************************************/
 define('BASE', '../');
-include(BASE.'functions/init.inc.php');
+require(BASE.'functions/init.inc.php');
+
 if ($enable_rss != 'yes') {
 	die ("RSS feeds are not enabled on this site.");
 }
@@ -115,6 +117,12 @@ if ( ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || ($_SERVER['HTTP_IF_
 	exit;
 }
 
+/* Change languages to ISO 639-1 to validate RSS without changing long version in config.inc.php */
+$user_language = array ("english", "polish", "german", "french", "dutch", "italian", "japanese", "norwegian", "spanish",  "swedish", "portuguese", "catalan", "traditional_chinese", "esperanto", "korean");
+$iso_language = array ("en", "pl", "de", "fr", "nl", "da", "it", "ja", "no", "es", "sv", "pt", "ca", "zh-tw", "eo", "ko");
+$rss_language = str_replace($user_language, $iso_language, $language);
+/* End language modification */
+
 //If client needs new feed - make the header
 $rss = 	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\n";
 $rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">'."\n";
@@ -165,7 +173,7 @@ $uid_arr = array();
 				$event_text 	= strip_tags($event_text, '<b><i><u>');
 				$event_text		= str_replace('&','&amp;',$event_text);
 				$event_text		= str_replace('&amp;amp;','&amp;',$event_text);
-				$event_text		= urlencode($event_text);
+			#	$event_text		= urlencode($event_text);
 			#uncomment for shorter event text with ...
 			#	$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines); 		
 				$description 	= stripslashes(urldecode($val["description"]));
@@ -194,9 +202,11 @@ $uid_arr = array();
 				*/
 				$rss .= '<link>'.$rss_link.'</link>'."\n";
 				$rss .= '<description>'.$rss_description.'</description>'."\n";
+				if (isset($val['location']) && $val['location'] !=''){
 				$location		= str_replace('&','&amp;',$val['location']);
 				$location		= str_replace('&amp;amp;','&amp;',$location);
-				$rss .= '<location>'.$location.'</location>';
+					$rss .= '<location>'.$location."/location>\n";
+				}	
 				$rss .= '</item>'."\n";
 				$events_count++;
 			}
