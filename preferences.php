@@ -33,6 +33,10 @@ if ($action == 'setcookie') {
 	$cookie_calendar 	= $_POST['cookie_calendar'];
 	$cookie_view 		= $_POST['cookie_view'];
 	$cookie_style 		= $_POST['cookie_style'];
+	if (isset($_POST['cookie_style']) && is_dir(BASE.'templates/'.$_POST['cookie_style'].'/')){ 
+		$template 			= $_POST['cookie_style'];
+	}	
+
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
 	$cookie_unset		= $_POST['unset'];
@@ -129,7 +133,7 @@ foreach ($daysofweek_lang as $daysofweek) {
 $dir_handle = @opendir(BASE.'templates/');
 while ($file = readdir($dir_handle)) {
 	if (($file != ".") && ($file != "..") && ($file != "CVS")) {
-		if (!is_file($file)) {
+		if (is_dir(BASE.'templates/'.$file)) {
 			$file_disp = ucfirst($file);
 			$style_select .= ($file == "$cookie_style") ? "<option value=\"$file\" selected=\"selected\">$file_disp</option>\n" : "<option value=\"$file\">$file_disp</option>\n";
 		}
