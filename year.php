@@ -111,6 +111,17 @@ $page->replace_tags(array(
 	'l_this_site_is'	=> $lang['l_this_site_is']
 
 	));
+
+if ($allow_login == 'yes') {
+	$page->replace_tags(array(
+	'l_invalid_login'	=> $lang['l_invalid_login'],
+	'l_password'		=> $lang['l_password'],
+	'l_username'		=> $lang['l_username'],
+	'l_login'			=> $lang['l_login'],
+	'l_logout'			=> $lang['l_logout']
+	));
+}
+
 $page->tomorrows_events($page);
 $page->get_vtodo($page);
 $page->draw_subscribe($page);	
