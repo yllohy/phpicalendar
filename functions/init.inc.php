@@ -151,7 +151,7 @@ foreach ($cal_filenames as $cal_filename) {
 		if (in_array($cal_filename, $blacklisted_cals)) {
 			exit(error($lang['l_error_restrictedcal'], $cal_filename));
 		}
-		$local_cals[] = urldecode(str_replace(".ics", '', basename($cal_filename)));
+		$local_cals[] = getCalendarName(urldecode($cal_filename));
 	}
 }
 
