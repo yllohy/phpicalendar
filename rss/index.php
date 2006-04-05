@@ -1,11 +1,14 @@
 <?php
 
+/* Rewritten by J. Hu 4/2/06
+*/
+
 define('BASE','../');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/calendar_functions.php');
 
 if ($enable_rss != 'yes') {
-	exit(error('RSS is not available for this installation.', $cal, '../'));
+	exit(error($lang['l_rss_notenabled'], $cal, '../'));
 }
 
 if (empty($default_path)) {
@@ -19,38 +22,47 @@ if (empty($default_path)) {
 $current_view = "rssindex";
 $display_date = "RSS Info";
 
-$filelist = availableCalendars($username, $password, $ALL_CALENDARS_COMBINED);
+$rss_list = "<table>\n";
+$xml_icon ="<img src = 'xml.gif' alt='xml'>";
 
-if (isset($cpath) && $cpath !=''){
-	$cpath_tmp = '&amp;cpath='.$cpath;
-}
+$filelist = availableCalendars($username, $password, $ALL_CALENDARS_COMBINED);
 foreach ($filelist as $file) {
 	// $cal_filename is the filename of the calendar without .ics
 	// $cal is a urlencoded version of $cal_filename
 	// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
 
-	if (substr($file, 0, 7) == 'http://' || substr($file, 0, 8) == 'https://' || substr($file, 0, 9) == 'webcal://') {
-		$cal_tmp = urlencode($file);
+	if (is_numeric(array_search($file, $cal_filelist))){
+		$cal_displayname_tmp = $cal_displaynames[array_search($file,$cal_filelist)];
 	}else{
-		$cal_tmp = getCalendarName($file);	
-	}
-	$cal_displayname_tmp = $cal_displaynames[array_search($file,$cal_filelist)];
-	$cal_tmp = str_replace(" ", "+", $cal_tmp);
-	$rss_list .= '<br /><font class="V12"><b>'.$cal_displayname_tmp.' '. $lang['l_calendar'].'</b></font><br />';
-	$rss_list .= '<table><tr><td><font class="V12">'.$lang['l_day'].':</font></td><td>
-	<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=day>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=day</a></td></tr>';
+		$cal_displayname_tmp = str_replace("32", " ", str_replace(".ics",'',basename($file)));
+	}	
+	$rss_list .= '<tr><td rowspan ="3"><font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $lang['l_calendar'].'</b></font></td>';
 
-	$rss_list .= '<td><font class="V12">'.$lang['l_week'].':</font></td><td>
-	<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=week>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=week</a></td></tr>';
+/* Changed to show links without urlencode, but links valid urls */
+	$rss_list .= "<td>".$lang['l_day']."</td>";
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 0.91</td>';
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 2.0</td></tr>';
 
-	$rss_list .= '<td><font class="V12">'.$lang['l_month'].':</font></td><td>
-	<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=month>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=month</a></td></tr>';
+	$rss_list .= "<td>".$lang['l_week']."</td>";
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 0.91</td>';
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 2.0</td></tr>';
 
-		$rss_list .= '<td><font class="V12">'.$lang['l_year'].':</font></td><td>
-		<a href='. $default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=year>'.$default_path.'/rss/rss.php?cal='.$cal_tmp.$cpath_tmp.'&amp;rssview=year</a></td></tr>';
-		$rss_list .='</table>';
-	$footer_check = $default_path.'/rss/rss.php?cal='.$default_cal.'&amp;rssview='.$default_view;
+	$rss_list .= "<td>".$lang['l_month']."</td>";
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 0.91</td>';
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 2.0</td></tr>';
+
+	$footer_check = $default_path.'/rss/rss.php?cal%3D'.rawurlencode($file.'&amp;cpath='.$cpath.'&amp;rssview='.$default_view);
+	$validrss_check = str_replace('%', '%25', $footer_check);
+	$rss_list .= "<tr><td>&nbsp;</td></tr>\n";
+
 }
+$rss_list .= "</table>\n";
+
+
+/* End link modification */
 
 
 $page = new Page(BASE.'templates/'.$template.'/rss_index.tpl');
@@ -76,6 +88,9 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rssdisable'	 	=> '',
 	'rss_valid' 		=> '',
+	'rss_docinfo'		=> "RSS feeds can also be set up for a specified number of days before or after a given date, or between two dates.  See the <a href='http://phpicalendar.net/documentation/index.php/RSS_feeds'>documentation</a> for how to set up the URLs",
+/* Replaces footer.tpl {validrss_check} with $validrss_check */	
+	'validrss_check'	=> $validrss_check,
 	'show_search' 		=> $show_search,
 	'l_rss_info'		=> $lang['l_rss_info'],
 	'l_rss_subhead'		=> $lang['l_rss_subhead'],
