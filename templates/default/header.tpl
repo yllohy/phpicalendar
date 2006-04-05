@@ -16,4 +16,5 @@
   <input type="hidden" name="time" id="time" value="" />
   <input type="hidden" name="uid" id="uid" value="" />
   <input type="hidden" name="cpath" id="cpath" value="" />
+  <input type="hidden" name="event_data" id="event_data" value="" />
 </form>

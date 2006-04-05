@@ -2,7 +2,7 @@
 define('BASE', '../');
 $getdate = $_POST['date'];
 include_once(BASE.'functions/init.inc.php'); 
-include_once(BASE.'functions/ical_parser.php'); 
+#include_once(BASE.'functions/ical_parser.php'); 
 require_once(BASE.'functions/template.php');
 
 function decode_popup ($item) {
@@ -13,7 +13,8 @@ function decode_popup ($item) {
 
 
 
-$event 			= $master_array[$_POST['date']][$_POST['time']][decode_popup($_POST['uid'])];
+#$event 			= $master_array[$_POST['date']][$_POST['time']][decode_popup($_POST['uid'])];
+$event 			= unserialize(stripslashes($_POST['event_data']));
 $organizer 		= unserialize($event['organizer']);
 $attendee 		= unserialize($event['attendee']);
 
