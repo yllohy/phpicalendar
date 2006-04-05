@@ -15,8 +15,9 @@ $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'config.inc.php');
 
-if (isset($_COOKIE['phpicalendar'])) {
-	$phpicalendar = unserialize(stripslashes($_COOKIE['phpicalendar']));
+$cookie_name = 'phpicalendar_'.basename($default_path);
+if (isset($_COOKIE["$cookie_name"]) && !isset($_POST['unset'])) {
+	$phpicalendar = unserialize(stripslashes($_COOKIE[$cookie_name]));
 	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
 	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal_check	= $phpicalendar['cookie_calendar'];
 	if (isset($phpicalendar['cookie_cpath'])) 		$default_cpath_check= $phpicalendar['cookie_cpath'];

@@ -33,27 +33,29 @@ if ($action == 'setcookie') {
 	$cookie_calendar 	= $_POST['cookie_calendar'];
 	$cookie_view 		= $_POST['cookie_view'];
 	$cookie_style 		= $_POST['cookie_style'];
-	if (isset($_POST['cookie_style']) && is_dir(BASE.'templates/'.$_POST['cookie_style'].'/')){ 
-		$template 			= $_POST['cookie_style'];
-	}	
-
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
 	$cookie_unset		= $_POST['unset'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time", "cookie_cpath"=>"$cookie_cpath");
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 
-		setcookie("phpicalendar","$the_cookie",time()-(60*60*24*7) ,"/","$cookie_uri",0);
+		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$cookie_uri",0);
 	} else {
-		setcookie("phpicalendar","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
+		setcookie("$cookie_name","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
+		if (isset($_POST['cookie_view'])) 
+			$default_view = $_POST['cookie_view'];
+		if (isset($_POST['cookie_style']) && is_dir(BASE.'templates/'.$_POST['cookie_style'].'/')) 
+			$template = $_POST['cookie_style'];
+		if (isset($_POST['cookie_language']) && is_file(BASE.'languages/'.strtolower($_POST['cookie_language']).'.inc.php')) 
+			include(BASE.'languages/'.strtolower($_POST['cookie_language']).'.inc.php');
 	}
-	$_COOKIE['phpicalendar'] = $the_cookie;
+	$_COOKIE[$cookie_name] = $the_cookie;
     $cpath = $cookie_cpath;
     $cal = $cookie_calendar;
 }
 
-if (isset($_COOKIE['phpicalendar'])) {
-	$phpicalendar 		= unserialize(stripslashes($_COOKIE['phpicalendar']));
+if (isset($_COOKIE[$cookie_name])) {
+	$phpicalendar 		= unserialize(stripslashes($_COOKIE[$cookie_name]));
 	$cookie_language 	= $phpicalendar['cookie_language'];
 	$cookie_calendar 	= $phpicalendar['cookie_calendar'];
 	$cookie_view 		= $phpicalendar['cookie_view'];
@@ -65,7 +67,7 @@ if (isset($_COOKIE['phpicalendar'])) {
 	}
 }
 
-if ((!isset($_COOKIE['phpicalendar'])) || ($cookie_unset)) {
+if ((!isset($_COOKIE[$cookie_name])) || ($cookie_unset)) {
 	# No cookie set -> use defaults from config file.
 	$cookie_language = ucfirst($language);
 	$cookie_calendar = $default_cal;
@@ -103,11 +105,11 @@ closedir($dir_handle);
 // select for calendars
 $calendar_select = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED),TRUE);
 $calendar_select .="<option value=\"$ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
-
+$calendar_select = str_replace("<option value=\"$cookie_calendar\">","<option value=\"$cookie_calendar\" selected='selected'>",$calendar_select);
 // select for dayview
-$view_select 	= ($cookie_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
-$view_select    .= ($cookie_view == 'week') ? '<option value="week" selected="selected">{L_WEEK}</option>' : '<option value="week">{L_WEEK}</option>';
-$view_select    .= ($cookie_view == 'month') ? '<option value="month" selected="selected">{L_MONTH}</option>' : '<option value="month">{L_MONTH}</option>';
+$view_select 	= ($default_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
+$view_select    .= ($default_view == 'week') ? '<option value="week" selected="selected">{L_WEEK}</option>' : '<option value="week">{L_WEEK}</option>';
+$view_select    .= ($default_view == 'month') ? '<option value="month" selected="selected">{L_MONTH}</option>' : '<option value="month">{L_MONTH}</option>';
 
 // select for time
 for ($i = 000; $i <= 1200; $i += 100) {
