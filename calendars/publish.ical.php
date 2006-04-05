@@ -54,7 +54,7 @@ if(isset($calendar_path) && $calendar_path != ''){
 	if (substr($calendar_path, -1, 1) !='/') $calendar_path = $calendar_path.'/';
 }else{
 	$calendar_path = '';
-
+}
 // allow/disallow publishing
 
 $phpicalendar_publishing = isset($phpicalendar_publishing) ? $phpicalendar_publishing : 0;
@@ -94,33 +94,25 @@ if(PHPICALENDAR_PUBLISHING == 1)
 	}
 	
 	// publishing
-	if($_SERVER['REQUEST_METHOD'] == 'PUT')
-	{
+	if($_SERVER['REQUEST_METHOD'] == 'PUT'){
 		// get calendar data
-		if($fp = fopen('php://input','r'))
-		{
-			while(!@feof($fp))
-			{
+		if($fp = fopen('php://input','r')){
+			while(!@feof($fp)){
 				$data .= fgets($fp,4096);
 			}
 			
 			@fclose($fp);
-		}
-		else
-		{
+		}else{
 			logmsg('unable to read input data');
 		}
 		
-		if(isset($data))
-		{
+		if(isset($data)){
 			
 			// get calendar name
 			$cal_arr = explode("\n",$data);
 			
-			foreach($cal_arr as $k => $v)
-			{
-				if(strstr($v,'X-WR-CALNAME:'))
-				{
+			foreach($cal_arr as $k => $v){
+				if(strstr($v,'X-WR-CALNAME:')){
 					$arr = explode(':',$v);
 					$calendar_name = trim($arr[1]);
 					break;
@@ -130,13 +122,10 @@ if(PHPICALENDAR_PUBLISHING == 1)
 			$calendar_name = isset($calendar_name) ? $calendar_name : 'default';
 			
 			// write to file
-			if($fp = fopen($calendar_path.$calendar_name.'.ics','w+'))
-			{
+			if($fp = fopen($calendar_path.$calendar_name.'.ics','w+')){
 				fputs($fp, $data, strlen($data) );
 				@fclose($fp);
-			}
-			else
-			{
+			}else{
 				logmsg( 'couldnt open file '.$calendar_path.$calendar_name.'.ics' );
 			}
 		}

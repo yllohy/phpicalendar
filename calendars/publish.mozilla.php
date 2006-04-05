@@ -65,7 +65,7 @@ if(isset($calendar_path) && $calendar_path != ''){
 	if (substr($calendar_path, -1, 1) !='/') $calendar_path = $calendar_path.'/';
 }else{
 	$calendar_path = '';
-
+}
 // allow/disallow publishing
 
 $phpicalendar_publishing = isset($phpicalendar_publishing) ? $phpicalendar_publishing : 0;
