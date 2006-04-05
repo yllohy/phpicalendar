@@ -12,8 +12,16 @@
 *	feeds can be specified for a number of days to or from a given date
 *	feeds can be specified for a range of dates
 *
-* Language encoding added by dyfrin  2006/03/08 19:09:28
 *********************************************************************************/
+
+/* Modified from 2.21 by dyfrin 2006/03/08 19:09:28
+   Changes:
+   -RSS changed to 2.0, encoding removed, languages converted to ISO standard for feeds
+   -RSS title changed to be set by config.inc.php.  Make sure that is added to it. 
+   Lines modified: 135-165, 208-223
+   Additional mods by J. Hu
+*/
+   
 define('BASE', '../');
 require(BASE.'functions/init.inc.php');
 
@@ -111,8 +119,7 @@ header ("ETag:\"$filemodtime\"");
 // checks the user agents headers to see if they kept track of our
 // stuff, if so be nice and send back a 304 and exit.
 
-if ( ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || ($_SERVER['HTTP_IF_NONE_MATCH'] == $filemodtime))
-{
+if ( ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || ($_SERVER['HTTP_IF_NONE_MATCH'] == $filemodtime)){
 	header ("HTTP/1.1 304 Not Modified");
 	exit;
 }
@@ -123,18 +130,24 @@ $iso_language = array ("en", "pl", "de", "fr", "nl", "da", "it", "ja", "no", "es
 $rss_language = str_replace($user_language, $iso_language, $language);
 /* End language modification */
 
-//If client needs new feed - make the header
 $rss = 	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\n";
-$rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">'."\n";
-$rss .= '<rss version="0.91">'."\n";
-$rss .= '<channel>'."\n";
+
+/* Use 1.0 and strip encoding, use rss_language */
+$rss .= 	'<rdf:RDF 
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+	xmlns:ev="http://purl.org/rss/1.0/modules/event/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns="http://purl.org/rss/1.0/">'."\n";
+
+$rss .= '<channel rdf:about="'.$default_path.'/rss/rss.php/';
+if (isset($cpath) && $cpath !='') $rss_link.="?cpath=$cpath";
+$rss .='">'."\n";
+
 $rss .= '<title>'.$cal_displayname;
 if ($theview !=""){$rss .= ' - '.$theview;} 
 $rss .= "</title>\n";
 
-$views = array('day','week','month','year');
-if (in_array($rssview, $views)) $default_path .= "/$rssview.php";
-$rss_link = $default_path."/";
+$rss .= '<link>'.htmlspecialchars("$default_path").'</link>'."\n";
 if (isset($cpath) && $cpath !='') $rss_link.="?cpath=$cpath";
 $rss .= "<link>$rss_link</link>\n";
 

@@ -82,11 +82,14 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
-2.22rc1
+2.22rc3
+	change popup to not require reparsing cal files
+	differentiate cookie names for different installs on the same host
 	allow image tags in events
 	use real calendar names instead of filenames
 	Year printview
 	Added sidebar to year view
+	Modified rss/index.php
 	-bug fixes from 2.21
 		Suppress lots of warnings and notices
 		all combined selection of webcals
@@ -94,6 +97,7 @@ cvs
 		More items controlled by language files
 		Problem with webcals with encoded spaces in URL
 		Fixes related to various recurring event combinations
+		Fix security hole for getting template file from cookies
 2.21
 	-patched security hole
 	-bug fixes from 2.2
