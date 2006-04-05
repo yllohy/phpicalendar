@@ -35,11 +35,11 @@
 								<td width="2%"></td>
 								<td width="98%" valign="top" align="left">
 									<br />
-									{L_THIS_SITE_IS} <a class="psf" href="http://www.oreillynet.com/rss/">RSS 0.91 enabled</a>.<br />
+									<br />
 									<br />
 									{RSS_LIST}
 									<br />
-									<p>RSS feeds can also be set up for a specified number of days before or after a given date, or between two dates.  See the <a href="http://phpicalendar.net/documentation/index.php/RSS_feeds">documentation</a> for how to set up the URLs</p>
+									<p>{RSS_DOCINFO}</p>
 								</td>
 							</tr>
 						</table>
