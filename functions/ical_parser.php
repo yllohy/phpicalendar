@@ -459,8 +459,10 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 								$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = localizeDate($dateFormat_week,$until);
 								break;
 							case 'INTERVAL':
+								if ($val > 0){
 								$number = $val;
 								$master_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $number;
+								}
 								break;
 							case 'BYSECOND':
 								$bysecond = $val;
@@ -564,7 +566,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 												case 'WEEKLY':
 													// Populate $byday with the default day if it's not set.
 													if (!isset($byday)) {
-														$byday[] = strtoupper(substr($daysofweekshort_lang[date('w', $start_date_time)], 0, 2));
+														$byday[] = strtoupper(substr(date('D', $start_date_time), 0, 2));
 													}
 													if (is_array($byday)) {
 														foreach($byday as $day) {
@@ -591,7 +593,35 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 													if (empty($bymonth)) $bymonth = array(1,2,3,4,5,6,7,8,9,10,11,12);
 													$next_range_time = strtotime(date('Y-m-01', $next_range_time));
 													$next_date_time = $next_date_time;
-													if ((isset($bymonthday)) && (!isset($byday))) {
+													if (isset($bysetpos)){
+														/* bysetpos code from dustinbutler
+														start on day 1 or last day. 
+														if day matches any BYDAY the count is incremented. 
+														SETPOS = 4, need 4th match 
+														SETPOS = -1, need 1st match 
+													 	*/ 
+													 	$year = date('Y', $next_range_time); 
+													 	$month = date('m', $next_range_time); 
+													 	if ($bysetpos > 0) { 
+													  		$next_day = '+1 day'; 
+													  		$day = 1; 
+													 	} else { 
+													  		$next_day = '-1 day'; 
+													  		$day = $totalDays[$month]; 
+													 	} 
+													 	$day = mktime(0, 0, 0, $month, $day, $year); 
+													 	$countMatch = 0; 
+													 	while ($countMatch != abs($bysetpos)) { 
+													  		/* Does this day match a BYDAY value? */ 
+													  		$thisDay = $day; 
+													  		$textDay = strtoupper(substr(date('D', $thisDay), 0, 2)); 
+													  		if (in_array($textDay, $byday)) { 
+													   			$countMatch++; 
+													  		} 
+													  		$day = strtotime($next_day, $thisDay); 
+													 	} 
+													 	$recur_data[] = $thisDay; 
+													}elseif ((isset($bymonthday)) && (!isset($byday))) {
 														foreach($bymonthday as $day) {
 															if ($day < 0) $day = ((date('t', $next_range_time)) + ($day)) + 1;
 															$year = date('Y', $next_range_time);
@@ -661,7 +691,33 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 														} else {
 															$year = date('Y', $next_range_time);
 														}
-
+														if (isset($bysetpos)){
+															/* bysetpos code from dustinbutler
+															start on day 1 or last day. 
+															if day matches any BYDAY the count is incremented. 
+															SETPOS = 4, need 4th match 
+															SETPOS = -1, need 1st match 
+															*/ 
+															if ($bysetpos > 0) { 
+																$next_day = '+1 day'; 
+																$day = 1; 
+															} else { 
+																$next_day = '-1 day'; 
+																$day = date("t",$month); 
+															} 
+															$day = mktime(12, 0, 0, $month, $day, $year); 
+															$countMatch = 0; 
+															while ($countMatch != abs($bysetpos)) { 
+																/* Does this day match a BYDAY value? */ 
+																$thisDay = $day;
+																$textDay = strtoupper(substr(date('D', $thisDay), 0, 2)); 
+																if (in_array($textDay, $byday)) { 
+																	$countMatch++; 
+																} 
+																$day = strtotime($next_day, $thisDay); 
+															} 
+															$recur_data[] = $thisDay; 															
+														}
 														if ((isset($byday)) && (is_array($byday))) {
 															$checkdate_time = mktime(0,0,0,$month,1,$year);
 															foreach($byday as $day) {
