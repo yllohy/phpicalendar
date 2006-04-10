@@ -35,7 +35,7 @@ function error($error_msg='There was an error processing the request.', $file='N
 	));
 
 	$page->replace_tags(array(
-		'default_path'		=> $error_base,
+		'default_path'		=> $default_path.'/',
 		'template'			=> $template,
 		'cal'				=> $cal,
 		'getdate'			=> $getdate,
