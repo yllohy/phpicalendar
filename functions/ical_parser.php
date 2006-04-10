@@ -556,7 +556,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 								
 								$count_to = 0;
 								// start at the $start_range and go until we hit the end of our range.
-								if(!isset($wkst)) $wkst='Su';
+								if(!isset($wkst)) $wkst='SU';
 								$wkst3char = two2threeCharDays($wkst);
 
 								while (($next_range_time >= $start_range_time_tmp) && ($next_range_time <= $end_range_time_tmp) && ($count_to != $count)) {
