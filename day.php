@@ -48,8 +48,8 @@ $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'event_js'			=> BASE.'functions/event.js',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-    'sidebar'                       => BASE.'templates/'.$template.'/sidebar.tpl',
-    'search_box'                    => BASE.'templates/'.$template.'/search_box.tpl'
+    'sidebar'           => BASE.'templates/'.$template.'/sidebar.tpl',
+    'search_box'        => BASE.'templates/'.$template.'/search_box.tpl'
 	));
 
 $page->replace_tags(array(
