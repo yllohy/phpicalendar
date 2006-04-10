@@ -50,8 +50,8 @@ $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'event_js'			=> BASE.'functions/event.js',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-        'sidebar'                       => BASE.'templates/'.$template.'/sidebar.tpl',
-        'search_box'                    => BASE.'templates/'.$template.'/search_box.tpl'
+    'sidebar'           => BASE.'templates/'.$template.'/sidebar.tpl',
+    'search_box'        => BASE.'templates/'.$template.'/search_box.tpl'
 	));
 
 $page->replace_tags(array(
@@ -61,7 +61,7 @@ $page->replace_tags(array(
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
  	'getcpath'			=> "&cpath=$cpath",
-       'cpath'                 => $cpath,
+    'cpath'                 => $cpath,
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $display_date,
 	'current_view'		=> $current_view,
@@ -69,7 +69,7 @@ $page->replace_tags(array(
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
-        'show_search'           => $show_search,
+    'show_search'           => $show_search,
 	'next_day' 			=> $next_day,
 	'next_week' 		=> $next_week,
 	'prev_day'	 		=> $prev_day,
