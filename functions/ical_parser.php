@@ -58,6 +58,10 @@ if ($save_parsed_cals == 'yes') {
 					}
 					$z++;
 				}
+				foreach ($master_array['-3'] as $temp_array) {
+					if (isset($temp_array) && $temp_array !='') $caldisplaynames[] = $temp_array;
+				}
+
 				if ($y == sizeof($cal_filelist)) {
 					if ($master_array['-1'] == 'valid cal file') {
 						$parse_file = false;
@@ -1200,7 +1204,7 @@ if ($parse_file) {
 if ($cal == $ALL_CALENDARS_COMBINED) {
 	$calendar_name = $all_cal_comb_lang;
 }
-$cal_displayname = implode(', ', $cal_displaynames); #reset this with the correct names
+$cal_displayname = urldecode(implode(', ', $cal_displaynames)); #reset this with the correct names
 $template_started = getmicrotime();
 
 //If you want to see the values in the arrays, uncomment below.
