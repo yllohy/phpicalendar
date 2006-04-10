@@ -29,7 +29,7 @@ $cpath = $_REQUEST['cpath'];
 
 if ($action == 'setcookie') { 
 	$cookie_language 	= $_POST['cookie_language'];
-   	    $cookie_cpath     	    = $_POST['cpath'];
+   	$cookie_cpath     	= $_POST['cpath'];
 	$cookie_calendar 	= $_POST['cookie_calendar'];
 	$cookie_view 		= $_POST['cookie_view'];
 	$cookie_style 		= $_POST['cookie_style'];

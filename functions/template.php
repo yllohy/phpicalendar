@@ -1027,23 +1027,31 @@ class Page {
 
 	}
 
-	function Page($template = 'std.tpl') {
-		if (file_exists($template))
-			$this->page = join('', file($template));
-		else
-			die("Template file $template not found.");
-		}
+	function Page($file = 'std.tpl') {
+		global $template;
+		if (!file_exists($file)){
+			#look for it in default if not found
+			$file = str_replace("templates/$template","templates/default",$file); 
+			if (!file_exists($file)) die("Template file $file not found.");
+		}	
+		$this->page = join('', file($file));
+	}
 
 	function parse($file) {
-		global $template;
-		ob_start();
-		if (strpos($file, "$template") > 0 || $file =='./functions/event.js'){
+		global $template; $lang;
+		if (basename(dirname($file)) == "$template" || $file =='./functions/event.js'){
+			if (!is_file($file)){
+				#look for it in default if not found
+				$file = str_replace("templates/$template","templates/default",$file); 
+			}
+			if (!is_file($file)){
+				exit(error($lang['l_error_path'], $file));
+			}
+			ob_start();
 			include($file);
 			$buffer = ob_get_contents();
 			ob_end_clean();
 			return $buffer;
-		}else{
-			die('breakin attempt');
 		}
 	}
 	
@@ -1069,7 +1077,7 @@ class Page {
 			foreach ($tags as $tag => $data) {
 				
 				// This opens up another template and parses it as well.
-				$data = (file_exists($data)) ? $this->parse($data) : $data;
+				$data = $this->parse($data);
 				
 				// This removes any unfilled tags
 				if (!$data) {
