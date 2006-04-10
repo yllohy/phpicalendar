@@ -552,6 +552,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 								
 								$count_to = 0;
 								// start at the $start_range and go until we hit the end of our range.
+								if(!isset($wkst)) $wkst='Su';
+								$wkst3char = two2threeCharDays($wkst);
+
 								while (($next_range_time >= $start_range_time_tmp) && ($next_range_time <= $end_range_time_tmp) && ($count_to != $count)) {
 									$func = $freq_type.'Compare';
 									$diff = $func(date('Ymd',$next_range_time), $start_date);
@@ -572,8 +575,14 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 														foreach($byday as $day) {
 															$day = two2threeCharDays($day);	
 															#need to find the first day of the appropriate week.
-															$the_sunday = dateOfWeek(date("Ymd",$next_range_time), 'Sunday'); 
+															#dateOfweek uses weekstartday as a global variable. This has to be changed to $wkst, 
+															#but then needs to be reset for other functions
+															$week_start_day_tmp = $week_start_day;
+															$week_start_day = $wkst3char;
+															
+															$the_sunday = dateOfWeek(date("Ymd",$next_range_time), $wkst3char);
 															$next_date_time = strtotime($day,strtotime($the_sunday)) + (12 * 60 * 60);
+															$week_start_day = $week_start_day_tmp; #see above reset to global value
 															
 															#reset $next_range_time to first instance in this week.
 															if ($next_date_time < $next_range_time){ 
