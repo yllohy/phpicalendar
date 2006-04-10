@@ -82,7 +82,9 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
-2.22rc3
+2.22
+	template.php will look in templates/default if a file is missing from templates/$template
+	add support for WKST and BYPOS tags
 	change popup to not require reparsing cal files
 	differentiate cookie names for different installs on the same host
 	allow image tags in events

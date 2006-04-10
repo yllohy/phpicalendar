@@ -154,6 +154,7 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
+	'version'			=> $phpicalendar_version,
 	'charset'			=> $charset,
 	'template'			=> $template,
 	'default_path'		=> '',

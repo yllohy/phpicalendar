@@ -53,6 +53,7 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
+	'version'			=> $phpicalendar_version,
 	'charset'			=> $charset,
 	'default_path'		=> '',
 	'template'			=> $template,

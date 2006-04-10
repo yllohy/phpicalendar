@@ -74,6 +74,7 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
+	'version'			=> $phpicalendar_version,
 	'default_path'		=> $default_path.'/',
 	'template'			=> $template,
 	'cal'				=> $cal,

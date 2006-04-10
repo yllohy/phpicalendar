@@ -53,6 +53,7 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
+	'version'			=> $phpicalendar_version,
 	'event_js'			=> '',
 	'current_view'		=> $current_view,
 	'template'			=> $template,

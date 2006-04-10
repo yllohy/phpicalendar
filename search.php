@@ -291,6 +291,7 @@ $page->replace_files(array(
 
 
 $page->replace_tags(array(
+	'version'			=> $phpicalendar_version,
 	'formatted_search'	=> $formatted_search,
 	'l_results'			=> $lang['l_results'],
 	'l_query'			=> $lang['l_query'],

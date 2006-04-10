@@ -1,5 +1,5 @@
 <?php 
-
+$phpicalendar_version = '2.22';
 // uncomment when developing, comment for shipping version
 //error_reporting (E_ERROR | E_WARNING | E_PARSE);
 error_reporting(0);
