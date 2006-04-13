@@ -20,7 +20,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.3 2006/04/13 21:14:17 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.4 2006/04/13 22:33:13 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -37,7 +37,7 @@ require_once 'Tools/ReportParser.php';
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.3 2006/04/13 21:14:17 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.4 2006/04/13 22:33:13 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -87,177 +87,6 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
     }
 
     /**
-     * REPORT response helper - format REPORT response
-     *
-     * @param options
-     * @return void
-     * @access public
-     */
-    function report_response_helper($options, $files)
-    {
-        $responses = array();
-
-        // now loop over all returned files
-        foreach ($files as $file) {
-
-            // collect namespaces here
-            $ns_hash = array('urn:ietf:params:xml:ns:caldav' => 'C');
-
-            $response = array();
-
-            $response['href'] = $this->getHref($file['path']);
-            if (isset($file['href'])) {
-                $response['href'] = $file['href'];
-            }
-
-            $response['propstat'] = array();
-
-            // nothing to do if no properties were returend
-            if (isset($file['props']) && is_array($file['props'])) {
-
-                // now loop over all returned properties
-                foreach ($file['props'] as $prop) {
-                    $status = '200 OK';
-
-                    // as a convenience feature we do not require user handlers
-                    // restrict returned properties to the requested ones
-                    // here we ignore unrequested entries
-                    switch ($options['props']) {
-                    case 'propname':
-
-                        // only names of all existing properties were requested
-                        // so remove values
-                        unset($prop['value']);
-
-                    case 'allprop':
-                        if (isset($prop['status'])) {
-                            $status = $prop['status'];
-                        }
-
-                        if (!isset($response['propstat'][$status])) {
-                            $response['propstat'][$status] = array();
-                        }
-
-                        $response['propstat'][$status][] = $prop;
-                        break;
-
-                    default:
-
-                        // search property name in requested properties
-                        foreach($options['props'] as $reqprop) {
-                            if ($reqprop['name'] == $prop['name'] &&
-                                    $reqprop['ns'] == $prop['ns']) {
-                                if (isset($prop['status'])) {
-                                    $status = $prop['status'];
-                                }
-
-                                if (!isset($response['propstat'][$status])) {
-                                    $response['propstat'][$status] = array();
-                                }
-
-                                $response['propstat'][$status][] = $prop;
-                                break (2);
-                            }
-                        }
-
-                        continue (2);
-                    }
-
-                    // namespace handling
-                    if (empty($prop['ns']) || // empty namespace
-                            $prop['ns'] == 'DAV:' || // default namespace
-                            isset($ns_hash[$prop['ns']])) { // already known
-                        continue;
-                    }
-
-                    // register namespace
-                    $ns_hash[$prop['ns']] = 'ns' . count($ns_hash);
-                }
-            }
-
-            // also need empty entries for properties requested
-            // but for which no values where returned
-            if (isset($options['props']) && is_array($options['props'])) {
-
-                // now loop over all requested properties
-                foreach ($options['props'] as $reqprop) {
-                    $status = '404 Not Found';
-
-                    // check if property exists in result
-                    foreach ($file['props'] as $prop) {
-                        if ($reqprop['name'] == $prop['name'] &&
-                                $reqprop['ns'] == $prop['ns']) {
-                            continue (2);
-                        }
-                    }
-
-                    if ($reqprop['name'] == 'lockdiscovery' &&
-                            $reqprop['ns'] == 'DAV:' &&
-                            method_exists($this, 'getLocks')) {
-
-                        $status = '200 OK';
-                        if (!isset($response['propstat'][$status])) {
-                            $response['propstat'][$status] = array();
-                        }
-
-                        $response['propstat'][$status][] =
-                            $this->mkprop('DAV:', 'lockdiscovery',
-                            $this->getLocks($file['path']));
-                        continue;
-                    }
-
-                    if ($reqprop['name'] == 'calendar-data' &&
-                            $reqprop['ns'] == 'urn:ietf:params:xml:ns:caldav' &&
-                            method_exists($this, 'get')) {
-
-                        $prop = $this->_calendarData($reqprop, $file, $options);
-                        if (isset($prop)) {
-                            $status = '200 OK';
-                            if (isset($prop['status'])) {
-                                $status = $prop['status'];
-                            }
-                        } else {
-                            $prop = HTTP_CalDAV_Server::calDavProp(
-                                'calendar-data');
-                        }
-
-                        if (!isset($response['propstat'][$status])) {
-                            $response['propstat'][$status] = array();
-                        }
-
-                        $response['propstat'][$status][] = $prop;
-                        continue;
-                    }
-
-                    if (!isset($response['propstat'][$status])) {
-                        $response['propstat'][$status] = array();
-                    }
-
-                    // add empty value for this property
-                    $response['propstat'][$status][] =
-                        $this->mkprop($reqprop['ns'], $reqprop['name'],
-                        null);
-
-                    // namespace handling
-                    if (empty($reqprop['ns']) || // empty namespace
-                            $reqprop['ns'] == 'DAV:' || // default namespace
-                            isset($ns_hash[$reqprop['ns']])) { // already known
-                        continue;
-                    }
-
-                    // register namespace
-                    $ns_hash[$reqprop['ns']] = 'ns' . count($ns_hash);
-                }
-            }
-
-            $response['ns_hash'] = $ns_hash;
-            $responses[] = $response;
-        }
-
-        $this->_multistatus($responses);
-    }
-
-    /**
      * REPORT method wrapper
      *
      * @param void
@@ -285,64 +114,88 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
         }
 
         /* Format REPORT response */
-        $this->report_response_helper($options, $files);
+
+        // TODO Make ns_hash a class variable so we can prettify C:
+        // Or make getNsName so we can return C:
+        $this->propfind_response_helper($options, $files);
     }
 
-    function _calendarData($reqprop, $file, $options)
+    function getProp($reqprop, $file, $options)
     {
-        $filters = $options['filters'];
-
-        $options = array();
-        $options['path'] = $file['path'];
-
-        $status = $this->get($options);
-        if (empty($status)) {
-            $status = '403 Forbidden';
+        // check if property exists in response
+        foreach ($file['props'] as $prop) {
+            if ($reqprop['name'] == $prop['name'] &&
+                    $reqprop['ns'] == $prop['ns']) {
+                return $prop;
+            }
         }
 
-        if ($status !== true) {
-            return HTTP_CalDAV_Server::calDavProp('calendar-data', null,
-                $status);
+        if ($reqprop['name'] == 'lockdiscovery' &&
+                $reqprop['ns'] == 'DAV:' &&
+                method_exists($this, 'getLocks')) {
+            return $this->mkprop('DAV:', 'lockdiscovery',
+                $this->getLocks($file['path']));
         }
 
-        if ($options['mimetype'] != 'text/calendar') {
-            return;
+        if ($reqprop['name'] == 'calendar-data' &&
+                $reqprop['ns'] == 'urn:ietf:params:xml:ns:caldav' &&
+                method_exists($this, 'get')) {
+            $filters = $options['filters'];
+
+            $options = array();
+            $options['path'] = $file['path'];
+
+            $status = $this->get($options);
+            if (empty($status)) {
+                $status = '403 Forbidden';
+            }
+
+            if ($status !== true) {
+                return $this->calDavProp('calendar-data', null, $status);
+            }
+
+            if ($options['mimetype'] != 'text/calendar') {
+                return $this->calDavProp('calendar-data', null, '404 Not Found');
+            }
+
+            if ($options['stream']) {
+                $handle = $options['stream'];
+            } else if ($options['data']) {
+                // What about data?
+            } else {
+                return $this->calDavProp('calendar-data', null, '404 Not Found');
+            }
+
+            if (!($value = $this->_parseComponent($handle, $reqprop['value'], $filters))) {
+                return $this->calDavProp('calendar-data', null, '404 Not Found');
+            }
+
+            return HTTP_CalDAV_Server::calDavProp('calendar-data', $value);
         }
 
-        if ($options['stream']) {
-            $handle = $options['stream'];
-        } else if ($options['data']) {
-            // What about data?
-        } else {
-            return;
-        }
-
-        if (!($value = HTTP_CalDAV_Server::_parseComponent($handle,
-            $reqprop['value'], $filters))) {
-            return;
-        }
-
-        return HTTP_CalDAV_Server::calDavProp('calendar-data', $value);
+        // incase the requested property had a value, like calendar-data
+        unset($reqprop['value']);
+        $reqprop['status'] = '404 Not Found';
+        return $reqprop;
     }
 
     function _parseComponent($handle, $value=null, $filters=null)
     {
-        $components = array();
+        $comps = array();
         $compValues = array($value);
         $compFilters = array($filters);
         while (($line = fgets($handle, 4096)) !== false) {
             $line = explode(':', trim($line));
 
             if ($line[0] == 'END') {
-                if ($line[1] != $components[key($components)]->name) {
+                if ($line[1] != $comps[count($comps) - 1]->name) {
                     return;
                 }
 
-                if (is_array($compFilters[key($compFilters)]['filters'])) {
-                    foreach ($compFilters[key($compFilters)]['filters'] as $filter) {
-print $filter['name'];
+                if (is_array($compFilters[count($compFilters) - 1]['filters'])) {
+                    foreach ($compFilters[count($compFilters) - 1]['filters'] as $filter) {
                         if ($filter['name'] == 'time-range') {
-                            if ($filter['value']['start'] > $components[key($components)]->properties['DTEND'][0]->value || $filter['value']['end'] < $components[key($components)]->properties['DTSTART'][0]->value) {
+                            if ($filter['value']['start'] > $comps[count($comps) - 1]->properties['DTEND'][0]->value || $filter['value']['end'] < $comps[count($comps) - 1]->properties['DTSTART'][0]->value) {
                                 array_pop($compValues);
                                 array_pop($compFilters);
                                 continue;
@@ -353,11 +206,11 @@ print $filter['name'];
 
                 // If we're about to pop the root component, we ignore the rest
                 // of our input
-                if (count($components) == 1) {
-                    return array_pop($components);
+                if (count($comps) == 1) {
+                    return array_pop($comps);
                 }
 
-                if (!$components[key($components)]->add_component(array_pop($components))) {
+                if (!$comps[count($comps) - 2]->add_component(array_pop($comps))) {
                     return;
                 }
 
@@ -368,11 +221,8 @@ print $filter['name'];
 
             if ($line[0] == 'BEGIN') {
                 $compName = $line[1];
-var_dump($compName);
-var_dump($compValues);
-var_dump($compValues[key($compValues)]);
-                if (is_array($compValues[key($compValues)]['comps']) &&
-                        !isset($compValues[key($compValues)]['comps'][$compName])) {
+                if (is_array($compValues[count($compValues) - 1]['comps']) &&
+                        !isset($compValues[count($compValues) - 1]['comps'][$compName])) {
                     while (($line = fgets($handle, 4096)) !== false) {
                         if (trim($line) == "END:$compName") {
                             continue (2);
@@ -397,19 +247,17 @@ var_dump($compValues[key($compValues)]);
                     return;
                 }
 
-                $components[] = new $className;
-                end($components);
-                $compValues[] = $compValues[key($compValues)]['comps'][$compName];
-                end($components);
-                $compFilters[] = $compFilters[key($compFilters)]['comps'][$compName];
-                end($components);
+                $comps[] = new $className;
+                $compValues[] = $compValues[count($compValues) - 1]['comps'][$compName];
+                $compFilters[] = $compFilters[count($compFilters) - 1]['comps'][$compName];
                 continue;
             }
 
             $line[0] = explode(';=', $line[0]);
             $propName = array_shift($line[0]);
-            if (is_array($data['props']) &&
-                    !in_array($propName, $data['props'])) {
+            if (is_array($compValues[count($compValues) - 1]['props']) &&
+                    !in_array($propName,
+                    $compValues[count($compValues) - 1]['props'])) {
                 continue;
             }
 
@@ -417,7 +265,7 @@ var_dump($compValues[key($compValues)]);
             while (!empty($line[0])) {
                 $params[array_shift($line[0])] = array_shift($line[0]);
             }
-            $components[key($components)]->add_property($propName, $line[1], $params);
+            $comps[count($comps) - 1]->add_property($propName, $line[1], $params);
         }
     }
 
