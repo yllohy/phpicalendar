@@ -7,6 +7,12 @@ require_once(BASE . 'functions/calendar_functions.php');
 require_once('/home/jablko/public_html/gallery2/modules/webdav/lib/HTTP/WebDAV/Server.php');
 require_once(BASE . 'lib/HTTP/CalDAV/Server.php');
 
+require_once(BASE . 'lib/bennu/bennu.class.php');
+require_once(BASE . 'lib/bennu/iCalendar_components.php');
+require_once(BASE . 'lib/bennu/iCalendar_parameters.php');
+require_once(BASE . 'lib/bennu/iCalendar_properties.php');
+require_once(BASE . 'lib/bennu/iCalendar_rfc2445.php');
+
 class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 	function getBasePath() {
 		global $calendar_path;
@@ -81,7 +87,7 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 		}
 
 		if (is_file($absolutePath)) {
-			$options['mimetype'] = 'text/calendar';
+			$options['mimetype'] = mime_content_type($absolutePath);
 
 			$stat = stat($absolutePath);
 			$options['mtime'] = $stat['mtime'];
@@ -169,7 +175,8 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 
 				while (($pathComponent = readdir($handle)) !== false) {
 					if ($pathComponent != '.' && $pathComponent != '..') {
-						$paths[] = "$path/$pathComponent";
+						$paths[] = $path != '' ? "$path/$pathComponent" :
+							$pathComponent;
 					}
 				}
 				closedir($handle);
@@ -202,25 +209,44 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 		return $handle;
 	}
 
-	function report($options, &$responses) {
-		global $ALL_CALENDARS_COMBINED;
+	function report($options, &$files) {
+		$files = array();
+		$paths = array();
+		$path = $options['path'];
+		while (isset($path)) {
+			$file = array();
+			$file['path'] = $path;
 
-		$responses = array();
-		$paths = availableCalendars(null, null, $ALL_CALENDARS_COMBINED);
-		foreach ($paths as $path) {
-			$response = array();
+			$absolutePath = HTTP_CalDAV_Server_PHPiCalendar::getBasePath() .
+				'/' . $path;
+			$stat = stat($absolutePath);
+			$file['props'] = array();
+			$file['props'][] = $this->mkprop('creationdate', $stat['ctime']);
+			$file['props'][] = $this->mkprop('getlastmodified', $stat['mtime']);
 
-			$response['ns_hash'] = array();
-			$response['ns_hash']['urn:ietf:params:xml:ns:caldav'] = 'C';
+			if (is_dir($absolutePath)) {
+				$file['props'][] = $this->mkprop('resourcetype', 'collection');
 
-			$response['href'] = $this->getHref(array_pop(explode('/', $path)));
-			$response['propstat'] = array();
+				$handle = opendir($absolutePath);
+				if (!$handle) {
+					return;
+				}
 
-			$props = array();
-			$props[] = $this->mkprop('urn:ietf:params:xml:ns:caldav', 'calendar-data', file_get_contents($path));
+				while (($pathComponent = readdir($handle)) !== false) {
+					if ($pathComponent != '.' && $pathComponent != '..') {
+						$paths[] = $path != '' ? "$path/$pathComponent" :
+							$pathComponent;
+					}
+				}
+				closedir($handle);
+			} else {
+				$file['props'][] = $this->mkprop('getcontentlength',
+					$stat['size']);
+				$file['props'][] = $this->mkprop('resourcetype', null);
+			}
 
-			$response['propstat']['200 OK'] = $props;
-			$responses[] = $response;
+			$files[] = $file;
+			$path = array_pop($paths);
 		}
 
 		return true;
