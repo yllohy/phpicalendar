@@ -1,4 +1,4 @@
-<?php // $Id: iCalendar_components.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+<?php // $Id: iCalendar_components.php,v 1.2 2006/04/13 21:14:17 jablko Exp $
 
 /**
  *  BENNU - PHP iCalendar library
@@ -9,7 +9,7 @@
  *  See http://bennu.sourceforge.net/ for more information and downloads.
  *
  * @author Ioannis Papaioannou 
- * @version $Id: iCalendar_components.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+ * @version $Id: iCalendar_components.php,v 1.2 2006/04/13 21:14:17 jablko Exp $
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -179,19 +179,6 @@ class iCalendar_component {
     }
     
     function serialize() {
-        // Check for validity of the object
-        if(!$this->is_valid()) {
-            return false;
-        }
-
-        // Maybe the object is valid, but there are some required properties that
-        // have not been given explicit values. In that case, set them to defaults.
-        foreach($this->valid_properties as $property => $propdata) {
-            if(($propdata & RFC2445_REQUIRED) && empty($this->properties[$property])) {
-                $this->add_property($property);
-            }
-        }
-
         // Start tag
         $string = rfc2445_fold('BEGIN:'.$this->name) . RFC2445_CRLF;
 

@@ -20,7 +20,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.2 2006/04/13 05:10:24 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.3 2006/04/13 21:14:17 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -37,7 +37,7 @@ require_once 'Tools/ReportParser.php';
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.2 2006/04/13 05:10:24 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.3 2006/04/13 21:14:17 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -81,6 +81,7 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
         }
 
         $options['props'] = $parser->props;
+        $options['filters'] = $parser->filters;
 
         return true;
     }
@@ -209,8 +210,7 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
                             $reqprop['ns'] == 'urn:ietf:params:xml:ns:caldav' &&
                             method_exists($this, 'get')) {
 
-                        $prop = $this->_calendarData($file['path'],
-                            $reqprop['value']);
+                        $prop = $this->_calendarData($reqprop, $file, $options);
                         if (isset($prop)) {
                             $status = '200 OK';
                             if (isset($prop['status'])) {
@@ -288,15 +288,12 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
         $this->report_response_helper($options, $files);
     }
 
-    function _calendarData($path, $data=null, $filter=null)
+    function _calendarData($reqprop, $file, $options)
     {
-        if (is_array($data['comps']) &&
-                !isset($data['comps']['VCALENDAR'])) {
-            return HTTP_CalDAV_Server::calDavProp('calendar-data');
-        }
+        $filters = $options['filters'];
 
         $options = array();
-        $options['path'] = $path;
+        $options['path'] = $file['path'];
 
         $status = $this->get($options);
         if (empty($status)) {
@@ -309,8 +306,7 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
         }
 
         if ($options['mimetype'] != 'text/calendar') {
-            return HTTP_CalDAV_Server::calDavProp('calendar-data', null,
-                '403 Forbidden');
+            return;
         }
 
         if ($options['stream']) {
@@ -321,51 +317,64 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
             return;
         }
 
-        if (($line = fgets($handle, 4096)) === false) {
-            return;
-        }
-
-        if (trim($line) != 'BEGIN:VCALENDAR') {
-            return;
-        }
-
         if (!($value = HTTP_CalDAV_Server::_parseComponent($handle,
-                'VCALENDAR', is_array($data['comps']) ?
-                $data['comps']['VCALENDAR'] : null))) {
+            $reqprop['value'], $filters))) {
             return;
         }
 
         return HTTP_CalDAV_Server::calDavProp('calendar-data', $value);
     }
 
-    function _parseComponent($handle, $name, $data=null, $filter=null)
+    function _parseComponent($handle, $value=null, $filters=null)
     {
-        $className = 'iCalendar_' . ltrim(strtolower($name), 'v');
-        if ($name == 'VCALENDAR') {
-            $className = 'iCalendar';
-        }
-
-        if (!class_exists($className)) {
-            return;
-        }
-        $component = new $className;
-
+        $components = array();
+        $compValues = array($value);
+        $compFilters = array($filters);
         while (($line = fgets($handle, 4096)) !== false) {
             $line = explode(':', trim($line));
 
             if ($line[0] == 'END') {
-                if ($line[1] != $name) {
+                if ($line[1] != $components[key($components)]->name) {
                     return;
                 }
 
-                return $component;
+                if (is_array($compFilters[key($compFilters)]['filters'])) {
+                    foreach ($compFilters[key($compFilters)]['filters'] as $filter) {
+print $filter['name'];
+                        if ($filter['name'] == 'time-range') {
+                            if ($filter['value']['start'] > $components[key($components)]->properties['DTEND'][0]->value || $filter['value']['end'] < $components[key($components)]->properties['DTSTART'][0]->value) {
+                                array_pop($compValues);
+                                array_pop($compFilters);
+                                continue;
+                            }
+                        }
+                    }
+                }
+
+                // If we're about to pop the root component, we ignore the rest
+                // of our input
+                if (count($components) == 1) {
+                    return array_pop($components);
+                }
+
+                if (!$components[key($components)]->add_component(array_pop($components))) {
+                    return;
+                }
+
+                array_pop($compValues);
+                array_pop($compFilters);
+                continue;
             }
 
             if ($line[0] == 'BEGIN') {
-                if (is_array($data['comps']) &&
-                        !isset($data['comps'][$line[1]])) {
-                    while (($l = fgets($handle, 4096)) !== false) {
-                        if (trim($l) == "END:$line[1]") {
+                $compName = $line[1];
+var_dump($compName);
+var_dump($compValues);
+var_dump($compValues[key($compValues)]);
+                if (is_array($compValues[key($compValues)]['comps']) &&
+                        !isset($compValues[key($compValues)]['comps'][$compName])) {
+                    while (($line = fgets($handle, 4096)) !== false) {
+                        if (trim($line) == "END:$compName") {
                             continue (2);
                         }
                     }
@@ -373,11 +382,14 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
                     return;
                 }
 
-                if (!($childComponent = HTTP_CalDAV_Server::_parseComponent(
-                        $handle, $line[1], is_array($data['comps']) ?
-                        $data['comps'][$line[1]] : null))) {
-                    while (($l = fgets($handle, 4096)) !== false) {
-                        if (trim($l) == "END:$line[1]") {
+                $className = 'iCalendar_' . ltrim(strtolower($compName), 'v');
+                if ($line[1] == 'VCALENDAR') {
+                    $className = 'iCalendar';
+                }
+
+                if (!class_exists($className)) {
+                    while (($line = fgets($handle, 4096)) !== false) {
+                        if (trim($line) == "END:$compName") {
                             continue (2);
                         }
                     }
@@ -385,26 +397,27 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
                     return;
                 }
 
-                if (!$component->add_component($childComponent)) {
-                    return;
-                }
-
+                $components[] = new $className;
+                end($components);
+                $compValues[] = $compValues[key($compValues)]['comps'][$compName];
+                end($components);
+                $compFilters[] = $compFilters[key($compFilters)]['comps'][$compName];
+                end($components);
                 continue;
             }
 
             $line[0] = explode(';=', $line[0]);
-            $prop_name = array_shift($line[0]);
+            $propName = array_shift($line[0]);
             if (is_array($data['props']) &&
-                    !in_array($prop_name, $data['props'])) {
+                    !in_array($propName, $data['props'])) {
                 continue;
             }
 
             $params = array();
-            while (($param_name = array_shift($line[0])) &&
-                    ($param_value = array_shift($line[0]))) {
-                $params[$param_name] = $param_value;
+            while (!empty($line[0])) {
+                $params[array_shift($line[0])] = array_shift($line[0]);
             }
-            $component->add_property($prop_name, $line[1], $params);
+            $components[key($components)]->add_property($propName, $line[1], $params);
         }
     }
 

@@ -20,7 +20,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ReportParser.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+ * @version CVS: $Id: ReportParser.php,v 1.2 2006/04/13 21:14:17 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -35,7 +35,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ReportParser.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+ * @version CVS: $Id: ReportParser.php,v 1.2 2006/04/13 21:14:17 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -64,6 +64,14 @@ class ReportParser
      * @access public
      */
     var $props = array();
+
+    /**
+     * Found filters are collected here
+     *
+     * @var array
+     * @access public
+     */
+    var $filters = array();
 
     /**
      * Stack of ancestor tag names
@@ -205,6 +213,45 @@ class ReportParser
             return;
         }
 
+        if (count($this->_names) == 1 && $name == 'filter') {
+            $this->_comps[] =& $this->filters;
+            $this->_names[] = $name;
+            return;
+        }
+
+        if ($name == 'comp-filter') {
+            end($this->_comps);
+
+            // Gross - end returns a copy of the last value
+            $comp =& $this->_comps[key($this->_comps)];
+
+            if (!is_array($comp['comps'])) {
+                $comp['comps'] = array();
+            }
+
+            $comp['comps'][$attrs['name']] = array();
+            $this->_comps[] =& $comp['comps'][$attrs['name']];
+            $this->_names[] = $name;
+            return;
+        }
+
+        if (end($this->_names) == 'comp-filter') {
+            end($this->_comps);
+
+            // Gross - end returns a copy of the last value
+            $comp =& $this->_comps[key($this->_comps)];
+
+            if (!is_array($comp['filters'])) {
+                $comp['filters'] = array();
+            }
+
+            $filter = array('name' => $name, 'value' => $attrs);
+
+            $comp['filters'][] = $filter;
+            $this->_names[] = $name;
+            return;
+        }
+
         $this->_names[] = $name;
     }
 
@@ -232,7 +279,9 @@ class ReportParser
         }
 
         // Any need to pop at end of calendar-data?
-        if ($name == 'comp') {
+        // Yes - $this->_comps is re-used for parsing filters
+        if ($name == 'comp' || $name == 'calendar-data' ||
+                $name == 'comp-filter' || $name == 'filter') {
             array_pop($this->_comps);
         }
 
