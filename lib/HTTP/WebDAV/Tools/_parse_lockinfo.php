@@ -17,7 +17,7 @@
 // |          Christian Stocker <chregu@bitflux.ch>                       |
 // +----------------------------------------------------------------------+
 //
-// $Id: _parse_lockinfo.php,v 1.1 2006/04/09 19:27:12 jablko Exp $
+// $Id: _parse_lockinfo.php,v 1.2 2006/04/14 02:50:10 jablko Exp $
 //
 
 /**

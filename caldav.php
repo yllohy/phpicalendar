@@ -148,13 +148,13 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 		return true;
 	}
 
-	// FIXME Handle depth
 	// FIXME Use file_exists
 	function propfind($options, &$files) {
 		$files = array();
-		$paths = array();
-		$path = $options['path'];
-		while (isset($path)) {
+		$paths = array(array($options['path'], 0));
+		while (!empty($paths)) {
+			list ($path, $depth) = array_pop($paths);
+
 			$file = array();
 			$file['path'] = $path;
 
@@ -168,18 +168,21 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 			if (is_dir($absolutePath)) {
 				$file['props'][] = $this->mkprop('resourcetype', 'collection');
 
-				$handle = opendir($absolutePath);
-				if (!$handle) {
-					return;
-				}
-
-				while (($pathComponent = readdir($handle)) !== false) {
-					if ($pathComponent != '.' && $pathComponent != '..') {
-						$paths[] = $path != '' ? "$path/$pathComponent" :
-							$pathComponent;
+				if ($depth < $options['depth']) {
+					$handle = opendir($absolutePath);
+					if (!$handle) {
+						return;
 					}
+
+					while (($pathComponent = readdir($handle)) !== false) {
+						if ($pathComponent != '.' && $pathComponent != '..') {
+							$paths[] = array($path != '' ?
+								"$path/$pathComponent" : $pathComponent,
+								$depth + 1);
+						}
+					}
+					closedir($handle);
 				}
-				closedir($handle);
 			} else {
 				$file['props'][] = $this->mkprop('getcontentlength',
 					$stat['size']);
@@ -187,7 +190,6 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 			}
 
 			$files[] = $file;
-			$path = array_pop($paths);
 		}
 
 		return true;
@@ -211,9 +213,10 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 
 	function report($options, &$files) {
 		$files = array();
-		$paths = array();
-		$path = $options['path'];
-		while (isset($path)) {
+		$paths = array(array($options['path'], 0));
+		while (!empty($paths)) {
+			list ($path, $depth) = array_pop($paths);
+
 			$file = array();
 			$file['path'] = $path;
 
@@ -227,18 +230,21 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 			if (is_dir($absolutePath)) {
 				$file['props'][] = $this->mkprop('resourcetype', 'collection');
 
-				$handle = opendir($absolutePath);
-				if (!$handle) {
-					return;
-				}
-
-				while (($pathComponent = readdir($handle)) !== false) {
-					if ($pathComponent != '.' && $pathComponent != '..') {
-						$paths[] = $path != '' ? "$path/$pathComponent" :
-							$pathComponent;
+				if ($depth < $options['depth']) {
+					$handle = opendir($absolutePath);
+					if (!$handle) {
+						return;
 					}
+
+					while (($pathComponent = readdir($handle)) !== false) {
+						if ($pathComponent != '.' && $pathComponent != '..') {
+							$paths[] = array($path != '' ?
+								"$path/$pathComponent" : $pathComponent,
+								$depth + 1);
+						}
+					}
+					closedir($handle);
 				}
-				closedir($handle);
 			} else {
 				$file['props'][] = $this->mkprop('getcontentlength',
 					$stat['size']);
@@ -246,7 +252,6 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 			}
 
 			$files[] = $file;
-			$path = array_pop($paths);
 		}
 
 		return true;
