@@ -20,7 +20,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ReportParser.php,v 1.3 2006/04/13 22:33:13 jablko Exp $
+ * @version CVS: $Id: ReportParser.php,v 1.4 2006/04/18 03:22:12 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -35,7 +35,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ReportParser.php,v 1.3 2006/04/13 22:33:13 jablko Exp $
+ * @version CVS: $Id: ReportParser.php,v 1.4 2006/04/18 03:22:12 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -97,6 +97,7 @@ class ReportParser
      */
     function ReportParser($input)
     {
+        // FIXME Take a handle, not a path
         $handle = fopen($input, 'r');
         if (!$handle) {
             return;

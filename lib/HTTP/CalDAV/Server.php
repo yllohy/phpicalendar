@@ -20,12 +20,13 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.4 2006/04/13 22:33:13 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.5 2006/04/18 03:22:12 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
 
 require_once 'Tools/ReportParser.php';
+require_once 'Tools/ICalendarParser.php';
 
 /**
  * CalDav Server class
@@ -37,7 +38,7 @@ require_once 'Tools/ReportParser.php';
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.4 2006/04/13 22:33:13 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.5 2006/04/18 03:22:12 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -69,7 +70,9 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
         $options = array();
         $options['path'] = $this->path;
 
-        $options['depth'] = 'infinity';
+        /* The request MAY include a Depth header.  If no Depth header is
+           included, Depth:0 is assumed. */
+        $options['depth'] = 0;
         if (isset($_SERVER['HTTP_DEPTH'])) {
             $options['depth'] = $_SERVER['HTTP_DEPTH'];
         }
@@ -147,7 +150,7 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
 
             $status = $this->get($options);
             if (empty($status)) {
-                $status = '403 Forbidden';
+                $status = '404 Not Found';
             }
 
             if ($status !== true) {
@@ -155,7 +158,8 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
             }
 
             if ($options['mimetype'] != 'text/calendar') {
-                return $this->calDavProp('calendar-data', null, '404 Not Found');
+                return $this->calDavProp('calendar-data', null,
+                    '404 Not Found');
             }
 
             if ($options['stream']) {
@@ -163,110 +167,25 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
             } else if ($options['data']) {
                 // What about data?
             } else {
-                return $this->calDavProp('calendar-data', null, '404 Not Found');
+                return $this->calDavProp('calendar-data', null,
+                    '404 Not Found');
             }
 
-            if (!($value = $this->_parseComponent($handle, $reqprop['value'], $filters))) {
-                return $this->calDavProp('calendar-data', null, '404 Not Found');
+            $parser = new ICalendarParser($handle, null, null,
+                $reqprop['value'], $filters);
+            if (!$parser->success) {
+                return $this->calDavProp('calendar-data', null,
+                    '404 Not Found');
             }
 
-            return HTTP_CalDAV_Server::calDavProp('calendar-data', $value);
+            return HTTP_CalDAV_Server::calDavProp('calendar-data',
+                $parser->comps[count($parser->comps) - 1]);
         }
 
         // incase the requested property had a value, like calendar-data
         unset($reqprop['value']);
         $reqprop['status'] = '404 Not Found';
         return $reqprop;
-    }
-
-    function _parseComponent($handle, $value=null, $filters=null)
-    {
-        $comps = array();
-        $compValues = array($value);
-        $compFilters = array($filters);
-        while (($line = fgets($handle, 4096)) !== false) {
-            $line = explode(':', trim($line));
-
-            if ($line[0] == 'END') {
-                if ($line[1] != $comps[count($comps) - 1]->name) {
-                    return;
-                }
-
-                if (is_array($compFilters[count($compFilters) - 1]['filters'])) {
-                    foreach ($compFilters[count($compFilters) - 1]['filters'] as $filter) {
-                        if ($filter['name'] == 'time-range') {
-                            if ($filter['value']['start'] > $comps[count($comps) - 1]->properties['DTEND'][0]->value || $filter['value']['end'] < $comps[count($comps) - 1]->properties['DTSTART'][0]->value) {
-                                array_pop($compValues);
-                                array_pop($compFilters);
-                                continue;
-                            }
-                        }
-                    }
-                }
-
-                // If we're about to pop the root component, we ignore the rest
-                // of our input
-                if (count($comps) == 1) {
-                    return array_pop($comps);
-                }
-
-                if (!$comps[count($comps) - 2]->add_component(array_pop($comps))) {
-                    return;
-                }
-
-                array_pop($compValues);
-                array_pop($compFilters);
-                continue;
-            }
-
-            if ($line[0] == 'BEGIN') {
-                $compName = $line[1];
-                if (is_array($compValues[count($compValues) - 1]['comps']) &&
-                        !isset($compValues[count($compValues) - 1]['comps'][$compName])) {
-                    while (($line = fgets($handle, 4096)) !== false) {
-                        if (trim($line) == "END:$compName") {
-                            continue (2);
-                        }
-                    }
-
-                    return;
-                }
-
-                $className = 'iCalendar_' . ltrim(strtolower($compName), 'v');
-                if ($line[1] == 'VCALENDAR') {
-                    $className = 'iCalendar';
-                }
-
-                if (!class_exists($className)) {
-                    while (($line = fgets($handle, 4096)) !== false) {
-                        if (trim($line) == "END:$compName") {
-                            continue (2);
-                        }
-                    }
-
-                    return;
-                }
-
-                $comps[] = new $className;
-                $compValues[] = $compValues[count($compValues) - 1]['comps'][$compName];
-                $compFilters[] = $compFilters[count($compFilters) - 1]['comps'][$compName];
-                continue;
-            }
-
-            $line[0] = explode(';=', $line[0]);
-            $propName = array_shift($line[0]);
-            if (is_array($compValues[count($compValues) - 1]['props']) &&
-                    !in_array($propName,
-                    $compValues[count($compValues) - 1]['props'])) {
-                continue;
-            }
-
-            $params = array();
-            while (!empty($line[0])) {
-                $params[array_shift($line[0])] = array_shift($line[0]);
-            }
-            $comps[count($comps) - 1]->add_property($propName, $line[1], $params);
-        }
     }
 
     function _multistatus($responses)

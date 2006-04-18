@@ -168,7 +168,8 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 			if (is_dir($absolutePath)) {
 				$file['props'][] = $this->mkprop('resourcetype', 'collection');
 
-				if ($depth < $options['depth']) {
+				if ($depth < $options['depth'] ||
+						$options['depth'] == 'infinity') {
 					$handle = opendir($absolutePath);
 					if (!$handle) {
 						return;
@@ -230,7 +231,8 @@ class HTTP_CalDAV_Server_PHPiCalendar extends HTTP_CalDAV_Server {
 			if (is_dir($absolutePath)) {
 				$file['props'][] = $this->mkprop('resourcetype', 'collection');
 
-				if ($depth < $options['depth']) {
+				if ($depth < $options['depth'] ||
+						$options['depth'] == 'infinity') {
 					$handle = opendir($absolutePath);
 					if (!$handle) {
 						return;
