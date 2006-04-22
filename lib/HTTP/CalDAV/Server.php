@@ -20,7 +20,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.5 2006/04/18 03:22:12 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.6 2006/04/22 22:50:24 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -38,7 +38,7 @@ require_once 'Tools/ICalendarParser.php';
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: Server.php,v 1.5 2006/04/18 03:22:12 jablko Exp $
+ * @version CVS: $Id: Server.php,v 1.6 2006/04/22 22:50:24 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -171,8 +171,8 @@ class HTTP_CalDAV_Server extends HTTP_WebDAV_Server
                     '404 Not Found');
             }
 
-            $parser = new ICalendarParser($handle, null, null,
-                $reqprop['value'], $filters);
+            $parser = new ICalendarParser($handle, null, $reqprop['value'],
+                $filters);
             if (!$parser->success) {
                 return $this->calDavProp('calendar-data', null,
                     '404 Not Found');

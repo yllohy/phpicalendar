@@ -20,7 +20,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ICalendarParser.php,v 1.1 2006/04/18 03:22:12 jablko Exp $
+ * @version CVS: $Id: ICalendarParser.php,v 1.2 2006/04/22 22:50:24 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -35,12 +35,20 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ICalendarParser.php,v 1.1 2006/04/18 03:22:12 jablko Exp $
+ * @version CVS: $Id: ICalendarParser.php,v 1.2 2006/04/22 22:50:24 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
 class ICalendarParser
 {
+    /**
+     * Input stream handle
+     *
+     * @var resource
+     * @access private
+     */
+    var $_handle;
+
     /**
      * Success state flag
      *
@@ -66,106 +74,104 @@ class ICalendarParser
     var $offsets = array();
 
     /**
+     * Component stack for parsing nested components
+     *
+     * @var array
+     * @access private
+     */
+    var $_compStack = array();
+
+    /**
+     * Begin offset stack for tracking begin offsets of nested components
+     *
+     * @var array
+     * @access private
+     */
+    var $_beginOffsetStack = array();
+
+    /**
+     * Offsets stack for parsing within specific ranges
+     *
+     * @var array
+     * @access private
+     */
+    var $_offsetStack = array();
+
+    /**
+     * Value stack for parsing only specific components & properties
+     *
+     * @var array
+     * @access private
+     */
+    var $_valueStack = array();
+
+    /**
+     * Filter stack for parsing only components & properties which match
+     * specific filters
+     *
+     * @var array
+     * @access private
+     */
+    var $_filterStack = array();
+
+    /**
      * Constructor
      *
      * @param resource input stream handle
      * @access public
      */
-    function ICalendarParser($handle, $beginOffset=null, $endOffset=null,
-        $value=null, $filters=null)
+    function ICalendarParser($handle, $offsets=null, $value=null, $filters=null)
     {
-        $comps = array();
-        $beginOffsets = array();
-        $compValues = array($value);
-        $compFilters = array($filters);
+        $this->_handle = $handle;
         $this->success = true;
-        while (($offset = ftell($handle)) !== false &&
-                ($line = fgets($handle, 4096)) !== false) {
-            if (isset($endOffset) && $offset > $endOffset) {
-                return;
+        $this->_offsetStack[] = $offsets;
+        $this->_valueStack[] = $value;
+        $this->_filterStack[] = $filters;
+        while ($this->success &&
+                ($offset = ftell($this->_handle)) !== false &&
+                ($line = fgets($this->_handle, 4096)) !== false) {
+            if (is_array($this->_offsetStack[count($this->_offsetStack) - 1]['offsets'])) {
+                if ($offset > $this->_offsetStack[count($this->_offsetStack) - 1]['offsets'][0][1]) {
+                    if (array_shift($this->_offsetStack[count($this->_offsetStack) - 1]['offsets']) !== null) {
+                        if (fseek($this->_offsetStack[count($this->_offsetStack) - 1]['offsets'][0][0])) {
+                            $this->success = false;
+                            return;
+                        }
+
+                        continue;
+                    }
+
+                    if (!empty($this->_compStack)) {
+                        $name = $this->_compStack[count($this->_compStack) - 1]->name;
+                        while (($line = fgets($this->_handle, 4096)) !== false) {
+                            if (trim($line) == "END:$name") {
+                                return;
+                            }
+                        }
+
+                        $this->_endComp($name);
+                        continue;
+                    }
+
+                    return;
+                }
             }
 
             $line = explode(':', trim($line));
 
-            if ($line[0] == 'END') {
-                if ($line[1] != $comps[count($comps) - 1]->name) {
-                    $this->success = false;
-                    return;
-                }
-
-                if (is_array($compFilters[count($compFilters) - 1]['filters'])) {
-                    foreach ($compFilters[count($compFilters) - 1]['filters'] as $filter) {
-                        if ($filter['name'] == 'time-range') {
-                            if ($filter['value']['start'] > $comps[count($comps) - 1]->properties['DTEND'][0]->value || $filter['value']['end'] < $comps[count($comps) - 1]->properties['DTSTART'][0]->value) {
-                                array_pop($compValues);
-                                array_pop($compFilters);
-                                continue;
-                            }
-                        }
-                    }
-                }
-
-                if (count($comps) > 1 &&
-                        !$comps[count($comps) - 2]->add_component($comps[count(
-                        $comps) - 1])) {
-                    $this->success = false;
-                    return;
-                }
-
-                if (($offset = ftell($handle)) === false) {
-                    $this->success = false;
-                    return;
-                }
-
-                $this->comps[] = array_pop($comps);
-                $this->offsets[] = array(array_pop($beginOffsets), $offset);
-                array_pop($compValues);
-                array_pop($compFilters);
+            if ($line[0] == 'BEGIN') {
+                $this->_beginComp($line[1]);
                 continue;
             }
 
-            if ($line[0] == 'BEGIN') {
-                $compName = $line[1];
-                if (is_array($compValues[count($compValues) - 1]['comps']) &&
-                        !isset($compValues[count($compValues) - 1]['comps'][$compName])) {
-                    while (($line = fgets($handle, 4096)) !== false) {
-                        if (trim($line) == "END:$compName") {
-                            continue (2);
-                        }
-                    }
-
-                    $this->success = false;
-                    return;
-                }
-
-                $className = 'iCalendar_' . ltrim(strtolower($compName), 'v');
-                if ($line[1] == 'VCALENDAR') {
-                    $className = 'iCalendar';
-                }
-
-                if (!class_exists($className)) {
-                    while (($line = fgets($handle, 4096)) !== false) {
-                        if (trim($line) == "END:$compName") {
-                            continue (2);
-                        }
-                    }
-
-                    $this->success = false;
-                    return;
-                }
-
-                $comps[] = new $className;
-                $beginOffsets[] = $offset;
-                $compValues[] = $compValues[count($compValues) - 1]['comps'][$compName];
-                $compFilters[] = $compFilters[count($compFilters) - 1]['comps'][$compName];
+            if ($line[0] == 'END') {
+                $this->_endComp($line[1]);
                 continue;
             }
 
             $line[0] = explode(';=', $line[0]);
-            $propName = array_shift($line[0]);
-            if (is_array($compValues[count($compValues) - 1]['props']) &&
-                    !in_array($propName,
-                    $compValues[count($compValues) - 1]['props'])) {
+            $name = array_shift($line[0]);
+            if (is_array($this->_valueStack[count($this->_valueStack) - 1]['props']) && !in_array($name, $this->_valueStack[count($this->_valueStack) - 1]['props'])) {
                 continue;
             }
 
@@ -173,12 +179,88 @@ class ICalendarParser
             while (!empty($line[0])) {
                 $params[array_shift($line[0])] = array_shift($line[0]);
             }
-            $comps[count($comps) - 1]->add_property($propName, $line[1], $params);
+            $this->_compStack[count($this->_compStack) - 1]->add_property($name, $line[1], $params);
         }
 
-        if (!feof($handle)) {
+        if (!feof($this->_handle)) {
             $this->success = false;
         }
+    }
+
+    function _beginComp($name)
+    {
+        if (is_array($this->_valueStack[count($this->_valueStack) - 1]['comps']) &&
+                !isset($this->_valueStack[count($this->_valueStack) - 1]['comps'][$name])) {
+            while (($line = fgets($this->_handle, 4096)) !== false) {
+                if (trim($line) == "END:$name") {
+                    return;
+                }
+            }
+
+            $this->success = false;
+            return;
+        }
+
+        $class = 'iCalendar_' . ltrim(strtolower($name), 'v');
+        if ($name == 'VCALENDAR') {
+            $class = 'iCalendar';
+        }
+
+        if (!class_exists($class)) {
+            while (($line = fgets($this->_handle, 4096)) !== false) {
+                if (trim($line) == "END:$name") {
+                    return;
+                }
+            }
+
+            $this->success = false;
+            return;
+        }
+
+        $this->_compStack[] = new $class;
+        $this->_beginOffsetStack[] = $offset;
+        $this->_offsetStack[] = $this->_offsetStack[count($this->_offsetStack) - 1]['comps'][$name];
+        $this->_valueStack[] = $this->_valueStack[count($this->_valueStack) - 1]['comps'][$name];
+        $this->_filterStack[] = $this->_filterStack[count($this->_filterStack) - 1]['comps'][$name];
+    }
+
+    function _endComp($name)
+    {
+        if ($name != $this->_compStack[count($this->_compStack) - 1]->name) {
+            $this->success = false;
+            return;
+        }
+
+        if (is_array($this->_filterStack[count($this->_filterStack) - 1]['filters'])) {
+            foreach ($this->_filterStack[count($this->_filterStack) - 1]['filters'] as $filter) {
+                if ($filter['name'] == 'time-range') {
+                    if ($filter['value']['start'] > $this->_compStack[count($this->_compStack) - 1]->properties['DTEND'][0]->value || $filter['value']['end'] < $this->_compStack[count($this->_compStack) - 1]->properties['DTSTART'][0]->value) {
+                        array_pop($this->_compStack);
+                        array_pop($this->_beginOffsetStack);
+                        array_pop($this->_offsetStack);
+                        array_pop($this->_valueStack);
+                        array_pop($this->_filterStack);
+                        return;
+                    }
+                }
+            }
+        }
+
+        if (count($this->_compStack) > 1 && !$this->_compStack[count($this->_compStack) - 2]->add_component($this->_compStack[count($this->_compStack) - 1])) {
+            $this->success = false;
+            return;
+        }
+
+        if (($offset = ftell($this->_handle)) === false) {
+            $this->success = false;
+            return;
+        }
+
+        $this->comps[] = array_pop($this->_compStack);
+        $this->offsets[] = array(array_pop($this->_beginOffsetStack), $offset);
+        array_pop($this->_offsetStack);
+        array_pop($this->_valueStack);
+        array_pop($this->_filterStack);
     }
 }
 
