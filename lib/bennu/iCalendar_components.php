@@ -1,4 +1,4 @@
-<?php // $Id: iCalendar_components.php,v 1.2 2006/04/13 21:14:17 jablko Exp $
+<?php // $Id: iCalendar_components.php,v 1.3 2006/04/23 20:09:50 jablko Exp $
 
 /**
  *  BENNU - PHP iCalendar library
@@ -9,7 +9,7 @@
  *  See http://bennu.sourceforge.net/ for more information and downloads.
  *
  * @author Ioannis Papaioannou 
- * @version $Id: iCalendar_components.php,v 1.2 2006/04/13 21:14:17 jablko Exp $
+ * @version $Id: iCalendar_components.php,v 1.3 2006/04/23 20:09:50 jablko Exp $
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -205,7 +205,6 @@ class iCalendar_component {
 
         return $string;
     }
-
 }
 
 class iCalendar extends iCalendar_component {
@@ -227,7 +226,6 @@ class iCalendar extends iCalendar_component {
         );
         parent::construct();
     }
-
 }
 
 class iCalendar_event extends iCalendar_component {
@@ -306,7 +304,6 @@ class iCalendar_event extends iCalendar_component {
         }
         return true;
     }
-
 }
 
 class iCalendar_todo extends iCalendar_component {
@@ -388,7 +385,6 @@ class iCalendar_timezone extends iCalendar_component {
         
         parent::construct();
     }
-
 }
 
 // REMINDER: DTEND must be later than DTSTART for all components which support both

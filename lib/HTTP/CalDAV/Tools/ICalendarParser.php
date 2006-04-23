@@ -20,7 +20,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ICalendarParser.php,v 1.2 2006/04/22 22:50:24 jablko Exp $
+ * @version CVS: $Id: ICalendarParser.php,v 1.3 2006/04/23 20:09:50 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -35,7 +35,7 @@
  * @author Jack Bates <ms419@freezone.co.uk>
  * @copyright 2006 The PHP Group
  * @license PHP License 3.0 http://www.php.net/license/3_0.txt
- * @version CVS: $Id: ICalendarParser.php,v 1.2 2006/04/22 22:50:24 jablko Exp $
+ * @version CVS: $Id: ICalendarParser.php,v 1.3 2006/04/23 20:09:50 jablko Exp $
  * @link http://pear.php.net/package/HTTP_CalDAV_Server
  * @see HTTP_WebDAV_Server
  */
@@ -50,12 +50,28 @@ class ICalendarParser
     var $_handle;
 
     /**
+     * Line of input
+     *
+     * @var string
+     * @access private
+     */
+    var $_line;
+
+    /**
+     * Offset of line
+     *
+     * @var int
+     * @access private
+     */
+    var $_offset;
+
+    /**
      * Success state flag
      *
      * @var bool
      * @access public
      */
-    var $success = false;
+    var $success = true;
 
     /**
      * Parsed components are collected here in post-order
@@ -82,12 +98,12 @@ class ICalendarParser
     var $_compStack = array();
 
     /**
-     * Begin offset stack for tracking begin offsets of nested components
+     * Begin offset stack for tracking start offsets of nested components
      *
      * @var array
      * @access private
      */
-    var $_beginOffsetStack = array();
+    var $_startOffsetStack = array();
 
     /**
      * Offsets stack for parsing within specific ranges
@@ -115,6 +131,21 @@ class ICalendarParser
     var $_filterStack = array();
 
     /**
+     * Parse RFC2445 date-time
+     *
+     * May eventually get moved someplace more appropriate
+     * TODO Timezone support
+     *
+     * @param string RFC2445 date-time
+     * @return int timestamp
+     * @access public
+     */
+    function datetime_to_timestamp($datetime)
+    {
+        return gmmktime(substr($datetime, 9, 2), substr($datetime, 11, 2), substr($datetime, 13, 2), substr($datetime, 4, 2), substr($datetime, 6, 2), substr($datetime, 0, 4));
+    }
+
+    /**
      * Constructor
      *
      * @param resource input stream handle
@@ -123,15 +154,16 @@ class ICalendarParser
     function ICalendarParser($handle, $offsets=null, $value=null, $filters=null)
     {
         $this->_handle = $handle;
-        $this->success = true;
         $this->_offsetStack[] = $offsets;
-        $this->_valueStack[] = $value;
+
+        // FIXME Separate comps & props stacks?
+        $this->_valueStack[] = array('comps' => $value);
         $this->_filterStack[] = $filters;
         while ($this->success &&
-                ($offset = ftell($this->_handle)) !== false &&
-                ($line = fgets($this->_handle, 4096)) !== false) {
+                ($this->_offset = ftell($this->_handle)) !== false &&
+                ($this->_line = fgets($this->_handle, 4096)) !== false) {
             if (is_array($this->_offsetStack[count($this->_offsetStack) - 1]['offsets'])) {
-                if ($offset > $this->_offsetStack[count($this->_offsetStack) - 1]['offsets'][0][1]) {
+                if ($this->_offset > $this->_offsetStack[count($this->_offsetStack) - 1]['offsets'][0][1]) {
                     if (array_shift($this->_offsetStack[count($this->_offsetStack) - 1]['offsets']) !== null) {
                         if (fseek($this->_offsetStack[count($this->_offsetStack) - 1]['offsets'][0][0])) {
                             $this->success = false;
@@ -157,10 +189,10 @@ class ICalendarParser
                 }
             }
 
-            $line = explode(':', trim($line));
+            $line = explode(':', trim($this->_line));
 
             if ($line[0] == 'BEGIN') {
-                $this->_beginComp($line[1]);
+                $this->_startComp($line[1]);
                 continue;
             }
 
@@ -187,7 +219,7 @@ class ICalendarParser
         }
     }
 
-    function _beginComp($name)
+    function _startComp($name)
     {
         if (is_array($this->_valueStack[count($this->_valueStack) - 1]['comps']) &&
                 !isset($this->_valueStack[count($this->_valueStack) - 1]['comps'][$name])) {
@@ -218,7 +250,7 @@ class ICalendarParser
         }
 
         $this->_compStack[] = new $class;
-        $this->_beginOffsetStack[] = $offset;
+        $this->_startOffsetStack[] = $this->_offset;
         $this->_offsetStack[] = $this->_offsetStack[count($this->_offsetStack) - 1]['comps'][$name];
         $this->_valueStack[] = $this->_valueStack[count($this->_valueStack) - 1]['comps'][$name];
         $this->_filterStack[] = $this->_filterStack[count($this->_filterStack) - 1]['comps'][$name];
@@ -236,7 +268,7 @@ class ICalendarParser
                 if ($filter['name'] == 'time-range') {
                     if ($filter['value']['start'] > $this->_compStack[count($this->_compStack) - 1]->properties['DTEND'][0]->value || $filter['value']['end'] < $this->_compStack[count($this->_compStack) - 1]->properties['DTSTART'][0]->value) {
                         array_pop($this->_compStack);
-                        array_pop($this->_beginOffsetStack);
+                        array_pop($this->_startOffsetStack);
                         array_pop($this->_offsetStack);
                         array_pop($this->_valueStack);
                         array_pop($this->_filterStack);
@@ -257,7 +289,7 @@ class ICalendarParser
         }
 
         $this->comps[] = array_pop($this->_compStack);
-        $this->offsets[] = array(array_pop($this->_beginOffsetStack), $offset);
+        $this->offsets[] = array(array_pop($this->_startOffsetStack), $offset);
         array_pop($this->_offsetStack);
         array_pop($this->_valueStack);
         array_pop($this->_filterStack);

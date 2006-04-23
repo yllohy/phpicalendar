@@ -1,4 +1,4 @@
-<?php // $Id: iCalendar_parameters.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+<?php // $Id: iCalendar_parameters.php,v 1.2 2006/04/23 20:09:50 jablko Exp $
 
 /**
  *  BENNU - PHP iCalendar library
@@ -9,7 +9,7 @@
  *  See http://bennu.sourceforge.net/ for more information and downloads.
  *
  * @author Ioannis Papaioannou 
- * @version $Id: iCalendar_parameters.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+ * @version $Id: iCalendar_parameters.php,v 1.2 2006/04/23 20:09:50 jablko Exp $
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -234,7 +234,6 @@ class iCalendar_parameter {
 
     function undo_value_formatting($parameter, $value) {
     }
-
 }
 
 ?>

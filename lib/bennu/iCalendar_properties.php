@@ -1,4 +1,4 @@
-<?php // $Id: iCalendar_properties.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+<?php // $Id: iCalendar_properties.php,v 1.2 2006/04/23 20:09:50 jablko Exp $
 
 /**
  *  BENNU - PHP iCalendar library
@@ -9,7 +9,7 @@
  *  See http://bennu.sourceforge.net/ for more information and downloads.
  *
  * @author Ioannis Papaioannou 
- * @version $Id: iCalendar_properties.php,v 1.1 2006/04/13 05:10:24 jablko Exp $
+ * @version $Id: iCalendar_properties.php,v 1.2 2006/04/23 20:09:50 jablko Exp $
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 
@@ -282,7 +282,6 @@ class iCalendar_property_version extends iCalendar_property {
     function is_valid_value($value) {
         return($value === '2.0' || $value === 2.0);
     }
-
 }
 
 // 4.8.1 Descriptive Component Properties
@@ -430,7 +429,6 @@ class iCalendar_property_geo extends iCalendar_property {
 
         return false;
     }
-
 }
 
 class iCalendar_property_location extends iCalendar_property {
@@ -466,7 +464,6 @@ class iCalendar_property_percent_complete extends iCalendar_property {
         $value = intval($value);
         return ($value >= 0 && $value <= 100);
     }
-
 }
 
 class iCalendar_property_priority extends iCalendar_property {
@@ -533,7 +530,6 @@ class iCalendar_property_status extends iCalendar_property {
         return in_array($value, $allowed);
 
     }
-
 }
 
 class iCalendar_property_summary extends iCalendar_property {
@@ -818,7 +814,6 @@ class iCalendar_property_attendee extends iCalendar_property {
 
         return false;
     }
-
 }
 
 class iCalendar_property_contact extends iCalendar_property {
@@ -902,7 +897,6 @@ class iCalendar_property_recurrence_id extends iCalendar_property {
 
         return true;
     }
-
 }
 
 class iCalendar_property_related_to extends iCalendar_property {
@@ -979,7 +973,6 @@ class iCalendar_property_exdate extends iCalendar_property {
 
         return true;
     }
-
 }
 
 class iCalendar_property_exrule extends iCalendar_property {
@@ -1021,7 +1014,6 @@ class iCalendar_property_rdate extends iCalendar_property {
 
         return true;
     }
-
 }
 
 class iCalendar_property_rrule extends iCalendar_property {
@@ -1277,7 +1269,6 @@ class iCalendar_property_request_status extends iCalendar_property {
 
         return false;
     }
-
 }
 
 
