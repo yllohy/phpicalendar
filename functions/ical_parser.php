@@ -35,7 +35,7 @@ $this_year = $day_array2[1];
 $parse_file = true;
 if ($save_parsed_cals == 'yes') {	
 	if (sizeof ($cal_filelist) > 1) {
-		$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cal_filename).'-'.$this_year;
+		$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
 		if (file_exists($parsedcal)) {
 			$fd = fopen($parsedcal, 'r');
 			$contents = fread($fd, filesize($parsedcal));
@@ -75,7 +75,7 @@ if ($save_parsed_cals == 'yes') {
 	} else {
 		foreach ($cal_filelist as $filename) {
 			$realcal_mtime = filemtime($filename);
-			$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cal_filename).'-'.$this_year;
+			$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
 			if (file_exists($parsedcal)) {
 				$parsedcal_mtime = filemtime($parsedcal);
 				if ($realcal_mtime == $parsedcal_mtime) {
