@@ -40,7 +40,7 @@ if(isset($_REQUEST['cpath'])&& $_REQUEST['cpath'] !=''){
 }elseif(isset($default_cpath_check) && $default_cpath_check !='' ){
 	$cpath 	= str_replace('..','',$default_cpath_check);				
 	$calendar_path 	.= "/$cpath";				
-	$tmp_dir 	.= "/$cpath";
+#	$tmp_dir 	.= "/$cpath";
 }
 #these need cpath to be set
 #set up specific template folder for a particular cpath
@@ -115,7 +115,7 @@ if (isset($_GET['cal'])) {
 			$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
 			$calcheckopen = @fopen($calcheck, "r");
 			if ($calcheckopen == FALSE) {
-				$cal_filenames[0] = $default_cal;
+				$cal_filenames = explode(',',$default_cal);
 			} else {
 				$cal_filenames[0] = $default_cal_check;
 			}
@@ -123,7 +123,7 @@ if (isset($_GET['cal'])) {
 			$cal_filenames[0] = $ALL_CALENDARS_COMBINED;
 		}
 	} else {
-		$cal_filenames[0] = $default_cal;
+		$cal_filenames = explode(',',$default_cal);
 	}
 }
 //load cal_filenames if $ALL_CALENDARS_COMBINED
