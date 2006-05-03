@@ -48,7 +48,7 @@ switch ($rssview){
 		break;
 	case 'week':
 		$fromdate = dateOfWeek($getdate, 'Sunday');
-		$todate = $fromdate + 6;
+		$todate = date("Ymd", strtotime($fromdate) + 6*24*60*60);
 		$theview = $lang['l_week']." of ".date('n/d/Y',strtotime($fromdate));
 		break;
 	case 'month':
@@ -89,7 +89,7 @@ switch ($rssview){
 	default:
 		#default to week
 		$fromdate = dateOfWeek($getdate, 'Sunday');
-		$todate = $fromdate + 6;
+		$todate = date("Ymd", strtotime($fromdate) + 6*24*60*60);
 		$theview = "";
 
 }
@@ -131,18 +131,9 @@ $rss_language = str_replace($user_language, $iso_language, $language);
 /* End language modification */
 
 $rss = 	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\n";
-
-/* Use 1.0 and strip encoding, use rss_language */
-$rss .= 	'<rdf:RDF 
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
-	xmlns:ev="http://purl.org/rss/1.0/modules/event/"
-	xmlns:dc="http://purl.org/dc/elements/1.1/"
-	xmlns="http://purl.org/rss/1.0/">'."\n";
-
-$rss .= '<channel rdf:about="'.$default_path.'/rss/rss.php/';
-if (isset($cpath) && $cpath !='') $rss_link.="?cpath=$cpath";
-$rss .='">'."\n";
-
+$rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">'."\n";
+$rss .= '<rss version="0.91">'."\n";
+$rss .= '<channel>'."\n";
 $rss .= '<title>'.$cal_displayname;
 if ($theview !=""){$rss .= ' - '.$theview;} 
 $rss .= "</title>\n";
@@ -152,8 +143,8 @@ if (isset($cpath) && $cpath !='') $rss_link.="?cpath=$cpath";
 $rss .= "<link>$rss_link</link>\n";
 
 $rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
-$rss .= '<language>'.$language.'</language>'."\n";
-$rss .= '<copyright>Copyright '.date('Y').', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
+$rss .= '<language>'.$rss_language.'</language>'."\n";
+$rss .= '<copyright>Copyright '.date(Y).', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 
 //generate the items
 $numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24))+1;
@@ -231,7 +222,7 @@ $uid_arr = array();
 		$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 		$rss .= '</item>'."\n";
 	}
-	$thisdate++;
+	$thisdate = date("Ymd", strtotime($thisdate)+60*60*24);
 	$i++;	
 	} while ($i <= $numdays);
 
