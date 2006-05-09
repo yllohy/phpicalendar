@@ -90,6 +90,7 @@ function flatten_ol_blocks($event_date, $ol_blocks, $new_block_key) {
 				if ($new_block['blockStart'] > $loop_block['blockStart']) $ol_blocks[$new_block_key]['blockStart'] = $loop_block['blockStart'];
 				if ($new_block['blockEnd'] < $loop_block['blockEnd']) $ol_blocks[$new_block_key]['blockEnd'] = $loop_block['blockEnd'];
 				$ol_blocks[$new_block_key]['events'] = array_merge($new_block['events'], $loop_block['events']);
+				$new_block['events'] = $ol_blocks[$new_block_key]['events'];
 				foreach ($loop_block['overlapRanges'] as $ol_range) {
 					$new_block['overlapRanges'] = merge_range($new_block['overlapRanges'], $ol_range['start'], $ol_range['end'], $ol_range['count']);
 				}
