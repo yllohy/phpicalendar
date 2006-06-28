@@ -1,6 +1,6 @@
 <?php 
 define('BASE', '../');
-$getdate = $_POST['date'];
+#$getdate = $_POST['date'];
 include_once(BASE.'functions/init.inc.php'); 
 #include_once(BASE.'functions/ical_parser.php'); 
 require_once(BASE.'functions/template.php');
