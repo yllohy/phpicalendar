@@ -22,7 +22,7 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 
 $search_box = '';
 $search_box .= 
-	'<form action="search.php" method="GET">'."\n".
+	'<form action="search.php" method="get">'."\n".
         '<input type="hidden" name="cpath" value="'.$cpath.'">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
