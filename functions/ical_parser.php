@@ -300,6 +300,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 						$end = strtotime('+1 day', $start);
 					}
 					// Changed for 1.0, basically write out the entire event if it starts while the array is written.
+					# while loop handles multi-day allday events to write separate master_array elements for each day.
 					if (($start < $mArray_end) && ($start < $end)) {
 						while (($start != $end) && ($start < $mArray_end)) {
 							$start_date2 = date('Ymd', $start);
@@ -700,7 +701,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 													foreach($bymonth as $month) {
 														// Make sure the month & year used is within the start/end_range.
 														if ($month < date('m', $next_range_time)) {
-															$year = date('Y', strtotime('+1 years', $next_range_time));
+															$year = date('Y', $next_range_time);
 														} else {
 															$year = date('Y', $next_range_time);
 														}
