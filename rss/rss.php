@@ -151,11 +151,12 @@ $numdays = round((strtotime($todate) - strtotime($fromdate))/(60*60*24))+1;
 $thisdate = $fromdate; 	#	start at beginning of date range, 
 						# 	note that usage of $thisdate is different from distribution
 						# 	I use it as a date, dist uses it as a time
+$thistime = strtotime($thisdate);						
 $i = 1;  #day counter
 $uid_arr = array();
 	do {
-	$thisdate=date('Ymd', strtotime($thisdate));
-	#echo "Date: $thisdate<br>\n";
+	$thisdate=date('Ymd', $thistime);
+#	echo "Date: $thisdate\ti:$i\tnumdays:$numdays<br>\n";
 	$dayofweek = localizeDate ("%a %b %e %Y", strtotime($thisdate));
 	if (isset($master_array[($thisdate)]) && sizeof($master_array[($thisdate)]) > 0) {
 		foreach ($master_array[("$thisdate")] as $event_times) {
@@ -222,7 +223,7 @@ $uid_arr = array();
 		$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 		$rss .= '</item>'."\n";
 	}
-	$thisdate = date("Ymd", strtotime($thisdate)+60*60*24);
+	$thistime = $thistime+(60*60*24); # echo "$thisdate: ".strtotime($thisdate)."->$thistime<br>\n";
 	$i++;	
 	} while ($i <= $numdays);
 
