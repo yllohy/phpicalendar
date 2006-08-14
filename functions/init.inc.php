@@ -143,6 +143,8 @@ foreach ($cal_filenames as $cal_filename) {
 		substr($cal_filename, 0, 8) == 'https://' ||
 		substr($cal_filename, 0, 9) == 'webcal://')
 	{
+		#jump sends cal url without .ics extension.  Add it if needed.
+		if (substr($cal_filename, -4) != ".ics") $cal_filename .= ".ics";
 		$web_cals[] = $cal_filename;
 	}
 	
