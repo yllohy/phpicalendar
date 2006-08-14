@@ -214,16 +214,19 @@ if (count($local_cals) > 0) {
 	// only one calendar being displayed and those paths are defined.
 	if (count($local_cals) == 1) {
 		$filename = $local_cals[0];
+		$add_cpath = '';
+		if (isset($cpath) && $cpath !='') $add_cpath = "$cpath/";
+
 		if (($download_uri == '') && (preg_match('/(^\/|\.\.\/)/', $filename) == 0)) {
-			$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'."$cpath/".$filename;
+			$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'.$filename;
 			$download_filename = $filename;
 		} elseif ($download_uri != '') {
 			$newurl = eregi_replace("^(http://)", "", $download_uri); 
-				$subscribe_path = 'webcal://'.$newurl.'/'."$cpath/".basename($filename);
-				$download_filename = $download_uri.'/'."$cpath/".basename($filename);
+				$subscribe_path = 'webcal://'.$newurl.'/'.$add_cpath.basename($filename);
+				$download_filename = $download_uri.'/'.$add_cpath.basename($filename);
 		} else {
-			$subscribe_path = "$cpath/";
-			$download_filename = "$cpath/";
+			$subscribe_path = $add_cpath;
+			$download_filename = $add_cpath;
 		}
 	}
 }
