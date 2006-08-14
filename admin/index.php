@@ -97,6 +97,7 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
+	'version'			=> $phpicalendar_version,
 	'event_js'			=> '',
 	'charset'			=> $charset,
 	'default_path'		=> $default_path.'/',
