@@ -239,7 +239,6 @@ function display_ical_list($cals, $pick=FALSE) {
 				#stop reading if we find an event or timezone before there's a name
 				if ($line == "BEGIN:VTIMEZONE" ||$line == "BEGIN:VEVENT") break;
 			}
-			echo "</pre>";
 
 		}
 
