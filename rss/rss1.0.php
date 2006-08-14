@@ -226,7 +226,7 @@ $uid_arr = array();
 		}
 	}
 	if (($events_count < 1) && ($i == $numdays)) {
-		$rss_items .= '<item>'."\n";
+		$rss_items .= '<item rdf:about="'.$default_path."\>\n";
 		$rss_items .= '<title>No events found</title>'."\n";
 		$rss_items .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 		$rss_items .= '</item>'."\n";

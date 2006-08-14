@@ -230,6 +230,7 @@ $uid_arr = array();
 	}
 	if (($events_count < 1) && ($i == $numdays)) {
 		$rss .= '<item>'."\n";
+		$rss .= '<guid isPermaLink="false">'.$default_path.'&amp;uid='.$thisdate.'</guid>'."\n";
 		$rss .= '<title>No events found</title>'."\n";
 		$rss .= '<link>'.htmlspecialchars ("$default_path").'</link>'."\n";
 		$rss .= '</item>'."\n";
