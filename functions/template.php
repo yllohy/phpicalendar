@@ -1101,15 +1101,15 @@ class Page {
 			$i=0;
 			foreach ($match[1] as $key => $val) {
 				if ($match[1][$i] == 'SMALL') {
-					$template_file 	= $this->parse('templates/'.$template.'/month_small.tpl');
+					$template_file 	= $this->parse(BASE.'templates/'.$template.'/month_small.tpl');
 					$type 			= 'small';
 					$offset 		= $match[2][$i].$match[3][$i];
 				} elseif ($match[1][$i] == 'MEDIUM') {
-					$template_file 	= $this->parse('templates/'.$template.'/month_medium.tpl');
+					$template_file 	= $this->parse(BASE.'templates/'.$template.'/month_medium.tpl');
 					$type 			= 'medium';
 					$offset 		= $match[3][$i];
 				} else {
-					$template_file 	= $this->parse('templates/'.$template.'/month_large.tpl');
+					$template_file 	= $this->parse(BASE.'templates/'.$template.'/month_large.tpl');
 					$type 			= 'large';
 					$offset 		= $match[2][$i].$match[3][$i];
 				}
