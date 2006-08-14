@@ -10,7 +10,7 @@ if ($printview_default == 'yes') {
 	$printview = $default_view;
 	$default_view = "print.php";
 } else {
-	$check = array ('day', 'week', 'month');
+	$check = array ('day', 'week', 'month', 'year');
 	if (in_array($default_view, $check)) {
 		$default_view = $default_view . '.php';
 	} else {
