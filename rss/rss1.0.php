@@ -216,7 +216,9 @@ $uid_arr = array();
 				$rss_items .= '<link>'.$rss_link.'</link>'."\n";
 				$rss_items .= '<description>'.$rss_description.'</description>'."\n";
 				if (isset($val['location']) && $val['location'] !=''){
-					$rss_items .= '<ev:location>'.$val['location']."</ev:location>\n";
+					$location		= str_replace('&','&amp;',$val['location']);
+					$location		= str_replace('&amp;amp;','&amp;',$location);
+					$rss_items .= '<ev:location>'.$location."</ev:location>\n";
 				}	
 				$rss_items .= '</item>'."\n";
 				$events_count++;
