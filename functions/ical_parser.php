@@ -660,7 +660,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 																$last_day_tmp = date('t',$next_range_time);
 																$next_range_time = strtotime(date('Y-m-'.$last_day_tmp, $next_range_time));
 																$last_tmp = (date('w',$next_range_time) == $on_day_num) ? '' : 'last ';
-																$next_date_time = strtotime($last_tmp.$on_day.' -'.$nth.' week', $next_range_time);
+																$next_date_time = strtotime($last_tmp.$on_day, $next_range_time) - $nth * 604800;
 																$month = date('m', $next_date_time);
 																if (in_array($month, $bymonth)) {
 																	$recur_data[] = $next_date_time;
@@ -682,7 +682,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 																	}
 																}
 															} elseif ((isset($byday_arr[1])) && ($byday_arr[1] != '-')) {
-																$next_date_time = strtotime($on_day.' +'.$nth.' week', $next_range_time);
+																$next_date_time = strtotime($on_day, $next_range_time) + $nth * 604800;
 																$month = date('m', $next_date_time);
 																if (in_array($month, $bymonth)) {
 																	$recur_data[] = $next_date_time;

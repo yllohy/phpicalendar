@@ -56,8 +56,8 @@ $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
 	'event_js'			=> BASE.'functions/event.js',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-        'calendar_nav'                       => BASE.'templates/'.$template.'/calendar_nav.tpl',
-        'search_box'                    => BASE.'templates/'.$template.'/search_box.tpl'
+    'calendar_nav'      => BASE.'templates/'.$template.'/calendar_nav.tpl',
+    'search_box'        => BASE.'templates/'.$template.'/search_box.tpl'
 	));
 
 $page->replace_tags(array(
