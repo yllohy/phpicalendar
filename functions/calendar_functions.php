@@ -219,6 +219,8 @@ function display_ical_list($cals, $pick=FALSE) {
 			$cal_displayname_tmp = $cal_displaynames[array_search($cal_tmp,$cal_filelist)];
 		}else{
 			# pull the name from the $cal_tmp file
+			$cal_tmp = str_replace('webcal://','http://',$cal_tmp);
+
 			$ifile = @fopen($cal_tmp, "r");
 			if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $cal_tmp));
 			while (!feof($ifile)) {
