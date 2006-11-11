@@ -38,7 +38,7 @@ $allow_preferences		= 'yes';			// Allow visitors to change various preferences v
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).
 $show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 $show_completed			= 'yes';				// Show completed todos on your todo list.
-$allow_login			= 'no';				// Set to yes to prompt for login to unlock calendars.
+$allow_login			= 'yes';				// Set to yes to prompt for login to unlock calendars.
 $login_cookies			= 'no';			// Set to yes to store authentication information via (unencrypted) cookies. Set to no to use sessions.
 $support_ical			= 'no';			// Set to yes to support the Apple iCal calendar database structure.
 $recursive_path			= 'no';			// Set to yes to recurse into subdirectories of the calendar path.
@@ -53,7 +53,7 @@ $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style pu
 
 // Administration settings (/admin/)
 $allow_admin			= 'yes';			// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
-$auth_method			= 'ftp';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
+$auth_method			= 'internal';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
 $auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.
 $auth_internal_password	= 'admin';			// Only used if $auth_method='internal'. The password for the administrator.
 $ftp_server				= 'localhost';		// Only used if $auth_method='ftp'. The ftp server name. 'localhost' will work for most servers.
@@ -81,7 +81,7 @@ $list_webcals[] = '';						// $allow_webcals does *not* need to be "yes" for the
 
 #$more_webcals['cpath'][] = ''				//add webcals that will show up only for a particular cpath.
 
-$locked_cals[] = '';						// Fill in-between the quotes the names of the calendars you wish to hide
+$locked_cals[] = 'work';						// Fill in-between the quotes the names of the calendars you wish to hide
 $locked_cals[] = '';						// unless unlocked by a username/password login. This should be the
 $locked_cals[] = '';						// exact calendar filename without the .ics suffix.
 $locked_cals[] = '';						//
