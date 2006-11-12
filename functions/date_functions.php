@@ -287,4 +287,17 @@ function extractDateTime($data, $property, $field) {
 	// Return the results.
 	return array($unixtime, $date, $time, $allday);
 }
+
+//TZIDs in calendars often contain leading information that should be stripped
+//Example: TZID=/mozilla.org/20050126_1/Europe/Berlin
+//Need to return the last part only
+function parse_tz($data){
+	$fields = explode("/",$data);
+	$tz = array_pop($fields);
+	$tmp = array_pop($fields);
+	if (isset($tmp) && $tmp != "") $tz = "$tmp/$tz";
+	return $tz;
+}
+
+
 ?>

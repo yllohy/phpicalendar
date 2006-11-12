@@ -1073,7 +1073,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							if ($eachval[0] == 'RECURRENCE-ID') {
 								// do nothing
 							} elseif ($eachval[0] == 'TZID') {
-								$recurrence_id['tzid'] = $eachval[1];
+								$recurrence_id['tzid'] = parse_tz($eachval[1]);
 							} elseif ($eachval[0] == 'RANGE') {
 								$recurrence_id['range'] = $eachval[1];
 							} elseif ($eachval[0] == 'VALUE') {
@@ -1119,7 +1119,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							$cal_displaynames[$cal_key] = $actual_calname; #correct the default calname based on filename
 						break;
 					case 'X-WR-TIMEZONE':
-						$calendar_tz = $data;
+						$calendar_tz = parse_tz($data);
 						$master_array['calendar_tz'] = $calendar_tz;
 						break;
 					case 'DURATION':
