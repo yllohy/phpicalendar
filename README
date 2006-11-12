@@ -85,6 +85,13 @@ cvs
 	Fix parsing of timezones to accommodate extra text from Mozilla and other calendars
 	Bug fixes
 		Fixed error in german language file
+		Change naming of saved parsed cals to allow same calname with different cpath
+		Changes to calculation of next datetimes to work with php5.1 variants
+		Fix index.php to allow year as default view
+		display version on admin index page
+		fix overlapping events bug
+		fix path problems in template.php
+		
 2.22
 	template.php will look in templates/default if a file is missing from templates/$template
 	add support for WKST and BYPOS tags
