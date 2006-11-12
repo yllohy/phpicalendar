@@ -244,7 +244,7 @@ function extractDateTime($data, $property, $field) {
 		// Pull out the timezone, or use GMT if zulu time was indicated.
 		if (preg_match('/^'.$property.';TZID=/i', $field)) {
 			$tz_tmp = explode('=', $field);
-			$tz_dt = $tz_tmp[1];
+			$tz_dt = parse_tz($tz_tmp[1]);
 			unset($tz_tmp);
 		} elseif ($zulu_time) {
 			$tz_dt = 'GMT';

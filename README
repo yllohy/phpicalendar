@@ -82,6 +82,9 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
+	Fix parsing of timezones to accommodate extra text from Mozilla and other calendars
+	Bug fixes
+		Fixed error in german language file
 2.22
 	template.php will look in templates/default if a file is missing from templates/$template
 	add support for WKST and BYPOS tags
