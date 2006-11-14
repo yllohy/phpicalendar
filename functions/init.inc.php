@@ -1,5 +1,5 @@
 <?php 
-$phpicalendar_version = '2.22';
+$phpicalendar_version = '2.23 rc1';
 // uncomment when developing, comment for shipping version
 //error_reporting (E_ERROR | E_WARNING | E_PARSE);
 error_reporting(0);
@@ -93,6 +93,11 @@ if (!isset($getdate)) {
 		$getdate = date('Ymd', time() + $second_offset);
 	}
 }
+
+preg_match ("/([0-9]{4})([0-9]{2})([0-9]{2})/", $getdate, $day_array2);
+$this_day = $day_array2[3];
+$this_month = $day_array2[2];
+$this_year = $day_array2[1];
 
 if (ini_get('max_execution_time') < 60) {
 	@ini_set('max_execution_time', '60');

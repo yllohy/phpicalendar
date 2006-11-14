@@ -24,13 +24,6 @@ while ($fillTime < $day_end) {
 	$fillTime = $fill_h . $fill_min;
 }
 
-// what date we want to get data for (for day calendar)
-if (!isset($getdate) || $getdate == '') $getdate = date('Ymd');
-preg_match ("/([0-9]{4})([0-9]{2})([0-9]{2})/", $getdate, $day_array2);
-$this_day = $day_array2[3];
-$this_month = $day_array2[2];
-$this_year = $day_array2[1];
-
 // reading the file if it's allowed
 $parse_file = true;
 if ($save_parsed_cals == 'yes') {	
@@ -427,15 +420,20 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					}
 					
 					$start_date_time = strtotime($start_date);
-					$this_month_start_time = strtotime($this_year.$this_month.'01');
-					if ($current_view == 'year' || ($save_parsed_cals == 'yes' && !$is_webcal)|| $current_view == 'print' && $printview == 'year') {
-						$start_range_time = strtotime($this_year.'-01-01 -2 weeks');
-						$end_range_time = strtotime($this_year.'-12-31 +2 weeks');
-					} else {
-						$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
-						$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
+					if (!isset($fromdate)){
+						#this should happen if not in one of the rss views
+						$this_month_start_time = strtotime($this_year.$this_month.'01');
+						if ($current_view == 'year' || ($save_parsed_cals == 'yes' && !$is_webcal)|| $current_view == 'print' && $printview == 'year') {
+							$start_range_time = strtotime($this_year.'-01-01 -2 weeks');
+							$end_range_time = strtotime($this_year.'-12-31 +2 weeks');
+						} else {
+							$start_range_time = strtotime('-1 month -2 day', $this_month_start_time);
+							$end_range_time = strtotime('+2 month +2 day', $this_month_start_time);
+						}
+					}else{
+							$start_range_time = strtotime($fromdate);			
+							$end_range_time = strtotime($todate)+60*60*24; 						
 					}
-					
 					foreach ($rrule_array as $key => $val) {
 						switch($key) {
 							case 'FREQ':
