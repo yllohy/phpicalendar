@@ -111,7 +111,7 @@ foreach ($master_array['-4'] as $calinfo){
 	if ($calinfo['mtime'] > $filemod) $filemod = $calinfo['mtime']; 
 }	
 $filemodtime = date("r", $filemod);
-/*
+
 //send relevant headers
 header ("Last-Modified: $filemodtime");
 header ("ETag:\"$filemodtime\"");
