@@ -49,7 +49,7 @@ if (isset($user_template["$cpath"])){
 }
 #set up specific webcals for a particular cpath
 if (is_array($more_webcals[$cpath])){
-	array_merge($list_webcals, $more_webcals["$cpath"]);
+	$list_webcals = array_merge($list_webcals, $more_webcals["$cpath"]);
 }
 include_once(BASE.'error.php');
 include_once(BASE.'functions/calendar_functions.php');
