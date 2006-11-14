@@ -82,7 +82,9 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
-	Fix parsing of timezones to accommodate extra text from Mozilla and other calendars
+	Change parsing of timezones to accommodate extra text from Mozilla and other calendars
+	Move getdate to init.inc.php.
+	Change date calcs so that rss feeds can list events across more than one year.
 	Bug fixes
 		Fixed error in german language file
 		Change naming of saved parsed cals to allow same calname with different cpath
