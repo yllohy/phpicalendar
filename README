@@ -82,6 +82,8 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
+	Patch to allow parsing of MS-Outlook generated ics files where line continuation uses tab instead of space.
+2.23rc1
 	Change parsing of timezones to accommodate extra text from Mozilla and other calendars
 	Move getdate to init.inc.php.
 	Change date calcs so that rss feeds can list events across more than one year.
