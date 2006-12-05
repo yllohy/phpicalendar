@@ -446,9 +446,12 @@ class Page {
 								$event_start 	= date ($timeFormat_small, $event_start);
  								$event_calno  	= $this_time_arr[$uid]['calnumber'];
  								$event_status	= strtolower($this_time_arr[$uid]['status']);
+ 								$event_recur = $this_time_arr[$uid]['recur'];
 								$event_calno = (($event_calno - 1) % $unique_colors) + 1;
+								$confirmed = '';
+						  		if (is_array($event_recur)) $confirmed .= '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 								if ($event_status != '') {
-						  			$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+						  			$confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
 								$colspan_width = round((80 / $nbrGridCols[$thisday]) * $drawWidth);
 								$weekdisplay .= '<td width="'.$colspan_width.'" rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
@@ -666,11 +669,9 @@ class Page {
  						  $event_recur  = $this_time_arr[$uid]['recur'];
  						  $event_status = strtolower($this_time_arr[$uid]['status']);
 						  $event_calno  = (($event_calno - 1) % $unique_colors) + 1;
-						  if ($event_status != '') {
-						  	$confirmed = '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
-						  } elseif (is_array($event_recur)) {
-						  	$confirmed = '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
-						  }
+						  $confirmed = '';
+						  if (is_array($event_recur)) $confirmed .= '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+						  if ($event_status != '') $confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  $colspan_width = round((460 / $nbrGridCols) * $drawWidth);
 						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" width="'.$colspan_width.'" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 						  
