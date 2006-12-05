@@ -133,7 +133,8 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 			$line = $nextline;
 			$nextline = fgets($ifile, 1024);
 			$nextline = ereg_replace("[\r\n]", "", $nextline);
-			while (substr($nextline, 0, 1) == " ") {
+			#handle continuation lines that start with either a space or a tab (MS Outlook)
+			while ($nextline{0} == " " || $nextline{0} == "\t") { 
 				$line = $line . substr($nextline, 1);
 				$nextline = fgets($ifile, 1024);
 				$nextline = ereg_replace("[\r\n]", "", $nextline);
