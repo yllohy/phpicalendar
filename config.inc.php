@@ -26,13 +26,14 @@ $second_offset			= '';				// The time in seconds between your time and your serv
 $bleed_time				= '-1';				// This allows events past midnight to just be displayed on the starting date, only good up to 24 hours. Range from '0000' to '2359', or '-1' for no bleed time.
 $cookie_uri				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar -- AUTO SETTING -- Only set if you are having cookie issues.
 $download_uri			= ''; 				// The HTTP URL to your calendars directory, ie. http://www.example.com/phpicalendar/calendars -- AUTO SETTING -- Only set if you are having subscribe issues.
-$default_path			= 'http://localhost/phpicalendar'; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
+$default_path			= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 $charset				= 'UTF-8';			// Character set your calendar is in, suggested UTF-8, or iso-8859-1 for most languages.
 
 // Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 $allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
 $this_months_events 	= 'yes';			// Display "This month's events" at the bottom off the month page.
 $enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
+$rss_link_to_event		= '';				// Set to yes to have links in the feed popup an event window.  Default is to link to day.php
 $show_search			= 'yes';			// Show the search box in the sidebar.
 $allow_preferences		= 'yes';			// Allow visitors to change various preferences via cookies.
 $printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $default_view (listed well above).

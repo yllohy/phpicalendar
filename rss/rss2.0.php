@@ -199,10 +199,14 @@ $uid_arr = array();
 				*/
 				/*  Add %20's for spaces for the calendar links to make them valid url's */
 				$urlcal 		= rawurlencode ("$cal");
-				$rss_link		=  ("$default_path/day.php?getdate=$thisdate&amp;cal=$urlcal");
-				if (isset($cpath) && $cpath !=''){
-					$rss_link .= "&amp;cpath=$cpath";
+				if (isset($rss_link_to_event) && $$rss_link_to_event == 'yes'){
+					$event_data = serialize($val);
+					$rss_link		= "$default_path/event.php?getdate=$thisdate&amp;cal=$cal&amp;event_data=$event_data";
+				}else{
+					$rss_link		=  ("$default_path/day.php?getdate=$thisdate&amp;cal=$urlcal");
+
 				}
+				if (isset($cpath) && $cpath !='') $rss_link.="&amp;cpath=$cpath";
 				/* End link modification */
 				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
