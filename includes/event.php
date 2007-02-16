@@ -11,8 +11,10 @@ function decode_popup ($item) {
 	return $item;
 }
 
+
+
 #$event 			= $master_array[$_POST['date']][$_POST['time']][decode_popup($_POST['uid'])];
-$event 			= unserialize(stripslashes($_REQUEST['event_data']));
+$event			= unserialize(stripslashes($_REQUEST['event_data']));
 $organizer 		= unserialize($event['organizer']);
 $attendee 		= unserialize($event['attendee']);
 
