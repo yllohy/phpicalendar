@@ -188,7 +188,8 @@ $uid_arr = array();
 
 
 				$rss_title		= urldecode ("$dayofweek: $event_text");
-				$rss_link		= "$default_path/day.php?getdate=$thisdate&amp;cal=$cal";
+				$event_data = serialize($val);
+				$rss_link		= "$default_path/event.php?getdate=$thisdate&amp;cal=$cal&amp;event_data=$event_data";
 				if (isset($cpath) && $cpath !='') $rss_link.="&amp;cpath=$cpath";
 				$rss_description	= htmlspecialchars ("$dayofweek $event_start: $description");
 				
