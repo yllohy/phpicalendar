@@ -82,6 +82,9 @@ COPYING for more information about our license.
 Changes:
 --------
 cvs
+	Change template.php display in print and month views of events that span multiple days to not repeat listing
+	Fix (I hope) utf-8 rendering problems in event.php
+	Allow admins to set whether link from rss feed goes to day.php or event.php
 	Patch to allow parsing of MS-Outlook generated ics files where line continuation uses tab instead of space.
 2.23rc1
 	Change parsing of timezones to accommodate extra text from Mozilla and other calendars

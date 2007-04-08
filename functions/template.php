@@ -62,7 +62,8 @@ class Page {
 		$loop_day 		= trim($match3[1]);
 		$parse_month 	= date ("Ym", strtotime($getdate));
 		$parse_year 	= date ("Y", strtotime($getdate));
-		
+
+		$seen_events = array();
 		foreach($master_array as $key => $val) {
 			preg_match ('/([0-9]{6})([0-9]{2})/', $key, $regs);
 			if ((($regs[1] == $parse_month) && ($printview == 'month')) || (($key == $getdate) && ($printview == 'day')) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == 'week')) || ((substr($regs[1],0,4) == $parse_year) && ($printview == 'year'))) {
@@ -71,10 +72,16 @@ class Page {
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 				$events_tmp = $loop_event;
 				$day_tmp	= $loop_day;
-				
+				$day_events = 0;
 				// Pull out each day
 				foreach ($val as $new_val) {
 					foreach ($new_val as $new_key2 => $new_val2) {
+						if (isset($seen_events["$new_key2"])){
+							$new_val2['event_text'] .= " second instance of ".$new_key2;
+							continue;
+						}
+						$seen_events["$new_key2"] = 1;
+						$day_events++;
 					if ($new_val2['event_text']) {	
 						$event_text 	= stripslashes(urldecode($new_val2['event_text']));
 						$location 	= stripslashes(urldecode($new_val2['location']));
@@ -90,6 +97,7 @@ class Page {
 								$event_start 	= date ($timeFormat, strtotime ($event_start));
 								$event_end 		= date ($timeFormat, strtotime ($event_end));
 								$event_start 	= $event_start .' - '.$event_end;
+								if (date("Ymd", $new_val2['start_unixtime']) != date("Ymd", $new_val2['end_unixtime'])) $event_start .= " ".localizeDate($dateFormat_day, $new_val2['end_unixtime']);
 							}
 						}
 						
@@ -108,6 +116,7 @@ class Page {
 						$events_tmp	= $loop_event;
 					}
 				}
+				if ($day_events == 0) continue;
 				$day_tmp  = str_replace('{DAYOFMONTH}', $dayofmonth, $day_tmp);
 				$final   .= $day_tmp.$some_events;
 				unset ($day_tmp, $some_events);
@@ -985,12 +994,15 @@ class Page {
 		$m_start = $this_year.$this_month.'01';
 		$u_start = strtotime($m_start);
 		$i=0;
+		$seen_events = array();
 		do {
 			if (isset($master_array[$m_start])) {
 				foreach ($master_array[$m_start] as $cal_time => $event_times) {
 					$switch['CAL'] 			= $cal;
 					$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
 					foreach ($event_times as $uid => $val) {
+						if (isset($seen_events[$uid])) continue;
+						$seen_events[$uid] = 1;
 						$switch['CALNAME'] 	= $val['calname'];
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
