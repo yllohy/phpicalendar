@@ -101,7 +101,7 @@ if(defined('PHPICALENDAR_LOG_PUBLISHING') && PHPICALENDAR_LOG_PUBLISHING == 1) {
 if (!isset($_SERVER['REMOTE_USER'])) {
 
 	// Require authentication 
-	if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+	if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 		list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
 			= explode( ':', base64_decode( substr($_SERVER['HTTP_AUTHORIZATION'], 6) ) );
 	}

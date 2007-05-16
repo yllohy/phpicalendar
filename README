@@ -81,7 +81,10 @@ COPYING for more information about our license.
 
 Changes:
 --------
-cvs
+2.23
+	Add input sanitizer - important for blocking XSS attacks
+	Change template.php to reduce memory usage
+	Change template.php to display locations in month view
 	Change template.php display in print and month views of events that span multiple days to not repeat listing
 	Fix (I hope) utf-8 rendering problems in event.php
 	Allow admins to set whether link from rss feed goes to day.php or event.php
