@@ -82,6 +82,7 @@ COPYING for more information about our license.
 Changes:
 --------
 2.23
+	New language files
 	Add input sanitizer - important for blocking XSS attacks
 	Change template.php to reduce memory usage
 	Change template.php to display locations in month view
