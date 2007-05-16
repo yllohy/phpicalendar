@@ -942,6 +942,7 @@ class Page {
 									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							}
+							$switch['EVENT'] .= (isset($val['location'])) ? "<span class='V9G'>".$val['location']."</span>" : '';
 						}
 					}
 				}
@@ -998,11 +999,14 @@ class Page {
 		do {
 			if (isset($master_array[$m_start])) {
 				foreach ($master_array[$m_start] as $cal_time => $event_times) {
-					$switch['CAL'] 			= $cal;
-					$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
+				#	$switch['CAL'] 			= $cal;
+				#	$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
+					$start_date 	= localizeDate ($dateFormat_week_list, $u_start);
 					foreach ($event_times as $uid => $val) {
 						if (isset($seen_events[$uid])) continue;
 						$seen_events[$uid] = 1;
+						$switch['CAL'] 			= $cal;
+						$switch['START_DATE'] 	= $start_date;
 						$switch['CALNAME'] 	= $val['calname'];
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
@@ -1027,13 +1031,14 @@ class Page {
 							$middle .= $temp;
 							$i = ($i == 1) ? 0 : 1;
 						}
+						unset ($switch);
 					}
 				}
 			}
 			$u_start 	 = strtotime("+1 day", $u_start);
 			$m_start 	 = date('Ymd', $u_start);
 			$check_month = date('m', $u_start);
-			unset ($switch);
+		#	unset ($switch);
 		} while ($this_month == $check_month);
 
 		$this->page = preg_replace('!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_even off -->!is', $middle, $this->page);
