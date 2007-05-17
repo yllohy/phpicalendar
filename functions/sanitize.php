@@ -4,7 +4,7 @@ foreach ($_REQUEST as $key=>$val){
 		case 'event_data':
 			# modify this to allow or disallow different HTML tags in event popups
 			$allowed = "<p><br><b><i><em><a><img><div><span><ul><ol><li><h1><h2><h3><h4><h5><h6><hr><em><strong><small><table><tr><td><th>";
-			$val = strip_tags($val,$allowed)
+			$val = strip_tags($val,$allowed);
 			break;
 		default:	
 			# cpath
@@ -21,7 +21,7 @@ foreach ($_POST as $key=>$val){
 			break;
 		case 'date':
 		case 'time':
-			if (!is_int($val)) $val = '';
+			if (!is_numeric($val)) $val = '';
 			break;
 		default:	
 			$val = strip_tags($val);
@@ -31,8 +31,19 @@ foreach ($_POST as $key=>$val){
 }
 foreach ($_GET as $key=>$val){
 	switch ($key){
+		case 'cal':
+			if (!is_array($val)){
+				$val = strip_tags($val);
+				$_REQUEST['cal'] = strip_tags($val);
+			}else{
+				unset ($_REQUEST['cal']);
+				foreach($val as $cal){
+					$_REQUEST['cal'][]= strip_tags($cal);
+				}
+			}
+			break;
 		case 'getdate':
-			if (!is_int($val)) $val = '';
+			if (!is_numeric($val)) $val = ''; 
 			break;
 		default:	
 			$val = strip_tags($val);
@@ -43,7 +54,7 @@ foreach ($_GET as $key=>$val){
 foreach ($_COOKIE as $key=>$val){
 	switch ($key){
 		case 'time':
-			if (!is_int($val)) $val = '';
+			if (!is_numeric($val)) $val = '';
 			break;
 		default:	
 		$val = strip_tags($val);
