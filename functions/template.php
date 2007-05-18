@@ -928,6 +928,7 @@ class Page {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
  									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 15, 'psf');
+ 									$switch['ALLDAY'] .= (isset($val['location']) && $val['location'] != '') ? $val['location']."<br />" : '';
 									$switch['ALLDAY'] .= '</div>';
 								} else {
 									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
@@ -936,13 +937,13 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								if ($type == 'large') {
 									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
- 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 10, 'ps3', "$start2 ").'<br />';
+ 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 10, 'ps3', "$start2 ").'';
+ 									$switch['EVENT'] .= (isset($val['location']) && $val['location'] != '') ? "<br />".$val['location']."<br />" : '';
 									$switch['EVENT'] .= '</div>';
 								} else {
 									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							}
-							$switch['LOCATION'] = (isset($val['location'])) ? "<span class='V9G'>".$val['location']."</span>" : '';
 						}
 					}
 				}
@@ -951,7 +952,7 @@ class Page {
 			$switch['EVENT'] = (isset($switch['EVENT'])) ? $switch['EVENT'] : '';
 			$switch['ALLDAY'] = (isset($switch['ALLDAY'])) ? $switch['ALLDAY'] : '';
 			
-			#print_r($switch);
+			#echo "<pre>";print_r($switch);echo "</pre>";
 			
 			foreach ($switch as $tag => $data) {
 				$temp = str_replace('{'.$tag.'}', $data, $temp);

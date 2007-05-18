@@ -81,6 +81,11 @@ COPYING for more information about our license.
 
 Changes:
 --------
+cvs
+	Fix location display in months
+	Fix polish language file
+	Sanitizer bug fixes
+	Fix status bug for publish.php
 2.23
 	New language files
 	Add input sanitizer - important for blocking XSS attacks
