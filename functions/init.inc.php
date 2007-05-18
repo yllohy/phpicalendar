@@ -196,7 +196,8 @@ foreach ($web_cals as $web_cal) {
 	}
 	
 	// Pull the display name off the URL.
-	$cal_displaynames[] = substr(str_replace('32', ' ', basename($web_cal)), 0, -4);
+#	$cal_displaynames[] = substr(str_replace('32', ' ', basename($web_cal)), 0, -4);
+	$cal_displaynames[] = substr(basename($web_cal), 0, -4);
 	
 	// FIXME
 	$cals[] = urlencode($web_cal);
