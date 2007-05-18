@@ -242,7 +242,7 @@ if(defined('PHPICALENDAR_LOG_PUBLISHING') && PHPICALENDAR_LOG_PUBLISHING == 1) {
 	fclose($logfile);
 }
 
-header('HTTP/1.1 204 Successful.');
+header('HTTP/1.1 200 OK');
 exit;
 
 
