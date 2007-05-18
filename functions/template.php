@@ -942,7 +942,7 @@ class Page {
 									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							}
-							$switch['EVENT'] .= (isset($val['location'])) ? "<span class='V9G'>".$val['location']."</span>" : '';
+							$switch['LOCATION'] = (isset($val['location'])) ? "<span class='V9G'>".$val['location']."</span>" : '';
 						}
 					}
 				}
