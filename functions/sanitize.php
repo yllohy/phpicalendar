@@ -34,11 +34,11 @@ foreach ($_GET as $key=>$val){
 		case 'cal':
 			if (!is_array($val)){
 				$val = strip_tags($val);
-				$_REQUEST['cal'] = strip_tags($val);
+				$_GET['cal'] = strip_tags($val);
 			}else{
-				unset ($_REQUEST['cal']);
+				unset ($_GET['cal']);
 				foreach($val as $cal){
-					$_REQUEST['cal'][]= strip_tags($cal);
+					$_GET['cal'][]= strip_tags($cal);
 				}
 			}
 			break;
@@ -48,7 +48,7 @@ foreach ($_GET as $key=>$val){
 		default:	
 			$val = strip_tags($val);
 	}
-	$_GET[$key] = $val;
+	if ($key != 'cal') $_GET[$key] = $val;
 
 }
 foreach ($_COOKIE as $key=>$val){
