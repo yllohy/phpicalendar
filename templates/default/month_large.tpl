@@ -16,6 +16,7 @@
 			</div>
 			{ALLDAY}
 			{EVENT}	
+			{LOCATION}
 		</td>
 		<!-- switch notthismonth off -->
 		<!-- switch istoday on -->
@@ -25,6 +26,7 @@
 			</div>
 			{ALLDAY}
 			{EVENT}	
+			{LOCATION}
 		</td>
 		<!-- switch istoday off -->
 		<!-- switch ismonth on -->
@@ -34,6 +36,7 @@
 			</div>
 			{ALLDAY}
 			{EVENT}	
+			{LOCATION}
 		</td>
 		<!-- switch ismonth off -->
 		<!-- loop monthdays off -->
