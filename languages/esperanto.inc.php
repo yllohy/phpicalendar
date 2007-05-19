@@ -1,130 +1,130 @@
 <?php
 
 // Esperanto language include
-// For version 1.0 PHP iCalendar 
+// For version 2.0 PHP iCalendar 
 //
 // Translation by Sjoerd Bosga (sjoerd@esperanto.se)
 //
-// Submit new translations to chad@chadsdomain.com
+// Submit new translations to phpicalendar@gmail.com
 
-$day_lang			= 'Tago';
-$week_lang			= 'Semajno';
-$month_lang			= 'Monato';
-$year_lang			= 'Jaro';
-$calendar_lang		= 'kalendaro';
-$next_day_lang		= 'Venonta tago';
-$next_month_lang	= 'Venonta monato';
-$next_week_lang		= 'Venonta semajno';
-$next_year_lang		= 'Venonta jaro';
-$last_day_lang		= 'Anta&#365;a tago';
-$last_month_lang	= 'Anta&#365;a monato';
-$last_week_lang		= 'Anta&#365;a semajno';
-$last_year_lang		= 'Anta&#365;a jaro';
-$subscribe_lang		= 'Abonu';
-$download_lang		= 'El&#349;utu';
-$powered_by_lang 	= 'Funkciigita per';
-$event_lang			= 'Evento';
-$event_start_lang	= 'Komenchoro';
-$event_end_lang		= 'Finhoro';
-$this_months_lang	= 'Eventoj de tiu &#265;i monato';
-$date_lang			= 'Dato';
-$summary_lang		= 'Resumo';
-$all_day_lang		= 'Tuttaga evento';
-$notes_lang			= 'Notoj';
-$this_years_lang	= 'Eventoj de tiu &#265;i jaro';
-$today_lang			= 'Hodia&#365;';
-$this_week_lang		= '&#264;i-semajne';
-$this_month_lang	= '&#264;i-monate';
-$jump_lang			= 'Saltu al';
-$tomorrows_lang		= 'Eventoj de morga&#365;';
-$goday_lang			= 'Iru al hodia&#365;';
-$goweek_lang		= 'Iru al nuna semajno';
-$gomonth_lang		= 'Iru al nuna monato';
-$goyear_lang		= 'Iru al nuna jaro';
-$search_lang		= 'ser&#265;i'; // the verb
-$results_lang		= 'Rezultoj de ser&#265;ado';
-$query_lang			= 'Vi ser&#265;is'; // will be followed by the search query
-$no_results_lang	= 'Neniuj eventoj trovi&#285;is';
-$goprint_lang		= 'Por printado';
-$time_lang			= 'Horo';
-$summary_lang		= 'Resumo';
-$description_lang	= 'Priskribo';
-$this_site_is_lang		= 'Tiu &#265;i-pa&#285;aro estas';
-$no_events_day_lang		= 'Neniuj eventoj hodia&#365;.';
-$no_events_week_lang	= 'Neniuj eventoj &#265;i-semajne.';
-$no_events_month_lang	= 'Neniuj eventoj &#265;i-monato.';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e';  // Lists just the day
-$rss_month_date			= '%b %e';  // Lists just the day
-$rss_language			= 'eo';
-$search_took_lang		= 'Ser&#265;ado da&#365;ris %s sekundojn';
-$recurring_event_lang	= 'Ripetita evento';
-$exception_lang			= 'Escepto';
-$no_query_lang			= 'Vi ne indikis kion ser&#265;i';
-$preferences_lang		= 'Preferoj';
-$printer_lang			= 'Printilo';
-$select_lang_lang		= 'Elektu vian preferatan lingvon:';
-$select_cal_lang		= 'Elektu vian preferatan kalendaron:';
-$select_view_lang		= 'Elektu vian preferatan montradon:';
-$select_time_lang		= 'Elektu vian preferatan komencan horon:';
-$select_day_lang		= 'Elektu vian preferatan unuan tagon en semajno:';
-$select_style_lang		= 'Elektu vian preferatan stilon:';
-$set_prefs_lang			= 'Konservu preferojn';
-$completed_date_lang	= 'Farita je';
-$completed_lang			= 'Farita';
-$created_lang			= 'Kreita:';
-$due_lang				= 'Devos preti je:';
-$priority_lang			= 'Prioritato:';
-$priority_high_lang		= 'Alta';
-$priority_low_lang		= 'Malalta';
-$priority_medium_lang	= 'Meza';
-$priority_none_lang		= 'Nenia';
-$status_lang			= 'Stato';
-$todo_lang				= 'Farenda&#309;oj';
-$unfinished_lang		= 'Nekompletigita';
-$prefs_set_lang 		= 'Viaj preferoj estas konservitaj.';
-$prefs_unset_lang 		= 'Viaj preferoj malkonservi&#285;is. &#348;an&#285;oj videblos venontan fojon kiam vi malfermos pa&#285;on.';
-$unset_prefs_lang 		= 'Malkonservu miajn preferojn:';
-$organizer_lang			= 'Organizanto:';
-$attendee_lang			= '&#264;eestanto:';
-$location_lang			= 'Ejo:';
-$admin_header_lang		= 'PHP iCalendar Administrado';
-$username_lang			= 'Uzanto';
-$password_lang			= 'Pasvorto';
-$login_lang				= 'Ensaluti';
-$invalid_login_lang		= 'Mal&#285;usta uzantonomo a&#365; pasvorto.';
-$addupdate_cal_lang		= 'Aldoni a&#365; &#285;isdatigi kalendaron';
-$addupdate_desc_lang	= 'Aldonu kalendaron en&#349;utante novan dosieron. &#284;isdatigu kalendaron en&#349;utante dosieron kun sama nomo.';
-$delete_cal_lang		= 'Forigi kalendaron';
-$logout_lang			= 'Elsaluti';
-$cal_file_lang			= 'Kalendar-dosiero';
-$php_error_lang			= 'PHP eraro';
+$lang['l_day']			= 'Tago';
+$lang['l_week']			= 'Semajno';
+$lang['l_month']			= 'Monato';
+$lang['l_year']			= 'Jaro';
+$lang['l_calendar']		= 'kalendaro';
+$lang['l_next_day']		= 'Venonta tago';
+$lang['l_next_month']	= 'Venonta monato';
+$lang['l_next_week']		= 'Venonta semajno';
+$lang['l_next_year']		= 'Venonta jaro';
+$lang['l_last_day']		= 'Anta&#365;a tago';
+$lang['l_last_month']	= 'Anta&#365;a monato';
+$lang['l_last_week']		= 'Anta&#365;a semajno';
+$lang['l_last_year']		= 'Anta&#365;a jaro';
+$lang['l_subscribe']		= 'Abonu';
+$lang['l_download']		= 'El&#349;utu';
+$lang['l_powered_by'] 	= 'Funkciigita per';
+$lang['l_event']			= 'Evento';
+$lang['l_event_start']	= 'Komenchoro';
+$lang['l_event_end']		= 'Finhoro';
+$lang['l_this_months']	= 'Eventoj de tiu &#265;i monato';
+$lang['l_date']			= 'Dato';
+$lang['l_summary']		= 'Resumo';
+$lang['l_all_day']		= 'Tuttaga evento';
+$lang['l_notes']			= 'Notoj';
+$lang['l_this_years']	= 'Eventoj de tiu &#265;i jaro';
+$lang['l_today']			= 'Hodia&#365;';
+$lang['l_this_week']		= '&#264;i-semajne';
+$lang['l_this_month']	= '&#264;i-monate';
+$lang['l_jump']			= 'Saltu al';
+$lang['l_tomorrows']		= 'Eventoj de morga&#365;';
+$lang['l_goday']			= 'Iru al hodia&#365;';
+$lang['l_goweek']		= 'Iru al nuna semajno';
+$lang['l_gomonth']		= 'Iru al nuna monato';
+$lang['l_goyear']		= 'Iru al nuna jaro';
+$lang['l_search']		= 'ser&#265;i'; // the verb
+$lang['l_results']		= 'Rezultoj de ser&#265;ado';
+$lang['l_query']			= 'Vi ser&#265;is'; // will be followed by the search query
+$lang['l_no_results']	= 'Neniuj eventoj trovi&#285;is';
+$lang['l_goprint']		= 'Por printado';
+$lang['l_time']			= 'Horo';
+$lang['l_summary']		= 'Resumo';
+$lang['l_description']	= 'Priskribo';
+$lang['l_this_site_is']		= 'Tiu &#265;i-pa&#285;aro estas';
+$lang['l_no_events_day']		= 'Neniuj eventoj hodia&#365;.';
+$lang['l_no_events_week']	= 'Neniuj eventoj &#265;i-semajne.';
+$lang['l_no_events_month']	= 'Neniuj eventoj &#265;i-monato.';
+$lang['l_rss_day_date']			= 'g:i A';  // Lists just the time
+$lang['l_rss_week_date']			= '%b %e';  // Lists just the day
+$lang['l_rss_month_date']			= '%b %e';  // Lists just the day
+$lang['l_rss_language']			= 'eo';
+$lang['l_search_took']		= 'Ser&#265;ado da&#365;ris %s sekundojn';
+$lang['l_recurring_event']	= 'Ripetita evento';
+$lang['l_exception']			= 'Escepto';
+$lang['l_no_query']			= 'Vi ne indikis kion ser&#265;i';
+$lang['l_preferences']		= 'Preferoj';
+$lang['l_printer']			= 'Printilo';
+$lang['l_select_lang']		= 'Elektu vian preferatan lingvon:';
+$lang['l_select_cal']		= 'Elektu vian preferatan kalendaron:';
+$lang['l_select_view']		= 'Elektu vian preferatan montradon:';
+$lang['l_select_time']		= 'Elektu vian preferatan komencan horon:';
+$lang['l_select_day']		= 'Elektu vian preferatan unuan tagon en semajno:';
+$lang['l_select_style']		= 'Elektu vian preferatan stilon:';
+$lang['l_set_prefs']			= 'Konservu preferojn';
+$lang['l_completed_date']	= 'Farita je';
+$lang['l_completed']			= 'Farita';
+$lang['l_created']			= 'Kreita:';
+$lang['l_due']				= 'Devos preti je:';
+$lang['l_priority']			= 'Prioritato:';
+$lang['l_priority_high']		= 'Alta';
+$lang['l_priority_low']		= 'Malalta';
+$lang['l_priority_medium']	= 'Meza';
+$lang['l_priority_none']		= 'Nenia';
+$lang['l_status']			= 'Stato';
+$lang['l_todo']				= 'Farenda&#309;oj';
+$lang['l_unfinished']		= 'Nekompletigita';
+$lang['l_prefs_set'] 		= 'Viaj preferoj estas konservitaj.';
+$lang['l_prefs_unset'] 		= 'Viaj preferoj malkonservi&#285;is. &#348;an&#285;oj videblos venontan fojon kiam vi malfermos pa&#285;on.';
+$lang['l_unset_prefs'] 		= 'Malkonservu miajn preferojn:';
+$lang['l_organizer']			= 'Organizanto:';
+$lang['l_attendee']			= '&#264;eestanto:';
+$lang['l_location']			= 'Ejo:';
+$lang['l_admin_header']		= 'PHP iCalendar Administrado';
+$lang['l_username']			= 'Uzanto';
+$lang['l_password']			= 'Pasvorto';
+$lang['l_login']				= 'Ensaluti';
+$lang['l_invalid_login']		= 'Mal&#285;usta uzantonomo a&#365; pasvorto.';
+$lang['l_addupdate_cal']		= 'Aldoni a&#365; &#285;isdatigi kalendaron';
+$lang['l_addupdate_desc']	= 'Aldonu kalendaron en&#349;utante novan dosieron. &#284;isdatigu kalendaron en&#349;utante dosieron kun sama nomo.';
+$lang['l_delete_cal']		= 'Forigi kalendaron';
+$lang['l_logout']			= 'Elsaluti';
+$lang['l_cal_file']			= 'Kalendar-dosiero';
+$lang['l_php_error']			= 'PHP eraro';
 $upload_error_gen_lang	= 'Estis iu problemo pri via en&#349;utado.';
 $upload_error_lang[0]	= 'Estis iu problemo pri via en&#349;utado.';
 $upload_error_lang[1]	= 'La dosiero kiun vi provas en&#349;uti estas tro granda.';
 $upload_error_lang[2]	= 'La dosiero kiun vi provas en&#349;uti estas tro granda.';
 $upload_error_lang[3]	= 'La dosiero kiun vi provas en&#349;uti nur parte en&#349;uti&#285;is.';
 $upload_error_lang[4]	= 'Vi devas selekti dosieron por en&#349;uti.';
-$upload_error_type_lang = 'Nur .ics dosieroj akcepti&#285;as.';
-$copy_error_lang		= 'Malsukcesis kopii la dosieron';
-$delete_error_lang		= 'Malsukcesis forigi la dosieron';
-$delete_success_lang	= 'estis sukcese forigita.';
-$action_success_lang	= 'Via peto plenumi&#285;is.';
-$submit_lang			= 'En&#349;uti';
-$delete_lang			= 'Forigi';
+$lang['l_upload_error_type'] = 'Nur .ics dosieroj akcepti&#285;as.';
+$lang['l_copy_error']		= 'Malsukcesis kopii la dosieron';
+$lang['l_delete_error']		= 'Malsukcesis forigi la dosieron';
+$lang['l_delete_success']	= 'estis sukcese forigita.';
+$lang['l_action_success']	= 'Via peto plenumi&#285;is.';
+$lang['l_submit']			= 'En&#349;uti';
+$lang['l_delete']			= 'Forigi';
 
 // ----- New after 1.0
 $all_cal_comb_lang		= '&#264;iuj kalendaroj kune';
 
 
 // - navigation
-$back_lang = 'Reen';
-$next_lang = 'Venonta';
-$prev_lang = 'Anta&#365;a';
-$day_view_lang = 'Taga montrado';
-$week_view_lang = 'Semajna montrado';
-$month_view_lang = 'Monata montrado';
-$year_view_lang = 'Jara montrado';
+$lang['l_back'] = 'Reen';
+$lang['l_next'] = 'Venonta';
+$lang['l_prev'] = 'Anta&#365;a';
+$lang['l_day_view'] = 'Taga montrado';
+$lang['l_week_view'] = 'Semajna montrado';
+$lang['l_month_view'] = 'Monata montrado';
+$lang['l_year_view'] = 'Jara montrado';
 
 // ---------------------------------
 
@@ -186,13 +186,13 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Eraro!';
-$error_window_lang = 'Okazis eraro!';
-$error_calendar_lang = 'La eraro okazis dum traktado de la kalendaro "%s".';
-$error_path_lang = 'Ne eblis malfermi la jenon: "%s"';
-$error_back_lang = 'Bonvolu uzi la "Reen" butonon por reiri.';
-$error_remotecal_lang = 'Tiu &#265;i servilo blokas eksterajn kalendarojn kiuj ne estas aprobitaj.';
-$error_restrictedcal_lang = 'Vi provis aliri kalendaron kiu estas limigita fare de tiu &#265; servilo.';
-$error_invalidcal_lang = 'Nevalida kalendardosiero. Bonvolu provi alian kalendaron.';
+$lang['l_error_title'] = 'Eraro!';
+$lang['l_error_window'] = 'Okazis eraro!';
+$lang['l_error_calendar'] = 'La eraro okazis dum traktado de la kalendaro "%s".';
+$lang['l_error_path'] = 'Ne eblis malfermi la jenon: "%s"';
+$lang['l_error_back'] = 'Bonvolu uzi la "Reen" butonon por reiri.';
+$lang['l_error_remotecal'] = 'Tiu &#265;i servilo blokas eksterajn kalendarojn kiuj ne estas aprobitaj.';
+$lang['l_error_restrictedcal'] = 'Vi provis aliri kalendaron kiu estas limigita fare de tiu &#265; servilo.';
+$lang['l_error_invalidcal'] = 'Nevalida kalendardosiero. Bonvolu provi alian kalendaron.';
 
 ?>
