@@ -23,16 +23,29 @@ function EventData(date, time, uid, cpath, event_data) {
 	this.cpath = cpath;
 	this.event_data = event_data;
 }
+//-->
+</script>
+<script language="JavaScript" type="text/javascript">
+<!--
 
-function openTodoInfo(vtodo_array) {	
-	var windowW = 460;
-	var windowH = 275;
-	var url = "includes/todo.php?vtodo_array="+vtodo_array;
-	options = "scrollbars=yes,width="+windowW+",height="+windowH;
-	info = window.open(url, "Popup", options);
-	info.focus();
+function openTodoInfo(num) {	
+	// populate the hidden form
+	var data = document.todo_popup_data[num];
+	var form = document.forms.todoPopupForm;
+
+	form.elements.todo_data.value = data.todo_data;
+
+	// open a new window
+	var w = window.open('', 'Popup', 'scrollbars=yes,width=460,height=275');
+	form.target = 'Popup';
+	form.submit();
+}
+function TodoData(todo_data,todo_text) {
+	this.todo_data = todo_data;
+	this.todo_text = todo_text;
 }
 
 document.popup_data = new Array();
+document.todo_popup_data = new Array();
 //-->
 </script>

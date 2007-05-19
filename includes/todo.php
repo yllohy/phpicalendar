@@ -5,7 +5,7 @@ include_once(BASE.'functions/init.inc.php');
 include_once(BASE.'functions/date_functions.php');
 require_once(BASE.'functions/template.php');
 
-$vtodo_array = unserialize(base64_decode($_GET['vtodo_array']));
+$vtodo_array = unserialize(urldecode(base64_decode($_REQUEST['todo_data'])));
 
 // Set the variables from the array
 $vtodo_text		= (isset($vtodo_array['vtodo_text'])) ? $vtodo_array['vtodo_text'] : ('');

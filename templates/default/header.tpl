@@ -18,3 +18,7 @@
   <input type="hidden" name="cpath" id="cpath" value="" />
   <input type="hidden" name="event_data" id="event_data" value="" />
 </form>
+<form name="todoPopupForm" id="todoPopupForm" method="post" action="includes/todo.php" style="display: none;">
+  <input type="hidden" name="todo_data" id="todo_data" value="" />
+  <input type="hidden" name="todo_text" id="todo_text" value="" />
+</form>

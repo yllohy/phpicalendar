@@ -779,7 +779,7 @@ class Page {
 		$important 	= trim($match2[1]);
 		$normal 	= trim($match3[1]);
 		$nugget2	= '';
-		
+		$todo_popup_data_index = 0;
 		if (is_array($master_array['-2'])) {
 			foreach ($master_array['-2'] as $vtodo_times) {
 				foreach ($vtodo_times as $val) {
@@ -805,8 +805,17 @@ class Page {
 							'start_date'	=> $start_date,
 							'status'		=> $status,
 							'vtodo_text' 	=> $vtodo_text);
+						$vtodo_array 	= base64_encode(urlencode(serialize($vtodo_array)));
+						$todo = "
+						<script language=\"Javascript\" type=\"text/javascript\"><!--
+						var todoData = new TodoData('$vtodo_array','$vtodo_text');
+						document.todo_popup_data[$todo_popup_data_index] = todoData;
+						// --></script>";
 
-						$vtodo_array 	= base64_encode(serialize($vtodo_array));
+						$todo .= '<a class="psf" title="'.$title.'" href="#" onclick="openTodoInfo('.$todo_popup_data_index.'); return false;">';
+						$todo_popup_data_index++;
+						$vtodo_array = $todo;
+						
 						$vtodo_text 	= word_wrap(strip_tags(str_replace('<br />',' ',$vtodo_text), '<b><i><u>'), 21, $tomorrows_events_lines);
 						$data 			= array ('{VTODO_TEXT}', '{VTODO_ARRAY}');
 						$rep			= array ($vtodo_text, $vtodo_array);
