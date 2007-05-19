@@ -113,6 +113,12 @@ $page->replace_tags(array(
 
 	));
 
+if ($allow_preferences != 'yes') {
+	$page->replace_tags(array(
+	'allow_preferences'	=> ''
+	));
+}	
+
 if ($allow_login == 'yes') {
 	$page->replace_tags(array(
 	'l_invalid_login'	=> $lang['l_invalid_login'],
@@ -121,6 +127,9 @@ if ($allow_login == 'yes') {
 	'l_login'			=> $lang['l_login'],
 	'l_logout'			=> $lang['l_logout']
 	));
+}
+if ($show_search != 'yes') {
+	$page->nosearch($page);
 }
 
 $page->tomorrows_events($page);
