@@ -81,9 +81,11 @@ COPYING for more information about our license.
 
 Changes:
 --------
-cvs
+2.24
+	Fix bug 1681711 - change how todo popups are handled
+	Fix bug 1632649 - year display
 	Fix location display in months
-	Fix polish language file
+	Partially fix language files for Polish, Esperanto, Traditional Chinese
 	Sanitizer bug fixes
 	Fix status bug for publish.php
 2.23
