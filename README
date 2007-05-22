@@ -21,7 +21,8 @@ Installation:
 -------------
 - Put PHP iCalendar into your Sites folder (or another web directory)
 - PHP iCalendar works 'out of the box' but you may want to configure some things
-- Edit the file "config.inc.php" and see section below called "Configuration"
+- If you are a new user, rename the file "config.inc-dist.php" to "config.inc.php" and see section below called "Configuration". 
+	Users who are upgrading should be able to use their old config.inc.php file, as long as the upgrade is from a relatively recent version.
 - Put your iCal files into the directory you specify in config.inc.php
   (default is "calendars")
 - Make sure PHP is enabled (http://developer.apple.com/internet/macosx/php.html)
