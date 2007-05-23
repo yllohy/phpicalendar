@@ -76,7 +76,7 @@ class Page {
 				// Pull out each day
 				foreach ($val as $new_val) {
 					foreach ($new_val as $new_key2 => $new_val2) {
-						if (isset($seen_events["$new_key2"])){
+						if (isset($seen_events["$new_key2"]) && $new_val2['spans_day'] == 1){
 							$new_val2['event_text'] .= " second instance of ".$new_key2;
 							continue;
 						}
@@ -1013,7 +1013,7 @@ class Page {
 				#	$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
 					$start_date 	= localizeDate ($dateFormat_week_list, $u_start);
 					foreach ($event_times as $uid => $val) {
-						if (isset($seen_events[$uid])) continue;
+						if (isset($seen_events[$uid]) && $val['spans_day'] == 1) continue;
 						$seen_events[$uid] = 1;
 						$switch['CAL'] 			= $cal;
 						$switch['START_DATE'] 	= $start_date;
