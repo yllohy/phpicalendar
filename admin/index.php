@@ -28,7 +28,7 @@ if ((isset($_GET['action'])) && ($_GET['action'] == 'logout')) {
 }
 
 
-// if $auth_method == 'none', don't do any authentication
+// if $auth_method == 'server', don't do any authentication
 $username = $_POST['username'];
 $password = $_POST['password'];
 
