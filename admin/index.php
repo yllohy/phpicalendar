@@ -32,7 +32,7 @@ if ((isset($_GET['action'])) && ($_GET['action'] == 'logout')) {
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-if ($auth_method == 'none') {
+if ($auth_method == 'server') {
 	$is_loged_in = TRUE;
 } else {
 	$is_loged_in = FALSE;

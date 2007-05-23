@@ -54,7 +54,7 @@ $phpicalendar_publishing = '';				// Set to '1' to enable remote webdav style pu
 
 // Administration settings (/admin/)
 $allow_admin			= 'yes';			// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $auth_method			
-$auth_method			= 'internal';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
+$auth_method			= 'internal';			// Valid values are: 'ftp', 'internal', or 'server'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $auth_internal_username and $auth_internal_password defined below - CHANGE the password. 'server' uses NO authentication from phpicalendar - meant to be used with another form of authentication such as http basic.
 $auth_internal_username	= 'admin';			// Only used if $auth_method='internal'. The username for the administrator.
 $auth_internal_password	= 'admin';			// Only used if $auth_method='internal'. The password for the administrator.
 $ftp_server				= 'localhost';		// Only used if $auth_method='ftp'. The ftp server name. 'localhost' will work for most servers.
