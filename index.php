@@ -1,7 +1,9 @@
 <?php
 
 if (!isset($ALL_CALENDARS_COMBINED))  $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
-include "./config.inc.php";
+if (!defined('BASE')) define('BASE', './');
+include_once(BASE.'default_config.php');
+if (is_file(BASE.'config.inc.php')) include_once(BASE.'config.inc.php');
 if (isset($_COOKIE['phpicalendar'])) {
 	$phpicalendar 		= unserialize(stripslashes($_COOKIE['phpicalendar']));
 	$default_view 		= $phpicalendar['cookie_view'];
