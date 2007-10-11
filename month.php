@@ -1,16 +1,11 @@
 <?php 
 define('BASE', './');
+$current_view = "month";
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$charset");
-$current_view = "month";
 if ($minical_view == 'current') $minical_view = 'month';
-
-ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
-$this_day 				= $day_array2[3]; 
-$this_month 			= $day_array2[2];
-$this_year 				= $day_array2[1];
 
 $unix_time 				= strtotime($getdate);
 $today_today 			= date('Ymd', time() + $second_offset); 
