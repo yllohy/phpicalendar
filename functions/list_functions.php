@@ -14,6 +14,7 @@ function list_jumps() {
 
 function list_calcolors() {
 	global $template, $master_array, $unique_colors;
+	$return = '';
 	$i = 1;
 	if (is_array($master_array['-3'])) {
 		foreach ($master_array['-3'] as $key => $val) {
@@ -30,6 +31,7 @@ function list_months() {
 	global $getdate, $this_year, $cal, $dateFormat_month;
 	$month_time 	= strtotime("$this_year-01-01");
 	$getdate_month 	= date("m", strtotime($getdate));
+	$return = '';
 	for ($i=0; $i<12; $i++) {
 		$monthdate 		= date ("Ymd", $month_time);
 		$month_month 	= date("m", $month_time);
@@ -48,6 +50,7 @@ function list_months() {
 function list_years() {
 	global $getdate, $this_year, $cal, $num_years;
 	$year_time = strtotime($getdate);
+	$return = '';
 	for ($i=0; $i < $num_years; $i++) {
 		$offset = $num_years - $i;
 		$prev_time = strtotime("-$offset year", $year_time);
@@ -81,6 +84,7 @@ function list_weeks() {
 	$check_week 		= strtotime($getdate);
 	$start_week_time 	= strtotime(dateOfWeek(date("Ymd", strtotime("$this_year-01-01")), $week_start_day));
 	$end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
+	$return = '';
 		
 	do {
 		$weekdate 		= date ("Ymd", $start_week_time);
@@ -101,6 +105,7 @@ function list_weeks() {
 
 function list_languages() {
 	global $getdate, $cal, $current_view;
+	$return = '';
 	$dir_handle = @opendir(BASE.'languages/');
 	$tmp_pref_language = urlencode(ucfirst($language));
 	while ($file = readdir($dir_handle)) {

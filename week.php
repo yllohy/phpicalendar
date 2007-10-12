@@ -1,5 +1,4 @@
 <?php
-
 $current_view = "week";
 define('BASE', './');
 require_once(BASE.'functions/ical_parser.php');

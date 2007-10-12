@@ -900,6 +900,8 @@ class Page {
 			$langtype = $daysofweek_lang;	
 		}
 		
+		$weekday_loop = '';
+		$middle = '';
 		for ($i=0; $i<7; $i++) {
 			$day_num 		= date("w", $start_day);
 			$weekday 		= $langtype[$day_num];
@@ -1006,6 +1008,7 @@ class Page {
 		$u_start = strtotime($m_start);
 		$i=0;
 		$seen_events = array();
+		$middle = '';
 		do {
 			if (isset($master_array[$m_start])) {
 				foreach ($master_array[$m_start] as $cal_time => $event_times) {
@@ -1020,7 +1023,7 @@ class Page {
 						$switch['CALNAME'] 	= $val['calname'];
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
-							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, $month_event_lines, 15, 'psf');
+							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, @$month_event_lines, 15, 'psf');
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						} else {
 							$event_start = $val['start_unixtime'];

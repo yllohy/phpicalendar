@@ -207,6 +207,7 @@ function getCalendarName($cal_path) {
 function display_ical_list($cals, $pick=FALSE) {
 	global $cal, $ALL_CALENDARS_COMBINED, $current_view, $getdate, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames;
 	// Print each calendar option.
+	$return = '';
 	foreach ($cals as $cal_tmp) {
 		// Format the calendar path for display.
 		//

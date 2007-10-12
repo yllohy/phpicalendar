@@ -12,6 +12,7 @@ $today_today 			= date('Ymd', time() + $second_offset);
 $tomorrows_date 		= date('Ymd', strtotime("+1 day",  $unix_time));
 $yesterdays_date 		= date('Ymd', strtotime("-1 day",  $unix_time));
 $sidebar_date 			= localizeDate($dateFormat_week_list, $unix_time);
+if (!isset($style_select)) $style_select = '';
 
 // find out next month
 $next_month_month 		= ($this_month+1 == '13') ? '1' : ($this_month+1);

@@ -236,6 +236,7 @@ function extractDateTime($data, $property, $field) {
 		// Set the values.
 		$unixtime = strtotime($data);
 		$date = date('Ymd', $unixtime);
+		$time = '';
 		$allday = $data;
 	}
 	

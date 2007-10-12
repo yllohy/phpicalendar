@@ -1,9 +1,8 @@
 <?php
-	
 define('BASE', './');
+$current_view 		='print';
 require_once(BASE.'functions/date_functions.php');
 require_once(BASE.'functions/init.inc.php');
-$current_view 		='print';
 $start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
 $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $parse_month 		= date ("Ym", strtotime($getdate));

@@ -1,5 +1,4 @@
 <?php
-
 define('BASE', './');
 $current_view = 'year';
 require_once(BASE.'functions/ical_parser.php');

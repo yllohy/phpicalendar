@@ -50,7 +50,7 @@ if (isset($user_template["$cpath"])){
   $template = $user_template["$cpath"]; 
 }
 #set up specific webcals for a particular cpath
-if (is_array($more_webcals[$cpath])){
+if (isset($more_webcals) && is_array($more_webcals[$cpath])){
 	$list_webcals = array_merge($list_webcals, $more_webcals["$cpath"]);
 }
 include_once(BASE.'error.php');
