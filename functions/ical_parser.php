@@ -114,6 +114,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 		} else {
 			$actual_mtime = @filemtime($filename);
 		}
+
+		include(BASE.'functions/parse_tzs.php');
+
 		
 		$ifile = @fopen($filename, "r");
 		if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $filename));
