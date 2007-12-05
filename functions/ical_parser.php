@@ -171,8 +171,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 				break;
 			
 			case 'END:VEVENT':
-				include "functions/end_vevent.php";				
-			
+				include BASE."functions/end_vevent.php";			
 				break;
 			case 'END:VTODO':
 				if ((!$vtodo_priority) && ($status == 'COMPLETED')) {
@@ -193,7 +192,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 						$description = '**CONFIDENTIAL**';
 					}
 				}
-				
+
 				$master_array['-2']["$vtodo_sort"]["$uid"] = array ('start_date' => $start_date, 'start_time' => $start_time, 'vtodo_text' => $summary, 'due_date'=> $due_date, 'due_time'=> $due_time, 'completed_date' => $completed_date, 'completed_time' => $completed_time, 'priority' => $vtodo_priority, 'status' => $status, 'class' => $class, 'categories' => $vtodo_categories, 'description' => $description, 'calname' => $actual_calname);
 				unset ($start_date, $start_time, $due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary, $description);
 				$vtodo_set = FALSE;
