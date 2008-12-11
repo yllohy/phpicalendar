@@ -1,28 +1,10 @@
 <?php
-
 if (!defined('BASE')) define('BASE', './');
 include_once(BASE.'functions/init.inc.php');
 include_once(BASE.'functions/date_functions.php');
 include_once(BASE.'functions/draw_functions.php');
-include_once(BASE.'functions/overlapping_events.php');
+include_once(BASE.'functions/parse/overlapping_events.php');
 include_once(BASE.'functions/timezones.php');
-
-$php_started = getmicrotime();
-
-$fillTime = $day_start;
-$day_array = array ();
-while ($fillTime < $day_end) {
-	array_push ($day_array, $fillTime);
-	preg_match ('/([0-9]{2})([0-9]{2})/', $fillTime, $dTime);
-	$fill_h = $dTime[1];
-	$fill_min = $dTime[2];
-	$fill_min = sprintf('%02d', $fill_min + $gridLength);
-	if ($fill_min == 60) {
-		$fill_h = sprintf('%02d', ($fill_h + 1));
-		$fill_min = '00';
-	}
-	$fillTime = $fill_h . $fill_min;
-}
 
 // reading the file if it's allowed
 $parse_file = true;
@@ -115,7 +97,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 			$actual_mtime = @filemtime($filename);
 		}
 
-		include(BASE.'functions/parse_tzs.php');
+		include(BASE.'functions/parse/parse_tzs.php');
 
 		
 		$ifile = @fopen($filename, "r");
@@ -171,7 +153,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 				break;
 			
 			case 'END:VEVENT':
-				include BASE."functions/end_vevent.php";			
+				include BASE."functions/parse/end_vevent.php";			
 				break;
 			case 'END:VTODO':
 				if ((!$vtodo_priority) && ($status == 'COMPLETED')) {
@@ -459,7 +441,7 @@ $template_started = getmicrotime();
 
 //If you want to see the values in the arrays, uncomment below.
 
-//print '<pre>';
+#print '<pre>';
 //print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
@@ -467,5 +449,5 @@ $template_started = getmicrotime();
 //print_r($recurrence_delete);
 //print_r($cal_displaynames);
 //print_r($cal_filelist);
-//print '</pre>';
+#print '</pre>';
 ?>

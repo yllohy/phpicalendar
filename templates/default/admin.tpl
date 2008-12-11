@@ -23,7 +23,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="dayborder"><img src="images/spacer.gif" width="1" height="5" alt=" " /></td>
+		<td class="dayborder"><img src="../images/spacer.gif" width="1" height="5" alt=" " /></td>
 	</tr>
 	<tr>
 		<td align="right">
@@ -122,9 +122,9 @@
 </table>
 <table width="600" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
-		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
-		<td class="tblr"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tbll"><img src="../images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="../images/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="../images/spacer.gif" alt="" width="8" height="4" /></td>
 	</tr>
 </table>
 {FOOTER}

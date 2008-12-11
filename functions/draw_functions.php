@@ -2,8 +2,8 @@
 // function returns starttime and endtime and event length for drawing into a grid
 
 function drawEventTimes ($start, $end) {
-	global $gridLength;
-	
+	global  $phpiCal_config;
+	$gridLength = $phpiCal_config->gridLength;
 	preg_match ('/([0-9]{2})([0-9]{2})/', $start, $time);
 	$sta_h = $time[1];
 	$sta_min = $time[2];

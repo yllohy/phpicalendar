@@ -1,27 +1,21 @@
 <?php
-
-if (!isset($ALL_CALENDARS_COMBINED))  $ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 if (!defined('BASE')) define('BASE', './');
-include_once(BASE.'default_config.php');
-if (is_file(BASE.'config.inc.php')) include_once(BASE.'config.inc.php');
-if (isset($_COOKIE['phpicalendar'])) {
-	$phpicalendar 		= unserialize(stripslashes($_COOKIE['phpicalendar']));
-	$default_view 		= $phpicalendar['cookie_view'];
-}
-if ($printview_default == 'yes') {
-	$printview = $default_view;
-	$default_view = "print.php";
+include_once(BASE.'functions/init.inc.php');
+
+if ($phpiCal_config->printview_default == 'yes') {
+	$printview = $phpiCal_config->default_view;
+	$phpiCal_config->setProperty('default_view', "print.php");
 } else {
 	$check = array ('day', 'week', 'month', 'year');
-	if (in_array($default_view, $check)) {
-		$default_view = $default_view . '.php';
+	if (in_array($phpiCal_config->default_view, $check)) {
+		$phpiCal_config->setProperty('default_view', $phpiCal_config->default_view . '.php');
 	} else {
-		die;
+		die('illegal view');
 	}
 }
 if(isset($_GET['cpath'])){
-	$default_view .= '?cpath='.$_GET['cpath'];
+	$phpiCal_config->default_view .= '?cpath='.$_GET['cpath'];
 }
-header("Location: $default_view");
+header("Location: $phpiCal_config->default_view");
 
 ?>

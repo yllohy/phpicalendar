@@ -7,8 +7,8 @@ if (isset($_GET['jumpto_day'])) {
 		$getdate = date('Ymd', $jumpto_day_time);
 	}
 }
-define('BASE', './');
 $current_view = 'day';
+if (!defined('BASE')) define('BASE', './');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
@@ -28,13 +28,13 @@ $start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
 
 
 // select for calendars
-$list_icals 	= display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
+$list_icals 	= display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED));
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
-$list_icals_pick = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED), TRUE);
+$list_icals_pick = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED), TRUE);
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
@@ -42,7 +42,7 @@ $show_user_login = (!$is_logged_in && $allow_login == 'yes');
 $login_querys = login_querys();
 $logout_querys = logout_querys();
 
-$page = new Page(BASE.'templates/'.$template.'/day.tpl');
+$page = new Page(BASE.'templates/'.$phpiCal_config->template.'/day.tpl'); 
 
 $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
@@ -53,10 +53,10 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
-	'charset'			=> $charset,
+	'version'			=> $phpiCal_config->phpicalendar_version,
+	'charset'			=> $phpiCal_config->charset,
 	'default_path'		=> '',
-	'template'			=> $template,
+	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'getcpath'			=> "&cpath=$cpath",

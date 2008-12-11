@@ -18,9 +18,9 @@ function is_loggedin () {
 // returns boolean was the login successful
 function login ($username, $password) {
 	global $_SESSION;
-	global $auth_method;
+	global $phpiCal_config;
 	
-	switch ($auth_method) {
+	switch ($phpiCal_config->auth_method) {
 		case 'ftp':
 			$loggedin = login_ftp($username, $password);
 			break;
@@ -72,10 +72,9 @@ function login_ftp ($username, $password) {
 // arg1: string password
 // returns boolean was login successful
 function login_internal ($username, $password) {
-	global $auth_internal_username;
-	global $auth_internal_password;
+	global $phpiCal_config;
 	
-	if ($auth_internal_username == $username && $auth_internal_password == $password)
+	if ($phpiCal_config->auth_internal_username == $username && $phpiCal_config->auth_internal_password == $password)
 		return TRUE;
 	else
 		return FALSE;
@@ -87,16 +86,14 @@ function login_internal ($username, $password) {
 // returns boolean was delete successful
 function delete_cal ($filename) {
 	global $_SESSION;
-	global $auth_method;
-	global $ftp_server;
+	global $phpiCal_config;
 	global $calendar_path;
-	global $ftp_calendar_path;
 	
-	if ($auth_method == 'ftp') {
+	if ($phpiCal_config->auth_method == 'ftp') {
 		$filename = get_ftp_calendar_path() . "/" . $filename;
 		
 		// set up basic connection
-		$conn_id = @ftp_connect($ftp_server); 
+		$conn_id = @ftp_connect($phpiCal_config->ftp_server); 
 		
 		// login with username and password
 		$login_result = @ftp_login($conn_id, $_SESSION['phpical_username'], $_SESSION['phpical_password']); 
@@ -117,18 +114,18 @@ function delete_cal ($filename) {
 		
 		return TRUE;
 	} else {
-		$filename = $calendar_path . "/" . $filename;
+		#$filename = $calendar_path . "/" . $filename;
 	
-		$delete = @unlink($filename); 
+		$delete = unlink($filename); 
 		clearstatcache();
 		if (@file_exists($filename)) { 
 			$filesys = eregi_replace("/","\\", $filename); 
-			$delete = @system("del $filesys");
+			$delete = system("del $filesys");
 			clearstatcache();
 			if (@file_exists($filename)) { 
-				$delete = @chmod ($filename, 0775); 
-				$delete = @unlink($filename); 
-				$delete = @system("del $filesys");
+				$delete = chmod ($filename, 0775); 
+				$delete = unlink($filename); 
+				$delete = system("del $filesys");
 			}
 		}
 		clearstatcache();
@@ -150,16 +147,15 @@ function delete_cal ($filename) {
 // returns boolean was copy successful
 function copy_cal ($source, $destination) {
 	global $_SESSION;
-	global $auth_method;
-	global $ftp_server;
+	global $phpiCal_config;
 	global $calendar_path;
 	
-	if ($auth_method == 'ftp') {
+	if ($phpiCal_config->auth_method == 'ftp') {
 		$destination = get_ftp_calendar_path() . "/" . basename($destination);
 		$destination = str_replace ("\\", "/", realpath($destination));
 		
 		// set up basic connection
-		$conn_id = ftp_connect($ftp_server); 
+		$conn_id = ftp_connect($phpiCal_config->ftp_server); 
 		
 		// login with username and password
 		$login_result = ftp_login($conn_id, $_SESSION['phpical_username'], $_SESSION['phpical_password']); 
@@ -198,11 +194,11 @@ function copy_cal ($source, $destination) {
 //
 // return string path to calendar directory for ftp operations
 function get_ftp_calendar_path() {
-	global $ftp_calendar_path;
+	global $phpiCal_config;
 	global $calendar_path;
 	
-	if ($ftp_calendar_path != '')
-		return $ftp_calendar_path;
+	if ($phpiCal_config->ftp_calendar_path != '')
+		return $phpiCal_config->ftp_calendar_path;
 	else {
 		return str_replace ("\\", "/", realpath($calendar_path));
 	}

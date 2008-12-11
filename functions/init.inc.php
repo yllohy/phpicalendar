@@ -1,69 +1,16 @@
 <?php 
-$phpicalendar_version = '2.24';
-// uncomment when developing, comment for shipping version
-//error_reporting (E_ERROR | E_WARNING | E_PARSE);
-error_reporting(0);
-// Older versions of PHP do not define $_SERVER. Define it here instead.
-if (!isset($_SERVER) && isset($HTTP_SERVER_VARS)) {
-	$_SERVER = &$HTTP_SERVER_VARS;
-}
-#=================Initialize global variables=================================
-// Define some magic strings.
-$ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
-
-// Pull in the configuration and some functions.
+$php_started = getmicrotime();
+# define BASE
 if (!defined('BASE')) define('BASE', './');
-include_once(BASE.'default_config.php');
-if (is_file(BASE.'config.inc.php')) include_once(BASE.'config.inc.php');
-include_once(BASE.'functions/sanitize.php');
-
-$cookie_name = 'phpicalendar_'.basename($default_path);
-if (isset($_COOKIE["$cookie_name"]) && !isset($_POST['unset'])) {
-	$phpicalendar = unserialize(stripslashes($_COOKIE[$cookie_name]));
-	if (isset($phpicalendar['cookie_language'])) 	$language 			= $phpicalendar['cookie_language'];
-	if (isset($phpicalendar['cookie_calendar'])) 	$default_cal_check	= $phpicalendar['cookie_calendar'];
-	if (isset($phpicalendar['cookie_cpath'])) 		$default_cpath_check= $phpicalendar['cookie_cpath'];
-	if (isset($phpicalendar['cookie_view'])) 		$default_view 		= $phpicalendar['cookie_view'];
-	if (isset($phpicalendar['cookie_style']) && is_dir(BASE.'templates/'.$phpicalendar['cookie_style'].'/')){ 
-		$template 			= $phpicalendar['cookie_style'];
-	}	
-	if (isset($phpicalendar['cookie_startday'])) 	$week_start_day		= $phpicalendar['cookie_startday'];
-	if (isset($phpicalendar['cookie_time']))		$day_start			= $phpicalendar['cookie_time'];
-}
-#cpath modifies the calendar path based on the url or cookie values.  This allows you to run multiple calendar subsets from a single phpicalendar installation. Operations on cpath are largely hidden from the end user.
-if ($calendar_path == '') {
-	$calendar_path = BASE.'calendars';
-}
-$cpath = ''; #initialize cpath to prevent later undef warnings.
-if(isset($_REQUEST['cpath'])&& $_REQUEST['cpath'] !=''){
-	$cpath 	= str_replace('..','',$_REQUEST['cpath']);				
-	$calendar_path 	.= "/$cpath";				
-#	$tmp_dir 	.= "/$cpath";				
-}elseif(isset($default_cpath_check) && $default_cpath_check !='' ){
-	$cpath 	= str_replace('..','',$default_cpath_check);				
-	$calendar_path 	.= "/$cpath";				
-#	$tmp_dir 	.= "/$cpath";
-}
-#these need cpath to be set
-#set up specific template folder for a particular cpath
-if (isset($user_template["$cpath"])){ 
-  $template = $user_template["$cpath"]; 
-}
-#set up specific webcals for a particular cpath
-if (isset($more_webcals) && is_array($more_webcals[$cpath])){
-	$list_webcals = array_merge($list_webcals, $more_webcals["$cpath"]);
-}
+include_once(BASE.'functions/init/sanitize.php');
+include_once(BASE.'functions/init/set_error_reporting.php');
+include_once(BASE.'functions/init/configs.php');
+include_once(BASE.'functions/init/cpaths.php');
+include_once(BASE.'functions/init/date_range.php');
 include_once(BASE.'error.php');
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
 
-
-// Set the cookie URI.
-if ($cookie_uri == '') {
-	$cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
-}
-
-if ($bleed_time == '') $bleed_time = -1;
 
 // Grab the action (login or logout).
 if (isset($_GET['action']))			$action = $_GET['action'];
@@ -76,30 +23,6 @@ if ($action != 'login') $invalid_login = false;
 if ($action == 'logout' || $invalid_login) {
 	list($username, $password) = user_logout();
 }
-
-// language support
-$language = strtolower($language);
-$lang_file = BASE.'languages/'.$language.'.inc.php';
-
-unset($lang); #$lang is array of phrases in appropriate language
-if (is_file($lang_file)) {
-	include($lang_file);
-} else {
-	exit(error('The requested language "'.$language.'" is not a supported language. Please use the configuration file to choose a supported language.'));
-}
-
-if (!isset($getdate)) {
-	if (isset($_GET['getdate']) && ($_GET['getdate'] !== '')) {
-		$getdate = $_GET['getdate'];
-	} else {
-		$getdate = date('Ymd', time() + $second_offset);
-	}
-}
-
-preg_match ("/([0-9]{4})([0-9]{2})([0-9]{2})/", $getdate, $day_array2);
-$this_day = $day_array2[3];
-$this_month = $day_array2[2];
-$this_year = $day_array2[1];
 
 if (ini_get('max_execution_time') < 60) {
 	@ini_set('max_execution_time', '60');
@@ -118,8 +41,8 @@ if (isset($_GET['cal'])) {
 	$cal_filenames = $_GET['cal'];
 } else {
 	if (isset($default_cal_check)) {
-		if ($default_cal_check != $ALL_CALENDARS_COMBINED) {
-			$calcheck = $calendar_path.'/'.$default_cal_check.'.ics';
+		if ($default_cal_check != $phpiCal_config->ALL_CALENDARS_COMBINED) {
+			$calcheck = $phpiCal_config->calendar_path.'/'.$default_cal_check.'.ics'; 
 			$calcheckopen = @fopen($calcheck, "r");
 			if ($calcheckopen == FALSE) {
 				$cal_filenames = explode(',',$default_cal);
@@ -127,15 +50,16 @@ if (isset($_GET['cal'])) {
 				$cal_filenames[0] = $default_cal_check;
 			}
 		} else {
-			$cal_filenames[0] = $ALL_CALENDARS_COMBINED;
+			$cal_filenames[0] = $phpiCal_config->ALL_CALENDARS_COMBINED;
 		}
 	} else {
-		$cal_filenames = explode(',',$default_cal);
+		$cal_filenames = explode(',',$phpiCal_config->default_cal);
 	}
 }
+
 //load cal_filenames if $ALL_CALENDARS_COMBINED
-if ($cal_filenames[0] == $ALL_CALENDARS_COMBINED){
-	$cal_filenames = availableCalendars($username, $password, $ALL_CALENDARS_COMBINED);
+if ($cal_filenames[0] == $phpiCal_config->ALL_CALENDARS_COMBINED){
+	$cal_filenames = availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
 }
 // Separate the calendar identifiers into web calendars and local
 // calendars.
@@ -158,7 +82,7 @@ foreach ($cal_filenames as $cal_filename) {
 	// Otherwise it is a local calendar.
 	else {
 		// Check blacklisted.
-		if (in_array($cal_filename, $blacklisted_cals)  && $cal_filename !='') {
+		if (in_array($cal_filename, $phpiCal_config->blacklisted_cals)  && $cal_filename !='') {
 			exit(error($lang['l_error_restrictedcal'], $cal_filename));
 		}
 		$local_cals[] = urldecode(str_replace(".ics", '', basename($cal_filename)));
@@ -254,7 +178,7 @@ $cal = implode(',', $cals);
 asort($cal_displaynames);
 $cal_displayname = implode(', ', $cal_displaynames);
 
-$rss_powered = ($enable_rss == 'yes') ? 'yes' : '';
+$rss_powered = ($phpiCal_config->enable_rss == 'yes') ? 'yes' : '';
 
 function getmicrotime() { 
 	list($usec, $sec) = explode(' ',microtime()); 

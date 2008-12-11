@@ -38,13 +38,13 @@ $thisday2 				= localizeDate($dateFormat_week_list, $unix_time);
 $num_of_events2 			= 0;
 
 // select for calendars
-$list_icals 	= display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
+$list_icals 	= display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED));
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
-$list_icals_pick = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED), TRUE);
+$list_icals_pick = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED), TRUE);
 
 $page = new Page(BASE.'templates/'.$template.'/month.tpl');
 
@@ -57,16 +57,16 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
-	'charset'			=> $charset,
-	'template'			=> $template,
+	'version'			=> $phpiCal_config->phpicalendar_version,
+	'charset'			=> $phpiCal_config->charset,
+	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'getcpath'			=> "&cpath=$cpath",
 	'cpath'             => $cpath,
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $display_date,
-	'rss_powered'	 	=> $rss_powered,
+	'rss_powered'	 	=> $phpiCal_config->rss_powered,
 	'default_path'		=> '',
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',

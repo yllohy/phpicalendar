@@ -43,7 +43,7 @@ function logout_querys() {
 // if no valid login is found. Returns a boolean invalid_login to
 // indicate that the login is invalid.
 function user_login() {
-	global $_COOKIE, $_GET, $_POST, $_SERVER;
+	global $_COOKIE, $_GET, $_POST, $_SERVER, $phpiCal_config;
 	global $login_cookies, $cookie_uri, $locked_map;
 	
 	// Initialize return values.
@@ -96,7 +96,7 @@ function user_login() {
 	}
 	
 	// Check to make sure the username and password is valid.
-	if (!array_key_exists("$username:$password", $locked_map)) {
+	if (!array_key_exists("$username:$password", $phpiCal_config->locked_map)) {
 		// Remember the invalid login, because we may want to display
 		// a message elsewhere or check validity.
 		return array($username, $password, true);
@@ -120,7 +120,7 @@ function user_login() {
 //
 // Returns an empty username and password.
 function user_logout() {
-	global $login_cookies, $cookie_uri;
+	global $login_cookies, $cookie_uri, $phpiCal_config;
 	
 	// Clear the login cookie or session authentication values.
 	if ($login_cookies == 'yes') {

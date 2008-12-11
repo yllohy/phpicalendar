@@ -24,7 +24,7 @@ $this_month = $day_array2[2];
 $this_year 	= $day_array2[1];
 
 // select for calendars
-$list_icals 	= display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
+$list_icals 	= display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED));
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
@@ -32,7 +32,7 @@ $list_jumps 	= list_jumps();
 $list_calcolors = '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />'.$lang['l_all_day'].'<br>
 <img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />'.$lang['l_event']."<br>"; 
 ;
-$list_icals_pick = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED), TRUE);
+$list_icals_pick = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED), TRUE);
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
@@ -52,11 +52,11 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
+	'version'			=> $phpiCal_config->phpicalendar_version,
 	'event_js'			=> '',
 	'current_view'		=> $current_view,
-	'template'			=> $template,
-	'charset'			=> $charset,
+	'template'			=> $phpiCal_config->template,
+	'charset'			=> $phpiCal_config->charset,
 	'default_path'		=> '',
 	'cal'				=> $cal,
 	'getcpath'			=> "&cpath=$cpath",
@@ -65,7 +65,7 @@ $page->replace_tags(array(
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $this_year,
 	'sidebar_date'		=> $sidebar_date,
-	'rss_powered'	 	=> $rss_powered,
+	'rss_powered'	 	=> $phpiCal_config->rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'todo_available' 	=> '',

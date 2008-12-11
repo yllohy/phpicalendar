@@ -7,7 +7,7 @@ define('BASE','../');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/calendar_functions.php');
 
-if ($enable_rss != 'yes') {
+if ($phpiCal_config->enable_rss != 'yes') {
 	exit(error($lang['l_rss_notenabled'], $cal, '../'));
 }
 
@@ -25,7 +25,7 @@ $display_date = "RSS Info";
 $rss_list = "<table>\n";
 $xml_icon ="<img src = 'xml.gif' alt='xml'>";
 
-$filelist = availableCalendars($username, $password, $ALL_CALENDARS_COMBINED);
+$filelist = availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
 foreach ($filelist as $file) {
 	// $cal_filename is the filename of the calendar without .ics
 	// $cal is a urlencoded version of $cal_filename

@@ -4,8 +4,8 @@ require_once(BASE.'functions/template.php');
 
 
 function error($error_msg='There was an error processing the request.', $file='NONE', $error_base='./') {
-	global $template, $language, $enable_rss, $lang, $charset, $default_path;
-	if (!isset($template))					$template = 'default';
+	global $language, $enable_rss, $lang, $charset, $phpiCal_config;
+	if (!isset($template))					$template = $phpiCal_config->template;
 	if (!isset($lang['l_powered_by']))		$lang['l_powered_by'] = 'Powered by';
 	if (!isset($lang['l_error_title']))		$lang['l_error_title'] = 'Error!';
 	if (!isset($lang['l_error_window']))	$lang['l_error_window'] = 'There was an error!';
@@ -19,7 +19,8 @@ function error($error_msg='There was an error processing the request.', $file='N
 	$display_date 		= $lang['l_error_title'];
 	$calendar_name 		= $lang['l_error_title'];
 	
-	if (empty($default_path)) {
+	$default_path = $phpiCal_config->default_path;
+	if (empty($phpiCal_config->default_path)) {
 		if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
 			$default_path = 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
 		} else {

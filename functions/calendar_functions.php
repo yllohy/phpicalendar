@@ -14,7 +14,7 @@
 //					  returned.
 function availableCalendars($username, $password, $cal_filename, $admin = false) {
 	// Import globals.
-	global $allow_webcals, $allow_login, $calendar_path, $recursive_path, $support_ical, $blacklisted_cals, $list_webcals, $locked_cals, $locked_map, $apache_map, $lang, $ALL_CALENDARS_COMBINED, $_SERVER;
+	global $allow_webcals, $allow_login, $calendar_path, $recursive_path, $support_ical, $locked_map, $apache_map, $lang, $_SERVER, $phpiCal_config;
 
 	// Create the list of available calendars.
 	$calendars = array();
@@ -41,12 +41,12 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	$calendars = array();
 	
 	// This array keeps track of paths we need to search.
-	$search_paths = array($calendar_path);
+	$search_paths = array($phpiCal_config->calendar_path);
 		
 	// Add web calendars.
-	if ($cal_filename_local[0] == $ALL_CALENDARS_COMBINED || $admin)	{
+	if ($cal_filename_local[0] == $phpiCal_config->ALL_CALENDARS_COMBINED || $admin)	{
 		if (!isset($http_user) && !$admin) {
-			foreach ($list_webcals as $file) {
+			foreach ($phpiCal_config->list_webcals as $file) {
 				// Make sure the URL ends with .ics.
 				if (!preg_match("/.ics$/i", $file)) continue;
 				
@@ -57,7 +57,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	}
 	
 	// Set some booleans that will dictate our search.
-	$find_all = ($cal_filename_local[0] == $ALL_CALENDARS_COMBINED || $admin);
+	$find_all = ($cal_filename_local[0] == $phpiCal_config->ALL_CALENDARS_COMBINED || $admin);
 	
 	// Process all search paths.
 	while (!empty($search_paths)) {
@@ -114,18 +114,18 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			
 			// Make sure this is not a blacklisted calendar.
 			$cal_name = getCalendarName($file);
-			if (in_array($cal_name, $blacklisted_cals)) continue;
+			if (in_array($cal_name, $phpiCal_config->blacklisted_cals)) continue;
 			
 			// If HTTP authenticated, make sure this calendar is available
 			// to the user.
 			if (isset($http_user)) {
-				if (!in_array($cal_name, $apache_map[$http_user])) continue;
+				if (!in_array($cal_name, $phpiCal_config->apache_map[$http_user])) continue;
 			}
 		
 			// Make sure this calendar is not locked.
 			if (!$admin &&
-				in_array($cal_name, $locked_cals) &&
-				!in_array($cal_name, $unlocked_cals))
+				in_array($cal_name, $phpiCal_config->locked_cals) &&
+				!in_array($cal_name, $phpiCal_config->unlocked_cals))
 			{
 				continue;
 			}
@@ -205,7 +205,7 @@ function getCalendarName($cal_path) {
 //
 // $cals	= The calendars (entire path, e.g. from availableCalendars).
 function display_ical_list($cals, $pick=FALSE) {
-	global $cal, $ALL_CALENDARS_COMBINED, $current_view, $getdate, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames;
+	global $cal, $current_view, $getdate, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $phpiCal_config;
 	// Print each calendar option.
 	$return = '';
 	foreach ($cals as $cal_tmp) {
@@ -287,7 +287,7 @@ function display_ical_list($cals, $pick=FALSE) {
 
 	// option to open all (non-web) calenders together
 	if (!$pick) {
-		if ($cal == $ALL_CALENDARS_COMBINED) {
+		if ($cal == $phpiCal_config->ALL_CALENDARS_COMBINED) {
 			$return .=  "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\" selected=\"selected\">$all_cal_comb_lang</option>";
 		} else {
 			$return .=  "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\">$all_cal_comb_lang</option>";

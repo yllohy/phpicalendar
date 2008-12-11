@@ -5,7 +5,7 @@
 class Page {
 	var $page;
 	function draw_subscribe($template_p) {
-		global $template, $getdate, $cal, $ALL_CALENDARS_COMBINED, $subscribe_path, $download_filename;
+		global $phpiCal_config, $getdate, $cal, $ALL_CALENDARS_COMBINED, $subscribe_path, $download_filename;
 		if ($cal != $ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') {
 			$this->page 	= str_replace('{SUBSCRIBE_PATH}', $subscribe_path, $this->page);
 			$this->page 	= str_replace('{DOWNLOAD_FILENAME}', $download_filename, $this->page);
@@ -15,7 +15,7 @@ class Page {
 	}
 	
 	function draw_admin() {
-		global $template, $getdate, $cal, $master_array, $is_loged_in;
+		global $phpiCal_config, $getdate, $cal, $master_array, $is_loged_in;
 		
 		if ($is_loged_in == TRUE) { 
 			// Print Calendar Checkboxes
@@ -55,7 +55,7 @@ class Page {
 	}
 	
 	function draw_print($template_p) {
-		global $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
+		global $phpiCal_config, $getdate, $cal, $master_array, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
 		preg_match("!<\!-- loop events on -->(.*)<\!-- loop events off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch some_events on -->(.*)<\!-- loop events on -->!is", $this->page, $match3);
 		$loop_event		= trim($match1[1]);
@@ -132,7 +132,7 @@ class Page {
 	}	
 	
 	function draw_search($template_p) {
-		global $template, $getdate, $cal, $the_arr, $daysofweek_lang, $week_start_day, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
+		global $phpiCal_config, $getdate, $cal, $the_arr, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
 
 		preg_match("!<\!-- switch results on -->(.*)<\!-- switch results off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch recur on -->(.*)<\!-- loop recur off -->!is", $this->page, $match2);
@@ -246,7 +246,7 @@ class Page {
 	}#end draw_search
 	
 	function draw_week($template_p) {
-		global $unique_colors, $start_week_time, $template, $getdate, $cal, $master_array, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $timeFormat_small, $day_start, $week_length;
+		global $phpiCal_config, $start_week_time, $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $timeFormat_small, $week_length;
 		
 		// Figure out colspans
 		$dayborder 	= 0;
@@ -287,7 +287,7 @@ class Page {
 			if (is_array($master_array[$get_date]['-1']) && !empty($master_array[$get_date]['-1']) ) {
 				foreach ($master_array[$get_date]['-1'] as $uid => $allday) {
 					$event_calno  	= $allday['calnumber'];
-					$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
+					$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
  					$event 			= openevent($get_date, -1, $uid, $allday, 1, 11, 'psf');
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
@@ -302,13 +302,13 @@ class Page {
 		// Replaces the daysofweek
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
-		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
-		$start_day 			= strtotime($week_start_day);
+		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
+		$start_day 			= strtotime($phpiCal_config->week_start_day);
 		for ($i=0; $i<$week_length; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
 			if ($current_view == 'day') {
-				$weekday 		= $daysofweek_lang[$day_num];
+				$weekday 		= $phpiCal_config->daysofweek_lang[$day_num];
 			} else {
 				$weekday = localizeDate($dateFormat_week_list, strtotime($daylink));
 			}	
@@ -359,16 +359,16 @@ class Page {
 
 			if (ereg("([0-9]{1,2}):00", $key)) {
 				$weekdisplay .= '<tr>';
-				$weekdisplay .= '<td colspan="4" rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
-				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>';
-			} elseif ($cal_time == $day_start) {
+				$weekdisplay .= '<td colspan="4" rowspan="' . (60 / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
+				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
+			} elseif ($cal_time == $phpiCal_config->day_start) {
 				$size_tmp = 60 - (int)substr($cal_time,2,2);
 				$weekdisplay .= '<tr>';
-				$weekdisplay .= '<td colspan="4" rowspan="' . ($size_tmp / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
-				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>';
+				$weekdisplay .= '<td colspan="4" rowspan="' . ($size_tmp / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
+				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			} else {
 				$weekdisplay .= '<tr>';
-				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>';
+				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			}
 			
 			// initialize $thisdate again
@@ -380,7 +380,7 @@ class Page {
 				$dayborder = 0;
 				unset($this_time_arr);
 
-				if ($day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
+				if ($phpiCal_config->day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
 					foreach($master_array[$thisday] as $time_key => $time_arr) {
 						if ((int)$time_key <= (int)$cal_time) {
 							if (is_array($time_arr) && $time_key != '-1') {
@@ -411,13 +411,13 @@ class Page {
 						$j = 0;
 						while (isset($event_length[$thisday][$j])) {
 							if ($event_length[$thisday][$j]["state"] == "ended") {
-								$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+								$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
 								break;
 							}
 							$j++;
 						}
 						if ($j == sizeof($event_length[$thisday])) {
-							array_push ($event_length[$thisday], array ("length" => ($drawEvent["draw_length"] / $gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
+							array_push ($event_length[$thisday], array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
 						}
 					}
 				}
@@ -456,7 +456,7 @@ class Page {
  								$event_calno  	= $this_time_arr[$uid]['calnumber'];
  								$event_status	= strtolower($this_time_arr[$uid]['status']);
  								$event_recur = $this_time_arr[$uid]['recur'];
-								$event_calno = (($event_calno - 1) % $unique_colors) + 1;
+								$event_calno = (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
 								$confirmed = '';
 						  		if (is_array($event_recur)) $confirmed .= '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 								if ($event_status != '') {
@@ -512,16 +512,15 @@ class Page {
 	}
 
 	function draw_day($template_p) {
-		global $template, $getdate, $cal, $master_array, $unique_colors, $daysofweek_lang, $week_start_day, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $gridLength, $day_start;
-
+		global $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $phpiCal_config;
 		// Replaces the allday events
-		$replace = '';
+		$replace = ''; 
 		if (is_array($master_array[$getdate]['-1'])) {
 			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
 			$loop_ad = trim($match1[1]);
 			foreach ($master_array[$getdate]['-1'] as $uid => $allday) {
 				$event_calno  	= $allday['calnumber'];
-				$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
+				$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
  				$event 			= openevent($getdate, -1, $uid, $allday);
 				$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 				$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
@@ -533,8 +532,8 @@ class Page {
 		// Replaces the daysofweek
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
-		$start_wt		 	= strtotime(dateOfWeek($getdate, $week_start_day));
-		$start_day 			= strtotime(dateOfWeek($getdate, $week_start_day));
+		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
+		$start_day 			= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		for ($i=0; $i<7; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
@@ -584,7 +583,7 @@ class Page {
 		preg_match('/([0-9]{4})([0-9]{2})([0-9]{2})/', $getdate, $day_array2);
 		$this_day = $day_array2[3]; 
 		$this_month = $day_array2[2];
-		$this_year = $day_array2[1];
+		$this_year = $day_array2[1]; 
 		foreach ($day_array as $key) {
 			preg_match('/([0-9]{2})([0-9]{2})/', $key, $regs_tmp);
 			$cal_time = $key;
@@ -592,8 +591,8 @@ class Page {
 			$key = date ($timeFormat, $key);
 			unset($this_time_arr);
 			
-			// add events that overlap $day_start instead of cutting them out completely
-			if (($day_start == $cal_time) && (isset($master_array[$getdate]))) {
+			// add events that overlap $phpiCal_config->day_start instead of cutting them out completely
+			if (($phpiCal_config->day_start == $cal_time) && (isset($master_array[$getdate]))) {
 				foreach($master_array[$getdate] as $time_key => $time_arr) {
 					if ((int)$time_key <= (int)$cal_time) {
 						if (is_array($time_arr) && $time_key != '-1') {
@@ -621,28 +620,28 @@ class Page {
 					$j = 0;
 					while (isset($event_length[$j])) {
 						if ($event_length[$j]['state'] == 'ended') {
-							$event_length[$j] = array ('length' => ($drawEvent['draw_length'] / $gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin');
+							$event_length[$j] = array ('length' => ($drawEvent['draw_length'] / $phpiCal_config->gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin');
 							break;
 						}
 						$j++;
 					}
 					if ($j == sizeof($event_length)) {
-						array_push ($event_length, array ('length' => ($drawEvent['draw_length'] / $gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin'));
+						array_push ($event_length, array ('length' => ($drawEvent['draw_length'] / $phpiCal_config->gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin'));
 					}
 				}
 			}
 			if (preg_match('/([0-9]{1,2}):00/', $key)) {
 				$daydisplay .= '<tr>'."\n";
-				$daydisplay .= '<td rowspan="' . (60 / $gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'."\n";
-				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>'."\n";
-			} elseif($cal_time == $day_start) {
+				$daydisplay .= '<td rowspan="' . (60 / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'."\n";
+				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>'."\n";
+			} elseif($cal_time == $phpiCal_config->day_start) {
 				$size_tmp = 60 - (int)substr($cal_time,2,2);
 				$daydisplay .= '<tr>'."\n";
-				$daydisplay .= "<td rowspan=\"" . ($size_tmp / $gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
-				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>'."\n";
+				$daydisplay .= "<td rowspan=\"" . ($size_tmp / $phpiCal_config->gridLength) . "\" align=\"center\" valign=\"top\" width=\"60\" class=\"timeborder\">$key</td>\n";
+				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>'."\n";
 			} else {
 				$daydisplay .= '<tr>'."\n";
-				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $gridLength . '"></td>'."\n";
+				$daydisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>'."\n";
 			}
 			if ($dayborder == 0) {
 				$class = ' class="dayborder"';
@@ -677,7 +676,7 @@ class Page {
  						  $event_calno  = $this_time_arr[$uid]['calnumber'];
  						  $event_recur  = $this_time_arr[$uid]['recur'];
  						  $event_status = strtolower($this_time_arr[$uid]['status']);
-						  $event_calno  = (($event_calno - 1) % $unique_colors) + 1;
+						  $event_calno  = (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
 						  $confirmed = '';
 						  if (is_array($event_recur)) $confirmed .= '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  if ($event_status != '') $confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
@@ -724,16 +723,15 @@ class Page {
 				}
 				
 			}
-			$daydisplay .= '</tr>'."\n";
-		}
-		
+			$daydisplay .= '</tr>'."\n"; 
+		}		
 		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!is', $daydisplay, $this->page);
 	
 	
 	}
 	
 	function tomorrows_events() {
-		global $template, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
+		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
 		
 		preg_match("!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!is", $this->page, $match2);
@@ -770,7 +768,7 @@ class Page {
 	}
 
 	function get_vtodo() {
-		global $template, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines, $show_completed, $show_todos;
+		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines, $show_completed, $show_todos;
 		
 		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!is", $this->page, $match2);
@@ -855,7 +853,7 @@ class Page {
 	}
 	
 	function draw_month($template_p, $offset = '+0', $type) {
-		global $template, $getdate, $master_array, $this_year, $this_month, $unique_colors, $dateFormat_month, $week_start_day, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
+		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $timeFormat_small, $timeFormat;
 		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template_p, $match1);
 		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template_p, $match2);
 		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template_p, $match3);
@@ -887,8 +885,8 @@ class Page {
 		$dateFormat_month_local = str_replace("%B", "<a class=\"ps3\" href=\"month.php?cal=$cal&amp;getdate=$first_of_month\">%B</a>", $dateFormat_month);
 		$dateFormat_month_local = str_replace("%Y", "<a class=\"ps3\" href=\"year.php?cal=$cal&amp;getdate=$first_of_year\">%Y</a>", $dateFormat_month_local);
 
-		//$start_day 			= strtotime($week_start_day);
-		$start_day			= strtotime(dateOfWeek($getdate, $week_start_day));
+		//$start_day 			= strtotime($phpiCal_config->week_start_day);
+		$start_day			= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$month_title 		= localizeDate ($dateFormat_month_local, $fake_getdate_time);
 		$month_date 		= date ('Ymd', $fake_getdate_time);
 
@@ -897,7 +895,7 @@ class Page {
 		} elseif ($type == 'medium') {
 			$langtype = $daysofweekshort_lang;
 		} elseif ($type == 'large') {
-			$langtype = $daysofweek_lang;	
+			$langtype = $phpiCal_config->daysofweek_lang;	
 		}
 		
 		$weekday_loop = '';
@@ -910,7 +908,7 @@ class Page {
 			$weekday_loop  .= $loop_tmp;
 		}
 		
-		$start_day 			= strtotime(dateOfWeek($first_of_month, $week_start_day));
+		$start_day 			= strtotime(dateOfWeek($first_of_month, $phpiCal_config->week_start_day));
 		$i 					= 0;
 		$whole_month 		= TRUE;
 		
@@ -934,25 +932,25 @@ class Page {
 					foreach ($master_array[$daylink] as $cal_time => $event_times) {
 						foreach ($event_times as $uid => $val) {
 							$event_calno 	= $val['calnumber'];
-							$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
+							$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
 							if (!isset($val['event_start'])) {
 								if ($type == 'large') {
-									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
+									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
  									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 15, 'psf');
  									$switch['ALLDAY'] .= (isset($val['location']) && $val['location'] != '') ? $val['location']."<br />" : '';
 									$switch['ALLDAY'] .= '</div>';
 								} else {
-									$switch['ALLDAY'] .= '<img src="templates/'.$template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
+									$switch['ALLDAY'] .= '<img src="templates/'.$phpiCal_config->template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							} else {	
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								if ($type == 'large') {
-									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
+									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
  									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 10, 'ps3', "$start2 ").'';
  									$switch['EVENT'] .= (isset($val['location']) && $val['location'] != '') ? "<br />".$val['location']."<br />" : '';
 									$switch['EVENT'] .= '</div>';
 								} else {
-									$switch['EVENT'] = '<img src="templates/'.$template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
+									$switch['EVENT'] = '<img src="templates/'.$phpiCal_config->template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							}
 						}
@@ -997,7 +995,7 @@ class Page {
 	}
 	
 	function monthbottom() {
-		global $template, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $timeFormat_small, $dateFormat_week_list, $lang;
+		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $timeFormat_small, $dateFormat_week_list, $lang;
 		preg_match("!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!is", $this->page, $match1);
 		preg_match("!<\!-- loop showbottomevents_even on -->(.*)<\!-- loop showbottomevents_even off -->!is", $this->page, $match2);
 		
@@ -1059,21 +1057,21 @@ class Page {
 	}
 
 	function Page($file = 'std.tpl') {
-		global $template;
+		global $phpiCal_config;
 		if (!file_exists($file)){
 			#look for it in default if not found
-			$file = str_replace("templates/$template","templates/default",$file); 
+			$file = str_replace("templates/$phpiCal_config->template","templates/default",$file); 
 			if (!file_exists($file)) die("Template file $file not found.");
 		}	
 		$this->page = join('', file($file));
 	}
 
 	function parse($file) {
-		global $template; $lang;
-		if (basename(dirname($file)) == "$template" || $file =='./functions/event.js'){
+		global $phpiCal_config; $lang;
+		if (basename(dirname($file)) == "$phpiCal_config->template" || $file =='./functions/event.js'){
 			if (!is_file($file)){
 				#look for it in default if not found
-				$file = str_replace("templates/$template","templates/default",$file); 
+				$file = str_replace("templates/$phpiCal_config->template","templates/default",$file); 
 			}
 			if (!is_file($file)){
 				exit(error($lang['l_error_path'], $file));
@@ -1124,7 +1122,7 @@ class Page {
 		}
 	
 	function output() {
-		global $template, $php_started, $lang, $enable_rss, $template_started, $cpath;
+		global $phpiCal_config, $php_started, $lang, $template_started, $cpath;
 		
 		// Looks for {MONTH} before sending page out
 		preg_match_all ('!\{MONTH_([A-Z]*)\|?([+|-])([0-9]{1,2})\}!is', $this->page, $match);
@@ -1132,19 +1130,19 @@ class Page {
 			$i=0;
 			foreach ($match[1] as $key => $val) {
 				if ($match[1][$i] == 'SMALL') {
-					$template_file 	= $this->parse(BASE.'templates/'.$template.'/month_small.tpl');
+					$phpiCal_config->template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_small.tpl');
 					$type 			= 'small';
 					$offset 		= $match[2][$i].$match[3][$i];
 				} elseif ($match[1][$i] == 'MEDIUM') {
-					$template_file 	= $this->parse(BASE.'templates/'.$template.'/month_medium.tpl');
+					$phpiCal_config->template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_medium.tpl');
 					$type 			= 'medium';
 					$offset 		= $match[3][$i];
 				} else {
-					$template_file 	= $this->parse(BASE.'templates/'.$template.'/month_large.tpl');
+					$phpiCal_config->template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_large.tpl');
 					$type 			= 'large';
 					$offset 		= $match[2][$i].$match[3][$i];
 				}
-				$data = $this->draw_month($template_file, $offset, $type);
+				$data = $this->draw_month($phpiCal_config->template_file, $offset, $type);
 				$this->page = str_replace($match[0][$i], $data, $this->page);
 				$i++;
 			}
@@ -1152,10 +1150,10 @@ class Page {
 		
 		$php_ended = @getmicrotime();
 		$generated1 = number_format(($php_ended-$php_started),3);
-		$generated2 = number_format(($php_ended-$template_started),3);
+		$generated2 = number_format(($php_ended-$phpiCal_config->template_started),3);
 		$this->page = str_replace('{GENERATED1}', $generated1, $this->page);
 		$this->page = str_replace('{GENERATED2}', $generated2, $this->page);
-		if ($enable_rss != 'yes') {
+		if ($phpiCal_config->enable_rss != 'yes') {
 			$this->page = preg_replace('!<\!-- switch rss_powered on -->(.*)<\!-- switch rss_powered off -->!is', '', $this->page);
 		} else {
 			$this->page = str_replace('{BASE}', BASE, $this->page);

@@ -29,13 +29,13 @@ $this_month = $day_array2[2];
 $this_year 	= $day_array2[1];
 
 // select for calendars
-$list_icals 	= display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED));
+$list_icals 	= display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED));
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
-$list_icals_pick = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED), TRUE);
+$list_icals_pick = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED), TRUE);
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
@@ -54,10 +54,10 @@ $page->replace_files(array(
 	));
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
-	'charset'			=> $charset,
+	'version'			=> $phpiCal_config->phpicalendar_version,
+	'charset'			=> $phpiCal_config->charset,
 	'default_path'		=> '',
-	'template'			=> $template,
+	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
  	'getcpath'			=> "&cpath=$cpath",
@@ -66,7 +66,7 @@ $page->replace_tags(array(
 	'display_date'		=> $display_date,
 	'current_view'		=> $current_view,
 	'sidebar_date'		=> $sidebar_date,
-	'rss_powered'	 	=> $rss_powered,
+	'rss_powered'	 	=> $phpiCal_config->rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
     'show_search'           => $show_search,
