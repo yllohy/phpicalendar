@@ -1,8 +1,14 @@
 <?php
+# adjust paths in case they are incorrect
+if ($phpiCal_config->default_path == '') {
+	$phpiCal_config->setProperty('default_path', BASE);
+}
+
 #cpath modifies the calendar path based on the url or cookie values.  This allows you to run multiple calendar subsets from a single phpicalendar installation. Operations on cpath are largely hidden from the end user.
 if ($phpiCal_config->calendar_path == '') {
-	$calendar_path = BASE.'calendars';
-}else $calendar_path = $phpiCal_config->calendar_path;
+	$phpiCal_config->setProperty('calendar_path', BASE.'calendars');
+}
+$calendar_path = $phpiCal_config->calendar_path;
 $cpath = ''; #initialize cpath to prevent later undef warnings.
 if(isset($_REQUEST['cpath'])&& $_REQUEST['cpath'] !=''){
 	$cpath 	= str_replace('..','',$_REQUEST['cpath']);				
