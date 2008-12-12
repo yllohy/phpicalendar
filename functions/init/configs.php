@@ -10,7 +10,7 @@ if ($phpiCal_config->cookie_uri == '') {
 }
 $cookie_name = 'phpicalendar_'.basename($phpiCal_config->default_path);
 if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
-	$phpicalendar = unserialize(stripslashes($_COOKIE[$phpiCal_config->cookie_uri]));
+	$phpicalendar = unserialize(stripslashes($_COOKIE[$cookie_name]));
 	if (isset($phpicalendar['cookie_language'])) 	$phpiCal_config->setProperty('language', 			$phpicalendar['cookie_language']);
 	if (isset($phpicalendar['cookie_calendar'])) 	$phpiCal_config->setProperty('default_cal_check', 	$phpicalendar['cookie_calendar']);
 	if (isset($phpicalendar['cookie_cpath'])) 		$phpiCal_config->setProperty('default_cpath_check', $phpicalendar['cookie_cpath']);
@@ -19,7 +19,8 @@ if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
 													$phpiCal_config->setProperty('template', 			$phpicalendar['cookie_style']);
 	}	
 	if (isset($phpicalendar['cookie_startday'])) 	$phpiCal_config->setProperty('week_start_day', 		$phpicalendar['cookie_startday']);
-	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); echo "cookie!";
+	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); 
+	echo "cookie!";
 }
 
 # language support

@@ -3,7 +3,6 @@
 define('BASE','./');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
 $display_date = $preferences_lang;
 
 if ($phpiCal_config->allow_preferences != 'yes') {
@@ -37,7 +36,7 @@ if ($action == 'setcookie') {
 	if ($cookie_unset) { 
 		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$phpiCal_config->cookie_uri",0);
 	} else {
-		setcookie("$cookie_name","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$phpiCal_config->cookie_uri",0); echo "setcookie";
+		setcookie("$cookie_name","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$phpiCal_config->cookie_uri",0);
 		if (isset($_POST['cookie_view'])) 
 			$default_view = $_POST['cookie_view'];
 		if (isset($_POST['cookie_style']) && is_dir(BASE.'templates/'.$_POST['cookie_style'].'/')) 
@@ -194,5 +193,5 @@ $page->replace_tags(array(
 	));
 
 $page->output();
-
+print_r($_COOKIE[$cookie_name]);
 ?>
