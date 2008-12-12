@@ -6,17 +6,13 @@ require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$charset");
 $display_date = $preferences_lang;
 
-if ($allow_preferences != 'yes') {
+if ($phpiCal_config->allow_preferences != 'yes') {
 	exit(error('Preferences are not available for this installation.', $cal));
-}
-
-if ($cookie_uri == '') {
-	$cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
 }
 
 $current_view = "preferences";
 $back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate.'&amp;cpath='.$cpath;
-if ($allow_preferences == 'no') header("Location: $back_page");
+if ($phpiCal_config->allow_preferences == 'no') header("Location: $back_page");
 
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
@@ -39,9 +35,9 @@ if ($action == 'setcookie') {
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time", "cookie_cpath"=>"$cookie_cpath");
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 
-		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$cookie_uri",0);
+		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$phpiCal_config->cookie_uri",0);
 	} else {
-		setcookie("$cookie_name","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$cookie_uri",0);
+		setcookie("$cookie_name","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$phpiCal_config->cookie_uri",0); echo "setcookie";
 		if (isset($_POST['cookie_view'])) 
 			$default_view = $_POST['cookie_view'];
 		if (isset($_POST['cookie_style']) && is_dir(BASE.'templates/'.$_POST['cookie_style'].'/')) 
@@ -70,11 +66,11 @@ if (isset($_COOKIE[$cookie_name])) {
 if ((!isset($_COOKIE[$cookie_name])) || ($cookie_unset)) {
 	# No cookie set -> use defaults from config file.
 	$cookie_language = ucfirst($language);
-	$cookie_calendar = $default_cal;
-	$cookie_view = $default_view;
-	$cookie_style = $template;
-	$cookie_startday = $week_start_day;
-	$cookie_time = $day_start;
+	$cookie_calendar = $phpiCal_config->default_cal;
+	$cookie_view = $phpiCal_config->default_view;
+	$cookie_style = $phpiCal_config->template;
+	$cookie_startday = $phpiCal_config->week_start_day;
+	$cookie_time = $phpiCal_config->day_start;
 }
 
 if ($action == 'setcookie') { 
@@ -146,17 +142,17 @@ closedir($dir_handle);
 $php_ended = getmicrotime();
 $generated = number_format(($php_ended-$php_started),3);
 
-$page = new Page(BASE.'templates/'.$template.'/preferences.tpl');
+$page = new Page(BASE.'templates/'.$phpiCal_config->template.'/preferences.tpl');
 
 $page->replace_files(array(
-	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl'
+	'header'			=> BASE.'templates/'.$phpiCal_config->template.'/header.tpl',
+	'footer'			=> BASE.'templates/'.$phpiCal_config->template.'/footer.tpl'
 	));
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
-	'charset'			=> $charset,
-	'template'			=> $template,
+	'version'			=> $phpiCal_config->phpicalendar_version,
+	'charset'			=> $phpiCal_config->charset,
+	'template'			=> $phpiCal_config->template,
 	'default_path'		=> '',
 	'cpath'				=> $cpath,
 	'cal'				=> $cal,

@@ -38,18 +38,18 @@ $list_icals_pick = display_ical_list(availableCalendars($username, $password, $p
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
-$show_user_login = (!$is_logged_in && $allow_login == 'yes');
+$show_user_login = (!$is_logged_in && $phpiCal_config->allow_login == 'yes');
 $login_querys = login_querys();
 $logout_querys = logout_querys();
 
 $page = new Page(BASE.'templates/'.$phpiCal_config->template.'/day.tpl'); 
 
 $page->replace_files(array(
-	'header'			=> BASE.'templates/'.$template.'/header.tpl',
+	'header'			=> BASE.'templates/'.$phpiCal_config->template.'/header.tpl',
 	'event_js'			=> BASE.'functions/event.js',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-    'sidebar'           => BASE.'templates/'.$template.'/sidebar.tpl',
-    'search_box'        => BASE.'templates/'.$template.'/search_box.tpl'
+	'footer'			=> BASE.'templates/'.$phpiCal_config->template.'/footer.tpl',
+    'sidebar'           => BASE.'templates/'.$phpiCal_config->template.'/sidebar.tpl',
+    'search_box'        => BASE.'templates/'.$phpiCal_config->template.'/search_box.tpl'
 	));
 
 $page->replace_tags(array(
@@ -68,7 +68,7 @@ $page->replace_tags(array(
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
-	'show_search' 		=> $show_search,
+	'show_search' 		=> $phpiCal_config->show_search,
 	'next_day' 			=> $next_day,
 	'prev_day'	 		=> $prev_day,
 	'show_goto' 		=> '',
@@ -105,13 +105,13 @@ $page->replace_tags(array(
 	'l_this_site_is'	=> $lang['l_this_site_is']
 	));
 
-if ($allow_preferences != 'yes') {
+if ($phpiCal_config->allow_preferences != 'yes') {
 	$page->replace_tags(array(
 	'allow_preferences'	=> ''
 	));
 }
 	
-if ($allow_login == 'yes') {
+if ($phpiCal_config->allow_login == 'yes') {
 	$page->replace_tags(array(
 	'l_invalid_login'	=> $lang['l_invalid_login'],
 	'l_password'		=> $lang['l_password'],
@@ -121,7 +121,7 @@ if ($allow_login == 'yes') {
 	));
 }
 
-if ($show_search != 'yes') {
+if ($phpiCal_config->show_search != 'yes') {
 	$page->nosearch($page);
 }
 	

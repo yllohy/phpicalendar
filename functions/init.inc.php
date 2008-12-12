@@ -149,13 +149,13 @@ if (count($local_cals) > 0) {
 		$add_cpath = '';
 		if (isset($cpath) && $cpath !='') $add_cpath = "$cpath/";
 
-		if (($download_uri == '') && (preg_match('/(^\/|\.\.\/)/', $filename) == 0)) {
+		if (($phpiCal_config->download_uri == '') && (preg_match('/(^\/|\.\.\/)/', $filename) == 0)) {
 			$subscribe_path = 'webcal://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'.$filename;
 			$download_filename = $filename;
-		} elseif ($download_uri != '') {
-			$newurl = eregi_replace("^(http://)", "", $download_uri); 
+		} elseif ($phpiCal_config->download_uri != '') {
+			$newurl = eregi_replace("^(http://)", "", $phpiCal_config->download_uri); 
 				$subscribe_path = 'webcal://'.$newurl.'/'.$add_cpath.basename($filename);
-				$download_filename = $download_uri.'/'.$add_cpath.basename($filename);
+				$download_filename = $phpiCal_config->download_uri.'/'.$add_cpath.basename($filename);
 		} else {
 			$subscribe_path = $add_cpath;
 			$download_filename = $add_cpath;

@@ -246,13 +246,13 @@ class Page {
 	}#end draw_search
 	
 	function draw_week($template_p) {
-		global $phpiCal_config, $start_week_time, $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $timeFormat_small, $week_length;
+		global $phpiCal_config, $start_week_time, $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $timeFormat_small;
 		
 		// Figure out colspans
 		$dayborder 	= 0;
 		$thisdate  	= $start_week_time;
 		$swt	   	= $start_week_time;
-		for ($i=0;$i<7;$i++) {
+		for ($i=0;$i < 7;$i++) {
 			$thisday = date("Ymd", $thisdate);
 			$nbrGridCols[$thisday] = 1;
 			if (isset($master_array[$thisday])) {
@@ -267,7 +267,7 @@ class Page {
 			$thisdate = ($thisdate + (25 * 60 * 60));
 		}
 		
-		for ($i=0; $i<$week_length; $i++) {
+		for ($i=0; $i < $phpiCal_config->week_length; $i++) {
 			$thisdate 			= date ('Ymd', $start_week_time); 
 			$weekarray[$i] 		= $thisdate;
 			$start_week_time 	= strtotime('+1 day', $start_week_time);
@@ -304,11 +304,11 @@ class Page {
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$start_day 			= strtotime($phpiCal_config->week_start_day);
-		for ($i=0; $i<$week_length; $i++) {
+		for ($i=0; $i<$phpiCal_config->week_length; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
 			if ($current_view == 'day') {
-				$weekday 		= $phpiCal_config->daysofweek_lang[$day_num];
+				$weekday 		= $daysofweek_lang[$day_num];
 			} else {
 				$weekday = localizeDate($dateFormat_week_list, strtotime($daylink));
 			}	
@@ -345,7 +345,7 @@ class Page {
 		$this_month = $day_array2[2];
 		$this_year = $day_array2[1];
 		$thisdate = $swt;
-		for ($i=0;$i<7;$i++) {
+		for ($i=0; $i < 7; $i++) {
 			$thisday = date("Ymd", $thisdate);
 			$event_length[$thisday] = array ();
 			$thisdate = ($thisdate + (25 * 60 * 60));
@@ -364,7 +364,7 @@ class Page {
 			} elseif ($cal_time == $phpiCal_config->day_start) {
 				$size_tmp = 60 - (int)substr($cal_time,2,2);
 				$weekdisplay .= '<tr>';
-				$weekdisplay .= '<td colspan="4" rowspan="' . ($size_tmp / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
+				$weekdisplay .= '<td colspan="4" rowspan="' . ($size_tmp / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>'; 
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			} else {
 				$weekdisplay .= '<tr>';
@@ -375,7 +375,7 @@ class Page {
 			$thisdate = $swt;
 			
 			// loop this part 7 times, one for each day
-			for ($week_loop=0; $week_loop<$week_length; $week_loop++) {
+			for ($week_loop=0; $week_loop<$phpiCal_config->week_length; $week_loop++) {
 				$thisday = date("Ymd", $thisdate);
 				$dayborder = 0;
 				unset($this_time_arr);
@@ -768,7 +768,7 @@ class Page {
 	}
 
 	function get_vtodo() {
-		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines, $show_completed, $show_todos;
+		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
 		
 		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!is", $this->page, $match1);
 		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!is", $this->page, $match2);
@@ -821,7 +821,7 @@ class Page {
 						// Reset this TODO's category.
 						$temp = '';
 						if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
-							if ($show_completed == 'yes') {
+							if ($phpiCal_config->show_completed == 'yes') {
 								$temp = $completed;
 							}
 						} elseif (isset($val['priority']) && ($val['priority'] != 0) && ($val['priority'] <= 5)) {
@@ -842,7 +842,7 @@ class Page {
 		}
 		
 		// If there are no TODO items, completely hide the TODO list.
-		if (($nugget2 == '') || ($show_todos != 'yes')) {
+		if (($nugget2 == '') || ($phpiCal_config->show_todos != 'yes')) {
 			$this->page = preg_replace('!<\!-- switch vtodo on -->(.*)<\!-- switch vtodo off -->!is', '', $this->page);
 		}
 		

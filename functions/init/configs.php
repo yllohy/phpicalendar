@@ -2,16 +2,15 @@
 // Pull in the configuration and some functions.
 include_once(BASE.'default_config.php');
 if (is_file(BASE.'config.inc.php')){
-	include_once(BASE.'config.inc.php');
+	include(BASE.'config.inc.php');
 	foreach($configs as $key=>$value) $phpiCal_config->setProperty($key, $value);
 }
-// Set the cookie URI.
 if ($phpiCal_config->cookie_uri == '') {
-	$phpiCal_config->setProperty('cookie_uri', $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/') ).'phpicalendar' );
+	$phpiCal_config->cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
 }
-
-if (isset($_COOKIE[$phpiCal_config->cookie_uri]) && !isset($_POST['unset'])) {
-	$phpicalendar = unserialize(stripslashes($_COOKIE[$cookie_name]));
+$cookie_name = 'phpicalendar_'.basename($phpiCal_config->default_path);
+if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
+	$phpicalendar = unserialize(stripslashes($_COOKIE[$phpiCal_config->cookie_uri]));
 	if (isset($phpicalendar['cookie_language'])) 	$phpiCal_config->setProperty('language', 			$phpicalendar['cookie_language']);
 	if (isset($phpicalendar['cookie_calendar'])) 	$phpiCal_config->setProperty('default_cal_check', 	$phpicalendar['cookie_calendar']);
 	if (isset($phpicalendar['cookie_cpath'])) 		$phpiCal_config->setProperty('default_cpath_check', $phpicalendar['cookie_cpath']);
@@ -20,7 +19,7 @@ if (isset($_COOKIE[$phpiCal_config->cookie_uri]) && !isset($_POST['unset'])) {
 													$phpiCal_config->setProperty('template', 			$phpicalendar['cookie_style']);
 	}	
 	if (isset($phpicalendar['cookie_startday'])) 	$phpiCal_config->setProperty('week_start_day', 		$phpicalendar['cookie_startday']);
-	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']);
+	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); echo "cookie!";
 }
 
 # language support
@@ -51,8 +50,7 @@ while ($fillTime < $phpiCal_config->day_end) {
 }
 
 
-/*
-echo "<pre>xx";
+/*echo "<pre>xx";
 print_r($configs);
 print_r($phpiCal_config);
 echo "</pre>";

@@ -288,9 +288,9 @@ function display_ical_list($cals, $pick=FALSE) {
 	// option to open all (non-web) calenders together
 	if (!$pick) {
 		if ($cal == $phpiCal_config->ALL_CALENDARS_COMBINED) {
-			$return .=  "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\" selected=\"selected\">$all_cal_comb_lang</option>";
+			$return .=  "<option value=\"$current_view.php?cal=$phpiCal_config->ALL_CALENDARS_COMBINED&amp;getdate=$getdate\" selected=\"selected\">$all_cal_comb_lang</option>";
 		} else {
-			$return .=  "<option value=\"$current_view.php?cal=$ALL_CALENDARS_COMBINED&amp;getdate=$getdate\">$all_cal_comb_lang</option>";
+			$return .=  "<option value=\"$current_view.php?cal=$phpiCal_config->ALL_CALENDARS_COMBINED&amp;getdate=$getdate\">$all_cal_comb_lang</option>";
 		}
 	}
 	return $return;

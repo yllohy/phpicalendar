@@ -112,13 +112,13 @@ $page->replace_tags(array(
 
 	));
 
-if ($allow_preferences != 'yes') {
+if ($phpiCal_config->allow_preferences != 'yes') {
 	$page->replace_tags(array(
 	'allow_preferences'	=> ''
 	));
 }	
 
-if ($allow_login == 'yes') {
+if ($phpiCal_config->allow_login == 'yes') {
 	$page->replace_tags(array(
 	'l_invalid_login'	=> $lang['l_invalid_login'],
 	'l_password'		=> $lang['l_password'],
