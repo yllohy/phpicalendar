@@ -32,8 +32,9 @@ function two2threeCharDays($day, $txt=true) {
 // dateOfWeek() takes a date in Ymd and a day of week in 3 letters or more
 // and returns the date of that day. (ie: "sun" or "sunday" would be acceptable values of $day but not "su")
 function dateOfWeek($Ymd, $day) {
-	global $week_start_day;
-	if (!isset($week_start_day)) $week_start_day = 'Sunday';
+	global $phpiCal_config;
+	$week_start_day = 'Sunday';
+	if (isset($phpiCal_config->week_start_day)) $week_start_day = $phpiCal_config->week_start_day;
 	$timestamp = strtotime($Ymd);
 	$num = date('w', strtotime($week_start_day));
 	$start_day_time = strtotime((date('w',$timestamp)==$num ? "$week_start_day" : "last $week_start_day"), $timestamp);
@@ -136,9 +137,8 @@ function calcTime($have, $want, $time) {
 	return $time;
 }
 
-function chooseOffset($time) {
-	global $timezone, $tz_array;
-	if (!isset($timezone)) $timezone = '';
+function chooseOffset($time, $timezone = '') {
+	global $tz_array;
 	switch ($timezone) {
 		case '':
 			$offset = 'none';
@@ -148,7 +148,7 @@ function chooseOffset($time) {
 			break;
 		default:
 			if (is_array($tz_array) && array_key_exists($timezone, $tz_array)) {
-				$dlst = date('I', $time);
+				$dlst = date('I', $time);	
 				$offset = $tz_array[$timezone][$dlst];
 			} else {
 				$offset = '+0000';
@@ -210,7 +210,7 @@ $return = "
 // $property	= The property being examined, e.g. DTSTART, DTEND.
 // $field		= The full field being examined, e.g. DTSTART;TZID=US/Pacific
 function extractDateTime($data, $property, $field) {
-	global $tz_array;
+	global $tz_array, $phpiCal_config;
 	
 	// Initialize values.
 	unset($unixtime, $date, $time, $allday);
@@ -238,14 +238,12 @@ function extractDateTime($data, $property, $field) {
 		$date = date('Ymd', $unixtime);
 		$time = '';
 		$allday = $data;
-	}
-	
-	// Extract date-time values.
-	else {
+	}else{	// Extract date-time values.
+
 		// Pull out the timezone, or use GMT if zulu time was indicated.
 		if (preg_match('/^'.$property.';TZID=/i', $field)) {
 			$tz_tmp = explode('=', $field);
-			$tz_dt = parse_tz($tz_tmp[1]);
+			$tz_dt = $tz_tmp[1];
 			unset($tz_tmp);
 		} elseif ($zulu_time) {
 			$tz_dt = 'GMT';
@@ -259,46 +257,22 @@ function extractDateTime($data, $property, $field) {
 		$date = $regs[1] . $regs[2] . $regs[3];
 		$time = $regs[4] . $regs[5];
 		$unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-
 		// Check for daylight savings time.
 		$dlst = date('I', $unixtime);
-		$server_offset_tmp = chooseOffset($unixtime);
+		$server_offset_tmp = chooseOffset($unixtime, $phpiCal_config->timezone);
 		if (isset($tz_dt)) {
-			if (array_key_exists($tz_dt, $tz_array)) {
-				$offset_tmp = $tz_array[$tz_dt][$dlst];
-			} else {
-				$offset_tmp = '+0000';
-			}
+			$offset_tmp = chooseOffset($unixtime, $tz_dt);
 		} elseif (isset($calendar_tz)) {
-			if (array_key_exists($calendar_tz, $tz_array)) {
-				$offset_tmp = $tz_array[$calendar_tz][$dlst];
-			} else {
-				$offset_tmp = '+0000';
-			}
+			$offset_tmp = chooseOffset($unixtime, $calendar_tz);			
 		} else {
 			$offset_tmp = $server_offset_tmp;
 		}
-		
 		// Set the values.
 		$unixtime = calcTime($offset_tmp, $server_offset_tmp, $unixtime);
 		$date = date('Ymd', $unixtime);
 		$time = date('Hi', $unixtime);
-	}
-	
+	}	
 	// Return the results.
 	return array($unixtime, $date, $time, $allday);
 }
-
-//TZIDs in calendars often contain leading information that should be stripped
-//Example: TZID=/mozilla.org/20050126_1/Europe/Berlin
-//Need to return the last part only
-function parse_tz($data){
-	$fields = explode("/",$data);
-	$tz = array_pop($fields);
-	$tmp = array_pop($fields);
-	if (isset($tmp) && $tmp != "") $tz = "$tmp/$tz";
-	return $tz;
-}
-
-
 ?>

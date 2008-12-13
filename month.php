@@ -66,7 +66,7 @@ $page->replace_tags(array(
 	'cpath'             => $cpath,
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $display_date,
-	'rss_powered'	 	=> $phpiCal_config->rss_powered,
+	'rss_powered'	 	=> $rss_powered,
 	'default_path'		=> '',
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',

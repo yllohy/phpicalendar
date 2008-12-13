@@ -6,21 +6,22 @@ if (is_file(BASE.'config.inc.php')){
 	foreach($configs as $key=>$value) $phpiCal_config->setProperty($key, $value);
 }
 if ($phpiCal_config->cookie_uri == '') {
-	$phpiCal_config->cookie_uri = $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/'));
+	$phpiCal_config->setProperty('cookie_uri', $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/')) );
+	if ($phpiCal_config->cookie_uri == 'localhost')	$phpiCal_config->setProperty('cookie_uri', '');
+;
 }
 $cookie_name = 'phpicalendar_'.basename($phpiCal_config->default_path);
 if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
 	$phpicalendar = unserialize(stripslashes($_COOKIE[$cookie_name]));
 	if (isset($phpicalendar['cookie_language'])) 	$phpiCal_config->setProperty('language', 			$phpicalendar['cookie_language']);
 	if (isset($phpicalendar['cookie_calendar'])) 	$phpiCal_config->setProperty('default_cal_check', 	$phpicalendar['cookie_calendar']);
-	if (isset($phpicalendar['cookie_cpath'])) 		$phpiCal_config->setProperty('default_cpath_check', $phpicalendar['cookie_cpath']);
+	if (isset($phpicalendar['cookie_cpath']) && strpos($phpicalendar['cookie_cpath'],'../') === false) 		$phpiCal_config->setProperty('default_cpath_check', $phpicalendar['cookie_cpath']);
 	if (isset($phpicalendar['cookie_view'])) 		$phpiCal_config->setProperty('default_view', 		$phpicalendar['cookie_view']);
 	if (isset($phpicalendar['cookie_style']) && is_dir(BASE.'templates/'.$phpicalendar['cookie_style'].'/')){ 
 													$phpiCal_config->setProperty('template', 			$phpicalendar['cookie_style']);
 	}	
 	if (isset($phpicalendar['cookie_startday'])) 	$phpiCal_config->setProperty('week_start_day', 		$phpicalendar['cookie_startday']);
 	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); 
-	echo "cookie!";
 }
 
 # language support
@@ -50,7 +51,7 @@ while ($fillTime < $phpiCal_config->day_end) {
 	$fillTime = $fill_h . $fill_min;
 }
 
-
+$tz_array=array();
 /*echo "<pre>xx";
 print_r($configs);
 print_r($phpiCal_config);

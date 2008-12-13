@@ -13,14 +13,14 @@ function list_jumps() {
 }
 
 function list_calcolors() {
-	global $template, $master_array, $unique_colors;
+	global $phpiCal_config, $master_array;
 	$return = '';
 	$i = 1;
 	if (is_array($master_array['-3'])) {
 		foreach ($master_array['-3'] as $key => $val) {
-			if ($i > $unique_colors) $i = 1;
+			if ($i > $phpiCal_config->unique_colors) $i = 1;
 			$val = str_replace ("\,", ",", $val);
-			$return .= '<img src="templates/'.$template.'/images/monthdot_'.$i.'.gif" alt="" /> '.$val.'<br />';
+			$return .= '<img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$i.'.gif" alt="" /> '.$val.'<br />';
 			$i++;
 		}
 	}

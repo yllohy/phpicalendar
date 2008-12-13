@@ -5,6 +5,7 @@ include_once(BASE.'functions/date_functions.php');
 include_once(BASE.'functions/draw_functions.php');
 include_once(BASE.'functions/parse/overlapping_events.php');
 include_once(BASE.'functions/timezones.php');
+include_once(BASE.'functions/parse/recur_functions.php');
 
 // reading the file if it's allowed
 $parse_file = true;
@@ -18,13 +19,13 @@ if ($save_parsed_cals == 'yes') {
 			$master_array = unserialize($contents);
 			$z=1;
 			$y=0;
+			$webcal_mtime = time() - ($webcal_hours * 3600);
 			if (sizeof($master_array['-4']) == (sizeof($cal_filelist))) {
 				foreach ($master_array['-4'] as $temp_array) {
 					$mtime = $master_array['-4'][$z]['mtime'];
 					$fname = $master_array['-4'][$z]['filename'];
 					$wcalc = $master_array['-4'][$z]['webcal'];	
 					if ($wcalc == 'no') $realcal_mtime = filemtime($fname);
-					$webcal_mtime = time() - strtotime($webcal_hours * 3600);
 					if (($mtime == $realcal_mtime) && ($wcalc == 'no')) {
 						$y++;
 					} elseif (($wcalc == 'yes') && ($mtime > $webcal_mtime)) {
@@ -142,8 +143,10 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					
 				$except_dates 	= array();
 				$except_times 	= array();
+				$byday  	 	= array();
 				$bymonth	 	= array();
 				$bymonthday 	= array();
+				$bysetpos   	= array();
 				$first_duration = TRUE;
 				$count 			= 1000000;
 				$valarm_set 	= FALSE;
@@ -304,7 +307,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							if ($eachval[0] == 'RECURRENCE-ID') {
 								// do nothing
 							} elseif ($eachval[0] == 'TZID') {
-								$recurrence_id['tzid'] = parse_tz($eachval[1]);
+								$recurrence_id['tzid'] = $eachval[1];
 							} elseif ($eachval[0] == 'RANGE') {
 								$recurrence_id['range'] = $eachval[1];
 							} elseif ($eachval[0] == 'VALUE') {
@@ -323,15 +326,12 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 			
 						$recur_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
 			
-						$dlst = date('I', $recur_unixtime);
-						$server_offset_tmp = chooseOffset($recur_unixtime);
 						if (isset($recurrence_id['tzid'])) {
-							$tz_tmp = $recurrence_id['tzid'];
-							$offset_tmp = $tz_array[$tz_tmp][$dlst];
+							$offset_tmp = chooseOffset($recur_unixtime, $recurrence_id['tzid']);
 						} elseif (isset($calendar_tz)) {
-							$offset_tmp = $tz_array[$calendar_tz][$dlst];
+							$offset_tmp = chooseOffset($recur_unixtime, $tz_array[$calendar_tz]);
 						} else {
-							$offset_tmp = $server_offset_tmp;
+							$offset_tmp = $chooseOffset($recur_unixtime);
 						}
 						$recur_unixtime = calcTime($offset_tmp, $server_offset_tmp, $recur_unixtime);
 						$recurrence_id['date'] = date('Ymd', $recur_unixtime);
@@ -350,7 +350,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							$cal_displaynames[$cal_key] = $actual_calname; #correct the default calname based on filename
 						break;
 					case 'X-WR-TIMEZONE':
-						$calendar_tz = parse_tz($data);
+						$calendar_tz = $data;
 						$master_array['calendar_tz'] = $calendar_tz;
 						break;
 					case 'DURATION':
@@ -441,13 +441,15 @@ $template_started = getmicrotime();
 
 //If you want to see the values in the arrays, uncomment below.
 
-#print '<pre>';
+//print '<pre>';
 //print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
 //print_r($rrule_array);
+//print_r($byday_arr);
 //print_r($recurrence_delete);
 //print_r($cal_displaynames);
 //print_r($cal_filelist);
-#print '</pre>';
+//print_r($tz_array);
+//print '</pre>';
 ?>

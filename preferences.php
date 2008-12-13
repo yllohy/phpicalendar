@@ -99,7 +99,7 @@ closedir($dir_handle);
 
 // select for calendars
 $calendar_select = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED),TRUE);
-$calendar_select .="<option value=\"$ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
+$calendar_select .="<option value=\"$phpiCal_config->ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
 $calendar_select = str_replace("<option value=\"$cookie_calendar\">","<option value=\"$cookie_calendar\" selected='selected'>",$calendar_select);
 // select for dayview
 $view_select 	= ($default_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
@@ -193,5 +193,4 @@ $page->replace_tags(array(
 	));
 
 $page->output();
-print_r($_COOKIE[$cookie_name]);
 ?>

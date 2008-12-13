@@ -7,7 +7,7 @@
 // Corrected by whippersnapper slomo (mail@slomo.de)
 // Revised for version 2.0 by Holger Schleicher (holger@vc4.de)
 //
-// Submit new translations to chad@chadsdomain.com
+// Submit new translations to phpicalendar@gmail.com
 
 $lang['l_day'] 				= 'Tag';
 $lang['l_week'] 			= 'Woche';
@@ -66,12 +66,12 @@ $lang['l_exception']		= 'Ausnahme';
 $lang['l_no_query']			= 'Kein Suchbegriff';
 $lang['l_preferences']		= 'Einstellungen';
 $lang['l_printer']			= 'Drucker';
-$lang['l_select_lang']		= 'Standardsprache w&auml;hlen:';
-$lang['l_select_cal']		= 'Standardkalender w&auml;hlen:';
-$lang['l_select_view']		= 'Standardansicht  w&auml;hlen:';
-$lang['l_select_time']		= 'Tag beginnt um:';
-$lang['l_select_day']		= 'Woche beginnt mit:';
-$lang['l_select_style']		= 'Standardstil w&auml;hlen:';
+$lang['l_select_lang']		= 'Standardsprache w&auml;hlen';
+$lang['l_select_cal']		= 'Standardkalender w&auml;hlen';
+$lang['l_select_view']		= 'Standardansicht  w&auml;hlen';
+$lang['l_select_time']		= 'Tag beginnt um';
+$lang['l_select_day']		= 'Woche beginnt mit';
+$lang['l_select_style']		= 'Standardstil w&auml;hlen';
 $lang['l_set_prefs']		= 'Einstellungen speichern';
 $lang['l_completed_date']	= 'Erledigt am';
 $lang['l_completed']		= 'Erledigt';
@@ -162,8 +162,8 @@ $format_recur_lang['byday']			= 'An den Tagen: %list%';			// ie, 'On days: Mon, 
 // ---------------------------------
 
 $daysofweek_lang			= array ('Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag');
-$daysofweekshort_lang		= array ('Son','Mon','Die','Mit','Don','Fre','Sam');
-$daysofweekreallyshort_lang	= array ('S','M','D','M','D','F','S');
+$daysofweekshort_lang		= array ('So','Mo','Di','Mi','Do','Fr','Sa');
+$daysofweekreallyshort_lang	= array ('So','Mo','Di','Mi','Do','Fr','Sa');
 $monthsofyear_lang			= array ('Januar','Februar','M&auml;rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember');
 $monthsofyearshort_lang		= array ('Jan','Feb','M&auml;r','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez');
 
