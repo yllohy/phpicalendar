@@ -1,20 +1,21 @@
 <?php
+$current_view = 'day';
+if (!defined('BASE')) define('BASE', './');
+require_once(BASE.'functions/init.inc.php');
+header("Content-Type: text/html; charset=$phpiCal_config->charset");
 if (isset($_GET['jumpto_day'])) {
 	$jumpto_day_time = strtotime($_GET['jumpto_day']);
 	if ($jumpto_day_time == -1) {
-		$getdate = date('Ymd', time() + $second_offset); 
+		$getdate = date('Ymd', time() + $phpiCal_config->second_offset); 
 	} else {
 		$getdate = date('Ymd', $jumpto_day_time);
 	}
 }
-$current_view = 'day';
-if (!defined('BASE')) define('BASE', './');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
 
-if ($minical_view == 'current') $minical_view = 'day';
+if ($phpiCal_config->minical_view == 'current') $minical_view = 'day';
 
 $weekstart 		= 1;
 $unix_time 		= strtotime($getdate);
@@ -24,7 +25,7 @@ $prev_day 		= date('Ymd', strtotime("-1 day",  $unix_time));
 
 $display_date = localizeDate($dateFormat_day, $unix_time);
 $sidebar_date = localizeDate($dateFormat_week_list, $unix_time);
-$start_week_time = strtotime(dateOfWeek($getdate, $week_start_day));
+$start_week_time = strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 
 
 // select for calendars

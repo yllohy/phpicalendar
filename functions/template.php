@@ -10,7 +10,7 @@ class Page {
 			$this->page 	= str_replace('{SUBSCRIBE_PATH}', $subscribe_path, $this->page);
 			$this->page 	= str_replace('{DOWNLOAD_FILENAME}', $download_filename, $this->page);
 		} else {
-			$this->page = preg_replace('!<\!-- switch display_download on -->(.*)<\!-- switch display_download off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch display_download on -->(.*)<\!-- switch display_download off -->!Uis', '', $this->page);
 		}
 	}
 	
@@ -48,16 +48,16 @@ class Page {
 			
 			$this->page 	= str_replace('{DELETE_TABLE}', $delete_table, $this->page);
 		} else {
-			$this->page 	= preg_replace('!<\!-- switch logged_in on -->(.*)<\!-- switch logged_in off -->!is', '', $this->page);
-			$this->page 	= preg_replace('!<\!-- switch logged_in2 on -->(.*)<\!-- switch logged_in2 off -->!is', '', $this->page);
+			$this->page 	= preg_replace('!<\!-- switch logged_in on -->(.*)<\!-- switch logged_in off -->!Uis', '', $this->page);
+			$this->page 	= preg_replace('!<\!-- switch logged_in2 on -->(.*)<\!-- switch logged_in2 off -->!Uis', '', $this->page);
 		}
 	
 	}
 	
 	function draw_print($template_p) {
 		global $phpiCal_config, $getdate, $cal, $master_array, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
-		preg_match("!<\!-- loop events on -->(.*)<\!-- loop events off -->!is", $this->page, $match1);
-		preg_match("!<\!-- switch some_events on -->(.*)<\!-- loop events on -->!is", $this->page, $match3);
+		preg_match("!<\!-- loop events on -->(.*)<\!-- loop events off -->!Uis", $this->page, $match1);
+		preg_match("!<\!-- switch some_events on -->(.*)<\!-- loop events on -->!Uis", $this->page, $match3);
 		$loop_event		= trim($match1[1]);
 		$loop_day 		= trim($match3[1]);
 		$parse_month 	= date ("Ym", strtotime($getdate));
@@ -102,11 +102,11 @@ class Page {
 						}
 						
 						if ($description == '') {
-							$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!is', '', $events_tmp);
+							$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!Uis', '', $events_tmp);
 						}
 
 						if ($location == '') {
-							$events_tmp = preg_replace('!<\!-- switch location_events on -->(.*)<\!-- switch location_events off -->!is', '', $events_tmp);
+							$events_tmp = preg_replace('!<\!-- switch location_events on -->(.*)<\!-- switch location_events off -->!Uis', '', $events_tmp);
 						}
 						
 						$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}', '{LOCATION}');
@@ -124,19 +124,19 @@ class Page {
 		}
 		
 		if ($events_week < 1) {
-			$this->page = preg_replace('!<\!-- switch some_events on -->(.*)<\!-- switch some_events off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch some_events on -->(.*)<\!-- switch some_events off -->!Uis', '', $this->page);
 		} else {
-			$this->page = preg_replace('!<\!-- switch some_events on -->(.*)<\!-- switch some_events off -->!is', $final, $this->page);
-			$this->page = preg_replace('!<\!-- switch no_events on -->(.*)<\!-- switch no_events off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch some_events on -->(.*)<\!-- switch some_events off -->!Uis', $final, $this->page);
+			$this->page = preg_replace('!<\!-- switch no_events on -->(.*)<\!-- switch no_events off -->!Uis', '', $this->page);
 		}
 	}	
 	
 	function draw_search($template_p) {
 		global $phpiCal_config, $getdate, $cal, $the_arr, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
 
-		preg_match("!<\!-- switch results on -->(.*)<\!-- switch results off -->!is", $this->page, $match1);
-		preg_match("!<\!-- switch recur on -->(.*)<\!-- loop recur off -->!is", $this->page, $match2);
-		preg_match("!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is", $this->page, $match3);
+		preg_match("!<\!-- switch results on -->(.*)<\!-- switch results off -->!Uis", $this->page, $match1);
+		preg_match("!<\!-- switch recur on -->(.*)<\!-- loop recur off -->!Uis", $this->page, $match2);
+		preg_match("!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis", $this->page, $match3);
 		$loop_event		= trim($match1[1]);
 		$loop_recur 	= trim($match2[1]);
 		$loop_except 	= trim($match3[1]);
@@ -172,10 +172,10 @@ class Page {
 				}
 				
 				if ($description == '') {
-					$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!is', '', $events_tmp);
+					$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!Uis', '', $events_tmp);
 				}
 					if (!isset($val['exceptions'])) {
-					$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is', '', $events_tmp);
+					$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis', '', $events_tmp);
 				}else{
 						$some_exceptions = "";
 						foreach ($val['exceptions'] as $except_val){
@@ -196,13 +196,13 @@ class Page {
 
 							#is there a recur in the exception?
 							if (!$except_val['recur']) {
-								$except_tmp = preg_replace('!<\!-- switch except_recur on -->(.*)<\!-- switch except_recur off -->!is', '', $except_tmp);
+								$except_tmp = preg_replace('!<\!-- switch except_recur on -->(.*)<\!-- switch except_recur off -->!Uis', '', $except_tmp);
 							}else{
 								$except_tmp = str_replace('{EXCEPT_RECUR}', $except_val['recur'], $except_tmp);
 							}
 							#is there a description in the exception?
 							if (!$except_val['description']) {
-								$except_tmp = preg_replace('!<\!-- switch except_description on -->(.*)<\!-- switch except_description off -->!is', '', $except_tmp);
+								$except_tmp = preg_replace('!<\!-- switch except_description on -->(.*)<\!-- switch except_description off -->!Uis', '', $except_tmp);
 							}else{
 								$except_description = stripslashes(urldecode($except_val['description']));
 								$except_tmp = str_replace('{EXCEPT_DESCRIPTION}', $except_description, $except_tmp);
@@ -210,13 +210,13 @@ class Page {
 							$some_exceptions .= $except_tmp;
 	
 						}
-						$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!is', $some_exceptions,$events_tmp );
+						$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis', $some_exceptions,$events_tmp );
 
 	
 				}
 				
 				if (!$val['recur']) {
-					$events_tmp = preg_replace('!<\!-- switch recur on -->(.*)<\!-- switch recur off -->!is', '', $events_tmp);
+					$events_tmp = preg_replace('!<\!-- switch recur on -->(.*)<\!-- switch recur off -->!Uis', '', $events_tmp);
 				}else{
 					$events_tmp = str_replace('{RECUR}', $val['recur'], $events_tmp);
 				}
@@ -236,10 +236,10 @@ class Page {
 		}
 		}		
 		if ($events_found < 1) {
-			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!Uis', '', $this->page);
 		} else {
-			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!is', $final, $this->page);
-			$this->page = preg_replace('!<\!-- switch no_results on -->(.*)<\!-- switch no_results off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!Uis', $final, $this->page);
+			$this->page = preg_replace('!<\!-- switch no_results on -->(.*)<\!-- switch no_results off -->!Uis', '', $this->page);
 			#echo "<hr>this->page: $this->page<br><hr>";
 
 		}
@@ -272,11 +272,10 @@ class Page {
 			$weekarray[$i] 		= $thisdate;
 			$start_week_time 	= strtotime('+1 day', $start_week_time);
 		}
-				
 		// Replaces the allday events
-		preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
-		preg_match("!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!is", $this->page, $match2);
-		preg_match("!<\!-- loop allday off -->(.*)<\!-- loop alldaysofweek off -->!is", $this->page, $match3);
+		preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
+		preg_match("!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!Uis", $this->page, $match2);
+		preg_match("!<\!-- loop allday off -->(.*)<\!-- loop alldaysofweek off -->!Uis", $this->page, $match3);
 		$loop_ad 	= trim($match1[1]);
 		$loop_begin = trim($match2[1]);
 		$loop_end 	= trim($match3[1]);
@@ -297,13 +296,14 @@ class Page {
 			$replace .= $loop_end;
 			$weekreplace .= $replace;
 		}
-		$this->page = preg_replace('!<\!-- loop alldaysofweek on -->(.*)<\!-- loop alldaysofweek off -->!is', $weekreplace, $this->page);
+		$this->page = preg_replace('!<\!-- loop alldaysofweek on -->(.*)<\!-- loop alldaysofweek off -->!Uis', $weekreplace, $this->page);
 		
 		// Replaces the daysofweek
-		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
+		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$start_day 			= strtotime($phpiCal_config->week_start_day);
+		$weekday_loop = '';
 		for ($i=0; $i<$phpiCal_config->week_length; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
@@ -330,11 +330,11 @@ class Page {
 			$loop_tmp 		= str_replace($search, $replace, $loop_dof);
 			$weekday_loop  .= $loop_tmp;
 		}
-		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is', $weekday_loop, $this->page);
+		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis', $weekday_loop, $this->page);
 		
 		// Build the body
-		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!is", $this->page, $match2);
-		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!is", $this->page, $match3);
+		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!Uis", $this->page, $match2);
+		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!Uis", $this->page, $match3);
 		$loop_hours = trim($match2[1]);
 		$loop_event = trim($match3[1]);
 
@@ -508,15 +508,15 @@ class Page {
 			$weekdisplay .= "</tr>\n";
 		}
 
-		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!is', $weekdisplay, $this->page);
+		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!Uis', $weekdisplay, $this->page);
 	}
 
 	function draw_day($template_p) {
-		global $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $phpiCal_config;
+		global $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $phpiCal_config, $daysofweek_lang;
 		// Replaces the allday events
 		$replace = ''; 
-		if (is_array($master_array[$getdate]['-1'])) {
-			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is", $this->page, $match1);
+		if (is_array(@$master_array[$getdate]['-1'])) {
+			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
 			$loop_ad = trim($match1[1]);
 			foreach ($master_array[$getdate]['-1'] as $uid => $allday) {
 				$event_calno  	= $allday['calnumber'];
@@ -527,10 +527,10 @@ class Page {
 				$replace		.= $loop_tmp;
 			}
 		}
-		$this->page = preg_replace('!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!is', $replace, $this->page);
+		$this->page = preg_replace('!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis', $replace, $this->page);
 
 		// Replaces the daysofweek
-		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is", $this->page, $match1);
+		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$start_day 			= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
@@ -558,7 +558,7 @@ class Page {
 			$loop_tmp 		= str_replace($search, $replace, $loop_dof);
 			$weekday_loop  .= $loop_tmp;
 		}
-		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!is', $weekday_loop, $this->page);
+		$this->page = preg_replace('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis', $weekday_loop, $this->page);
 		
 		// Build the body
 		$dayborder = 0;
@@ -573,8 +573,8 @@ class Page {
 				}
 			} 
 		}
-		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!is", $this->page, $match2);
-		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!is", $this->page, $match3);
+		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!Uis", $this->page, $match2);
+		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!Uis", $this->page, $match3);
 		$loop_hours = trim($match2[1]);
 		$loop_event = trim($match3[1]);
 
@@ -583,7 +583,7 @@ class Page {
 		preg_match('/([0-9]{4})([0-9]{2})([0-9]{2})/', $getdate, $day_array2);
 		$this_day = $day_array2[3]; 
 		$this_month = $day_array2[2];
-		$this_year = $day_array2[1]; 
+		$this_year = $day_array2[1];
 		foreach ($day_array as $key) {
 			preg_match('/([0-9]{2})([0-9]{2})/', $key, $regs_tmp);
 			$cal_time = $key;
@@ -723,9 +723,10 @@ class Page {
 				}
 				
 			}
-			$daydisplay .= '</tr>'."\n"; 
-		}		
-		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!is', $daydisplay, $this->page);
+			$daydisplay .= '</tr>'."\n";
+		}
+		
+		$this->page = preg_replace('!<\!-- loop row on -->(.*)<\!-- loop event off -->!Uis', $daydisplay, $this->page);
 	
 	
 	}
@@ -733,8 +734,8 @@ class Page {
 	function tomorrows_events() {
 		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
 		
-		preg_match("!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!is", $this->page, $match1);
-		preg_match("!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!is", $this->page, $match2);
+		preg_match("!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!Uis", $this->page, $match1);
+		preg_match("!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!Uis", $this->page, $match2);
 		$loop_t_ad 	= trim($match1[1]);
 		$loop_t_e 	= trim($match2[1]);
 		$return_adtmp	= '';
@@ -757,12 +758,12 @@ class Page {
 				}
 			}
 
-			$this->page = preg_replace('!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!is', $replace_ad, $this->page);
-			$this->page = preg_replace('!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!is', $replace_e, $this->page);		
+			$this->page = preg_replace('!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!Uis', $replace_ad, $this->page);
+			$this->page = preg_replace('!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!Uis', $replace_e, $this->page);		
 
 		} else {
 
-			$this->page = preg_replace('!<\!-- switch tomorrows_events on -->(.*)<\!-- switch tomorrows_events off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch tomorrows_events on -->(.*)<\!-- switch tomorrows_events off -->!Uis', '', $this->page);
 
 		}
 	}
@@ -770,15 +771,15 @@ class Page {
 	function get_vtodo() {
 		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
 		
-		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!is", $this->page, $match1);
-		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!is", $this->page, $match2);
-		preg_match("!<\!-- switch show_normal on -->(.*)<\!-- switch show_normal off -->!is", $this->page, $match3);
+		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!Uis", $this->page, $match1);
+		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!Uis", $this->page, $match2);
+		preg_match("!<\!-- switch show_normal on -->(.*)<\!-- switch show_normal off -->!Uis", $this->page, $match3);
 		$completed 	= trim($match1[1]);
 		$important 	= trim($match2[1]);
 		$normal 	= trim($match3[1]);
 		$nugget2	= '';
 		$todo_popup_data_index = 0;
-		if (is_array($master_array['-2'])) {
+		if (is_array(@$master_array['-2'])) {
 			foreach ($master_array['-2'] as $vtodo_times) {
 				foreach ($vtodo_times as $val) {
 					$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
@@ -843,24 +844,24 @@ class Page {
 		
 		// If there are no TODO items, completely hide the TODO list.
 		if (($nugget2 == '') || ($phpiCal_config->show_todos != 'yes')) {
-			$this->page = preg_replace('!<\!-- switch vtodo on -->(.*)<\!-- switch vtodo off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch vtodo on -->(.*)<\!-- switch vtodo off -->!Uis', '', $this->page);
 		}
 		
 		// Otherwise display the list of TODOs.
 		else {
-			$this->page = preg_replace('!<\!-- switch show_completed on -->(.*)<\!-- switch show_normal off -->!is', $nugget2, $this->page);
+			$this->page = preg_replace('!<\!-- switch show_completed on -->(.*)<\!-- switch show_normal off -->!Uis', $nugget2, $this->page);
 		}
 	}
 	
 	function draw_month($template_p, $offset = '+0', $type) {
-		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $timeFormat_small, $timeFormat;
-		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!is", $template_p, $match1);
-		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!is", $template_p, $match2);
-		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!is", $template_p, $match3);
-		preg_match("!<\!-- switch istoday on -->(.*)<\!-- switch istoday off -->!is", $template_p, $match4);
-		preg_match("!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!is", $template_p, $match5);
-		preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!is", $template_p, $match6);
-		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!is", $template_p, $match7);		
+		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
+		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!Uis", $template_p, $match1);
+		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!Uis", $template_p, $match2);
+		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!Uis", $template_p, $match3);
+		preg_match("!<\!-- switch istoday on -->(.*)<\!-- switch istoday off -->!Uis", $template_p, $match4);
+		preg_match("!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!Uis", $template_p, $match5);
+		preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!Uis", $template_p, $match6);
+		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!Uis", $template_p, $match7);		
 				
 		$loop_wd 			= trim($match1[1]);
 		$loop_md 			= trim($match2[1]);
@@ -895,7 +896,7 @@ class Page {
 		} elseif ($type == 'medium') {
 			$langtype = $daysofweekshort_lang;
 		} elseif ($type == 'large') {
-			$langtype = $phpiCal_config->daysofweek_lang;	
+			$langtype = $daysofweek_lang;	
 		}
 		
 		$weekday_loop = '';
@@ -978,7 +979,7 @@ class Page {
 		} while ($whole_month == TRUE); 
 		
 		$return = str_replace('<!-- loop weekday on -->'.$match1[1].'<!-- loop weekday off -->', $weekday_loop, $template_p);
-		$return = preg_replace('!<\!-- loop monthweeks on -->(.*)<\!-- loop monthweeks off -->!is', $middle, $return);
+		$return = preg_replace('!<\!-- loop monthweeks on -->(.*)<\!-- loop monthweeks off -->!Uis', $middle, $return);
 		$return = str_replace('{MONTH_TITLE}', $month_title, $return);
 		$return = str_replace('{CAL}', $cal, $return);
 		$return = str_replace('{MONTH_DATE}', $month_date, $return);
@@ -987,17 +988,17 @@ class Page {
 	}
 	
 	function nomonthbottom() {
-		$this->page = preg_replace('!<\!-- switch showbottom on -->(.*)<\!-- switch showbottom off -->!is','', $this->page);
+		$this->page = preg_replace('!<\!-- switch showbottom on -->(.*)<\!-- switch showbottom off -->!Uis','', $this->page);
 	}
 
 	function nosearch() {
-		$this->page = preg_replace('!<\!-- switch show_search on -->(.*)<\!-- switch show_search off -->!is','', $this->page);
+		$this->page = preg_replace('!<\!-- switch show_search on -->(.*)<\!-- switch show_search off -->!Uis','', $this->page);
 	}
 	
 	function monthbottom() {
 		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $timeFormat_small, $dateFormat_week_list, $lang;
-		preg_match("!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!is", $this->page, $match1);
-		preg_match("!<\!-- loop showbottomevents_even on -->(.*)<\!-- loop showbottomevents_even off -->!is", $this->page, $match2);
+		preg_match("!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!Uis", $this->page, $match1);
+		preg_match("!<\!-- loop showbottomevents_even on -->(.*)<\!-- loop showbottomevents_even off -->!Uis", $this->page, $match2);
 		
 		$loop[0] 	= trim($match1[1]);
 		$loop[1] 	= trim($match2[1]);
@@ -1052,7 +1053,7 @@ class Page {
 		#	unset ($switch);
 		} while ($this_month == $check_month);
 
-		$this->page = preg_replace('!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_even off -->!is', $middle, $this->page);
+		$this->page = preg_replace('!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_even off -->!Uis', $middle, $this->page);
 
 	}
 
@@ -1064,6 +1065,7 @@ class Page {
 			if (!file_exists($file)) die("Template file $file not found.");
 		}	
 		$this->page = join('', file($file));
+		return;
 	}
 
 	function parse($file) {
@@ -1090,7 +1092,7 @@ class Page {
 				
 				// This removes any unfilled tags
 				if (!$data) {
-					$this->page = preg_replace('!<\!-- switch ' . $tag . ' on -->(.*)<\!-- switch ' . $tag . ' off -->!is', '', $this->page);
+					$this->page = preg_replace('!<\!-- switch ' . $tag . ' on -->(.*)<\!-- switch ' . $tag . ' off -->!Uis', '', $this->page);
 				}
 				
 				// This replaces any tags
@@ -1110,7 +1112,7 @@ class Page {
 				
 				// This removes any unfilled tags
 				if (!$data) {
-					$this->page = preg_replace('!<\!-- switch ' . $tag . ' on -->(.*)<\!-- switch ' . $tag . ' off -->!is', '', $this->page);
+					$this->page = preg_replace('!<\!-- switch ' . $tag . ' on -->(.*)<\!-- switch ' . $tag . ' off -->!Uis', '', $this->page);
 				}
 				
 				// This replaces any tags
@@ -1125,24 +1127,24 @@ class Page {
 		global $phpiCal_config, $php_started, $lang, $template_started, $cpath;
 		
 		// Looks for {MONTH} before sending page out
-		preg_match_all ('!\{MONTH_([A-Z]*)\|?([+|-])([0-9]{1,2})\}!is', $this->page, $match);
+		preg_match_all ('!\{MONTH_([A-Z]*)\|?([+|-])([0-9]{1,2})\}!Uis', $this->page, $match);
 		if (sizeof($match) > 0) {
 			$i=0;
 			foreach ($match[1] as $key => $val) {
 				if ($match[1][$i] == 'SMALL') {
-					$phpiCal_config->template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_small.tpl');
+					$template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_small.tpl');
 					$type 			= 'small';
 					$offset 		= $match[2][$i].$match[3][$i];
 				} elseif ($match[1][$i] == 'MEDIUM') {
-					$phpiCal_config->template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_medium.tpl');
+					$template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_medium.tpl');
 					$type 			= 'medium';
 					$offset 		= $match[3][$i];
 				} else {
-					$phpiCal_config->template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_large.tpl');
+					$template_file 	= $this->parse(BASE.'templates/'.$phpiCal_config->template.'/month_large.tpl');
 					$type 			= 'large';
 					$offset 		= $match[2][$i].$match[3][$i];
 				}
-				$data = $this->draw_month($phpiCal_config->template_file, $offset, $type);
+				$data = $this->draw_month($template_file, $offset, $type);
 				$this->page = str_replace($match[0][$i], $data, $this->page);
 				$i++;
 			}
@@ -1150,11 +1152,11 @@ class Page {
 		
 		$php_ended = @getmicrotime();
 		$generated1 = number_format(($php_ended-$php_started),3);
-		$generated2 = number_format(($php_ended-$phpiCal_config->template_started),3);
+		$generated2 = number_format(($php_ended-$template_started),3);
 		$this->page = str_replace('{GENERATED1}', $generated1, $this->page);
 		$this->page = str_replace('{GENERATED2}', $generated2, $this->page);
 		if ($phpiCal_config->enable_rss != 'yes') {
-			$this->page = preg_replace('!<\!-- switch rss_powered on -->(.*)<\!-- switch rss_powered off -->!is', '', $this->page);
+			$this->page = preg_replace('!<\!-- switch rss_powered on -->(.*)<\!-- switch rss_powered off -->!Uis', '', $this->page);
 		} else {
 			$this->page = str_replace('{BASE}', BASE, $this->page);
 		}

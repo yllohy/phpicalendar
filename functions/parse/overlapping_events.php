@@ -114,7 +114,7 @@ function checkOverlap($event_date, $event_time, $uid) {
 	if (!isset($event_date)) return;
 	$event = $master_array[$event_date][$event_time][$uid];
 	// Copy out the array - we replace this at the end.
-	$ol_day_array = $overlap_array[$event_date];
+	$ol_day_array = @$overlap_array[$event_date];
 	$drawTimes = drawEventTimes($event['event_start'], $event['event_end']);
 
 	// For a given date,
@@ -141,7 +141,7 @@ function checkOverlap($event_date, $event_time, $uid) {
 	//		'start' - start_time for the overlap block.
 	//		'end'	- end_time for the overlap block.
 
-	$ol_day_array = $overlap_array[$event_date];
+	$ol_day_array = @$overlap_array[$event_date];
 	// Track if $event has been merged in, so we don't re-add the details to 'event' or 'overlapRanges' multiple times.
 	$already_merged_once = false;
 	// First, check the existing overlap blocks, see if the event overlaps with any.

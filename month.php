@@ -5,10 +5,10 @@ require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$charset");
-if ($minical_view == 'current') $minical_view = 'month';
+if ($phpiCal_config->minical_view == 'current') $minical_view = 'month';
 
 $unix_time 				= strtotime($getdate);
-$today_today 			= date('Ymd', time() + $second_offset); 
+$today_today 			= date('Ymd', time() + $phpiCal_config->second_offset); 
 $tomorrows_date 		= date('Ymd', strtotime("+1 day",  $unix_time));
 $yesterdays_date 		= date('Ymd', strtotime("-1 day",  $unix_time));
 $sidebar_date 			= localizeDate($dateFormat_week_list, $unix_time);
@@ -33,7 +33,7 @@ $prev_month 			= date("Ymd", $prev_month_time);
 $display_date 			= localizeDate ($dateFormat_month, $unix_time);
 $parse_month 			= date ("Ym", $unix_time);
 $first_of_month 		= $this_year.$this_month."01";
-$start_month_day 		= dateOfWeek($first_of_month, $week_start_day);
+$start_month_day 		= dateOfWeek($first_of_month, $phpiCal_config->week_start_day);
 $thisday2 				= localizeDate($dateFormat_week_list, $unix_time);
 $num_of_events2 			= 0;
 
@@ -70,7 +70,7 @@ $page->replace_tags(array(
 	'default_path'		=> '',
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
-	'show_search' 		=> $show_search,
+	'show_search' 		=> $phpiCal_config->show_search,
 	'next_month' 		=> $next_month,
 	'prev_month'	 	=> $prev_month,
 	'show_goto' 		=> '',

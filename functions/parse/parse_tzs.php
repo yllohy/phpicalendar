@@ -17,6 +17,8 @@ while (!feof($ifile)) {
 		$nextline = ereg_replace("[\r\n]", "", $nextline);
 	}
 	$line = trim($line);
+	$is_daylight = false;
+	$is_std = false;
 	
 	switch ($line) {
 		case 'BEGIN:VTIMEZONE':
@@ -25,6 +27,7 @@ while (!feof($ifile)) {
 		case 'BEGIN:STANDARD':
 			unset ($offset_s);
 			$is_std = true;
+			$is_daylight = false;
 			break;
 		case 'END:STANDARD':
 			$offset_s = $offset_to;
@@ -33,6 +36,7 @@ while (!feof($ifile)) {
 		case 'BEGIN:DAYLIGHT':
 			unset ($offset_d);
 			$is_daylight = true;
+			$is_std = false;
 			break;
 		case 'END:DAYLIGHT':
 			$offset_d = $offset_to;

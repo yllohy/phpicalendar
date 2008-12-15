@@ -94,6 +94,11 @@ function yearCompare($now, $then) {
 	return $diff_years;
 }
 
+function noneCompare($now, $then) {
+	return 0;
+}
+
+
 // localizeDate() - similar to strftime but uses our preset arrays of localized
 // months and week days and only supports %A, %a, %B, %b, %e, and %Y
 // more can be added as needed but trying to keep it small while we can
