@@ -28,17 +28,19 @@ function add_recur($times,$freq=''){
 	if (!is_array($times)) $times = array($times);
 	$times = array_unique($times);
 	sort($times); 
+	#echo "add_recur";dump_times($times);
 	/*BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR,
    BYMINUTE, BYSECOND and BYSETPOS*/
-	$times = restrict_bymonth($times,$freq); 	
+	$times = restrict_bymonth($times,$freq); 
+
 	$times = restrict_byweekno($times,$freq);
 	$times = restrict_byyearday($times,$freq);
 	$times = restrict_bymonthday($times,$freq);
 	$times = restrict_byday($times,$freq);
-	$times = restrict_bysetpos($times,$freq);
+	$times = restrict_bysetpos($times,$freq);#echo "restrict_bysetpos";dump_times($times);
 
 	foreach ($times as $time){ 
-	echo "time:". date("Ymd",$time);
+		#echo "time:". date("Ymd",$time);
 		if(isset($time) && !in_array(date("Ymd",$time), $except_dates)) $count--; 
 		if($time >= $mArray_begin && $time <= $mArray_end && $count >= 0) $recur_data[] = $time;
 	}
@@ -84,14 +86,20 @@ function expand_byyearday($times){
 }
 
 function expand_bymonthday($times){
-	global $bymonthday, $year, $month;
+	global $bymonthday, $year;
 	if (empty($bymonthday)) return $times;
-	foreach($times as $time) foreach($bymonthday as $monthday) $new_times[] = mktime(12,0,0,$month,$monthday,$year);
+	foreach($times as $time){ 
+		$month = date('m',$time);
+		foreach($bymonthday as $monthday){ 
+			$new_times[] = mktime(12,0,0,$month,$monthday,$year);
+			#echo "monthday:$monthday\n";
+		}	
+	}	
 	return $new_times;
 }
 
 function expand_byday($time){
-	global $freq_type, $byday, $wkst3char, $year, $month, $start_unixtime;
+	global $freq_type, $byday, $wkst3char, $year, $month, $start_unixtime,$summary;
 	if (empty($byday)) return array($time);
 	$the_sunday = dateOfWeek(date("Ymd",$time), $wkst3char);
 #	echo "$freq_type, ".print_r($byday,true)."$wkst3char $the_sunday";
@@ -117,12 +125,13 @@ function expand_byday($time){
 			case 'month':
 			case 'year':
 				$week_arr = array(1,2,3,4,5);
-				if(isset($byday_arr[2])) $week_arr = array($byday_arr[2]); 
-				$month_start = strtotime(date("Ym01",$time));
+				if(isset($byday_arr[2]) && $byday_arr[2] !='') $week_arr = array($byday_arr[2]); 
+				$month_start = strtotime(date("Ym00",$time));
 				foreach($week_arr as $week){
+					#echo "<pre>$summary".$byday_arr[1].$week.$on_day,date("Ymd",$month_start)."\n";
 					$next_date_time = strtotime($byday_arr[1].$week.$on_day,$month_start);
 					# check that we're still in the same month
-					if (date("m",$next_date_time) == date("m",$month_start) ) $times[] = $next_date_time; 
+					if (date("m",$next_date_time) == date("m",$time) ) $times[] = $next_date_time; 
 				}
 				break;
 			default:
@@ -130,7 +139,7 @@ function expand_byday($time){
 				$next_date_time = strtotime($byday_arr[1].$byday_arr[2].$on_day, $month_start); 
 		}
 	}
-	dump_times($times);
+	#echo "exp byday";dump_times($times);
 	return $times;
 }
 
@@ -196,10 +205,11 @@ function restrict_bysetpos($times,$freq=''){
 	return $new_times;	
 }
 
-function dump_times($recur_data){
+# for diagnostics
+function dump_times($times){
 	global $summary;
-	echo "<pre>$summary recur_data:";
-	var_dump($recur_data);
-	foreach($recur_data as $time) echo "\n".date("Ymd his",$time);
+	echo "<pre>$summary times:";
+	var_dump($times);
+	foreach($times as $time) echo "\ndate:".date("Ymd his",$time);
 	echo "</pre>";
 }

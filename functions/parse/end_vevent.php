@@ -228,7 +228,7 @@ $wkst3char = two2threeCharDays($wkst);
 /* The while loop below increments $next_range_time by $freq type. For the larger freq types, there is only 
 one $next_range_time per repeat, but the BYXXX rules may write more than one event in that repeat cycle
 $next_date_time handles those instances within a $freq_type */
-echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tstart range time:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."\n";
+#echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tstart range time:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."\n";
 $recur_data = array();
 while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 	$year = date('Y', $next_range_unixtime); 
@@ -237,6 +237,7 @@ while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 	# $diff is the number of occurrences between start_date and next_range_time
 	$func = $freq_type.'Compare';
 	$diff = $func(date('Ymd',$next_range_time), $start_date);
+	$time = mktime(12,0,0,$month,date("d",$start_unixtime),$year);
 	switch ($freq_type){
 		case 'day':
 			add_recur($next_range_unixtime);
@@ -245,17 +246,16 @@ while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 			add_recur(expand_byday($next_range_unixtime));
 			break;
 		case 'month':
-			$time = mktime(12,0,0,$month,date("d",$start_unixtime),$year);
 			$times = expand_bymonthday(array($time));
 			foreach($times as $time){ 
 				add_recur(expand_byday($time));
 			}
 			break;
 		case 'year':
-			$times = expand_bymonth($next_range_unixtime); 
-			$times = expand_byweekno($times); 
-			$times = expand_byyearday($times);
-			$times = expand_bymonthday($times);
+			$times = expand_bymonth($time); #echo "exp bymonth";dump_times($times);
+			$times = expand_byweekno($times); #echo "exp bymonth";dump_times($times);
+			$times = expand_byyearday($times); #echo "exp bymonth";dump_times($times);
+			$times = expand_bymonthday($times); #echo "exp bymonthday";dump_times($times);
 			foreach($times as $time){ 
 				add_recur(expand_byday($time));
 			}
@@ -264,7 +264,7 @@ while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 			add_recur($start_unixtime);
 			break 2;
 	}
-	$next_range_unixtime = strtotime('+'.$interval.' '.$freq_type, $next_range_unixtime); echo "\nnext $interval $freq_type".date("Ymd",$next_range_unixtime)."\n";
+	$next_range_unixtime = strtotime('+'.$interval.' '.$freq_type, $next_range_unixtime); #echo "\nnext $interval $freq_type".date("Ymd",$next_range_unixtime)."\n";
 } #end while loop
 sort($recur_data);
 
