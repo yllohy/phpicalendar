@@ -199,16 +199,18 @@ variables ending in date are in phpical date format: YYYYMMDD
 variables ending with time are in phpical time format: HHMM
 variables ending in unixtime are in unixtime
 
-mArray_begin and mArray_end are set in initialization by date_range.php and may be overwritten by rss_common.php.  These should be the default for start_range and end_range unixtimes.  Conditions where overwrite these:
-	COUNT < 1,000,000             	- we have to count occurrences; reset next_range_unixtime starting value
+mArray_begin and mArray_end are set in initialization by date_range.php and may be overwritten by rss_common.php.  
+
+$start_date_unixtime should be the default for starting the range.  Need this for the intervals to work out (e.g. every other day, week, month etc)
+mArray_end should be the default for end_range unixtimes.  
+Conditions where overwrite these:
 	$until_unixtime < $mArray_end 	- stop iterating early
 	!isset($rrule_array['FREQ']) 	- only iterate once, set the end_range_unixtime to the end_date_unixtime
 Note that start_range_unixtime and end_range_unixtime are not the same as start_date_unixtime and end_date_unixtime */
 
-$next_range_unixtime = $mArray_begin;			
 $end_range_unixtime = $mArray_end+60*60*24;
 $start_date_unixtime = strtotime($start_date);
-if($count < 1000000) $next_range_unixtime = $start_date_unixtime;
+$next_range_unixtime = $start_date_unixtime;			
 if(isset($until) && $end_range_unixtime > $until_unixtime) $end_range_unixtime = $until_unixtime;
 if(!isset($rrule_array['FREQ'])){ 
 	$end_range_unixtime = strtotime($end_date);
@@ -225,7 +227,7 @@ one $next_range_time per repeat, but the BYXXX rules may write more than one eve
 $next_date_time handles those instances within a $freq_type */
 #echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tstart range time:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."</pre>";
 $recur_data = array();
-while ($next_range_unixtime <= $end_range_unixtime) {
+while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 	$year = date('Y', $next_range_unixtime); 
 	$month = date('m', $next_range_unixtime); 
 	# pick the right compare function from date_functions.php
@@ -240,12 +242,20 @@ while ($next_range_unixtime <= $end_range_unixtime) {
 			add_recur(expand_byday($next_range_unixtime));
 			break;
 		case 'month':
-			$next_date_unixtime = mktime(12,0,0,$month,date('d',$start_unixtime),$year); echo "month".date("Ymd his",$next_date_unixtime);
-			add_recur(($next_date_unixtime));
+			$times = expand_bymonthday(array($next_range_unixtime));
+			foreach($times as $time){ 
+				add_recur(expand_byday($time));
+			}
 			break;
 		case 'year':
-			$next_date_unixtime = mktime(12,0,0,date('m',$start_unixtime),date('d',$start_unixtime),$year); echo "year:$hour,$min,0,".date('m',$start_unixtime).",".date('d',$start_unixtime).",$year".date("Ymd his",$next_date_unixtime);print_r($datetime);
-			add_recur(($next_date_unixtime));
+			$times = expand_bymonth($next_range_unixtime);
+			$times = expand_byweekno($times);
+			$times = expand_byyearday($times);
+			$times = expand_bymonthday($times);
+			
+			foreach($times as $time){ 
+				add_recur(expand_byday($time));
+			}
 			break;
 		default:
 			add_recur($start_unixtime);
@@ -253,16 +263,11 @@ while ($next_range_unixtime <= $end_range_unixtime) {
 	}
 	$next_range_unixtime = strtotime('+'.$interval.' '.$freq_type, $next_range_unixtime); 
 } #end while loop
-$recur_data = array_unique($recur_data);
 sort($recur_data);
 echo "<pre>$summary recur_data:";
 #var_dump($recur_data);
 foreach($recur_data as $time) echo "\n".date("Ymd his",$time);
 echo "</pre>";
-if ($count < count($recur_data)){ 
-	$arr = array_slice($recur_data,0,$count);
-	$recur_data =$arr;
-}
 
 # use recur_data array to write the master array
 // use the same code to write the data instead of always changing it 5 times						
