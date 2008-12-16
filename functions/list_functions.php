@@ -48,11 +48,11 @@ function list_months() {
 
 
 function list_years() {
-	global $getdate, $this_year, $cal, $num_years;
+	global $getdate, $this_year, $cal, $phpiCal_config;
 	$year_time = strtotime($getdate);
 	$return = '';
-	for ($i=0; $i < $num_years; $i++) {
-		$offset = $num_years - $i;
+	for ($i=0; $i < $phpiCal_config->num_years; $i++) {
+		$offset = $phpiCal_config->num_years - $i;
 		$prev_time = strtotime("-$offset year", $year_time);
 		$prev_date = date("Ymd", $prev_time);
 		$prev_year = date("Y", $prev_time);
@@ -63,7 +63,7 @@ function list_years() {
 	$getdate_year = date("Y", $year_time);
 	$return .= "<option value=\"year.php?cal=$cal&amp;getdate=$getdate_date\" selected=\"selected\">$getdate_year</option>\n";
 	
-	for ($i=0; $i < $num_years; $i++) {
+	for ($i=0; $i < $phpiCal_config->num_years; $i++) {
 		$offset = $i + 1;
 		$next_time = strtotime("+$offset year", $year_time);
 		$next_date = date("Ymd", $next_time);

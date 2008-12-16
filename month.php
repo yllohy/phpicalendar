@@ -4,7 +4,7 @@ $current_view = "month";
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
+header("Content-Type: text/html; charset=$phpiCal_config->charset");
 if ($phpiCal_config->minical_view == 'current') $minical_view = 'month';
 
 $unix_time 				= strtotime($getdate);

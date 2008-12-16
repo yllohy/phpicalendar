@@ -4,7 +4,7 @@ $current_view = 'year';
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
+header("Content-Type: text/html; charset=$phpiCal_config->charset");
 
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day 	= $day_array2[3]; 
@@ -65,7 +65,7 @@ $page->replace_tags(array(
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $this_year,
 	'sidebar_date'		=> $sidebar_date,
-	'rss_powered'	 	=> $phpiCal_config->rss_powered,
+	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'todo_available' 	=> '',
@@ -78,14 +78,14 @@ $page->replace_tags(array(
 	'next_year'			=> $next_year,
 	'prev_year'			=> $prev_year,
 	'show_goto' 		=> '',
-	'show_user_login'	=> $show_user_login,
+	'show_user_login'	=> $phpiCal_config->show_user_login,
 	'invalid_login'		=> $invalid_login,
 	'login_querys'		=> $login_querys,
 	'is_logged_in' 		=> $is_logged_in,
 	'username'			=> $username,
 	'logout_querys'		=> $logout_querys,
 	'list_icals' 		=> $list_icals,
-	'list_icals_pick' 		=> $list_icals_pick,
+	'list_icals_pick'	=> $list_icals_pick,
 	'list_years' 		=> $list_years,
 	'list_months' 		=> $list_months,
 	'list_weeks' 		=> $list_weeks,
@@ -103,7 +103,7 @@ $page->replace_tags(array(
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],
 	'l_year'			=> $lang['l_year'],
-	'l_search'				=> $lang['l_search'],
+	'l_search'			=> $lang['l_search'],
 	'l_subscribe'		=> $lang['l_subscribe'],
 	'l_download'		=> $lang['l_download'],
 	'l_pick_multiple'	=> $lang['l_pick_multiple'],
@@ -127,7 +127,7 @@ if ($phpiCal_config->allow_login == 'yes') {
 	'l_logout'			=> $lang['l_logout']
 	));
 }
-if ($show_search != 'yes') {
+if ($phpiCal_config->show_search != 'yes') {
 	$page->nosearch($page);
 }
 

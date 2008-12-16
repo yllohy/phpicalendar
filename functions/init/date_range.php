@@ -31,9 +31,9 @@ switch ($current_view){
 	case 'week':
 	case 'day':
 		$mArray_begin = mktime (0,0,0,$start_month,21,($start_year));
-		$mArray_end = mktime (0,0,0,$end_month,12,($end_year));
+		$mArray_end = mktime (0,0,0,$end_month,31,($end_year));
 		break;
 	default:
 		$mArray_begin = mktime (0,0,0,12,21,($this_year - 1));
-		$mArray_end = mktime (0,0,0,1,12,($this_year + 1));
+		$mArray_end = mktime (0,0,0,1,31,($this_year + 1));
 }
