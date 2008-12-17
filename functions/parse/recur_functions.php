@@ -24,7 +24,7 @@ BYxxx rule parts modify the recurrence in some manner. BYxxx rule
 */
 
 function add_recur($times,$freq=''){
-	global $recur_data, $count, $mArray_begin, $mArray_end, $except_dates, $start_date_unixtime,$until_unixtime;	
+	global $recur_data, $count, $mArray_begin, $mArray_end, $except_dates, $start_date_unixtime,$end_range_unixtime;	
 	if (!is_array($times)) $times = array($times);
 	#echo "add_recur";dump_times($times);
 	/*BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR,
@@ -38,7 +38,7 @@ function add_recur($times,$freq=''){
 	$times[] = $start_date_unixtime;
 	$times = array_unique($times);
 	sort($times); 
-	$until_date = date("Ymd",$until_unixtime);
+	$until_date = date("Ymd",$end_range_unixtime);
 	foreach ($times as $time){ 
 		#echo "time:". date("Ymd",$time);
 		$date = date("Ymd",$time);
