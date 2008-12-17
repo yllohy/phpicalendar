@@ -30,7 +30,7 @@ switch ($current_view){
 	case 'month':
 	case 'week':
 	case 'day':
-		$mArray_begin = mktime (0,0,0,$start_month,21,($start_year));
+		$mArray_begin = mktime (0,0,0,$start_month,1,($start_year));
 		$mArray_end = mktime (0,0,0,$end_month,31,($end_year));
 		break;
 	default:

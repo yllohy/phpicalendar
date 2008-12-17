@@ -24,25 +24,28 @@ BYxxx rule parts modify the recurrence in some manner. BYxxx rule
 */
 
 function add_recur($times,$freq=''){
-	global $recur_data, $count, $mArray_begin, $mArray_end, $except_dates;	
+	global $recur_data, $count, $mArray_begin, $mArray_end, $except_dates, $start_date_unixtime,$until_unixtime;	
 	if (!is_array($times)) $times = array($times);
-	$times = array_unique($times);
-	sort($times); 
 	#echo "add_recur";dump_times($times);
 	/*BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR,
    BYMINUTE, BYSECOND and BYSETPOS*/
 	$times = restrict_bymonth($times,$freq); 
-
 	$times = restrict_byweekno($times,$freq);
 	$times = restrict_byyearday($times,$freq);
 	$times = restrict_bymonthday($times,$freq);
 	$times = restrict_byday($times,$freq);
 	$times = restrict_bysetpos($times,$freq);#echo "restrict_bysetpos";dump_times($times);
-
+	$times[] = $start_date_unixtime;
+	$times = array_unique($times);
+	sort($times); 
+	$until_date = date("Ymd",$until_unixtime);
 	foreach ($times as $time){ 
 		#echo "time:". date("Ymd",$time);
-		if(isset($time) && !in_array(date("Ymd",$time), $except_dates)) $count--; 
-		if($time >= $mArray_begin && $time <= $mArray_end && $count >= 0) $recur_data[] = $time;
+		$date = date("Ymd",$time);
+		if(isset($time) && !in_array($date, $except_dates) && $time >= $start_date_unixtime && $date <= $until_date){ 
+			$count--; 
+			if($time >= $mArray_begin && $time <= $mArray_end && $count >= 0) $recur_data[] = $time;
+		}
 	}
 	return;
 }
@@ -101,8 +104,9 @@ function expand_bymonthday($times){
 function expand_byday($time){
 	global $freq_type, $byday, $wkst3char, $year, $month, $start_unixtime,$summary;
 	if (empty($byday)) return array($time);
+	$times = array();
 	$the_sunday = dateOfWeek(date("Ymd",$time), $wkst3char);
-#	echo "$freq_type, ".print_r($byday,true)."$wkst3char $the_sunday";
+	#echo "<pre>$summary $freq_type ".print_r($byday,true)."$wkst3char $the_sunday</pre>";
 	foreach($byday as $key=>$day) {
 		/* set $byday_arr
 				[0] => byday string, e.g. 4TH
@@ -114,12 +118,8 @@ function expand_byday($time){
 		$on_day = two2threeCharDays($byday_arr[3]);
 		switch($freq_type){
 			case 'week':
-				#need to find the first day of the appropriate week.						
-				if ($key == 0){ 
-					$next_date_time = strtotime("next $on_day",strtotime($the_sunday)) + (12 * 60 * 60);
-				}else{
-					$next_date_time = strtotime("next $on_day",$next_date_time) + (12 * 60 * 60);						
-				}
+				#need to find the first day of the appropriate week.
+				$next_date_time = strtotime("this $on_day",strtotime($the_sunday)) + (12 * 60 * 60);					
 				$times[] = $next_date_time; 
 				break;
 			case 'month':

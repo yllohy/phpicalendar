@@ -125,7 +125,7 @@ if ($phpiCal_config->show_search != 'yes') {
 	$page->nosearch($page);
 }
 	
-if ($this_months_events == 'yes') {	
+if ($phpiCal_config->this_months_events == 'yes') {	
 	$page->monthbottom($page);
 } else {
 	$page->nomonthbottom($page);

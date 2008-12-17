@@ -212,13 +212,24 @@ $start_date_unixtime = strtotime($start_date);
 $next_range_unixtime = $start_date_unixtime;
 
 #conditions where we can not iterate over the whole range
-if($count == 1000000 && $interval == 1) $next_range_unixtime = $mArray_begin;
+if($count == 1000000){
+	if($interval == 1) {
+		$next_range_unixtime = $mArray_begin;
+	}else{
+		# can we calculate the right start time?
+		# pick the right compare function from date_functions.php
+		# $diff is the number of occurrences between start_date and next_range_time
+	#	$func = $freq_type.'Compare';
+	#	$diff = $func(date('Ymd',strtotime($getdate)), $start_date);	
+	#	$next_range_unixtime = strtotime('+'.$diff*$interval.' '.$freq_type, $start_date_unixtime); echo "<pre>$summary\nnext $freq_type $diff $freq_type".date("Ymd",$start_date_unixtime)."\n";
+	}
+}
 // if the beginning of our range is less than the start of the item, we may as well set it equal to it
 if ($next_range_unixtime < $start_date_unixtime) $next_range_unixtime = $start_date_unixtime;
 
 if(isset($until) && $end_range_unixtime > $until_unixtime) $end_range_unixtime = $until_unixtime;
 if($freq_type == 'year') $end_range_unixtime	+= 366*24*60*60;
-if(!isset($rrule_array['FREQ'])){ 
+if(!isset($rrule_array['FREQ']) && isset($end_date)){ 
 	$end_range_unixtime = strtotime($end_date);
 	$count = 1;
 }
@@ -228,15 +239,11 @@ $wkst3char = two2threeCharDays($wkst);
 /* The while loop below increments $next_range_time by $freq type. For the larger freq types, there is only 
 one $next_range_time per repeat, but the BYXXX rules may write more than one event in that repeat cycle
 $next_date_time handles those instances within a $freq_type */
-#echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tstart range time:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."\n";
+#echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tnext_range_unixtime:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."\n";
 $recur_data = array();
 while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 	$year = date('Y', $next_range_unixtime); 
 	$month = date('m', $next_range_unixtime); 
-	# pick the right compare function from date_functions.php
-	# $diff is the number of occurrences between start_date and next_range_time
-	$func = $freq_type.'Compare';
-	$diff = $func(date('Ymd',$next_range_time), $start_date);
 	$time = mktime(12,0,0,$month,date("d",$start_unixtime),$year);
 	switch ($freq_type){
 		case 'day':
