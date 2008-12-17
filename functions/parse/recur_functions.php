@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /* from the std
 
@@ -24,7 +24,8 @@ BYxxx rule parts modify the recurrence in some manner. BYxxx rule
 */
 
 function add_recur($times,$freq=''){
-	global $recur_data, $count, $mArray_begin, $mArray_end, $except_dates, $start_date_unixtime,$end_range_unixtime;	
+	global $recur_data;
+	global $count, $mArray_begin, $mArray_end, $except_dates, $start_date_unixtime,$end_range_unixtime;	
 	if (!is_array($times)) $times = array($times);
 	#echo "add_recur";dump_times($times);
 	/*BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR,
@@ -34,16 +35,19 @@ function add_recur($times,$freq=''){
 	$times = restrict_byyearday($times,$freq);
 	$times = restrict_bymonthday($times,$freq);
 	$times = restrict_byday($times,$freq);
-	$times = restrict_bysetpos($times,$freq);#echo "restrict_bysetpos";dump_times($times);
-	$times[] = $start_date_unixtime;
+	$times = restrict_bysetpos($times,$freq);#echo "restrict_bysetpos";
+	if($start_date_unixtime > $mArray_begin) $times[] = $start_date_unixtime;
 	$times = array_unique($times);
 	sort($times); 
 	$until_date = date("Ymd",$end_range_unixtime);
+#dump_times($times);
+#dump_times($recur_data);
 	foreach ($times as $time){ 
-		#echo "time:". date("Ymd",$time);
+		#echo "time:". date("Ymd",$time)."\n";
 		$date = date("Ymd",$time);
-		if(isset($time) && !in_array($date, $except_dates) && $time >= $start_date_unixtime && $date <= $until_date){ 
-			$count--; 
+		$time = strtotime("$date 12:00:00");
+		if(isset($time) && !in_array($time, $recur_data) && !in_array($date, $except_dates) && $time >= $start_date_unixtime && $date <= $until_date){ 
+			$count--; #echo ".";
 			if($time >= $mArray_begin && $time <= $mArray_end && $count >= 0) $recur_data[] = $time;
 		}
 	}
@@ -94,6 +98,7 @@ function expand_bymonthday($times){
 	foreach($times as $time){ 
 		$month = date('m',$time);
 		foreach($bymonthday as $monthday){ 
+			if($monthday < 0) $monthday = date("t",$time) + $monthday +1;
 			$new_times[] = mktime(12,0,0,$month,$monthday,$year);
 			#echo "monthday:$monthday\n";
 		}	
@@ -127,9 +132,11 @@ function expand_byday($time){
 				$week_arr = array(1,2,3,4,5);
 				if(isset($byday_arr[2]) && $byday_arr[2] !='') $week_arr = array($byday_arr[2]); 
 				$month_start = strtotime(date("Ym00",$time));
+				$month_end = strtotime(date("Ymt",$time))+ (36 * 60 * 60);				
 				foreach($week_arr as $week){
-					#echo "<pre>$summary".$byday_arr[1].$week.$on_day,date("Ymd",$month_start)."\n";
-					$next_date_time = strtotime($byday_arr[1].$week.$on_day,$month_start);
+				#	echo "<pre>$summary".$byday_arr[1].$week.$on_day,date("Ymd",$month_start)."\n";
+					if($byday_arr[1] == '-') $next_date_time = strtotime($byday_arr[1].$week.$on_day,$month_end);
+					else $next_date_time = strtotime($byday_arr[1].$week.$on_day,$month_start);
 					# check that we're still in the same month
 					if (date("m",$next_date_time) == date("m",$time) ) $times[] = $next_date_time; 
 				}
@@ -165,7 +172,16 @@ function restrict_byyearday($times,$freq=''){
 	global $byyearday;
 	if(empty($byyearday)) return $times;
 	$new_times=array();
-	foreach ($times as $time) if(in_array(date("z", $time), $byyearday)) $new_times[] = $time;
+	foreach ($times as $time){
+		foreach ($byyearday as $yearday){
+			if($yearday < 0){
+				$yearday = 365 + $yearday +1;
+				if(date("L",$time)) $yearday += 1;
+			}	
+			$yearday_arr[] = $yearday;
+		}	
+		if(in_array(date("z", $time), $yearday_arr)) $new_times[] = $time;
+	}	
 	return $new_times;
 }
 
@@ -173,7 +189,13 @@ function restrict_bymonthday($times,$freq=''){
 	global $bymonthday;
 	if(empty($bymonthday)) return $times;
 	$new_times=array();
-	foreach ($times as $time) if(in_array(date("j", $time), $bymonthday)) $new_times[] = $time;
+	foreach ($times as $time){
+		foreach ($bymonthday as $monthday){
+			if($monthday < 0) $monthday = date("t",$time) + $monthday +1;
+			$monthday_arr[] = $monthday;
+		}	
+		if(in_array(date("j", $time), $monthday_arr)) $new_times[] = $time;
+	}	
 	return $new_times;
 }
 function restrict_byday($times,$freq=''){

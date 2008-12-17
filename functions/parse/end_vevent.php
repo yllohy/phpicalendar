@@ -277,8 +277,8 @@ sort($recur_data);
 
 /* ============================ Use $recur_data array to write the master array ============================*/
 // This used to use 5 different blocks to write the array... can it be reduced further?						
-$recur_data_hour = @substr($start_unixtime,0,2);
-$recur_data_minute = @substr($start_unixtime,2,2);
+$recur_data_hour = @substr($start_time,0,2);
+$recur_data_minute = @substr($start_time,2,2);
 foreach($recur_data as $recur_data_unixtime) {
 	$recur_data_year = date('Y', $recur_data_unixtime);
 	$recur_data_month = date('m', $recur_data_unixtime);

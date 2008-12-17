@@ -75,6 +75,8 @@ switch ($event['status']){
 	case 'TENTATIVE':
 		$event['status'] =	$lang['l_status_tentative'] ; 
 		break;
+	default:	
+		$event['status'] =	'' ; 
 }
 
 $page = new Page(BASE.'templates/'.$template.'/event.tpl');
