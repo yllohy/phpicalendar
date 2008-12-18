@@ -28,3 +28,4 @@ if (isset($user_template["$cpath"])){
 if (isset($phpiCal_config->more_webcals) && is_array($phpiCal_config->more_webcals[$cpath])){
 	$list_webcals = array_merge($phpiCal_config->list_webcals, $phpiCal_config->more_webcals["$cpath"]);
 }
+$phpiCal_config->setProperty('calendar_path',$calendar_path);

@@ -242,7 +242,7 @@ $next_date_time handles those instances within a $freq_type */
 #echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tnext_range_unixtime:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."\n";
 $recur_data = array();
 while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
-	$year = date('Y', $next_range_unixtime); 
+	$year = date("Y", $next_range_unixtime); 
 	$month = date('m', $next_range_unixtime); 
 	$time = mktime(12,0,0,$month,date("d",$start_unixtime),$year);
 	switch ($freq_type){
@@ -253,16 +253,17 @@ while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 			add_recur(expand_byday($next_range_unixtime));
 			break;
 		case 'month':
-			$times = expand_bymonthday(array($time));
+			if(!empty($bymonthday)) $time = mktime(12,0,0,$month,1,$year);
+			$times = expand_bymonthday(array($time));#echo "\n $month exp bymonthday";dump_times($times);
 			foreach($times as $time){ 
 				add_recur(expand_byday($time));
 			}
 			break;
 		case 'year':
 			$times = expand_bymonth($time); #echo "exp bymonth";dump_times($times);
-			$times = expand_byweekno($times); #echo "exp bymonth";dump_times($times);
-			$times = expand_byyearday($times); #echo "exp bymonth";dump_times($times);
-			$times = expand_bymonthday($times); #echo "exp bymonthday";dump_times($times);
+			$times = expand_byweekno($times); #echo "exp byweekno";dump_times($times);
+			$times = expand_byyearday($times); #echo "exp byyearday";dump_times($times);
+			$times = expand_bymonthday($times); #echo "\nexp bymonthday";dump_times($times);
 			foreach($times as $time){ 
 				add_recur(expand_byday($time));
 			}

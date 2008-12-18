@@ -148,7 +148,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					$location = '';
 					$url = '';
 					$type = '';
-					$wkst = 'SU';
+					$wkst = 'MO';
 					
 					$except_dates 	= array();
 					$except_times 	= array();
