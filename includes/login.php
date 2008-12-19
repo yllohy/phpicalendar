@@ -1,7 +1,7 @@
 <?php
 	// Hide the login block if logged in, there are no lock usernames,
 	// or if authenticated via HTTP.
-	if ($username == '' && $allow_login == 'yes' &&	!isset($_SERVER['PHP_AUTH_USER'])) {
+	if ($username == '' && $phpiCal_config->allow_login == 'yes' &&	!isset($_SERVER['PHP_AUTH_USER'])) {
 		// Set the login table width if not set.
 		if (!isset($login_width)) $login_width = "100%";
 

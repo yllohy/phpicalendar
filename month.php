@@ -46,6 +46,12 @@ $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
 $list_icals_pick = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED), TRUE);
 
+// login/logout
+$is_logged_in = ($username != '' && !$invalid_login) ? true : false;
+$show_user_login = (!$is_logged_in && $phpiCal_config->allow_login == 'yes');
+$login_querys = login_querys();
+$logout_querys = logout_querys();
+
 $page = new Page(BASE.'templates/'.$phpiCal_config->template.'/month.tpl');
 
 $page->replace_files(array(
@@ -74,7 +80,12 @@ $page->replace_tags(array(
 	'next_month' 		=> $next_month,
 	'prev_month'	 	=> $prev_month,
 	'show_goto' 		=> '',
-	'is_logged_in' 		=> '',
+	'show_user_login'	=> $show_user_login,
+	'invalid_login'		=> $invalid_login,
+	'login_querys'		=> $login_querys,
+	'is_logged_in' 		=> $is_logged_in,
+	'username'			=> $username,
+	'logout_querys'		=> $logout_querys,
 	'list_jumps' 		=> $list_jumps,
 	'list_icals' 		=> $list_icals,
 	'list_icals_pick'	=> $list_icals_pick,

@@ -96,7 +96,7 @@ function user_login() {
 	}
 	
 	// Check to make sure the username and password is valid.
-	if (!array_key_exists("$username:$password", $phpiCal_config->locked_map)) {
+	if (!array_key_exists("$username:$password", $locked_map)) {
 		// Remember the invalid login, because we may want to display
 		// a message elsewhere or check validity.
 		return array($username, $password, true);

@@ -36,7 +36,7 @@ $list_icals_pick = display_ical_list(availableCalendars($username, $password, $p
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
-$show_user_login = (!$is_logged_in && $allow_login == 'yes');
+$show_user_login = (!$is_logged_in && $phpiCal_config->allow_login == 'yes');
 $login_querys = login_querys();
 $logout_querys = logout_querys();
 
@@ -78,7 +78,7 @@ $page->replace_tags(array(
 	'next_year'			=> $next_year,
 	'prev_year'			=> $prev_year,
 	'show_goto' 		=> '',
-	'show_user_login'	=> $phpiCal_config->show_user_login,
+	'show_user_login'	=> $show_user_login,
 	'invalid_login'		=> $invalid_login,
 	'login_querys'		=> $login_querys,
 	'is_logged_in' 		=> $is_logged_in,
