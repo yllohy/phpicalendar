@@ -1,21 +1,13 @@
 <?php 
 $current_view = "event";
 define('BASE', '../');
-#$getdate = $_POST['date'];
 include_once(BASE.'functions/init.inc.php'); 
-#include_once(BASE.'functions/ical_parser.php'); 
 require_once(BASE.'functions/template.php');
 
-function decode_popup ($item) {
-	$item = stripslashes(rawurldecode($item));
-	$item = str_replace('\\','',$item);
-	return $item;
-}
-
-
-
-#$event 			= $master_array[$_POST['date']][$_POST['time']][decode_popup($_POST['uid'])];
-$event			= unserialize(stripslashes($_REQUEST['event_data']));
+# information for the popup is sent via $_POST by a javascript snippet in 
+# in function openevent() from functions/date_functions.php
+# character encoding has been problematic with popups.
+$event			= unserialize($_POST['event_data']);
 $organizer 		= unserialize($event['organizer']);
 $attendee 		= unserialize($event['attendee']);
 
@@ -27,31 +19,29 @@ if ($_POST['time'] == -1) {
 	$event_times = date($timeFormat, $event['start_unixtime']) . ' - ' .  date($timeFormat, $event['end_unixtime']); 
 }
 
-$event['description'] 	= stripslashes(utf8_decode(urldecode($event['description'])));
-$event['event_text'] = stripslashes(utf8_decode(urldecode($event['event_text'])));
-$event['location'] = stripslashes(utf8_decode(urldecode($event['location'])));
+$event['event_text'] = stripslashes(urldecode($event['event_text']));
+$event['description'] 	= stripslashes(urldecode($event['description']));
+$event['location'] = stripslashes(urldecode($event['location']));
 $display ='';
 if ($event['description']) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
 
-$organizer = '';
 if (isset($organizer) && is_array($organizer)) {
 	$i=0;
 	$display .= $lang['l_organizer'] . ' - ';
 	foreach ($organizer as $val) {	
-		$organizers .= $organizer[$i]["name"] . ', ';
+		$organizers[] = $organizer[$i]["name"];
 		$i++;
 	}
-	$organizer = substr($organizers,0,-2);
+	$organizer = implode(', ',$organizers);
 }
-$attendees = '';
 if (isset($attendee) && is_array($attendee)) {
 	$i=0;
 	$display .= $lang['l_attendee'] . ' - ';
 	foreach ($attendee as $val) {	
-		$attendees .= $attendee[$i]["name"] . ', ';
+		$attendees[] .= $attendee[$i]["name"];
 		$i++;
 	}
-	$attendee = substr($attendees,0,-2);
+	$attendee = implode(', ',$attendees);
 }
 
 if (isset($event['location'])) {
@@ -96,6 +86,8 @@ $page->replace_tags(array(
 	'location' 			=> stripslashes($event['location']),
 	'cal_title_full'	=> $event['calname'].' '.$lang['l_calendar'],
 	'template'			=> $phpiCal_config->template,
+	'l_summary' 		=> $lang['l_summary'],
+	'l_description'		=> $lang['l_description'],
 	'l_organizer'		=> $lang['l_organizer'],
 	'l_attendee'		=> $lang['l_attendee'],
 	'l_status'			=> $lang['l_status'],
