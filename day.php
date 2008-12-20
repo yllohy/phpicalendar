@@ -19,7 +19,7 @@ if ($phpiCal_config->minical_view == 'current') $minical_view = 'day';
 
 $weekstart 		= 1;
 $unix_time 		= strtotime($getdate);
-$today_today 	= date('Ymd', time() + $second_offset);  
+$today_today 	= date('Ymd', time() + $phpiCal_config->second_offset);  
 $next_day		= date('Ymd', strtotime("+1 day",  $unix_time));
 $prev_day 		= date('Ymd', strtotime("-1 day",  $unix_time));
 
@@ -86,7 +86,7 @@ $page->replace_tags(array(
 	'list_weeks' 		=> $list_weeks,
 	'list_jumps' 		=> $list_jumps,
 	'legend'	 		=> $list_calcolors,
-	'style_select' 		=> $style_select,
+	'style_select' 		=> @$style_select,
 	'l_goprint'			=> $lang['l_goprint'],
 	'l_preferences'		=> $lang['l_preferences'],
 	'l_calendar'		=> $lang['l_calendar'],

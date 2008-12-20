@@ -10,7 +10,7 @@ if ($phpiCal_config->minical_view == "current") $minical_view = "week";
 $starttime 			= "0500";
 $weekstart 			= 1;
 $unix_time 			= strtotime($getdate);
-$today_today        = date('Ymd', time() + $second_offset); 
+$today_today        = date('Ymd', time() + $phpiCal_config->second_offset); 
 $next_week 			= date("Ymd", strtotime("+1 week",  $unix_time));
 $prev_week 			= date("Ymd", strtotime("-1 week",  $unix_time));
 $next_day			= date('Ymd', strtotime("+1 day",  $unix_time));

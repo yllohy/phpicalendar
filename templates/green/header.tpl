@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset={CHARSET}" />
 	<title>{CALENDAR_NAME} - {DISPLAY_DATE}</title>
-  	<link rel="stylesheet" type="text/css" href="{DEFAULT_PATH}templates/{TEMPLATE}/default.css" />
+  	<link rel="stylesheet" type="text/css" href="{DEFAULT_PATH}/templates/{TEMPLATE}/default.css" />
 	<!-- switch rss_available on -->
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="{DEFAULT_PATH}/rss/rss.php?cal={CAL}&amp;rssview={CURRENT_VIEW}">
 	<!-- switch rss_available off -->		
@@ -17,4 +17,8 @@
   <input type="hidden" name="uid" id="uid" value="" />
   <input type="hidden" name="cpath" id="cpath" value="" />
   <input type="hidden" name="event_data" id="event_data" value="" />
+</form>
+<form name="todoPopupForm" id="todoPopupForm" method="post" action="includes/todo.php" style="display: none;">
+  <input type="hidden" name="todo_data" id="todo_data" value="" />
+  <input type="hidden" name="todo_text" id="todo_text" value="" />
 </form>

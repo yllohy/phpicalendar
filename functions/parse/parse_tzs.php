@@ -46,10 +46,10 @@ while (!feof($ifile)) {
 			$tz_array[$tz_id] = array(
 				0	=> $offset_s, 
 				1	=> $offset_d,
-				'dt_start' => $begin_daylight,
-				'st_start' => $begin_std,
-				'st_name'	=> $st_name,
-				'dt_name'	=> $dt_name
+				'dt_start' => @$begin_daylight,
+				'st_start' => @$begin_std,
+				'st_name'	=> @$st_name,
+				'dt_name'	=> @$dt_name
 				
 				); #echo "<pre>$tz_id"; print_r($tz_array[$tz_id]);echo"</pre>";
 			break;

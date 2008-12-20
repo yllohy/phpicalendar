@@ -47,22 +47,22 @@ header("Content-Type: text/html; charset=$charset");
 $page = new Page(BASE.'templates/'.$template.'/print.tpl');
 
 $page->replace_files(array(
-	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl'
+	'header'			=> BASE.'templates/'.$phpiCal_config->template.'/header.tpl',
+	'footer'			=> BASE.'templates/'.$phpiCal_config->template.'/footer.tpl',
+	'sidebar'			=> BASE.'templates/'.$phpiCal_config->template.'/sidebar.tpl'
 	));
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
+	'version'			=> $phpiCal_config->phpicalendar_version,
 	'event_js'			=> '',
-	'charset'			=> $charset,
-	'default_path'		=> '',
-	'template'			=> $template,
+	'charset'			=> $phpiCal_config->charset,
+	'default_path'		=> $phpiCal_config->default_path,
+	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $cal_displayname,
 	'current_view'		=> $current_view,
-        'printview'          => $printview,
+    'printview'         => $printview,
 	'display_date'		=> $display_date,
 	'sidebar_date'		=> $sidebar_date,
 	'rss_powered'	 	=> $rss_powered,
@@ -79,7 +79,7 @@ $page->replace_tags(array(
 	'list_weeks' 		=> $list_weeks,
 	'list_jumps' 		=> $list_jumps,
 	'legend'	 		=> $list_calcolors,
-	'style_select' 		=> $style_select,
+	'style_select' 		=> @$style_select,
 	'l_time'			=> $lang['l_time'],
 	'l_summary'			=> $lang['l_summary'],
 	'l_description'		=> $lang['l_description'],
@@ -88,7 +88,7 @@ $page->replace_tags(array(
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],
 	'l_year'			=> $lang['l_year'],
-	'l_location'			=> $lang['l_location'],	
+	'l_location'		=> $lang['l_location'],	
 	'l_subscribe'		=> $lang['l_subscribe'],
 	'l_download'		=> $lang['l_download'],
 	'l_no_results'		=> $lang['l_no_results'],
