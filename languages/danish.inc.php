@@ -1,150 +1,161 @@
 <?php
 
-// Danish language include
-// For version 1.0 PHP iCalendar
+// English language include
+// For version 2.0 PHP iCalendar
 //
-// Translation by Henrik H�jmark (styxx@worldonline.dk)
-//            and Jakob Peterh�nsel (marook@creepers.org)
+// Translation by Chad Little (chad@chadsdomain.com)
 //
-// Submit new translations to chad@chadsdomain.com
+// Submit new translations to phpicalendar@gmail.com
 
-$day_lang			= 'Dag';
-$week_lang			= 'Uge';
-$month_lang			= 'M&aring;ned';
-$year_lang			= '&Aring;r';
-$calendar_lang		= 'kalender';
-$next_day_lang		= 'N&aelig;ste dag';
-$next_month_lang	= 'N&aelig;ste m&aring;ned';
-$next_week_lang		= 'N&aelig;ste uge';
-$next_year_lang		= 'N&aelig;ste &aring;r';
-$last_day_lang		= 'Forrige dag';
-$last_month_lang	= 'Forrige m&aring;ned';
-$last_week_lang		= 'Forrige uge';
-$last_year_lang		= 'Forrige &aring;r';
-$subscribe_lang		= 'Abonn&eacute;r';
-$download_lang		= 'Hent';
-$powered_by_lang 	= 'Drevet af';
-$event_lang			= 'Aftale';
-$event_start_lang	= 'Start tidspunkt';
-$event_end_lang		= 'Slut tidspunkt';
-$this_months_lang	= 'Denne m&aring;neds aftaler';
-$date_lang			= 'Dato';
-$summary_lang		= 'Opsummering';
-$all_day_lang		= 'Heldags aftale';
-$notes_lang			= 'Noter';
-$this_years_lang	= 'Dette &aring;s aftaler';
-$today_lang			= 'I dag';
-$this_week_lang		= 'Denne uge';
-$this_month_lang	= 'Denne m&aring;ned';
-$jump_lang			= 'G&aring; til';
-$tomorrows_lang		= 'N&aelig;ste dags aftaler';
-$goday_lang			= 'G&aring; til i dag';
-$goweek_lang		= 'G&aring; til denne uge';
-$gomonth_lang		= 'G&aring; til denne m&aring;ned';
-$goyear_lang		= 'G&aring; til dette &aring;r';
-$search_lang		= 'S&oslash;g'; // the verb
-$results_lang		= 'S&oskash;ge resultater';
-$query_lang			= 'S&oslash;gekriterier: '; // will be followed by the search query
-$no_results_lang	= 'Der er ikke fundet nogen aftaler';
-$goprint_lang		= 'Udskriftsvenligt';
-$time_lang			= 'Tid';
-$summary_lang		= 'Opsummering';
-$description_lang	= 'Beskrivelse';
-$this_site_is_lang		= 'Denne webadresse er';
-$no_events_day_lang		= 'Ingen aftaler i dag.';
-$no_events_week_lang	= 'Ingen aftaler i denne uge.';
-$no_events_month_lang	= 'Ingen aftaler i denne m&aring;ned.';
-$rss_day_date			= 'g:i A';  // Lists just the time
-$rss_week_date			= '%b %e';  // Lists just the day
-$rss_month_date			= '%b %e';  // Lists just the day
-$search_took_lang		= 'S&oslash;gningen tog %s sekunder';
-$recurring_event_lang	= 'Gentagen aftale';
-$exception_lang			= 'Undtagelse';
-$no_query_lang			= 'Der er ingen forsp&oslash;rgsel';
-$preferences_lang		= 'Indstillinger';
-$printer_lang			= 'Printer';
-$select_lang_lang		= 'V&aelig;lg sprog:';
-$select_cal_lang		= 'V&aelig;lg kalender:';
-$select_view_lang		= 'V&aelig;lg visning:';
-$select_time_lang		= 'V&aelig;lg starttidspunkt :';
-$select_day_lang		= 'V&aelig;lg startdag:';
-$select_style_lang		= 'V&aelig;lg stil :';
-$set_prefs_lang			= 'Gem indstillinger';
-$completed_date_lang	= 'Afsluttet p&aring;';
-$completed_lang			= 'Afsluttet';
-$created_lang			= 'Lavet:';
-$due_lang				= 'Klar:';
-$priority_lang			= 'Prioritet:';
-$priority_high_lang		= 'H&oslash;j';
-$priority_low_lang		= 'Lav';
-$priority_medium_lang	= 'Medium';
-$priority_none_lang		= 'Ingen';
-$status_lang			= 'Status';
-$todo_lang				= 'Ting der skal g&oslash;res';
-$unfinished_lang		= 'Uafsluttet';
-$prefs_set_lang 		= 'Dine indstillinger er gemt.'; //Your preferences have been set.
-$prefs_unset_lang 		= 'Indstillinger fjernet. &AElig;ndringer er synlig ved n&aelig;ste sidevisning.'; //Preferences unset. Changes will take place next page load.
-$unset_prefs_lang 		= 'Unset preferences:';
-$organizer_lang			= 'Organizer';
-$attendee_lang			= 'Attendee';
-$location_lang			= 'Location';
-$admin_header_lang		= 'PHP iCalendar Administration';
-$username_lang			= 'Username';
-$password_lang			= 'Password';
-$login_lang				= 'Login';
-$invalid_login_lang		= 'Wrong username or password.';
-$addupdate_cal_lang		= 'Add or Update a Calendar';
-$addupdate_desc_lang	= 'Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.';
-$delete_cal_lang		= 'Delete a Calendar';
-$logout_lang			= 'Logout';
-$cal_file_lang			= 'Calendar File';
-$php_error_lang			= 'PHP Error';
-$upload_error_gen_lang	= 'There was a problem with your upload.';
-$upload_error_lang[0]	= 'There was a problem with your upload.';
-$upload_error_lang[1]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[2]	= 'The file you are trying to upload is too big.';
-$upload_error_lang[3]	= 'The file you are trying upload was only partially uploaded.';
-$upload_error_lang[4]	= 'You must select a file for upload.';
-$upload_error_type_lang = 'Only .ics files may be uploaded.';
-$copy_error_lang		= 'Failed to copy file';
-$delete_error_lang		= 'Failed to delete file';
-$delete_success_lang	= 'was deleted successfully.';
-$action_success_lang	= 'Your action was successful.';
-$submit_lang			= 'Submit';
-$delete_lang			= 'Delete';
+$lang['l_day'] 				= 'Dag';
+$lang['l_week'] 			= 'Uge';
+$lang['l_month'] 			= 'M&aring;ned';
+$lang['l_year'] 			= '&Aring;r';
+$lang['l_calendar'] 		= 'Kalender';
+$lang['l_next_day'] 		= 'N&aelig;ste dag';
+$lang['l_next_month'] 		= 'N&aelig;ste m&aring;ned';
+$lang['l_next_week'] 		= 'N&aelig;ste uge';
+$lang['l_next_year'] 		= 'N&aelig;ste &aring;r';
+$lang['l_last_day'] 		= 'Forrige dag';
+$lang['l_last_month'] 		= 'Forrige m&aring;ned';
+$lang['l_last_week'] 		= 'Forrige uge';
+$lang['l_last_year'] 		= 'Forrige &Aring;r';
+$lang['l_subscribe'] 		= 'Abonn&eacute;r';
+$lang['l_download'] 		= 'Download';
+$lang['l_powered_by'] 		= 'Powered by';
+$lang['l_event'] 			= 'Event';
+$lang['l_event_start'] 		= 'Starttid';
+$lang['l_event_end'] 		= 'Sluttid';
+$lang['l_this_months'] 		= 'Denne m&aring;neds events';
+$lang['l_date'] 			= 'Dato';
+$lang['l_summary'] 			= 'Summary';
+$lang['l_all_day'] 			= 'Heldags-event';
+$lang['l_notes'] 			= 'Noter';
+$lang['l_this_years'] 		= 'Dette &aring;rs events';
+$lang['l_today'] 			= 'Idag';
+$lang['l_this_week'] 		= 'Denne uge';
+$lang['l_this_month'] 		= 'Denne m&aring;ned';
+$lang['l_jump'] 			= 'G&aring; til';
+$lang['l_tomorrows'] 		= 'Events imorgen';
+$lang['l_goday'] 			= 'G&aring; til idag';
+$lang['l_goweek'] 			= 'G&aring; til denne uge';
+$lang['l_gomonth'] 			= 'G&aring; til denne m&aring;ned';
+$lang['l_goyear'] 			= 'G&aring; til dette &aring;r';
+$lang['l_search'] 			= 'S&oslash;g'; // the verb
+$lang['l_results'] 			= 'S&oslash;geresultater';
+$lang['l_pick_multiple'] 	= 'V&aelig;lg flere';
+$lang['l_query'] 			= 'Kriterie'; // will be followed by the search query
+$lang['l_no_results'] 		= 'Ingen events fundet';
+$lang['l_goprint'] 			= 'Printervenlig';
+$lang['l_time'] 			= 'Tid';
+$lang['l_summary'] 			= 'Summary';
+$lang['l_description'] 		= 'Beskrivelse';
+$lang['l_this_site_is']		= 'Dette site er';
+$lang['l_no_events_day']	= 'Ingen events idag.';
+$lang['l_no_events_week']	= 'Ingen events denne uge.';
+$lang['l_no_events_month']	= 'Ingen events denne m&aring;ned.';
+$lang['l_rss_day_date']		= 'g:i A';  // Lists just the time
+$lang['l_rss_week_date	']	= '%b %e';  // Lists just the day
+$lang['l_rss_month_date	']	= '%b %e';  // Lists just the day
+$lang['l_rss_language']		= 'en-us';
+$lang['l_search_took']		= 'S&oslash;gning tog %s sekunder';
+$lang['l_recurring_event']	= 'Tilbagevendende event';
+$lang['l_exception']		= 'Undtagelse';
+$lang['l_no_query']			= 'Ingen kriterier angivet';
+$lang['l_preferences']		= 'Indstillinger';
+$lang['l_printer']			= 'Printer';
+$lang['l_select_lang']		= 'V&aelig;lg dit standard-sprog';
+$lang['l_select_cal']		= 'V&aelig;lg din standard-kalender';
+$lang['l_select_view']		= 'V&aelig;lg dit standard-view';
+$lang['l_select_time']		= 'V&aelig;lg din standard-starttid';
+$lang['l_select_day']		= 'V&aelig;lg din f&oslash;rste dag i ugen';
+$lang['l_select_style']		= 'V&aelig;lg din standard-stil';
+$lang['l_set_prefs']		= 'Indstillinger';
+$lang['l_completed_date']	= 'Afsluttet d.';
+$lang['l_completed']		= 'Afsluttet';
+$lang['l_created']			= 'Oprettet';
+$lang['l_due']				= 'Forfald';
+$lang['l_priority']			= 'Prioritet';
+$lang['l_priority_high']	= 'H&oslash;j';
+$lang['l_priority_low']		= 'Lav';
+$lang['l_priority_medium']	= 'Medium';
+$lang['l_priority_none']	= 'Ingen';
+$lang['l_status']			= 'Status';
+$lang['l_status_confirmed'] = 'BEKR&AElig;FTET' ; 
+$lang['l_status_cancelled'] = 'ANNULLERET'; 
+$lang['l_status_tentative'] = 'TENTATIV'; 
+$lang['l_todo']				= 'Todo-items';
+$lang['l_unfinished']		= 'Ikke afsluttet';
+$lang['l_prefs_set'] 		= 'Dine indstillinger er gemt.';
+$lang['l_prefs_unset'] 		= 'Indstillinger nulstillet.  &AElig;ndringer vil tr&aelig;de i kraft n&aelig;ste gang siden indl&aelig;ses.';
+$lang['l_unset_prefs'] 		= 'Nulstil indstillinger';
+$lang['l_organizer']		= 'Organizer';
+$lang['l_attendee']			= 'Tilstede';
+$lang['l_location']			= 'Location';
+$lang['l_admin_header']		= 'PHP iCalendar-administration';
+$lang['l_username']			= 'Brugernavn';
+$lang['l_password']			= 'Password';
+$lang['l_login']			= 'Login';
+$lang['l_invalid_login']	= 'Forkert brugernavn eller password.';
+$lang['l_addupdate_cal']	= 'Tilf&oslash;j eller opdat&eacute;r en kalender';
+$lang['l_addupdate_desc']	= 'Tilf&oslash;j en kalender ved at uploade en ny fil.  Opdat&eacute;r en kalender ved at uploade en fil med samme navn.';
+$lang['l_delete_cal']		= 'Slet en kalender';
+$lang['l_logout']			= 'Logout';
+$lang['l_cal_file']			= 'Kalenderfil';
+$lang['l_php_error']		= 'PHP-fejl';
+$upload_error_gen_lang		= 'Der opstod et problem med din upload.';
+$upload_error_lang[0]		= 'Der opstod et problem med din upload.';
+$upload_error_lang[1]		= 'Den fil du fors&oslash;ger at uploade er for stor.';
+$upload_error_lang[2]		= 'Den fil du fors&oslash;ger at uploade er for stor.';
+$upload_error_lang[3]		= 'Den fil du fors&oslash;ger at uploade blev kun delvist uploaded.';
+$upload_error_lang[4]		= 'Du skal v&aelig;lge en fil at uploade..';
+$lang['l_upload_error_type'] = 'Kun .ics-filer kan uploades.';
+$lang['l_copy_error']			= 'Kunne ikke kopiere fil';
+$lang['l_delete_error']			= 'Kunne ikke slette fil';
+$lang['l_delete_success']		= 'er blevet slettet.';
+$lang['l_action_success']		= 'Gennemf&oslash;rt.';
+$lang['l_submit']				= 'Submit';
+$lang['l_delete']				= 'Slet';
+$all_cal_comb_lang			= 'Alle kombineret';
 
-// ----- New for 1.0
-$all_cal_comb_lang		= 'All calendars combined';
+// New for 2.0
+$lang['l_legend']			= 'Signaturer';
+$lang['l_admin_subhead']	= 'Administr&eacute;r dine kalendre fra denne side';
+$lang['l_prefs_subhead']	= 'Gemmer en cookie n&aring;r du beg&oslash;ger dette site';
+$lang['l_rss_info']			= 'RSS-information';
+$lang['l_rss_subhead']		= 'RSS-feeds for hver enkelt kalender';
+$lang['l_rss_notenabled']	= 'RSS er ikke tilg&aelig;ngeligt p&aring; dette site';
 
 // - navigation
-$back_lang = 'Tilbage';
-$next_lang = 'N&aelig;ste';
-$prev_lang = 'Forrige';
-$day_view_lang = 'Vis Dag';
-$week_view_lang = 'Vis Uge';
-$month_view_lang = 'Vis M&aring;ned';
-$year_view_lang = 'Vis &Aring;r';
+$lang['l_back'] 		= 'Tilbage';
+$lang['l_next'] 		= 'N&aelig;ste';
+$lang['l_prev'] 		= 'Forrige';
+$lang['l_day_view'] 	= 'Dag-view';
+$lang['l_week_view'] 	= 'Uge-iew';
+$lang['l_month_view'] 	= 'M&aring;ned-view';
+$lang['l_year_view'] 	= '&Aring;r-view';
 
 // ---------------------------------
 
-// $format_recur, items enclosed in % will be substituted with variables
-$format_recur_lang['delimiter']		= ', ';							// ie, 'one, two, three'
 
-$format_recur_lang['yearly']		= array('&aring;r','&aring;r');	// for these, put singular
-$format_recur_lang['monthly']		= array('m&aring;ned','m&aring;neder');		// and plural forms
-$format_recur_lang['weekly']		= array('uge','uger');			// these will be %freq%
+// $format_recur, items enclosed in % will be substituted with variables
+$format_recur_lang['delimiter']	= ', ';								// ie, 'one, two, three'
+
+$format_recur_lang['yearly']		= array('&aring;r','&aring;r');		// for these, put singular
+$format_recur_lang['monthly']		= array('m^aring;ned','m&aring;neder');		// and plural forms
+$format_recur_lang['weekly']		= array('uge','uger');		// these will be %freq%
 $format_recur_lang['daily']			= array('dag','dage');			// in the replacement below
 $format_recur_lang['hourly']		= array('time','timer');
 $format_recur_lang['minutely']		= array('minut','minutter');
 $format_recur_lang['secondly']		= array('sekund','sekunder');
 
 $format_recur_lang['start']			= 'Hver %int% %freq% %for%';	// ie, 'Every 1 day until January 4' or 'Every 1 day for a count of 5'
-$format_recur_lang['until']			= 'Indtil %date%';				// ie, 'until January 4'
-$format_recur_lang['count']			= '%int% gange';				// ie, 'for 5 times'
+$format_recur_lang['until']			= 'indtil %date%';				// ie, 'until January 4'
+$format_recur_lang['count']			= '%int% gange';		// ie, 'for 5 times'
 
-$format_recur_lang['bymonth']		= 'I m&aring;nderne: %list%';	// ie, 'In months: January, February, March'
-$format_recur_lang['bymonthday']	= 'P&aring; datoerne: %list%';	// ie, 'On dates: 1, 2, 3, 4'
-$format_recur_lang['byday']			= 'P&aring; dagene: %list%';	// ie, 'On days: Mon, Tues, Wed, Thurs'
+$format_recur_lang['bymonth']		= 'I m&aring;neder: %list%';			// ie, 'In months: January, February, March'
+$format_recur_lang['bymonthday']	= 'P&aring; datoer: %list%';			// ie, 'On dates: 1, 2, 3, 4'
+$format_recur_lang['byday']			= 'P&aring; dage: %list%';			// ie, 'On days: Mon, Tues, Wed, Thurs'
 
 // ---------------------------------
 
@@ -155,17 +166,19 @@ $monthsofyear_lang			= array ('Januar','Februar','Marts','April','Maj','Juni','J
 $monthsofyearshort_lang		= array ('Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
-$timeFormat = 'H:i';
-$timeFormat_small = 'H:i';
+$timeFormat = 'G:i';
+$timeFormat_small = 'G:i';
 
 // For date formatting, see note below
-$dateFormat_day = '%A, %e %B';
-$dateFormat_week = '%e %B';
-$dateFormat_week_list = '%a, %e %b';
-$dateFormat_week_jump = '%e %b';
+$dateFormat_day = '%A, %B %e';
+$dateFormat_week = '%B %e';
+//$dateFormat_week_list = '%a, %b %e';
+$dateFormat_week_list = '%a %e. %b';
+$dateFormat_week_jump = '%e. %b';
 $dateFormat_month = '%B %Y';
-$dateFormat_month_list = '%A, %e %B';
+$dateFormat_month_list = '%A, %e. %B';
 $dateFormat_year = '%Y';
+
 
 /*
 Notes about dateFormat_*
@@ -184,14 +197,15 @@ Notes about dateFormat_*
 */
 
 // Error messages - %s will be replaced with a variable
-$error_title_lang = 'Fejl!';
-$error_window_lang = 'Der opstod en fejl!';
-$error_calendar_lang = 'Kalenderen "%s" blev benyttet da fejlen opstod.';
-$error_path_lang = 'Kan ikke &aring;bne stien : "%s"';
-$error_back_lang = 'Brug venligst "Tilbage" knappen for at g&aring; tilbage.';
-$error_remotecal_lang = 'Denne server blokerer for eksterne kalendere der ikke er blevet godkendt';
-$error_restrictedcal_lang = 'Du har fors&oslash;gt at f&aring; adgang til en beskyttet kalender p&aring; denne server.';
-$error_invalidcal_lang = 'Kalenderen kan ikke l&aelig;ses. Pr&oslash;v en anden kalender.';
-
+$lang['l_error_title'] 			= 'Fejl!';
+$lang['l_error_window'] 		= 'Der opstod en fejl!';
+$lang['l_error_calendar'] 		= 'Kalenderen "%s" var under behandling da denne fejl opstod.';
+$lang['l_error_path'] 			= 'Kan ikke &aring;bne sti: "%s"';
+$lang['l_error_back'] 			= 'Brug "Tilbage"-knappen for at komme retur.';
+$lang['l_error_remotecal'] 		= 'Denne server blokerer remote-kalendre der ikke er godkendt.';
+$lang['l_error_restrictedcal'] 	= 'Du har ford&oslash;gt at tilg&aring; en kalender der er begr&arlig;nset adgang til p&aring; denne server.';
+$lang['l_error_invalidcal'] 	= 'Ugyldig kalender-fil.  Pr&oslash;v venligst en anden kalender.';
+$lang['l_error_cantopen'] 		= 'Kan ikke &aring;bne kalender.';
+$lang['l_error_cache']			= 'Kan ikke skrive til cache-folder.  Kontroll&eacute;r venligst ops&aelig;tningen.';
 
 ?>

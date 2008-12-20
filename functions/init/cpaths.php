@@ -1,7 +1,8 @@
 <?php
 # adjust paths in case they are incorrect
 if ($phpiCal_config->default_path == '') {
-	$phpiCal_config->setProperty('default_path', BASE);
+	$p = str_replace("/rss","","http://".$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']) );
+	$phpiCal_config->setProperty('default_path', $p);
 }
 
 #cpath modifies the calendar path based on the url or cookie values.  This allows you to run multiple calendar subsets from a single phpicalendar installation. Operations on cpath are largely hidden from the end user.

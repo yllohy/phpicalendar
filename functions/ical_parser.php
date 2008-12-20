@@ -463,7 +463,8 @@ $cal_displayname = urldecode(implode(', ', $cal_displaynames)); #reset this with
 $template_started = getmicrotime();
 
 //If you want to see the values in the arrays, uncomment below.
-//print '<pre>';
+#print '<pre>';
+#var_dump($phpiCal_config);
 //print_r($master_array);
 //print_r($overlap_array);
 //print_r($day_array);
@@ -473,5 +474,5 @@ $template_started = getmicrotime();
 //print_r($cal_displaynames);
 //print_r($cal_filelist);
 //print_r($tz_array);
-//print '</pre>';
+#print '</pre>';
 ?>

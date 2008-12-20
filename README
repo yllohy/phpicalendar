@@ -88,6 +88,11 @@ COPYING for more information about our license.
 
 Changes:
 --------
+2.3 Major changes to recurrence handling
+	Added more languages
+	Added login to month view
+	Consolidated common rss functions
+
 2.24
 	Fix bug 1681711 - change how todo popups are handled
 	Fix bug 1632649 - year display

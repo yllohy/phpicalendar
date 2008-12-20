@@ -48,8 +48,8 @@ function rss_item(){
 #	$rss .= '<guid isPermaLink="false">'.$rss_link.$uid.'</guid>'."\n";
 	/* End guid modification */
 	$rss_item .= '<title>'.$rss_title.'</title>'."\n";
-	$rss_item .= '<ev:startdate>'.date("Y-m-d", strtotime($thisdate)).'T'.date("h:m:s",$val["event_start"]).'</ev:startdate>'."\n";
-	$rss_item .= '<ev:enddate>'.date("Y-m-d", strtotime($thisdate)).'T'.date("h:m:s",$val["event_start"]).'</ev:enddate>'."\n";
+	$rss .= '<ev:startdate>'.date("Y-m-d\TH:i:s", $val["start_unixtime"]).'</ev:startdate>'."\n";
+	$rss .= '<ev:enddate>'.date("Y-m-d\TH:i:s", $val["end_unixtime"]).'</ev:enddate>'."\n";
 
 	$rss_item .= '<link>'.$rss_link.'</link>'."\n";
 	$rss_item .= '<description>'.$rss_description.'</description>'."\n";

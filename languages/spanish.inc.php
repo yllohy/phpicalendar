@@ -1,9 +1,10 @@
 <?php
 
-// English language include
+// Spanish language include
 // For version 2.0 PHP iCalendar
 //
 // Translation by Juan carlos Negron(carich37@hotmail.com)
+// Translation by Luis Fernando Rocha (ludwig_von_rocht@yahoo.com)
 //
 
 $lang['l_day'] 			= 'D&iacute;a';
@@ -21,7 +22,7 @@ $lang['l_last_week'] 		= 'Semana anterior';
 $lang['l_last_year'] 		= 'A&ntilde;o anterior';
 $lang['l_subscribe'] 		= 'Suscribir';
 $lang['l_download'] 		= 'Descargar';
-$lang['l_powered_by'] 		= 'Powered by';
+$lang['l_powered_by'] 		= 'Operaci&oacute;n por';  // Changed
 $lang['l_event'] 			= 'Evento';
 $lang['l_event_start'] 		= 'Inicio';
 $lang['l_event_end'] 		= 'Fin';
@@ -42,7 +43,7 @@ $lang['l_gomonth'] 			= 'Ir a este Mes';
 $lang['l_goyear'] 			= 'Ir a este A&ntilde;o';
 $lang['l_search'] 			= 'Buscar'; // the verb
 $lang['l_results'] 			= 'Resultados de la b&uacute;squeda';
-$lang['l_pick_multiple'] 	= 'Pick multiple';
+$lang['l_pick_multiple'] 	= 'Seleccionar multiples';  // Changed
 $lang['l_query'] 			= 'Consulta: '; // will be followed by the search query
 $lang['l_no_results'] 		= 'Ning&uacute;n evento encontrado';
 $lang['l_goprint'] 		= 'Formato de impresi&oacute;n';
@@ -63,12 +64,12 @@ $lang['l_exception']		= 'Excepci&oacute;n';
 $lang['l_no_query']		= 'falta la consulta';
 $lang['l_preferences']		= 'Preferencias';
 $lang['l_printer']		= 'Impresora';
-$lang['l_select_lang']		= 'Escoja su idioma por defecto:';
-$lang['l_select_cal']		= 'Escoja su calendario por defecto:';
-$lang['l_select_view']		= 'Elija su vista por defecto:';
-$lang['l_select_time']		= 'Elija su hora de inicio por defecto:';
-$lang['l_select_day']		= 'Escoja su d&aacute;a de la semana de inicio:';
-$lang['l_select_style']		= 'Seleccione su estilo por defecto:';
+$lang['l_select_lang']		= 'Escoja su idioma principal:';  // Changed
+$lang['l_select_cal']		= 'Escoja su calendario principal:';  // Changed
+$lang['l_select_view']		= 'Elija su vista por defecto:';  // Changed
+$lang['l_select_time']		= 'Elija su hora de inicio principal:';  // Changed
+$lang['l_select_day']		= 'Escoja d&aacute;a para iniciar semana:';  // Changed
+$lang['l_select_style']		= 'Seleccione su estilo principal:';  // Changed
 $lang['l_set_prefs']		= 'Guardar preferencias';
 $lang['l_completed_date']	= 'Finalizado el';
 $lang['l_completed']		= 'Finalizado';
@@ -80,9 +81,9 @@ $lang['l_priority_low']		= 'Baja';
 $lang['l_priority_medium']	= 'Media';
 $lang['l_priority_none']	= 'Ninguna';
 $lang['l_status']			= 'Estado';
-$lang['l_status_confirmed'] = 'CONFIRMED' ; 
-$lang['l_status_cancelled'] = 'CANCELLED'; 
-$lang['l_status_tentative'] = 'TENTATIVE'; 
+$lang['l_status_confirmed'] = 'CONFIRMADO' ;   // Changed
+$lang['l_status_cancelled'] = 'CANCELADO';   // Changed
+$lang['l_status_tentative'] = 'PENDIENTE';   // Changed
 $lang['l_todo']			= 'Por hacer';
 $lang['l_unfinished']		= 'Sin terminar';
 $lang['l_prefs_set'] 		= 'Sus preferencias han sido guardadas.';
@@ -200,9 +201,9 @@ $lang['l_error_calendar'] 		= 'Cuando se produjo este error, se procesaba "%s" d
 $lang['l_error_path'] 			= 'Incapaz de abrir la ruta a: "%s"';
 $lang['l_error_back'] 			= 'Por favor, use el bot&oacute;n "Atr&aacute;s" para volver.';
 $lang['l_error_remotecal'] 		= 'Este servidor bloquea calendarios remotos que no han sido aprobados.';
-$lang['l_error_restrictedcal'] 	= 'Usted ha intentado accesar a un calendario restringido en este servidor.';
+$lang['l_error_restrictedcal'] 	= 'Usted ha intentado accesar un calendario restringido en este servidor.';  // Changed
 $lang['l_error_invalidcal'] 		= 'Archivo de calendario inv&aacute;lido. Por favor, pruebe con otro calendario.';
-$lang['l_error_cantopen'] 		= 'Unable to open calendar.';
-$lang['l_error_cache']			= 'Unable to write to cache directory. Please check your config.';
+$lang['l_error_cantopen'] 		= 'Incapaz de abrir el calendario.';  // Changed
+$lang['l_error_cache']			= 'Incapaz de escribir al directorio de memoria. Verifique su configuraci&oacute;.';  // Changed
 
 ?>
