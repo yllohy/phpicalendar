@@ -1,16 +1,16 @@
 <?php
-
 define('BASE','./');
+$current_view = 'preferences';
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
-$display_date = $preferences_lang;
+$display_date = $lang['l_preferences'];
 
 if ($phpiCal_config->allow_preferences != 'yes') {
 	exit(error('Preferences are not available for this installation.', $cal));
 }
 
 $current_view = "preferences";
-$back_page = BASE.$default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate.'&amp;cpath='.$cpath;
+$back_page = BASE.$phpiCal_config->default_view.'.php?cal='.$cal.'&amp;getdate='.$getdate.'&amp;cpath='.$cpath;
 if ($phpiCal_config->allow_preferences == 'no') header("Location: $back_page");
 
 if (isset($_GET['action'])) {
@@ -20,7 +20,6 @@ if (isset($_GET['action'])) {
 } 
 
 $startdays = array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-$cpath = $_REQUEST['cpath'];
 
 if ($action == 'setcookie') { 
 	$cookie_language 	= $_POST['cookie_language'];
@@ -30,7 +29,7 @@ if ($action == 'setcookie') {
 	$cookie_style 		= $_POST['cookie_style'];
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
-	$cookie_unset		= $_POST['unset'];
+	$cookie_unset		= @$_POST['unset'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time", "cookie_cpath"=>"$cookie_cpath");
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 
@@ -85,6 +84,7 @@ if ($action == 'setcookie') {
 // select for languages
 $dir_handle = @opendir(BASE.'languages/');
 $tmp_pref_language = urlencode(ucfirst($language));
+$language_select = '';
 while ($file = readdir($dir_handle)) {
 	if (substr($file, -8) == ".inc.php") {
 		$language_tmp = urlencode(ucfirst(substr($file, 0, -8)));
@@ -98,15 +98,16 @@ while ($file = readdir($dir_handle)) {
 closedir($dir_handle);
 
 // select for calendars
-$calendar_select = display_ical_list(availableCalendars($username, $password, $ALL_CALENDARS_COMBINED),TRUE);
+$calendar_select = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED),TRUE);
 $calendar_select .="<option value=\"$phpiCal_config->ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
 $calendar_select = str_replace("<option value=\"$cookie_calendar\">","<option value=\"$cookie_calendar\" selected='selected'>",$calendar_select);
 // select for dayview
-$view_select 	= ($default_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
-$view_select    .= ($default_view == 'week') ? '<option value="week" selected="selected">{L_WEEK}</option>' : '<option value="week">{L_WEEK}</option>';
-$view_select    .= ($default_view == 'month') ? '<option value="month" selected="selected">{L_MONTH}</option>' : '<option value="month">{L_MONTH}</option>';
+$view_select 	= ($phpiCal_config->default_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
+$view_select    .= ($phpiCal_config->default_view == 'week') ? '<option value="week" selected="selected">{L_WEEK}</option>' : '<option value="week">{L_WEEK}</option>';
+$view_select    .= ($phpiCal_config->default_view == 'month') ? '<option value="month" selected="selected">{L_MONTH}</option>' : '<option value="month">{L_MONTH}</option>';
 
 // select for time
+$time_select = '';
 for ($i = 000; $i <= 1200; $i += 100) {
 	$s = sprintf("%04d", $i);
 	$time_select .= '<option value="'.$s.'"';
@@ -118,6 +119,7 @@ for ($i = 000; $i <= 1200; $i += 100) {
 
 // select for day of week
 $i=0;
+$startday_select = '';
 foreach ($daysofweek_lang as $daysofweek) {
 	if ($startdays[$i] == $cookie_startday) {
 		$startday_select .= '<option value="'.$startdays[$i].'" selected="selected">'.$daysofweek.'</option>';
@@ -128,6 +130,7 @@ foreach ($daysofweek_lang as $daysofweek) {
 }
 
 $dir_handle = @opendir(BASE.'templates/');
+$style_select = '';
 while ($file = readdir($dir_handle)) {
 	if (($file != ".") && ($file != "..") && ($file != "CVS")) {
 		if (is_dir(BASE.'templates/'.$file)) {
@@ -152,7 +155,7 @@ $page->replace_tags(array(
 	'version'			=> $phpiCal_config->phpicalendar_version,
 	'charset'			=> $phpiCal_config->charset,
 	'template'			=> $phpiCal_config->template,
-	'default_path'		=> '',
+	'default_path'		=> $phpiCal_config->default_path,
 	'cpath'				=> $cpath,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
