@@ -20,7 +20,7 @@ function rss_top(){
 	if ($theview !=""){$rss .= ' - '.$theview;} 
 	$rss .= "</title>\n";
 	
-	$rss .= '<link>'.htmlspecialchars("$default_path").'</link>'."\n";
+	$rss .= '<link>'.htmlspecialchars("$phpiCal_config->default_path").'</link>'."\n";
 	if (isset($cpath) && $cpath !='') $rss_link.="?cpath=$cpath";
 	$rss .= "<link>$rss_link</link>\n";
 	

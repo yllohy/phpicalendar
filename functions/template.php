@@ -64,32 +64,34 @@ class Page {
 		$parse_year 	= date ("Y", strtotime($getdate));
 
 		$seen_events = array();
+		$final = '';
 		foreach($master_array as $key => $val) {
 			preg_match ('/([0-9]{6})([0-9]{2})/', $key, $regs);
-			if ((($regs[1] == $parse_month) && ($printview == 'month')) || (($key == $getdate) && ($printview == 'day')) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == 'week')) || ((substr($regs[1],0,4) == $parse_year) && ($printview == 'year'))) {
-				$events_week++;
+			if (((@$regs[1] == $parse_month) && ($printview == 'month')) || (($key == $getdate) && ($printview == 'day')) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == 'week')) || ((substr(@$regs[1],0,4) == $parse_year) && ($printview == 'year'))) {
+				@$events_week++;
 				$dayofmonth = strtotime ($key);
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 				$events_tmp = $loop_event;
 				$day_tmp	= $loop_day;
 				$day_events = 0;
 				// Pull out each day
+				$some_events = '';
 				foreach ($val as $new_val) {
 					foreach ($new_val as $new_key2 => $new_val2) {
-						if (isset($seen_events["$new_key2"]) && $new_val2['spans_day'] == 1){
+						if (isset($seen_events["$new_key2"]) && isset($new_val2['spans_day']) && $new_val2['spans_day'] == 1){
 							$new_val2['event_text'] .= " second instance of ".$new_key2;
 							continue;
 						}
 						$seen_events["$new_key2"] = 1;
 						$day_events++;
-					if ($new_val2['event_text']) {	
+					if (isset($new_val2['event_text'])) {	
 						$event_text 	= stripslashes(urldecode($new_val2['event_text']));
-						$location 	= stripslashes(urldecode($new_val2['location']));
-						$description 	= stripslashes(urldecode($new_val2['description']));
-						$event_start 	= $new_val2['event_start'];
-						$event_end 		= $new_val2['event_end'];
+						$location 	= stripslashes(urldecode(@$new_val2['location']));
+						$description 	= stripslashes(urldecode(@$new_val2['description']));
+						$event_start 	= @$new_val2['event_start'];
+						$event_end 		= @$new_val2['event_end'];
 						if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
-							if (!$new_val2['event_start']) { 
+							if (!isset($new_val2['event_start'])) { 
 								$event_start = $lang['l_all_day'];
 								$event_start2 = '';
 								$event_end = '';
@@ -119,7 +121,8 @@ class Page {
 				if ($day_events == 0) continue;
 				$day_tmp  = str_replace('{DAYOFMONTH}', $dayofmonth, $day_tmp);
 				$final   .= $day_tmp.$some_events;
-				unset ($day_tmp, $some_events);
+				unset ($day_tmp);
+				$some_events = '';
 			}
 		}
 		
@@ -279,11 +282,12 @@ class Page {
 		$loop_ad 	= trim($match1[1]);
 		$loop_begin = trim($match2[1]);
 		$loop_end 	= trim($match3[1]);
+		$weekreplace = '';
 		foreach ($weekarray as $get_date) {
 			$replace 	= $loop_begin;
 			$colspan	= 'colspan="'.$nbrGridCols[$get_date].'"';
 			$replace 	= str_replace('{COLSPAN}', $colspan, $replace);
-			if (is_array($master_array[$get_date]['-1']) && !empty($master_array[$get_date]['-1']) ) {
+			if (isset($master_array[$get_date]['-1']) && is_array($master_array[$get_date]['-1']) && !empty($master_array[$get_date]['-1']) ) {
 				foreach ($master_array[$get_date]['-1'] as $uid => $allday) {
 					$event_calno  	= $allday['calnumber'];
 					$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
@@ -350,6 +354,7 @@ class Page {
 			$event_length[$thisday] = array ();
 			$thisdate = ($thisdate + (25 * 60 * 60));
 		}
+		$weekdisplay = '';
 		foreach ($day_array as $key) {
 			$cal_time = $key;	
 			preg_match('/([0-9]{2})([0-9]{2})/', $key, $regs_tmp);
@@ -467,7 +472,7 @@ class Page {
 
 								// Start drawing the event
 								$event_temp   = $loop_event;
-								$event 		  = openevent($thisday, $cal_time, $uid, $this_time_arr[$uid], $week_events_lines, 25, 'ps');
+								$event 		  = openevent($thisday, $cal_time, $uid, $this_time_arr[$uid], $phpiCal_config->week_events_lines, 25, 'ps');
 								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
 								$event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
 								$event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);
@@ -738,10 +743,12 @@ class Page {
 		preg_match("!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!Uis", $this->page, $match2);
 		$loop_t_ad 	= trim($match1[1]);
 		$loop_t_e 	= trim($match2[1]);
+		$replace_ad	= '';
+		$replace_e	= '';
 		$return_adtmp	= '';
 		$return_etmp	= '';
 
-		if (is_array($master_array[$next_day]) && sizeof($master_array[$next_day]) > 0) {
+		if (isset($master_array[$next_day]) && is_array($master_array[$next_day]) && sizeof($master_array[$next_day]) > 0) {
 			foreach ($master_array[$next_day] as $cal_time => $event_times) {
 				foreach ($event_times as $uid => $val) {
 					$event_text = stripslashes(urldecode($val["event_text"]));
@@ -811,7 +818,7 @@ class Page {
 						document.todo_popup_data[$todo_popup_data_index] = todoData;
 						// --></script>";
 
-						$todo .= '<a class="psf" title="'.$title.'" href="#" onclick="openTodoInfo('.$todo_popup_data_index.'); return false;">';
+						$todo .= '<a class="psf" title="'.@$title.'" href="#" onclick="openTodoInfo('.$todo_popup_data_index.'); return false;">';
 						$todo_popup_data_index++;
 						$vtodo_array = $todo;
 						
@@ -1015,7 +1022,7 @@ class Page {
 				#	$switch['START_DATE'] 	= localizeDate ($dateFormat_week_list, $u_start);
 					$start_date 	= localizeDate ($dateFormat_week_list, $u_start);
 					foreach ($event_times as $uid => $val) {
-						if (isset($seen_events[$uid]) && $val['spans_day'] == 1) continue;
+						if (isset($seen_events[$uid]) && @$val['spans_day'] == 1) continue;
 						$seen_events[$uid] = 1;
 						$switch['CAL'] 			= $cal;
 						$switch['START_DATE'] 	= $start_date;

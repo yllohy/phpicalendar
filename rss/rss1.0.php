@@ -19,7 +19,7 @@ function rss_top(){
 		xmlns:dc="http://purl.org/dc/elements/1.1/"
 		xmlns="http://purl.org/rss/1.0/">'."\n";
 	
-	$rss .= '<channel rdf:about="'.$default_path.'/rss/rss.php/';
+	$rss .= '<channel rdf:about="'.$phpiCal_config->default_path.'/rss/rss.php/';
 	if (isset($cpath) && $cpath !='') $rss_link.="?cpath=$cpath";
 	$rss .='">'."\n";
 	
@@ -48,8 +48,8 @@ function rss_item(){
 #	$rss .= '<guid isPermaLink="false">'.$rss_link.$uid.'</guid>'."\n";
 	/* End guid modification */
 	$rss_item .= '<title>'.$rss_title.'</title>'."\n";
-	$rss .= '<ev:startdate>'.date("Y-m-d\TH:i:s", $val["start_unixtime"]).'</ev:startdate>'."\n";
-	$rss .= '<ev:enddate>'.date("Y-m-d\TH:i:s", $val["end_unixtime"]).'</ev:enddate>'."\n";
+	$rss .= '<ev:startdate>'.date("Y-m-d\TH:i:s", @$val["start_unixtime"]).'</ev:startdate>'."\n";
+	$rss .= '<ev:enddate>'.date("Y-m-d\TH:i:s", @$val["end_unixtime"]).'</ev:enddate>'."\n";
 
 	$rss_item .= '<link>'.$rss_link.'</link>'."\n";
 	$rss_item .= '<description>'.$rss_description.'</description>'."\n";

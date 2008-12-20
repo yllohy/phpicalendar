@@ -5,8 +5,8 @@ function drawEventTimes ($start, $end) {
 	global  $phpiCal_config;
 	$gridLength = $phpiCal_config->gridLength;
 	preg_match ('/([0-9]{2})([0-9]{2})/', $start, $time);
-	$sta_h = $time[1];
-	$sta_min = $time[2];
+	$sta_h = @$time[1];
+	$sta_min = @$time[2];
 	$sta_min = sprintf("%02d", floor($sta_min / $gridLength) * $gridLength);
 	if ($sta_min == 60) {
 		$sta_h = sprintf("%02d", ($sta_h + 1));
@@ -14,8 +14,8 @@ function drawEventTimes ($start, $end) {
 	}
 	
 	preg_match ('/([0-9]{2})([0-9]{2})/', $end, $time);
-	$end_h = $time[1];
-	$end_min = $time[2];
+	$end_h = @$time[1];
+	$end_min = @$time[2];
 	$end_min = sprintf("%02d", floor($end_min / $gridLength) * $gridLength);
 	if ($end_min == 60) {
 		$end_h = sprintf("%02d", ($end_h + 1));

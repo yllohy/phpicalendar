@@ -56,7 +56,7 @@ $page->replace_files(array(
 $page->replace_tags(array(
 	'version'			=> $phpiCal_config->phpicalendar_version,
 	'charset'			=> $phpiCal_config->charset,
-	'default_path'		=> '',
+	'default_path'		=> $phpiCal_config->default_path,
 	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,

@@ -135,7 +135,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 						$allday_start, $allday_end, $start, $end, $the_duration, 
 						$beginning, $start_of_vevent, $url, 
 						$valarm_description, $start_unixtime, $end_unixtime, $display_end_tmp, $end_time_tmp1, 
-						$recurrence_id, $uid, $rrule, $abs_until, $until_check,
+						$recurrence_id, $uid, $rrule, $until_check,
 						$until, $byweek, $byweekno, 
 						$byminute, $byhour, $bysecond
 					);
@@ -170,9 +170,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					include BASE."functions/parse/end_vevent.php";			
 					break;
 				case 'END:VTODO':
-					if ((!$vtodo_priority) && ($status == 'COMPLETED')) {
+					if (($vtodo_priority == '') && ($status == 'COMPLETED')) {
 						$vtodo_sort = 11;
-					} elseif (!$vtodo_priority) { 
+					} elseif ($vtodo_priority == '') { 
 						$vtodo_sort = 10;
 					} else {
 						$vtodo_sort = $vtodo_priority;
@@ -209,6 +209,16 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					
 				case 'BEGIN:VTODO':
 					$vtodo_set = TRUE;
+					$summary = '';
+					$due_date = '';
+					$due_time = '';
+					$completed_date = '';
+					$completed_time = '';
+					$vtodo_priority = '';
+					$vtodo_categories = '';
+					$status = '';
+					$class = '';
+					$description = '';
 					break;
 				case 'BEGIN:VALARM':
 					$valarm_set = TRUE;
@@ -287,7 +297,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 								preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $exdata, $regs);
 								$except_dates[] = $regs[1] . $regs[2] . $regs[3];
 								// Added for Evolution, since they dont think they need to tell me which time to exclude.
-								if (($regs[4] == '') && ($start_time != '')) { 
+								if ($regs[4] == '' && isset($start_time) && $start_time != '') { 
 									$except_times[] = $start_time;
 								} else {
 									$except_times[] = $regs[4] . $regs[5];
@@ -356,7 +366,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							} else {
 								$offset_tmp = $chooseOffset($recur_unixtime);
 							}
-							$recur_unixtime = calcTime($offset_tmp, $server_offset_tmp, $recur_unixtime);
+							$recur_unixtime = calcTime($offset_tmp, @$server_offset_tmp, $recur_unixtime);
 							$recurrence_id['date'] = date('Ymd', $recur_unixtime);
 							$recurrence_id['time'] = date('Hi', $recur_unixtime);
 							$recurrence_d = date('Ymd', $recur_unixtime);

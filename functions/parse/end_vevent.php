@@ -11,6 +11,8 @@ What happens in this file:
 3. Add occurrences to master_array
 */
 
+if (!isset($start_date)) echo "no start date for $summary<br>";
+
 // Handle DURATION
 if (!isset($end_unixtime)) {
 	if(!isset($the_duration)) $the_duration = 0;
@@ -132,7 +134,6 @@ foreach ($rrule_array as $key => $val) {
 			$until = str_replace('T', '', $val);
 			$until = str_replace('Z', '', $until);
 			if (strlen($until) == 8) $until = $until.'235959';
-			$abs_until = $until;
 			ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})', $until, $regs);
 			$until_unixtime = mktime($regs[4],$regs[5],@$regs[6],$regs[2],$regs[3],$regs[1]);
 			$recur_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = localizeDate($dateFormat_week,$until);
@@ -330,7 +331,7 @@ foreach($recur_data as $recur_data_unixtime) {
 				
 				// Let's double check the until to not write past it
 				$until_check = $start_date_tmp.$time_tmp.'00'; 
-				if ($abs_until > $until_check) {
+				if (@$until > $until_check) {
 					$master_array[$start_date_tmp][$time_tmp][$uid] = array (
 						'event_start' => $start_time_tmp, 
 						'event_end' => $end_time_tmp, 

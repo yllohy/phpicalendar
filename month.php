@@ -73,7 +73,7 @@ $page->replace_tags(array(
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $display_date,
 	'rss_powered'	 	=> $rss_powered,
-	'default_path'		=> '',
+	'default_path'		=> $phpiCal_config->default_path,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'show_search' 		=> $phpiCal_config->show_search,

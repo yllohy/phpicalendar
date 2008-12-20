@@ -57,7 +57,7 @@ function add_recur($times,$freq=''){
 }
 function expand_bymonth($time){
 	global $bymonth, $byweekno, $bymonthday, $year, $start_unixtime, $freq_type;
-	if(!empty($byweekno)) return $times;
+	if(!empty($byweekno)) return $time;
 	if(empty($bymonth)) $bymonth = array(date("m", $start_unixtime)); 
 	$d = date("d",$start_unixtime);
 	if (!empty($bymonthday)) $d = 1;

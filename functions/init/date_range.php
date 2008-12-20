@@ -3,7 +3,7 @@ if (!isset($getdate)) {
 	if (isset($_GET['getdate']) && ($_GET['getdate'] !== '')) {
 		$getdate = $_GET['getdate'];
 	} else {
-		$getdate = date('Ymd', time() + $phpIcal_config->second_offset);
+		$getdate = date('Ymd', time() + $phpiCal_config->second_offset);
 	}
 }
 

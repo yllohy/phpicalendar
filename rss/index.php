@@ -1,8 +1,7 @@
 <?php
 
-/* Rewritten by J. Hu 4/2/06
-*/
-
+/* Rewritten by J. Hu 4/2/06*/
+$current_view = 'rss';
 define('BASE','../');
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/calendar_functions.php');
@@ -12,7 +11,7 @@ if ($phpiCal_config->enable_rss != 'yes') {
 }
 
 if (empty($default_path)) {
-	if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
+	if (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ) {
 		$default_path = 'https://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
 	} else {
 		$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/rss/'));
@@ -40,21 +39,21 @@ foreach ($filelist as $file) {
 
 /* Changed to show links without urlencode, but links valid urls */
 	$rss_list .= "<td>".$lang['l_day']."</td>";
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 0.91</td>';
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 1.0</td>';
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 2.0</td></tr>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 0.91</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 2.0</td></tr>';
 
 	$rss_list .= "<td>".$lang['l_week']."</td>";
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 0.91</td>';
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 1.0</td>';
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 2.0</td></tr>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 0.91</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 2.0</td></tr>';
 
 	$rss_list .= "<td>".$lang['l_month']."</td>";
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 0.91</td>';
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 1.0</td>';
-	$rss_list .= '<td><a href='.$default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 2.0</td></tr>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 0.91</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 2.0</td></tr>';
 
-	$footer_check = $default_path.'/rss/rss.php?cal%3D'.rawurlencode($file.'&amp;cpath='.$cpath.'&amp;rssview='.$default_view);
+	$footer_check = $phpiCal_config->default_path.'/rss/rss.php?cal%3D'.rawurlencode($file.'&amp;cpath='.$cpath.'&amp;rssview='.$phpiCal_config->default_view);
 	$validrss_check = str_replace('%', '%25', $footer_check);
 	$rss_list .= "<tr><td>&nbsp;</td></tr>\n";
 
@@ -65,34 +64,34 @@ $rss_list .= "</table>\n";
 /* End link modification */
 
 
-$page = new Page(BASE.'templates/'.$template.'/rss_index.tpl');
+$page = new Page(BASE.'templates/'.$phpiCal_config->template.'/rss_index.tpl');
 
 $page->replace_files(array(
-	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
+	'header'			=> BASE.'templates/'.$phpiCal_config->template.'/header.tpl',
+	'footer'			=> BASE.'templates/'.$phpiCal_config->template.'/footer.tpl',
 	'event_js'			=> ''
 	));
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
-	'default_path'		=> $default_path.'/',
-	'template'			=> $template,
+	'version'			=> $phpiCal_config->phpicalendar_version,
+	'default_path'		=> $phpiCal_config->default_path.'/',
+	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
 	'display_date'		=> $display_date,
 	'current_view'		=> $current_view,
-	'sidebar_date'		=> $sidebar_date,
+	'sidebar_date'		=> @$sidebar_date,
 	'rss_powered'	 	=> $rss_powered,
 	'rss_list'	 		=> $rss_list,
-	'charset'	 		=> $charset,
+	'charset'	 		=> $phpiCal_config->charset,
 	'rss_available' 	=> '',
 	'rssdisable'	 	=> '',
 	'rss_valid' 		=> '',
 	'rss_docinfo'		=> "RSS feeds can also be set up for a specified number of days before or after a given date, or between two dates.  See the <a href='http://phpicalendar.net/documentation/index.php/RSS_feeds'>documentation</a> for how to set up the URLs",
 /* Replaces footer.tpl {validrss_check} with $validrss_check */	
 	'validrss_check'	=> $validrss_check,
-	'show_search' 		=> $show_search,
+	'show_search' 		=> $phpiCal_config->show_search,
 	'l_rss_info'		=> $lang['l_rss_info'],
 	'l_rss_subhead'		=> $lang['l_rss_subhead'],
 	'l_day'				=> $lang['l_day'],

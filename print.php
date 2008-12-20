@@ -3,7 +3,7 @@ define('BASE', './');
 $current_view 		='print';
 require_once(BASE.'functions/date_functions.php');
 require_once(BASE.'functions/init.inc.php');
-$start_week_time 	= strtotime(dateOfWeek($getdate, $week_start_day));
+$start_week_time 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $parse_month 		= date ("Ym", strtotime($getdate));
 $events_week 		= 0;
@@ -41,7 +41,7 @@ if ($printview == 'day') {
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
+header("Content-Type: text/html; charset=$phpiCal_config->charset");
 
 
 $page = new Page(BASE.'templates/'.$template.'/print.tpl');
@@ -64,21 +64,21 @@ $page->replace_tags(array(
 	'current_view'		=> $current_view,
     'printview'         => $printview,
 	'display_date'		=> $display_date,
-	'sidebar_date'		=> $sidebar_date,
+	'sidebar_date'		=> @$sidebar_date,
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'show_search' 		=> '',
-	'next_day' 			=> $next_day,
-	'prev_day'	 		=> $prev_day,
+	'next_day' 			=> @$next_day,
+	'prev_day'	 		=> @$prev_day,
 	'show_goto' 		=> '',
 	'is_logged_in' 		=> '',
-	'list_icals' 		=> $list_icals,
-	'list_years' 		=> $list_years,
-	'list_months' 		=> $list_months,
-	'list_weeks' 		=> $list_weeks,
-	'list_jumps' 		=> $list_jumps,
-	'legend'	 		=> $list_calcolors,
+	'list_icals' 		=> @$list_icals,
+	'list_years' 		=> @$list_years,
+	'list_months' 		=> @$list_months,
+	'list_weeks' 		=> @$list_weeks,
+	'list_jumps' 		=> @$list_jumps,
+	'legend'	 		=> @$list_calcolors,
 	'style_select' 		=> @$style_select,
 	'l_time'			=> $lang['l_time'],
 	'l_summary'			=> $lang['l_summary'],

@@ -4,7 +4,7 @@ define('BASE', '../');
 include_once(BASE.'functions/init.inc.php');
 include_once(BASE.'functions/date_functions.php');
 require_once(BASE.'functions/template.php');
-
+$current_view = 'todo';
 $vtodo_array = unserialize(urldecode(base64_decode($_REQUEST['todo_data'])));
 
 // Set the variables from the array
@@ -25,9 +25,9 @@ $vtodo_text		= ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a tar
 if ((!isset($status) || $status == "COMPLETED") && isset($completed_date)) {
 	$status = $lang['l_completed_date'] . ' ' . $completed_date;
 } elseif ($status == "COMPLETED") {
-	$status = $completed_lang;
+	$status = $lang['l_completed'];
 } else {
-	$status = $unfinished_lang;
+	$status = $lang['l_unfinished'];
 }
 
 if ($priority >= 1 && $priority <= 4) {
@@ -43,7 +43,7 @@ if ($priority >= 1 && $priority <= 4) {
 $page = new Page(BASE.'templates/'.$template.'/todo.tpl');
 
 $page->replace_tags(array(
-	'charset'			=> $charset,
+	'charset'			=> $phpiCal_config->charset,
 	'cal' 				=> $cal_title_full,
 	'vtodo_text' 		=> $vtodo_text,
 	'description' 		=> $description,
@@ -52,7 +52,7 @@ $page->replace_tags(array(
 	'status'	 		=> $status,
 	'due_date' 			=> $due_date,
 	'cal_title_full'	=> $cal_title_full,
-	'template'			=> $template,
+	'template'			=> $phpiCal_config->template,
 	'l_created'			=> $lang['l_created'],
 	'l_priority'		=> $lang['l_priority'],
 	'l_status'			=> $lang['l_status'],

@@ -1,4 +1,5 @@
 <?php 
+$current_view = "event";
 define('BASE', '../');
 #$getdate = $_POST['date'];
 include_once(BASE.'functions/init.inc.php'); 
@@ -29,21 +30,23 @@ if ($_POST['time'] == -1) {
 $event['description'] 	= stripslashes(utf8_decode(urldecode($event['description'])));
 $event['event_text'] = stripslashes(utf8_decode(urldecode($event['event_text'])));
 $event['location'] = stripslashes(utf8_decode(urldecode($event['location'])));
-
+$display ='';
 if ($event['description']) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
 
-if (is_array($organizer)) {
+$organizer = '';
+if (isset($organizer) && is_array($organizer)) {
 	$i=0;
-	$display .= $organizer_lang . ' - ';
+	$display .= $lang['l_organizer'] . ' - ';
 	foreach ($organizer as $val) {	
 		$organizers .= $organizer[$i]["name"] . ', ';
 		$i++;
 	}
 	$organizer = substr($organizers,0,-2);
 }
-if (is_array($attendee)) {
+$attendees = '';
+if (isset($attendee) && is_array($attendee)) {
 	$i=0;
-	$display .= $attendee_lang . ' - ';
+	$display .= $lang['l_attendee'] . ' - ';
 	foreach ($attendee as $val) {	
 		$attendees .= $attendee[$i]["name"] . ', ';
 		$i++;
@@ -51,13 +54,13 @@ if (is_array($attendee)) {
 	$attendee = substr($attendees,0,-2);
 }
 
-if ($event['location']) {
+if (isset($event['location'])) {
 	if ($event['url'] != '') $event['location'] = '<a href="'.$event['url'].'" target="_blank">'.stripslashes($event['location']).'</a>';
 }else{
 	$event['location'] = stripslashes($event['location']);
 }
 
-if (!$event['location'] && $event['url']) {
+if (!isset($event['location']) && isset($event['url'])) {
 	$event['location'] = '<a href="'.$event['url'].'" target="_blank">'.$event['url'].'</a>';
 	$lang['l_location'] = 'URL';
 }
@@ -79,10 +82,10 @@ switch ($event['status']){
 		$event['status'] =	'' ; 
 }
 
-$page = new Page(BASE.'templates/'.$template.'/event.tpl');
+$page = new Page(BASE.'templates/'.$phpiCal_config->template.'/event.tpl');
 
 $page->replace_tags(array(
-	'charset'			=> $charset,
+	'charset'			=> $phpiCal_config->charset,
 	'cal' 				=> $event['calname'],
 	'event_text' 		=> $event['event_text'],
 	'event_times' 		=> $event_times,
@@ -92,7 +95,7 @@ $page->replace_tags(array(
 	'status'	 		=> $event['status'],
 	'location' 			=> stripslashes($event['location']),
 	'cal_title_full'	=> $event['calname'].' '.$lang['l_calendar'],
-	'template'			=> $template,
+	'template'			=> $phpiCal_config->template,
 	'l_organizer'		=> $lang['l_organizer'],
 	'l_attendee'		=> $lang['l_attendee'],
 	'l_status'			=> $lang['l_status'],

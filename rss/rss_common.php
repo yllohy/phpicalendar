@@ -21,7 +21,7 @@
    Lines modified: 135-165, 208-223
    Additional mods by J. Hu
 */
-   
+$current_view = 'rss';   
 require(BASE.'functions/init.inc.php');
 
 if ($phpiCal_config->enable_rss != 'yes') {
@@ -122,7 +122,7 @@ header ("ETag:\"$filemodtime\"");
 // checks the user agents headers to see if they kept track of our
 // stuff, if so be nice and send back a 304 and exit.
 
-if ( ($_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || ($_SERVER['HTTP_IF_NONE_MATCH'] == $filemodtime)){
+if ( (@$_SERVER['HTTP_IF_MODIFIED_SINCE'] == $filemodtime) || (@$_SERVER['HTTP_IF_NONE_MATCH'] == $filemodtime)){
 	header ("HTTP/1.1 304 Not Modified");
 	exit;
 }
@@ -154,7 +154,7 @@ do {
 		foreach ($master_array[("$thisdate")] as $event_times) {
 			foreach ($event_times as $uid=>$val) {
 				#handle multiday all day events
-				if(!$val["event_start"]){
+				if(!isset($val["event_start"])){
 					if (isset($uid_arr[$uid])){
 						$uid_arr[$uid] .= "+$dayofweek" ;
 						continue;
