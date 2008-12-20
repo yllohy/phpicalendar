@@ -2,11 +2,11 @@
 
 define('BASE','./');
 $current_view = 'search';
-$display_date = $lang['l_results'];
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
+header("Content-Type: text/html; charset=$phpiCal_config->charset");
+$display_date = $lang['l_results'];
 
 if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '') {
 	$back_page = $_SERVER['HTTP_REFERER'];
@@ -27,7 +27,7 @@ $search_box .=
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
 	'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
-        '<INPUT type="image" src="templates/'.$template.'/images/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
+        '<INPUT type="image" src="templates/'.$phpiCal_config->template.'/images/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
 	'</form>';
 
 $search_started = getmicrotime();
@@ -277,21 +277,22 @@ function format_recur($arr) {
 }
 
 
-$page = new Page(BASE.'templates/'.$template.'/search.tpl');
+$page = new Page(BASE.'templates/'.$phpiCal_config->template.'/search.tpl');
 
 $page->draw_search($page);
 
 	
 $page->replace_files(array(
-	'header'			=> BASE.'templates/'.$template.'/header.tpl',
-	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
-	'sidebar'			=> BASE.'templates/'.$template.'/sidebar.tpl',
+	'header'			=> BASE.'templates/'.$phpiCal_config->template.'/header.tpl',
+	'footer'			=> BASE.'templates/'.$phpiCal_config->template.'/footer.tpl',
+	'sidebar'			=> BASE.'templates/'.$phpiCal_config->template.'/sidebar.tpl',
 	'event_js'			=> BASE.'functions/event.js',
 	));
 
 
 $page->replace_tags(array(
-	'version'			=> $phpicalendar_version,
+	'version'			=> $phpiCal_config->phpicalendar_version,
+	'default_path'		=> $phpiCal_config->default_path,
 	'formatted_search'	=> $formatted_search,
 	'l_results'			=> $lang['l_results'],
 	'l_query'			=> $lang['l_query'],
@@ -303,15 +304,14 @@ $page->replace_tags(array(
 	'l_exception'		=> $lang['l_exception'],
 	'l_no_results'		=> $lang['l_no_results'],
 	'search_box'		=> $search_box,
-	'charset'			=> $charset,
-	'template'			=> $template,
+	'charset'			=> $phpiCal_config->charset,
+	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'cpath'				=> $cpath,
 	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $display_date,
 	'rss_powered'	 	=> $rss_powered,
-	'default_path'		=> '',
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'show_search' 		=> $show_search,

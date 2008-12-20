@@ -388,7 +388,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							break;
 						case 'DURATION':
 							if (($first_duration == TRUE) && (!stristr($field, '=DURATION'))) {
-								ereg ('^P([0-9]{1,2}[W])?([0-9]{1,2}[D])?([T]{0,1})?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration); 
+								ereg ('^P([0-9]{1,2}[W])?([0-9]{1,3}[D])?([T]{0,1})?([0-9]{1,2}[H])?([0-9]{1,2}[M])?([0-9]{1,2}[S])?', $data, $duration); 
 								$weeks 			= str_replace('W', '', $duration[1]); 
 								$days 			= str_replace('D', '', $duration[2]); 
 								$hours 			= str_replace('H', '', $duration[4]); 
