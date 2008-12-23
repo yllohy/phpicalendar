@@ -520,6 +520,8 @@ class Page {
 		global $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $phpiCal_config, $daysofweek_lang;
 		// Replaces the allday events
 		$replace = ''; 
+		$weekday_loop = '';
+		$daydisplay = '';
 		if (is_array(@$master_array[$getdate]['-1'])) {
 			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
 			$loop_ad = trim($match1[1]);
