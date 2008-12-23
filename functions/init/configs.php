@@ -51,6 +51,8 @@ while ($fillTime < $phpiCal_config->day_end) {
 	$fillTime = $fill_h . $fill_min;
 }
 
+if (!isset($current_view)) $current_view = $phpiCal_config->default_view;
+
 $tz_array=array();
 /*echo "<pre>xx";
 print_r($configs);
