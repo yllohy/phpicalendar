@@ -40,8 +40,36 @@ function drawEventTimes ($start, $end) {
 function word_wrap($str, $length, $lines=0) {
 	if ($lines > 0) {
 		$len = $length * $lines;
-		if ($len < strlen($str)) {
-			$str = substr($str,0,$len).'...';
+		//if ($len < strlen($str)) {
+		// $str = substr($str,0,$len).'...';
+		//}
+		$rstr=bite_str($str,0,$len+1);
+	}
+	return $rstr;
+}
+
+// String intercept By Bleakwind
+// utf-8:$byte=3 | gb2312:$byte=2 | big5:$byte=2
+function bite_str($string, $start, $len, $byte=3){
+	$str = "";
+	$count = 0;
+	$str_len = strlen($string);
+	for ($i=0; $i<$str_len; $i++) {
+		if (($count+1-$start)>$len) {
+			$str .= "...";
+			break;
+		} elseif ((ord(substr($string,$i,1)) <= 128) && ($count < $start)){
+			$count++;
+		} elseif ((ord(substr($string,$i,1)) > 128) && ($count < $start)){
+			$count = $count+2;
+			$i = $i+$byte-1;
+		} elseif ((ord(substr($string,$i,1)) <= 128) && ($count >= $start)){
+			$str .= substr($string,$i,1);
+			$count++;
+		} elseif ((ord(substr($string,$i,1)) > 128) && ($count >= $start)){
+			$str .= substr($string,$i,$byte);
+			$count = $count+2;
+			$i = $i+$byte-1;
 		}
 	}
 	return $str;
