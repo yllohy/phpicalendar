@@ -1,5 +1,4 @@
 ﻿<?php
-
 /* from the std
 
 BYxxx rule parts modify the recurrence in some manner. BYxxx rule

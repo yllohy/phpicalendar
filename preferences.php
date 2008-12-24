@@ -1,7 +1,7 @@
 <?php
 define('BASE','./');
 $current_view = 'preferences';
-require_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/init.inc.php');
 require_once(BASE.'functions/template.php');
 $display_date = $lang['l_preferences'];
 
@@ -29,17 +29,18 @@ if ($action == 'setcookie') {
 	$cookie_style 		= $_POST['cookie_style'];
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
+	$cookie_endtime		= $_POST['cookie_endtime'];
 	$cookie_unset		= @$_POST['unset'];
-	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time", "cookie_cpath"=>"$cookie_cpath");
+	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time","cookie_endtime" => "$cookie_endtime", "cookie_cpath"=>"$cookie_cpath");
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 
 		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$phpiCal_config->cookie_uri",0);
 	} else {
 		setcookie("$cookie_name","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$phpiCal_config->cookie_uri",0);
 		if (isset($_POST['cookie_view'])) 
-			$default_view = $_POST['cookie_view'];
+			$phpiCal_config->default_view = $_POST['cookie_view'];
 		if (isset($_POST['cookie_style']) && is_dir(BASE.'templates/'.$_POST['cookie_style'].'/')) 
-			$template = $_POST['cookie_style'];
+			$phpiCal_config->template = $_POST['cookie_style'];
 		if (isset($_POST['cookie_language']) && is_file(BASE.'languages/'.strtolower($_POST['cookie_language']).'.inc.php')) 
 			include(BASE.'languages/'.strtolower($_POST['cookie_language']).'.inc.php');
 	}
@@ -56,6 +57,7 @@ if (isset($_COOKIE[$cookie_name])) {
 	$cookie_style 		= $phpicalendar['cookie_style'];
 	$cookie_startday	= $phpicalendar['cookie_startday'];
 	$cookie_time		= $phpicalendar['cookie_time'];
+	$cookie_endtime		= $phpicalendar['cookie_endtime'];
 	if ($cookie_unset) { 
 		unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
 	}
@@ -69,6 +71,7 @@ if ((!isset($_COOKIE[$cookie_name])) || ($cookie_unset)) {
 	$cookie_style = $phpiCal_config->template;
 	$cookie_startday = $phpiCal_config->week_start_day;
 	$cookie_time = $phpiCal_config->day_start;
+	$cookie_endtime = $phpiCal_config->day_end;
 }
 
 if ($action == 'setcookie') { 
@@ -108,13 +111,23 @@ $view_select    .= ($phpiCal_config->default_view == 'month') ? '<option value="
 
 // select for time
 $time_select = '';
-for ($i = 000; $i <= 1200; $i += 100) {
+for ($i = 000; $i <= 2400; $i += 100) {
 	$s = sprintf("%04d", $i);
 	$time_select .= '<option value="'.$s.'"';
 	if ($s == $cookie_time) {
 		$time_select .= ' selected="selected"';
 	}
 	$time_select .= ">$s</option>\n";
+}
+
+$endtime_select = '';
+for ($i = 000; $i <= 2400; $i += 100) {
+	$s = sprintf("%04d", $i);
+	$endtime_select .= '<option value="'.$s.'"';
+	if ($s == $cookie_endtime) {
+		$endtime_select .= ' selected="selected"';
+	}
+	$endtime_select .= ">$s</option>\n";
 }
 
 // select for day of week
@@ -169,6 +182,7 @@ $page->replace_tags(array(
 	'calendar_select' 	=> $calendar_select,
 	'view_select' 		=> $view_select,
 	'time_select' 		=> $time_select,
+	'endtime_select'	=> $endtime_select,
 	'startday_select' 	=> $startday_select,
 	'style_select' 		=> $style_select,
 	'display_date'	 	=> $lang['l_preferences'],
@@ -179,6 +193,7 @@ $page->replace_tags(array(
 	'l_select_lang'		=> $lang['l_select_lang'],
 	'l_select_view'		=> $lang['l_select_view'],
 	'l_select_time'		=> $lang['l_select_time'],
+	'l_select_endtime'	=> $lang['l_select_endtime'],
 	'l_select_day'		=> $lang['l_select_day'],
 	'l_select_cal'		=> $lang['l_select_cal'],
 	'l_select_style'	=> $lang['l_select_style'],

@@ -22,6 +22,7 @@ if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
 	}	
 	if (isset($phpicalendar['cookie_startday'])) 	$phpiCal_config->setProperty('week_start_day', 		$phpicalendar['cookie_startday']);
 	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); 
+	if (isset($phpicalendar['cookie_endtime']))		$phpiCal_config->setProperty('day_end', 			$phpicalendar['cookie_endtime']); 
 }
 
 # language support
