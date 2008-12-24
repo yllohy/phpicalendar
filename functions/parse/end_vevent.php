@@ -11,7 +11,7 @@ What happens in this file:
 3. Add occurrences to master_array
 */
 
-if (!isset($start_date)) echo "no start date for $summary<br>";
+if (!isset($start_date)) $start_date = "19700101";
 
 // Handle DURATION
 if (!isset($end_unixtime)) {
@@ -131,11 +131,13 @@ foreach ($rrule_array as $key => $val) {
 			$recur_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $count;
 			break;
 		case 'UNTIL':
-			$until = str_replace('T', '', $val);
-			$until = str_replace('Z', '', $until);
-			if (strlen($until) == 8) $until = $until.'235959';
+			#$until = str_replace('T', '', $val); 
+			#$until = str_replace('Z', '', $until);
+			#if (strlen($until) == 8) $until = $until.'235959';
+			# UNTIL must be in UTC
+			$until = date("YmdHis",strtotime($val));
 			ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})', $until, $regs);
-			$until_unixtime = mktime($regs[4],$regs[5],@$regs[6],$regs[2],$regs[3],$regs[1]);
+			$until_unixtime = mktime($regs[4],$regs[5],@$regs[6],$regs[2],$regs[3],$regs[1]); 
 			$recur_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = localizeDate($dateFormat_week,$until);
 			break;
 		case 'INTERVAL':
