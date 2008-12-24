@@ -229,7 +229,16 @@ if($count == 1000000){
 if ($next_range_unixtime < $start_date_unixtime) $next_range_unixtime = $start_date_unixtime;
 
 if(isset($until) && $end_range_unixtime > $until_unixtime) $end_range_unixtime = $until_unixtime;
-if($freq_type == 'year') $end_range_unixtime	+= 366*24*60*60;
+
+switch ($freq_type){
+	case 'week':
+		# need to get the first value of $next_range_unixtime onto the right day of the week
+		$next_range_unixtime = strtotime("this ".date("D", $start_date_unixtime), $next_range_unixtime);
+		break;
+	case 'year':
+		$end_range_unixtime	+= 366*24*60*60;
+		break;
+}
 if(!isset($rrule_array['FREQ']) && isset($end_date)){ 
 	$end_range_unixtime = strtotime($end_date);
 	$count = 1;
