@@ -153,7 +153,7 @@ function chooseOffset($time, $timezone = '') {
 			break;
 		default:
 			if (is_array($tz_array) && array_key_exists($timezone, $tz_array)) {
-				$dlst = date('I', $time);	
+				$dlst = is_daylight($time, $timezone);	
 				$offset = $tz_array[$timezone][$dlst];
 			} else {
 				$offset = '+0000';
@@ -208,76 +208,105 @@ $return = "
 	return $return;
 }
 
-// Returns an array of the date and time extracted from the data
-// passed in. This array contains (unixtime, date, time, allday).
-//
-// $data		= A string representing a date-time per RFC2445.
-// $property	= The property being examined, e.g. DTSTART, DTEND.
-// $field		= The full field being examined, e.g. DTSTART;TZID=US/Pacific
+/* Returns an array of the date and time extracted from the data
+ passed in. This array contains (unixtime, date, time, allday).
+
+	$data		= A string representing a date-time per RFC2445.
+	$property	= The property being examined, e.g. DTSTART, DTEND.
+	$field		= The full field being examined, e.g. DTSTART;TZID=US/Pacific
+	
+See:http://phpicalendar.org/documentation/index.php/Property_Value_Data_Types#4.3.5___Date-Time	
+*/
 function extractDateTime($data, $property, $field) {
-	global $tz_array, $phpiCal_config;
-	
-	// Initialize values.
-	unset($unixtime, $date, $time, $allday);
-	
+	global $tz_array, $phpiCal_config, $calendar_tz;
+		
 	$allday =''; #suppress error on returning undef.
 	// Check for zulu time.
 	$zulu_time = false;
 	if (substr($data,-1) == 'Z') $zulu_time = true;
-	$data = str_replace('Z', '', $data);
-	
-	// Remove some substrings we don't want to look at.
-	$data = str_replace('T', '', $data);
-	$field = str_replace(';VALUE=DATE-TIME', '', $field); 
+	// Pull out the timezone, or use GMT if zulu time was indicated.
+	if (preg_match('/^'.$property.';TZID=/i', $field)) {
+		$tz_tmp = explode('=', $field);
+		$tz_dt = match_tz($tz_tmp[1]); #echo "$tz_dt<br>";
+	} elseif ($zulu_time) {
+		$tz_dt = 'GMT';
+	}
 	
 	// Extract date-only values.
-	if ((preg_match('/^'.$property.';VALUE=DATE/i', $field)) || (ereg ('^([0-9]{4})([0-9]{2})([0-9]{2})$', $data)))  {
+	if ((preg_match('/^'.$property.';VALUE=DATE:/i', $field)) || (ereg ('^([0-9]{4})([0-9]{2})([0-9]{2})$', $data)))  {
 		// Pull out the date value. Minimum year is 1970.
 		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dt_check);
 		if ($dt_check[1] < 1970) { 
 			$data = '1971'.$dt_check[2].$dt_check[3];
-		}
-		
-		// Set the values.
-		$unixtime = strtotime($data);
-		$date = date('Ymd', $unixtime);
+		}		
+		# convert to date-time
+		$data = $dt_check[1].$dt_check[2].$dt_check[3]."T000000";
 		$time = '';
 		$allday = $data;
-	}else{	// Extract date-time values.
-
-		// Pull out the timezone, or use GMT if zulu time was indicated.
-		if (preg_match('/^'.$property.';TZID=/i', $field)) {
-			$tz_tmp = explode('=', $field);
-			$tz_dt = $tz_tmp[1];
-			unset($tz_tmp);
-		} elseif ($zulu_time) {
-			$tz_dt = 'GMT';
-		}
-
-		// Pull out the date and time values. Minimum year is 1970.
-		preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
-		if ($regs[1] < 1970) { 
-			$regs[1] = '1971';
-		}
-		$date = $regs[1] . $regs[2] . $regs[3];
-		$time = $regs[4] . $regs[5];
-		$unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
-		// Check for daylight savings time.
-		$dlst = date('I', $unixtime);
-		$server_offset_tmp = chooseOffset($unixtime, $phpiCal_config->timezone);
-		if (isset($tz_dt)) {
-			$offset_tmp = chooseOffset($unixtime, $tz_dt);
-		} elseif (isset($calendar_tz)) {
-			$offset_tmp = chooseOffset($unixtime, $calendar_tz);			
-		} else {
-			$offset_tmp = $server_offset_tmp;
-		}
-		// Set the values.
-		$unixtime = calcTime($offset_tmp, $server_offset_tmp, $unixtime);
-		$date = date('Ymd', $unixtime);
-		$time = date('Hi', $unixtime);
-	}	
+	}
+	// Extract date-time values.
+	// Pull out the date and time values. Minimum year is 1970.
+	preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})T{0,1}([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
+	if ($regs[1] < 1970) { 
+		$regs[1] = '1971';
+	}
+	$date = $regs[1] . $regs[2] . $regs[3];
+	$time = $regs[4] . $regs[5];
+	$unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
+	# chooseOffset checks for Daylight Saving Time
+	$server_offset_tmp = chooseOffset($unixtime, $phpiCal_config->timezone);
+	if (isset($tz_dt)) {
+		$offset_tmp = chooseOffset($unixtime, $tz_dt);
+	} elseif (isset($calendar_tz)) {
+		$offset_tmp = chooseOffset($unixtime, $calendar_tz);			
+	} else {
+		$offset_tmp = $server_offset_tmp;
+	}
+	// Set the values.
+	$unixtime = calcTime($offset_tmp, $server_offset_tmp, $unixtime);
+	#echo "offset_tmp $offset_tmp, server_offset_tmp $server_offset_tmp, $unixtime =".date("Ymd His",$unixtime)." $time<br>";
+	$date = date('Ymd', $unixtime);
+	if ($allday == '') $time = date('Hi', $unixtime);
+		
 	// Return the results.
 	return array($unixtime, $date, $time, $allday);
 }
+
+/* TZIDs in calendars often contain leading information that should be stripped
+Example: TZID=/mozilla.org/20050126_1/Europe/Berlin
+if this has been set by the parse_tzs scanning the file, then it should be OK, but sometimes a calendar may have a tzid without having defined the vtimezone, expecting a match (This will often happen when users send isolated events in bug reports; the calendars should have vtimezones).
+
+Need to return the part that matches a key in $tz_array
+*/
+function match_tz($data){
+	global $tz_array;
+	if (isset($tz_array[$data])) return $data;
+	foreach ($tz_array as $key=>$val){
+		if (strpos(" $data",$key) > 0) return $key;
+	}
+	return $data;
+}
+
+require_once(BASE."functions/is_daylight.php");
+/*	function is_daylight($date, $timezone)  returns 1 if daylight time, 0 if not
+
+	default is to use the server's date function.  This will be off when the timezone's rules are not the same as the server's rules. In php5.2+ there seems to be a better way to do this, but we can't count on users having php5.2+.
+	
+	Although we set dt_start and st_start in parse_tzs.php, these are not rrules and I don't know how to use them yet. So we'll do it by brute force for the ones we know about, from: http://www.webexhibits.org/daylightsaving/g.html
+	
+	Note that this sends a screwy time value - it's not necessarily UTC unixtime, since the mktime functions that create the time are not using the timezone.
+
+function is_daylight($time, $timezone){
+	global $tz_array;
+	# default to std time, overwrite if daylight.
+	$dlst = 0;
+	switch ($timezone){
+		default:
+			$dlst = date('I', $time);
+	}
+	
+	return $dlst;
+
+}
+*/
 ?>

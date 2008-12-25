@@ -4,7 +4,7 @@
 phpicalendar 2.3 should work with no additional configuration. This file can be changed to customize the behavior of phpicalendar.
 In version 2.3, there has been a change in the way configuration works in order to reduce the number of confusing global variables.  Unfortunately, this means that config.inc.php files from older installations will have to be translated to the new format.  The conversion is simple: use the old variable names as array keys for the $configs array below:
 */
-
+$secs = 6*60*60;
 $configs = array(
 #	'calendar_path'	=>	'/Library/WebServer/Documents/phpicalendar/calendars',
 #	'timezone'	=> 'US/Central', 
@@ -13,6 +13,8 @@ $configs = array(
 	'allow_preferences'	=> 'yes', 
 #	'show_search'	=> 'yes',
 #	'show_todos'	=> 'no',
+	'timezone'	=> 'US/Central',
+#	'second_offset'	=> $secs,
 #	'cookie_uri'	=> '' 
 );
 

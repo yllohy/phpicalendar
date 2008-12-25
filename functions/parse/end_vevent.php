@@ -320,7 +320,6 @@ foreach($recur_data as $recur_data_unixtime) {
 	} else {
 		$start_unixtime_tmp = mktime($recur_data_hour,$recur_data_minute,0,$recur_data_month,$recur_data_day,$recur_data_year);
 		$end_unixtime_tmp = $start_unixtime_tmp + $length;
-		
 		if (($end_time >= $phpiCal_config->bleed_time) && ($bleed_check == '-1')) {
 			$start_tmp = strtotime(date('Ymd',$start_unixtime_tmp));
 			$end_date_tmp = date('Ymd',$end_unixtime_tmp);
@@ -339,34 +338,29 @@ foreach($recur_data as $recur_data_unixtime) {
 					$end_time_tmp = '2400';
 					$display_end_tmp = $end_time;
 				}
-				
-				// Let's double check the until to not write past it
-				$until_check = $start_date_tmp.$time_tmp.'00'; 
-				if (@$until > $until_check) {
-					$master_array[$start_date_tmp][$time_tmp][$uid] = array (
-						'event_start' => $start_time_tmp, 
-						'event_end' => $end_time_tmp, 
-						'start_unixtime' => $start_unixtime_tmp, 
-						'end_unixtime' => $end_unixtime_tmp, 
-						'event_text' => $summary, 
-						'event_length' => $length, 
-						'event_overlap' => 0, 
-						'description' => $description, 
-						'status' => $status, 
-						'class' => $class, 
-						'spans_day' => true, 
-						'location' => $location, 
-						'organizer' => serialize($organizer), 
-						'attendee' => serialize($attendee), 
-						'calnumber' => $calnumber, 
-						'calname' => $actual_calname, 
-						'url' => $url, 
-						'recur' => $recur);
-					if (isset($display_end_tmp)){
-						$master_array[$start_date_tmp][$time_tmp][$uid]['display_end'] = $display_end_tmp;
-					}
-					checkOverlap($start_date_tmp, $time_tmp, $uid);
+				$master_array[$start_date_tmp][$time_tmp][$uid] = array (
+					'event_start' => $start_time_tmp, 
+					'event_end' => $end_time_tmp, 
+					'start_unixtime' => $start_unixtime_tmp, 
+					'end_unixtime' => $end_unixtime_tmp, 
+					'event_text' => $summary, #
+					'event_length' => $length, 
+					'event_overlap' => 0, 
+					'description' => $description, 
+					'status' => $status, 
+					'class' => $class, 
+					'spans_day' => true, 
+					'location' => $location, 
+					'organizer' => serialize($organizer), 
+					'attendee' => serialize($attendee), 
+					'calnumber' => $calnumber, 
+					'calname' => $actual_calname, 
+					'url' => $url, 
+					'recur' => $recur);
+				if (isset($display_end_tmp)){
+					$master_array[$start_date_tmp][$time_tmp][$uid]['display_end'] = $display_end_tmp;
 				}
+				checkOverlap($start_date_tmp, $time_tmp, $uid);
 				$start_tmp = strtotime('+1 day',$start_tmp);
 			}
 		} else {
@@ -376,31 +370,29 @@ foreach($recur_data as $recur_data_unixtime) {
 					
 			}
 			if (!isset($end_time_tmp1)) $end_time_tmp1 = $end_time;
-		
-			// Let's double check the until to not write past it
 				$master_array[($recur_data_date)][($hour.$minute)][$uid] = array (
-					'event_start' => $start_time, 
-					'event_end' => $end_time_tmp1, 
-					'start_unixtime' => $start_unixtime_tmp, 
-					'end_unixtime' => $end_unixtime_tmp, 
-					'event_text' => $summary, 
-					'event_length' => $length, 
-					'event_overlap' => 0, 
-					'description' => $description, 
-					'status' => $status, 
-					'class' => $class, 
-					'spans_day' => false, 
-					'location' => $location, 
-					'organizer' => serialize($organizer), 
-					'attendee' => serialize($attendee), 
-					'calnumber' => $calnumber, 
-					'calname' => $actual_calname, 
-					'url' => $url, 
-					'recur' => $recur);
-				if (isset($display_end_tmp)){
-					$master_array[($recur_data_date)][($hour.$minute)][$uid]['display_end'] = $display_end_tmp;
-				}
-				checkOverlap($recur_data_date, ($hour.$minute), $uid);
+				'event_start' => $start_time, 
+				'event_end' => $end_time_tmp1, 
+				'start_unixtime' => $start_unixtime_tmp, 
+				'end_unixtime' => $end_unixtime_tmp, 
+				'event_text' => $summary, 
+				'event_length' => $length, 
+				'event_overlap' => 0, 
+				'description' => $description, 
+				'status' => $status, 
+				'class' => $class, 
+				'spans_day' => false, 
+				'location' => $location, 
+				'organizer' => serialize($organizer), 
+				'attendee' => serialize($attendee), 
+				'calnumber' => $calnumber, 
+				'calname' => $actual_calname, 
+				'url' => $url, 
+				'recur' => $recur);
+			if (isset($display_end_tmp)){
+				$master_array[($recur_data_date)][($hour.$minute)][$uid]['display_end'] = $display_end_tmp;
+			}
+			checkOverlap($recur_data_date, ($hour.$minute), $uid);
 			
 		}
 	}

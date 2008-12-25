@@ -28,6 +28,7 @@ function add_recur($times,$freq=''){
 	if (!is_array($times)) $times = array($times);
 	/*BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR,
    BYMINUTE, BYSECOND and BYSETPOS*/
+#dump_times($times);
 	$times = restrict_bymonth($times,$freq); 
 #	$times = restrict_byweekno($times,$freq);
 	$times = restrict_byyearday($times,$freq);
@@ -253,6 +254,6 @@ function dump_times($times){
 	global $summary;
 	echo "<pre>$summary times:";
 	#var_dump($times);
-	foreach($times as $time) echo "\ndate:".date("Ymd his",$time);
+	foreach($times as $time) echo "\ndate:".date("Y-m-d H:i:s",$time);
 	echo "</pre>";
 }
