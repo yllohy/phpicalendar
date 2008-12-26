@@ -32,6 +32,9 @@
 					<!-- switch location on -->
 					<b>{L_LOCATION}</b>: {LOCATION}<br />
 					<!-- switch location off -->
+					<!-- switch url on -->
+					<b>{L_URL}</b>: {URL}<br />
+					<!-- switch url off -->
 					</p>
 				</div>
 			</td>

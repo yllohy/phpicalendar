@@ -359,7 +359,6 @@ class Page {
 			$key = mktime($regs_tmp[1],$regs_tmp[2],0,$this_month,$this_day,$this_year);
 			$key = date ($timeFormat, $key);
 												
-
 			if (ereg("([0-9]{1,2}):00", $key)) {
 				$weekdisplay .= '<tr>';
 				$weekdisplay .= '<td colspan="4" rowspan="' . (60 / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
@@ -466,11 +465,14 @@ class Page {
 						  			$confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
 								$colspan_width = round((80 / $nbrGridCols[$thisday]) * $drawWidth);
+								$event_temp   = $loop_event;
+								$event 		  = openevent($thisday, $cal_time, $uid, $this_time_arr[$uid], $phpiCal_config->week_events_lines, 25, 'ps');
+								# adjust length by rough guess to word wrapping
+								$event_text_lines = ceil((strlen(strip_tags(trim($event))) * 8)/$colspan_width) + 1; 
+								if ($event_length[$thisday][$i]['length'] < $event_text_lines) $event_length[$thisday][$i]['length'] = $event_text_lines;
 								$weekdisplay .= '<td width="'.$colspan_width.'" rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 
 								// Start drawing the event
-								$event_temp   = $loop_event;
-								$event 		  = openevent($thisday, $cal_time, $uid, $this_time_arr[$uid], $phpiCal_config->week_events_lines, 25, 'ps');
 								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
 								$event_temp   = str_replace('{EVENT_START}', $event_start, $event_temp);
 								$event_temp   = str_replace('{CONFIRMED}', $confirmed, $event_temp);

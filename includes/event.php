@@ -43,20 +43,10 @@ if (isset($attendee) && is_array($attendee)) {
 	}
 	$attendee = implode(', ',$attendees);
 }
-
-if (isset($event['location'])) {
-	if ($event['url'] != '') $event['location'] = '<a href="'.$event['url'].'" target="_blank">'.stripslashes($event['location']).'</a>';
-}else{
-	$event['location'] = stripslashes($event['location']);
-}
-
-if (!isset($event['location']) && isset($event['url'])) {
-	$event['location'] = '<a href="'.$event['url'].'" target="_blank">'.$event['url'].'</a>';
-	$lang['l_location'] = 'URL';
-}
-
+if (isset($event['location'])) $event['location'] = stripslashes($event['location']);
 if (sizeof($attendee) == 0) $attendee = '';
 if (sizeof($organizer) == 0) $organizer = '';
+if ($event['url'] != '') $event['url'] = '<a href="'.$event['url'].'" target="_blank">'.$event['url'].'</a>';
 
 switch ($event['status']){
 	case 'CONFIRMED':
@@ -83,7 +73,8 @@ $page->replace_tags(array(
 	'organizer' 		=> $organizer,
 	'attendee'	 		=> $attendee,
 	'status'	 		=> $event['status'],
-	'location' 			=> stripslashes($event['location']),
+	'location' 			=> $event['location'],
+	'url'      			=> $event['url'],
 	'cal_title_full'	=> $event['calname'].' '.$lang['l_calendar'],
 	'template'			=> $phpiCal_config->template,
 	'l_summary' 		=> $lang['l_summary'],
@@ -91,7 +82,8 @@ $page->replace_tags(array(
 	'l_organizer'		=> $lang['l_organizer'],
 	'l_attendee'		=> $lang['l_attendee'],
 	'l_status'			=> $lang['l_status'],
-	'l_location'		=> $lang['l_location']
+	'l_location'		=> $lang['l_location'],
+	'l_url'     		=> $lang['l_url']
 		
 	));
 

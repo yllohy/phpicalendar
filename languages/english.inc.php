@@ -94,6 +94,7 @@ $lang['l_unset_prefs'] 		= 'Unset preferences';
 $lang['l_organizer']		= 'Organizer';
 $lang['l_attendee']			= 'Attendee';
 $lang['l_location']			= 'Location';
+$lang['l_url']   			= 'URL';
 $lang['l_admin_header']		= 'PHP iCalendar Administration';
 $lang['l_username']			= 'Username';
 $lang['l_password']			= 'Password';

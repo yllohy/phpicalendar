@@ -48,7 +48,12 @@ if (isset($start_time) && isset($end_time)) {
 		$allday_end = ($start_date + 1);
 	}
 }
-
+# disallow events with negative length
+if ($end_unixtime < $start_unixtime){
+	$end_date = $start_date;
+	$end_time = $start_time;
+	$end_unixtime = $start_unixtime;
+}
 # look for events that span more than one day
 if (isset($start_unixtime,$end_unixtime) && date('Ymd',$start_unixtime) != date('Ymd',$end_unixtime)) {
 	$spans_day = true;
@@ -63,9 +68,9 @@ if (isset($start_time) && $start_time != '') {
 	preg_match ('/([0-9]{2})([0-9]{2})/', $start_time, $time);
 	preg_match ('/([0-9]{2})([0-9]{2})/', $end_time, $time2);
 	if (isset($start_unixtime) && isset($end_unixtime)) {
-		$length = $end_unixtime - $start_unixtime;
+		$length = $end_unixtime - $start_unixtime; 
 	} else {
-		$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]);
+		$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]); 
 	}
 	
 	$drawKey = drawEventTimes($start_time, $end_time);
