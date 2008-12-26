@@ -13,7 +13,8 @@ $configs = array(
 	'allow_preferences'	=> 'yes', 
 #	'show_search'	=> 'yes',
 #	'show_todos'	=> 'no',
-	'timezone'	=> 'US/Central',
+#	'timezone'	=> 'US/Central',
+	'timezone'	=> 'America/Bogota',
 #	'second_offset'	=> $secs,
 #	'cookie_uri'	=> '' 
 );

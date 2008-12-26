@@ -209,7 +209,7 @@ $return = "
 }
 
 /* Returns an array of the date and time extracted from the data
- passed in. This array contains (unixtime, date, time, allday).
+ passed in. This array contains (unixtime, date, time, allday, tzid).
 
 	$data		= A string representing a date-time per RFC2445.
 	$property	= The property being examined, e.g. DTSTART, DTEND.
@@ -219,7 +219,6 @@ See:http://phpicalendar.org/documentation/index.php/Property_Value_Data_Types#4.
 */
 function extractDateTime($data, $property, $field) {
 	global $tz_array, $phpiCal_config, $calendar_tz;
-		
 	$allday =''; #suppress error on returning undef.
 	// Check for zulu time.
 	$zulu_time = false;
@@ -258,9 +257,11 @@ function extractDateTime($data, $property, $field) {
 	if (isset($tz_dt)) {
 		$offset_tmp = chooseOffset($unixtime, $tz_dt);
 	} elseif (isset($calendar_tz)) {
-		$offset_tmp = chooseOffset($unixtime, $calendar_tz);			
+		$offset_tmp = chooseOffset($unixtime, $calendar_tz);
+		$tz_dt = $calendar_tz;
 	} else {
 		$offset_tmp = $server_offset_tmp;
+		$tz_dt = $phpiCal_config->timezone;
 	}
 	// Set the values.
 	$unixtime = calcTime($offset_tmp, $server_offset_tmp, $unixtime);
@@ -269,7 +270,7 @@ function extractDateTime($data, $property, $field) {
 	if ($allday == '') $time = date('Hi', $unixtime);
 		
 	// Return the results.
-	return array($unixtime, $date, $time, $allday);
+	return array($unixtime, $date, $time, $allday, $tz_dt);
 }
 
 /* TZIDs in calendars often contain leading information that should be stripped

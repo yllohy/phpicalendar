@@ -1,33 +1,18 @@
 ﻿<?php
 /* from the std
 
-BYxxx rule parts modify the recurrence in some manner. BYxxx rule
-   parts for a period of time which is the same or greater than the
-   frequency generally reduce or limit the number of occurrences of the
-   recurrence generated. For example, "FREQ=DAILY;BYMONTH=1" reduces the
-   number of recurrence instances from all days (if BYMONTH tag is not
-   present) to all days in January. BYxxx rule parts for a period of
-   time less than the frequency generally increase or expand the number
-   of occurrences of the recurrence. For example,
-   "FREQ=YEARLY;BYMONTH=1,2" increases the number of days within the
-   yearly recurrence set from 1 (if BYMONTH tag is not present) to 2.
+"BYxxx rule parts modify the recurrence in some manner. BYxxx rule parts for a period of time which is the same or greater than the frequency generally reduce or limit the number of occurrences of the recurrence generated. For example, "FREQ=DAILY;BYMONTH=1" reduces the number of recurrence instances from all days (if BYMONTH tag is not present) to all days in January. BYxxx rule parts for a period of time less than the frequency generally increase or expand the number of occurrences of the recurrence. For example, "FREQ=YEARLY;BYMONTH=1,2" increases the number of days within the yearly recurrence set from 1 (if BYMONTH tag is not present) to 2.
 
-   If multiple BYxxx rule parts are specified, then after evaluating the
-   specified FREQ and INTERVAL rule parts, the BYxxx rule parts are
-   applied to the current set of evaluated occurrences in the following
-   order: BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR,
-   BYMINUTE, BYSECOND and BYSETPOS; then COUNT and UNTIL are evaluated.
+If multiple BYxxx rule parts are specified, then after evaluating the specified FREQ and INTERVAL rule parts, the BYxxx rule parts are applied to the current set of evaluated occurrences in the following order: BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR, BYMINUTE, BYSECOND and BYSETPOS; then COUNT and UNTIL are evaluated."
 
-	We will use two kinds of functions - those that restrict the date to allowed values and those that expand allowed values
-
+We will use two kinds of functions - those that restrict the date to allowed values and those that expand allowed values
 */
 
 function add_recur($times,$freq=''){
 	global $recur_data;
-	global $count, $mArray_begin, $mArray_end, $except_dates, $start_date_unixtime,$end_range_unixtime;	
+	global $count, $mArray_begin, $mArray_end, $except_dates, $start_date, $start_date_unixtime,$end_range_unixtime, $day_offset;	
 	if (!is_array($times)) $times = array($times);
-	/*BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR,
-   BYMINUTE, BYSECOND and BYSETPOS*/
+	/*	BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR, BYMINUTE, BYSECOND and BYSETPOS	*/
 #dump_times($times);
 	$times = restrict_bymonth($times,$freq); 
 #	$times = restrict_byweekno($times,$freq);
@@ -43,12 +28,19 @@ function add_recur($times,$freq=''){
 		#echo "time:". date("Ymd",$time)."\n";
 		$date = date("Ymd",$time);
 		$time = strtotime("$date 12:00:00");
-		if(isset($time) && !in_array($time, $recur_data) && 
-			!in_array($date, $except_dates) && $time >= $start_date_unixtime && $date <= $until_date){ 
+		# day offset fixes shifts across day boundaries due to time diffs.  
+		# These are already fixed for the initial instance, but need to be fixed for recurrences
+		if (date("Ymd", $time) != $start_date) $time = $time + $day_offset * (24*60*60);
+		if(isset($time) 
+			&& !in_array($time, $recur_data) 
+			&& !in_array($date, $except_dates) 
+			&& $time >= $start_date_unixtime 
+			&& $date <= $until_date
+		){ 
 			$count--; #echo "\n.$count\n";
-			if($time >= $mArray_begin && 
-			$time <= $mArray_end 
-			&& $count >= 0
+			if($time >= $mArray_begin 
+				&& $time  <= $mArray_end 
+				&& $count >= 0
 			) $recur_data[] = $time;
 		}
 	}

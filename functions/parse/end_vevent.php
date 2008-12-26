@@ -292,11 +292,17 @@ sort($recur_data);
 // This used to use 5 different blocks to write the array... can it be reduced further?						
 $recur_data_hour = @substr($start_time,0,2);
 $recur_data_minute = @substr($start_time,2,2);
+if (isset($allday_start) && $allday_start != ''){
+	$recur_data_hour = '00';
+	$recur_data_minute = '00';
+}
 foreach($recur_data as $recur_data_unixtime) {
 	$recur_data_year = date('Y', $recur_data_unixtime);
 	$recur_data_month = date('m', $recur_data_unixtime);
 	$recur_data_day = date('d', $recur_data_unixtime);
 	$recur_data_date = $recur_data_year.$recur_data_month.$recur_data_day;
+
+	/* 	at this point the recur data year, month, day, hour, and minute are in the default timezone for the phpicalendar installation, if that is set.  We need to compare whether both the event timezone and the the phpicaledar timezone are in the same state wrt std vs daylight time. */
 
 	if (isset($allday_start) && $allday_start != '') {
 		$start_time2 = $recur_data_unixtime;

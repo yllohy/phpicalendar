@@ -6,6 +6,9 @@ if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal']
 
 // read file in line by line
 // XXX end line is skipped because of the 1-line readahead
+$is_daylight = false;
+$is_std = false;
+
 while (!feof($ifile)) {
 	$line = $nextline;
 	$nextline = fgets($ifile, 1024);
@@ -16,10 +19,7 @@ while (!feof($ifile)) {
 		$nextline = fgets($ifile, 1024);
 		$nextline = ereg_replace("[\r\n]", "", $nextline);
 	}
-	$line = trim($line);
-	$is_daylight = false;
-	$is_std = false;
-	
+	$line = trim($line);	
 	switch ($line) {
 		case 'BEGIN:VTIMEZONE':
 			unset($tz_name, $offset_from, $offset_to, $tz_id);
@@ -55,13 +55,12 @@ while (!feof($ifile)) {
 			break;
 		default:
 			unset ( $data, $prop_pos, $property);
-			if (ereg ("([^:]+):(.*)", $line, $line)){
-				$property = $line[1];
-				$data = $line[2];
+			if (ereg ("([^:]+):(.*)", $line, $arr)){
+				$property = $arr[1];
+				$data = $arr[2];
 				$prop_pos = strpos($property,';');
 				if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
 				$property = strtoupper($property);
-			
 				switch ($property) {		
 					case 'TZID':
 						$tz_id = $data;
@@ -73,8 +72,14 @@ while (!feof($ifile)) {
 						$offset_to = $data;
 						break;
 					case 'DTSTART':
-						if($is_std) $begin_std = $data;
-						if($is_daylight) $begin_daylight = $data;
+						if($is_std || $is_daylight){
+							$datetime = extractDateTime($data, $property, $field); 
+							$start_unixtime = $datetime[0];
+							$start_date = $datetime[1];
+							$year = substr($start_date,0,4);
+							if($is_std) $begin_std[$year] = $data;
+							if($is_daylight) $begin_daylight[$year] = $data;
+						}
 						break;
 					case 'TZNAME':
 						if($is_std) $st_name = $data;

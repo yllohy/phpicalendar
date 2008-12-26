@@ -279,6 +279,11 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							$start_date = $datetime[1];
 							$start_time = $datetime[2];
 							$allday_start = $datetime[3];
+							$start_tz = $datetime[4];
+							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
+							$vevent_start_date = $regs[1] . $regs[2] . $regs[3];
+							$day_offset = dayCompare($start_date, $vevent_start_date);
+							#echo date("Ymd Hi", $start_unixtime)." $start_date $start_time $vevent_start_date $day_offset<br>";
 							break;
 							
 						case 'DTEND':
