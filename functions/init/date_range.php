@@ -37,6 +37,10 @@ switch ($current_view){
 		$mArray_begin = time();
 		$mArray_end = time();
 		break;		
+	case 'search':
+		$mArray_begin = mktime (0,0,0,1,1,1970);
+		$mArray_end = mktime (0,0,0,1,31,2030);
+		break;		
 	default:
 		$mArray_begin = mktime (0,0,0,12,21,($this_year - 1));
 		$mArray_end = mktime (0,0,0,1,31,($this_year + 1));

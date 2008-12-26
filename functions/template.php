@@ -146,97 +146,95 @@ class Page {
 		$parse_month 	= date ("Ym", strtotime($getdate));
 		
 		if (isset($the_arr)){
+			// Pull out each event
+			foreach($the_arr as $key => $val) {				
+				$events_found++;
+				$dayofmonth = strtotime($val['date']);
+				$dayofmonth = localizeDate ('%A, %B %e %Y', $dayofmonth);
+				$events_tmp = $loop_event;
+				$recur_tmp	= $loop_recur;
+				if ($val['event_text']) {	
+					$event_text 	= stripslashes(urldecode($val['event_text']));
+					$description 	= stripslashes(urldecode($val['description']));
+						$location 	= stripslashes(urldecode($val['location']));
+					$event_start 	= $val['event_start'];
+					$event_end 		= $val['event_end'];
+					if (isset($val['display_end'])) $event_end = $val['display_end'];
+						if (!$val['event_start']) { 
+							$event_start = $lang['l_all_day'];
+							$event_start2 = '';
+							$event_end = '';
+						} else {
+								$event_start    = date ($timeFormat, strtotime ($event_start));
+								$event_end      = date ($timeFormat, strtotime ($event_end));
+								$event_start    = $event_start .' - '.$event_end;
+						}							
+					}
+					
+					if ($description == '') {
+						$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!Uis', '', $events_tmp);
+					}
+						if (!isset($val['exceptions'])) {
+						$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis', '', $events_tmp);
+					}else{
+							$some_exceptions = "";
+							foreach ($val['exceptions'] as $except_val){
+								$except_tmp	= $loop_except;
+								
+								$except_date = strtotime($except_val['date']);
+								$except_date = localizeDate ('%A, %B %e %Y', $except_date);
+								$except_tmp = str_replace('{DAYOFMONTH}', $except_date, $except_tmp);
+	
+								$except_event_start    	= date ($timeFormat, strtotime ($except_val['event_start']));
+								$except_event_end    	= date ($timeFormat, strtotime ($except_val['event_end']));
+								$except_event_start    	= $except_event_start .' - '.$except_event_end;
+	
+								$except_tmp = str_replace('{EVENT_START}', $except_event_start, $except_tmp);
+	
+								$except_event_text 	= stripslashes(urldecode($except_val['event_text']));
+								$except_tmp = str_replace('{EVENT_TEXT}', $except_event_text, $except_tmp);
+	
+								#is there a recur in the exception?
+								if (!$except_val['recur']) {
+									$except_tmp = preg_replace('!<\!-- switch except_recur on -->(.*)<\!-- switch except_recur off -->!Uis', '', $except_tmp);
+								}else{
+									$except_tmp = str_replace('{EXCEPT_RECUR}', $except_val['recur'], $except_tmp);
+								}
+								#is there a description in the exception?
+								if (!$except_val['description']) {
+									$except_tmp = preg_replace('!<\!-- switch except_description on -->(.*)<\!-- switch except_description off -->!Uis', '', $except_tmp);
+								}else{
+									$except_description = stripslashes(urldecode($except_val['description']));
+									$except_tmp = str_replace('{EXCEPT_DESCRIPTION}', $except_description, $except_tmp);
+								}
+								$some_exceptions .= $except_tmp;
 		
-		// Pull out each event
-		foreach($the_arr as $key => $val) {
-			
-			$events_found++;
-			$dayofmonth = strtotime($val['date']);
-			$dayofmonth = localizeDate ('%A, %B %e %Y', $dayofmonth);
-			$events_tmp = $loop_event;
-			$recur_tmp	= $loop_recur;
-				
-			if ($val['event_text']) {	
-				$event_text 	= stripslashes(urldecode($val['event_text']));
-				$description 	= stripslashes(urldecode($val['description']));
-					$location 	= stripslashes(urldecode($val['location']));
-				$event_start 	= $val['event_start'];
-				$event_end 		= $val['event_end'];
-				if (isset($val['display_end'])) $event_end = $val['display_end'];
-					if (!$val['event_start']) { 
-						$event_start = $lang['l_all_day'];
-						$event_start2 = '';
-						$event_end = '';
-					} else {
-							$event_start    = date ($timeFormat, strtotime ($event_start));
-							$event_end      = date ($timeFormat, strtotime ($event_end));
-							$event_start    = $event_start .' - '.$event_end;
-					}							
-				}
-				
-				if ($description == '') {
-					$events_tmp = preg_replace('!<\!-- switch description_events on -->(.*)<\!-- switch description_events off -->!Uis', '', $events_tmp);
-				}
-					if (!isset($val['exceptions'])) {
-					$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis', '', $events_tmp);
-				}else{
-						$some_exceptions = "";
-						foreach ($val['exceptions'] as $except_val){
-							$except_tmp	= $loop_except;
-							
-							$except_date = strtotime($except_val['date']);
-							$except_date = localizeDate ('%A, %B %e %Y', $except_date);
-							$except_tmp = str_replace('{DAYOFMONTH}', $except_date, $except_tmp);
-
-							$except_event_start    	= date ($timeFormat, strtotime ($except_val['event_start']));
-							$except_event_end    	= date ($timeFormat, strtotime ($except_val['event_end']));
-							$except_event_start    	= $except_event_start .' - '.$except_event_end;
-
-							$except_tmp = str_replace('{EVENT_START}', $except_event_start, $except_tmp);
-
-							$except_event_text 	= stripslashes(urldecode($except_val['event_text']));
-							$except_tmp = str_replace('{EVENT_TEXT}', $except_event_text, $except_tmp);
-
-							#is there a recur in the exception?
-							if (!$except_val['recur']) {
-								$except_tmp = preg_replace('!<\!-- switch except_recur on -->(.*)<\!-- switch except_recur off -->!Uis', '', $except_tmp);
-							}else{
-								$except_tmp = str_replace('{EXCEPT_RECUR}', $except_val['recur'], $except_tmp);
 							}
-							#is there a description in the exception?
-							if (!$except_val['description']) {
-								$except_tmp = preg_replace('!<\!-- switch except_description on -->(.*)<\!-- switch except_description off -->!Uis', '', $except_tmp);
-							}else{
-								$except_description = stripslashes(urldecode($except_val['description']));
-								$except_tmp = str_replace('{EXCEPT_DESCRIPTION}', $except_description, $except_tmp);
-							}
-							$some_exceptions .= $except_tmp;
+							$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis', $some_exceptions,$events_tmp );
 	
-						}
-						$events_tmp = preg_replace('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis', $some_exceptions,$events_tmp );
-
-	
-				}
-				
-				if (!$val['recur']) {
-					$events_tmp = preg_replace('!<\!-- switch recur on -->(.*)<\!-- switch recur off -->!Uis', '', $events_tmp);
-				}else{
-					$events_tmp = str_replace('{RECUR}', $val['recur'], $events_tmp);
-				}
-				
+		
+					}
+					
+					if (!$val['recur']) {
+						$events_tmp = preg_replace('!<\!-- switch recur on -->(.*)<\!-- switch recur off -->!Uis', '', $events_tmp);
+						$events_tmp = str_replace('{L_STARTING_ON}', '', $events_tmp);
+					}else{
+						$events_tmp = str_replace('{RECUR}', $val['recur'], $events_tmp);
+					}
+					
 					$search		= array('{EVENT_START}', '{EVENT_TEXT}', '{DESCRIPTION}','{LOCATION}');
 					$replace	= array($event_start, $event_text, $description, $location);
-				$events_tmp = str_replace($search, $replace, $events_tmp);
-				$some_events .= $events_tmp;
-				$events_tmp	= $loop_event;
+					$events_tmp = str_replace($search, $replace, $events_tmp);
+					$some_events .= $events_tmp;
+					$events_tmp	= $loop_event;
+					
 				
-			
-			$some_events  = str_replace('{KEY}', $val['date'], $some_events);
-			$some_events  = str_replace('{DAYOFMONTH}', $dayofmonth, $some_events);
-			$final   .= $day_tmp.$some_events;
-			unset ($day_tmp, $some_events);
-
-		}
+				$some_events  = str_replace('{KEY}', $val['date'], $some_events);
+				$some_events  = str_replace('{DAYOFMONTH}', $dayofmonth, $some_events);
+				$final   .= $day_tmp.$some_events;
+				unset ($day_tmp, $some_events);
+	
+			}
 		}		
 		if ($events_found < 1) {
 			$this->page = preg_replace('!<\!-- switch results on -->(.*)<\!-- switch results off -->!Uis', '', $this->page);
@@ -824,13 +822,15 @@ class Page {
 						$todo_popup_data_index++;
 						$vtodo_array = $todo;
 						
-						$vtodo_text 	= word_wrap(strip_tags(str_replace('<br />',' ',$vtodo_text), '<b><i><u>'), 21, $tomorrows_events_lines);
+						$vtodo_text 	= word_wrap(strip_tags(str_replace('<br />',' ',$vtodo_text), '<b><i><u>'), 21, $phpiCal_config->tomorrows_events_lines);
 						$data 			= array ('{VTODO_TEXT}', '{VTODO_ARRAY}');
 						$rep			= array ($vtodo_text, $vtodo_array);
 						
 						// Reset this TODO's category.
+						
+						
 						$temp = '';
-						if ($status == 'COMPLETED' || (isset($val['completed_date']) && isset($val['completed_time']))) {
+						if ($status == 'COMPLETED' || ($val['completed_date'] !='' && $val['completed_time'] !='')) {
 							if ($phpiCal_config->show_completed == 'yes') {
 								$temp = $completed;
 							}

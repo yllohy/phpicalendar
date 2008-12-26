@@ -296,6 +296,7 @@ $page->replace_tags(array(
 	'formatted_search'	=> $formatted_search,
 	'l_results'			=> $lang['l_results'],
 	'l_query'			=> $lang['l_query'],
+	'l_starting_on'		=> $lang['l_starting_on'],
 	'l_time'			=> $lang['l_time'],
 	'l_summary'			=> $lang['l_summary'],
 	'l_location'		=> $lang['l_location'],

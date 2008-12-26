@@ -253,6 +253,7 @@ one $next_range_time per repeat, but the BYXXX rules may write more than one eve
 $next_date_time handles those instances within a $freq_type */
 #echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tnext_range_unixtime:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."\n";
 $recur_data = array();
+if($current_view == 'search') $freq_type = 'none'; 
 while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 	$year = date("Y", $next_range_unixtime); 
 	$month = date('m', $next_range_unixtime); 

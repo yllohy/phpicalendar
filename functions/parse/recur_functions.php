@@ -10,19 +10,21 @@ We will use two kinds of functions - those that restrict the date to allowed val
 
 function add_recur($times,$freq=''){
 	global $recur_data;
-	global $count, $mArray_begin, $mArray_end, $except_dates, $start_date, $start_date_unixtime,$end_range_unixtime, $day_offset;	
+	global $count, $mArray_begin, $mArray_end, $except_dates, $start_date, $start_date_unixtime,$end_range_unixtime, $day_offset, $current_view;	
 	if (!is_array($times)) $times = array($times);
 	/*	BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR, BYMINUTE, BYSECOND and BYSETPOS	*/
 #dump_times($times);
-	$times = restrict_bymonth($times,$freq); 
-#	$times = restrict_byweekno($times,$freq);
-	$times = restrict_byyearday($times,$freq);
-	$times = restrict_bymonthday($times,$freq);
-	$times = restrict_byday($times,$freq);
-	if($start_date_unixtime > $mArray_begin) $times[] = $start_date_unixtime;
-	$times = restrict_bysetpos($times,$freq);#echo "restrict_bysetpos";
-	$times = array_unique($times);
-	sort($times); 
+	if ($current_view != 'search'){
+		$times = restrict_bymonth($times,$freq); 
+	#	$times = restrict_byweekno($times,$freq);
+		$times = restrict_byyearday($times,$freq);
+		$times = restrict_bymonthday($times,$freq);
+		$times = restrict_byday($times,$freq);
+		if($start_date_unixtime > $mArray_begin) $times[] = $start_date_unixtime;
+		$times = restrict_bysetpos($times,$freq);#echo "restrict_bysetpos";
+		$times = array_unique($times);
+		sort($times); 
+	}
 	$until_date = date("Ymd",$end_range_unixtime);
 	foreach ($times as $time){ 
 		#echo "time:". date("Ymd",$time)."\n";

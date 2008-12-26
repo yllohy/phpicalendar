@@ -30,7 +30,7 @@
 			<div style="padding: 10px;">
 				<div><p class="V12">{L_QUERY}: {FORMATTED_SEARCH}</p></div>
 				<!-- switch results on -->
-				<font class="V12"><b><a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{DAYOFMONTH}</a></b></font><br />
+				<font class="V12"><b><a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{L_STARTING_ON} {DAYOFMONTH}</a></b></font><br />
 				<div style="margin-left: 10px; margin-bottom: 10px;">
 					<table width="100%" border="0" cellspacing="1" cellpadding="1">
 						<tr>
