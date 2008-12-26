@@ -28,6 +28,7 @@ if ($event['description']) $event['description'] = ereg_replace("[[:alpha:]]+://
 if (isset($organizer) && is_array($organizer)) {
 	$i=0;
 	$display .= $lang['l_organizer'] . ' - ';
+	$organizers = array();
 	foreach ($organizer as $val) {	
 		$organizers[] = $organizer[$i]["name"];
 		$i++;
@@ -37,6 +38,7 @@ if (isset($organizer) && is_array($organizer)) {
 if (isset($attendee) && is_array($attendee)) {
 	$i=0;
 	$display .= $lang['l_attendee'] . ' - ';
+	$attendees = array();
 	foreach ($attendee as $val) {	
 		$attendees[] .= $attendee[$i]["name"];
 		$i++;

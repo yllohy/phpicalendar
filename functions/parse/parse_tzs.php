@@ -54,13 +54,13 @@ while (!feof($ifile)) {
 				); #echo "<pre>$tz_id"; print_r($tz_array[$tz_id]);echo"</pre>";
 			break;
 		default:
-			unset ( $data, $prop_pos, $property);
-			if (ereg ("([^:]+):(.*)", $line, $arr)){
-				$property = $arr[1];
-				$data = $arr[2];
+			unset ($field, $data, $prop_pos, $property);
+			if (ereg ("([^:]+):(.*)", $line, $line)){
+				$field = $line[1];
+				$data = $line[2];				
+				$property = strtoupper($field);
 				$prop_pos = strpos($property,';');
 				if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
-				$property = strtoupper($property);
 				switch ($property) {		
 					case 'TZID':
 						$tz_id = $data;

@@ -233,11 +233,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					if (ereg ("([^:]+):(.*)", $line, $line)){
 					$field = $line[1];
 					$data = $line[2];
-					
-					$property = $field;
+					$property = strtoupper($field);
 					$prop_pos = strpos($property,';');
 					if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
-					$property = strtoupper($property);
 					
 					switch ($property) {
 						
