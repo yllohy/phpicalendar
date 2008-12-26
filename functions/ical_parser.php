@@ -363,9 +363,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							$recur_unixtime = mktime($regs[4], $regs[5], 0, $regs[2], $regs[3], $regs[1]);
 				
 							if (isset($recurrence_id['tzid'])) {
-								$offset_tmp = chooseOffset($recur_unixtime, $recurrence_id['tzid']);
+								$offset_tmp = chooseOffset($recur_unixtime, $recurrence_id['tzid']); 
 							} elseif (isset($calendar_tz)) {
-								$offset_tmp = chooseOffset($recur_unixtime, $tz_array[$calendar_tz]);
+								$offset_tmp = chooseOffset($recur_unixtime, $calendar_tz);
 							} else {
 								$offset_tmp = $chooseOffset($recur_unixtime);
 							}

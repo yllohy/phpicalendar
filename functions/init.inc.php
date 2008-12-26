@@ -184,6 +184,8 @@ function getmicrotime() {
 	list($usec, $sec) = explode(' ',microtime()); 
 	return ((float)$usec + (float)$sec); 
 }
+
+$uid_list = array();
 #uncomment for diagnostics
 #echo "after init.inc.ics<pre>";
 #echo "cals";

@@ -145,7 +145,7 @@ function calcTime($have, $want, $time) {
 }
 
 function chooseOffset($time, $timezone = '') {
-	global $tz_array;
+	global $tz_array, $summary;
 	switch ($timezone) {
 		case '':
 			$offset = 'none';
@@ -155,7 +155,7 @@ function chooseOffset($time, $timezone = '') {
 			break;
 		default:
 			if (is_array($tz_array) && array_key_exists($timezone, $tz_array)) {
-				$dlst = is_daylight($time, $timezone);	
+				$dlst = is_daylight($time, $timezone);
 				$offset = $tz_array[$timezone][$dlst];
 			} else {
 				$offset = '+0000';

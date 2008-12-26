@@ -36,9 +36,13 @@ if (!isset($uid)) {
 	$uid = $uid_counter;
 	$uid_counter++;
 	$uid_valid = false;
-} else {
+}elseif(in_array($uid, $uid_list)) {
+	$uid .= $uid_counter;
+	$uid_counter++;
+}else{
 	$uid_valid = true;
 }
+$uid_list[] = $uid;
 
 # adjust event start and end times
 if (isset($start_time) && isset($end_time)) {
