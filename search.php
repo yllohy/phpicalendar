@@ -109,12 +109,12 @@ function format_search($search_str) {
 		if ($i != 0 && $and_arr[$i] == 'or') {
 			while ($and_arr[$i] == 'or') {
 				$or_arr[$j][] = $and_arr[$i-1];
-				unset($and_arr[$i], $and_arr[$i-1]);
-				$i += 2;
+				array_splice($and_arr,$i-1,2);
+ 				$i--;
 			}
-			if (isset($and_arr[$i-1])) {
-				$or_arr[$j][] = $and_arr[$i-1];
-				unset($and_arr[$i-1]);
+			if (isset($and_arr[$i])) {
+				$or_arr[$j][] = $and_arr[$i];
+				array_splice($and_arr,$i,1);
 			}
 			$or_str_arr[$j] = implode('</b> OR <b>', $or_arr[$j]);
 			$j++;
@@ -125,10 +125,10 @@ function format_search($search_str) {
 	foreach($and_arr as $key => $val) {
 		if (substr($val,0,1) == '-') {
 			$not_arr[] = substr($val,1);
-			unset($and_arr[$key]);
+			array_splice($and_arr,$key,1);
 		} elseif(substr($val,0,1) == '+') {
 			$and_arr[] = substr($val,1);
-			unset($and_arr[$key]);
+			array_splice($and_arr,$key,1);
 		}
 	}
 	
