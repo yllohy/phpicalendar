@@ -34,6 +34,7 @@ function add_recur($times,$freq=''){
 		# These are already fixed for the initial instance, but need to be fixed for recurrences
 		if (date("Ymd", $time) != $start_date) $time = $time + $day_offset * (24*60*60);
 		if(isset($time) 
+			&& $time != ''
 			&& !in_array($time, $recur_data) 
 			&& !in_array($date, $except_dates) 
 			&& $time >= $start_date_unixtime 

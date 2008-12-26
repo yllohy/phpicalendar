@@ -107,15 +107,17 @@ function localizeDate($format, $timestamp) {
 	$year = date("Y", $timestamp);
 	$month = date("n", $timestamp)-1;
 	$day = date("j", $timestamp);
-	$dayofweek = date("w", $timestamp);
-	
-	$date = str_replace('%Y', $year, $format);
-	$date = str_replace('%e', $day, $date);
-	$date = str_replace('%B', $monthsofyear_lang[$month], $date);
-	$date = str_replace('%b', $monthsofyearshort_lang[$month], $date);
-	$date = str_replace('%A', $daysofweek_lang[$dayofweek], $date);
-	$date = str_replace('%a', $daysofweekshort_lang[$dayofweek], $date);
-	
+	$dayofweek = date("w", $timestamp);	
+ 	$replacements = array(
+ 		'%Y' =>	$year,
+ 		'%e' => $day,
+ 		'%B' => $monthsofyear_lang[$month],
+ 		'%b' => $monthsofyearshort_lang[$month],
+ 		'%A' => $daysofweek_lang[$dayofweek],
+ 		'%a' => $daysofweekshort_lang[$dayofweek],
+ 		'%d' => sprintf("%02d", $day)
+ 	);
+ 	$date = str_replace(array_keys($replacements), array_values($replacements), $format);	
 	return $date;	
 	
 }
