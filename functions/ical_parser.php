@@ -412,9 +412,11 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							}
 							break;
 						case 'ATTENDEE':
-							$field 		= str_replace("ATTENDEE;CN=", "", $field);
-							$data 		= str_replace ("mailto:", "", $data);
-							$attendee[] = array ('name' => stripslashes($field), 'email' => stripslashes($data));
+							$attendee[] = array ('name'    => ereg_replace ("ATTENDEE;CN=([^;]*).*", "\\1", $field), 
+												 'email'   => ereg_replace (".*mailto:(.*).*", "\\1", $field), 
+									        	 'RSVP'    => ereg_replace (".*RSVP=([^;]*).*", "\\1", $field),
+									        	 'PARSTAT' => ereg_replace (".*PARTSTAT=([^;]*).*", "\\1", $field),
+								         		 'ROLE'    => ereg_replace (".*ROLE=([^;]*).*", "\\1", $field));
 							break;
 						case 'ORGANIZER':
 							$field 		 = str_replace("ORGANIZER;CN=", "", $field);
