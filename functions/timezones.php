@@ -381,6 +381,7 @@ $tz_array['Europe/Zagreb']               	= array('+0100', '+0200');
 $tz_array['Europe/Zaporozhye']           	= array('+0200', '+0300');
 $tz_array['Europe/Zurich']               	= array('+0100', '+0200');
 $tz_array['GB']                          	= array('+0000', '+0100');
+$tz_array['GMT']                          	= array('+0000', '+0000');
 $tz_array['GB-Eire']                     	= array('+0000', '+0100');
 $tz_array['HST']                         	= array('-1000', '-1000');
 $tz_array['Hongkong']                    	= array('+0800', '+0800');

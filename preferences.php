@@ -144,6 +144,58 @@ foreach ($daysofweek_lang as $daysofweek) {
 	$i++;
 }
 
+$timezone_subset = array(
+	'',
+	'GMT',
+	'US/Hawaii',
+	'US/Pacific',
+	'US/Mountain',
+	'US/Central',
+	'US/Eastern',
+	'Canada/Newfoundland',
+	'CET',
+	'EET',
+	'Etc/GMT-1',
+	'Etc/GMT-2',
+	'Etc/GMT-3',
+	'Etc/GMT-4',
+	'Etc/GMT-5',
+	'Etc/GMT-6',
+	'Etc/GMT-7',
+	'Etc/GMT-8',
+	'Etc/GMT-9',
+	'Etc/GMT-10',
+	'Etc/GMT-11',
+	'Etc/GMT-12',
+	'Etc/GMT-13',
+	'Etc/GMT-14',
+	'Etc/GMT+1',
+	'Etc/GMT+2',
+	'Etc/GMT+3',
+	'Etc/GMT+4',
+	'Etc/GMT+5',
+	'Etc/GMT+6',
+	'Etc/GMT+7',
+	'Etc/GMT+8',
+	'Etc/GMT+9',
+	'Etc/GMT+10',
+	'Etc/GMT+11',
+	'Etc/GMT+12',
+	'MET',
+	'Mexico/General',
+	'NZ',
+	'WET'
+);
+$timezone_select = '';
+foreach ($timezone_subset as $i => $timezone) {
+	if ($timezone_subset[$i] == $cookie_timezone) {
+		$timezone_select .= "<option value='$timezone' selected='selected'>$timezone</option>\n";
+	} else {
+		$timezone_select .= "<option value='$timezone.'>$timezone</option>\n";
+	}
+}
+
+
 $dir_handle = @opendir(BASE.'templates/');
 $style_select = '';
 while ($file = readdir($dir_handle)) {

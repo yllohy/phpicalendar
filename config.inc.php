@@ -30,7 +30,7 @@ As noted, phpicalendar should work without adjusting the default settings.  Chan
 /*     ** Timezones **
 If timezone is not set, all events show in the local time of the source calendar.  This isn't a problem if all your calendars are in the same timezone.  If you set a timezone for the server, events in other timezones are shown when they occur at the server's time.
 */
-#     'timezone'             => 'US/Central',
+     'timezone'             => 'US/Central',
 #     'second_offset'        => $secs,
 
 /*     ** Appearance **      
