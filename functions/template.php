@@ -250,7 +250,6 @@ class Page {
 		global $phpiCal_config, $start_week_time, $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $timeFormat_small;
 		
 		// Figure out colspans and initialize weekarray
-		$dayborder 	= 0;
 		$thisdate  	= $start_week_time;
 		$swt	   	= $start_week_time;
 		for ($i=0;$i < $phpiCal_config->week_length;$i++) {
@@ -267,9 +266,10 @@ class Page {
 				} 
 			}
 			$weekarray[$i] 		= $thisday;
+			$event_length[$thisday] = array ();
 			$thisdate = ($thisdate + (25 * 60 * 60));
 		}
-		#echo "<pre>";print_r($nbrGridCols);		
+
 		// Replaces the allday events
 		preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
 		preg_match("!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!Uis", $this->page, $match2);
@@ -301,27 +301,19 @@ class Page {
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis", $this->page, $match1);
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
-		$start_day 			= strtotime($phpiCal_config->week_start_day);
 		$weekday_loop = '';
 		for ($i=0; $i<$phpiCal_config->week_length; $i++) {
-			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
-			if ($current_view == 'day') {
-				$weekday 		= $daysofweek_lang[$day_num];
-			} else {
-				$weekday = localizeDate($dateFormat_week_list, strtotime($daylink));
-			}	
-			
+			$weekday = localizeDate($dateFormat_week_list, strtotime($daylink));
 			if ($daylink == $getdate) {
 				$row1 = 'rowToday';
 				$row2 = 'rowOn';
 				$row3 = 'rowToday';
-			} else {
+			}else{
 				$row1 = 'rowOff';
 				$row2 = 'rowOn';
 				$row3 = 'rowOff';
 			}
-			$start_day 		= strtotime("+1 day", $start_day);
 			$start_wt 		= strtotime("+1 day", $start_wt);
 			$colspan		= 'colspan="'.$nbrGridCols[$daylink].'"';
 			$search			= array('{DAY}', '{DAYLINK}', '{ROW1}', '{ROW2}', '{ROW3}', '{COLSPAN}');
@@ -344,12 +336,10 @@ class Page {
 		$this_month = $day_array2[2];
 		$this_year = $day_array2[1];
 		$thisdate = $swt;
-		for ($i=0; $i < 7; $i++) {
-			$thisday = date("Ymd", $thisdate);
-			$event_length[$thisday] = array ();
-			$thisdate = ($thisdate + (25 * 60 * 60));
-		}
+
 		$weekdisplay = '';
+		
+		#day_array is an array of time blocks of length $phpiCal_config->gridLength
 		foreach ($day_array as $key) {
 			$cal_time = $key;	
 			preg_match('/([0-9]{2})([0-9]{2})/', $key, $regs_tmp);
@@ -371,78 +361,64 @@ class Page {
 				$weekdisplay .= '<tr>';
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			}
-			
-			// initialize $thisdate again
-			$thisdate = $swt;
-			
-			// loop this part 7 times, one for each day
-			for ($week_loop=0; $week_loop<$phpiCal_config->week_length; $week_loop++) {
-				$thisday = date("Ymd", $thisdate);
-				$dayborder = 0;
-				unset($this_time_arr);
-
+						
+			/* 	add columns in the $cal_time grid slot for each day
+				each cell will have $this_time_arr of events 	*/
+			foreach ($weekarray as $thisday) {
+				$this_time_arr = array();
+				$dayborder 	= 0;
 				if ($phpiCal_config->day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
+					# want to pile up all the events before day_start that end in the displayed times
 					foreach($master_array[$thisday] as $time_key => $time_arr) {
-						if ((int)$time_key <= (int)$cal_time) {
-							if (is_array($time_arr) && $time_key != '-1') {
-								foreach($time_arr as $uid => $event_tmp) {
-									if ((int)$event_tmp['event_end'] > (int)$cal_time) {
-										$this_time_arr[$uid] = $event_tmp;
-									}
-								}
-							}
-						} else {
-							break;
+						if ((int)$time_key <= (int)$cal_time && is_array($time_arr) && $time_key != '-1') {
+							foreach($time_arr as $uid => $event_tmp) {
+								if ((int)$event_tmp['display_end'] > (int)$cal_time) $this_time_arr[$uid] = $event_tmp;			
+							}		
 						}
 					}
 				} else {
+					# events that start in internal cal_times the grid
 					if (isset($master_array[$thisday][$cal_time]) && sizeof($master_array[$thisday][$cal_time]) > 0) {
-						$this_time_arr = $master_array[$thisday][$cal_time];
-					}
-				}
-				
-				// check for eventstart 
-				if (isset($this_time_arr) && sizeof($this_time_arr) > 0) {
-					#print "<pre>";print_r ($this_time_arr);print "</pre>";
-
-					foreach ($this_time_arr as $eventKey => $loopevent) {
-						$drawEvent = drawEventTimes ($cal_time, $loopevent["event_end"]);
-						$j = 0;
-						while (isset($event_length[$thisday][$j])) {
-							if ($event_length[$thisday][$j]["state"] == "ended") {
-								$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
-								break;
-							}
-							$j++;
-						}
-						if ($j == sizeof($event_length[$thisday])) {
-							array_push ($event_length[$thisday], array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin"));
-						}
+						$this_time_arr = $master_array[$thisday][$cal_time]; 
 					}
 				}
 
-				if (sizeof($event_length[$thisday]) == 0) {
+				// go through $this_time_array and fill the event_length array
+				foreach ($this_time_arr as $eventKey => $loopevent) {
+					$drawEvent = drawEventTimes ($cal_time, $loopevent["display_end"]);
+					$j = 0;
+					while (isset($event_length[$thisday][$j])) {
+						if ($event_length[$thisday][$j]["state"] == "ended") {
+							$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+							break;
+						}
+						$j++;
+					}
+					if ($j == sizeof(@$event_length[$thisday])) {
+						$event_length[$thisday][] = array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+					}
+				}
+				if (empty($event_length[$thisday])) {
+					# no events
 					if ($dayborder == 0) {
 						$class = ' class="weekborder"';
 						$dayborder++;
 					} else {
 						$class = '';
 						$dayborder = 0;
-					}
-					
+					}					
 					$drawWidth = 1;
 					$colspan_width = round((80 / $nbrGridCols[$thisday]) * $drawWidth);
-					$weekdisplay .= '<td width="' . $colspan_width . '" colspan="' . $nbrGridCols[$thisday] . '" ' . $class . '>&nbsp;</td>'."\n";
-					
+					$weekdisplay .= '<td width="' . $colspan_width . '" colspan="' . $nbrGridCols[$thisday] . '" ' . $class . '>&nbsp;</td>'."\n";					
 				} else {
+					# have events
 					$emptyWidth = $nbrGridCols[$thisday];
 					// Used to "join" ended events, so the ended case below results in one colspan'd td instead of multiple tds.
 					$ended_counter = 0;
-					for ($i=0;$i<sizeof($event_length[$thisday]);$i++) {
-
-						$drawWidth = $nbrGridCols[$thisday] / ($event_length[$thisday][$i]["overlap"] + 1);
+					foreach($event_length[$thisday] as $i=>$el) {					
+						$drawWidth = $nbrGridCols[$thisday] / ($el["overlap"] + 1);
 						$emptyWidth = $emptyWidth - $drawWidth;
-						switch ($event_length[$thisday][$i]["state"]) {
+						switch ($el["state"]) {
 							case "begin":
 								if ($ended_counter) {
 									$weekdisplay .= '<td colspan="' . $ended_counter . '" '.$class.'>&nbsp;</td>';
@@ -502,7 +478,6 @@ class Page {
 						array_pop($event_length[$thisday]);
 					}
 				}
-				$thisdate = ($thisdate + (25 * 60 * 60));
 			}
 			$weekdisplay .= "</tr>\n";
 		}
@@ -860,6 +835,8 @@ class Page {
 	
 	function draw_month($template_p, $offset = '+0', $type) {
 		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
+
+		$unique_colors = $phpiCal_config->unique_colors;
 		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!Uis", $template_p, $match1);
 		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!Uis", $template_p, $match2);
 		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!Uis", $template_p, $match3);
@@ -938,8 +915,8 @@ class Page {
 					foreach ($master_array[$daylink] as $cal_time => $event_times) {
 						foreach ($event_times as $uid => $val) {
 							$event_calno 	= $val['calnumber'];
-							$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
-							if (!isset($val['event_start'])) {
+							$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
+							if ($cal_time == -1) {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
  									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 15, 'psf');

@@ -109,14 +109,6 @@ function flatten_ol_blocks($event_date, $ol_blocks, $new_block_key) {
 }
 
 // Builds $overlap_array structure, and updates event_overlap in $master_array for the given events.
-function checkOverlap($event_date, $event_time, $uid) {
-	global $master_array, $overlap_array;
-	if (!isset($event_date)) return;
-	$event = $master_array[$event_date][$event_time][$uid];
-	// Copy out the array - we replace this at the end.
-	$ol_day_array = @$overlap_array[$event_date];
-	$drawTimes = drawEventTimes($event['event_start'], $event['event_end']);
-
 	// For a given date,
 	// 	- check to see if the event's already in a block, and if so, add it.
 	//		- make sure the new block doesn't overlap another block, and if so, merge the blocks.
@@ -140,8 +132,16 @@ function checkOverlap($event_date, $event_time, $uid) {
 	//		'count' - number of overlaps that time range (can be zero if that range has no overlaps).
 	//		'start' - start_time for the overlap block.
 	//		'end'	- end_time for the overlap block.
-
+function checkOverlap($event_date, $event_time, $uid) {
+	global $master_array, $overlap_array;
+	if (!isset($event_date)) return;
+	$event = $master_array[$event_date][$event_time][$uid];
+	// Copy out the array - we replace this at the end.
 	$ol_day_array = @$overlap_array[$event_date];
+	$draw_end = $event['event_end'];
+	if (isset($event['display_end'])) $draw_end = $event['display_end'];
+	$drawTimes = drawEventTimes($event['event_start'], $draw_end);
+
 	// Track if $event has been merged in, so we don't re-add the details to 'event' or 'overlapRanges' multiple times.
 	$already_merged_once = false;
 	// First, check the existing overlap blocks, see if the event overlaps with any.
@@ -180,7 +180,7 @@ function checkOverlap($event_date, $event_time, $uid) {
 			foreach ($time as $loop_event_key => $loop_event) {
 				// Make sure we haven't already dealt with the event, and we're not checking against ourself.
 				if ($loop_event['event_overlap'] == 0 && $loop_event_key != $uid) {
-					$loopDrawTimes = drawEventTimes($loop_event['event_start'], $loop_event['event_end']);
+					$loopDrawTimes = drawEventTimes($loop_event['event_start'], $loop_event['display_end']);
 					if ($loopDrawTimes['draw_start'] < $drawTimes['draw_end'] && $loopDrawTimes['draw_end'] > $drawTimes['draw_start']) {
 						if ($loopDrawTimes['draw_start'] < $drawTimes['draw_start']) {
 							$block_start = $loopDrawTimes['draw_start'];

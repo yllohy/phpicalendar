@@ -16,7 +16,8 @@ $configs = array(
 	'show_completed'	=> 'no',
 #	'timezone'	=> 'US/Central',
 #	'timezone'	=> 'America/Bogota',
-	'timezone'	=> 'Europe/Paris',
+#	'timezone'	=> 'Europe/Paris',
+#	'gridLength' => 5,
 #	'second_offset'	=> $secs,
 #	'cookie_uri'	=> '' 
 );

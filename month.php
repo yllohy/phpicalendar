@@ -94,7 +94,7 @@ $page->replace_tags(array(
 	'list_weeks' 		=> $list_weeks,
 	'legend'	 		=> $list_calcolors,
 	'current_view'		=> $current_view,
-	'style_select' 		=> $style_select,
+#	'style_select' 		=> $style_select,
 	'sidebar_date'		=> $sidebar_date,
 	'l_goprint'			=> $lang['l_goprint'],
 	'l_preferences'		=> $lang['l_preferences'],

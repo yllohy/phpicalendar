@@ -166,6 +166,7 @@ function chooseOffset($time, $timezone = '') {
 
 function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
 	global $cpath, $master_array;
+	$return = '';
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	if (empty($start)) {
 		$title = $event_text;
@@ -248,6 +249,7 @@ function extractDateTime($data, $property, $field) {
 	// Extract date-time values.
 	// Pull out the date and time values. Minimum year is 1970.
 	preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})T{0,1}([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
+	if (!isset ($regs[1])) return;
 	if ($regs[1] < 1970) { 
 		$regs[1] = '1971';
 	}

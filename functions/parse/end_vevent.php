@@ -13,13 +13,6 @@ What happens in this file:
 
 if (!isset($start_date)) $start_date = "19700101";
 
-// Handle DURATION
-if (!isset($end_unixtime)) {
-	if(!isset($the_duration)) $the_duration = 0;
-	$end_unixtime 	= $start_unixtime + $the_duration;
-	$end_time 	= date ('Hi', $end_unixtime);
-}
-	
 // CLASS support
 if (isset($class)) {
 	if ($class == 'PRIVATE') {
@@ -29,7 +22,7 @@ if (isset($class)) {
 		$summary ='**CONFIDENTIAL**';
 		$description ='**CONFIDENTIAL**';
 	}
-}	 
+}
 
 // make sure we have some value for $uid
 if (!isset($uid)) {
@@ -44,60 +37,50 @@ if (!isset($uid)) {
 }
 $uid_list[] = $uid;
 
+# Handle DURATION
+if (!isset($end_unixtime)) {
+	if(!isset($the_duration)) $the_duration = 0;
+	$end_unixtime 	= $start_unixtime + $the_duration;
+	$end_time 	= date ('Hi', $end_unixtime);
+}
+# at this point $end_unixtime should be set
 # adjust event start and end times
 if (isset($start_time) && isset($end_time)) {
 	// Mozilla style all-day events or just really long events
-	if (($end_time - $start_time) > 2345) {
+	if (($end_unixtime - $start_unixtime) > 24*60*60) {
 		$allday_start = $start_date;
 		$allday_end = ($start_date + 1);
 	}
 }
-# disallow events with negative length
-if ($end_unixtime < $start_unixtime){
-	$end_date = $start_date;
-	$end_time = $start_time;
-	$end_unixtime = $start_unixtime;
-}
 # look for events that span more than one day
-if (isset($start_unixtime,$end_unixtime) && date('Ymd',$start_unixtime) != date('Ymd',$end_unixtime)) {
+if (isset($start_unixtime,$end_unixtime) && date('Ymd',$start_unixtime) < date('Ymd',$end_unixtime)) {
 	$spans_day = true;
-	$bleed_check = (($start_unixtime - $end_unixtime) < (60*60*24)) ? '-1' : '0';
+	$bleed_check = (($start_unixtime - $end_unixtime) <= (60*60*24)) ? '-1' : '0';
 } else {
 	$spans_day = false;
 	$bleed_check = 0;
 }
 
-# get hour and minute adjusted to allowed grid times
-if (isset($start_time) && $start_time != '') {
-	preg_match ('/([0-9]{2})([0-9]{2})/', $start_time, $time);
-	preg_match ('/([0-9]{2})([0-9]{2})/', $end_time, $time2);
-	if (isset($start_unixtime) && isset($end_unixtime)) {
-		$length = $end_unixtime - $start_unixtime; 
-	} else {
-		$length = ($time2[1]*60+$time2[2]) - ($time[1]*60+$time[2]); 
-	}
-	
-	$drawKey = drawEventTimes($start_time, $end_time);
-	preg_match ('/([0-9]{2})([0-9]{2})/', $drawKey['draw_start'], $time3);
-	$hour = $time3[1];
-	$minute = $time3[2];
+$length = $end_unixtime - $start_unixtime;
+if ($length < 0){ 
+	$length = 0;
+	$end_time = $start_time;
 }
+# get hour and minute adjusted to allowed grid times
+$drawKey = drawEventTimes($start_time, $end_time);
+preg_match ('/([0-9]{2})([0-9]{2})/', $drawKey['draw_start'], $time3);
+preg_match ('/([0-9]{2})([0-9]{2})/', $drawKey['draw_end'], $time4);
+$hour = $time3[1];
+$minute = $time3[2];
+$end_hour = $time4[1];
+$end_minute = $time4[2];
+
 
 // RECURRENCE-ID Support
 if (isset($recurrence_d)) {
 	
 	$recurrence_delete["$recurrence_d"]["$recurrence_t"] = $uid;
 }
-
-
-# treat nonrepeating events as rrule events with one instance
-if (!isset($rrule_array) && $start_unixtime < $mArray_end && $end_unixtime > $mArray_begin){
-	$rrule_array['FREQ'] = 'YEARLY';
-	$rrule_array['START_DATE'] = $start_date;
-	$rrule_array['UNTIL'] = $start_date;
-#	$rrule_array['END'] = 'end';
-}
-
 
 if (isset($allday_start) && $allday_start != '') {
 	$hour = '-';
@@ -140,9 +123,6 @@ foreach ($rrule_array as $key => $val) {
 			$recur_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = $count;
 			break;
 		case 'UNTIL':
-			#$until = str_replace('T', '', $val); 
-			#$until = str_replace('Z', '', $until);
-			#if (strlen($until) == 8) $until = $until.'235959';
 			# UNTIL must be in UTC
 			$until = date("YmdHis",strtotime($val));
 			ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})', $until, $regs);
@@ -197,6 +177,8 @@ foreach ($rrule_array as $key => $val) {
 			break;
 	}
 }
+if($current_view == 'search') $freq_type = 'none'; 
+
 # $recur is the recurrence info that goes into the master array for this VEVENT
 $recur = @$recur_array[($start_date)][($hour.$minute)][$uid]['recur']; 
 
@@ -223,24 +205,17 @@ $end_range_unixtime = $mArray_end+60*60*24;
 $start_date_unixtime = strtotime($start_date);
 $next_range_unixtime = $start_date_unixtime;
 
-#conditions where we can not iterate over the whole range
-if($count == 1000000){
-	if($interval == 1) {
-		$next_range_unixtime = $mArray_begin;
-	}else{
-		# can we calculate the right start time?
-		# pick the right compare function from date_functions.php
-		# $diff is the number of occurrences between start_date and next_range_time
-	#	$func = $freq_type.'Compare';
-	#	$diff = $func(date('Ymd',strtotime($getdate)), $start_date);	
-	#	$next_range_unixtime = strtotime('+'.$diff*$interval.' '.$freq_type, $start_date_unixtime); echo "<pre>$summary\nnext $freq_type $diff $freq_type".date("Ymd",$start_date_unixtime)."\n";
-	}
-}
-// if the beginning of our range is less than the start of the item, we may as well set it equal to it
+# conditions where we don't need to iterate over the whole range
+# if repeating without limit, and steps are by 1, don't go back before the mArray beginning.
+if($count == 1000000 && $interval == 1 && $mArray_begin > $next_range_unixtime) $next_range_unixtime = $mArray_begin;
+
+# if the beginning of our range is less than the start of the item, we may as well set the range to start at start_time
 if ($next_range_unixtime < $start_date_unixtime) $next_range_unixtime = $start_date_unixtime;
 
+# stop at the until limit if set
 if(isset($until) && $end_range_unixtime > $until_unixtime) $end_range_unixtime = $until_unixtime;
 
+# more adjustments
 switch ($freq_type){
 	case 'week':
 		# need to get the first value of $next_range_unixtime onto the right day of the week
@@ -250,6 +225,8 @@ switch ($freq_type){
 		$end_range_unixtime	+= 366*24*60*60;
 		break;
 }
+
+#nonrepeating events can stop at the first instance
 if(!isset($rrule_array['FREQ']) && isset($end_date)){ 
 	$end_range_unixtime = strtotime($end_date);
 	$count = 1;
@@ -262,7 +239,6 @@ one $next_range_time per repeat, but the BYXXX rules may write more than one eve
 $next_date_time handles those instances within a $freq_type */
 #echo "<pre>$summary\n\tstart mArray time:".date("Ymd his",$mArray_begin)."\n\tnext_range_unixtime:".date("Ymd his",$next_range_unixtime)."\n\tend range time ".date("Ymd his",$end_range_unixtime)."\n";
 $recur_data = array();
-if($current_view == 'search') $freq_type = 'none'; 
 while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 	$year = date("Y", $next_range_unixtime); 
 	$month = date('m', $next_range_unixtime); 
@@ -298,8 +274,17 @@ while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 } #end while loop
 sort($recur_data);
 
-/* ============================ Use $recur_data array to write the master array ============================*/
-// This used to use 5 different blocks to write the array... can it be reduced further?						
+/* ============================ Use $recur_data array to write the master array ============================
+// This used to use 5 different blocks to write the array... can it be reduced further?
+
+For each recurrence date, an event may still cross day boundaries.  So we need to loop from the start_date for that recurrence to the end of that recurrence.
+To generate $recur_data we mostly only paid attention to start times.
+
+Now, a single event must be split into multiple master array values for each day on which it occurs
+
+$hour and $minute are the values from the start_time, rounded to the nearest grid time.
+
+*/
 $recur_data_hour = @substr($start_time,0,2);
 $recur_data_minute = @substr($start_time,2,2);
 if (isset($allday_start) && $allday_start != ''){
@@ -307,114 +292,59 @@ if (isset($allday_start) && $allday_start != ''){
 	$recur_data_minute = '00';
 }
 foreach($recur_data as $recur_data_unixtime) {
-	$recur_data_year = date('Y', $recur_data_unixtime);
-	$recur_data_month = date('m', $recur_data_unixtime);
-	$recur_data_day = date('d', $recur_data_unixtime);
-	$recur_data_date = $recur_data_year.$recur_data_month.$recur_data_day;
+	$recur_data_year 	= date('Y', $recur_data_unixtime);
+	$recur_data_month 	= date('m', $recur_data_unixtime);
+	$recur_data_day 	= date('d', $recur_data_unixtime);
+	$recur_data_date 	= $recur_data_year.$recur_data_month.$recur_data_day;
+	
+	# initialize the loop range	to the recur date + grid time
+	$next_range_unixtime = mktime($recur_data_hour,$recur_data_minute,0,$recur_data_month,$recur_data_day,$recur_data_year);
+	$end_range_unixtime = $next_range_unixtime + $length;
+	$end_date_tmp = date("Ymd",$end_range_unixtime);
+	#echo "<pre>$summary ".date("Ymd H:i:s",$next_range_unixtime)." ".date("Ymd H:i:s",$end_range_unixtime)."\n";
 
-	/* 	at this point the recur data year, month, day, hour, and minute are in the default timezone for the phpicalendar installation, if that is set.  We need to compare whether both the event timezone and the the phpicaledar timezone are in the same state wrt std vs daylight time. */
-
-	if (isset($allday_start) && $allday_start != '') {
-		$start_time2 = $recur_data_unixtime;
-		$end_time2 = strtotime('+'.$diff_allday_days.' days', $recur_data_unixtime);
-		while ($start_time2 < $end_time2) {
-			$start_date2 = date('Ymd', $start_time2);
-			$master_array[($start_date2)][('-1')][$uid] = array (
-				'event_text' => $summary, 
-				'description' => $description, 
-				'location' => $location, 
-				'organizer' => serialize($organizer), 
-				'attendee' => serialize($attendee), 
-				'calnumber' => $calnumber, 
-				'calname' => $actual_calname, 
-				'url' => $url, 
-				'status' => $status, 
-				'class' => $class, 
-				'recur' => $recur );
-			$start_time2 = strtotime('+1 day', $start_time2);
+	# default the time_key to -1 for allday events, overwrite as needed
+	$time_key = -1;
+	
+	$start_unixtime_tmp = strtotime($recur_data_date.$start_time);
+	$end_unixtime_tmp = strtotime($end_date_tmp.$end_time);
+	while (date("Ymd", $next_range_unixtime) <= $end_date_tmp) {
+		$this_date_tmp = date('Ymd',$next_range_unixtime);	
+		$next_range_unixtime = strtotime('+1 day',$next_range_unixtime);
+		
+		if (!isset($allday_start) || $allday_start == '') $time_key = $hour.$minute;
+		$display_end_tmp = $end_hour.$end_minute;
+		if($time_key > -1){
+			# the day is not the first day of the recurrence
+			if ($this_date_tmp > $recur_data_date) $time_key = '0000';
+			# the day is not the last day of the recurrence
+			if ($this_date_tmp < $end_date_tmp) $display_end_tmp = '2400';
 		}
-	} else {
-		$start_unixtime_tmp = mktime($recur_data_hour,$recur_data_minute,0,$recur_data_month,$recur_data_day,$recur_data_year);
-		$end_unixtime_tmp = $start_unixtime_tmp + $length;
-		if (($end_time >= $phpiCal_config->bleed_time) && ($bleed_check == '-1')) {
-			$start_tmp = strtotime(date('Ymd',$start_unixtime_tmp));
-			$end_date_tmp = date('Ymd',$end_unixtime_tmp);
-			while ($start_tmp < $end_unixtime_tmp) {
-				$start_date_tmp = date('Ymd',$start_tmp);
-				if ($start_date_tmp == $recur_data_year.$recur_data_month.$recur_data_day) {
-					$time_tmp = $hour.$minute;
-					$start_time_tmp = $start_time;
-				} else {
-					$time_tmp = '0000';
-					$start_time_tmp = '0000';
-				}
-				if ($start_date_tmp == $end_date_tmp) {
-					$end_time_tmp = $end_time;
-				} else {
-					$end_time_tmp = '2400';
-					$display_end_tmp = $end_time;
-				}
-				$master_array[$start_date_tmp][$time_tmp][$uid] = array (
-					'event_start' => $start_time_tmp, 
-					'event_end' => $end_time_tmp, 
-					'start_unixtime' => $start_unixtime_tmp, 
-					'end_unixtime' => $end_unixtime_tmp, 
-					'event_text' => $summary, #
-					'event_length' => $length, 
-					'event_overlap' => 0, 
-					'description' => $description, 
-					'status' => $status, 
-					'class' => $class, 
-					'spans_day' => true, 
-					'location' => $location, 
-					'organizer' => serialize($organizer), 
-					'attendee' => serialize($attendee), 
-					'calnumber' => $calnumber, 
-					'calname' => $actual_calname, 
-					'url' => $url, 
-					'recur' => $recur);
-				if (isset($display_end_tmp)){
-					$master_array[$start_date_tmp][$time_tmp][$uid]['display_end'] = $display_end_tmp;
-				}
-				checkOverlap($start_date_tmp, $time_tmp, $uid);
-				$start_tmp = strtotime('+1 day',$start_tmp);
-			}
-		} else {
-			if ($bleed_check == '-1') {
-				$display_end_tmp = $end_time;
-				$end_time_tmp1 = '2400';
-					
-			}
-			if (!isset($end_time_tmp1)) $end_time_tmp1 = $end_time;
-				$master_array[($recur_data_date)][($hour.$minute)][$uid] = array (
-				'event_start' => $start_time, 
-				'event_end' => $end_time_tmp1, 
-				'start_unixtime' => $start_unixtime_tmp, 
-				'end_unixtime' => $end_unixtime_tmp, 
-				'event_text' => $summary, 
-				'event_length' => $length, 
-				'event_overlap' => 0, 
-				'description' => $description, 
-				'status' => $status, 
-				'class' => $class, 
-				'spans_day' => false, 
-				'location' => $location, 
-				'organizer' => serialize($organizer), 
-				'attendee' => serialize($attendee), 
-				'calnumber' => $calnumber, 
-				'calname' => $actual_calname, 
-				'url' => $url, 
-				'recur' => $recur);
-			if (isset($display_end_tmp)){
-				$master_array[($recur_data_date)][($hour.$minute)][$uid]['display_end'] = $display_end_tmp;
-			}
-			checkOverlap($recur_data_date, ($hour.$minute), $uid);
-			
-		}
+		if($this_date_tmp == $end_date_tmp && $end_time == '0000') continue;
+		$master_array[$this_date_tmp][$time_key][$uid] = array (
+			'event_start' => $start_time,                	# hhmm
+			'event_end' => $end_time,                    	# hhmm
+			'display_end' => $display_end_tmp,            	# hhmm display_start is $time_key
+			'start_unixtime' => $start_unixtime_tmp,      	# start unixtime for this recurrence
+			'end_unixtime' => $end_unixtime_tmp,          	# end unixtime for this recurrence
+			'event_text' => $summary,                    	#
+			'event_length' => $length,                    	# length in seconds
+			'event_overlap' => 0,                        	# checkOverlap modifies this
+			'description' => $description, 
+			'status' => $status, 
+			'class' => $class, 
+			'spans_day' => $spans_day, 
+			'location' => $location, 
+			'organizer' => serialize($organizer), 
+			'attendee' => serialize($attendee), 
+			'calnumber' => $calnumber, 
+			'calname' => $actual_calname, 
+			'url' => $url, 
+			'recur' => $recur
+			);
+		checkOverlap($this_date_tmp, $time_key, $uid);
 	}
-
-}
-
+} # end foreach recur_data 
 unset($recur_data);
 
 

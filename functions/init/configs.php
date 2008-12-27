@@ -45,7 +45,7 @@ while ($fillTime < $phpiCal_config->day_end) {
 	$fill_h = $dTime[1];
 	$fill_min = $dTime[2];
 	$fill_min = sprintf('%02d', $fill_min + $phpiCal_config->gridLength);
-	if ($fill_min == 60) {
+	if ($fill_min >= 60) {
 		$fill_h = sprintf('%02d', ($fill_h + 1));
 		$fill_min = '00';
 	}
