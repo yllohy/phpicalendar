@@ -914,6 +914,7 @@ class Page {
 				if ($type != 'small') {
 					foreach ($master_array[$daylink] as $cal_time => $event_times) {
 						foreach ($event_times as $uid => $val) {
+							if (!isset($val['calnumber'])) continue;
 							$event_calno 	= $val['calnumber'];
 							$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
 							if ($cal_time == -1) {

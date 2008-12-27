@@ -320,7 +320,7 @@ foreach($recur_data as $recur_data_unixtime) {
 			# the day is not the last day of the recurrence
 			if ($this_date_tmp < $end_date_tmp) $display_end_tmp = '2400';
 		}
-		if($this_date_tmp == $end_date_tmp && $end_time == '0000') continue;
+		if($this_date_tmp == $end_date_tmp && ($end_time == '0000' ||$time_key == -1)) continue;
 		$master_array[$this_date_tmp][$time_key][$uid] = array (
 			'event_start' => $start_time,                	# hhmm
 			'event_end' => $end_time,                    	# hhmm
@@ -342,7 +342,7 @@ foreach($recur_data as $recur_data_unixtime) {
 			'url' => $url, 
 			'recur' => $recur
 			);
-		checkOverlap($this_date_tmp, $time_key, $uid);
+		if($time_key > -1) checkOverlap($this_date_tmp, $time_key, $uid);
 	}
 } # end foreach recur_data 
 unset($recur_data);
