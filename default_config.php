@@ -2,7 +2,7 @@
 class Configs{
 	private static $instance;
 	private function __construct(){
-		$this->phpicalendar_version = '2.3rc1.2';
+		$this->phpicalendar_version = '2.3rc1.3';
 	// Configuration file for PHP iCalendar 2.25rc1
 	//
 	// To set values, change the text between the single quotes
@@ -41,7 +41,7 @@ class Configs{
 		$this->enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
 		$this->rss_link_to_event		= '';				// Set to yes to have links in the feed popup an event window.  Default is to link to day.php
 		$this->show_search				= 'no';			// Show the search box in the sidebar.
-		$this->allow_preferences		= 'no';			// Allow visitors to change various preferences via cookies.
+		$this->allow_preferences		= 'yes';			// Allow visitors to change various preferences via cookies.
 		$this->printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $this->default_view (listed well above).
 		$this->show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 		$this->show_completed			= 'yes';				// Show completed todos on your todo list.

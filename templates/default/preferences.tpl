@@ -43,6 +43,11 @@
 							<td width="10%"><select name="cookie_language" class="query_style">{LANGUAGE_SELECT}</select></td>
 						</tr>
 						<tr align="left" valign="top">
+							<td width="80%" nowrap="nowrap">{L_SELECT_TIMEZONE}:</td>
+							<td width="10%"><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
+							<td width="10%"><select name="cookie_timezone" class="query_style">{TIMEZONE_SELECT}</select></td>
+						</tr>
+						<tr align="left" valign="top">
 							<td nowrap="nowrap">{L_SELECT_CAL}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><select name="cookie_calendar" class="query_style">{CALENDAR_SELECT}</select>

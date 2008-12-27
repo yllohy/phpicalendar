@@ -33,6 +33,7 @@ switch ($current_view){
 		$mArray_begin = mktime (0,0,0,$start_month,1,($start_year));
 		$mArray_end = mktime (0,0,0,$end_month,31,($end_year));
 		break;
+	case 'error':
 	case 'preferences':
 		$mArray_begin = time();
 		$mArray_end = time();
@@ -44,4 +45,8 @@ switch ($current_view){
 	default:
 		$mArray_begin = mktime (0,0,0,12,21,($this_year - 1));
 		$mArray_end = mktime (0,0,0,1,31,($this_year + 1));
+}
+if ($phpiCal_config->save_parsed_cals == 'yes') {	
+	$mArray_begin = mktime (0,0,0,12,21,($this_year - 1));
+	$mArray_end = mktime (0,0,0,1,31,($this_year + 1));
 }

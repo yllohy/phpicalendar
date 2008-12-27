@@ -269,7 +269,7 @@ class Page {
 			$event_length[$thisday] = array ();
 			$thisdate = ($thisdate + (25 * 60 * 60));
 		}
-
+		#echo "<pre>";print_r($nbrGridCols);
 		// Replaces the allday events
 		preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
 		preg_match("!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!Uis", $this->page, $match2);
@@ -510,7 +510,7 @@ class Page {
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$start_day 			= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
-		for ($i=0; $i<7; $i++) {
+		for ($i=0; $i<$phpiCal_config->week_length; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
 			if ($current_view == 'day') {
@@ -883,7 +883,7 @@ class Page {
 		
 		$weekday_loop = '';
 		$middle = '';
-		for ($i=0; $i<7; $i++) {
+		for ($i=0; $i< $phpiCal_config->week_length; $i++) {
 			$day_num 		= date("w", $start_day);
 			$weekday 		= $langtype[$day_num];
 			$start_day 		= strtotime("+1 day", $start_day);
@@ -910,7 +910,7 @@ class Page {
 			} else {
 				$temp = $t_month[2];
 			}
-			if (isset($master_array[$daylink])) {
+			if (isset($master_array[$daylink]) && $i <= $phpiCal_config->week_length) {
 				if ($type != 'small') {
 					foreach ($master_array[$daylink] as $cal_time => $event_times) {
 						foreach ($event_times as $uid => $val) {
@@ -953,7 +953,10 @@ class Page {
 			$middle .= $temp;
 			
 			$start_day = strtotime("+1 day", $start_day); 
-			if ($i == 7) { 
+			if ($i == $phpiCal_config->week_length) { 
+				if ($phpiCal_config->week_length != 7) {
+					$start_day = strtotime("+".(7-$phpiCal_config->week_length)." day", $start_day);
+				}
 				$i = 0;
 				$middle .= $endweek;
 				$checkagain = date ("m", $start_day);

@@ -22,7 +22,7 @@ $current_view = "rssindex";
 $display_date = "RSS Info";
 
 $rss_list = "<table>\n";
-$xml_icon ="<img src = 'xml.gif' alt='xml'>";
+$xml_icon ="<img src = 'feed.png' alt='rss icon'>";
 
 $filelist = availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
 foreach ($filelist as $file) {

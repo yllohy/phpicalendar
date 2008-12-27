@@ -5,6 +5,25 @@ if (is_file(BASE.'config.inc.php')){
 	include(BASE.'config.inc.php');
 	foreach($configs as $key=>$value) $phpiCal_config->setProperty($key, $value);
 }
+
+# adjust gridlength to allowed values
+$g = $phpiCal_config->gridLength;
+if (!in_array($g,array(1,2,3,4,10,12,15,20,30,60)) && $g < 11){
+	$g = 10;
+}elseif($g < 13){
+	$g = 12;
+}elseif($g < 17){
+	$g = 15;
+}elseif($g < 25){
+	$g = 20;
+}elseif($g < 45){
+	$g = 30;
+}else{
+	$g = 60;
+}
+$phpiCal_config->setProperty('gridLength', $g);
+
+
 if ($phpiCal_config->cookie_uri == '') {
 	$phpiCal_config->setProperty('cookie_uri', $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/')) );
 	if ($phpiCal_config->cookie_uri == 'localhost')	$phpiCal_config->setProperty('cookie_uri', '');
@@ -23,6 +42,7 @@ if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
 	if (isset($phpicalendar['cookie_startday'])) 	$phpiCal_config->setProperty('week_start_day', 		$phpicalendar['cookie_startday']);
 	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); 
 	if (isset($phpicalendar['cookie_endtime']))		$phpiCal_config->setProperty('day_end', 			$phpicalendar['cookie_endtime']); 
+	if (isset($phpicalendar['cookie_timezone']))	$phpiCal_config->setProperty('timezone', 			$phpicalendar['timezone']); 
 }
 
 # language support

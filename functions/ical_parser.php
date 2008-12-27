@@ -11,7 +11,7 @@ include_once(BASE.'functions/parse/recur_functions.php');
 $parse_file = true;
 if ($phpiCal_config->save_parsed_cals == 'yes') {	
 	if (sizeof ($cal_filelist) > 1) {
-		$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
+		$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
 		if (file_exists($parsedcal)) {
 			$fd = fopen($parsedcal, 'r');
 			$contents = fread($fd, filesize($parsedcal));
@@ -51,7 +51,7 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 	} else {
 		foreach ($cal_filelist as $filename) {
 			$realcal_mtime = filemtime($filename);
-			$parsedcal = $tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
+			$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
 			if (file_exists($parsedcal)) {
 				$parsedcal_mtime = filemtime($parsedcal);
 				if ($realcal_mtime == $parsedcal_mtime) {

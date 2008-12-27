@@ -69,6 +69,7 @@ $lang['l_select_lang']		= 'Select your default language';
 $lang['l_select_cal']		= 'Select your default calendar';
 $lang['l_select_view']		= 'Select your default view';
 $lang['l_select_time']		= 'Select your default start time';
+$lang['l_select_timezone']	= 'Select your default timezone';
 $lang['l_select_endtime']	= 'Select your default end time';
 $lang['l_select_day']		= 'Select your default start day of week';
 $lang['l_select_style']		= 'Select your default style';

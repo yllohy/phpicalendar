@@ -31,7 +31,7 @@ if ($action == 'setcookie') {
 	$cookie_time		= $_POST['cookie_time'];
 	$cookie_endtime		= $_POST['cookie_endtime'];
 	$cookie_unset		= @$_POST['unset'];
-	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time","cookie_endtime" => "$cookie_endtime", "cookie_cpath"=>"$cookie_cpath");
+	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time","cookie_endtime" => "$cookie_endtime", "cookie_cpath"=>"$cookie_cpath", "cookie_timezone"=>"$cookie_timezone");
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 
 		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$phpiCal_config->cookie_uri",0);
@@ -58,6 +58,7 @@ if (isset($_COOKIE[$cookie_name])) {
 	$cookie_startday	= $phpicalendar['cookie_startday'];
 	$cookie_time		= $phpicalendar['cookie_time'];
 	$cookie_endtime		= $phpicalendar['cookie_endtime'];
+	$cookie_endtime		= $phpicalendar['cookie_timezone'];
 	if ($cookie_unset) { 
 		unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
 	}
@@ -72,6 +73,7 @@ if ((!isset($_COOKIE[$cookie_name])) || ($cookie_unset)) {
 	$cookie_startday = $phpiCal_config->week_start_day;
 	$cookie_time = $phpiCal_config->day_start;
 	$cookie_endtime = $phpiCal_config->day_end;
+	$cookie_timezone = $phpiCal_config->timezone;
 }
 
 if ($action == 'setcookie') { 
@@ -179,6 +181,7 @@ $page->replace_tags(array(
 	'rss_valid' 		=> '',
 	'event_js' 			=> '',
 	'language_select' 	=> $language_select,
+	'timezone_select' 	=> $timezone_select,
 	'calendar_select' 	=> $calendar_select,
 	'view_select' 		=> $view_select,
 	'time_select' 		=> $time_select,
@@ -193,6 +196,7 @@ $page->replace_tags(array(
 	'l_select_lang'		=> $lang['l_select_lang'],
 	'l_select_view'		=> $lang['l_select_view'],
 	'l_select_time'		=> $lang['l_select_time'],
+	'l_select_timezone'	=> $lang['l_select_timezone'],
 	'l_select_endtime'	=> $lang['l_select_endtime'],
 	'l_select_day'		=> $lang['l_select_day'],
 	'l_select_cal'		=> $lang['l_select_cal'],
