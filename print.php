@@ -8,7 +8,7 @@ $end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 $parse_month 		= date ("Ym", strtotime($getdate));
 $events_week 		= 0;
 $unix_time 			= strtotime($getdate);
-$printview = 'month';
+$printview = $phpiCal_config->default_view;
 if (isset($_GET['printview']))	$printview = $_GET['printview'];
 
 if ($printview == 'day') {
@@ -57,7 +57,9 @@ $page->replace_tags(array(
 	'event_js'			=> '',
 	'charset'			=> $phpiCal_config->charset,
 	'default_path'		=> $phpiCal_config->default_path,
+	'default_view'		=> $phpiCal_config->default_view,
 	'template'			=> $phpiCal_config->template,
+	'cpath'  			=> $phpiCal_config->cpath,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $cal_displayname,
@@ -84,6 +86,7 @@ $page->replace_tags(array(
 	'l_summary'			=> $lang['l_summary'],
 	'l_description'		=> $lang['l_description'],
 	'l_calendar'		=> $lang['l_calendar'],
+	'l_view_calendars'	=> $lang['l_view_calendars'],
 	'l_day'				=> $lang['l_day'],
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],

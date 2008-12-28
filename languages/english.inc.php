@@ -47,6 +47,7 @@ $lang['l_pick_multiple'] 	= 'Pick multiple';
 $lang['l_query'] 			= 'Query'; // will be followed by the search query
 $lang['l_no_results'] 		= 'No events found';
 $lang['l_goprint'] 			= 'Printer Friendly';
+$lang['l_view_calendars']	= 'Calendar view';
 $lang['l_time'] 			= 'Time';
 $lang['l_summary'] 			= 'Summary';
 $lang['l_description'] 		= 'Description';
