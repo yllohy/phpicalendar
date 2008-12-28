@@ -11,11 +11,12 @@ include_once(BASE.'error.php');
 include_once(BASE.'functions/calendar_functions.php');
 include_once(BASE.'functions/userauth_functions.php');
 
-
+# require php 5
+if (phpversion() < '5.1') die (error(sprintf($lang['l_php_version_required'],phpversion()) ) );
 // Grab the action (login or logout).
+$action = '';
 if (isset($_GET['action']))			$action = $_GET['action'];
-else if (isset($_POST['action']))		$action = $_POST['action'];
-else											$action = '';
+else if (isset($_POST['action']))	$action = $_POST['action'];											
 	
 // Login and/or logout.
 list($username, $password, $invalid_login) = user_login();

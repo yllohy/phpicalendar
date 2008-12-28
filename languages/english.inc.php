@@ -204,6 +204,7 @@ Notes about dateFormat_*
 $lang['l_error_title'] 			= 'Error!';
 $lang['l_error_window'] 		= 'There was an error!';
 $lang['l_error_calendar'] 		= 'The calendar "%s" was being processed when this error occurred.';
+$lang['l_php_version_required']	= 'PHP version "%s" detected.  PHP 5.1 or greater is required to run this version of phpicalendar.';
 $lang['l_error_path'] 			= 'Unable to open the path: "%s"';
 $lang['l_error_back'] 			= 'Please use the "Back" button to return.';
 $lang['l_error_remotecal'] 		= 'This server blocks remote calendars which have not been approved.';
@@ -211,5 +212,6 @@ $lang['l_error_restrictedcal'] 	= 'You have tried to access a calendar that is r
 $lang['l_error_invalidcal'] 	= 'Invalid calendar file. Please try a different calendar.';
 $lang['l_error_cantopen'] 		= 'Unable to open calendar.';
 $lang['l_error_cache']			= 'Unable to write to cache directory. Please check your config.';
+$lang['l_prefs_off']			= 'Preferences are disabled on this installation.';
 
 ?>

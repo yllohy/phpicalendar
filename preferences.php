@@ -6,7 +6,7 @@ require_once(BASE.'functions/template.php');
 $display_date = $lang['l_preferences'];
 
 if ($phpiCal_config->allow_preferences != 'yes') {
-	exit(error('Preferences are not available for this installation.', $cal));
+	exit(error($lang['l_prefs_off'], $cal));
 }
 
 $current_view = "preferences";
@@ -30,6 +30,7 @@ if ($action == 'setcookie') {
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
 	$cookie_endtime		= $_POST['cookie_endtime'];
+	$cookie_timezone	= $_POST['cookie_timezone'];
 	$cookie_unset		= @$_POST['unset'];
 	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time","cookie_endtime" => "$cookie_endtime", "cookie_cpath"=>"$cookie_cpath", "cookie_timezone"=>"$cookie_timezone");
 	$the_cookie 		= serialize($the_cookie);
@@ -58,7 +59,7 @@ if (isset($_COOKIE[$cookie_name])) {
 	$cookie_startday	= $phpicalendar['cookie_startday'];
 	$cookie_time		= $phpicalendar['cookie_time'];
 	$cookie_endtime		= $phpicalendar['cookie_endtime'];
-	$cookie_endtime		= $phpicalendar['cookie_timezone'];
+	$cookie_timezone	= $phpicalendar['cookie_timezone'];
 	if ($cookie_unset) { 
 		unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
 	}
@@ -226,7 +227,7 @@ $page->replace_tags(array(
 	'cpath'				=> $cpath,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
-	'calendar_name'		=> $calendar_name,
+	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $display_date,
 	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',

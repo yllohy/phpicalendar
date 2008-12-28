@@ -1,8 +1,8 @@
 <?php
 $ifile = @fopen($filename, "r");
-if ($ifile == FALSE) exit(error($lang['l_error_cantopen']." parse_tz", $filename));
+if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $filename));
 $nextline = fgets($ifile);
-if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal']." parse_tz", $filename));
+if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal'], $filename));
 
 // read file in line by line
 // XXX end line is skipped because of the 1-line readahead

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* from the std
 
 "BYxxx rule parts modify the recurrence in some manner. BYxxx rule parts for a period of time which is the same or greater than the frequency generally reduce or limit the number of occurrences of the recurrence generated. For example, "FREQ=DAILY;BYMONTH=1" reduces the number of recurrence instances from all days (if BYMONTH tag is not present) to all days in January. BYxxx rule parts for a period of time less than the frequency generally increase or expand the number of occurrences of the recurrence. For example, "FREQ=YEARLY;BYMONTH=1,2" increases the number of days within the yearly recurrence set from 1 (if BYMONTH tag is not present) to 2.
@@ -28,6 +28,7 @@ function add_recur($times,$freq=''){
 	$until_date = date("Ymd",$end_range_unixtime);
 	foreach ($times as $time){ 
 		#echo "time:". date("Ymd",$time)."\n";
+		if (!isset($time) || $time == '') continue;
 		$date = date("Ymd",$time);
 		$time = strtotime("$date 12:00:00");
 		# day offset fixes shifts across day boundaries due to time diffs.  

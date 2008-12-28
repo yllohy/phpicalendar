@@ -86,7 +86,7 @@ $page->replace_tags(array(
 	'list_weeks' 		=> $list_weeks,
 	'list_jumps' 		=> $list_jumps,
 	'legend'	 		=> $list_calcolors,
-	'style_select' 		=> @$style_select,
+#	'style_select' 		=> $style_select,
 	'l_goprint'			=> $lang['l_goprint'],
 	'l_preferences'		=> $lang['l_preferences'],
 	'l_calendar'		=> $lang['l_calendar'],

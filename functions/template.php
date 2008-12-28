@@ -1062,7 +1062,7 @@ class Page {
 				$file = str_replace("templates/$phpiCal_config->template","templates/default",$file); 
 			}
 			if (!is_file($file)){
-				exit(error($lang['l_error_path']." template 1065", $file));
+				exit(error($lang['l_error_path'], $file));
 			}
 			ob_start();
 			include($file);

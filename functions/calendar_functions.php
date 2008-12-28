@@ -73,9 +73,9 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		if ($find_all || $phpiCal_config->recursive_path == 'yes' || $phpiCal_config->support_ical == 'yes') {
 			// Open the directory.
 			$dir_handle = opendir($search_path)
-				or die(error("cal fn 78:".sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
+				or die(error(sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
 			if ($dir_handle === false)
-				die(error(" cal fn 80:".sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
+				die(error(sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
 				
 			// Add each file in the directory that does not begin with a dot.
 			while (false !== ($file = readdir($dir_handle))) {

@@ -1,18 +1,8 @@
 <?php
+require_once(BASE."functions/is_daylight.php");
 // date_functions.php
 // functions for returning or comparing dates
 
-// not a date function, but I didn't know where to put it
-// for backwards compatibility
-if (phpversion() < '4.1') {
-	function array_key_exists($key, $arr) {
-		if (!is_array($arr)) return false;
-		foreach (array_keys($arr) as $k) {
-			if ("$k" == "$key") return true;
-		}
-		return false;
-	}
-}
 
 // takes iCalendar 2 day format and makes it into 3 characters
 // if $txt is true, it returns the 3 letters, otherwise it returns the
@@ -290,28 +280,4 @@ function match_tz($data){
 		if (strpos(" $data",$key) > 0) return $key;
 	}
 	return $data;
-}
-
-require_once(BASE."functions/is_daylight.php");
-/*	function is_daylight($date, $timezone)  returns 1 if daylight time, 0 if not
-
-	default is to use the server's date function.  This will be off when the timezone's rules are not the same as the server's rules. In php5.2+ there seems to be a better way to do this, but we can't count on users having php5.2+.
-	
-	Although we set dt_start and st_start in parse_tzs.php, these are not rrules and I don't know how to use them yet. So we'll do it by brute force for the ones we know about, from: http://www.webexhibits.org/daylightsaving/g.html
-	
-	Note that this sends a screwy time value - it's not necessarily UTC unixtime, since the mktime functions that create the time are not using the timezone.
-
-function is_daylight($time, $timezone){
-	global $tz_array;
-	# default to std time, overwrite if daylight.
-	$dlst = 0;
-	switch ($timezone){
-		default:
-			$dlst = date('I', $time);
-	}
-	
-	return $dlst;
-
-}
-*/
-?>
+}?>

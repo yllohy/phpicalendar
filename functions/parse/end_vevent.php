@@ -177,8 +177,9 @@ foreach ($rrule_array as $key => $val) {
 			break;
 	}
 }
+# convert wkst to a 3 char day for strtotime to work		
+$wkst3char = two2threeCharDays($wkst);
 if($current_view == 'search') $freq_type = 'none'; 
-
 # $recur is the recurrence info that goes into the master array for this VEVENT
 $recur = @$recur_array[($start_date)][($hour.$minute)][$uid]['recur']; 
 
@@ -206,16 +207,16 @@ $start_date_unixtime = strtotime($start_date);
 $next_range_unixtime = $start_date_unixtime;
 
 # conditions where we don't need to iterate over the whole range
-# if repeating without limit, and steps are by 1, don't go back before the mArray beginning.
+# 	if repeating without limit, and steps are by 1, don't go back before the mArray beginning.
 if($count == 1000000 && $interval == 1 && $mArray_begin > $next_range_unixtime) $next_range_unixtime = $mArray_begin;
 
-# if the beginning of our range is less than the start of the item, we may as well set the range to start at start_time
+# 	if the beginning of our range is less than the start of the item, we may as well set the range to start at start_time
 if ($next_range_unixtime < $start_date_unixtime) $next_range_unixtime = $start_date_unixtime;
 
-# stop at the until limit if set
+# 	stop at the until limit if set
 if(isset($until) && $end_range_unixtime > $until_unixtime) $end_range_unixtime = $until_unixtime;
 
-# more adjustments
+# 	more adjustments
 switch ($freq_type){
 	case 'week':
 		# need to get the first value of $next_range_unixtime onto the right day of the week
@@ -231,8 +232,6 @@ if(!isset($rrule_array['FREQ']) && isset($end_date)){
 	$end_range_unixtime = strtotime($end_date);
 	$count = 1;
 }
-// convert wkst to a 3 char day for strtotime to work		
-$wkst3char = two2threeCharDays($wkst);
 
 /* The while loop below increments $next_range_time by $freq type. For the larger freq types, there is only 
 one $next_range_time per repeat, but the BYXXX rules may write more than one event in that repeat cycle
