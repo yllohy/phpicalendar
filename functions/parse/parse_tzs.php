@@ -2,7 +2,7 @@
 $ifile = @fopen($filename, "r");
 if ($ifile == FALSE) exit(error($lang['l_error_cantopen']." parse_tz", $filename));
 $nextline = fgets($ifile);
-if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal'], $filename));
+if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal']." parse_tz", $filename));
 
 // read file in line by line
 // XXX end line is skipped because of the 1-line readahead
