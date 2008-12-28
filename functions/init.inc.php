@@ -127,8 +127,6 @@ foreach ($web_cals as $web_cal) {
 #	$cal_displaynames[] = substr(str_replace('32', ' ', basename($web_cal)), 0, -4);
 	$cal_displaynames[] = substr(basename($web_cal), 0, -4);
 	
-	// FIXME
-	echo "$web_cal<br>";
 	if(in_array($web_cal, $list_webcals)){
 		$web_cal = md5($phpiCal_config->salt.$web_cal);
 	}
