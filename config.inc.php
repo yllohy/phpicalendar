@@ -58,18 +58,23 @@ phpicalendar currently supports about 30 language variants.  For a list of suppo
 #     'week_length'          => '5',	           // Number of days to display in the week view
 #     'day_start'            => '0600',	           // Start time for day grid
 #     'day_end'              => '2000',	           // End time for day grid
-);
+
 
 /*     ========= SPECIAL CALENDARS =========
 
 */
+     'allow_webcals'          => 'yes',
+
+
+);
+
 $blacklisted_cals[] = '';                          // Fill in between the quotes the name of the calendars 
 $blacklisted_cals[] = '';                          // you wish to 'blacklist' or that you don't want to show up in your calendar
 $blacklisted_cals[] = '';                          // list. This should be the exact calendar filename without .ics
 $blacklisted_cals[] = '';                          // the parser will *not* parse any cal that is in this list (it will not be Web accessible)
 // add more lines as necessary
 
-$list_webcals[] = '';                              // Fill in between the quotes exact URL of a calendar that you wish
+$list_webcals[] = 'http://www.google.com/calendar/ical/jim.hu.biobio%40gmail.com/public/basic.ics';                              // Fill in between the quotes exact URL of a calendar that you wish
 $list_webcals[] = '';                              // to show up in your calendar list. You must prefix the URL with http://
 $list_webcals[] = '';                              // or webcal:// and the filename should contain the .ics suffix
 $list_webcals[] = '';                              // $allow_webcals does *not* need to be "yes" for these to show up and work

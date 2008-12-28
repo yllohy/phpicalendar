@@ -125,7 +125,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 				$nextline = fgets($ifile, 1024);
 				$nextline = ereg_replace("[\r\n]", "", $nextline);
 			}
-			$line = trim($line);
+			$line = trim(stripslashes($line));
 			
 			switch ($line) {
 				case 'BEGIN:VEVENT':

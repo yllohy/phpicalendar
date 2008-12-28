@@ -40,7 +40,7 @@ function enclose_items($rss_items){
 
 function rss_item(){
 	global $uid,$event_start,$rss_title,$rss_link, $dayofweek, $event_text, $rss_description, $val;
-	$rss .= '<item>'."\n";
+	$rss = '<item>'."\n";
 	$rss .= '<uid>'.$uid.'</uid>'."\n";
 	$rss .= '<event_start>'.$event_start.'</event_start>'."\n";
 	$rss .= '<title>'.$rss_title.'</title>'."\n";
