@@ -20,12 +20,16 @@ As noted, phpicalendar should work without adjusting the default settings.  Chan
 
        calendar_path is a FILE path
        default_path, cookie_uri, and download_uri are a URL paths, e.g. http://www.example.com/phpicalendar; set these if you are having problems.
+
+Note that the allow_webcals setting allows webcals to be passed as URLs.  You do NOT need to override the default setting to list specific webcals for inclusion in the SPECIAL CALENDARS section below.
 */
 #     'calendar_path'        => '/Library/WebServer/Documents/phpicalendar/calendars/recur_tests',
 #     'default_path'         => '', 	
 #     'save_parsed_cals'     => 'yes', 
 #     'cookie_uri'           => '', 
 #     'download_uri'         => '', 	
+#     'allow_webcals'          => 'yes',
+     'recursive_path'          => 'yes',
 
 /*     ** Timezones **
 If timezone is not set, all events show in the local time of the source calendar.  This isn't a problem if all your calendars are in the same timezone.  If you set a timezone for the server, events in other timezones are shown when they occur at the server's time.
@@ -42,10 +46,10 @@ phpicalendar currently supports about 30 language variants.  For a list of suppo
 */
 
 #     'language'             => 'Spanish',
-#     'default_cal'          => 'US Holidays',	   // Exact filename of calendar without .ics. Or set to 'ALL_CALENDARS_COMBINED to open all calenders combined into one.
+#     'default_cal'          => 'US Holidays',	   // Exact filename of calendar without .ics.
 #     'template'             => 'green';           // Template support: change this to have a different "skin" for your installation.     
-     'default_view'         => 'year',           // Default view for calendars'     => 'day', 'week', 'month', 'year'
-      'printview_default'    => 'yes',	           // Set print view as the default view. Uses'default_view (listed above).
+ #    'default_view'         => 'year',           // Default view for calendars'     => 'day', 'week', 'month', 'year'
+#      'printview_default'    => 'yes',	           // Set print view as the default view. Uses'default_view (listed above).
 #     'gridLength'           => 10,                // Grid size in day and week views. Allowed values are 1,2,3,4,10,12,15,20,30,60. Default is 15
 #     'minical_view'         => 'current',	       // Where do the mini-calendars go when clicked?'     => 'day', 'week', 'month', 'current'
 #     'allow_preferences'    => 'no', 
@@ -59,36 +63,35 @@ phpicalendar currently supports about 30 language variants.  For a list of suppo
 #     'day_start'            => '0600',	           // Start time for day grid
 #     'day_end'              => '2000',	           // End time for day grid
 
-
+);
 /*     ========= SPECIAL CALENDARS =========
 
-*/
-     'allow_webcals'          => 'yes',
+these arrays provide extra calendar options.
 
+       ** Blacklisted Calendars
+
+       
+*/
+$blacklisted_cals = array(
+''
+);                          
+/*     ========= SPECIAL CALENDARS =========
+
+these arrays provide extra calendar options.
+
+*/
+$list_webcals[] = array(
+#	'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics'
+);
+$more_webcals['recur_tests'] = array();
+$locked_cals[] = array(
 
 );
+/*     ========= SPECIAL CALENDARS =========
 
-$blacklisted_cals[] = '';                          // Fill in between the quotes the name of the calendars 
-$blacklisted_cals[] = '';                          // you wish to 'blacklist' or that you don't want to show up in your calendar
-$blacklisted_cals[] = '';                          // list. This should be the exact calendar filename without .ics
-$blacklisted_cals[] = '';                          // the parser will *not* parse any cal that is in this list (it will not be Web accessible)
-// add more lines as necessary
+these arrays provide extra calendar options.
 
-$list_webcals[] = 'http://www.google.com/calendar/ical/jim.hu.biobio%40gmail.com/public/basic.ics';                              // Fill in between the quotes exact URL of a 
-$list_webcals[] = 'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics';						// Fill in between the quotes exact URL of a calendar that you wish calendar that you wish
-$list_webcals[] = '';                              // to show up in your calendar list. You must prefix the URL with http://
-$list_webcals[] = '';                              // or webcal:// and the filename should contain the .ics suffix
-$list_webcals[] = '';                              // $allow_webcals does *not* need to be "yes" for these to show up and work
-// add more lines as necessary
-
-#$more_webcals['cpath'][] = ''                     //add webcals that will show up only for a particular cpath.
-
-$locked_cals[] = '';                               // Fill in-between the quotes the names of the calendars you wish to hide
-$locked_cals[] = '';                               // unless unlocked by a username/password login. This should be the
-$locked_cals[] = '';                               // exact calendar filename without the .ics suffix.
-$locked_cals[] = '';                               //
-// add more lines as necessary
-
+*/
 $locked_map['user1:pass'] = array('');             // Map username:password accounts to locked calendars that should be
 $locked_map['user2:pass'] = array('');             // unlocked if logged in. Calendar names should be the same as what is
 $locked_map['user3:pass'] = array('');             // listed in the $locked_cals, again without the .ics suffix.

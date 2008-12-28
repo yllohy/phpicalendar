@@ -1,5 +1,4 @@
 <?php
-
 // This function returns a list of all calendars that the current user
 // has access to. Basically, all local calendars found in the calendar
 // directory, plus any webcals listed in the configuration file, but
@@ -48,8 +47,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		if (!isset($http_user) && !$admin) {
 			foreach ($list_webcals as $file) {
 				// Make sure the URL ends with .ics.
-				if (!preg_match("/.ics$/i", $file)) continue;
-				
+				if (!preg_match("/.ics$/i", $file)) continue;			
 				// Add this calendar.
 				array_push($calendars, $file);
 			}
@@ -100,49 +98,33 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			// Push directories onto the search paths if recursive paths is
 			// turned on.
 			if (is_dir($file)) {
-				if ($recursive_path == 'yes') {
-					array_push($search_paths, $file);
-				}
+				if ($phpiCal_config->recursive_path == 'yes') array_push($search_paths, $file);
 				continue;
-			}
-			
+			}			
 			// Make sure the file is real.
 			if (!is_file($file)) continue;
-			
 			// Make sure the file ends in .ics.
 			if (!preg_match("/^.*\.ics$/i", $file)) continue;
-			
 			// Make sure this is not a blacklisted calendar.
 			$cal_name = getCalendarName($file);
 			if (in_array($cal_name, $blacklisted_cals)) continue;
-			
 			// If HTTP authenticated, make sure this calendar is available
 			// to the user.
-			if (isset($http_user)) {
-				if (!in_array($cal_name, $apache_map[$http_user])) continue;
-			}
-		
+			if (isset($http_user) && !in_array($cal_name, $apache_map[$http_user])) continue;
+
 			// Make sure this calendar is not locked.
-			if (!$admin &&
-				in_array($cal_name, $locked_cals) &&
-				!in_array($cal_name, $unlocked_cals))
-			{
-				continue;
-			}
+			if (!$admin && in_array($cal_name, $locked_cals) && !in_array($cal_name, $unlocked_cals)) continue;
 			
 			// Add this calendar if we're looking for it, and remove it's name
 			// from the local list because we've found it.
 			if ($find_all || in_array($cal_name, $cal_filename_local)) {
 				array_push($calendars, $file);
-				$cal_filename_local = array_diff($cal_filename_local, array($cal_name));
-				
+				$cal_filename_local = array_diff($cal_filename_local, array($cal_name));				
 				// If the local list is empty, we're done.
-				if (empty($cal_filename_local))
-					break 2;
+				if (empty($cal_filename_local))	break 2;
 			}
 		}
 	}
-
 	// Return the sorted calendar list.
 	natcasesort($calendars);
 	return $calendars;
@@ -171,8 +153,7 @@ function availableCalendarNames($username, $password, $cal_filename, $admin = fa
 	return $calendars;
 }
 
-// This function returns the calendar name for the specified calendar
-// path.
+// This function returns the calendar name for the specified calendar path.
 //
 // $cal_path	= The path to the calendar file.
 function getCalendarName($cal_path) {
@@ -256,7 +237,6 @@ function display_ical_list($cals, $pick=FALSE) {
 		else {
 			// Strip path and .ics suffix.
 			$cal_tmp = getCalendarName($cal_tmp);
-
 			// Add calendar label.
 			$cal_displayname_tmp .= " $calendar_lang";
 		}
