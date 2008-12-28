@@ -184,7 +184,7 @@ function getCalendarName($cal_path) {
 //
 // $cals	= The calendars (entire path, e.g. from availableCalendars).
 function display_ical_list($cals, $pick=FALSE) {
-	global $cal, $current_view, $getdate, $lang, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $phpiCal_config;
+	global $cal, $current_view, $getdate, $lang, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $list_webcals, $phpiCal_config;
 	// Print each calendar option.
 	$return = '';
 	foreach ($cals as $cal_tmp) {
@@ -193,15 +193,15 @@ function display_ical_list($cals, $pick=FALSE) {
 		// Only display the calendar name, replace all instances of "32" with " ",
 		// and remove the .ics suffix.
 		$cal_displayname_tmp = getCalendarName($cal_tmp);
-		$cal_displayname_tmp = str_replace("32", " ", $cal_displayname_tmp);
+		#$cal_displayname_tmp = str_replace("32", " ", $cal_displayname_tmp);
 		#overwrite the display name if we already have a real name
 		if (is_numeric(array_search($cal_tmp, $cal_filelist))){
 			$cal_displayname_tmp = $cal_displaynames[array_search($cal_tmp,$cal_filelist)];
 		}else{
 			# pull the name from the $cal_tmp file
-			$cal_tmp = str_replace('webcal://','http://',$cal_tmp);
+			$cal_tmp2 = str_replace('webcal://','http://',$cal_tmp);
 
-			$ifile = @fopen($cal_tmp, "r");
+			$ifile = @fopen($cal_tmp2, "r");
 			if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $cal_tmp));
 			while (!feof($ifile)) {
 				$line = fgets($ifile, 1024);
@@ -241,7 +241,9 @@ function display_ical_list($cals, $pick=FALSE) {
 
 		// Encode the calendar path.
 		$cal_encoded_tmp = urlencode($cal_tmp);
-
+		if(in_array($cal_tmp, $list_webcals)){
+			$cal_encoded_tmp = md5($phpiCal_config->salt.$cal_tmp);;
+		}
 		// Display the option.
 		//
 		// The submitted calendar will be encoded, and always use http://

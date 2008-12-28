@@ -67,7 +67,7 @@ class Configs{
 		$this->ftp_server				= 'localhost';		// Only used if $this->auth_method='ftp'. The ftp server name. 'localhost' will work for most servers.
 		$this->ftp_port					= '21';				// Only used if $this->auth_method='ftp'. The ftp port. '21' is the default for ftp servers.
 		$this->ftp_calendar_path		= '';				// Only used if $this->auth_method='ftp'. The full path to the calendar directory on the ftp server. If = '', will attempt to deduce the path based on $this->calendar_path, but may not be accurate depending on ftp server config.
-		
+		$this->salt                     = '';
 		// Calendar colors
 		//
 		// You can increase the number of unique colors by adding additional images (monthdot_n.gif) 

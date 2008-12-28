@@ -66,6 +66,10 @@ if ($cal_filenames[0] == $phpiCal_config->ALL_CALENDARS_COMBINED){
 $web_cals = array();
 $local_cals = array();
 foreach ($cal_filenames as $cal_filename) {
+	# substitute for md5-obscured list_webcals
+	foreach ($list_webcals as $tmp_cal){
+		if($cal_filename == md5($phpiCal_config->salt.$tmp_cal)) $cal_filename = $tmp_cal;
+	}
 	// If the calendar identifier begins with a web protocol, this is a web
 	// calendar.
 	$cal_filename = urldecode($cal_filename); #need to decode for substr statements to identify webcals
@@ -107,7 +111,6 @@ foreach ($web_cals as $web_cal) {
 	$cal_httpPrefix = str_replace('webcal://','http://',$web_cal);
 	$cal_httpsPrefix = str_replace('webcal://','https://',$web_cal);
 	$cal_httpsPrefix = str_replace('http://','https://',$web_cal);
-	$web_cal = $cal_httpPrefix;
 		
 	// We can only include this web calendar if we allow all web calendars
 	// (as defined by $allow_webcals) or if the web calendar shows up in the
@@ -125,11 +128,16 @@ foreach ($web_cals as $web_cal) {
 	$cal_displaynames[] = substr(basename($web_cal), 0, -4);
 	
 	// FIXME
+	echo "$web_cal<br>";
+	if(in_array($web_cal, $list_webcals)){
+		$web_cal = md5($phpiCal_config->salt.$web_cal);
+	}
 	$cals[] = urlencode($web_cal);
 	//$filename = $cal_filename;
 	$subscribe_path = $cal_webcalPrefix;
 	
 	// Add the webcal to the available calendars.
+	$web_cal = $cal_httpPrefix;
 	$cal_filelist[] = $web_cal;
 }
 

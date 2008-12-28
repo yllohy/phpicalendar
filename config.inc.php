@@ -22,6 +22,8 @@ As noted, phpicalendar should work without adjusting the default settings.  Chan
        default_path, cookie_uri, and download_uri are a URL paths, e.g. http://www.example.com/phpicalendar; set these if you are having problems.
 
 Note that the allow_webcals setting allows webcals to be passed as URLs.  You do NOT need to override the default setting to list specific webcals for inclusion in the SPECIAL CALENDARS section below.
+
+The salt parameter is used to obfuscate things like webcal links that may have usernames and passwords.  This should be changed.
 */
 #     'calendar_path'        => '/Library/WebServer/Documents/phpicalendar/calendars/recur_tests',
 #     'default_path'         => '', 	
@@ -30,6 +32,7 @@ Note that the allow_webcals setting allows webcals to be passed as URLs.  You do
 #     'download_uri'         => '', 	
 #     'allow_webcals'          => 'yes',
 #     'recursive_path'          => 'yes',
+#     'salt'                => 'SaLt4',
 
 /*     ** Timezones **
 If timezone is not set, all events show in the local time of the source calendar.  This isn't a problem if all your calendars are in the same timezone.  If you set a timezone for the server, events in other timezones are shown when they occur at the server's time.
@@ -80,7 +83,7 @@ these arrays provide extra calendar options.
 
 */
 $list_webcals = array(
-#	'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics'
+	'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics'
 );
 $more_webcals['recur_tests'] = array();
 $locked_cals = array(
