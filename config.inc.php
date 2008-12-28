@@ -29,7 +29,7 @@ Note that the allow_webcals setting allows webcals to be passed as URLs.  You do
 #     'cookie_uri'           => '', 
 #     'download_uri'         => '', 	
 #     'allow_webcals'          => 'yes',
-     'recursive_path'          => 'yes',
+#     'recursive_path'          => 'yes',
 
 /*     ** Timezones **
 If timezone is not set, all events show in the local time of the source calendar.  This isn't a problem if all your calendars are in the same timezone.  If you set a timezone for the server, events in other timezones are shown when they occur at the server's time.
@@ -57,7 +57,6 @@ phpicalendar currently supports about 30 language variants.  For a list of suppo
 #     'show_todos'           => 'no',
 #     'show_completed'       => 'no',
       'allow_login'          => 'yes',	           // Set to yes to prompt for login to unlock calendars.
-#     'allow_admin'          => 'yes', 
 #     'week_start_day'       => 'Monday',          // Day of the week your week starts on
 #     'week_length'          => '5',	           // Number of days to display in the week view
 #     'day_start'            => '0600',	           // Start time for day grid
@@ -80,11 +79,11 @@ $blacklisted_cals = array(
 these arrays provide extra calendar options.
 
 */
-$list_webcals[] = array(
+$list_webcals = array(
 #	'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics'
 );
 $more_webcals['recur_tests'] = array();
-$locked_cals[] = array(
+$locked_cals = array(
 
 );
 /*     ========= SPECIAL CALENDARS =========

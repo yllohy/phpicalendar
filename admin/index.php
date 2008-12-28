@@ -1,9 +1,11 @@
 <?php
 define('BASE', '../');
+$current_view = 'admin';
+require_once(BASE.'functions/init.inc.php');
 require_once(BASE.'functions/admin_functions.php');
-require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$charset");
+
+#echo "<pre>";print_r($_REQUEST);
 
 if (empty($phpiCal_config->default_path)) {
 	if (isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) == 'on' ) {
@@ -12,13 +14,9 @@ if (empty($phpiCal_config->default_path)) {
 		$default_path = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'],'/admin/'));
 	}
 }
-if ($phpiCal_config->allow_admin != 'yes') {
-	exit(error('The administration menu has been turned off.', $cal, '../'));
-}
-
-// Load variables from forms and query strings into local scope
-if($_POST) 	{extract($_POST, EXTR_PREFIX_SAME, "post_");}
-if($_GET)  	{extract($_GET, EXTR_PREFIX_SAME, "get_");}
+#if ($phpiCal_config->allow_admin != 'yes') {
+	exit(error('The administration menu has been turned off.', '', '/..'));
+#}
 
 // Logout by clearing session variables
 if ((isset($_GET['action'])) && ($_GET['action'] == 'logout')) {
@@ -27,12 +25,11 @@ if ((isset($_GET['action'])) && ($_GET['action'] == 'logout')) {
 	unset($_SESSION['phpical_password']);
 }
 
-
 // if $auth_method == 'server', don't do any authentication
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = @$_POST['username'];
+$password = @$_POST['password'];
 
-if ($auth_method == 'server') {
+if ($phpiCal_config->auth_method == 'server') {
 	$is_loged_in = TRUE;
 } else {
 	$is_loged_in = FALSE;
@@ -41,19 +38,20 @@ if ($auth_method == 'server') {
 		$is_loged_in = TRUE;
 	}
 	
-	if (isset($username) && $_GET['action'] != 'logout') {
+	if (isset($username) && @$_GET['action'] != 'logout') {
 		$is_loged_in = login ($username, $password);
 	}
 }
 
 $login_good = ($is_loged_in) ? '' : 'oops';
-$login_bad	= ((!$is_loged_in) && ($_GET['action'] == 'login')) ? 'oops' : '';
+$login_bad	= ((!$is_loged_in) && (@$_GET['action'] == 'login')) ? 'oops' : '';
+$delete_msg = '';
+$addupdate_msg 	= '';
 if(is_loggedin()){
 	// Delete a calendar
 	// Not at all secure - need to strip out path info if used by users besides admin in the future
-	$delete_msg = '';
-	if ($_POST['action'] == 'delete') {
-		foreach ($delete_calendar as $filename) {
+	if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+		foreach ($_POST['delete_calendar'] as $filename) {
 			if (!delete_cal(urldecode($filename))) {
 				$delete_msg = $delete_msg . '<font color="red">' . $lang['l_delete_error'] . ' ' . urldecode(substr($filename,0,-4)) . '</font><br />';
 			} else {
@@ -63,8 +61,7 @@ if(is_loggedin()){
 	}
 	
 	// Add or Update a calendar
-	$addupdate_msg 	= '';
-	if ((isset($_POST['action']))  && ($_POST['action'] == 'addupdate')) {
+	if (isset($_POST['action'])  && $_POST['action'] == 'addupdate') {
 		for ($filenumber = 1; $filenumber < 6; $filenumber++) {
 			$file = $_FILES['calfile'];
 			$addupdate_success = FALSE;
@@ -101,15 +98,15 @@ $page->replace_tags(array(
 	'version'			=> $phpiCal_config->phpicalendar_version,
 	'event_js'			=> '',
 	'charset'			=> $phpiCal_config->charset,
-	'default_path'		=> "../".$phpiCal_config->default_path,
+	'default_path'		=> $phpiCal_config->default_path."/..",
 	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
 	'calendar_name'		=> $calendar_name,
-	'display_date'		=> $display_date,
+	'display_date'		=> '',
 	'current_view'		=> $current_view,
-	'sidebar_date'		=> $sidebar_date,
-	'rss_powered'	 	=> $phpiCal_config->rss_powered,
+#	'sidebar_date'		=> $sidebar_date,
+	'rss_powered'	 	=> $rss_powered,
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'show_search' 		=> '',

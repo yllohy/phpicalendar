@@ -2,7 +2,7 @@
 class Configs{
 	private static $instance;
 	private function __construct(){
-		$this->phpicalendar_version = '2.3rc1.4';
+		$this->phpicalendar_version = '2.3rc1.6';
 	// Configuration file for PHP iCalendar 2.25rc1
 	//
 	// To set values, change the text between the single quotes
@@ -33,6 +33,7 @@ class Configs{
 		$this->cookie_uri				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar -- AUTO SETTING -- Only set if you are having cookie issues.
 		$this->download_uri				= ''; 				// The HTTP URL to your calendars directory, ie. http://www.example.com/phpicalendar/calendars -- AUTO SETTING -- Only set if you are having subscribe issues.
 		$this->default_path				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
+		$this->cpath	     			= ''; 				// optional subdirectory
 		$this->charset					= 'UTF-8';			// Character set your calendar is in, suggested UTF-8, or iso-8859-1 for most languages.
 		
 		// Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.

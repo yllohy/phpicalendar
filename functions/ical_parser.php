@@ -128,6 +128,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 			$line = trim(stripslashes($line));
 			
 			switch ($line) {
+				case 'BEGIN:VFREEBUSY':
 				case 'BEGIN:VEVENT':
 					// each of these vars were being set to an empty string
 					unset (
@@ -165,7 +166,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					$organizer		= array();
 					
 					break;
-				
+				case 'END:VFREEBUSY':
 				case 'END:VEVENT':
 					include BASE."functions/parse/end_vevent.php";			
 					break;

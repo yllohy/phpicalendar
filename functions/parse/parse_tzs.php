@@ -1,6 +1,6 @@
 <?php
 $ifile = @fopen($filename, "r");
-if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $filename));
+if ($ifile == FALSE) exit(error($lang['l_error_cantopen']." parse_tz", $filename));
 $nextline = fgets($ifile);
 if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal'], $filename));
 

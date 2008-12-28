@@ -41,19 +41,17 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	
 	// This array keeps track of paths we need to search.
 	$search_paths = array($phpiCal_config->calendar_path);
-		
 	// Add web calendars.
 	if ($cal_filename_local[0] == $phpiCal_config->ALL_CALENDARS_COMBINED || $admin)	{
 		if (!isset($http_user) && !$admin) {
 			foreach ($list_webcals as $file) {
 				// Make sure the URL ends with .ics.
-				if (!preg_match("/.ics$/i", $file)) continue;			
+				if (!is_string($file)) continue;			
 				// Add this calendar.
 				array_push($calendars, $file);
 			}
 		}
-	}
-	
+	}	
 	// Set some booleans that will dictate our search.
 	$find_all = ($cal_filename_local[0] == $phpiCal_config->ALL_CALENDARS_COMBINED || $admin);
 	
@@ -74,10 +72,10 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		// used to identify the calendar filename.
 		if ($find_all || $phpiCal_config->recursive_path == 'yes' || $phpiCal_config->support_ical == 'yes') {
 			// Open the directory.
-			$dir_handle = @opendir($search_path)
-				or die(error(sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
+			$dir_handle = opendir($search_path)
+				or die(error("cal fn 78:".sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
 			if ($dir_handle === false)
-				die(error(sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
+				die(error(" cal fn 80:".sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
 				
 			// Add each file in the directory that does not begin with a dot.
 			while (false !== ($file = readdir($dir_handle))) {
@@ -110,7 +108,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			if (in_array($cal_name, $blacklisted_cals)) continue;
 			// If HTTP authenticated, make sure this calendar is available
 			// to the user.
-			if (isset($http_user) && !in_array($cal_name, $apache_map[$http_user])) continue;
+			if (isset($http_user) && isset($apache_map[$http_user]) && !in_array($cal_name, $apache_map[$http_user])) continue;
 
 			// Make sure this calendar is not locked.
 			if (!$admin && in_array($cal_name, $locked_cals) && !in_array($cal_name, $unlocked_cals)) continue;
@@ -157,10 +155,10 @@ function availableCalendarNames($username, $password, $cal_filename, $admin = fa
 //
 // $cal_path	= The path to the calendar file.
 function getCalendarName($cal_path) {
-	global $support_ical;
+	global $phpiCal_config;
 		
 	// If iCal is supported, check the directory for an Info.plist.
-	if ($support_ical == 'yes') {
+	if ($phpiCal_config->support_ical == 'yes') {
 		// Look for the Info.plist file.
 		$plist_filename = dirname($cal_path)."/Info.plist";
 		if (is_file($plist_filename)) {
@@ -186,7 +184,7 @@ function getCalendarName($cal_path) {
 //
 // $cals	= The calendars (entire path, e.g. from availableCalendars).
 function display_ical_list($cals, $pick=FALSE) {
-	global $cal, $current_view, $getdate, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $phpiCal_config;
+	global $cal, $current_view, $getdate, $lang, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $phpiCal_config;
 	// Print each calendar option.
 	$return = '';
 	foreach ($cals as $cal_tmp) {
@@ -216,7 +214,7 @@ function display_ical_list($cals, $pick=FALSE) {
 					if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
 					$property = strtoupper($property);
 					if ($property == "X-WR-CALNAME"){
-						$cal_displayname_tmp = $data;
+						$cal_displayname_tmp = stripslashes($data);
 						break;
 					}
 				}	

@@ -16,7 +16,7 @@ class Page {
 	
 	function draw_admin() {
 		global $phpiCal_config, $getdate, $cal, $master_array, $is_loged_in;
-		
+		$delete_table = '';
 		if ($is_loged_in == TRUE) { 
 			// Print Calendar Checkboxes
 			$COLUMNS_TO_PRINT = 3;
@@ -1062,7 +1062,7 @@ class Page {
 				$file = str_replace("templates/$phpiCal_config->template","templates/default",$file); 
 			}
 			if (!is_file($file)){
-				exit(error($lang['l_error_path'], $file));
+				exit(error($lang['l_error_path']." template 1065", $file));
 			}
 			ob_start();
 			include($file);

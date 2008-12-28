@@ -47,10 +47,10 @@ function login ($username, $password) {
 // arg1: string password
 // returns boolean was login successful
 function login_ftp ($username, $password) {
-	global $ftp_server, $ftp_port;
+	global $phpiCal_config;
 	
 	// set up basic connection
-	$conn_id = @ftp_connect($ftp_server, $ftp_port); 
+	$conn_id = @ftp_connect($phpiCal_config->ftp_server, $phpiCal_config->ftp_port); 
 	if (!$conn_id) exit(error('Cannot connect to FTP server', $filename));
 	// login with username and password
 	$login_result = @ftp_login($conn_id, $username, $password); 
@@ -88,6 +88,7 @@ function delete_cal ($filename) {
 	global $_SESSION;
 	global $phpiCal_config;
 	global $calendar_path;
+	echo $filename;
 	
 	if ($phpiCal_config->auth_method == 'ftp') {
 		$filename = get_ftp_calendar_path() . "/" . $filename;
@@ -115,12 +116,11 @@ function delete_cal ($filename) {
 		return TRUE;
 	} else {
 		#$filename = $calendar_path . "/" . $filename;
-	
 		$delete = unlink($filename); 
 		clearstatcache();
 		if (@file_exists($filename)) { 
 			$filesys = eregi_replace("/","\\", $filename); 
-			$delete = system("del $filesys");
+			$delete = system("rm -f $filesys");
 			clearstatcache();
 			if (@file_exists($filename)) { 
 				$delete = chmod ($filename, 0775); 

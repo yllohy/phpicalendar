@@ -75,14 +75,14 @@ foreach ($cal_filenames as $cal_filename) {
 		substr($cal_filename, 0, 9) == 'webcal://')
 	{
 		#jump sends cal url without .ics extension.  Add it if needed.
-		if (substr($cal_filename, -4) != ".ics") $cal_filename .= ".ics";
+	#	if (substr($cal_filename, -4) != ".ics") $cal_filename .= ".ics";
 		$web_cals[] = $cal_filename;
 	}
 	
 	// Otherwise it is a local calendar.
 	else {
 		// Check blacklisted.
-		if (in_array($cal_filename, $phpiCal_config->blacklisted_cals)  && $cal_filename !='') {
+		if (in_array($cal_filename, $blacklisted_cals)  && $cal_filename !='') {
 			exit(error($lang['l_error_restrictedcal'], $cal_filename));
 		}
 		$local_cals[] = urldecode(str_replace(".ics", '', basename($cal_filename)));

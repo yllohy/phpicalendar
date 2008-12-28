@@ -33,6 +33,7 @@ switch ($current_view){
 		$mArray_begin = mktime (0,0,0,$start_month,1,($start_year));
 		$mArray_end = mktime (0,0,0,$end_month,31,($end_year));
 		break;
+	case 'admin':
 	case 'error':
 	case 'preferences':
 		$mArray_begin = time();

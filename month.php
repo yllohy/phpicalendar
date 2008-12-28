@@ -53,7 +53,6 @@ $login_querys = login_querys();
 $logout_querys = logout_querys();
 
 $page = new Page(BASE.'templates/'.$phpiCal_config->template.'/month.tpl');
-
 $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$phpiCal_config->template.'/header.tpl',
 	'event_js'			=> BASE.'functions/event.js',

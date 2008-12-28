@@ -26,7 +26,7 @@ if (isset($user_template["$cpath"])){
   $template = $user_template["$cpath"]; 
 }
 #set up specific webcals for a particular cpath
-if (isset($more_webcals) && is_array($more_webcals[$cpath])){
-	$list_webcals = array_merge($list_webcals, $more_webcals["$cpath"]);
+if (isset($more_webcals[$cpath]) && is_array($more_webcals[$cpath])){
+	foreach ($more_webcals[$cpath] as $wcal)$list_webcals[] = $wcal;
 }
 $phpiCal_config->setProperty('calendar_path',$calendar_path);
