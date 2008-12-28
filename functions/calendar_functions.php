@@ -14,14 +14,14 @@
 //					  returned.
 function availableCalendars($username, $password, $cal_filename, $admin = false) {
 	// Import globals.
-	global $allow_webcals, $allow_login, $calendar_path, $recursive_path, $support_ical, $locked_map, $apache_map, $lang, $_SERVER, $phpiCal_config;
+	global $list_webcals, $blacklisted_cals, $locked_cals, $locked_map, $apache_map, $lang, $_SERVER, $phpiCal_config;
 
 	// Create the list of available calendars.
 	$calendars = array();
 
 	// Grab any HTTP authentication.
 	unset($http_user);
-	if ((isset($_SERVER['PHP_AUTH_USER'])) && ($allow_login == 'yes')) {
+	if ((isset($_SERVER['PHP_AUTH_USER'])) && ($phpiCal_config->allow_login == 'yes')) {
 		$http_user = $_SERVER['PHP_AUTH_USER'];
 	}
 
@@ -46,7 +46,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	// Add web calendars.
 	if ($cal_filename_local[0] == $phpiCal_config->ALL_CALENDARS_COMBINED || $admin)	{
 		if (!isset($http_user) && !$admin) {
-			foreach ($phpiCal_config->list_webcals as $file) {
+			foreach ($list_webcals as $file) {
 				// Make sure the URL ends with .ics.
 				if (!preg_match("/.ics$/i", $file)) continue;
 				
@@ -74,7 +74,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 		// subdirectory, or we are supporting the iCal repository format.
 		// The latter is necessary because the calendar name cannot be
 		// used to identify the calendar filename.
-		if ($find_all || $recursive_path == 'yes' || $support_ical == 'yes') {
+		if ($find_all || $phpiCal_config->recursive_path == 'yes' || $phpiCal_config->support_ical == 'yes') {
 			// Open the directory.
 			$dir_handle = @opendir($search_path)
 				or die(error(sprintf($lang['l_error_path'], $search_path), implode(',', $cal_filename)));
@@ -114,18 +114,18 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			
 			// Make sure this is not a blacklisted calendar.
 			$cal_name = getCalendarName($file);
-			if (in_array($cal_name, $phpiCal_config->blacklisted_cals)) continue;
+			if (in_array($cal_name, $blacklisted_cals)) continue;
 			
 			// If HTTP authenticated, make sure this calendar is available
 			// to the user.
 			if (isset($http_user)) {
-				if (!in_array($cal_name, $phpiCal_config->apache_map[$http_user])) continue;
+				if (!in_array($cal_name, $apache_map[$http_user])) continue;
 			}
 		
 			// Make sure this calendar is not locked.
 			if (!$admin &&
-				in_array($cal_name, $phpiCal_config->locked_cals) &&
-				!in_array($cal_name, $phpiCal_config->unlocked_cals))
+				in_array($cal_name, $locked_cals) &&
+				!in_array($cal_name, $unlocked_cals))
 			{
 				continue;
 			}

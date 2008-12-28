@@ -74,11 +74,6 @@ class Configs{
 		// Colors will repeat from the beginning for calendars past $this->unique_colors (7 by default), with no limit.
 		$this->unique_colors			= '7';	
 		
-		$this->blacklisted_cals = array();
-		$this->list_webcals = array();
-		$this->locked_cals = array();
-		$this->locked_map = array();
-		$this->verbose_errors = false;
 		return true;
 	}	
 	

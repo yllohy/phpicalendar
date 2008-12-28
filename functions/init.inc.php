@@ -112,7 +112,7 @@ foreach ($web_cals as $web_cal) {
 	// We can only include this web calendar if we allow all web calendars
 	// (as defined by $allow_webcals) or if the web calendar shows up in the
 	// list of web calendars defined in config.inc.php.
-	if ($allow_webcals != 'yes' &&
+	if ($phpiCal_config->allow_webcals != 'yes' &&
 		!in_array($cal_webcalPrefix, $list_webcals) &&
 		!in_array($cal_httpPrefix, $list_webcals) &&
 		!in_array($cal_httpsPrefix, $list_webcals))
@@ -187,19 +187,13 @@ function getmicrotime() {
 
 $uid_list = array();
 #uncomment for diagnostics
-#echo "after init.inc.ics<pre>";
-#echo "cals";
-#print_r($cals);echo"\n\n";
-#echo "cal_filenames";
-#print_r($cal_filenames);echo"\n\n";
-#echo "web_cals";
-#print_r($web_cals);echo"\n\n";
-#echo "local_cals";
-#print_r($local_cals);echo"\n\n";
-#echo "cal_filelist";
-#print_r($cal_filelist);
-#echo "cal_displaynames";
-#print_r($cal_displaynames);
+#echo "after init.inc.ics<pre>"; 
+#echo "cals";print_r($cals);echo"\n\n";
+#echo "cal_filenames";print_r($cal_filenames);echo"\n\n";
+#echo "web_cals";print_r($web_cals);echo"\n\n";
+#echo "local_cals";print_r($local_cals);echo"\n\n";
+#echo "cal_filelist";print_r($cal_filelist);
+#echo "cal_displaynames";print_r($cal_displaynames);
 #echo "</pre><hr>";
 
 ?>

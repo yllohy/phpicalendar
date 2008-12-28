@@ -74,7 +74,8 @@ $blacklisted_cals[] = '';                          // list. This should be the e
 $blacklisted_cals[] = '';                          // the parser will *not* parse any cal that is in this list (it will not be Web accessible)
 // add more lines as necessary
 
-$list_webcals[] = 'http://www.google.com/calendar/ical/jim.hu.biobio%40gmail.com/public/basic.ics';                              // Fill in between the quotes exact URL of a calendar that you wish
+$list_webcals[] = 'http://www.google.com/calendar/ical/jim.hu.biobio%40gmail.com/public/basic.ics';                              // Fill in between the quotes exact URL of a 
+$list_webcals[] = 'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics';						// Fill in between the quotes exact URL of a calendar that you wish calendar that you wish
 $list_webcals[] = '';                              // to show up in your calendar list. You must prefix the URL with http://
 $list_webcals[] = '';                              // or webcal:// and the filename should contain the .ics suffix
 $list_webcals[] = '';                              // $allow_webcals does *not* need to be "yes" for these to show up and work
