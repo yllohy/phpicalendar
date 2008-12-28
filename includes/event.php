@@ -7,7 +7,7 @@ require_once(BASE.'functions/template.php');
 # information for the popup is sent via $_POST by a javascript snippet in 
 # in function openevent() from functions/date_functions.php
 # character encoding has been problematic with popups.
-$event			= unserialize($_POST['event_data']);
+$event			= unserialize(stripslashes($_POST['event_data']));
 $organizer 		= unserialize($event['organizer']);
 $attendee 		= unserialize($event['attendee']);
 
@@ -19,11 +19,11 @@ if ($_POST['time'] == -1) {
 	$event_times = date($timeFormat, $event['start_unixtime']) . ' - ' .  date($timeFormat, $event['end_unixtime']); 
 }
 
-$event['event_text'] = stripslashes(urldecode($event['event_text']));
-$event['description'] 	= stripslashes(urldecode($event['description']));
-$event['location'] = stripslashes(urldecode($event['location']));
+$event['event_text']  = urldecode($event['event_text']);
+$event['description'] = urldecode($event['description']);
+$event['location']    = urldecode($event['location']);
 $display ='';
-if ($event['description']) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
+if (isset($event['description'])) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
 
 if (isset($organizer) && is_array($organizer)) {
 	$i=0;
