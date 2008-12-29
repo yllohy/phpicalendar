@@ -4,7 +4,6 @@ $current_view = 'year';
 require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
-header("Content-Type: text/html; charset=$phpiCal_config->charset");
 
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 $this_day 	= $day_array2[3]; 
@@ -46,6 +45,7 @@ $page = new Page(BASE.'templates/'.$template.'/year.tpl');
 
 $page->replace_files(array(
 	'header'			=> BASE.'templates/'.$template.'/header.tpl',
+	'event_js'			=> BASE.'functions/event.js',
 	'footer'			=> BASE.'templates/'.$template.'/footer.tpl',
     'sidebar'           => BASE.'templates/'.$template.'/sidebar_year.tpl',
     'search_box'        => BASE.'templates/'.$template.'/search_box.tpl'

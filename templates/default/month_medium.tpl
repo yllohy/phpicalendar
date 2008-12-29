@@ -22,8 +22,8 @@
 					<td class="yearon">
 						<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 						<div align="center">
-							{ALLDAY}
-							{EVENT}
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{ALLDAY}</a>
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{EVENT}</a>
 						</div>
 					</td>
 					<!-- switch istoday off -->
@@ -31,8 +31,8 @@
 					<td class="yearreg">
 						<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{DAY}</a>
 						<div align="center">
-							{ALLDAY}
-							{EVENT}
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{ALLDAY}</a>
+							<a class="psf" href="day.php?cal={CAL}&amp;getdate={DAYLINK}">{EVENT}</a>
 						</div>
 					</td>
 					<!-- switch ismonth off -->

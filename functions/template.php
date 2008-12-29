@@ -978,7 +978,7 @@ class Page {
  									$switch['ALLDAY'] .= (isset($val['location']) && $val['location'] != '') ? $val['location']."<br />" : '';
 									$switch['ALLDAY'] .= '</div>';
 								} else {
-									$switch['ALLDAY'] .= '<img src="templates/'.$phpiCal_config->template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
+									$switch['ALLDAY'] = '<img src="templates/'.$phpiCal_config->template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
 							} else {	
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
