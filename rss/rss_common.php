@@ -42,8 +42,13 @@ if (isset($_GET['getdate']) && $_GET['getdate'] !=''){
 switch ($rssview){
 	case 'day':
 		$fromdate = $getdate;
-		$todate = $getdate;
+		$todate = date("Ymd", strtotime($getdate) + 60*60*24);
 		$theview = $lang['l_day'];
+		break;
+	case 'tomorrow':
+		$fromdate = date("Ymd",strtotime('tomorrow'));
+		$todate = date("Ymd", strtotime('tomorrow') + 60*60*24);
+		$theview = $lang['l_tomorrows'] ;
 		break;
 	case 'week':
 		$fromdate = dateOfWeek($getdate, 'Sunday');

@@ -15,9 +15,9 @@
 		<tr>
 			<td align="left" class="V12">
 				<div style="margin-left: 10px; margin-bottom:10px;">
-					<p>{EVENT_TEXT} - <span class="V9">(<i>{EVENT_TIMES}</i>)</span></p>
+					<p><b>{L_SUMMARY}</b>:{EVENT_TEXT} - <span class="V9">(<i>{EVENT_TIMES}</i>)</span></p>
 					<!-- switch description on -->
-					<p>{DESCRIPTION}</p>
+					<p><b>{L_DESCRIPTION}</b>:{DESCRIPTION}</p>
 					<!-- switch description off -->
 					<p>
 					<!-- switch organizer on -->
@@ -32,6 +32,9 @@
 					<!-- switch location on -->
 					<b>{L_LOCATION}</b>: {LOCATION}<br />
 					<!-- switch location off -->
+					<!-- switch url on -->
+					<b>{L_URL}</b>: {URL}<br />
+					<!-- switch url off -->
 					</p>
 				</div>
 			</td>

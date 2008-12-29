@@ -203,7 +203,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 						'class' => $class, 
 						'categories' => $vtodo_categories, 
 						'description' => $description, 
-						'calname' => $actual_calname);
+						'calname' => $actual_calname,
+						'url' => $url
+						);
 					unset ($start_date, $start_time, $due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary, $description);
 					$vtodo_set = FALSE;				
 					break;

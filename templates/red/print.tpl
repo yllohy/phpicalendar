@@ -5,15 +5,16 @@
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr valign="top">
-					<td align="left" width="400" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></td>
+					<td align="left" width="400" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span><br />
+					<a class="psf" href="{DEFAULT_VIEW}.php?cal={CAL}&amp;getdate={GETDATE}&amp;cpath={CPATH}">{L_VIEW_CALENDARS}</a></td>
 					<td valign="top" align="right" width="120" class="navback">	
 						<div style="padding-top: 3px;">
 						<table width="90" border="0" cellpadding="0" cellspacing="0">
 							<tr valign="top">
-								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=day"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" border="0" /></a></td>
-								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=week"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" border="0" /></a></td>
-								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=month"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" border="0" /></a></td>
-								<td><a class="psf" href="print.php?cal={CAL}&amp;getdate={GETDATE}&amp;printview=year"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;cpath={CPATH}&amp;getdate={GETDATE}&amp;printview=day"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" title="{L_DAY}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;cpath={CPATH}&amp;getdate={GETDATE}&amp;printview=week"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" title="{L_WEEK}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;cpath={CPATH}&amp;getdate={GETDATE}&amp;printview=month"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" title="{L_MONTH}" border="0" /></a></td>
+								<td><a class="psf" href="print.php?cal={CAL}&amp;cpath={CPATH}&amp;getdate={GETDATE}&amp;printview=year"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" title="{L_YEAR}" border="0" /></a></td>
 							</tr>
 						</table>
 						</div>
