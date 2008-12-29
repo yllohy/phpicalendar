@@ -338,7 +338,8 @@ foreach($recur_data as $recur_data_unixtime) {
 			'organizer' => serialize($organizer), 
 			'attendee' => serialize($attendee), 
 			'calnumber' => $calnumber, 
-			'calname' => $actual_calname, 
+			'calname' => $actual_calname,
+			'geo' => $geo,
 			'url' => $url, 
 			'recur' => $recur
 			);

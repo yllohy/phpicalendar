@@ -29,7 +29,7 @@
 									<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" title="{L_DAY}" border="0" /></a></td>
 									<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" title="{L_WEEK}" border="0" /></a></td>
 									<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" title="{L_MONTH}" border="0" /></a></td>
-									<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" title="{L_YEAR}" border="0" /></a></td>
+									<td><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" title="{L_YEAR}" border="0" /></td>
 								</tr>
 							</table>
 						</td>

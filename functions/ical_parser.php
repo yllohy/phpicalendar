@@ -134,7 +134,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					unset (
 						$start_time, $end_time, $start_date, $end_date, 
 						$allday_start, $allday_end, $start, $end, $the_duration, 
-						$beginning, $start_of_vevent, $url, 
+						$beginning, $start_of_vevent,
 						$valarm_description, $start_unixtime, $end_unixtime, $display_end_tmp, $end_time_tmp1, 
 						$recurrence_id, $uid, $rrule, $until_check,
 						$until, $byweek, $byweekno, 
@@ -148,6 +148,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					$class = '';
 					$location = '';
 					$url = '';
+					$geo = '';
 					$type = '';
 					$wkst = 'MO';
 					
@@ -204,6 +205,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 						'categories' => $vtodo_categories, 
 						'description' => $description, 
 						'calname' => $actual_calname,
+						'geo' => $geo,
 						'url' => $url
 						);
 					unset ($start_date, $start_time, $due_date, $due_time, $completed_date, $completed_time, $vtodo_priority, $status, $class, $vtodo_categories, $summary, $description);
@@ -262,6 +264,10 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							
 						case 'STATUS':
 							$status = "$data";
+							break;
+
+						case 'GEO':
+							$geo = "$data";
 							break;
 							
 						case 'CLASS':
