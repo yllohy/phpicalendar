@@ -313,7 +313,7 @@ class Page {
 					}
 					$event_calno  	= $allday['calnumber'];
 					$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
- 					$event 			= openevent($get_date, -1, $uid, $allday, $phpiCal_config->allday_week_lines, 11, 'psf');
+ 					$event 			= openevent($get_date, -1, $uid, $allday, $phpiCal_config->allday_week_lines, (8*$colspan), 'psf');
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 					$replace		.= $loop_tmp;

@@ -83,10 +83,10 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 /* Link colors and attributes */
 /* This is the main link style */
 a.psf			{ text-decoration:	none; }
-a.psf:link		{ color: #a01010; }
-a.psf:visited	{ color: #a01010; }
+a.psf:link		{ color: #FF9999; }
+a.psf:visited	{ color: #FF9999; }
 a.psf:active	{ color: #3366CC; }
-a.psf:hover		{ color: #000099; text-decoration: underline; }
+a.psf:hover		{ color: #FF0099; text-decoration: underline; }
 
 /* This is the link style for the mini-cals */	
 a.ps2			{ text-decoration:	underline; }
