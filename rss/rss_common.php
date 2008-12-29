@@ -45,6 +45,11 @@ switch ($rssview){
 		$todate = date("Ymd", strtotime($getdate) + 60*60*24);
 		$theview = $lang['l_day'];
 		break;
+	case 'today':
+		$fromdate = date("Ymd");
+		$todate = date("Ymd", strtotime('tomorrow'));
+		$theview = $lang['l_todays'] ;
+		break;
 	case 'tomorrow':
 		$fromdate = date("Ymd",strtotime('tomorrow'));
 		$todate = date("Ymd", strtotime('tomorrow') + 60*60*24);

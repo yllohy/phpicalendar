@@ -36,6 +36,7 @@ switch ($current_view){
 	case 'admin':
 	case 'error':
 	case 'preferences':
+	case 'rss_index':
 		$mArray_begin = time();
 		$mArray_end = time();
 		break;		

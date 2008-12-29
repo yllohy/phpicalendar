@@ -1,9 +1,9 @@
 <?php
 
 /* Rewritten by J. Hu 4/2/06*/
-$current_view = 'rss';
+$current_view = 'rss_index';
 define('BASE','../');
-require_once(BASE.'functions/ical_parser.php');
+require_once(BASE.'functions/init.inc.php');
 require_once(BASE.'functions/calendar_functions.php');
 
 if ($phpiCal_config->enable_rss != 'yes') {
@@ -18,40 +18,36 @@ if (empty($default_path)) {
 	}
 }
 
-$current_view = "rssindex";
+$current_view = "rss_index";
 $display_date = "RSS Info";
 
-$rss_list = "<table>\n";
+$rss_list = "<table width='90%'>\n";
 $xml_icon ="<img src = 'feed.png' alt='rss icon'>";
-
-$filelist = availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
-foreach ($filelist as $file) {
+$cals[] = '';
+$cal_displaynames[] = $all_cal_comb_lang;
+foreach ($cals as $k=>$file) {
 	// $cal_filename is the filename of the calendar without .ics
 	// $cal is a urlencoded version of $cal_filename
 	// $cal_displayname is $cal_filename with occurrences of "32" replaced with " "
-
-	if (is_numeric(array_search($file, $cal_filelist))){
-		$cal_displayname_tmp = $cal_displaynames[array_search($file,$cal_filelist)];
-	}else{
-		$cal_displayname_tmp = str_replace("32", " ", str_replace(".ics",'',basename($file)));
-	}	
-	$rss_list .= '<tr><td rowspan ="3"><font class="V12" color="blue"><b>'.$cal_displayname_tmp.' '. $lang['l_calendar'].'</b></font></td>';
+	
+	$rss_list .= '<tr><td rowspan ="3"><font class="V12" color="blue"><b>'.$cal_displaynames[$k].' '. $lang['l_calendar'].'</b></font></td>';
 
 /* Changed to show links without urlencode, but links valid urls */
 	$rss_list .= "<td>".$lang['l_day']."</td>";
-	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 0.91</td>';
-	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 0.91</td><td>&nbsp;</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 1.0</td><td>&nbsp;</td>';
 	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=day>'.$xml_icon.'</a> RSS 2.0</td></tr>';
 
 	$rss_list .= "<td>".$lang['l_week']."</td>";
-	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 0.91</td>';
-	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 1.0</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 0.91</td><td>&nbsp;</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 1.0</td><td>&nbsp;</td>';
 	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=week>'.$xml_icon.'</a> RSS 2.0</td></tr>';
 
 	$rss_list .= "<td>".$lang['l_month']."</td>";
-	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 0.91</td>';
-	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 1.0</td>';
-	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 2.0</td></tr>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 0.91</td><td>&nbsp;</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss1.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 1.0</td><td>&nbsp;</td>';
+	$rss_list .= '<td><a href='.$phpiCal_config->default_path.'/rss/rss2.0.php?cal='.rawurlencode($file).'&amp;cpath='.$cpath.'&amp;rssview=month>'.$xml_icon.'</a> RSS 2.0</td>
+	</tr>';
 
 	$footer_check = $phpiCal_config->default_path.'/rss/rss.php?cal%3D'.rawurlencode($file.'&amp;cpath='.$cpath.'&amp;rssview='.$phpiCal_config->default_view);
 	$validrss_check = str_replace('%', '%25', $footer_check);
@@ -78,7 +74,7 @@ $page->replace_tags(array(
 	'template'			=> $phpiCal_config->template,
 	'cal'				=> $cal,
 	'getdate'			=> $getdate,
-	'calendar_name'		=> $calendar_name,
+	'calendar_name'		=> $cal_displayname,
 	'display_date'		=> $display_date,
 	'current_view'		=> $current_view,
 	'sidebar_date'		=> @$sidebar_date,

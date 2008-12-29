@@ -11,7 +11,7 @@ $rss_version = '<rss version="0.91">'."\n";
 require(BASE.'rss/rss_common.php');
 
 function rss_top(){
-	global $cal_displayname, $theview, $default_path, $cpath, $lang, $rss_link, $rss_language;
+	global $cal_displayname, $theview, $phpiCal_config, $cpath, $lang, $rss_link, $rss_language;
 	$rss = 	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\n";
 	$rss .= '<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">'."\n";
 	$rss .= '<rss version="0.91">'."\n";
@@ -26,7 +26,7 @@ function rss_top(){
 	
 	$rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
 	$rss .= '<language>'.$rss_language.'</language>'."\n";
-	$rss .= '<copyright>Copyright '.date(Y).', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
+	$rss .= '<copyright>Copyright '.date("Y").', '.htmlspecialchars ("$default_path").'</copyright>'."\n";
 	return $rss;
 }
 

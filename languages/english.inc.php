@@ -36,6 +36,7 @@ $lang['l_today'] 			= 'Today';
 $lang['l_this_week'] 		= 'This Week';
 $lang['l_this_month'] 		= 'This Month';
 $lang['l_jump'] 			= 'Jump to';
+$lang['l_todays']    		= 'Today\'s Events';
 $lang['l_tomorrows'] 		= 'Tomorrow\'s Events';
 $lang['l_goday'] 			= 'Go to Today';
 $lang['l_goweek'] 			= 'Go to This Week';
