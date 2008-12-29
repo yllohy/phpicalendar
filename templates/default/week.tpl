@@ -51,6 +51,7 @@
 												</td>
 												<!-- loop daysofweek off -->
 											</tr>
+											<!-- loop allday row on -->
 											<tr valign="top" id="allday">
 												<td width="60" class="rowOff2" colspan="4"><img src="images/spacer.gif" width="60" height="1" alt=" " /></td>
 												<td width="1"></td>
@@ -65,6 +66,7 @@
 												</td>
 												<!-- loop alldaysofweek off -->
 											</tr>
+											<!-- loop allday row off -->
 											<!-- loop row on -->
 											<tr>
 												<td rowspan="4" align="center" valign="top" width="60" class="timeborder">9:00 AM</td>

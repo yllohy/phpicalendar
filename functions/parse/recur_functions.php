@@ -10,7 +10,7 @@ We will use two kinds of functions - those that restrict the date to allowed val
 
 function add_recur($times,$freq=''){
 	global $recur_data;
-	global $count, $mArray_begin, $mArray_end, $except_dates, $start_date, $start_date_unixtime,$end_range_unixtime, $day_offset, $current_view;	
+	global $count, $mArray_begin, $mArray_end, $except_dates, $start_date, $start_date_unixtime,$end_range_unixtime,$until_unixtime, $day_offset, $current_view;	
 	if (!is_array($times)) $times = array($times);
 	/*	BYMONTH, BYWEEKNO, BYYEARDAY, BYMONTHDAY, BYDAY, BYHOUR, BYMINUTE, BYSECOND and BYSETPOS	*/
 #dump_times($times);
@@ -27,7 +27,7 @@ function add_recur($times,$freq=''){
 	}
 	$until_date = date("Ymd",$end_range_unixtime);
 	foreach ($times as $time){ 
-		#echo "time:". date("Ymd",$time)."\n";
+		#echo "time:". date("Ymd",$time)." $until_date<br>\n";
 		if (!isset($time) || $time == '') continue;
 		$date = date("Ymd",$time);
 		$time = strtotime("$date 12:00:00");
@@ -38,6 +38,7 @@ function add_recur($times,$freq=''){
 			&& $time != ''
 			&& !in_array($time, $recur_data) 
 			&& !in_array($date, $except_dates) 
+			&& $time <= $until_unixtime 
 			&& $time >= $start_date_unixtime 
 			&& $date <= $until_date
 		){ 

@@ -156,20 +156,20 @@ $timezone_subset = array(
 	'Canada/Newfoundland',
 	'CET',
 	'EET',
-	'Etc/GMT-1',
-	'Etc/GMT-2',
-	'Etc/GMT-3',
-	'Etc/GMT-4',
-	'Etc/GMT-5',
-	'Etc/GMT-6',
-	'Etc/GMT-7',
-	'Etc/GMT-8',
-	'Etc/GMT-9',
-	'Etc/GMT-10',
-	'Etc/GMT-11',
-	'Etc/GMT-12',
-	'Etc/GMT-13',
 	'Etc/GMT-14',
+	'Etc/GMT-13',
+	'Etc/GMT-12',
+	'Etc/GMT-11',
+	'Etc/GMT-10',
+	'Etc/GMT-9',
+	'Etc/GMT-8',
+	'Etc/GMT-7',
+	'Etc/GMT-6',
+	'Etc/GMT-5',
+	'Etc/GMT-4',
+	'Etc/GMT-3',
+	'Etc/GMT-2',
+	'Etc/GMT-1',
 	'Etc/GMT+1',
 	'Etc/GMT+2',
 	'Etc/GMT+3',
@@ -187,12 +187,13 @@ $timezone_subset = array(
 	'NZ',
 	'WET'
 );
+
 $timezone_select = '';
-foreach ($timezone_subset as $i => $timezone) {
-	if ($timezone_subset[$i] == $cookie_timezone) {
+foreach ($timezone_subset as $timezone) {
+	if ($timezone == $cookie_timezone) {
 		$timezone_select .= "<option value='$timezone' selected='selected'>$timezone</option>\n";
 	} else {
-		$timezone_select .= "<option value='$timezone.'>$timezone</option>\n";
+		$timezone_select .= "<option value='$timezone'>$timezone</option>\n";
 	}
 }
 
@@ -208,9 +209,6 @@ while ($file = readdir($dir_handle)) {
 	}
 }
 closedir($dir_handle);
-
-$php_ended = getmicrotime();
-$generated = number_format(($php_ended-$php_started),3);
 
 $page = new Page(BASE.'templates/'.$phpiCal_config->template.'/preferences.tpl');
 
@@ -242,7 +240,6 @@ $page->replace_tags(array(
 	'startday_select' 	=> $startday_select,
 	'style_select' 		=> $style_select,
 	'display_date'	 	=> $lang['l_preferences'],
-	'generated'	 		=> $generated,
 	'message'	 		=> $message,
 	'l_preferences'		=> $lang['l_preferences'],
 	'l_prefs_subhead'	=> $lang['l_prefs_subhead'],

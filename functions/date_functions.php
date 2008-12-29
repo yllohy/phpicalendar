@@ -153,16 +153,33 @@ function chooseOffset($time, $timezone = '') {
 	}
 	return $offset;
 }
-
+/* Returns a string to make event text with a link to popup boxes 
+	$arr is a master array item
+	$lines is the number of lines to restrict the event_text to, using word_wrap
+	$length is the length of one line
+	$link_class is a css class
+	$pre_text and $post_text are to add tags around the link text (e.g. <b> or<i>)
+	
+	$title is the tooltip for the link
+*/
 function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
-	global $cpath, $master_array;
+	global $cpath, $timeFormat, $dateFormat_week;
 	$return = '';
 	$event_text = stripslashes(urldecode($arr["event_text"]));
-	if (empty($start)) {
+	# build tooltip
+	if ($time == -1) {
+		$start = localizeDate($dateFormat_week, $arr['start_unixtime']);
+		$end   = localizeDate($dateFormat_week, ($arr['end_unixtime'] - 60));
 		$title = $event_text;
+		if ($start != $end) $title = "$start - $end $event_text";
 	} else {
-		$title = $arr['event_start'].' - '.$arr['event_end'].': '.$event_text;
+		$start = date($timeFormat, $arr['start_unixtime']);
+		$end = date($timeFormat, $arr['end_unixtime']);
+		$title = "$start: $event_text";
+		if ($start != $end) $title = "$start - $end $event_text";
 	}
+	$title .= "\n".urldecode($arr['description'])."\n".urldecode($arr['location']);
+	$title = trim($title);
 	# for iCal pseudo tag <http> comptability
 	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) {
 		$full_event_text = $matches[1] . $matches[2];
@@ -181,14 +198,14 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 			$escaped_date = addslashes($event_date);
 			$escaped_time = addslashes($time);
 			$escaped_uid  = addslashes($uid);
-			$event_data   = addslashes(serialize ($master_array[$event_date][$time][$uid]));
+			$event_data   = addslashes(serialize ($arr));
 			// fix for URL-length bug in IE: populate and submit a hidden form on click
 			static $popup_data_index = 0;
-$return = "
-    <script language=\"Javascript\" type=\"text/javascript\"><!--
-    var eventData = new EventData('$escaped_date', '$escaped_time', '$escaped_uid','$cpath','$event_data');
-    document.popup_data[$popup_data_index] = eventData;
-    // --></script>";
+			$return = "
+				<script language='Javascript' type='text/javascript'><!--
+				var eventData = new EventData('$escaped_date', '$escaped_time', '$escaped_uid','$cpath','$event_data');
+				document.popup_data[$popup_data_index] = eventData;
+				// --></script>";
 
 			$return .= '<a class="'.$link_class.'" title="'.$title.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
 			$popup_data_index++;

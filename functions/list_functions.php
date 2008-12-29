@@ -76,13 +76,13 @@ function list_years() {
 
 
 function list_weeks() {
-	global $getdate, $this_year, $cal, $dateFormat_week_jump, $week_start_day;
+	global $getdate, $this_year, $cal, $dateFormat_week_jump, $phpiCal_config;
 	ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
 	$this_day 			= $day_array2[3]; 
 	$this_month 		= $day_array2[2];
 	$this_year 			= $day_array2[1];
 	$check_week 		= strtotime($getdate);
-	$start_week_time 	= strtotime(dateOfWeek(date("Ymd", strtotime("$this_year-01-01")), $week_start_day));
+	$start_week_time 	= strtotime(dateOfWeek(date("Ymd", strtotime("$this_year-01-01")), $phpiCal_config->week_start_day));
 	$end_week_time 		= $start_week_time + (6 * 25 * 60 * 60);
 	$return = '';
 		

@@ -22,7 +22,7 @@ class Configs{
 		$this->day_end					= '2000';			// End time for day grid
 		$this->gridLength 				= '15';				// Grid distance in minutes for day view, multiples of 15 preferred
 		$this->num_years 				= '1';				// Number of years (up and back) to display in 'Jump to'
-		$this->month_event_lines 		= '1';				// Number of lines to wrap each event title in month view, 0 means display all lines.
+		$this->month_event_lines 		= '0';				// Number of lines to wrap each event title in month view, 0 means display all lines.
 		$this->tomorrows_events_lines 	= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.
 		$this->allday_week_lines 		= '1';				// Number of lines to wrap each event title in all-day events in week view, 0 means display all lines.
 		$this->week_events_lines 		= '1';				// Number of lines to wrap each event title in the 'Tommorrow's events' box, 0 means display all lines.

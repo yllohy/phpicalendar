@@ -2,6 +2,7 @@
 $current_view = "event";
 define('BASE', '../');
 include_once(BASE.'functions/init.inc.php'); 
+require_once(BASE.'functions/date_functions.php');
 require_once(BASE.'functions/template.php');
 
 # information for the popup is sent via $_POST by a javascript snippet in 
@@ -14,9 +15,15 @@ $attendee 		= unserialize($event['attendee']);
 // Format event time
 // All day
 if ($_POST['time'] == -1) {
-	$event_times = $lang['l_all_day'];
+	$start = localizeDate($dateFormat_week, $event['start_unixtime']);
+	$end   = localizeDate($dateFormat_week, ($event['end_unixtime'] - 60));
+	$event_times = $lang['l_all_day']." $start";
+	if ($start != $end) $event_times = "$start - $end";
 } else {
-	$event_times = date($timeFormat, $event['start_unixtime']) . ' - ' .  date($timeFormat, $event['end_unixtime']); 
+	$start = date($timeFormat, $event['start_unixtime']);
+	$end   = date($timeFormat, $event['end_unixtime']);
+	$event_times = "$start";
+	if ($start != $end) $event_times = "$start - $end";
 }
 
 $event['event_text']  = urldecode($event['event_text']);

@@ -124,9 +124,9 @@ foreach ($rrule_array as $key => $val) {
 			break;
 		case 'UNTIL':
 			# UNTIL must be in UTC
-			$until = date("YmdHis",strtotime($val));
+			$until = date("YmdHis",strtotime($val)); 
 			ereg ('([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})', $until, $regs);
-			$until_unixtime = mktime($regs[4],$regs[5],@$regs[6],$regs[2],$regs[3],$regs[1]); 
+			$until_unixtime = mktime($regs[4],@$regs[5],@$regs[6],$regs[2],$regs[3],$regs[1]);
 			$recur_array[($start_date)][($hour.$minute)][$uid]['recur'][$key] = localizeDate($dateFormat_week,$until);
 			break;
 		case 'INTERVAL':
@@ -181,7 +181,8 @@ foreach ($rrule_array as $key => $val) {
 $wkst3char = two2threeCharDays($wkst);
 if($current_view == 'search') $freq_type = 'none'; 
 # $recur is the recurrence info that goes into the master array for this VEVENT
-$recur = @$recur_array[($start_date)][($hour.$minute)][$uid]['recur']; 
+$recur ='';
+if (isset($recur_array[($start_date)][($hour.$minute)][$uid]['recur'])) $recur = $recur_array[($start_date)][($hour.$minute)][$uid]['recur']; 
 
 /* ============================ Load $recur_data ============================
 $recur_data is an array of unix times for days of recurrences of an event.  This code handles repeats at the day level or above.  The next loop handles the times.
@@ -214,7 +215,7 @@ if($count == 1000000 && $interval == 1 && $mArray_begin > $next_range_unixtime) 
 if ($next_range_unixtime < $start_date_unixtime) $next_range_unixtime = $start_date_unixtime;
 
 # 	stop at the until limit if set
-if(isset($until) && $end_range_unixtime > $until_unixtime) $end_range_unixtime = $until_unixtime;
+if(isset($until) && $end_range_unixtime > $until_unixtime) $end_range_unixtime = $until_unixtime;else $until_unixtime = $mArray_end;
 
 # 	more adjustments
 switch ($freq_type){
@@ -257,10 +258,10 @@ while ($next_range_unixtime <= $end_range_unixtime && $count > 0) {
 			}
 			break;
 		case 'year':
-			$times = expand_bymonth($time); #echo "exp bymonth";dump_times($times);
-			$times = expand_byweekno($times); #echo "exp byweekno";dump_times($times);
-			$times = expand_byyearday($times); #echo "exp byyearday";dump_times($times);
-			$times = expand_bymonthday($times); #echo "\nexp bymonthday";dump_times($times);
+			$times = expand_bymonth($time);      #echo "exp bymonth";dump_times($times);
+			$times = expand_byweekno($times);    #echo "exp byweekno";dump_times($times);
+			$times = expand_byyearday($times);   #echo "exp byyearday";dump_times($times);
+			$times = expand_bymonthday($times);  #echo "\nexp bymonthday";dump_times($times);
 			foreach($times as $time){ 
 				add_recur(expand_byday($time));
 			}
@@ -319,7 +320,7 @@ foreach($recur_data as $recur_data_unixtime) {
 			# the day is not the last day of the recurrence
 			if ($this_date_tmp < $end_date_tmp) $display_end_tmp = '2400';
 		}
-		if($this_date_tmp == $end_date_tmp && ($end_time == '0000' ||$time_key == -1)) continue;
+		if($this_date_tmp == $end_date_tmp && ($end_time == '0000' && $time_key == -1)) continue;
 		$master_array[$this_date_tmp][$time_key][$uid] = array (
 			'event_start' => $start_time,                	# hhmm
 			'event_end' => $end_time,                    	# hhmm

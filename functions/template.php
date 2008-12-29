@@ -65,10 +65,11 @@ class Page {
 
 		$seen_events = array();
 		$final = '';
+		$events_week = 0;
 		foreach($master_array as $key => $val) {
 			preg_match ('/([0-9]{6})([0-9]{2})/', $key, $regs);
 			if (((@$regs[1] == $parse_month) && ($printview == 'month')) || (($key == $getdate) && ($printview == 'day')) || ((($key >= $week_start) && ($key <= $week_end)) && ($printview == 'week')) || ((substr(@$regs[1],0,4) == $parse_year) && ($printview == 'year'))) {
-				@$events_week++;
+				$events_week++;
 				$dayofmonth = strtotime ($key);
 				$dayofmonth = localizeDate ($dateFormat_day, $dayofmonth);
 				$events_tmp = $loop_event;
@@ -86,10 +87,10 @@ class Page {
 						$day_events++;
 					if (isset($new_val2['event_text'])) {	
 						$event_text 	= stripslashes(urldecode($new_val2['event_text']));
-						$location 	= stripslashes(urldecode(@$new_val2['location']));
-						$description 	= stripslashes(urldecode(@$new_val2['description']));
-						$event_start 	= @$new_val2['event_start'];
-						$event_end 		= @$new_val2['event_end'];
+						$location 	= stripslashes(urldecode($new_val2['location']));
+						$description 	= stripslashes(urldecode($new_val2['description']));
+						$event_start 	= $new_val2['event_start'];
+						$event_end 		= $new_val2['event_end'];
 						if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
 							if (!isset($new_val2['event_start'])) { 
 								$event_start = $lang['l_all_day'];
@@ -271,14 +272,65 @@ class Page {
 		}
 		#echo "<pre>";print_r($nbrGridCols);
 		// Replaces the allday events
+		preg_match("!<\!-- loop allday row on -->(.*)<\!-- loop alldaysofweek on -->!Uis", $this->page, $match1);
+		$loop_row_begin = trim($match1[1]); # <tr>etc 
 		preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
 		preg_match("!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!Uis", $this->page, $match2);
 		preg_match("!<\!-- loop allday off -->(.*)<\!-- loop alldaysofweek off -->!Uis", $this->page, $match3);
-		$loop_ad 	= trim($match1[1]);
-		$loop_begin = trim($match2[1]);
-		$loop_end 	= trim($match3[1]);
+		$loop_ad 	= trim($match1[1]); # one day cell
+		$loop_begin = trim($match2[1]); # <td> 
+		$loop_end 	= trim($match3[1]); # </td>
+		preg_match("!<\!-- loop alldaysofweek off -->(.*)<\!-- loop allday row off -->!Uis", $this->page, $match3);
+		$loop_row_end 	= trim($match3[1]); # </tr>
+		$allday_uids = array();
+		$allday_uid_dates = array();
 		$weekreplace = '';
-		foreach ($weekarray as $get_date) {
+		foreach ($weekarray as $i=>$get_date){
+			if (isset($master_array[$get_date]['-1']) && is_array($master_array[$get_date]['-1']) && !empty($master_array[$get_date]['-1'])){
+				foreach ($master_array[$get_date]['-1'] as $uid => $allday){ 
+					if (!array_key_exists($uid, $allday_uids)) $allday_uids[$uid] = $get_date;
+					$allday_uid_dates[$uid][] = $get_date;	
+				}	
+			}
+		}
+		# new allday routine is better for multiday events
+		while(!empty($allday_uids)){
+			$row = $loop_row_begin;
+			$day = 0;
+			$replace ='';
+			while ($day < $phpiCal_config->week_length){
+				$colspan  = 0;
+				$replace  .= $loop_begin; # <td>
+				if(array_search($weekarray[$day], $allday_uids)){ 
+					$uid = array_search($weekarray[$day], $allday_uids);
+					unset($allday_uids[$uid]);
+					$allday = $master_array[$weekarray[$day]]['-1'][$uid];
+					foreach ($allday_uid_dates[$uid] as $date){
+						#$ev = (!isset($ev)) ? "  $uid ":"";
+						#$replace .= $ev;
+						$colspan += $nbrGridCols[$weekarray[$day]];
+						$day++;
+					}
+					$event_calno  	= $allday['calnumber'];
+					$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
+ 					$event 			= openevent($get_date, -1, $uid, $allday, $phpiCal_config->allday_week_lines, 11, 'psf');
+					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
+					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
+					$replace		.= $loop_tmp;
+					$replace .= $loop_end;
+				}else{
+					$colspan	= $nbrGridCols[$weekarray[$day]];
+					$replace .= $loop_end;
+					$day++;
+				}	
+				unset ($ev);
+				$replace 	= str_replace('{COLSPAN}', "colspan='$colspan'", $replace);
+			} 
+			$row .= "$replace $loop_row_end\n";
+			$weekreplace .= "$row\n";
+		}
+		/* old routine
+		foreach ($weekarray as $i=>$get_date) {
 			$replace 	= $loop_begin;
 			$colspan	= 'colspan="'.$nbrGridCols[$get_date].'"';
 			$replace 	= str_replace('{COLSPAN}', $colspan, $replace);
@@ -286,7 +338,7 @@ class Page {
 				foreach ($master_array[$get_date]['-1'] as $uid => $allday) {
 					$event_calno  	= $allday['calnumber'];
 					$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
- 					$event 			= openevent($get_date, -1, $uid, $allday, 1, 11, 'psf');
+ 					$event 			= openevent($get_date, -1, $uid, $allday, $phpiCal_config->allday_week_lines, 11, 'psf');
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
 					$replace		.= $loop_tmp;
@@ -295,6 +347,7 @@ class Page {
 			$replace .= $loop_end;
 			$weekreplace .= $replace;
 		}
+		*/
 		$this->page = preg_replace('!<\!-- loop alldaysofweek on -->.*<\!-- loop alldaysofweek off -->!Uis', $weekreplace, $this->page);
 		
 		// Replaces the daysofweek
@@ -726,10 +779,10 @@ class Page {
 					$event_text = strip_tags($event_text, '<b><i><u>');
 					if ($event_text != "") {
 						if (!isset($val["event_start"])) {
-							$return_adtmp = openevent($next_day, $cal_time, $uid, $val, $tomorrows_events_lines, 21, 'psf');
+							$return_adtmp = openevent($next_day, $cal_time, $uid, $val, $phpiCal_config->tomorrows_events_lines, 21, 'psf');
 							$replace_ad  .= str_replace('{T_ALLDAY}', $return_adtmp, $loop_t_ad);
 						} else {
-							$return_etmp  = openevent($next_day, $cal_time, $uid, $val, $tomorrows_events_lines, 21, 'ps3');
+							$return_etmp  = openevent($next_day, $cal_time, $uid, $val, $phpiCal_config->tomorrows_events_lines, 21, 'ps3');
 							$replace_e   .= str_replace('{T_EVENT}', $return_etmp, $loop_t_e);
 						}
 					}
@@ -910,6 +963,7 @@ class Page {
 			} else {
 				$temp = $t_month[2];
 			}
+			$switch['ALLDAY'] = $switch['EVENT'] = '';
 			if (isset($master_array[$daylink]) && $i <= $phpiCal_config->week_length) {
 				if ($type != 'small') {
 					foreach ($master_array[$daylink] as $cal_time => $event_times) {
@@ -920,7 +974,7 @@ class Page {
 							if ($cal_time == -1) {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
- 									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 15, 'psf');
+ 									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 15, 'psf');
  									$switch['ALLDAY'] .= (isset($val['location']) && $val['location'] != '') ? $val['location']."<br />" : '';
 									$switch['ALLDAY'] .= '</div>';
 								} else {
@@ -929,8 +983,8 @@ class Page {
 							} else {	
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								if ($type == 'large') {
-									@$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
- 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $month_event_lines, 10, 'ps3', "$start2 ").'';
+									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
+ 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 10, 'ps3', "$start2 ").'';
  									$switch['EVENT'] .= (isset($val['location']) && $val['location'] != '') ? "<br />".$val['location']."<br />" : '';
 									$switch['EVENT'] .= '</div>';
 								} else {
@@ -1008,7 +1062,7 @@ class Page {
 						$switch['CALNAME'] 	= $val['calname'];
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
-							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, @$month_event_lines, 15, 'psf');
+							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 15, 'psf');
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
 						} else {
 							$event_start = $val['start_unixtime'];
