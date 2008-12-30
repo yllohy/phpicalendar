@@ -10,7 +10,6 @@ What happens in this file:
 2. Build recur_data array
 3. Add occurrences to master_array
 */
-
 if (!isset($start_date)) $start_date = "19700101";
 
 // CLASS support
@@ -320,7 +319,7 @@ foreach($recur_data as $recur_data_unixtime) {
 			# the day is not the last day of the recurrence
 			if ($this_date_tmp < $end_date_tmp) $display_end_tmp = '2400';
 		}
-		if($this_date_tmp == $end_date_tmp && ($end_time == '0000' && $time_key == -1)) continue;
+		if($this_date_tmp == $end_date_tmp && ($end_time == '0000')) continue;
 		$master_array[$this_date_tmp][$time_key][$uid] = array (
 			'event_start' => $start_time,                	# hhmm
 			'event_end' => $end_time,                    	# hhmm

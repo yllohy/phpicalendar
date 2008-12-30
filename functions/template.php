@@ -563,7 +563,7 @@ class Page {
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$start_day 			= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
-		for ($i=0; $i<$phpiCal_config->week_length; $i++) {
+		for ($i=0; $i< $phpiCal_config->week_length; $i++) {
 			$day_num 		= date("w", $start_day);
 			$daylink		= date('Ymd', $start_wt);
 			if ($current_view == 'day') {
@@ -645,7 +645,7 @@ class Page {
 			// check for eventstart 
 			if (isset($this_time_arr) && sizeof($this_time_arr) > 0) {
 				foreach ($this_time_arr as $eventKey => $loopevent) {
-					$drawEvent = drawEventTimes ($cal_time, $loopevent['event_end']);
+					$drawEvent = drawEventTimes ($cal_time, $loopevent['display_end']);
 					$j = 0;
 					while (isset($event_length[$j])) {
 						if ($event_length[$j]['state'] == 'ended') {
@@ -697,11 +697,6 @@ class Page {
 						  }
 						  $event_length[$i]['state'] = 'started';
  						  $uid = $event_length[$i]['key'];
- 						  $event_start 	= strtotime ($this_time_arr[$uid]['event_start']);
- 						  $event_end	= strtotime ($this_time_arr[$uid]['event_end']);
- 						  if (isset($this_time_arr[$uid]['display_end'])) $event_end = strtotime ($this_time_arr[$uid]['display_end']);
-						  $event_start 	= date ($timeFormat, $event_start);
-						  $event_end	= date ($timeFormat, $event_end);
  						  $event_calno  = $this_time_arr[$uid]['calnumber'];
  						  $event_recur  = $this_time_arr[$uid]['recur'];
  						  $event_status = strtolower($this_time_arr[$uid]['status']);
@@ -716,8 +711,8 @@ class Page {
 						  $event_temp  = $loop_event;
 						  $event 	   = openevent($getdate, $cal_time, $uid, $this_time_arr[$uid], 0, 0, 'ps');
 						  $event_temp  = str_replace('{EVENT}', $event, $event_temp);
-						  $event_temp  = str_replace('{EVENT_START}', $event_start, $event_temp);
-						  $event_temp  = str_replace('{EVENT_END}', $event_end, $event_temp);
+						  $event_temp  = str_replace('{EVENT_START}', date($timeFormat, $this_time_arr[$uid]['start_unixtime']), $event_temp);
+						  $event_temp  = str_replace('{EVENT_END}', date($timeFormat, $this_time_arr[$uid]['end_unixtime']), $event_temp);
 						  $event_temp  = str_replace('{CONFIRMED}', $confirmed, $event_temp);
 						  $event_temp  = str_replace('{EVENT_CALNO}', $event_calno, $event_temp);
 						  $daydisplay .= $event_temp;
@@ -1068,7 +1063,7 @@ class Page {
 							$event_start = $val['start_unixtime'];
 							$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
 							$event_start = date($timeFormat, $val['start_unixtime']);
-							$event_end   = date($timeFormat, @strtotime ($event_end));
+							$event_end   = date($timeFormat, $val['end_unixtime']);
 							$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
 							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, 0, 15, 'psf');
 							$switch['DESCRIPTION'] 	= urldecode($val['description']);
