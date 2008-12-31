@@ -970,7 +970,7 @@ class Page {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
  									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 15, 'psf');
- 									$switch['ALLDAY'] .= (isset($val['location']) && $val['location'] != '') ? $val['location']."<br />" : '';
+ 									$switch['ALLDAY'] .= (isset($val['location']) && $val['location'] != '' && $phpiCal_config->month_locations == 'yes') ? $val['location']."<br />" : '';
 									$switch['ALLDAY'] .= '</div>';
 								} else {
 									$switch['ALLDAY'] = '<img src="templates/'.$phpiCal_config->template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
@@ -980,7 +980,7 @@ class Page {
 								if ($type == 'large') {
 									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
  									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 10, 'ps3', "$start2 ").'';
- 									$switch['EVENT'] .= (isset($val['location']) && $val['location'] != '') ? "<br />".$val['location']."<br />" : '';
+ 									$switch['EVENT'] .= (isset($val['location']) && $val['location'] != '' && $phpiCal_config->month_locations == 'yes') ? "<br />".$val['location']."<br />" : '';
 									$switch['EVENT'] .= '</div>';
 								} else {
 									$switch['EVENT'] = '<img src="templates/'.$phpiCal_config->template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';

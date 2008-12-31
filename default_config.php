@@ -38,6 +38,7 @@ class Configs{
 		
 		// Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 		$this->allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $this->cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
+		$this->month_locations  		= 'yes';			// Display location in the month view.
 		$this->this_months_events 		= 'yes';			// Display "This month's events" at the bottom off the month page.
 		$this->enable_rss				= 'yes';			// Enable RSS access to your calendars (good thing).
 		$this->rss_link_to_event		= '';				// Set to yes to have links in the feed popup an event window.  Default is to link to day.php

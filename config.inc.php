@@ -51,15 +51,16 @@ phpicalendar currently supports about 30 language variants.  For a list of suppo
 #     'language'             => 'Spanish',
 #     'default_cal'          => 'US Holidays',	   // Exact filename of calendar without .ics.
 #     'template'             => 'green';           // Template support: change this to have a different "skin" for your installation.     
- #    'default_view'         => 'year',           // Default view for calendars'     => 'day', 'week', 'month', 'year'
+#    'default_view'         => 'year',           // Default view for calendars'     => 'day', 'week', 'month', 'year'
 #      'printview_default'    => 'yes',	           // Set print view as the default view. Uses'default_view (listed above).
 #     'gridLength'           => 10,                // Grid size in day and week views. Allowed values are 1,2,3,4,10,12,15,20,30,60. Default is 15
 #     'minical_view'         => 'current',	       // Where do the mini-calendars go when clicked?'     => 'day', 'week', 'month', 'current'
 #     'allow_preferences'    => 'no', 
+     'month_locations'      => 'no',
 #     'show_search'          => 'yes',
 #     'show_todos'           => 'no',
 #     'show_completed'       => 'no',
-      'allow_login'          => 'yes',	           // Set to yes to prompt for login to unlock calendars.
+#     'allow_login'          => 'yes',	           // Set to yes to prompt for login to unlock calendars.
 #     'week_start_day'       => 'Monday',          // Day of the week your week starts on
 #     'week_length'          => '5',	           // Number of days to display in the week view
 #     'day_start'            => '0600',	           // Start time for day grid
