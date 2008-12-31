@@ -29,10 +29,22 @@ if ($action == 'setcookie') {
 	$cookie_style 		= $_POST['cookie_style'];
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
+	$cookie_timeformat	= $_POST['cookie_timeformat'];
 	$cookie_endtime		= $_POST['cookie_endtime'];
 	$cookie_timezone	= $_POST['cookie_timezone'];
 	$cookie_unset		= @$_POST['unset'];
-	$the_cookie = array ("cookie_language" => "$cookie_language", "cookie_calendar" => "$cookie_calendar", "cookie_view" => "$cookie_view", "cookie_startday" => "$cookie_startday", "cookie_style" => "$cookie_style", "cookie_time" => "$cookie_time","cookie_endtime" => "$cookie_endtime", "cookie_cpath"=>"$cookie_cpath", "cookie_timezone"=>"$cookie_timezone");
+	$the_cookie = array (
+		"cookie_language"   => "$cookie_language", 
+		"cookie_calendar"   => "$cookie_calendar", 
+		"cookie_view"       => "$cookie_view", 
+		"cookie_startday"   => "$cookie_startday", 
+		"cookie_style"      => "$cookie_style", 
+		"cookie_time"       => "$cookie_time",
+		"cookie_endtime"    => "$cookie_endtime",
+		"cookie_timeformat" => "$cookie_timeformat", 
+		"cookie_cpath"      => "$cookie_cpath", 
+		"cookie_timezone"   => "$cookie_timezone"
+		);
 	$the_cookie 		= serialize($the_cookie);
 	if ($cookie_unset) { 
 		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$phpiCal_config->cookie_uri",0);
@@ -59,22 +71,24 @@ if (isset($_COOKIE[$cookie_name])) {
 	$cookie_startday	= $phpicalendar['cookie_startday'];
 	$cookie_time		= $phpicalendar['cookie_time'];
 	$cookie_endtime		= $phpicalendar['cookie_endtime'];
+	$cookie_timeformat	= $phpicalendar['cookie_timeformat'];
 	$cookie_timezone	= $phpicalendar['cookie_timezone'];
 	if ($cookie_unset) { 
-		unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style,$cookie_startday);
+		unset ($cookie_language, $cookie_calendar, $cookie_view, $cookie_style, $cookie_startday, $cookie_time, $cookie_endtime, $cookie_timeformat, $cookie_timezone);
 	}
 }
 
 if ((!isset($_COOKIE[$cookie_name])) || ($cookie_unset)) {
 	# No cookie set -> use defaults from config file.
-	$cookie_language = ucfirst($language);
-	$cookie_calendar = $phpiCal_config->default_cal;
-	$cookie_view = $phpiCal_config->default_view;
-	$cookie_style = $phpiCal_config->template;
-	$cookie_startday = $phpiCal_config->week_start_day;
-	$cookie_time = $phpiCal_config->day_start;
-	$cookie_endtime = $phpiCal_config->day_end;
-	$cookie_timezone = $phpiCal_config->timezone;
+	$cookie_language 	= ucfirst($language);
+	$cookie_calendar 	= $phpiCal_config->default_cal;
+	$cookie_view     	= $phpiCal_config->default_view;
+	$cookie_style   	= $phpiCal_config->template;
+	$cookie_startday 	= $phpiCal_config->week_start_day;
+	$cookie_time    	= $phpiCal_config->day_start;
+	$cookie_endtime 	= $phpiCal_config->day_end;
+	$cookie_timeformat 	= $timeFormat;
+	$cookie_timezone 	= $phpiCal_config->timezone;
 }
 
 if ($action == 'setcookie') { 
@@ -108,8 +122,8 @@ $calendar_select = display_ical_list(availableCalendars($username, $password, $p
 $calendar_select .="<option value=\"$phpiCal_config->ALL_CALENDARS_COMBINED\">$all_cal_comb_lang</option>";
 $calendar_select = str_replace("<option value=\"$cookie_calendar\">","<option value=\"$cookie_calendar\" selected='selected'>",$calendar_select);
 // select for dayview
-$view_select 	= ($phpiCal_config->default_view == 'day') ? '<option value="day" selected="selected">{L_DAY}</option>' : '<option value="day">{L_DAY}</option>';
-$view_select    .= ($phpiCal_config->default_view == 'week') ? '<option value="week" selected="selected">{L_WEEK}</option>' : '<option value="week">{L_WEEK}</option>';
+$view_select 	 = ($phpiCal_config->default_view == 'day'  ) ? '<option value="day" selected="selected">{L_DAY}</option>'     : '<option value="day">{L_DAY}</option>';
+$view_select    .= ($phpiCal_config->default_view == 'week' ) ? '<option value="week" selected="selected">{L_WEEK}</option>'   : '<option value="week">{L_WEEK}</option>';
 $view_select    .= ($phpiCal_config->default_view == 'month') ? '<option value="month" selected="selected">{L_MONTH}</option>' : '<option value="month">{L_MONTH}</option>';
 
 // select for time
@@ -131,6 +145,24 @@ for ($i = 000; $i <= 2400; $i += 100) {
 		$endtime_select .= ' selected="selected"';
 	}
 	$endtime_select .= ">$s</option>\n";
+}
+$timeformat_arr = array(
+	'g:i',
+	'h:i',
+	'g:i A',
+	'h:i A',
+	'G:i',
+	'H:i',
+);
+$example_time = strtotime("19700101 08:00:00");
+$timeformat_select = '';
+foreach ($timeformat_arr as $i => $s) {
+	$s = date($timeformat_arr[$i], $example_time)."/".date($timeformat_arr[$i], ($example_time + 12*60*60));
+	$timeformat_select .= '<option value="'.$timeformat_arr[$i].'"';
+	if ($timeformat_arr[$i] == $cookie_timeformat) {
+		$timeformat_select .= ' selected="selected"';
+	}
+	$timeformat_select .= ">$s</option>\n";
 }
 
 // select for day of week
@@ -237,6 +269,7 @@ $page->replace_tags(array(
 	'view_select' 		=> $view_select,
 	'time_select' 		=> $time_select,
 	'endtime_select'	=> $endtime_select,
+	'timeformat_select'	=> $timeformat_select,
 	'startday_select' 	=> $startday_select,
 	'style_select' 		=> $style_select,
 	'display_date'	 	=> $lang['l_preferences'],
@@ -248,6 +281,7 @@ $page->replace_tags(array(
 	'l_select_time'		=> $lang['l_select_time'],
 	'l_select_timezone'	=> $lang['l_select_timezone'],
 	'l_select_endtime'	=> $lang['l_select_endtime'],
+	'l_select_timeformat'=> $lang['l_select_timeformat'],
 	'l_select_day'		=> $lang['l_select_day'],
 	'l_select_cal'		=> $lang['l_select_cal'],
 	'l_select_style'	=> $lang['l_select_style'],

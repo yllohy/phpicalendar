@@ -27,7 +27,6 @@ $phpiCal_config->setProperty('gridLength', $g);
 if ($phpiCal_config->cookie_uri == '') {
 	$phpiCal_config->setProperty('cookie_uri', $_SERVER['SERVER_NAME'].substr($_SERVER['PHP_SELF'],0,strpos($_SERVER['PHP_SELF'], '/')) );
 	if ($phpiCal_config->cookie_uri == 'localhost')	$phpiCal_config->setProperty('cookie_uri', '');
-;
 }
 $cookie_name = 'phpicalendar_'.basename($phpiCal_config->default_path);
 if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
@@ -53,6 +52,23 @@ $language = strtolower($phpiCal_config->language);
 $lang_file = BASE.'languages/'.$language.'.inc.php';
 if (is_file($lang_file)) {
 	include_once($lang_file);
+}
+
+if (isset($phpicalendar['cookie_timeformat']) && $phpicalendar['cookie_timeformat'] !=''){
+	$timeFormat = $phpicalendar['cookie_timeformat'];
+echo "here $timeFormat<pre>";print_r($phpicalendar);
+	switch($timeFormat){
+		case 'h:i':
+		case 'h:i A':
+			$timeFormat_small = 'h:i';
+			break;
+		case 'G:i':
+		case 'H:i':
+			$timeFormat_small = 'G:i';
+			break;
+		default:
+			$timeFormat_small = 'g:i';
+	}
 }
 
 $template = $phpiCal_config->template;

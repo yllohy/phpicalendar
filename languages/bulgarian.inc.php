@@ -166,8 +166,8 @@ $monthsofyear_lang			= array ('Януари','Февруари','Март','Ап
 $monthsofyearshort_lang		= array ('Яну','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Ное','Дек');
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
-$timeFormat = 'G:I';
-$timeFormat_small = 'G:I';
+$timeFormat = 'G:i';
+$timeFormat_small = 'G:i';
 
 // For date formatting, see note below
 $dateFormat_day = '%A, %e %B';

@@ -69,6 +69,11 @@
 							<td><select name="cookie_endtime" class="query_style">{ENDTIME_SELECT}</select></td>
 						</tr>
 						<tr align="left" valign="top">
+							<td nowrap="nowrap">{L_SELECT_TIMEFORMAT}:</td>
+							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
+							<td><select name="cookie_timeformat" class="query_style">{TIMEFORMAT_SELECT}</select></td>
+						</tr>
+						<tr align="left" valign="top">
 							<td nowrap="nowrap">{L_SELECT_DAY}:</td>
 							<td><img src="images/spacer.gif" alt=" " width="20" height="1" border="0" /></td>
 							<td><select name="cookie_startday" class="query_style">{STARTDAY_SELECT}</select></td>
