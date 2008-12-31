@@ -56,7 +56,6 @@ if (is_file($lang_file)) {
 
 if (isset($phpicalendar['cookie_timeformat']) && $phpicalendar['cookie_timeformat'] !=''){
 	$timeFormat = $phpicalendar['cookie_timeformat'];
-echo "here $timeFormat<pre>";print_r($phpicalendar);
 	switch($timeFormat){
 		case 'h:i':
 		case 'h:i A':

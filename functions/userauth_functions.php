@@ -43,8 +43,7 @@ function logout_querys() {
 // if no valid login is found. Returns a boolean invalid_login to
 // indicate that the login is invalid.
 function user_login() {
-	global $_COOKIE, $_GET, $_POST, $_SERVER, $phpiCal_config;
-	global $login_cookies, $cookie_uri, $locked_map;
+	global $phpiCal_config, $locked_map;
 	
 	// Initialize return values.
 	$invalid_login = false;
@@ -56,41 +55,34 @@ function user_login() {
 	}
 
 	// Look for a login cookie.
-	if ($login_cookies == 'yes' &&
-		isset($_COOKIE['phpicalendar_login']))
-	{
+	if ($phpiCal_config->login_cookies == 'yes' && isset($_COOKIE['phpicalendar_login'])){
 		$login_cookie = unserialize(stripslashes($_COOKIE['phpicalendar_login']));
-		if (isset($login_cookie['username']) &&
-			isset($login_cookie['password']))
-		{
+		if (isset($login_cookie['username']) &&	isset($login_cookie['password'])){
 			$username = $login_cookie['username'];
 			$password = $login_cookie['password'];
 		}
 	}
 	
 	// Look for session authentication.
-	if ($login_cookies != 'yes') {
+	if ($phpiCal_config->login_cookies != 'yes') {
 		if (!session_id()) {
 			session_start();
-			setcookie(session_name(), session_id(), time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
+			setcookie(session_name(), session_id(), time()+(60*60*24*7*12*10), '/', $phpiCal_config->cookie_uri, 0);
 		}
-		if (isset($_SESSION['username']) &&
-			isset($_SESSION['password']))
-		{
+		if (isset($_SESSION['username'], $_SESSION['password'])){
 			$username = $_SESSION['username'];
 			$password = $_SESSION['password'];
 		}
 	}
 	
 	// Look for a new username and password.
-	if (isset($_GET['username']) &&
-		isset($_GET['password']))
-	{
-		$username = $_GET['username'];
-		$password = $_GET['password'];
-	} else if (isset($_POST['username']) &&
-			   isset($_POST['password']))
-	{
+# Should only take these from post?	
+#	if (isset($_GET['username'], $_GET['password'])){
+#		$username = $_GET['username'];
+#		$password = $_GET['password'];
+#	} else 
+	
+	if (isset($_POST['username'], $_POST['password'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 	}
@@ -120,16 +112,16 @@ function user_login() {
 //
 // Returns an empty username and password.
 function user_logout() {
-	global $login_cookies, $cookie_uri, $phpiCal_config;
+	global $phpiCal_config;
 	
 	// Clear the login cookie or session authentication values.
-	if ($login_cookies == 'yes') {
-		setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $cookie_uri, 0);
+	if ($phpiCal_config->login_cookies == 'yes') {
+		setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $phpiCal_config->cookie_uri, 0);
 	} else {
 		// Check if the session has already been started.
 		if (!session_id()) {
 			session_start();
-			setcookie(session_name(), session_id(), time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
+			setcookie(session_name(), session_id(), time()+(60*60*24*7*12*10), '/', $phpiCal_config->cookie_uri, 0);
 		}
 	
 		// Clear the session authentication values.

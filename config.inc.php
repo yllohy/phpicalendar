@@ -56,11 +56,11 @@ phpicalendar currently supports about 30 language variants.  For a list of suppo
 #     'gridLength'           => 10,                // Grid size in day and week views. Allowed values are 1,2,3,4,10,12,15,20,30,60. Default is 15
 #     'minical_view'         => 'current',	       // Where do the mini-calendars go when clicked?'     => 'day', 'week', 'month', 'current'
 #     'allow_preferences'    => 'no', 
-     'month_locations'      => 'no',
+#     'month_locations'      => 'no',
 #     'show_search'          => 'yes',
 #     'show_todos'           => 'no',
 #     'show_completed'       => 'no',
-#     'allow_login'          => 'yes',	           // Set to yes to prompt for login to unlock calendars.
+     'allow_login'          => 'yes',	           // Set to yes to prompt for login to unlock calendars.
 #     'week_start_day'       => 'Monday',          // Day of the week your week starts on
 #     'week_length'          => '5',	           // Number of days to display in the week view
 #     'day_start'            => '0600',	           // Start time for day grid
@@ -76,7 +76,6 @@ these arrays provide extra calendar options.
        
 */
 $blacklisted_cals = array(
-''
 );                          
 /*     ========= SPECIAL CALENDARS =========
 
@@ -84,24 +83,24 @@ these arrays provide extra calendar options.
 
 */
 $list_webcals = array(
-	'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics'
+#	'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics'
 );
 $more_webcals['recur_tests'] = array();
 $locked_cals = array(
-
+	'Cindy','nuug'
 );
 /*     ========= SPECIAL CALENDARS =========
 
 these arrays provide extra calendar options.
 
 */
-$locked_map['user1:pass'] = array('');             // Map username:password accounts to locked calendars that should be
+$locked_map['jimhu:lambda'] = array('Cindy', 'nuug');             // Map username:password accounts to locked calendars that should be
 $locked_map['user2:pass'] = array('');             // unlocked if logged in. Calendar names should be the same as what is
 $locked_map['user3:pass'] = array('');             // listed in the $locked_cals, again without the .ics suffix.
 $locked_map['user4:pass'] = array('');             // Example: $locked_map['username:password'] = array('Locked1', 'Locked2');
 // add more lines as necessary
 
-$apache_map['user1'] = array('');                  // Map HTTP authenticated users to specific calendars. Users listed here and
+$apache_map['jimhu'] = array('Home');                  // Map HTTP authenticated users to specific calendars. Users listed here and
 $apache_map['user2'] = array('');                  // authenticated via HTTP will not see the public calendars, and will not be
 $apache_map['user3'] = array('');                  // given any login/logout options. Calendar names not include the .ics suffix.
 $apache_map['user4'] = array('');                  // Example: $apache_map['username'] = array('Calendar1', 'Calendar2');

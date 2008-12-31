@@ -14,7 +14,6 @@
 function availableCalendars($username, $password, $cal_filename, $admin = false) {
 	// Import globals.
 	global $list_webcals, $blacklisted_cals, $locked_cals, $locked_map, $apache_map, $lang, $_SERVER, $phpiCal_config;
-
 	// Create the list of available calendars.
 	$calendars = array();
 
@@ -29,7 +28,6 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 	if (isset($locked_map["$username:$password"])) {
 		$unlocked_cals = $locked_map["$username:$password"];
 	}
-	
 	// Make a local copy of the requested calendars.
 	if (!is_array($cal_filename))
 		$cal_filename_local = array($cal_filename);
@@ -101,10 +99,10 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			}			
 			// Make sure the file is real.
 			if (!is_file($file)) continue;
-			// Make sure the file ends in .ics.
-			if (!preg_match("/^.*\.ics$/i", $file)) continue;
+			// Remove any php files.
+			if (preg_match("/^.*\.php$/i", $file)) continue;
 			// Make sure this is not a blacklisted calendar.
-			$cal_name = getCalendarName($file);
+			$cal_name = getCalendarName($file); 
 			if (in_array($cal_name, $blacklisted_cals)) continue;
 			// If HTTP authenticated, make sure this calendar is available
 			// to the user.
