@@ -3,7 +3,7 @@
 /*
 Extension to PHP iCalendar for supporting publishing from Apple iCal
 Date: 11.12.2003
-Author: Dietrich Ayala
+Authors: Dietrich Ayala, Jo Rhett, Jim Hu
 Copyright 2003 Dietrich Ayala
 
 Description:
@@ -61,7 +61,7 @@ Usage (Sunbird Calendar):
 	Password: either your web server password, or auth_internal_password 
 
 Hints:
-1. PHP 4.3.0 or greater is required
+1. PHP 5.1.0 or greater is required
 2. Your version of php and apache MUST support $_SERVER['PATH_INFO']
 3. Depending on your web server environment, you may need to set safe_mode = Off
    (this won't be necessary if you are using a wrapper like cgiwrap or suexec) 
@@ -72,19 +72,27 @@ This will write out a log file to the same directory as this script.
 Don't forget to turn off logging when done!!
 */
 
+define('BASE', '../');
 // include PHP iCalendar configuration variables
-include('../config.inc.php');
+include_once(BASE.'functions/init.inc.php'); 
+
+// allow/disallow publishing
+$phpicalendar_publishing = isset($phpiCal_config->phpicalendar_publishing) ? $phpiCal_config->phpicalendar_publishing : 0;
+define( 'PHPICALENDAR_PUBLISHING', $phpicalendar_publishing );
+// only allow publishing if explicitly enabled
+if(PHPICALENDAR_PUBLISHING != 1) {
+	header('WWW-Authenticate: Basic realm="ERROR: Calendar Publishing is disabled on this server"');
+	header('HTTP/1.1 401 Unauthorized');
+	echo 'Calendar Publishing is disabled on this server!';
+	exit;
+}
 
 // set calendar path, or just use current directory...make sure there's a trailing slash
-if (isset($calendar_path) && $calendar_path != '') {
-	if (substr($calendar_path, -1, 1) !='/') $calendar_path = $calendar_path.'/';
+if (isset($phpiCal_config->calendar_path) && $phpiCal_config->calendar_path != '') {
+	if (substr($phpiCal_config->calendar_path, -1, 1) !='/') $calendar_path = $calendar_path.'/';
 } else {
 	$calendar_path = '';
 }
-// allow/disallow publishing
-
-$phpicalendar_publishing = isset($phpicalendar_publishing) ? $phpicalendar_publishing : 0;
-define( 'PHPICALENDAR_PUBLISHING', $phpicalendar_publishing );
 
 // toggle logging
 define( 'PHPICALENDAR_LOG_PUBLISHING', 1 );
@@ -99,20 +107,18 @@ if(defined('PHPICALENDAR_LOG_PUBLISHING') && PHPICALENDAR_LOG_PUBLISHING == 1) {
 
 // Require authentication 
 if (!isset($_SERVER['REMOTE_USER'])) {
-
 	// Require authentication 
 	if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 		list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])
 			= explode( ':', base64_decode( substr($_SERVER['HTTP_AUTHORIZATION'], 6) ) );
 	}
-
 	if (!isset($_SERVER['PHP_AUTH_USER'])) {
 		header('WWW-Authenticate: Basic realm="phpICalendar"');
 		header('HTTP/1.1 401 Unauthorized');
 		echo 'You must be authorized!';
 		exit;
 	} else {
-		if ($_SERVER['PHP_AUTH_USER'] != $auth_internal_username || $_SERVER['PHP_AUTH_PW'] != $auth_internal_password) {
+		if ($_SERVER['PHP_AUTH_USER'] != $phpiCal_config->auth_internal_username || $_SERVER['PHP_AUTH_PW'] != $phpiCal_config->auth_internal_password) {
 			header('WWW-Authenticate: Basic realm="phpICalendar"');
 			header('HTTP/1.1 401 Unauthorized');
 			echo 'You must be authorized!';
@@ -121,121 +127,94 @@ if (!isset($_SERVER['REMOTE_USER'])) {
 	}
 }
 
-// only allow publishing if explicitly enabled
-if(PHPICALENDAR_PUBLISHING != 1) {
-	header('WWW-Authenticate: Basic realm="ERROR: Calendar Publishing is disabled on this server"');
-	header('HTTP/1.1 401 Unauthorized');
-	echo 'You must be authorized!';
-	exit;
-}
-
-// unpublishing
-if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-	// get calendar filename
-	$calendar_file = $calendar_path.substr($_SERVER['REQUEST_URI'] , ( strrpos($_SERVER['REQUEST_URI'], '/') + 1) ) ;
-
-	$calendar_file = urldecode($calendar_file);
-	
-	logmsg('received request to delete '.$calendar_file);
-	
-	// remove calendar file
-	if(!unlink($calendar_file))
-	{
-		logmsg('unable to delete the calendar file');
-	}
-	else
-	{
-		logmsg('deleted');
-	}
-	return;
-}
-
-// publishing
-elseif($_SERVER['REQUEST_METHOD'] == 'PUT'){
-	logmsg('PUT request');
-
-	// get calendar data
-	if($datain = fopen('php://input','r')){
-		while(!@feof($datain)){
-			$data .= fgets($datain,4096);
+switch ($_SERVER['REQUEST_METHOD']){
+	// unpublishing
+	case 'DELETE':
+		// get calendar filename
+		$calendar_file = $calendar_path.substr($_SERVER['REQUEST_URI'] , ( strrpos($_SERVER['REQUEST_URI'], '/') + 1) ) ;
+		$calendar_file = urldecode($calendar_file);
+		logmsg('received request to delete '.$calendar_file);
+		// remove calendar file
+		if(!unlink($calendar_file)){
+			logmsg('unable to delete the calendar file');
+		}else{
+			logmsg('deleted');
 		}
-		
-		@fclose($datain);
-	}else{
-		logmsg('unable to read input data');
-	}
-	
-	if(isset($data)){
-		if (isset($_SERVER['PATH_INFO'])) {
-			preg_match("/\/([\w\-\.\+ ]*).ics/i",$_SERVER['PATH_INFO'],$matches);
-			$calendar_name = urldecode($matches[1]);
+		break;
+	// publishing
+	case 'PUT':
+		logmsg('PUT request');
+		// get calendar data
+		# php://input allows you to read raw POST data
+		if($datain = fopen('php://input','r')){
+			while(!@feof($datain)){
+				$data .= fgets($datain,4096);
+			}
+			@fclose($datain);
+		}else{
+			logmsg('unable to read input data');
 		}
-
-		// If we don't have it from path info, use the supplied calendar name
-		if( ! isset($calendar_name) ) {
-		
-			$cal_arr = explode("\n",$data);
-		
-			foreach($cal_arr as $k => $v){
-				if(strstr($v,'X-WR-CALNAME:')){
-					$arr = explode(':',$v);
-					$calendar_name = trim($arr[1]);
-					break;
+		if(isset($data)){
+			if (isset($_SERVER['PATH_INFO'])) {
+				preg_match("/\/([\w\-\.\+ ]*).ics/i",$_SERVER['PATH_INFO'],$matches);
+				$calendar_name = urldecode($matches[1]);
+			}
+			// If we don't have it from path info, use the supplied calendar name
+			if( ! isset($calendar_name) ) {
+				$cal_arr = explode("\n",$data);
+				foreach($cal_arr as $k => $v){
+					if(strstr($v,'X-WR-CALNAME:')){
+						$arr = explode(':',$v);
+						$calendar_name = trim($arr[1]);
+						break;
+					}
 				}
 			}
+			logmsg('Received request to update: ' . $calendar_name);
+			// Remove any invalid characters from the filename
+			$calendar_name = preg_replace( "/[^\w\.\- ]/", '', $calendar_name );
+			if( ( ! isset($calendar_name) ) || ( $calendar_name == '' ) ) {
+				header('HTTP/1.1 401 Invalid calendar name');
+				header('WWW-Authenticate: Basic realm="ERROR: Invalid calendar name."');
+				echo 'Invalid calendar name.';
+			}
+			// If we don't have a name, assume default
+			$calendar_name = isset($calendar_name) ? $calendar_name : 'default';
+			logmsg('Updating calendar: ' . $calendar_name);
+			// If this is Apple iCal, an event with a blank summary is private - mark as such
+			if( preg_match( "/Apple.*iCal/", $_SERVER['HTTP_USER_AGENT'] ) ) {
+				$data = preg_replace(
+					"/^\s*SUMMARY:\s*$/m",
+					"SUMMARY: **PRIVATE**\nCLASS:PRIVATE",
+					$data
+				);
+			}
+			// write to file
+			if($dataout = fopen($calendar_path.$calendar_name.'.ics','w+')){
+				fputs($dataout, $data, strlen($data) );
+				@fclose($dataout);
+			}else{
+				logmsg( 'could not open file '.$calendar_path.$calendar_name.'.ics' );
+			}
+
+		}else {
+			logmsg('PUT ERROR - No data supplied.');
 		}
-
-		logmsg('Received request to update: ' . $calendar_name);
-
-		// Remove any invalid characters from the filename
-		$calendar_name = preg_replace( "/[^\w\.\- ]/", '', $calendar_name );
-
-		if( ( ! isset($calendar_name) ) || ( $calendar_name == '' ) ) {
-			header('HTTP/1.1 401 Invalid calendar name');
-			header('WWW-Authenticate: Basic realm="ERROR: Invalid calendar name."');
-			echo 'Invalid calendar name.';
+		break;
+	case 'GET':
+		if (isset($_SERVER['PATH_INFO'])) {
+			preg_match("/\/([ A-Za-z0-9._]*).ics/i",$_SERVER['PATH_INFO'],$matches);
+			$icsfile = urldecode($matches[1]);
+	
+			// get calendar data
+			if (file_exists($calendar_path . $icsfile . '.ics') &&
+				is_readable($calendar_path . $icsfile . '.ics') &&
+				is_file($calendar_path . $icsfile . '.ics')
+			) {
+				echo file_get_contents($calendar_path . $icsfile . '.ics');
+				logmsg('downloaded calendar ' . $icsfile);
+			}
 		}
-		
-		// If we don't have a name, assume default
-		$calendar_name = isset($calendar_name) ? $calendar_name : 'default';
-
-		logmsg('Updating calendar: ' . $calendar_name);
-
-		// If this is Apple iCal, an event with a blank summary is private - mark as such
-		if( preg_match( "/Apple.*iCal/", $_SERVER['HTTP_USER_AGENT'] ) ) {
-			$data = preg_replace(
-				"/^\s*SUMMARY:\s*$/m",
-				"SUMMARY: **PRIVATE**\nCLASS:PRIVATE",
-				$data
-			);
-		}
-
-		// write to file
-		if($dataout = fopen($calendar_path.$calendar_name.'.ics','w+')){
-			fputs($dataout, $data, strlen($data) );
-			@fclose($dataout);
-		}else{
-			logmsg( 'could not open file '.$calendar_path.$calendar_name.'.ics' );
-		}
-	}
-	else {
-		logmsg('PUT ERROR - No data supplied.');
-	}
-}
-elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
-	if (isset($_SERVER['PATH_INFO'])) {
-		preg_match("/\/([ A-Za-z0-9._]*).ics/i",$_SERVER['PATH_INFO'],$matches);
-		$icsfile = urldecode($matches[1]);
-
-		// get calendar data
-		if (file_exists($calendar_path . $icsfile . '.ics') &&
-			is_readable($calendar_path . $icsfile . '.ics') &&
-			is_file($calendar_path . $icsfile . '.ics')
-		) {
-			echo file_get_contents($calendar_path . $icsfile . '.ics');
-			logmsg('downloaded calendar ' . $icsfile);
-		}
-	}
 }
 
 if(defined('PHPICALENDAR_LOG_PUBLISHING') && PHPICALENDAR_LOG_PUBLISHING == 1) {
@@ -256,7 +235,7 @@ function logmsg($str){
 		else
 			$user =  $_SERVER['REMOTE_USER'];
 
-		$logline = date('Y-m-d H:i:s ') . $_SERVER['REMOTE_ADDR'] . ' ' . $user . ' ' . ${str} . "\n";
+		$logline = date('Y-m-d H:i:s ') . $_SERVER['REMOTE_ADDR'] . ' ' . $user . ' ' . $str . "\n";
 
 		fputs($logfile, $logline, strlen($logline) );
 	}
