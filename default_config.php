@@ -2,8 +2,8 @@
 class Configs{
 	private static $instance;
 	private function __construct(){
-		$this->phpicalendar_version = '2.31rc3';
-	// Configuration file for PHP iCalendar 2.25rc1
+		$this->phpicalendar_version = '2.31rc4';
+	// Configuration file for PHP iCalendar 2.31
 	//
 	// To set values, change the text between the single quotes
 	// Follow instructions to the right for detailed information
