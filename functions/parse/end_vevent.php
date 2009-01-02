@@ -334,10 +334,13 @@ foreach($recur_data as $recur_data_unixtime) {
 			'class' => $class, 
 			'spans_day' => $spans_day, 
 			'location' => $location, 
+			'categories' => $vtodo_categories, 
 			'organizer' => serialize($organizer), 
 			'attendee' => serialize($attendee), 
 			'calnumber' => $calnumber, 
 			'calname' => $actual_calname,
+			'timezone' => $start_tz,
+			'other' => trim($other),
 			'geo' => $geo,
 			'url' => $url, 
 			'recur' => $recur

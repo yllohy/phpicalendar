@@ -35,6 +35,9 @@
 					<!-- switch url on -->
 					<b>{L_URL}</b>: {URL}<br />
 					<!-- switch url off -->
+					<!-- switch event download on -->
+					{EVENT_DOWNLOAD}<br />
+					<!-- switch event download off -->
 					</p>
 				</div>
 			</td>

@@ -43,9 +43,10 @@ while (!feof($ifile)) {
 			$is_daylight = false;
 			break;
 		case 'END:VTIMEZONE':
+			if (!isset($offset_d) && isset($offset_s)) $offset_d = $offset_s;
 			$tz_array[$tz_id] = array(
-				0	=> $offset_s, 
-				1	=> $offset_d,
+				0	=> @$offset_s, 
+				1	=> @$offset_d,
 				'dt_start' => @$begin_daylight,
 				'st_start' => @$begin_std,
 				'st_name'	=> @$st_name,

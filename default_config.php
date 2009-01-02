@@ -2,7 +2,7 @@
 class Configs{
 	private static $instance;
 	private function __construct(){
-		$this->phpicalendar_version = '2.31rc2';
+		$this->phpicalendar_version = '2.31rc3';
 	// Configuration file for PHP iCalendar 2.25rc1
 	//
 	// To set values, change the text between the single quotes
@@ -47,6 +47,7 @@ class Configs{
 		$this->printview_default		= 'no';				// Set print view as the default view. day, week, and month only supported views for $this->default_view (listed well above).
 		$this->show_todos				= 'yes';			// Show your todo list on the side of day and week view.
 		$this->show_completed			= 'yes';				// Show completed todos on your todo list.
+		$this->event_download			= 'no';				// Show completed todos on your todo list.
 		$this->allow_login				= 'no';				// Set to yes to prompt for login to unlock calendars.
 		$this->login_cookies			= 'no';			// Set to yes to store authentication information via (unencrypted) cookies. Set to no to use sessions.
 		$this->support_ical				= 'no';			// Set to yes to support the Apple iCal calendar database structure.

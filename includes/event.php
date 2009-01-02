@@ -11,6 +11,7 @@ require_once(BASE.'functions/template.php');
 $event			= unserialize(stripslashes($_POST['event_data']));
 $organizer 		= unserialize($event['organizer']);
 $attendee 		= unserialize($event['attendee']);
+$uid    		= stripslashes($_POST['uid']);
 
 // Format event time
 // All day
@@ -71,6 +72,35 @@ switch ($event['status']){
 		$event['status'] =	'' ; 
 }
 
+$event_download = '';
+if($phpiCal_config->event_download == 'yes') $event_download = "
+<form action='' method='post'>
+<input type=hidden name='event_data' value = '".$_POST['event_data']."' />
+<input type=hidden name='uid' value = '".$_POST['uid']."' />
+<input type='submit' name='submit' value='".$lang['l_download_event']."' />
+<form>";
+
+if (isset($_POST['submit'])){
+header("Content-Type: text/calendar; charset=utf-8; name=$uid");
+header("Content-Disposition: attachment; filename=$uid");
+echo 
+"BEGIN:VCALENDAR
+VERSION:2.0
+X-WR-CALNAME:".$event['calname']."
+BEGIN:VEVENT
+UID:$uid
+SUMMARY:".$event['event_text']."
+CATEGORIES:".$event['calname']."
+DTSTART;TZID=".$event['timezone'].":".date("Ymd\THis",$event['start_unixtime'])."
+DTEND;TZID=".$event['timezone'].":".date("Ymd\THis",$event['start_unixtime'])."
+CLASS:".$event['class']."
+".$event['other']."
+SEQUENCE:1
+CREATED:20081128T075152
+END:VEVENT
+END:VCALENDAR
+";exit;
+}
 $page = new Page(BASE.'templates/'.$phpiCal_config->template.'/event.tpl');
 
 $page->replace_tags(array(
@@ -83,6 +113,7 @@ $page->replace_tags(array(
 	'attendee'	 		=> $attendee,
 	'status'	 		=> $event['status'],
 	'location' 			=> $event['location'],
+	'event_download'	=> $event_download,
 	'url'      			=> $event['url'],
 	'cal_title_full'	=> $event['calname'].' '.$lang['l_calendar'],
 	'template'			=> $phpiCal_config->template,

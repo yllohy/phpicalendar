@@ -98,6 +98,7 @@ $lang['l_unset_prefs'] 		= 'Unset preferences';
 $lang['l_organizer']		= 'Organizer';
 $lang['l_attendee']			= 'Attendee';
 $lang['l_location']			= 'Location';
+$lang['l_download_event']	= 'Download event';
 $lang['l_url']   			= 'URL';
 $lang['l_admin_header']		= 'PHP iCalendar Administration';
 $lang['l_username']			= 'Username';
@@ -206,7 +207,6 @@ Notes about dateFormat_*
 $lang['l_error_title'] 			= 'Error!';
 $lang['l_error_window'] 		= 'There was an error!';
 $lang['l_error_calendar'] 		= 'The calendar "%s" was being processed when this error occurred.';
-$lang['l_php_version_required']	= 'PHP version "%s" detected.  PHP 5.1 or greater is required to run this version of phpicalendar.';
 $lang['l_error_path'] 			= 'Unable to open the path: "%s"';
 $lang['l_error_back'] 			= 'Please use the "Back" button to return.';
 $lang['l_error_remotecal'] 		= 'This server blocks remote calendars which have not been approved.';

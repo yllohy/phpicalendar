@@ -126,7 +126,6 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 				$nextline = ereg_replace("[\r\n]", "", $nextline);
 			}
 			$line = trim(stripslashes($line));
-			
 			switch ($line) {
 				case 'BEGIN:VFREEBUSY':
 				case 'BEGIN:VEVENT':
@@ -150,6 +149,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					$url = '';
 					$geo = '';
 					$type = '';
+					$other = '';
 					$wkst = 'MO';
 					
 					$except_dates 	= array();
@@ -440,6 +440,8 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 						case 'URL':
 							$url = $data;
 							break;
+						default:
+							if(strpos(':',$data) > 1) $other .= $data;
 					}
 				}
 			}

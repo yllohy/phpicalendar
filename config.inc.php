@@ -65,6 +65,21 @@ phpicalendar currently supports about 30 language variants.  For a list of suppo
 #     'week_length'          => '5',	           // Number of days to display in the week view
 #     'day_start'            => '0600',	           // Start time for day grid
 #     'day_end'              => '2000',	           // End time for day grid
+#      'event_download' => 'yes',
+
+
+/*     ========= CALENDAR PUBLISHING =========
+
+	This section is not needed if your calendars directory is accessible via WebDAV or CalDAV.  These settings 
+	control the publish.php script provided in the calendars directory.  For more information, please see that
+	file.
+*/
+
+	'phpicalendar_publishing'=> 1,
+
+
+
+
 
 );
 /*     ========= SPECIAL CALENDARS =========
