@@ -24,7 +24,7 @@
 define('BASE', '../');
 require(BASE.'rss/rss_common.php');
 function rss_top(){
-	global $cal_displayname, $theview, $default_path, $cpath, $lang, $rss_link, $rss_language;
+	global $cal_displayname, $theview, $phpiCal_config, $cpath, $lang, $rss_link, $rss_language;
 
 	$rss = 	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"."\n";
 	/* Use 2.0 and strip encoding, use rss_language */

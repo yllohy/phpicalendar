@@ -88,6 +88,11 @@ COPYING for more information about our license.
 
 Changes:
 --------
+2.31 Fix events ending at midnight bug in day view
+	Fix publish.php for 2.3 config system
+	add option to hide location in month view
+	add option to make individual events downloadable from event view
+	
 2.3 Major changes to recurrence handling
 	Added more languages
 	Added login to month view
