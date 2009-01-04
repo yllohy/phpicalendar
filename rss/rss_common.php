@@ -32,7 +32,8 @@ include_once(BASE.'functions/date_functions.php');
 
 
 //set the range of days to return based on the view chosen
-$rssview = $_GET['rssview'];
+$rssview = $phpiCal_config->default_view;
+if (isset($_GET['rssview'])) $rssview = $_GET['rssview'];
 if (isset($_GET['getdate']) && $_GET['getdate'] !=''){
 	$getdate = $_GET['getdate'];
 }else{

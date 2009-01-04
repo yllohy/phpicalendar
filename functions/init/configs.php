@@ -29,10 +29,10 @@ if ($phpiCal_config->cookie_uri == '') {
 	if ($phpiCal_config->cookie_uri == 'localhost')	$phpiCal_config->setProperty('cookie_uri', '');
 }
 $cookie_name = 'phpicalendar_'.basename($phpiCal_config->default_path);
-if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
+if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset']) && $current_view != 'rss') {
 	$phpicalendar = unserialize(stripslashes($_COOKIE[$cookie_name]));
 	if (isset($phpicalendar['cookie_language'])) 	$phpiCal_config->setProperty('language', 			$phpicalendar['cookie_language']);
-	if (isset($phpicalendar['cookie_calendar'])) 	$phpiCal_config->setProperty('default_cal_check', 	$phpicalendar['cookie_calendar']);
+	if (isset($phpicalendar['cookie_calendar'])) 	$phpiCal_config->setProperty('default_cal', 	$phpicalendar['cookie_calendar']);
 	if (isset($phpicalendar['cookie_cpath']) && strpos($phpicalendar['cookie_cpath'],'../') === false) 		$phpiCal_config->setProperty('default_cpath_check', $phpicalendar['cookie_cpath']);
 	if (isset($phpicalendar['cookie_view'])) 		$phpiCal_config->setProperty('default_view', 		$phpicalendar['cookie_view']);
 	if (isset($phpicalendar['cookie_style']) && is_dir(BASE.'templates/'.$phpicalendar['cookie_style'].'/')){ 
@@ -40,7 +40,7 @@ if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset'])) {
 	}	
 	if (isset($phpicalendar['cookie_startday'])) 	$phpiCal_config->setProperty('week_start_day', 		$phpicalendar['cookie_startday']);
 	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); 
-	if (isset($phpicalendar['cookie_endtime']))		$phpiCal_config->setProperty('day_end', 			$phpicalendar['cookie_endtime']); 
+	if (isset($phpicalendar['cookie_endtime']))	$phpiCal_config->setProperty('day_end', 			$phpicalendar['cookie_endtime']); 
 	if (isset($phpicalendar['cookie_timezone']))	$phpiCal_config->setProperty('timezone', 			$phpicalendar['cookie_timezone']); 
 }
 
@@ -74,6 +74,7 @@ $template = $phpiCal_config->template;
 
 $fillTime = $phpiCal_config->day_start;
 $day_array = array ();
+
 while ($fillTime < $phpiCal_config->day_end) {
 	array_push ($day_array, $fillTime);
 	preg_match ('/([0-9]{2})([0-9]{2})/', $fillTime, $dTime);
@@ -90,9 +91,9 @@ while ($fillTime < $phpiCal_config->day_end) {
 if (!isset($current_view)) $current_view = $phpiCal_config->default_view;
 
 $tz_array=array();
-/*echo "<pre>xx";
-print_r($configs);
-print_r($phpiCal_config);
-echo "</pre>";
+#echo "<pre>xx";
+#print_r($configs);
+#print_r($phpicalendar);
+#print_r($phpiCal_config);
+#echo "</pre>";
 #die;
-*/

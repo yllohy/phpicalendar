@@ -45,8 +45,8 @@ if ($action == 'setcookie') {
 		"cookie_cpath"      => "$cookie_cpath", 
 		"cookie_timezone"   => "$cookie_timezone"
 		);
-	$the_cookie 		= serialize($the_cookie);
-	if ($cookie_unset) { 
+	$the_cookie 		= addslashes(serialize($the_cookie));
+	if (isset($cookie_unset)) { 
 		setcookie("$cookie_name","$the_cookie",time()-(60*60*24*7) ,"/","$phpiCal_config->cookie_uri",0);
 	} else {
 		setcookie("$cookie_name","$the_cookie",time()+(60*60*24*7*12*10) ,"/","$phpiCal_config->cookie_uri",0);
@@ -78,7 +78,7 @@ if (isset($_COOKIE[$cookie_name])) {
 	}
 }
 
-if ((!isset($_COOKIE[$cookie_name])) || ($cookie_unset)) {
+if ((!isset($_COOKIE[$cookie_name])) || isset($cookie_unset)) {
 	# No cookie set -> use defaults from config file.
 	$cookie_language 	= ucfirst($language);
 	$cookie_calendar 	= $phpiCal_config->default_cal;
@@ -146,6 +146,8 @@ for ($i = 000; $i <= 2400; $i += 100) {
 	}
 	$endtime_select .= ">$s</option>\n";
 }
+
+$timeformat_select = '';
 $timeformat_arr = array(
 	'g:i',
 	'h:i',
@@ -155,7 +157,6 @@ $timeformat_arr = array(
 	'H:i',
 );
 $example_time = strtotime("19700101 08:00:00");
-$timeformat_select = '';
 foreach ($timeformat_arr as $i => $s) {
 	$s = date($timeformat_arr[$i], $example_time)."/".date($timeformat_arr[$i], ($example_time + 12*60*60));
 	$timeformat_select .= '<option value="'.$timeformat_arr[$i].'"';

@@ -151,6 +151,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					$type = '';
 					$other = '';
 					$wkst = 'MO';
+					$vtodo_categories = '';
 					
 					$except_dates 	= array();
 					$except_times 	= array();

@@ -34,7 +34,7 @@ if (ini_get('max_execution_time') < 60) {
 // Pull the calendars off the GET line if provided. The $cal_filename
 // is always an array, because this makes it easier to deal with below.
 $cal_filenames = array();
-if (isset($_GET['cal'])) {
+if (isset($_GET['cal']) && $_GET['cal'] !='') {
 	// If the cal value is not an array, split it into an array on
 	// commas.
 	if (!is_array($_GET['cal']))
@@ -42,22 +42,10 @@ if (isset($_GET['cal'])) {
 	
 	// Grab the calendar filenames off the cal value array.
 	$cal_filenames = $_GET['cal'];
+} elseif ($phpiCal_config->default_cal != '') {
+	$cal_filenames = explode(',',$phpiCal_config->default_cal);
 } else {
-	if (isset($default_cal_check)) {
-		if ($default_cal_check != $phpiCal_config->ALL_CALENDARS_COMBINED) {
-			$calcheck = $phpiCal_config->calendar_path.'/'.$default_cal_check.'.ics'; 
-			$calcheckopen = @fopen($calcheck, "r");
-			if ($calcheckopen == FALSE) {
-				$cal_filenames = explode(',',$default_cal);
-			} else {
-				$cal_filenames[0] = $default_cal_check;
-			}
-		} else {
-			$cal_filenames[0] = $phpiCal_config->ALL_CALENDARS_COMBINED;
-		}
-	} else {
-		$cal_filenames = explode(',',$phpiCal_config->default_cal);
-	}
+	$cal_filenames[0] = $phpiCal_config->ALL_CALENDARS_COMBINED;
 }
 
 //load cal_filenames if $ALL_CALENDARS_COMBINED
