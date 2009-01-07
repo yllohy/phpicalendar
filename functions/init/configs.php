@@ -40,7 +40,7 @@ if (isset($_COOKIE[$cookie_name]) && !isset($_POST['unset']) && $current_view !=
 	}	
 	if (isset($phpicalendar['cookie_startday'])) 	$phpiCal_config->setProperty('week_start_day', 		$phpicalendar['cookie_startday']);
 	if (isset($phpicalendar['cookie_time']))		$phpiCal_config->setProperty('day_start', 			$phpicalendar['cookie_time']); 
-	if (isset($phpicalendar['cookie_endtime']))	$phpiCal_config->setProperty('day_end', 			$phpicalendar['cookie_endtime']); 
+	if (isset($phpicalendar['cookie_endtime']))		$phpiCal_config->setProperty('day_end', 			$phpicalendar['cookie_endtime']); 
 	if (isset($phpicalendar['cookie_timezone']))	$phpiCal_config->setProperty('timezone', 			$phpicalendar['cookie_timezone']); 
 }
 
@@ -55,7 +55,7 @@ if (is_file($lang_file)) {
 }
 
 if (isset($phpicalendar['cookie_timeformat']) && $phpicalendar['cookie_timeformat'] !=''){
-	$timeFormat = $phpicalendar['cookie_timeformat'];
+	$timeFormat = urldecode($phpicalendar['cookie_timeformat']);
 	switch($timeFormat){
 		case 'h:i':
 		case 'h:i A':
@@ -89,11 +89,11 @@ while ($fillTime < $phpiCal_config->day_end) {
 }
 
 if (!isset($current_view)) $current_view = $phpiCal_config->default_view;
-
+/*
 $tz_array=array();
-#echo "<pre>xx";
+echo "<pre>xx";
 #print_r($configs);
-#print_r($phpicalendar);
-#print_r($phpiCal_config);
-#echo "</pre>";
+print_r($phpiCal_config);
+echo "</pre>";
 #die;
+*/

@@ -159,7 +159,7 @@ $timeformat_arr = array(
 $example_time = strtotime("19700101 08:00:00");
 foreach ($timeformat_arr as $i => $s) {
 	$s = date($timeformat_arr[$i], $example_time)."/".date($timeformat_arr[$i], ($example_time + 12*60*60));
-	$timeformat_select .= '<option value="'.$timeformat_arr[$i].'"';
+	$timeformat_select .= '<option value="'.urlencode($timeformat_arr[$i]).'"';
 	if ($timeformat_arr[$i] == $cookie_timeformat) {
 		$timeformat_select .= ' selected="selected"';
 	}

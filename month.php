@@ -85,7 +85,7 @@ $page->replace_tags(array(
 	'is_logged_in' 		=> $is_logged_in,
 	'username'			=> $username,
 	'logout_querys'		=> $logout_querys,
-	'list_jumps' 		=> $list_jumps,
+#	'list_jumps' 		=> $list_jumps,
 	'list_icals' 		=> $list_icals,
 	'list_icals_pick'	=> $list_icals_pick,
 	'list_years' 		=> $list_years,

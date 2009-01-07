@@ -14,7 +14,6 @@ class Configs{
 		$this->default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 		$this->minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 		$this->default_cal 				= $this->ALL_CALENDARS_COMBINED;		// Exact filename of calendar without .ics. Or set to $this->ALL_CALENDARS_COMBINED to open all calenders combined into one.
-		#$this->default_cal 			= 'Other_racing';		// Exact filename of calendar without .ics. Or set to $this->ALL_CALENDARS_COMBINED to open all calenders combined into one.
 		$this->language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto', 'Korean'
 		$this->week_start_day 			= 'Sunday';			// Day of the week your week starts on
 		$this->week_length				= '7';				// Number of days to display in the week view

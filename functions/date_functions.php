@@ -98,6 +98,7 @@ function localizeDate($format, $timestamp) {
 	$month = date("n", $timestamp)-1;
 	$day = date("j", $timestamp);
 	$dayofweek = date("w", $timestamp);	
+	$weeknumber = date("W", $timestamp);
  	$replacements = array(
  		'%Y' =>	$year,
  		'%e' => $day,
@@ -105,6 +106,7 @@ function localizeDate($format, $timestamp) {
  		'%b' => $monthsofyearshort_lang[$month],
  		'%A' => $daysofweek_lang[$dayofweek],
  		'%a' => $daysofweekshort_lang[$dayofweek],
+ 		'%W' => $weeknumber,
  		'%d' => sprintf("%02d", $day)
  	);
  	$date = str_replace(array_keys($replacements), array_values($replacements), $format);	
