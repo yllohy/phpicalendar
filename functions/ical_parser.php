@@ -486,8 +486,16 @@ if ($parse_file) {
 if ($cal == $phpiCal_config->ALL_CALENDARS_COMBINED) {
 	$calendar_name = $all_cal_comb_lang;
 }
+/* example of how to customize the display name sort order
+if(in_array('US Holidays',$cal_displaynames)){
+	unset($cal_displaynames[array_search('US Holidays',$cal_displaynames)]);
+	array_unshift($cal_displaynames, 'US Holidays');
+}
+*/
 $cal_displayname = urldecode(implode(', ', $cal_displaynames)); #reset this with the correct names
 $template_started = getmicrotime();
+
+
 
 //If you want to see the values in the arrays, uncomment below.
 #print '<pre>';
