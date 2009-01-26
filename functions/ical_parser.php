@@ -19,7 +19,7 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 			$master_array = unserialize($contents);
 			$z=1;
 			$y=0;
-			$webcal_mtime = time() - ($webcal_hours * 3600);
+			$webcal_mtime = time() - ($phpiCal_config->webcal_hours * 3600);
 			if (sizeof($master_array['-4']) == (sizeof($cal_filelist))) {
 				foreach ($master_array['-4'] as $temp_array) {
 					$mtime = $master_array['-4'][$z]['mtime'];

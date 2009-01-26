@@ -108,7 +108,7 @@ $page->replace_tags(array(
 	'cal' 				=> $event['calname'],
 	'event_text' 		=> $event['event_text'],
 	'event_times' 		=> $event_times,
-	'description' 		=> $event['description'],
+	'description' 		=> nl2br($event['description']),
 	'organizer' 		=> $organizer,
 	'attendee'	 		=> $attendee,
 	'status'	 		=> $event['status'],

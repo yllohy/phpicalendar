@@ -101,6 +101,8 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			if (!is_file($file)) continue;
 			// Remove any php files.
 			if (preg_match("/^.*\.php$/i", $file)) continue;
+			# remove publish log file 
+			if ($file == 'publish_log.txt') continue;
 			// Make sure this is not a blacklisted calendar.
 			$cal_name = getCalendarName($file); 
 			if (in_array($cal_name, $blacklisted_cals)) continue;
