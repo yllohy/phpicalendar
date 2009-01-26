@@ -26,7 +26,7 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 					$fname = $master_array['-4'][$z]['filename'];
 					$wcalc = $master_array['-4'][$z]['webcal'];	
 					if ($wcalc == 'no') $realcal_mtime = filemtime($fname);
-					if (($mtime == $realcal_mtime) && ($wcalc == 'no')) {
+					if (isset($realcal_mtime) && ($mtime == $realcal_mtime) && ($wcalc == 'no')) {
 						$y++;
 					} elseif (($wcalc == 'yes') && ($mtime > $webcal_mtime)) {
 						//echo date('H:i',$mtime). ' > '. date('H:i',$webcal_mtime);
@@ -142,6 +142,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					);
 	
 					$interval = 1;				
+					$sequence = 0;				
 					$summary = '';
 					$description = '';
 					$status = '';
@@ -388,6 +389,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							unset($server_offset_tmp);
 							break;
 							
+						case 'SEQUENCE':
+							$sequence = $data;
+							break;
 						case 'UID':
 							$uid = $data;
 							break;

@@ -29,8 +29,8 @@ if (!isset($uid)) {
 	$uid_counter++;
 	$uid_valid = false;
 }elseif(in_array($uid, $uid_list)) {
-	$uid .= $uid_counter;
-	$uid_counter++;
+	#$uid .= $uid_counter;
+	#$uid_counter++;
 }else{
 	$uid_valid = true;
 }
@@ -320,31 +320,35 @@ foreach($recur_data as $recur_data_unixtime) {
 			if ($this_date_tmp < $end_date_tmp) $display_end_tmp = '2400';
 		}
 		if($this_date_tmp == $end_date_tmp && ($end_time == '0000')) continue;
-		$master_array[$this_date_tmp][$time_key][$uid] = array (
-			'event_start' => $start_time,                	# hhmm
-			'event_end' => $end_time,                    	# hhmm
-			'display_end' => $display_end_tmp,            	# hhmm display_start is $time_key
-			'start_unixtime' => $start_unixtime_tmp,      	# start unixtime for this recurrence
-			'end_unixtime' => $end_unixtime_tmp,          	# end unixtime for this recurrence
-			'event_text' => $summary,                    	#
-			'event_length' => $length,                    	# length in seconds
-			'event_overlap' => 0,                        	# checkOverlap modifies this
-			'description' => $description, 
-			'status' => $status, 
-			'class' => $class, 
-			'spans_day' => $spans_day, 
-			'location' => $location, 
-			'categories' => $vtodo_categories, 
-			'organizer' => serialize($organizer), 
-			'attendee' => serialize($attendee), 
-			'calnumber' => $calnumber, 
-			'calname' => $actual_calname,
-			'timezone' => $start_tz,
-			'other' => trim($other),
-			'geo' => $geo,
-			'url' => $url, 
-			'recur' => $recur
-			);
+		if(!isset($master_array[$this_date_tmp][$time_key][$uid]['sequence']) || 
+			$sequence >  $master_array[$this_date_tmp][$time_key][$uid]['sequence']){
+			$master_array[$this_date_tmp][$time_key][$uid] = array (
+				'event_start' => $start_time,                	# hhmm
+				'event_end' => $end_time,                    	# hhmm
+				'display_end' => $display_end_tmp,            	# hhmm display_start is $time_key
+				'start_unixtime' => $start_unixtime_tmp,      	# start unixtime for this recurrence
+				'end_unixtime' => $end_unixtime_tmp,          	# end unixtime for this recurrence
+				'event_text' => $summary,                    	#
+				'event_length' => $length,                    	# length in seconds
+				'event_overlap' => 0,                        	# checkOverlap modifies this
+				'description' => $description, 
+				'status' => $status, 
+				'class' => $class, 
+				'spans_day' => $spans_day, 
+				'location' => $location, 
+				'categories' => $vtodo_categories, 
+				'organizer' => serialize($organizer), 
+				'attendee' => serialize($attendee), 
+				'calnumber' => $calnumber, 
+				'calname' => $actual_calname,
+				'timezone' => $start_tz,
+				'other' => trim($other),
+				'geo' => $geo,
+				'url' => $url, 
+				'sequence' => $sequence, 
+				'recur' => $recur
+				);
+		}	
 		if($time_key > -1) checkOverlap($this_date_tmp, $time_key, $uid);
 	}
 } # end foreach recur_data 
