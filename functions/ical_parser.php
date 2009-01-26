@@ -125,6 +125,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 				$nextline = fgets($ifile, 1024);
 				$nextline = ereg_replace("[\r\n]", "", $nextline);
 			}
+			$line = str_replace('\n',"\n",$line);
 			$line = trim(stripslashes($line));
 			switch ($line) {
 				case 'BEGIN:VFREEBUSY':
@@ -333,9 +334,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							break;
 							
 						case 'DESCRIPTION':
-							$data = str_replace("\\n", "<br />", $data);
+							$data = str_replace("\n", "<br />", $data);
 							$data = str_replace("\\t", "&nbsp;", $data);
-							$data = str_replace("\\r", "<br />", $data);
+							$data = str_replace("\r", "<br />", $data);
 							$data = str_replace('$', '&#36;', $data);
 							$data = stripslashes($data);
 							$data = htmlentities(urlencode($data));
