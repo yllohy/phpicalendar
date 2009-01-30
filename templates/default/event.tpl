@@ -15,9 +15,9 @@
 		<tr>
 			<td align="left" class="V12">
 				<div style="margin-left: 10px; margin-bottom:10px;">
-					<p><b>{L_SUMMARY}</b>:{EVENT_TEXT} - <span class="V9">(<i>{EVENT_TIMES}</i>)</span></p>
+					<p><b>{L_SUMMARY}</b>: {EVENT_TEXT} - <span class="V9">(<i>{EVENT_TIMES}</i>)</span></p>
 					<!-- switch description on -->
-					<p><b>{L_DESCRIPTION}</b>:{DESCRIPTION}</p>
+					<p><b>{L_DESCRIPTION}</b>: {DESCRIPTION}</p>
 					<!-- switch description off -->
 					<p>
 					<!-- switch organizer on -->
