@@ -92,7 +92,9 @@ Changes:
 	Fix publish.php for 2.3 config system
 	add option to hide location in month view
 	add option to make individual events downloadable from event view
-	
+	Fix calendar showing modified events twice
+	Make multiline descriptions display with line breaks in event popup
+	Fix German language file
 2.3 Major changes to recurrence handling
 	Added more languages
 	Added login to month view
