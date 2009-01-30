@@ -102,8 +102,8 @@ SEQUENCE:7
 UID:starts on 07
 DTSTAMP:20020918T224617Z
 SUMMARY:Earlier overlap
-DESCRIPTION:this is a test 
- multiline 
+DESCRIPTION:this is a test \n
+ multiline \n
  description
 STATUS:CONFIRMED
 DURATION:P3D
