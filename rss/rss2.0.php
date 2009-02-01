@@ -30,8 +30,9 @@ function rss_top(){
 	/* Use 2.0 and strip encoding, use rss_language */
 	$rss .= '<rss version="2.0"'."\n";
 	$rss .= 	'xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  
-	xmlns:ev="http://purl.org/rss/1.0/modules/event/" 
-	xmlns:dc="http://purl.org/dc/elements/1.1/">'."\n";
+	xmlns:ev="http://purl.org/rss/1.0/modules/event/"'.
+#	'xmlns:atom="http://www.w3.org/2005/Atom"'.
+	'xmlns:dc="http://purl.org/dc/elements/1.1/">'."\n";
 	$rss .= '<channel>'."\n";
 	$rss .= '<title>'.$cal_displayname;
 	if ($theview !=""){$rss .= ' - '.$theview;} 
@@ -85,7 +86,8 @@ function rss_noitems(){
 
 function rss_close(){
 	global $rss_link;
-	return "\n
-	<atom:link href=\"$rss_link\" rel=\"self\" type=\"application/rss+xml\" />\n</channel>\n</rss>\n";
+	return "\n".
+#	"<atom:link href=\"$rss_link\" rel=\"self\" type=\"application/rss+xml\" />\n".
+	"</channel>\n</rss>\n";
 }
 ?>
