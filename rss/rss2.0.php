@@ -84,6 +84,8 @@ function rss_noitems(){
 }
 
 function rss_close(){
-	return "\n</channel>\n</rss>\n";
+	global $rss_link;
+	return "\n
+	<atom:link href=\"$rss_link\" rel=\"self\" type=\"application/rss+xml\" />\n</channel>\n</rss>\n";
 }
 ?>

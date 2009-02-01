@@ -185,8 +185,8 @@ do {
 			#uncomment for shorter event text with ...
 			#	$event_text 	= word_wrap($event_text, 21, $tomorrows_events_lines); 		
 				$description 	= stripslashes(urldecode($val["description"]));
-				$description		= str_replace('<br />',"\n",$description);
-				$description 	= strip_tags($description, '<b><i><u>');
+			#	$description		= str_replace('<br />',"\n",$description);
+				$description 	= strip_tags($description, '<b><i><u><br>');
 				$description		= str_replace('&','&amp;',$description);
 				$description		= str_replace('&amp;amp;','&amp;',$description);
 				$rss_title		= urldecode ("$dayofweek: $event_text");	

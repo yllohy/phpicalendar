@@ -192,6 +192,7 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 	}
 
 	if (!empty($event_text)) {
+		$title = strip_tags(str_replace("<br />","\n",$title));
 		if ($lines > 0) {
 			$event_text = word_wrap($event_text, $length, $lines);
 		}
