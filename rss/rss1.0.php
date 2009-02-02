@@ -37,7 +37,7 @@ function rss_li($rss_link, $uid){
 }
 
 function enclose_items($rss_items){
-	return 	"<items>\n<rdf:Seq>\n".$rss_items."</rdf:Seq>\n</items>\n</channel>\n";
+	return 	"<items>\n<rdf:Seq>\n".$rss_items."</rdf:Seq>\n</items>\n";
 }
 
 function rss_item(){
@@ -71,6 +71,6 @@ function rss_noitems(){
 }
 
 function rss_close(){
-	return "</rdf:RDF>\n";
+	return "</channel></rdf:RDF>\n";
 }
 ?>
