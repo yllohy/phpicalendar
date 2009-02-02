@@ -37,12 +37,12 @@ function rss_li($rss_link, $uid){
 }
 
 function enclose_items($rss_items){
-	return 	"<items>\n<rdf:Seq>\n".$rss_items."</rdf:Seq>\n</items>\n";
+	return 	"<items>\n<rdf:Seq>\n".$rss_items."</rdf:Seq>\n</items>\n</channel>\n";
 }
 
 function rss_item(){
 	global $uid,$event_start,$rss_title,$rss_link, $dayofweek, $event_text, $rss_description, $val;
-	$rss_item = '<item><rdf:about="'.$rss_link.'&amp;uid='.$uid.'/">'."\n";
+	$rss_item = '<item rdf:about="'.$rss_link.'&amp;uid='.$uid.'/">'."\n";
 
 	/* Create guid, and use uid to make link unique */
 #	$rss .= '<guid isPermaLink="false">'.$rss_link.$uid.'</guid>'."\n";
@@ -71,6 +71,6 @@ function rss_noitems(){
 }
 
 function rss_close(){
-	return "</channel></rdf:RDF>\n";
+	return "</rdf:RDF>\n";
 }
 ?>
