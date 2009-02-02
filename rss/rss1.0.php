@@ -27,7 +27,7 @@ function rss_top(){
 	if ($theview !=""){$rss .= ' - '.$theview;} 
 	$rss .= "</title>\n";
 	
-	$rss .= '<link>'.htmlspecialchars("$default_path").'</link>'."\n";
+	$rss .= '<link>'.htmlspecialchars("$phpiCal_config->default_path").'</link>'."\n";
 	$rss .= '<description>'.$cal_displayname.' '.$lang['l_calendar'].' - '.$theview.'</description>'."\n";
 	#$rss .= '<language>'.$rss_language.'</language>'."\n";
 	return $rss;
