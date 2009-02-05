@@ -278,7 +278,7 @@ function extractDateTime($data, $property, $field) {
 		$tz_dt = $phpiCal_config->timezone;
 	}
 	// Set the values.
-	$unixtime = calcTime($offset_tmp, $server_offset_tmp, $unixtime);
+	if ($allday == '') $unixtime = calcTime($offset_tmp, $server_offset_tmp, $unixtime);
 	#echo "offset_tmp $offset_tmp, server_offset_tmp $server_offset_tmp, $unixtime =".date("Ymd His",$unixtime)." $time<br>";
 	$date = date('Ymd', $unixtime);
 	if ($allday == '') $time = date('Hi', $unixtime);
