@@ -1,7 +1,8 @@
 <?php
 # adjust paths in case they are incorrect
 if ($phpiCal_config->default_path == '') {
-	$p = str_replace("/rss","","http://".$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']) );
+	$proto = (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://');
+	$p = str_replace("/rss","",$proto.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].dirname($_SERVER['PHP_SELF']) );
 	$phpiCal_config->setProperty('default_path', $p);
 }
 
