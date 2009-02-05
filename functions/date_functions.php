@@ -249,7 +249,7 @@ function extractDateTime($data, $property, $field) {
 		// Pull out the date value. Minimum year is 1970.
 		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dt_check);
 		if ($dt_check[1] < 1970) { 
-			$data = '1971'.$dt_check[2].$dt_check[3];
+			$dt_check[1] = '1970';
 		}		
 		# convert to date-time
 		$data = $dt_check[1].$dt_check[2].$dt_check[3]."T000000";
@@ -261,7 +261,7 @@ function extractDateTime($data, $property, $field) {
 	preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})T{0,1}([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
 	if (!isset ($regs[1])) return;
 	if ($regs[1] < 1970) { 
-		$regs[1] = '1971';
+		$regs[1] = '1970';
 	}
 	$date = $regs[1] . $regs[2] . $regs[3];
 	$time = $regs[4] . $regs[5];
