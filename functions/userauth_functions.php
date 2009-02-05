@@ -97,7 +97,7 @@ function user_login() {
 	// Set the login cookie or session authentication values.
 	if ($login_cookies == 'yes') {
 		$the_cookie = serialize(array('username' => $username, 'password' => $password));
-		setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $cookie_uri, 0);
+		setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $phpiCal_config->cookie_uri, 0);
 	} else {
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
