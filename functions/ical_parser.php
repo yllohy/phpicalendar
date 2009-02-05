@@ -379,7 +379,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							} elseif (isset($calendar_tz)) {
 								$offset_tmp = chooseOffset($recur_unixtime, $calendar_tz);
 							} else {
-								$offset_tmp = $chooseOffset($recur_unixtime);
+								$offset_tmp = chooseOffset($recur_unixtime);
 							}
 							$recur_unixtime = calcTime($offset_tmp, @$server_offset_tmp, $recur_unixtime);
 							$recurrence_id['date'] = date('Ymd', $recur_unixtime);
