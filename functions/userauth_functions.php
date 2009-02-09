@@ -4,7 +4,7 @@
 // Returns the login query string.
 function login_querys() {
 	global $QUERY_STRING;
-	
+
 	// Remove the username, password, and action values.
 	$querys = preg_replace('/(username|password|action)=[^&]+/', '', $QUERY_STRING);
 
@@ -18,14 +18,14 @@ function login_querys() {
 // Returns the logout query string.
 function logout_querys() {
 	global $QUERY_STRING;
-	
+
 	// Make sure the action is logout.
 	$querys = preg_replace('/action=[^&]+/', 'action=logout', $QUERY_STRING);
 	if ($querys == $QUERY_STRING) $querys .= '&action=logout';
-	
+
 	// Remove references to the username or password.
 	$querys = preg_replace('/(username|password)=[^&]+/', '', $querys);
-	
+
 	// Return the logout query string.
 	$querys = preg_replace('/&&/', '', $querys);
 	return $querys;
@@ -44,13 +44,16 @@ function logout_querys() {
 // indicate that the login is invalid.
 function user_login() {
 	global $phpiCal_config, $locked_map;
-	
+
 	// Initialize return values.
 	$invalid_login = false;
 	$username = ''; $password = '';
-	
+
 	// If not HTTP authenticated, try login via cookies or the web page.
 	if (isset($_SERVER['PHP_AUTH_USER'])) {
+		$username = $_SERVER['PHP_AUTH_USER'];
+		if (isset($_SERVER['PHP_AUTH_PW'])) $password = $_SERVER['PHP_AUTH_PW'];
+
 		return array($username, $password, $invalid_login);
 	}
 
@@ -62,7 +65,7 @@ function user_login() {
 			$password = $login_cookie['password'];
 		}
 	}
-	
+
 	// Look for session authentication.
 	if ($phpiCal_config->login_cookies != 'yes') {
 		if (!session_id()) {
@@ -74,26 +77,26 @@ function user_login() {
 			$password = $_SESSION['password'];
 		}
 	}
-	
+
 	// Look for a new username and password.
-# Should only take these from post?	
+# Should only take these from post?
 #	if (isset($_GET['username'], $_GET['password'])){
 #		$username = $_GET['username'];
 #		$password = $_GET['password'];
-#	} else 
-	
+#	} else
+
 	if (isset($_POST['username'], $_POST['password'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 	}
-	
+
 	// Check to make sure the username and password is valid.
 	if (!array_key_exists("$username:$password", $locked_map)) {
 		// Remember the invalid login, because we may want to display
 		// a message elsewhere or check validity.
 		return array($username, $password, true);
 	}
-	
+
 	// Set the login cookie or session authentication values.
 	if ($login_cookies == 'yes') {
 		$the_cookie = serialize(array('username' => $username, 'password' => $password));
@@ -102,7 +105,7 @@ function user_login() {
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
 	}
-	
+
 	// Return the username and password.
 	return array($username, $password, $invalid_login);
 }
@@ -113,7 +116,7 @@ function user_login() {
 // Returns an empty username and password.
 function user_logout() {
 	global $phpiCal_config;
-	
+
 	// Clear the login cookie or session authentication values.
 	if ($phpiCal_config->login_cookies == 'yes') {
 		setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $phpiCal_config->cookie_uri, 0);
@@ -123,12 +126,12 @@ function user_logout() {
 			session_start();
 			setcookie(session_name(), session_id(), time()+(60*60*24*7*12*10), '/', $phpiCal_config->cookie_uri, 0);
 		}
-	
+
 		// Clear the session authentication values.
 		unset($_SESSION['username']);
 		unset($_SESSION['password']);
 	}
-	
+
 	// Return empty username and password.
 	return array('', '');
 }
