@@ -32,6 +32,22 @@ function recursiveSanitize($value) {
     return $value;
 }
 
+
+function sanitizeForWeb($string) {
+    $string = preg_replace('/<br\s*\/?>/', "\n", $string);
+
+    $string = str_replace('&', '&amp;', $string);
+    $string = str_replace('<', '&lt;', $string);
+    $string = str_replace('>', '&gt;', $string);
+    $string = str_replace('\'', '&#39;', $string);
+    $string = str_replace('"', '&#34;', $string);
+
+    $string = str_replace('<br />', "\n", $string);
+    
+    return $string;
+}
+
+
 if (!isset($_SERVER) && isset($HTTP_SERVER_VARS)) {
 	$_SERVER = &$HTTP_SERVER_VARS;
 }

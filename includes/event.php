@@ -27,9 +27,9 @@ if ($_POST['time'] == -1) {
 	if ($start != $end) $event_times = "$start - $end";
 }
 
-$event['event_text']  = urldecode($event['event_text']);
-$event['description'] = urldecode($event['description']);
-$event['location']    = urldecode($event['location']);
+$event['event_text']  = sanitizeForWeb(urldecode($event['event_text']));
+$event['description'] = sanitizeForWeb(urldecode($event['description']));
+$event['location']    = sanitizeForWeb(urldecode($event['location']));
 $display ='';
 if (isset($event['description'])) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
 
