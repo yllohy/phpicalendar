@@ -29,8 +29,8 @@ if (!isset($uid)) {
 	$uid_counter++;
 	$uid_valid = false;
 }elseif(in_array($uid, $uid_list)) {
-	#$uid .= $uid_counter;
-	#$uid_counter++;
+	# UID seen before. If sequence is the default, bump it.
+	if ($sequence == 0) $sequence++;
 }else{
 	$uid_valid = true;
 }
@@ -321,7 +321,8 @@ foreach($recur_data as $recur_data_unixtime) {
 		}
 		if($this_date_tmp == $end_date_tmp && ($end_time == '0000')) continue;
 		if(!isset($master_array[$this_date_tmp][$time_key][$uid]['sequence']) || 
-			$sequence >  $master_array[$this_date_tmp][$time_key][$uid]['sequence']){
+			$sequence >  $master_array[$this_date_tmp][$time_key][$uid]['sequence']
+			){
 			$master_array[$this_date_tmp][$time_key][$uid] = array (
 				'event_start' => $start_time,                	# hhmm
 				'event_end' => $end_time,                    	# hhmm

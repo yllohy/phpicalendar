@@ -100,6 +100,7 @@ these arrays provide extra calendar options.
 */
 $list_webcals = array(
 #	'webcal://dimer.tamu.edu/calendars/seminars/Biochem.ics'
+'webcal://calendar.sxsw.com/iCal-EXDrB-sa-sxsw@rollerfeet.com.ics'
 );
 $more_webcals['recur_tests'] = array();
 $locked_cals = array(

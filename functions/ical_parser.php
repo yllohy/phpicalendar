@@ -104,7 +104,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 		$ifile = @fopen($filename, "r");
 		if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $filename));
 		$nextline = fgets($ifile, 1024);
-		if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal'], $filename));
+		#if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal'], $filename));
 		
 		// Set a value so we can check to make sure $master_array contains valid data
 		$master_array['-1'] = 'valid cal file';
