@@ -348,7 +348,7 @@ class Page {
 			$weekreplace .= $replace;
 		}
 		*/
-		$this->page = preg_replace('!<\!-- loop alldaysofweek on -->.*<\!-- loop alldaysofweek off -->!Uis', $weekreplace, $this->page);
+		$this->page = preg_replace('!<\!-- loop allday row on -->.*<\!-- loop allday row off -->!Uis', $weekreplace, $this->page);
 		
 		// Replaces the daysofweek
 		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis", $this->page, $match1);
@@ -461,8 +461,7 @@ class Page {
 						$dayborder = 0;
 					}					
 					$drawWidth = 1;
-					$colspan_width = round((80 / $nbrGridCols[$thisday]) * $drawWidth);
-					$weekdisplay .= '<td width="' . $colspan_width . '" colspan="' . $nbrGridCols[$thisday] . '" ' . $class . '>&nbsp;</td>'."\n";					
+					$weekdisplay .= '<td colspan="' . $nbrGridCols[$thisday] . '" ' . $class . '>&nbsp;</td>'."\n";					
 				} else {
 					# have events
 					$emptyWidth = $nbrGridCols[$thisday];
@@ -490,10 +489,9 @@ class Page {
 								if ($event_status != '') {
 						  			$confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
-								$colspan_width = round((80 / $nbrGridCols[$thisday]) * $drawWidth);
 								$event_temp   = $loop_event;
 								$event 		  = openevent($thisday, $cal_time, $uid, $this_time_arr[$uid], $phpiCal_config->week_events_lines, 25, 'ps');
-								$weekdisplay .= '<td width="'.$colspan_width.'" rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
+								$weekdisplay .= '<td rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 
 								// Start drawing the event
 								$event_temp   = str_replace('{EVENT}', $event, $event_temp);
@@ -704,8 +702,7 @@ class Page {
 						  $confirmed = '';
 						  if (is_array($event_recur)) $confirmed .= '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  if ($event_status != '') $confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
-						  $colspan_width = round((460 / $nbrGridCols) * $drawWidth);
-						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" width="'.$colspan_width.'" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
+						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 						  
 						  // Start drawing the event
 						  $event_temp  = $loop_event;

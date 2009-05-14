@@ -2,13 +2,13 @@
 <center>
 	<table border="0" width="770" cellspacing="0" cellpadding="0">
 		<tr>
-			<td width="610" valign="top">
-				<table width="610" border="0" cellspacing="0" cellpadding="0" class="calborder">
+			<td valign="top">
+				<table border="0" cellspacing="0" cellpadding="0" class="calborder">
 					<tr>
 						<td align="center" valign="middle">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr valign="top">
-								<td align="left" width="490" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></td>
+								<td align="left" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></td>
 								<td valign="top" align="right" width="120" class="navback">	
 									<div style="padding-top: 3px;">
 									<table width="120" border="0" cellpadding="0" cellspacing="0">
@@ -30,7 +30,7 @@
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="G10B">
 								<tr>
 									<td align="center" valign="top">
-										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tfixed">
 											<tr>
 												<td align="left" valign="top" width="15" class="rowOff2" onmouseover="this.className='rowOn2'" onmouseout="this.className='rowOff2'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={PREV_WEEK}'">
 													<div class="V12">&nbsp;<a class="psf" href="week.php?cal={CAL}&amp;getdate={PREV_WEEK}">&laquo;</a></div>
@@ -46,7 +46,7 @@
 												</td>
 												<td width="1"></td>
 												<!-- loop daysofweek on -->
-												<td width="80" {COLSPAN} align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={DAYLINK}'">
+												<td {COLSPAN} align="center" class="{ROW1}" onmouseover="this.className='{ROW2}'" onmouseout="this.className='{ROW3}'" onclick="window.location.href='week.php?cal={CAL}&amp;getdate={DAYLINK}'">
 													<a class="ps3" href="day.php?cal={CAL}&amp;getdate={DAYLINK}"><span class="V9BOLD">{DAY}</span></a> 
 												</td>
 												<!-- loop daysofweek off -->
@@ -56,11 +56,11 @@
 												<td width="60" class="rowOff2" colspan="4"><img src="images/spacer.gif" width="60" height="1" alt=" " /></td>
 												<td width="1"></td>
 												<!-- loop alldaysofweek on -->
-												<td width="80" {COLSPAN} class="rowOff">
+												<td {COLSPAN} class="rowOff">
 													<!-- loop allday on -->
 													<div class="alldaybg_{CALNO}">
 														{ALLDAY}
-														<img src="images/spacer.gif" width="80" height="1" alt=" " />
+														<img src="images/spacer.gif" width="1" height="1" alt=" " />
 													</div>
 													<!-- loop allday off -->
 												</td>
