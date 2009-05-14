@@ -155,7 +155,39 @@ function chooseOffset($time, $timezone = '') {
 	}
 	return $offset;
 }
-/* Returns a string to make event text with a link to popup boxes 
+
+/* Returns a string to be used in HTML title attributes
+	$arr is a master array item
+	$time is the event's UNIX timestamp
+*/
+function makeTitle($arr, $time) {
+	global $timeFormat, $dateFormat_week;
+
+	$event_text = stripslashes(urldecode($arr["event_text"]));
+	if ($time == -1) {
+		$start = localizeDate($dateFormat_week, $arr['start_unixtime']);
+		$end   = localizeDate($dateFormat_week, ($arr['end_unixtime'] - 60));
+		$title = $event_text;
+		if ($start != $end) $title .= "\n$start - $end";
+	} else {
+		$start = date($timeFormat, $arr['start_unixtime']);
+		$end   = date($timeFormat, $arr['end_unixtime']);
+		$title = "$start: $event_text";
+		if ($start != $end) $title = "$event_text\n$start - $end";
+	}
+
+	if (!empty($arr['description'])) {
+		$title .= "\n\nDescription: ".urldecode($arr['description']);
+	}
+	if (!empty($arr['location'])) {
+		$title .= "\n\nLocation: ".urldecode($arr['location']);
+	}
+	$title = trim($title);
+
+	return $title;
+}
+
+/* Returns a string to make event text with a link to popup boxes
 	$arr is a master array item
 	$lines is the number of lines to restrict the event_text to, using word_wrap
 	$length is the length of one line
@@ -169,19 +201,7 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 	$return = '';
 	$event_text = stripslashes(urldecode($arr["event_text"]));
 	# build tooltip
-	if ($time == -1) {
-		$start = localizeDate($dateFormat_week, $arr['start_unixtime']);
-		$end   = localizeDate($dateFormat_week, ($arr['end_unixtime'] - 60));
-		$title = $event_text;
-		if ($start != $end) $title = "$start - $end $event_text";
-	} else {
-		$start = date($timeFormat, $arr['start_unixtime']);
-		$end = date($timeFormat, $arr['end_unixtime']);
-		$title = "$start: $event_text";
-		if ($start != $end) $title = "$start - $end $event_text";
-	}
-	$title .= "\n".urldecode($arr['description'])."\n".urldecode($arr['location']);
-	$title = trim($title);
+	$title = makeTitle($arr, $time);
 	# for iCal pseudo tag <http> comptability
 	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) {
 		$full_event_text = $matches[1] . $matches[2];
