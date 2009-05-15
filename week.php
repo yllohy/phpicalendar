@@ -96,6 +96,8 @@ $page->replace_tags(array(
 	'l_tomorrows'		=> $lang['l_tomorrows'],
 	'l_jump'			=> $lang['l_jump'],
 	'l_todo'			=> $lang['l_todo'],
+	'l_prev'			=> $lang['l_prev'],
+	'l_next'			=> $lang['l_next'],
 	'l_day'				=> $lang['l_day'],
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],
