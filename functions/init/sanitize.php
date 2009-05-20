@@ -33,6 +33,23 @@ function recursiveSanitize($value) {
 }
 
 
+/**
+ * Truncate a string to a specific number of words
+ */
+function chopToWordCount($string, $count) {
+    $wc = str_word_count($string);
+    if ($wc > $count) {
+	$words = str_word_count($string, 2);
+	$last_word = array_slice($words, $count, 1, true);
+	$pos = key($last_word);
+	$string = substr($string, 0, $pos);
+    }
+    return $string;
+}
+
+/**
+ * Strip "dangerous" HTML to make it safe to print to web browsers
+ */
 function sanitizeForWeb($string) {
     $string = preg_replace('/<br\s*\/?>/', "\n", $string);
 
