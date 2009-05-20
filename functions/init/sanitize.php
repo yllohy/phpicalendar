@@ -42,7 +42,7 @@ function chopToWordCount($string, $count) {
 	$words = str_word_count($string, 2);
 	$last_word = array_slice($words, $count, 1, true);
 	$pos = key($last_word);
-	$string = substr($string, 0, $pos);
+	$string = substr($string, 0, $pos) . '...';
     }
     return $string;
 }
