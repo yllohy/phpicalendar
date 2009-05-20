@@ -42,7 +42,7 @@ function sanitizeForWeb($string) {
     $string = str_replace('\'', '&#39;', $string);
     $string = str_replace('"', '&#34;', $string);
 
-    $string = str_replace('<br />', "\n", $string);
+    $string = str_replace("\n", '<br />', $string);
     
     return $string;
 }
