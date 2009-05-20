@@ -30,25 +30,22 @@ if ($_POST['time'] == -1) {
 $event['event_text']  = sanitizeForWeb(urldecode($event['event_text']));
 $event['description'] = sanitizeForWeb(urldecode($event['description']));
 $event['location']    = sanitizeForWeb(urldecode($event['location']));
-$display ='';
 if (isset($event['description'])) $event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>',$event['description']);
 
 if (isset($organizer) && is_array($organizer)) {
 	$i=0;
-	$display .= $lang['l_organizer'] . ' - ';
 	$organizers = array();
-	foreach ($organizer as $val) {	
-		$organizers[] = $organizer[$i]["name"];
+	foreach ($organizer as $val) {
+		$organizers[] .= "<a href=\"mailto:{$organizer[$i]["email"]}\">{$organizer[$i]["name"]}</a>";
 		$i++;
 	}
 	$organizer = implode(', ',$organizers);
 }
 if (isset($attendee) && is_array($attendee)) {
 	$i=0;
-	$display .= $lang['l_attendee'] . ' - ';
 	$attendees = array();
-	foreach ($attendee as $val) {	
-		$attendees[] .= $attendee[$i]["name"];
+	foreach ($attendee as $val) {
+		$attendees[] .= "<a href=\"mailto:{$attendee[$i]["email"]}\">{$attendee[$i]["name"]}</a>";
 		$i++;
 	}
 	$attendee = implode(', ',$attendees);
