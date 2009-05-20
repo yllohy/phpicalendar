@@ -22,14 +22,14 @@ if (isset($_GET['action'])) {
 $startdays = array ('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 
 if ($action == 'setcookie') { 
-	$cookie_language 	= $_POST['cookie_language'];
+	$cookie_language 	= urldecode($_POST['cookie_language']);
    	$cookie_cpath     	= $_POST['cpath'];
 	$cookie_calendar 	= $_POST['cookie_calendar'];
 	$cookie_view 		= $_POST['cookie_view'];
 	$cookie_style 		= $_POST['cookie_style'];
 	$cookie_startday	= $_POST['cookie_startday'];
 	$cookie_time		= $_POST['cookie_time'];
-	$cookie_timeformat	= $_POST['cookie_timeformat'];
+	$cookie_timeformat	= urldecode($_POST['cookie_timeformat']);
 	$cookie_endtime		= $_POST['cookie_endtime'];
 	$cookie_timezone	= $_POST['cookie_timezone'];
 	$cookie_unset		= @$_POST['unset'];
@@ -128,7 +128,7 @@ $view_select    .= ($phpiCal_config->default_view == 'month') ? '<option value="
 
 // select for time
 $time_select = '';
-for ($i = 000; $i <= 2400; $i += 100) {
+for ($i = 0; $i <= 2400; $i += 100) {
 	$s = sprintf("%04d", $i);
 	$time_select .= '<option value="'.$s.'"';
 	if ($s == $cookie_time) {
@@ -138,7 +138,7 @@ for ($i = 000; $i <= 2400; $i += 100) {
 }
 
 $endtime_select = '';
-for ($i = 000; $i <= 2400; $i += 100) {
+for ($i = 0; $i <= 2400; $i += 100) {
 	$s = sprintf("%04d", $i);
 	$endtime_select .= '<option value="'.$s.'"';
 	if ($s == $cookie_endtime) {
