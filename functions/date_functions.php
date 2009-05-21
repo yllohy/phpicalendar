@@ -163,7 +163,7 @@ function chooseOffset($time, $timezone = '') {
 function makeTitle($arr, $time) {
 	global $timeFormat, $dateFormat_week;
 
-	$event_text = chopToWordCount(sanitizeForWeb(urldecode($arr["event_text"])), 25);
+	$event_text = chopToWordCount(sanitizeForWeb(urldecode($arr["event_text"])), 20);
 	if ($time == -1) {
 		$start = localizeDate($dateFormat_week, $arr['start_unixtime']);
 		$end   = localizeDate($dateFormat_week, ($arr['end_unixtime'] - 60));
@@ -176,11 +176,11 @@ function makeTitle($arr, $time) {
 		if ($start != $end) $title = "$event_text\n$start - $end";
 	}
 
-	if (!empty($arr['description'])) {
-		$title .= "\n\nDescription: " . chopToWordCount(sanitizeForWeb(urldecode($arr['description'])), 100);
-	}
 	if (!empty($arr['location'])) {
-		$title .= "\n\nLocation: " . chopToWordCount(sanitizeForWeb(urldecode($arr['location'])), 25);
+		$title .= "\nLocation: " . chopToWordCount(sanitizeForWeb(urldecode($arr['location'])), 20);
+	}
+	if (!empty($arr['description'])) {
+		$title .= "\n\n" . chopToWordCount(sanitizeForWeb(urldecode($arr['description'])), 80);
 	}
 	$title = trim($title);
 
