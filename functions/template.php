@@ -85,13 +85,15 @@ class Page {
 						}
 						$seen_events["$new_key2"] = 1;
 						$day_events++;
-					if (isset($new_val2['event_text'])) {	
-						$event_text 	= stripslashes(urldecode($new_val2['event_text']));
-						$location 	= stripslashes(urldecode($new_val2['location']));
-						$description 	= stripslashes(urldecode($new_val2['description']));
-						$event_start 	= $new_val2['event_start'];
-						$event_end 		= $new_val2['event_end'];
-						if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
+						if (isset($new_val2['event_text'])) {
+							$event_text 	= sanitizeForWeb(stripslashes(urldecode($new_val2['event_text'])));
+							$location 		= sanitizeForWeb(stripslashes(urldecode($new_val2['location'])));
+							$description 	= sanitizeForWeb(stripslashes(urldecode($new_val2['description'])));
+							if (!empty($description)) $description = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>', $description);
+
+							$event_start 	= $new_val2['event_start'];
+							$event_end 		= $new_val2['event_end'];
+							if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
 							if (!isset($new_val2['event_start'])) { 
 								$event_start = $lang['l_all_day'];
 								$event_start2 = '';
