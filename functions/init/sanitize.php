@@ -60,7 +60,8 @@ function sanitizeForWeb($string) {
     $string = str_replace('"', '&#34;', $string);
 
     $string = str_replace("\n", '<br />', $string);
-    
+    $string = str_replace("\t", ' &nbsp; &nbsp; ', $string);
+
     return $string;
 }
 
