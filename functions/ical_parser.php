@@ -425,15 +425,28 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							}
 							break;
 						case 'ATTENDEE':
-							$attendee[] = array ('name'     => ereg_replace(".*;CN=([^;]*).*", "\\1", $field),
-												 'email'    => str_replace ("mailto:", "", $data),
-									        	 'RSVP'     => ereg_replace(".*;RSVP=([^;]*).*", "\\1", $field),
-									        	 'PARTSTAT' => ereg_replace(".*;PARTSTAT=([^;]*).*", "\\1", $field),
-								         		 'ROLE'     => ereg_replace(".*;ROLE=([^;]*).*", "\\1", $field));
+							$name		= preg_match("/CN=([^;]*)/i", $field, $matches1);
+							$email		= str_replace("mailto:", "", $data);
+							$rsvp 		= preg_match("/RSVP=([^;]*)/i", $field, $matches2);
+							$partstat	= preg_match("/PARTSTAT=([^;]*)/i", $field, $matches3);
+							$role		= preg_match("/ROLE=([^;]*)/i", $field, $matches4);
+
+							$name		= ($name ? $matches1[1] : $email);
+							$rsvp		= ($rsvp ? $matches2[1] : '');
+							$partstat	= ($partstat ? $matches3[1] : '');
+							$role		= ($role ? $matches4[1] : '');
+
+							$attendee[] = array ('name'     => stripslashes($name),
+												 'email'    => stripslashes($email),
+									        	 'RSVP'     => stripslashes($rsvp),
+									        	 'PARTSTAT' => stripslashes($partstat),
+								         		 'ROLE'     => stripslashes($role)
+												);
 							break;
 						case 'ORGANIZER':
-							$field 		 = ereg_replace(".*;CN=([^;]*).*", "\\1", $field);
-							$data 		 = str_replace ("mailto:", "", $data);
+							$data		= str_replace ("mailto:", "", $data);
+							$field		= preg_match("/CN=([^;]*)/i", $field, $matches);
+							$field		= ($field ? $matches[1] : $data);
 							$organizer[] = array ('name' => stripslashes($field), 'email' => stripslashes($data));
 							break;
 						case 'LOCATION':
