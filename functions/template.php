@@ -77,7 +77,7 @@ class Page {
 				$day_events = 0;
 				// Pull out each day
 				$some_events = '';
-				foreach ($val as $new_val) {
+				foreach ($val as $cal_time => $new_val) {
 					foreach ($new_val as $new_key2 => $new_val2) {
 						if (isset($seen_events["$new_key2"]) && isset($new_val2['spans_day']) && $new_val2['spans_day'] == 1){
 							$new_val2['event_text'] .= " second instance of ".$new_key2;
@@ -97,7 +97,7 @@ class Page {
 							$event_start 	= $new_val2['event_start'];
 							$event_end 		= $new_val2['event_end'];
 							if (isset($new_val2['display_end'])) $event_end = $new_val2['display_end'];
-							if (!isset($new_val2['event_start'])) { 
+							if ($cal_time == -1) {
 								$event_start = $lang['l_all_day'];
 								$event_start2 = '';
 								$event_end = '';
