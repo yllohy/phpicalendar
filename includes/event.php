@@ -31,8 +31,8 @@ $event['event_text']  = sanitizeForWeb(urldecode($event['event_text']));
 $event['description'] = sanitizeForWeb(urldecode($event['description']));
 $event['location']    = sanitizeForWeb(urldecode($event['location']));
 if (isset($event['description'])) {
-	$event['description'] = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", '<a target="_new" href="\0">\0</a>', $event['description']);
-	$event['description'] = ereg_replace("[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}", '<a href="mailto:\0">\0</a>', $event['description']);
+	$event['description'] = ereg_replace("(blocked)?([[:alpha:]]+://([^<>&[:space:]]|&amp;)+[[:alnum:]/])", '<a target="_new" href="\2">\2</a>', $event['description']);
+	$event['description'] = ereg_replace("(blocked)?(mailto:)?([[:alnum:]_.%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,4})", '<a href="mailto:\3">\3</a>', $event['description']);
 }
 
 if (isset($organizer) && is_array($organizer)) {

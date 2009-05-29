@@ -90,8 +90,8 @@ class Page {
 							$location 		= sanitizeForWeb(stripslashes(urldecode($new_val2['location'])));
 							$description 	= sanitizeForWeb(stripslashes(urldecode($new_val2['description'])));
 							if (!empty($description)) {
-								$description = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",'<a target="_new" href="\0">\0</a>', $description);
-								$description = ereg_replace("[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}", '<a href="mailto:\0">\0</a>', $description);
+								$description = ereg_replace("(blocked)?([[:alpha:]]+://([^<>&[:space:]]|&amp;)+[[:alnum:]/])", '<a target="_new" href="\2">\2</a>', $description);
+								$description = ereg_replace("(blocked)?(mailto:)?([[:alnum:]_.%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,4})", '<a href="mailto:\3">\3</a>', $description);
 							}
 
 							$event_start 	= $new_val2['event_start'];
