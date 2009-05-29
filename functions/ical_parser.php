@@ -420,16 +420,20 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							}
 							break;
 						case 'ATTENDEE':
-							$name		= preg_match("/CN=([^;]*)/i", $field, $matches1);
-							$email		= str_replace("mailto:", "", $data);
-							$rsvp 		= preg_match("/RSVP=([^;]*)/i", $field, $matches2);
-							$partstat	= preg_match("/PARTSTAT=([^;]*)/i", $field, $matches3);
-							$role		= preg_match("/ROLE=([^;]*)/i", $field, $matches4);
+							$email		= preg_match("/mailto:(.*)/i", $data, $matches1);
+							$name		= preg_match("/CN=([^;]*)/i", $field, $matches2);
+							$rsvp 		= preg_match("/RSVP=([^;]*)/i", $field, $matches3);
+							$partstat	= preg_match("/PARTSTAT=([^;]*)/i", $field, $matches4);
+							$role		= preg_match("/ROLE=([^;]*)/i", $field, $matches5);
 
-							$name		= ($name ? $matches1[1] : $email);
-							$rsvp		= ($rsvp ? $matches2[1] : '');
-							$partstat	= ($partstat ? $matches3[1] : '');
-							$role		= ($role ? $matches4[1] : '');
+							$email		= ($email ? $matches1[1] : '');
+							$name		= ($name ? $matches2[1] : $email);
+							$rsvp		= ($rsvp ? $matches3[1] : '');
+							$partstat	= ($partstat ? $matches4[1] : '');
+							$role		= ($role ? $matches5[1] : '');
+
+							// Emergency fallback
+							if (empty($name) && empty($email)) $name = $data;
 
 							$attendee[] = array ('name'     => stripslashes($name),
 												 'email'    => stripslashes($email),
@@ -439,10 +443,16 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 												);
 							break;
 						case 'ORGANIZER':
-							$data		= str_replace ("mailto:", "", $data);
-							$field		= preg_match("/CN=([^;]*)/i", $field, $matches);
-							$field		= ($field ? $matches[1] : $data);
-							$organizer[] = array ('name' => stripslashes($field), 'email' => stripslashes($data));
+							$email		= preg_match("/mailto:(.*)/i", $data, $matches1);
+							$name		= preg_match("/CN=([^;]*)/i", $field, $matches2);
+
+							$email		= ($email ? $matches1[1] : '');
+							$name		= ($name ? $matches2[1] : $email);
+
+							// Emergency fallback
+							if (empty($name) && empty($email)) $name = $data;
+
+							$organizer[] = array ('name' => stripslashes($name), 'email' => stripslashes($email));
 							break;
 						case 'LOCATION':
 							$data = str_replace("\\n", "<br />", $data);

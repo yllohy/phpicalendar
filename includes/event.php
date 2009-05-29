@@ -39,7 +39,11 @@ if (isset($organizer) && is_array($organizer)) {
 	$i=0;
 	$organizers = array();
 	foreach ($organizer as $val) {
-		$organizers[] .= "<a href=\"mailto:{$organizer[$i]["email"]}\">{$organizer[$i]["name"]}</a>";
+		if (!empty($organizer[$i]["email"])) {
+			$organizers[] .= "<a href=\"mailto:{$organizer[$i]["email"]}\">{$organizer[$i]["name"]}</a>";
+		} else {
+			$organizers[] .= $organizer[$i]["name"];
+		}
 		$i++;
 	}
 	$organizer = implode(', ',$organizers);
@@ -48,7 +52,11 @@ if (isset($attendee) && is_array($attendee)) {
 	$i=0;
 	$attendees = array();
 	foreach ($attendee as $val) {
-		$attendees[] .= "<a href=\"mailto:{$attendee[$i]["email"]}\">{$attendee[$i]["name"]}</a>";
+		if (!empty($attendee[$i]["email"])) {
+			$attendees[] .= "<a href=\"mailto:{$attendee[$i]["email"]}\">{$attendee[$i]["name"]}</a>";
+		} else {
+			$attendees[] .= $attendee[$i]["name"];
+		}
 		$i++;
 	}
 	$attendee = implode(', ',$attendees);
