@@ -225,7 +225,7 @@ foreach ($uid_arr as $uid=>$date_range){
 	$rss = str_replace("<uid>$uid</uid>\n<event_start>".$lang['l_all_day']."</event_start>","<uid>$uid</uid>\n<event_start>$date_range</event_start>", $rss);
 
 }
-header ("Content-Type: text/xml");
+header ("Content-Type: application/xml");
 
 echo "$rss";
 
