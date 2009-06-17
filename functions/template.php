@@ -5,8 +5,8 @@
 class Page {
 	var $page;
 	function draw_subscribe($template_p) {
-		global $phpiCal_config, $getdate, $cal, $ALL_CALENDARS_COMBINED, $subscribe_path, $download_filename;
-		if ($cal != $ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') {
+		global $phpiCal_config, $getdate, $cal, $subscribe_path, $download_filename;
+		if ($cal != $phpiCal_config->ALL_CALENDARS_COMBINED && $subscribe_path != '' && $download_filename != '') {
 			$this->page 	= str_replace('{SUBSCRIBE_PATH}', $subscribe_path, $this->page);
 			$this->page 	= str_replace('{DOWNLOAD_FILENAME}', $download_filename, $this->page);
 		} else {
