@@ -87,10 +87,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 		$is_webcal = FALSE;
 		if (substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://') {
 			$is_webcal = TRUE;
-			$cal_webcalPrefix = str_replace('http://','webcal://',$filename);
-			$cal_httpPrefix = str_replace('webcal://','http://',$filename);
-			$cal_httpsPrefix = str_replace('webcal://','https://',$filename);
-			$cal_httpsPrefix = str_replace('http://','https://',$cal_httpsPrefix);
+			$cal_webcalPrefix = str_replace(array('http://', 'https://'), 'webcal://', $filename);
+			$cal_httpPrefix = str_replace(array('webcal://', 'https://'), 'http://', $filename);
+			$cal_httpsPrefix = str_replace(array('http://', 'webcal://'), 'https://', $filename);
 			$filename = $cal_httpPrefix;
 			$master_array['-4'][$calnumber]['webcal'] = 'yes';
 			$actual_mtime = time();
