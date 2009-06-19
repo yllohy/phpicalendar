@@ -19,17 +19,16 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 			$master_array = unserialize($contents);
 			$z=1;
 			$y=0;
-			$webcal_mtime = time() - ($phpiCal_config->webcal_hours * 3600);
 			if (sizeof($master_array['-4']) == (sizeof($cal_filelist))) {
 				foreach ($master_array['-4'] as $temp_array) {
 					$mtime = $master_array['-4'][$z]['mtime'];
 					$fname = $master_array['-4'][$z]['filename'];
 					$wcalc = $master_array['-4'][$z]['webcal'];	
+					
 					if ($wcalc == 'no') $realcal_mtime = filemtime($fname);
-					if (isset($realcal_mtime) && ($mtime == $realcal_mtime) && ($wcalc == 'no')) {
-						$y++;
-					} elseif (($wcalc == 'yes') && ($mtime > $webcal_mtime)) {
-						//echo date('H:i',$mtime). ' > '. date('H:i',$webcal_mtime);
+					else $realcal_mtime = remote_filemtime($fname);
+					
+					if ($mtime == $realcal_mtime) {
 						$y++;
 					}
 					$z++;
@@ -50,7 +49,13 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 		if ($parse_file == true) unset($master_array);
 	} else {
 		foreach ($cal_filelist as $filename) {
-			$realcal_mtime = filemtime($filename);
+			if (substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://') {
+				$realcal_mtime = remote_filemtime($filename);
+			}
+			else {
+				$realcal_mtime = filemtime($filename);
+			}
+
 			$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
 			if (file_exists($parsedcal)) {
 				$parsedcal_mtime = filemtime($parsedcal);
@@ -84,15 +89,13 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 	if ($parse_file) {	
 		
 		// Let's see if we're doing a webcal
-		$is_webcal = FALSE;
 		if (substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://') {
-			$is_webcal = TRUE;
 			$cal_webcalPrefix = str_replace(array('http://', 'https://'), 'webcal://', $filename);
 			$cal_httpPrefix = str_replace(array('webcal://', 'https://'), 'http://', $filename);
 			$cal_httpsPrefix = str_replace(array('http://', 'webcal://'), 'https://', $filename);
 			$filename = $cal_httpPrefix;
 			$master_array['-4'][$calnumber]['webcal'] = 'yes';
-			$actual_mtime = time();
+			$actual_mtime = @remote_filemtime($filename);
 		} else {
 			$actual_mtime = @filemtime($filename);
 		}

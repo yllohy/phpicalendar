@@ -55,7 +55,6 @@ class Configs{
 		// Calendar Caching (decreases page load times)
 		$this->save_parsed_cals 		= 'no';				// Saves a copy of the cal in /tmp after it's been parsed. Improves performance.
 		$this->tmp_dir					= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X). Any php-writable folder works.
-		$this->webcal_hours				= '24';				// Number of hours to cache webcals. Setting to '0' will always re-parse webcals.
 		
 		// Webdav style publishing
 		$this->phpicalendar_publishing 	= '0';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;

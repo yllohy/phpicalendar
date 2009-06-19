@@ -4,6 +4,30 @@ require_once(BASE."functions/is_daylight.php");
 // functions for returning or comparing dates
 
 
+// get remote file last modification date (returns unix timestamp)
+function remote_filemtime($url) {
+	$fp = fopen($url, 'r');
+	if (!$fp) return 0;
+	$metadata = stream_get_meta_data($fp);
+	fclose($fp);
+
+	$unixtime = 0;
+	foreach ($metadata['wrapper_data'] as $response) {
+		// case: redirection
+		// WARNING: does not handle relative redirection
+		if (substr(strtolower($response), 0, 10) == 'location: ') {
+			return GetRemoteLastModified(substr($response, 10));
+		}
+		// case: last-modified
+		else if (substr(strtolower($response), 0, 15) == 'last-modified: ') {
+			$unixtime = strtotime(substr($response, 15));
+			break;
+		}
+	}
+
+	return $unixtime;
+}
+
 // takes iCalendar 2 day format and makes it into 3 characters
 // if $txt is true, it returns the 3 letters, otherwise it returns the
 // integer of that day; 0=Sun, 1=Mon, etc.
