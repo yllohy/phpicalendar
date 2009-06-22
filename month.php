@@ -5,7 +5,15 @@ require_once(BASE.'functions/ical_parser.php');
 require_once(BASE.'functions/list_functions.php');
 require_once(BASE.'functions/template.php');
 header("Content-Type: text/html; charset=$phpiCal_config->charset");
-if ($phpiCal_config->minical_view == 'current') $minical_view = 'month';
+
+$minical_view = $current_view;
+switch ($phpiCal_config->minical_view) {
+	case 'day':
+	case 'week':
+	case 'month':
+		$minical_view = $phpiCal_config->minical_view;
+		break;
+}
 
 $unix_time 				= strtotime($getdate);
 $today_today 			= date('Ymd', time() + $phpiCal_config->second_offset); 
