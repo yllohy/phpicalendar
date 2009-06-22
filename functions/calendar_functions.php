@@ -187,7 +187,10 @@ function display_ical_list($cals, $pick=FALSE) {
 	global $cal, $current_view, $getdate, $lang, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $list_webcals, $phpiCal_config;
 	// Print each calendar option.
 	$return = '';
-	$all_cals = true;
+
+	$all_cals = false;
+	if (count($cals) > 1) $all_cals = true;
+
 	foreach ($cals as $cal_tmp) {
 		// Format the calendar path for display.
 		//
@@ -256,9 +259,9 @@ function display_ical_list($cals, $pick=FALSE) {
 		// trying to figure out if this is the selected calendar.
 		if($pick) {
 			if (in_array($cal_encoded_tmp, explode(",", $cal)) || count($cals) == count(explode(",", $cal))) {
-					$return .= "<option value=\"$cal_encoded_tmp\" selected=\"selected\">$cal_displayname_tmp</option>\n";
+				$return .= "<option value=\"$cal_encoded_tmp\" selected=\"selected\">$cal_displayname_tmp</option>\n";
 			} else {
-					$return .= "<option value=\"$cal_encoded_tmp\">$cal_displayname_tmp</option>\n";	
+				$return .= "<option value=\"$cal_encoded_tmp\">$cal_displayname_tmp</option>\n";
 			}
 		} else {
 			$cal_httpPrefix_tmp = str_replace('webcal://', 'http://', $cal_tmp);
