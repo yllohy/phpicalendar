@@ -5,6 +5,7 @@
 //
 // Translation by Einbert (einbert@einbert.net)
 // And some sentences form version 1.0 made by La Shampouineuse (info@lashampoo.com)
+// Some small corrections, and updates from 'english.inc.php' 1.73, by fero14041 (fero14041@ifrance.com)
 //
 // Submit new translations to chad@chadsdomain.com
 
@@ -37,7 +38,8 @@ $lang['l_today'] 			= 'Aujourd\'hui';
 $lang['l_this_week'] 		= 'Cette semaine';
 $lang['l_this_month'] 		= 'Ce mois';
 $lang['l_jump'] 			= 'Voir';
-$lang['l_tomorrows'] 		= 'Ev&eacute;nement de demain';
+$lang['l_todays'] 			= 'Ev&eacute;nements d\'aujourd\'hui';
+$lang['l_tomorrows'] 		= 'Ev&eacute;nements de demain';
 $lang['l_goday'] 			= 'Voir aujourd\'hui';
 $lang['l_goweek'] 			= 'Voir cette semaine';
 $lang['l_gomonth'] 			= 'Voir ce mois';
@@ -48,6 +50,7 @@ $lang['l_pick_multiple'] 	= 'Choix multiple';
 $lang['l_query'] 			= 'Requ&egrave;te'; // will be followed by the search query
 $lang['l_no_results'] 		= 'Aucun &eacute;v&eacute;nement trouv&eacute;';
 $lang['l_goprint'] 			= 'Version imprimable';
+$lang['l_view_calendars']	= 'Retour à la vue des calendrier';
 $lang['l_time'] 			= 'Heure';
 $lang['l_summary'] 			= 'R&eacute;sum&eacute;';
 $lang['l_description'] 		= 'Description';
@@ -60,7 +63,8 @@ $lang['l_rss_week_date	']	= '%e %b';  // Lists just the day
 $lang['l_rss_month_date	']	= '%e %b';  // Lists just the day
 $lang['l_rss_language']		= 'fr-fr';
 $lang['l_search_took']		= 'La recherche a pris %s seconds';
-$lang['l_recurring_event']	= 'Ev&eacute;nement r&eacute;curent';
+$lang['l_starting_on'] 		= 'Starting on ';
+$lang['l_recurring_event']	= 'Ev&eacute;nement r&eacute;current';
 $lang['l_exception']		= 'Exception';
 $lang['l_no_query']			= 'Aucune requ&egrave;te';
 $lang['l_preferences']		= 'Pr&eacute;f&eacute;rences';
@@ -69,31 +73,35 @@ $lang['l_select_lang']		= 'Choisissez votre langage par d&eacute;faut';
 $lang['l_select_cal']		= 'Choisissez votre calendrier par d&eacute;faut';
 $lang['l_select_view']		= 'Choisissez votre vue par d&eacute;faut';
 $lang['l_select_time']		= 'Choisissez votre heure de d&eacute;but par d&eacute;faut';
+$lang['l_select_timezone']	= 'Choisissez votre fuseau horaire';
+$lang['l_select_endtime']	= 'Choisissez votre heure de fin par d&eacute;faut';
+$lang['l_select_timeformat']= 'Choisissez votre format d\'heure par d&eacute;faut (AM/PM)';
 $lang['l_select_day']		= 'Choisissez votre jour de d&eacute;but de semaine par d&eacute;faut';
 $lang['l_select_style']		= 'Choisissez votre style par d&eacute;faut';
 $lang['l_set_prefs']		= 'Enregistrer les pr&eacute;f&eacute;rences';
 $lang['l_completed_date']	= 'Termin&eacute; le';
 $lang['l_completed']		= 'Termin&eacute;';
 $lang['l_created']			= 'Cr&eacute;&eacute;';
-$lang['l_due']				= 'Fin:';
+$lang['l_due']				= 'Fin';
 $lang['l_priority']			= 'Priorit&eacute;';
 $lang['l_priority_high']	= 'Haute';
 $lang['l_priority_low']		= 'Basse';
 $lang['l_priority_medium']	= 'Moyenne';
 $lang['l_priority_none']	= 'Aucune';
-$lang['l_status']			= 'Status:';
-$lang['l_status_confirmed'] = 'CONFIRMED' ; 
-$lang['l_status_cancelled'] = 'CANCELLED'; 
-$lang['l_status_tentative'] = 'TENTATIVE'; 
+$lang['l_status']			= 'Status';
+$lang['l_status_confirmed'] = 'CONFIRMED'; 
+$lang['l_status_cancelled'] = 'CANCELLED';
+$lang['l_status_tentative'] = 'TENTATIVE';
 $lang['l_todo']				= 'T&acirc;ches &agrave; r&eacute;aliser';
 $lang['l_unfinished']		= 'Non faites';
 $lang['l_prefs_set'] 		= 'Vos pr&eacute;f&eacute;rences ont &eacute;t&eacute; modifi&eacute;es.';
 $lang['l_prefs_unset'] 		= 'Pr&eacute;f&eacute;rences supprim&eacute;es. Changement au prochain chargement de la page.';
 $lang['l_unset_prefs'] 		= 'Supprimez les pr&eacute;f&eacute;rences';
-$lang['l_organizer']		= 'Organizer';
-$lang['l_attendee']			= 'Attendee';
-$lang['l_status']			= 'Status';
-$lang['l_location']			= 'Location';
+$lang['l_organizer']		= 'Organisateur';
+$lang['l_attendee']			= 'Participant';
+$lang['l_location']			= 'Lieu';
+$lang['l_download_event']	= 'Télécharger l\'&eacute;v&eacute;nement';
+$lang['l_url'] 				= 'URL';
 $lang['l_admin_header']		= 'Administration de PHP iCalendar';
 $lang['l_username']			= 'Utilisateur';
 $lang['l_password']			= 'Mot de passe';
@@ -102,7 +110,7 @@ $lang['l_invalid_login']	= 'Utilisateur ou mot de passe erron&eacute;.';
 $lang['l_addupdate_cal']	= 'Ajoutez ou modifiez un calendrier';
 $lang['l_addupdate_desc']	= 'Ajoutez un calendrier en chargeant un nouveau fichier. Modifiez un calendrier en chargeant un fichier de m&ecirc;me nom.';
 $lang['l_delete_cal']		= 'Effacez un calendrier';
-$lang['l_logout']			= 'Logout';
+$lang['l_logout']			= 'D&eacute;connexion';
 $lang['l_cal_file']			= 'Fichier calendrier';
 $lang['l_php_error']		= 'Erreur PHP';
 $upload_error_gen_lang		= 'Une erreur lors du t&eacute;l&eacute;chargement s\'est produite.';
@@ -112,8 +120,8 @@ $upload_error_lang[2]		= 'Le fichier que vous tentez de t&eacute;l&eacute;charge
 $upload_error_lang[3]		= 'Le fichier n\'a &eacute;t&eacute; que partiellement t&eacute;l&eacute;charg&eacute;.';
 $upload_error_lang[4]		= 'Vous devez choisir un fichier &agrave; t&eacute;l&eacute;charger.';
 $lang['l_upload_error_type'] = 'Seuls des fichiers au format .ics peuvent &ecirc;tre t&eacute;l&eacute;charg&eacute;s.';
-$lang['l_copy_error']			= 'La copie du fichier a &eacute;chou&eacute;';
-$lang['l_delete_error']			= 'La suppression du fichier a &eacute;chou&eacute;';
+$lang['l_copy_error']			= 'La copie du fichier a &eacute;chou&eacute;.';
+$lang['l_delete_error']			= 'La suppression du fichier a &eacute;chou&eacute;.';
 $lang['l_delete_success']		= 'a &eacute;t&eacute; supprim&eacute; avec succ&egrave;s.';
 $lang['l_action_success']		= 'Action effectu&eacute;e avec succ&egrave;s.';
 $lang['l_submit']				= 'Envoyer';
@@ -122,10 +130,10 @@ $all_cal_comb_lang			= 'Tous les calendriers';
 
 // New for 2.0
 $lang['l_legend']			= 'L&eacute;gende';
-$lang['l_admin_subhead']	= 'Contr&ocirc;lez vos calendriers &agrave; partir de cette page';
-$lang['l_prefs_subhead']	= 'Stock un cookie pour la visite de ce site';
+$lang['l_admin_subhead']	= 'Contr&ocirc;lez vos calendriers &agrave; partir de cette page.';
+$lang['l_prefs_subhead']	= 'Stocke un cookie pour la visite de ce site.';
 $lang['l_rss_info']			= 'Information RSS';
-$lang['l_rss_subhead']		= 'RSS feeds basic disponible pour chaque calendrier';
+$lang['l_rss_subhead']		= 'Flux RSS disponible pour chaque calendrier';
 $lang['l_rss_notenabled']	= 'RSS n\'est pas disponible sur ce site';
 
 // - navigation
@@ -205,7 +213,8 @@ $lang['l_error_back'] 			= 'Veuillez utiliser le bouton "Retour" pour revenir en
 $lang['l_error_remotecal'] 		= 'Ce serveur refuse les calendriers distants non approuv&eacute;s.';
 $lang['l_error_restrictedcal'] 	= 'Vous avez essay&eacute; d\'utiliser un calendrier dont les permissions sont restreintes sur ce serveur.';
 $lang['l_error_invalidcal'] 	= 'Fichier calendrier invalide. Veuillez essayer un calendrier diff&eacute;rent.';
-$lang['l_error_cantopen'] 		= 'Unable to open calendar.';
-$lang['l_error_cache']			= 'Unable to write to cache directory. Please check your config.';
+$lang['l_error_cantopen'] 		= 'Impossible d\'ouvrir le calendrier.';
+$lang['l_error_cache']			= 'Impossible d\'&eacute;crire dans le r&eacute;pertoire de cache. V&eacute;rifiez votre config. SVP.';
+$lang['l_prefs_off']			= 'Les pr&eacute;f&eacute;rences sont d&eacute;sactiv&eacute;es pour cette installation.';
 
 ?>
