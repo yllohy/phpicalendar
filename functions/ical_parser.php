@@ -23,7 +23,7 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 				foreach ($master_array['-4'] as $temp_array) {
 					$mtime = $master_array['-4'][$z]['mtime'];
 					$fname = $master_array['-4'][$z]['filename'];
-					$wcalc = $master_array['-4'][$z]['webcal'];	
+					$wcalc = $master_array['-4'][$z]['webcal'];
 					
 					if ($wcalc == 'no') $realcal_mtime = filemtime($fname);
 					else $realcal_mtime = remote_filemtime($fname);
@@ -503,6 +503,7 @@ if ($parse_file) {
 		@fwrite($fd, $write_me);
 		@fclose($fd);
 		@touch($parsedcal, $realcal_mtime);
+		@chmod($parsedcal, 0600); // 0640
 	}
 }
 
