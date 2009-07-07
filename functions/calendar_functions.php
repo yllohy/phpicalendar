@@ -264,7 +264,6 @@ function display_ical_list($cals, $pick=FALSE) {
 				$return .= "<option value=\"$cal_encoded_tmp\">$cal_displayname_tmp</option>\n";
 			}
 		} else {
-			$cal_httpPrefix_tmp = str_replace('webcal://', 'http://', $cal_tmp);
 			if ($cal_encoded_tmp == $cal || $cal_encoded_tmp == urldecode($cal)) {
 				$return .= "<option value=\"$current_view.php?cal=$cal_encoded_tmp&amp;getdate=$getdate\" selected=\"selected\">$cal_displayname_tmp</option>";
 			} else {

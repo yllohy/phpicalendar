@@ -1,9 +1,9 @@
 {HEADER}
 <center>
-	<table width="770" border="0" cellspacing="0" cellpadding="0">
+	<table border="0" cellspacing="0" cellpadding="0" class="maintable">
 		<tr>
-			<td width="676">
-				<table width="676" border="0" cellspacing="0" cellpadding="0" class="calborder">
+			<td>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="calborder">
 					<tr>
 						<td align="center" valign="middle" bgcolor="white">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -32,7 +32,7 @@
 												<td><a class="psf" href="day.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/day_on.gif" alt="{L_DAY}" title="{L_DAY}" border="0" /></a></td>
 												<td><a class="psf" href="week.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/week_on.gif" alt="{L_WEEK}" title="{L_WEEK}" border="0" /></a></td>
 												<td><a class="psf" href="month.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/month_on.gif" alt="{L_MONTH}" title="{L_MONTH}" border="0" /></a></td>
-												<td><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" title="{L_YEAR}" border="0" /></td>
+												<td><a class="psf" href="year.php?cal={CAL}&amp;getdate={GETDATE}"><img src="templates/{TEMPLATE}/images/year_on.gif" alt="{L_YEAR}" title="{L_YEAR}" border="0" /></a></td>
 											</tr>
 										</table>
 									</td>
@@ -41,97 +41,62 @@
 						</td>
 					</tr>
 				</table>
-				<br />
-				<table border="0" width="670" cellspacing="0" cellpadding="0">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td width="210" valign="top" align="left">
+						<td colspan="3">
+							<img src="images/spacer.gif" height="5" height="1" alt=" " />
+						</td>
+					</tr>
+					<tr>
+						<td class="yearleft" valign="top" align="left">
 							{MONTH_MEDIUM|01}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearmiddle" valign="top" align="left">
 							{MONTH_MEDIUM|02}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearright" valign="top" align="left">
 							{MONTH_MEDIUM|03}
 						</td>
-						<td width="20" rowspan='8'>
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
 					</tr>
 					<tr>
-						<td colspan="5">
-							<img src="images/spacer.gif" width="1" height="20" alt=" " />
-						</td>
-					</tr>
-					<tr>
-						<td width="210" valign="top" align="left">
+						<td class="yearleft" valign="top" align="left">
 							{MONTH_MEDIUM|04}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearmiddle" valign="top" align="left">
 							{MONTH_MEDIUM|05}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearright" valign="top" align="left">
 							{MONTH_MEDIUM|06}
 						</td>
 					</tr>
 					<tr>
-						<td colspan="5">
-							<img src="images/spacer.gif" width="1" height="20" alt=" " />
-						</td>
-					</tr>
-					<tr>
-						<td width="210" valign="top" align="left">
+						<td class="yearleft" valign="top" align="left">
 							{MONTH_MEDIUM|07}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearmiddle" valign="top" align="left">
 							{MONTH_MEDIUM|08}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearright" valign="top" align="left">
 							{MONTH_MEDIUM|09}
 						</td>
 					</tr>
 					<tr>
-						<td colspan="5">
-							<img src="images/spacer.gif" width="1" height="20" alt=" " />
-						</td>
-					</tr>
-					<tr>
-						<td width="210" valign="top" align="left">
+						<td class="yearleft" valign="top" align="left">
 							{MONTH_MEDIUM|10}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearmiddle" valign="top" align="left">
 							{MONTH_MEDIUM|11}
 						</td>
-						<td width="20">
-							<img src="images/spacer.gif" width="20" height="1" alt=" " />
-						</td>
-						<td width="210" valign="top" align="left">
+						<td class="yearright" valign="top" align="left">
 							{MONTH_MEDIUM|12}
 						</td>
 					</tr>
 				</table>
 			</td>
-			<td valign="top">
+			<td width="10">
+				<img src="images/spacer.gif" width="10" height="1" alt=" " />
+			</td>
+			<td width="170" valign="top" class="sidebar">
 				{SIDEBAR}
 			</td>
 		</tr>

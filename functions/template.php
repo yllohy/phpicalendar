@@ -253,7 +253,7 @@ class Page {
 	}#end draw_search
 	
 	function draw_week($template_p) {
-		global $phpiCal_config, $start_week_time, $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat, $timeFormat_small;
+		global $phpiCal_config, $start_week_time, $getdate, $cal, $master_array, $dateFormat_week_list, $current_view, $day_array, $timeFormat;
 		
 		// Figure out colspans and initialize weekarray
 		$thisdate  	= $start_week_time;
@@ -306,6 +306,10 @@ class Page {
 			while ($day < $phpiCal_config->week_length){
 				$colspan  = 0;
 				$replace  .= $loop_begin; # <td>
+
+				if ($weekarray[$day] == $getdate) $replace = str_replace('{TODAY}', "rowToday", $replace);
+				$replace 	= str_replace('{TODAY}', "rowOff", $replace);
+
 				if(array_search($weekarray[$day], $allday_uids)){ 
 					$uid = array_search($weekarray[$day], $allday_uids);
 					unset($allday_uids[$uid]);
@@ -464,9 +468,14 @@ class Page {
 					} else {
 						$class = '';
 						$dayborder = 0;
-					}					
+					}
+					$tclass = $class;
+					if ($thisday == $getdate) {
+						if ($tclass) $tclass = ' class="weekborder weektoday"';
+						else $tclass = ' class="weektoday"';
+					}
 					$drawWidth = 1;
-					$weekdisplay .= '<td colspan="' . $nbrGridCols[$thisday] . '" ' . $class . '>&nbsp;</td>'."\n";					
+					$weekdisplay .= '<td colspan="' . $nbrGridCols[$thisday] . '"' . $tclass . '>&nbsp;</td>'."\n";
 				} else {
 					# have events
 					$emptyWidth = $nbrGridCols[$thisday];
@@ -478,13 +487,18 @@ class Page {
 						switch ($el["state"]) {
 							case "begin":
 								if ($ended_counter) {
-									$weekdisplay .= '<td colspan="' . $ended_counter . '" '.$class.'>&nbsp;</td>';
+									$tclass = $class;
+									if ($thisday == $getdate) {
+										if ($tclass) $tclass = ' class="weekborder weektoday"';
+										else $tclass = ' class="weektoday"';
+									}
+									$weekdisplay .= '<td colspan="' . $ended_counter . '"' . $tclass . '>&nbsp;</td>';
 									$ended_counter = 0;
 								}
 								$event_length[$thisday][$i]["state"] = "started";
  								$uid = $event_length[$thisday][$i]["key"];
  								$event_start 	= $this_time_arr[$uid]['start_unixtime'];
-								$event_start 	= date ($timeFormat_small, $event_start);
+								$event_start 	= date ($timeFormat, $event_start);
  								$event_calno  	= $this_time_arr[$uid]['calnumber'];
  								$event_status	= strtolower($this_time_arr[$uid]['status']);
  								$event_recur = $this_time_arr[$uid]['recur'];
@@ -510,7 +524,12 @@ class Page {
 								break;
 							case "started":
 								if ($ended_counter) {
-									$weekdisplay .= '<td colspan="' . $ended_counter . '" '.$class.'>&nbsp;</td>';
+									$tclass = $class;
+									if ($thisday == $getdate) {
+										if ($tclass) $tclass = ' class="weekborder weektoday"';
+										else $tclass = ' class="weektoday"';
+									}
+									$weekdisplay .= '<td colspan="' . $ended_counter . '"' . $tclass . '>&nbsp;</td>';
 									$ended_counter = 0;
 								}
 								break;
@@ -528,7 +547,12 @@ class Page {
 					$emptyWidth += $ended_counter;
 					//fill empty space on the right
 					if ($emptyWidth > 0) {
-						$weekdisplay .= "<td colspan=\"" . $emptyWidth . "\" $class>&nbsp;</td>\n";
+						$tclass = $class;
+						if ($thisday == $getdate) {
+							if ($tclass) $tclass = ' class="weekborder weektoday"';
+							else $tclass = ' class="weektoday"';
+						}
+						$weekdisplay .= "<td colspan=\"" . $emptyWidth . "\"$tclass>&nbsp;</td>\n";
 					}
 					while (isset($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"]) && $event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
 						array_pop($event_length[$thisday]);
@@ -981,7 +1005,7 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								if ($type == 'large') {
 									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
- 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 10, 'ps3', "$start2 ").'';
+ 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 10, 'ps3', "<span style=\"font-weight: bold;\">$start2</span> ");
  									$switch['EVENT'] .= (isset($val['location']) && $val['location'] != '' && $phpiCal_config->month_locations == 'yes') ? "<br />".$val['location']."<br />" : '';
 									$switch['EVENT'] .= '</div>';
 								} else {
@@ -1033,7 +1057,7 @@ class Page {
 	}
 	
 	function monthbottom() {
-		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $timeFormat_small, $dateFormat_week_list, $lang;
+		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $dateFormat_week_list, $lang;
 		preg_match("!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!Uis", $this->page, $match1);
 		preg_match("!<\!-- loop showbottomevents_even on -->(.*)<\!-- loop showbottomevents_even off -->!Uis", $this->page, $match2);
 		

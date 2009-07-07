@@ -1,7 +1,7 @@
-<table width="735" border="0" cellspacing="1" cellpadding="2" class="monthback">
+<table width="100%" border="0" cellspacing="1" cellpadding="2" class="monthback tfixed">
 	<tr>
 		<!-- loop weekday on -->
-		<td valign="top" width="105" height="12" class="dateback">
+		<td valign="top" height="12" class="dateback">
 			<center class="V9BOLD">{LOOP_WEEKDAY}</center>
 		</td>
 		<!-- loop weekday off -->

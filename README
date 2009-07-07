@@ -88,14 +88,32 @@ COPYING for more information about our license.
 
 Changes:
 --------
-2.31 Fix events ending at midnight bug in day view
+2.4
+	Event information displayed with Nice Titles
+	More ICS input sanitizing
+	Better display of tabs/line breaks in calendar events
+	Many updates to included templates; HTML fixes, better CSS support
+	Webcal caching now works like local calendar caching (with save_parsed_cals enabled)
+	Updates to Czech and French translations
+	Fixes for attendee/organizer parsing and email address hyperlinking
+	Fixes for Print View
+	Fix setting time format in preferences page
+	Fix default calendar selections in listbox picker
+	Fix timezone DST calculation with all-day events
+	Fix dates before 1970
+	Fixed bugs with ALL_CALENDARS_COMBINED and saving parsed calendars (using wrong file name)
+	Better handling of URLs and email addresses in event descriptions (also strip "blocked" protocols, added by some mail servers)
+
+2.31
+	Fix events ending at midnight bug in day view
 	Fix publish.php for 2.3 config system
 	add option to hide location in month view
 	add option to make individual events downloadable from event view
 	Fix calendar showing modified events twice
 	Make multiline descriptions display with line breaks in event popup
 	Fix German language file
-2.3 Major changes to recurrence handling
+2.3
+	Major changes to recurrence handling
 	Added more languages
 	Added login to month view
 	Consolidated common rss functions

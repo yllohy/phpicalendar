@@ -1,5 +1,5 @@
 <?php
-define('BASE', './');
+if (!defined('BASE')) define('BASE', './');
 $current_view 		='print';
 require_once(BASE.'functions/date_functions.php');
 require_once(BASE.'functions/init.inc.php');

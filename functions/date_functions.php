@@ -234,6 +234,8 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 		$full_event_text = $event_text;
 		$event_text      = strip_tags($event_text, '<b><i><u><img>');
 	}
+	
+	if (!empty($link_class)) $link_class = ' class="'.$link_class.'"';
 
 	if (!empty($event_text)) {
 		$title = strip_tags(str_replace("<br />","\n",$title));
@@ -254,10 +256,10 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 				document.popup_data[$popup_data_index] = eventData;
 				// --></script>";
 
-			$return .= '<a class="'.$link_class.'" title="'.$title.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
+			$return .= '<a'.$link_class.' title="'.$title.'" href="#" onclick="openEventWindow('.$popup_data_index.'); return false;">';
 			$popup_data_index++;
 		} else {
-			$return .= '<a class="'.$link_class.'" title="'.$title.'" href="'.$res[1].'">';
+			$return .= '<a'.$link_class.' title="'.$title.'" href="'.$res[1].'">';
 		}
 		$return .= $pre_text.$event_text.$post_text.'</a>'."\n";
 	}

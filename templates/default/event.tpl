@@ -8,13 +8,13 @@
 </head>
 <body>
 <center>
-	<table border="0" width="430" cellspacing="0" cellpadding="0" class="calborder">
+	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="calborder">
 		<tr>
 			<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">{CAL_TITLE_FULL}</div></td>
 		</tr>
 		<tr>
 			<td align="left" class="V12">
-				<div style="margin-left: 10px; margin-bottom:10px;">
+				<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 10px;">
 					<p><b>{L_SUMMARY}</b>: {EVENT_TEXT} - <span class="V9">(<i>{EVENT_TIMES}</i>)</span></p>
 					<!-- switch description on -->
 					<p><b>{L_DESCRIPTION}</b>: {DESCRIPTION}</p>

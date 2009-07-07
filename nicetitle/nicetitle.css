@@ -1,0 +1,32 @@
+div.nicetitle {
+    position: absolute;
+    padding: 4px;
+    top: 0px;
+    left: 0px;
+    color: white;
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    width: 25em;
+    background: url(ntbg.png);
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    text-shadow: black 1px 1px 1px;
+}
+div.nicetitle p {
+    margin: 0;
+    padding: 0 3px;
+}
+div.nicetitle p.destination {
+    font-size: 9px;
+    text-align: left;
+    padding-top: 3px;
+}
+
+@media print {
+    div.nicetitle {
+        display: none;
+    }
+}

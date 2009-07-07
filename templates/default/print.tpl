@@ -1,12 +1,12 @@
 {HEADER}
 <center>
-<table border="0" width="650" cellspacing="0" cellpadding="0" class="calborder">
+<table border="0" cellspacing="0" cellpadding="0" class="calborder maintable">
 	<tr>
 		<td>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr valign="top">
-					<td align="left" width="400" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span><br />
-					<a class="psf" href="{DEFAULT_VIEW}.php?cal={CAL}&amp;getdate={GETDATE}">{L_VIEW_CALENDARS}</a></td>
+					<td align="left" width="400" class="title"><h1>{DISPLAY_DATE}</h1><span class="V9G">{CALENDAR_NAME}</span><br />
+					<a class="psf" href="{PRINTVIEW}.php?cal={CAL}&amp;getdate={GETDATE}">{L_VIEW_CALENDARS}</a></td>
 					<td valign="top" align="right" width="120" class="navback">	
 						<div style="padding-top: 3px;">
 						<table width="90" border="0" cellpadding="0" cellspacing="0">
@@ -32,7 +32,7 @@
 				<tr>
 					<td align="left" valign="top">
 						<!-- switch some_events on -->
-						<div class="V12"><b>{DAYOFMONTH}</b></div>
+						<div class="V12" style="border-top: 1px solid #A1A5A9"><b>{DAYOFMONTH}</b></div>
 						<!-- loop events on -->
 						<div style="padding: 6px;">
 							<table width="100%" border="0" cellspacing="1" cellpadding="1">
@@ -70,7 +70,7 @@
 		</td>
 	</tr>
 </table>
-<table width="650" border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="0" cellspacing="0" class="maintable">
 	<tr>
 		<td class="tbll"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>
 		<td class="tblbot"><img src="images/spacer.gif" alt="" width="8" height="4" /></td>

@@ -14,7 +14,7 @@ $next_year 	= date ("Ymd", $next_year);
 $prev_year 	= strtotime ("-1 year", strtotime($getdate));
 $prev_year 	= date ("Ymd", $prev_year);
 
-$sidebar_date 		= localizeDate($dateFormat_day, strtotime($getdate));
+$sidebar_date 		= localizeDate($dateFormat_week_list, strtotime($getdate));
 
 // For the side months
 ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $getdate, $day_array2);
@@ -69,7 +69,6 @@ $page->replace_tags(array(
 	'rss_available' 	=> '',
 	'rss_valid' 		=> '',
 	'todo_available' 	=> '',
-	'event_js' 			=> '',
 	'this_year'			=> $this_year,
 	'next_day' 			=> @$next_day,
 	'next_week' 		=> @$next_week,
@@ -99,6 +98,8 @@ $page->replace_tags(array(
 	'l_tomorrows'		=> $lang['l_tomorrows'],
 	'l_jump'			=> $lang['l_jump'],
 	'l_todo'			=> $lang['l_todo'],
+	'l_prev'			=> $lang['l_prev'],
+	'l_next'			=> $lang['l_next'],
 	'l_day'				=> $lang['l_day'],
 	'l_week'			=> $lang['l_week'],
 	'l_month'			=> $lang['l_month'],

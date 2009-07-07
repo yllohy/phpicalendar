@@ -1,10 +1,10 @@
-<table border="0" width="210" cellspacing="0" cellpadding="0" class="calborder">
+<table border="0" width="100%" cellspacing="0" cellpadding="0" class="calborder">
 	<tr>
 		<td align="center" class="medtitle">{MONTH_TITLE}</td>
 	</tr>
 	<tr>
 		<td>
-			<table border="0" width="210" cellspacing="1" cellpadding="0" class="yearmonth">
+			<table border="0" width="100%" cellspacing="1" cellpadding="0" class="yearmonth tfixed">
 				<tr>
 					<!-- loop weekday on -->
 					<td class="yearweek">{LOOP_WEEKDAY}</td>

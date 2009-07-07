@@ -48,12 +48,18 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .title  		{ background-image: url(images/time_bg.gif); padding: 5px; }
 .title h1 		{ font-family: Helvetica, sans-serif; font-size: 18px; color: #000; margin: 0px;}
 
+/* Main class used for all page wrapper tables */
+.maintable		{ width: 990px; }
+
+/* Week view */
+.weektoday		{ background-color: #eff; }
+
 /* Month View */
 
 .monthback		{ background-color: #A1A5A9; }
-.monthreg		{ background-color: #fff; height: 105px; width: 105px; text-align: left; vertical-align: top; }
-.monthoff		{ background-color: #F2F2F2; height: 105px; width: 105px; text-align: left;  vertical-align: top; }
-.monthon		{ background-color: #F2F9FF; height: 105px; width: 105px; text-align: left;  vertical-align: top; }
+.monthreg		{ background-color: #fff; height: 105px; text-align: left; vertical-align: top; }
+.monthoff		{ background-color: #F2F2F2; height: 105px; text-align: left;  vertical-align: top; }
+.monthon		{ background-color: #F2F9FF; height: 105px; text-align: left;  vertical-align: top; }
 .montheventtop	{ background-image: url(images/side_bg.gif); border-top: 1px solid #A1A5A9; }
 .montheventline	{ border-right: 1px dotted #A1A5A9; }
 
@@ -65,7 +71,9 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .yearon			{ background-color: #F2F9FF; height: 30px; width: 30px; text-align: right;  vertical-align: top; font-size: 9px; }
 .yearmonth		{ background-color: #ccc; }
 .yearweek		{ background-color: #eee; width: 30px; font-size: 9px; font-weight: 900; text-align: center; height: 15px; }
-
+.yearleft		{ padding-right: 5px; padding-top: 5px; padding-bottom: 5px; }
+.yearmiddle		{ padding: 5px; }
+.yearright		{ padding-left: 5px; padding-top: 5px; padding-bottom: 5px; }
 
 /* older styles */
 
@@ -139,3 +147,13 @@ body			{ background-color: #E5E5E5; }
 .query_style 	{ font-size: 11px; font-family: verdana, geneva, arial, sans-serif; width: 156px; margin-bottom: 0; }
 .search_style 	{ font-size: 12px; font-family: verdana, geneva, arial, sans-serif; width: 134px; margin-bottom: 0; }
 .login_style	{ font-size: 11px; font-family: verdana, geneva, arial, sans-serif; width: 80px; margin-bottom: 0; }
+
+
+/* Make printed pages look nice */
+@media print {
+	.sidebar		{ width: 0px; display: none; }
+	.footer			{ display: none; }
+	.monthback		{ border-spacing: 0; }
+	.monthback td	{ border: 1px solid #606060; }
+	.calborder		{ border: 1px solid #606060; }
+}

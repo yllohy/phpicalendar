@@ -11,7 +11,7 @@ function openEventWindow(num) {
 	form.elements.event_data.value = data.event_data;
 	
 	// open a new window
-	var w = window.open('', 'Popup', 'scrollbars=yes,width=460,height=275');
+	var w = window.open('', 'Popup', 'scrollbars=yes,width=550,height=350');
 	form.target = 'Popup';
 	form.submit();
 }
@@ -36,7 +36,7 @@ function openTodoInfo(num) {
 	form.elements.todo_data.value = data.todo_data;
 
 	// open a new window
-	var w = window.open('', 'Popup', 'scrollbars=yes,width=460,height=275');
+	var w = window.open('', 'Popup', 'scrollbars=yes,width=550,height=350');
 	form.target = 'Popup';
 	form.submit();
 }
