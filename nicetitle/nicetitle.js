@@ -3,16 +3,6 @@
  * http://www.kryogenix.org/code/browser/nicetitle/
  */
 
-addEvent(window, "load", makeNiceTitles);
-
-
-// Get script self directory
-var src = document.getElementById("nicetitle").src.split("/");
-src.pop();
-src = src.join("/");
-
-// Pre-load background PNG
-(new Image()).src = src + "/ntbg.png";
 
 // Start configuration
 var SHOW_LINKS = false; // Set to false to disable showing link URLs
@@ -26,6 +16,17 @@ var SNAP_LENGTH = 25; // Define the length from the edge of the window to snap t
 var MOUSE_OFFSET = 15; // Define the distance to place the title from the mouse
 // End configuration
 
+
+// Let the magic begin...
+addEvent(window, "load", makeNiceTitles);
+
+// Get script self directory
+var src = document.getElementById("nicetitle").src.split("/");
+src.pop();
+src = src.join("/");
+
+// Pre-load background PNG
+(new Image()).src = src + "/ntbg.png";
 
 var XHTMLNS = "http://www.w3.org/1999/xhtml";
 var CURRENT_NICE_TITLE;
