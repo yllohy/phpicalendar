@@ -140,7 +140,9 @@ function checkOverlap($event_date, $event_time, $uid) {
 	$ol_day_array = @$overlap_array[$event_date];
 	$draw_end = $event['event_end'];
 	if (isset($event['display_end'])) $draw_end = $event['display_end'];
-	$drawTimes = drawEventTimes($event['event_start'], $draw_end);
+	$drawTimes = drawEventTimes($event['event_start'], $draw_end, ($event['event_length'] >= (60*60*24)));
+	if ($event_time == "0000") $drawTimes['draw_start'] = "0000";
+	if ($draw_end == "2400") $drawTimes['draw_end'] = "2400";
 
 	// Track if $event has been merged in, so we don't re-add the details to 'event' or 'overlapRanges' multiple times.
 	$already_merged_once = false;

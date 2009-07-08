@@ -266,7 +266,7 @@ class Page {
 					# ovlKey is a time slot; $ovlValue is an array with key=uid
 					if ($ovlKey != "-1") {
 						foreach($ovlValue as $ovl2Value) {
-							$nbrGridCols[($thisday)] = kgv($nbrGridCols[($thisday)], ($ovl2Value["event_overlap"] + 1));
+							$nbrGridCols[$thisday] = kgv($nbrGridCols[$thisday], ($ovl2Value["event_overlap"] + 1));
 						}
 					}
 				} 
@@ -508,6 +508,19 @@ class Page {
 								if ($event_status != '') {
 						  			$confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
+								$event_date_start = date('Ymd', $this_time_arr[$uid]['start_unixtime']);
+								$event_date_end   = date('Ymd', $this_time_arr[$uid]['end_unixtime']);
+								if ($event_date_start != $event_date_end) {
+									if ($thisday == $event_date_start) {
+										$confirmed .= '<img src="images/longevent_start.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+									}
+									else if ($thisday == $event_date_end) {
+										$confirmed .= '<img src="images/longevent_end.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+									}
+									else {
+										$confirmed .= '<img src="images/longevent_mid.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+									}
+								}
 								$event_temp   = $loop_event;
 								$event 		  = openevent($thisday, $cal_time, $uid, $this_time_arr[$uid], $phpiCal_config->week_events_lines, 25, 'ps');
 								$weekdisplay .= '<td rowspan="' . $event_length[$thisday][$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
@@ -731,6 +744,19 @@ class Page {
 						  $confirmed = '';
 						  if (is_array($event_recur)) $confirmed .= '<img src="images/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  if ($event_status != '') $confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+						  $event_date_start = date('Ymd', $this_time_arr[$uid]['start_unixtime']);
+						  $event_date_end   = date('Ymd', $this_time_arr[$uid]['end_unixtime']);
+						  if ($event_date_start != $event_date_end) {
+							  if ($getdate == $event_date_start) {
+								  $confirmed .= '<img src="images/longevent_start.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+							  }
+							  else if ($getdate == $event_date_end) {
+								  $confirmed .= '<img src="images/longevent_end.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+							  }
+							  else {
+								  $confirmed .= '<img src="images/longevent_mid.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
+							  }
+						  }
 						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
 						  
 						  // Start drawing the event

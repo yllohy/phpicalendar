@@ -1,6 +1,6 @@
 <?php
 # drawEventTimes returns starttime and endtime and event length for drawing into a grid
-function drawEventTimes ($start, $end) {
+function drawEventTimes ($start, $end, $long_event = FALSE) {
 	global  $phpiCal_config;
 	$sta_h = $sta_min = $end_h = $end_min = "00";
 	$gridLength = $phpiCal_config->gridLength;
@@ -24,14 +24,15 @@ function drawEventTimes ($start, $end) {
 		$end_min = "00";
 	}
 	
-	if (($sta_h . $sta_min) == ($end_h . $end_min))  {
+	if ((!$long_event) && (($sta_h . $sta_min) == ($end_h . $end_min))) {
 		$end_min += $gridLength;
 		if ($end_min == 60) {
 			$end_h = sprintf("%02d", ($end_h + 1));
 			$end_min = "00";
 		}
-	}	
+	}
 	$draw_len = ($end_h * 60 + $end_min) - ($sta_h * 60 + $sta_min);
+
 	return array ("draw_start" => ($sta_h . $sta_min), "draw_end" => ($end_h . $end_min), "draw_length" => $draw_len);
 }
 

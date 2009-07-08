@@ -66,7 +66,7 @@ if ($length < 0){
 	$end_time = $start_time;
 }
 # get hour and minute adjusted to allowed grid times
-$drawKey = drawEventTimes($start_time, $end_time);
+$drawKey = drawEventTimes($start_time, $end_time, ($length >= (60*60*24)));
 preg_match ('/([0-9]{2})([0-9]{2})/', $drawKey['draw_start'], $time3);
 preg_match ('/([0-9]{2})([0-9]{2})/', $drawKey['draw_end'], $time4);
 $hour = $time3[1];
@@ -349,7 +349,7 @@ foreach($recur_data as $recur_data_unixtime) {
 				'sequence' => $sequence, 
 				'recur' => $recur
 				);
-		}	
+		}
 		if($time_key > -1) checkOverlap($this_date_tmp, $time_key, $uid);
 	}
 } # end foreach recur_data 
