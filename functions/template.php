@@ -411,6 +411,7 @@ class Page {
 			$key = date ($timeFormat, $key);
 												
 			if (ereg("([0-9]{1,2}):00", $key)) {
+				$even_row = '2';
 				# column of times colspan = 4 to cover navigation links at top
 				$weekdisplay .= '<tr>';
 				$weekdisplay .= '<td colspan="4" rowspan="' . (60 / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
@@ -421,6 +422,8 @@ class Page {
 				$weekdisplay .= '<td colspan="4" rowspan="' . ($size_tmp / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.' </td>'; 
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			} else {
+				$even_row = '';
+				if (ereg("([0-9]{1,2}):30", $key)) $even_row = '2';
 				# empty row for each gridLength, to the right of times and left of first weekday
 				$weekdisplay .= '<tr>';
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
@@ -465,7 +468,7 @@ class Page {
 				if (empty($event_length[$thisday])) {
 					# no events
 					if ($dayborder == 0) {
-						$class = ' class="weekborder"';
+						$class = ' class="weekborder'.$even_row.'"';
 						$dayborder++;
 					} else {
 						$class = '';
@@ -473,7 +476,7 @@ class Page {
 					}
 					$tclass = $class;
 					if ($thisday == $getdate) {
-						if ($tclass) $tclass = ' class="weekborder weektoday"';
+						if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 						else $tclass = ' class="weektoday"';
 					}
 					$drawWidth = 1;
@@ -491,7 +494,7 @@ class Page {
 								if ($ended_counter) {
 									$tclass = $class;
 									if ($thisday == $getdate) {
-										if ($tclass) $tclass = ' class="weekborder weektoday"';
+										if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 										else $tclass = ' class="weektoday"';
 									}
 									$weekdisplay .= '<td colspan="' . $ended_counter . '"' . $tclass . '>&nbsp;</td>';
@@ -541,7 +544,7 @@ class Page {
 								if ($ended_counter) {
 									$tclass = $class;
 									if ($thisday == $getdate) {
-										if ($tclass) $tclass = ' class="weekborder weektoday"';
+										if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 										else $tclass = ' class="weektoday"';
 									}
 									$weekdisplay .= '<td colspan="' . $ended_counter . '"' . $tclass . '>&nbsp;</td>';
@@ -564,7 +567,7 @@ class Page {
 					if ($emptyWidth > 0) {
 						$tclass = $class;
 						if ($thisday == $getdate) {
-							if ($tclass) $tclass = ' class="weekborder weektoday"';
+							if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 							else $tclass = ' class="weektoday"';
 						}
 						$weekdisplay .= "<td colspan=\"" . $emptyWidth . "\"$tclass>&nbsp;</td>\n";
