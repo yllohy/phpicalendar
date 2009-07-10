@@ -302,7 +302,7 @@ class Page {
 		while(!empty($allday_uids)){
 			$row = $loop_row_begin;
 			$day = 0;
-			$replace ='';
+			$replace = '';
 			while ($day < $phpiCal_config->week_length){
 				$colspan  = 0;
 				$replace  .= $loop_begin; # <td>
@@ -315,8 +315,6 @@ class Page {
 					unset($allday_uids[$uid]);
 					$allday = $master_array[$weekarray[$day]]['-1'][$uid];
 					foreach ($allday_uid_dates[$uid] as $date){
-						#$ev = (!isset($ev)) ? "  $uid ":"";
-						#$replace .= $ev;
 						$colspan += $nbrGridCols[$weekarray[$day]];
 						$day++;
 					}
@@ -340,25 +338,6 @@ class Page {
 			$row .= "$replace $loop_row_end\n";
 			$weekreplace .= "$row\n";
 		}
-		/* old routine
-		foreach ($weekarray as $i=>$get_date) {
-			$replace 	= $loop_begin;
-			$colspan	= 'colspan="'.$nbrGridCols[$get_date].'"';
-			$replace 	= str_replace('{COLSPAN}', $colspan, $replace);
-			if (isset($master_array[$get_date]['-1']) && is_array($master_array[$get_date]['-1']) && !empty($master_array[$get_date]['-1']) ) {
-				foreach ($master_array[$get_date]['-1'] as $uid => $allday) {
-					$event_calno  	= $allday['calnumber'];
-					$event_calno	= (($event_calno - 1) % $phpiCal_config->unique_colors) + 1;
- 					$event 			= openevent($get_date, -1, $uid, $allday, $phpiCal_config->allday_week_lines, 11, 'psf');
-					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
-					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
-					$replace		.= $loop_tmp;
-				}
-			}
-			$replace .= $loop_end;
-			$weekreplace .= $replace;
-		}
-		*/
 		$this->page = preg_replace('!<\!-- loop allday row on -->.*<\!-- loop allday row off -->!Uis', $weekreplace, $this->page);
 		
 		// Replaces the daysofweek
@@ -367,7 +346,7 @@ class Page {
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$weekday_loop = '';
 		for ($i=0; $i<$phpiCal_config->week_length; $i++) {
-			$daylink		= date('Ymd', $start_wt);
+			$daylink = date('Ymd', $start_wt);
 			$weekday = localizeDate($dateFormat_week_list, strtotime($daylink));
 			if ($daylink == $getdate) {
 				$row1 = 'rowToday';
@@ -433,7 +412,6 @@ class Page {
 				each cell will have $this_time_arr of events 	*/
 			foreach ($weekarray as $thisday) {
 				$this_time_arr = array();
-				$dayborder 	= 0;
 				if ($phpiCal_config->day_start == $cal_time && isset($master_array[$thisday]) && is_array($master_array[$thisday])) {
 					# want to pile up all the events before day_start that end in the displayed times
 					foreach($master_array[$thisday] as $time_key => $time_arr) {
@@ -465,20 +443,11 @@ class Page {
 						$event_length[$thisday][] = array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
 					}
 				}
+				$class = ' class="weekborder'.$even_row.'"';
 				if (empty($event_length[$thisday])) {
 					# no events
-					if ($dayborder == 0) {
-						$class = ' class="weekborder'.$even_row.'"';
-						$dayborder++;
-					} else {
-						$class = '';
-						$dayborder = 0;
-					}
 					$tclass = $class;
-					if ($thisday == $getdate) {
-						if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
-						else $tclass = ' class="weektoday"';
-					}
+					if ($thisday == $getdate) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 					$drawWidth = 1;
 					$weekdisplay .= '<td colspan="' . $nbrGridCols[$thisday] . '"' . $tclass . '>&nbsp;</td>'."\n";
 				} else {
@@ -493,10 +462,7 @@ class Page {
 							case "begin":
 								if ($ended_counter) {
 									$tclass = $class;
-									if ($thisday == $getdate) {
-										if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
-										else $tclass = ' class="weektoday"';
-									}
+									if ($thisday == $getdate) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 									$weekdisplay .= '<td colspan="' . $ended_counter . '"' . $tclass . '>&nbsp;</td>';
 									$ended_counter = 0;
 								}
@@ -514,7 +480,7 @@ class Page {
 						  			$confirmed .= '<img src="images/'.$event_status.'.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 						  		}
 								$event_date_start = date('Ymd', $this_time_arr[$uid]['start_unixtime']);
-								$event_date_end   = date('Ymd', $this_time_arr[$uid]['end_unixtime']);
+								$event_date_end   = date('Ymd', $this_time_arr[$uid]['end_unixtime'] - 1);
 								if ($event_date_start != $event_date_end) {
 									if ($thisday == $event_date_start) {
 										$confirmed .= '<img src="images/longevent_start.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
@@ -543,10 +509,7 @@ class Page {
 							case "started":
 								if ($ended_counter) {
 									$tclass = $class;
-									if ($thisday == $getdate) {
-										if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
-										else $tclass = ' class="weektoday"';
-									}
+									if ($thisday == $getdate) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 									$weekdisplay .= '<td colspan="' . $ended_counter . '"' . $tclass . '>&nbsp;</td>';
 									$ended_counter = 0;
 								}
@@ -566,10 +529,7 @@ class Page {
 					//fill empty space on the right
 					if ($emptyWidth > 0) {
 						$tclass = $class;
-						if ($thisday == $getdate) {
-							if ($tclass) $tclass = ' class="weekborder'.$even_row.' weektoday"';
-							else $tclass = ' class="weektoday"';
-						}
+						if ($thisday == $getdate) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 						$weekdisplay .= "<td colspan=\"" . $emptyWidth . "\"$tclass>&nbsp;</td>\n";
 					}
 					while (isset($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"]) && $event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
