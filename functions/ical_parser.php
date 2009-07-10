@@ -220,6 +220,8 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					
 				case 'BEGIN:VTODO':
 					$vtodo_set = TRUE;
+					$start_date = '';
+					$start_time = '';
 					$summary = '';
 					$due_date = '';
 					$due_time = '';
