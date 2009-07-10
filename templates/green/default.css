@@ -98,7 +98,7 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 
 .eventbg	 	{ background-color: #339933; }
 
-.tfixed			{ table-layout: fixed; }
+.tfixed			{ table-layout: fixed; word-wrap: break-word; }
 .calborder 		{ background-color: #ffffff; border: 1px #A1A5A9 solid; }
 
 .dateback		{ background-color: #eee; }
