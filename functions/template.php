@@ -307,10 +307,10 @@ class Page {
 				$colspan  = 0;
 				$replace  .= $loop_begin; # <td>
 
-				if ($weekarray[$day] == $getdate) $replace = str_replace('{TODAY}', "rowToday", $replace);
-				$replace 	= str_replace('{TODAY}', "rowOff", $replace);
+				if ($weekarray[$day] == $getdate) $replace = str_replace('{TODAY}', 'rowToday', $replace);
+				$replace 	= str_replace('{TODAY}', 'rowOff', $replace);
 
-				if(array_search($weekarray[$day], $allday_uids)){ 
+				if(array_search($weekarray[$day], $allday_uids)){
 					$uid = array_search($weekarray[$day], $allday_uids);
 					unset($allday_uids[$uid]);
 					$allday = $master_array[$weekarray[$day]]['-1'][$uid];
@@ -325,15 +325,17 @@ class Page {
  					$event 			= openevent($get_date, -1, $uid, $allday, $phpiCal_config->allday_week_lines, (8*$colspan), 'psf');
 					$loop_tmp 		= str_replace('{ALLDAY}', $event, $loop_ad);
 					$loop_tmp 		= str_replace('{CALNO}', $event_calno, $loop_tmp);
+					$replace		= str_replace('{NOBORDER}', ' style="border-top: none;"', $replace);
 					$replace		.= $loop_tmp;
-					$replace .= $loop_end;
+					$replace		.= $loop_end;
 				}else{
-					$colspan	= $nbrGridCols[$weekarray[$day]];
-					$replace .= $loop_end;
+					$replace		= str_replace('{NOBORDER}', '', $replace);
+					$colspan		= $nbrGridCols[$weekarray[$day]];
+					$replace		.= $loop_end;
 					$day++;
 				}	
 				unset ($ev);
-				$replace 	= str_replace('{COLSPAN}', "colspan='$colspan'", $replace);
+				$replace 	= str_replace('{COLSPAN}', "colspan=\"$colspan\"", $replace);
 			} 
 			$row .= "$replace $loop_row_end\n";
 			$weekreplace .= "$row\n";

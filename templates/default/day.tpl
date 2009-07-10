@@ -44,7 +44,7 @@
 						</table>
 					</td>
 				</tr>
-				<tr id="allday">
+				<tr class="allday">
 					<td>
 						<!-- loop allday on -->
 						<div class="alldaybg_{CALNO}">

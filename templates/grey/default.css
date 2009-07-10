@@ -31,9 +31,9 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .eventbg_5	 	{ background-color: #705f60; padding: 2px;}
 .eventbg_6	 	{ background-color: #608060; padding: 2px;}
 .eventbg_7	 	{ background-color: #a0a090; padding: 2px;}
-#allday a		{ font-size: 9px; color: #fff; font-weight: 900; text-decoration:none;}
-#allday a:hover	{ text-decoration:underline;}
 
+.allday a		{ font-size: 9px; color: #fff !important; font-weight: 900; text-decoration:none;}
+.allday a:hover	{ text-decoration:underline;}
 
 .eventbg2_1	 		{ background-color: #505050; border: 1px solid #303030; }
 .eventbg2_2	 		{ background-color: #909080; border: 1px solid #707060; }

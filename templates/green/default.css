@@ -32,8 +32,8 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .eventbg_6	 	{ background-color: #ac9200; padding: 2px;}
 .eventbg_7	 	{ background-color: #00a28f; padding: 2px;}
 
-#allday a		{ font-size: 9px; color: #fff; font-weight: 900; text-decoration:none;}
-#allday a:hover	{ text-decoration:underline;}
+.allday a		{ font-size: 9px; color: #fff !important; font-weight: 900; text-decoration:none;}
+.allday a:hover	{ text-decoration:underline;}
 
 .eventbg2_1	 		{ background-color: #00992c; border: 1px solid #00790c; }
 .eventbg2_2	 		{ background-color: #00e400; border: 1px solid #00c400; }

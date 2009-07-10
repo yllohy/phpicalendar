@@ -31,9 +31,9 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .eventbg_5	 	{ background-color: #bc4700; padding: 2px;}
 .eventbg_6	 	{ background-color: #df2c6c; padding: 2px;}
 .eventbg_7	 	{ background-color: #ac4848; padding: 2px;}
-#allday a		{ font-size: 9px; color: #fff; font-weight: 900; text-decoration:none;}
-#allday a:hover	{ text-decoration:underline;}
 
+.allday a		{ font-size: 9px; color: #fff !important; font-weight: 900; text-decoration:none;}
+.allday a:hover	{ text-decoration:underline;}
 
 .eventbg2_1	 		{ background-color: #c03030; border: 1px solid #a01010; }
 .eventbg2_2	 		{ background-color: #cb8c00; border: 1px solid #ab6c00; }
@@ -42,6 +42,7 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .eventbg2_5	 		{ background-color: #dc6700; border: 1px solid #bc4700; }
 .eventbg2_6	 		{ background-color: #ff4c8c; border: 1px solid #df2c6c; }
 .eventbg2_7	 		{ background-color: #cc6868; border: 1px solid #ac4848; }
+
 .dayborder 		{ background-color: #fff; border-top: 1px solid #A1A5A9; }
 .dayborder2 	{ background-color: #fff; border-top: 1px dashed #ccc; }
 

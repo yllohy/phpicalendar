@@ -49,11 +49,11 @@
 									<!-- loop daysofweek off -->
 								</tr>
 								<!-- loop allday row on -->
-								<tr valign="top" id="allday">
+								<tr valign="top" class="allday">
 									<td width="60" class="rowOff2" colspan="4"><img src="images/spacer.gif" width="60" height="1" alt=" " /></td>
 									<td width="1"></td>
 									<!-- loop alldaysofweek on -->
-									<td {COLSPAN} class="{TODAY}">
+									<td {COLSPAN} class="{TODAY}"{NOBORDER}>
 										<!-- loop allday on -->
 										<div class="alldaybg_{CALNO}">
 											{ALLDAY}
