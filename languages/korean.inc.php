@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 // English language include
 // For version 2.0 PHP iCalendar
