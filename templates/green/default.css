@@ -102,10 +102,10 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .calborder 		{ background-color: #ffffff; border: 1px #A1A5A9 solid; }
 
 .dateback		{ background-color: #eee; }
-.weekborder 	{ border-right: 1px solid #A1A5A9; border-top: 1px dashed #ccc; }
-.weekborder2 	{ border-right: 1px solid #A1A5A9; border-top: 1px solid #A1A5A9; }
-.timeborder 	{ border-right: 2px solid #A1A5A9; border-top: 1px dashed #A1A5A9; background-image: url(images/time_bg.gif); }
-.timeborder2 	{ border-right: 2px solid #A1A5A9; border-top: 1px solid #A1A5A9; background-image: url(images/time_bg.gif); }
+.weekborder 	{ border-left: 1px solid #A1A5A9; border-top: 1px dashed #ccc; }
+.weekborder2 	{ border-left: 1px solid #A1A5A9; border-top: 1px solid #A1A5A9; }
+.timeborder 	{ border-top: 1px dashed #A1A5A9; background-image: url(images/time_bg.gif); }
+.timeborder2 	{ border-top: 1px solid #A1A5A9; background-image: url(images/time_bg.gif); }
 .navback 		{ background-image: url(images/time_bg.gif); }
 .sideback 		{ background-image: url(images/side_bg.gif); }
 
