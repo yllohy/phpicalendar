@@ -393,12 +393,12 @@ class Page {
 				$even_row = '2';
 				# column of times colspan = 4 to cover navigation links at top
 				$weekdisplay .= '<tr>';
-				$weekdisplay .= '<td colspan="4" rowspan="' . (60 / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.'</td>';
+				$weekdisplay .= '<td colspan="4" rowspan="' . (60 / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder2">'.$key.'</td>';
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			} elseif ($cal_time == $phpiCal_config->day_start) {
 				$size_tmp = 60 - (int)substr($cal_time,2,2);
 				$weekdisplay .= '<tr>';
-				$weekdisplay .= '<td colspan="4" rowspan="' . ($size_tmp / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder">'.$key.' </td>'; 
+				$weekdisplay .= '<td colspan="4" rowspan="' . ($size_tmp / $phpiCal_config->gridLength) . '" align="center" valign="top" width="60" class="timeborder2">'.$key.' </td>'; 
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			} else {
 				$even_row = '';
