@@ -15,11 +15,11 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .alldaybg_6 {background: #BA900C url(images/allday_6.gif) repeat-x; border-bottom: 1px solid #A07400; min-height: 18px; padding-top: 5px; text-align: center;}
 .alldaybg_7 {background: #959595 url(images/allday_7.gif) repeat-x; border-bottom: 1px solid #888888; min-height: 18px; padding-top: 5px; text-align: center;}
 
-.rowOn			{ background-color: #cfc; border-top: 1px solid #fff; border-left: 1px solid #fff; }
-.rowOn2			{ background-color: #cfc; border-top: 1px solid #fff; }
+.rowOn			{ background-color: #B0E8B0; border-top: 1px solid #fff; border-left: 1px solid #fff; }
+.rowOn2			{ background-color: #B0E8B0; border-top: 1px solid #fff; }
 .rowOff			{ background-color: #E1E8F1; border-top: 1px solid #fff; border-left: 1px solid #fff; }
 .rowOff2		{ background-color: #E1E8F1; border-top: 1px solid #fff; }
-.rowToday		{ background-color: #cff; border-top: 1px solid #fff; border-left: 1px solid #fff; }
+.rowToday		{ background-color: #B0E8E8; border-top: 1px solid #fff; border-left: 1px solid #fff; }
 
 .padd			{ padding: 2px; }
 
@@ -53,7 +53,7 @@ table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 .maintable		{ width: 990px; }
 
 /* Week view */
-.weektoday		{ background-color: #eff; }
+.weektoday		{ background-color: #dff; }
 
 /* Month View */
 
