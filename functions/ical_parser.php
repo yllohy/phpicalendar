@@ -139,7 +139,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 						$allday_start, $allday_end, $start, $end, $the_duration, 
 						$beginning, $start_of_vevent,
 						$valarm_description, $start_unixtime, $end_unixtime, $display_end_tmp, $end_time_tmp1, 
-						$recurrence_id, $uid, $rrule, $until_check,
+						$recurrence_id, $recurrence_d, $recurrence_, $uid, $rrule, $until_check,
 						$until, $byweek, $byweekno, 
 						$byminute, $byhour, $bysecond
 					);
