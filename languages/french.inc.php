@@ -177,7 +177,7 @@ $monthsofyearshort_lang		= array ('Jan','F&eacute;v','Mar','Avr','Mai','Juin','J
 
 // For time formatting, check out: http://www.php.net/manual/en/function.date.php
 $timeFormat = 'H:i';
-$timeFormat_small = 'g:i';
+$timeFormat_small = 'G:i';
 
 // For date formatting, see note below
 $dateFormat_day = '%A %e %B';

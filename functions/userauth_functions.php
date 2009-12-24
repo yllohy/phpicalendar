@@ -3,10 +3,8 @@
 //
 // Returns the login query string.
 function login_querys() {
-	global $QUERY_STRING;
-
 	// Remove the username, password, and action values.
-	$querys = preg_replace('/(username|password|action)=[^&]+/', '', $QUERY_STRING);
+	$querys = preg_replace('/(username|password|action)=[^&]+/', '', $_SERVER['QUERY_STRING']);
 
 	// Return the login query string.
 	$querys = preg_replace('/&&/', '', $querys);
@@ -17,10 +15,8 @@ function login_querys() {
 //
 // Returns the logout query string.
 function logout_querys() {
-	global $QUERY_STRING;
-
 	// Make sure the action is logout.
-	$querys = preg_replace('/action=[^&]+/', 'action=logout', $QUERY_STRING);
+	$querys = preg_replace('/action=[^&]+/', 'action=logout', $_SERVER['QUERY_STRING']);
 	if ($querys == $QUERY_STRING) $querys .= '&action=logout';
 
 	// Remove references to the username or password.
