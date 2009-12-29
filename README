@@ -103,6 +103,7 @@ Changes:
 	Fix dates before 1970
 	Fix logout
 	Fixed bugs with ALL_CALENDARS_COMBINED and saving parsed calendars (using wrong file name)
+	Fixed recurring events across multiple versions of PHP; thanks to Len and gueba!
 	Better handling of URLs and email addresses in event descriptions (also strip "blocked" protocols, added by some mail servers)
 
 2.31

@@ -140,7 +140,7 @@ function expand_byday($time){
 				if(empty($byweekno)){
 					$week_arr = array(1,2,3,4,5);
 					if(isset($byday_arr[2]) && $byday_arr[2] !='') $week_arr = array($byday_arr[2]); 
-					$month_start = strtotime(date("Ym00",$time));
+					$month_start = strtotime(date("Ym01",$time)) - (24 * 60 * 60);
 					$month_end = strtotime(date("Ymt",$time))+ (36 * 60 * 60);
 					if($freq_type == 'year' && empty($bymonth)){
 						$month_start = mktime(12,0,0,1,0,$year);
@@ -149,7 +149,13 @@ function expand_byday($time){
 					foreach($week_arr as $week){
 						#echo "<pre>$summary ".$byday_arr[1].$week.$on_day." st:".date("Ymd",$month_start)." t:".date("Ymd",$time)."\n";
 						if($byday_arr[1] == '-') $next_date_time = strtotime($byday_arr[1].$week.$on_day,$month_end);
-						else $next_date_time = strtotime($byday_arr[1].$week.$on_day,$month_start);
+						else {
+							# we need this special offset in case the event day coincides with the month start day
+							# eg: month starts on a Sunday, our event is the Nth Sunday of the month... without this
+							# special offset, the event will be added to the (N+1)th Sunday of the month
+							$special_offset = ($month_start_day == $on_day) ? (24 * 60 * 60) : 0;
+							$next_date_time = strtotime($byday_arr[1] . $week . $on_day, ($month_start + $special_offset));
+						}
 						# check that we're still in the same month
 						if (date("m",$next_date_time) == date("m",$time) ) $times[] = $next_date_time; 
 					}
