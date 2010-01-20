@@ -1,6 +1,6 @@
 <?php
 
-// English language include
+// Czech language include
 // For version 2.0 PHP iCalendar
 //
 // Translation by Petr Kletečka (kletecka@email.cz)
