@@ -2,14 +2,14 @@
 class Configs{
 	private static $instance;
 	private function __construct(){
-		$this->phpicalendar_version = '2.4alpha';
+		$this->phpicalendar_version = '2.4';
 	// Configuration file for PHP iCalendar 2.4
 	//
 	// To set values, change the text between the single quotes
 	// Follow instructions to the right for detailed information
 #=================Initialize global variables=================================
 // Define some magic strings.
-		$this->ALL_CALENDARS_COMBINED = 'all_calendars_combined971';	
+		$this->ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 		$this->template 				= 'default';		// Template support
 		$this->default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
 		$this->minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
@@ -34,7 +34,7 @@ class Configs{
 		$this->default_path				= ''; 				// The HTTP URL to the PHP iCalendar directory, ie. http://www.example.com/phpicalendar
 		$this->cpath	     			= ''; 				// optional subdirectory
 		$this->charset					= 'UTF-8';			// Character set your calendar is in, suggested UTF-8, or iso-8859-1 for most languages.
-		
+
 		// Yes/No questions --- 'yes' means Yes, anything else means no. 'yes' must be lowercase.
 		$this->allow_webcals 			= 'no';				// Allow http:// and webcal:// prefixed URLs to be used as the $this->cal for remote viewing of "subscribe-able" calendars. This does not have to be enabled to allow specific ones below.
 		$this->month_locations  		= 'yes';			// Display location in the month view.
@@ -51,16 +51,16 @@ class Configs{
 		$this->login_cookies			= 'no';			// Set to yes to store authentication information via (unencrypted) cookies. Set to no to use sessions.
 		$this->support_ical				= 'no';			// Set to yes to support the Apple iCal calendar database structure.
 		$this->recursive_path			= 'no';			// Set to yes to recurse into subdirectories of the calendar path.
-		
+
 		// Calendar Caching (decreases page load times)
 		$this->save_parsed_cals 		= 'no';				// Saves a copy of the cal in /tmp after it's been parsed. Improves performance.
 		$this->tmp_dir					= '/tmp';			// The temporary directory on your system (/tmp is fine for UNIXes including Mac OS X). Any php-writable folder works.
-		
+
 		// Webdav style publishing
 		$this->phpicalendar_publishing 	= '0';				// Set to '1' to enable remote webdav style publish. See 'calendars/publish.php' for complete information;
-		
+
 		// Administration settings (/admin/)
-		$this->allow_admin				= 'no';			// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $this->auth_method			
+		$this->allow_admin				= 'no';			// Set to yes to allow the admin page - remember to change the default password if using 'internal' as the $this->auth_method
 		$this->auth_method				= 'internal';			// Valid values are: 'ftp', 'internal', or 'none'. 'ftp' uses the ftp server's username and password as well as ftp commands to delete and copy files. 'internal' uses $this->auth_internal_username and $this->auth_internal_password defined below - CHANGE the password. 'none' uses NO authentication - meant to be used with another form of authentication such as http basic.
 		$this->auth_internal_username	= 'admin';			// Only used if $this->auth_method='internal'. The username for the administrator.
 		$this->auth_internal_password	= 'admin';			// Only used if $this->auth_method='internal'. The password for the administrator.
@@ -70,21 +70,21 @@ class Configs{
 		$this->salt                     = '';
 		// Calendar colors
 		//
-		// You can increase the number of unique colors by adding additional images (monthdot_n.gif) 
+		// You can increase the number of unique colors by adding additional images (monthdot_n.gif)
 		// and in the css file (default.css) classes .alldaybg_n, .eventbg_n and .eventbg2_n
 		// Colors will repeat from the beginning for calendars past $this->unique_colors (7 by default), with no limit.
-		$this->unique_colors			= '7';	
-		
+		$this->unique_colors			= '7';
+
 		return true;
-	}	
-	
+	}
+
 	public static function getInstance(){
 		if (empty(self::$instance)){
 			self::$instance = new Configs;
 		}
 		return self::$instance;
 	}
-	
+
 	# val can be an array
 	public function setProperty($key,$val){
 		$this->$key = $val;
