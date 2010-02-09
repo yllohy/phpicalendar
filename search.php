@@ -23,13 +23,15 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 
 $search_box = '';
 $search_box .=
+	'<div style="width: 160px;">'."\n".
 	'<form action="search.php" method="get">'."\n".
-        '<input type="hidden" name="cpath" value="'.$cpath.'">'."\n".
+	'<input type="hidden" name="cpath" value="'.$cpath.'">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
-	'<input type="text" size="15" name="query" value="'.$query.'">'."\n".
-        '<INPUT type="image" src="templates/'.$phpiCal_config->template.'/images/search.gif" border=0 height="19" width="18" name="submit" value="Search">'."\n".
-	'</form>';
+	'<input type="text" style="width: 130px;" name="query" value="'.$query.'">'."\n".
+	'<input type="image" src="templates/'.$phpiCal_config->template.'/images/search.gif" border="0" style="float: right;" name="submit" value="Search">'."\n".
+	'</form>'."\n".
+	'</div>';
 
 $search_started = getmicrotime();
 if ($search_valid) {

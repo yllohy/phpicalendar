@@ -6,7 +6,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr valign="top">
 					<td align="left" width="400" class="title"><h1>{L_RESULTS}</h1><span class="V9G">{CALENDAR_NAME} {L_CALENDAR}</span></td>
-					<td valign="top" align="right" width="120" class="navback">	
+					<td valign="top" align="right" width="120" class="navback">
 						<div style="padding-top: 3px;">
 						<table width="120" border="0" cellpadding="0" cellspacing="0">
 							<tr valign="top">
@@ -18,7 +18,7 @@
 						</table>
 						</div>
 					</td>
-				</tr>  			
+				</tr>
 			</table>
 		</td>
 	</tr>
@@ -58,7 +58,7 @@
 						<!-- switch description off -->
 					</table>
 				</div>
-				<!-- switch exceptions on -->		
+				<!-- switch exceptions on -->
 				<font class="V10"><i>{L_EXCEPTION}</i>: <a class="ps3" href="day.php?cal={CAL}&amp;getdate={KEY}">{DAYOFMONTH}</a></font><br />
 				<div style="margin-left: 10px;">
 					<table width="100%" border="0" cellspacing="1" cellpadding="1">
@@ -84,16 +84,16 @@
 						<!-- switch except_description off -->
 					</table>
 				</div>
-				<!-- switch exceptions off -->		
+				<!-- switch exceptions off -->
 				<br />
 				<!-- switch results off -->
-				
+
 				<!-- switch no_results on -->
 				<div align="center">
 					<p class="V12">{L_NO_RESULTS}</p>
 				</div>
 				<!-- switch no_results off -->
-				
+
 				<div align="center">
 					{SEARCH_BOX}
 				</div>
