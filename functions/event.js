@@ -49,3 +49,29 @@ document.popup_data = new Array();
 document.todo_popup_data = new Array();
 //-->
 </script>
+<script language="JavaScript" type="text/javascript">
+<!--
+
+function submitform(form, value) {
+	// Parse value.
+	var values = decodeURI(value).split("&");
+	var temp = values[0].split("?", 2);
+	var action = temp[0];
+	values[0] = temp[1];
+
+	form.action = action;
+
+	// Stuff the hidden form fields.
+	for (var i = 0; i < values.length; i++) {
+		temp = values[i].split("=", 2);
+		form.elements.namedItem(temp[0]).value = temp[1];
+	}
+
+	// Clear the select+option value.
+	var select = form.elements.namedItem("action")
+	select.options[select.selectedIndex].value = "";
+
+	form.submit();
+}
+//-->
+</script>
