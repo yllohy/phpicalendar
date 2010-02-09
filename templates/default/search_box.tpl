@@ -4,6 +4,6 @@
 	<input type="hidden" name="cpath" value="{CPATH}"/>
 	<input type="hidden" name="cal" value="{CAL}"/>
 	<input type="hidden" name="getdate" value="{GETDATE}"/>
-	<input type="text" size="15" name="query" value=""/>
-	<input type="image" src="templates/{TEMPLATE}/images/search.gif" name="submit" value="Search"/>
+	<input type="text" style="width: 130px;" name="query" value=""/>
+	<input type="image" style="float: right;" src="templates/{TEMPLATE}/images/search.gif" name="submit" value="Search"/>
 </form>
