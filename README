@@ -98,10 +98,12 @@ Changes:
 		Default calendar selections in listbox picker
 		Timezone DST calculation with all-day events
 		Handling dates before 1970
-		Logout URL containing multiple ampersands
+		Log in cookie handling; thanks gueba!
+		Log out URL containing multiple ampersands
 		Parsed calendars used the wrong file name for "all calendars"
 		Recurring events across multiple versions of PHP; thanks to Len and gueba!
 		Better handling of URLs and email addresses in event descriptions
+		Navigation forms breaking PHP transparent SID
 	New features:
 		Event information displayed with Nice Titles
 		Attendee/organizer parsing and email address hyperlinking

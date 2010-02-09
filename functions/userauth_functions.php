@@ -94,7 +94,7 @@ function user_login() {
 	}
 
 	// Set the login cookie or session authentication values.
-	if ($login_cookies == 'yes') {
+	if ($phpiCal_config->login_cookies == 'yes' && empty($_COOKIE['phpicalendar_login'])) {
 		$the_cookie = serialize(array('username' => $username, 'password' => $password));
 		setcookie('phpicalendar_login', $the_cookie, time()+(60*60*24*7*12*10), '/', $phpiCal_config->cookie_uri, 0);
 	} else {
@@ -116,6 +116,7 @@ function user_logout() {
 	// Clear the login cookie or session authentication values.
 	if ($phpiCal_config->login_cookies == 'yes') {
 		setcookie('phpicalendar_login', '', time()-(60*60*24*7), '/', $phpiCal_config->cookie_uri, 0);
+		unset($_COOKIE['phpicalendar_login']);
 	} else {
 		// Check if the session has already been started.
 		if (!session_id()) {
