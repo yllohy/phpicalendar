@@ -28,8 +28,8 @@ $search_box .=
 	'<input type="hidden" name="cpath" value="'.$cpath.'">'."\n".
 	'<input type="hidden" name="cal" value="'.$cal.'">'."\n".
 	'<input type="hidden" name="getdate" value="'.$getdate.'">'."\n".
-	'<input type="text" style="width: 130px;" name="query" value="'.$query.'">'."\n".
-	'<input type="image" src="templates/'.$phpiCal_config->template.'/images/search.gif" border="0" style="float: right;" name="submit" value="Search">'."\n".
+	'<input type="text" style="width: 130px; float: left;" name="query" value="'.$query.'">'."\n".
+	'<input type="image" src="templates/'.$phpiCal_config->template.'/images/search.gif" border="0" style="border-bottom: 3px;" name="submit" value="Search">'."\n".
 	'</form>'."\n".
 	'</div>';
 

@@ -1,5 +1,6 @@
 /* Style sheet for the green calendar */
 
+form {margin: 0;}
 table, td {font: 11px Verdana, Arial, sans-serif; color: #000;}
 
 /* Background images for tables */
