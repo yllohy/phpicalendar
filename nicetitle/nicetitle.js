@@ -30,7 +30,6 @@ src = src.join("/");
 
 var XHTMLNS = "http://www.w3.org/1999/xhtml";
 var CURRENT_NICE_TITLE;
-var browser = new Browser();
 
 function makeNiceTitles() {
     if (!document.createElement || !document.getElementsByTagName) return;
@@ -108,17 +107,18 @@ function get_longest(ary) {
     ary.forEach(function(el) {
         if (el.length > l) l = el.length;
     });
-    
+
     return l;
 }
 
 function moveNiceTitle(e) {
     if (!CURRENT_NICE_TITLE) return;
     var d = CURRENT_NICE_TITLE;
-    if (window.event && window.event.srcElement) {
-        var el = window.event.srcElement
-    } else if (e && e.currentTarget) {
+    if (e && e.currentTarget && (typeof(e.currentTarget) != "undefined")) {
         var el = e.currentTarget
+    }
+    else if (window.event && window.event.srcElement) {
+        var el = window.event.srcElement
     }
 
     // Browser size
@@ -150,7 +150,7 @@ function moveNiceTitle(e) {
         // Unused
         var sx = 0;
         var sy = 0;
-        
+
         // Title element position within document
         var elPos = findPosition(el);
         var x = elPos[0];
@@ -172,7 +172,7 @@ function moveNiceTitle(e) {
         y = ((wh + sy) - h - SNAP_LENGTH);
         SNAP_BOTTOM = true;
     }
-    
+
     // Ensure mouse can never enter the title in the lower right corner of the window
     if (FOLLOW_MOUSE && SNAP_RIGHT && SNAP_BOTTOM) {
         y = (my - MOUSE_OFFSET - h);
@@ -181,37 +181,33 @@ function moveNiceTitle(e) {
         y = elPos[1] - h - MOUSE_OFFSET;
     }
 
-    d.style.left = x + 'px';
-    d.style.top = y + 'px';
+    d.style.left = x + "px";
+    d.style.top = y + "px";
 }
 
 function showNiceTitle(e) {
     if (CURRENT_NICE_TITLE) hideNiceTitle(CURRENT_NICE_TITLE);
     if (!document.getElementsByTagName) return;
-    if (window.event && window.event.srcElement) {
-        var lnk = window.event.srcElement
-    } else if (e && e.currentTarget) {
+    if (e && e.currentTarget && (typeof(e.currentTarget) != "undefined")) {
         var lnk = e.currentTarget
     }
+    else if (window.event && window.event.srcElement) {
+        var lnk = window.event.srcElement
+    }
+
     if (!lnk) return;
-    if (lnk.nodeName.toUpperCase() != 'A') {
+    if (lnk.nodeName.toUpperCase() != "A") {
         // lnk is not actually the link -- ascend parents until we hit a link
-        lnk = getParent(lnk,"A");
+        lnk = getParent(lnk, "A");
     }
     if (!lnk) return;
     var nicetitle = lnk.getAttribute("nicetitle");
-    
-    var d = document.createElementNS(XHTMLNS,"div");
-    if (browser.isIE) {
-        /*
-         * IE likes to display the element as soon as it is created.
-         * So let's hide it now and show it after it's been appended to the body
-         */
-        d.style.display = 'none';
-    }
+
+    var d = document.createElementNS(XHTMLNS, "div");
+    d.style.display = "none";
     d.className = "nicetitle";
 
-    var nicetitle_parts = nicetitle.split('\n');
+    var nicetitle_parts = nicetitle.split("\n");
     nicetitle_parts.forEach(function(textpart) {
         var pat = document.createElementNS(XHTMLNS, "p");
         pat.className = "titletext";
@@ -229,24 +225,22 @@ function showNiceTitle(e) {
         pad.appendChild(tnd);
         d.appendChild(pad);
     }
-    
+
     var l = get_longest(nicetitle_parts);
-    
+
     // Approximate pixel width of longest line in the title
     var w = ((lnk.href && SHOW_LINKS) ? lnk.href.length : 0) * 6;
     var t = (l ? l : 0) * 8;
-    
+
     // Use the greatest width: title text, link URL, or MIN_WIDTH. Limited to MAX_WIDTH
     w = ((w > MIN_WIDTH) ? w : MIN_WIDTH);
     w = ((w > t) ? w : t);
     w = ((w > MAX_WIDTH) ? MAX_WIDTH : w);
-    d.style.width = w + 'px';
+    d.style.width = w + "px";
 
     document.getElementsByTagName("body")[0].appendChild(d);
-    if (browser.isIE) {
-        d.style.display = 'block';
-    }
- 
+    d.style.display = "block";
+
     CURRENT_NICE_TITLE = d;
     moveNiceTitle(e);
 }
@@ -266,7 +260,7 @@ function addEvent(obj, evType, fn) {
         obj.addEventListener(evType, fn, false);
         return true;
     } else if (obj.attachEvent) {
-        return obj.attachEvent("on"+evType, fn);
+        return obj.attachEvent("on" + evType, fn);
     } else {
         return false;
     }
@@ -274,82 +268,60 @@ function addEvent(obj, evType, fn) {
 
 function getParent(el, pTagName) {
 	if (el == null) return null;
-	else if (el.nodeType == 1 && el.tagName.toLowerCase() == pTagName.toLowerCase())	// Gecko bug, supposed to be uppercase
+	else if (el.nodeType == 1 && el.tagName.toLowerCase() == pTagName.toLowerCase())
 		return el;
 	else
 		return getParent(el.parentNode, pTagName);
 }
 
-function getMousePosition(event) {
-    if (browser.isIE) {
-        var x = window.event.clientX + document.documentElement.scrollLeft;// + document.body.scrollLeft;
-        var y = window.event.clientY + document.documentElement.scrollTop;// + document.body.scrollTop;
+function getMousePosition(e) {
+    var x = 0;
+    var y = 0;
+
+    if (e && (typeof(window.scrollX) != "undefined")) {
+        x = e.clientX + window.scrollX;
+        y = e.clientY + window.scrollY;
     }
-    if (browser.isNS) {
-        var x = event.clientX + window.scrollX;// window.pageXOffset;
-        var y = event.clientY + window.scrollY;// window.pageYOffset;
+    else if (window.event) {
+        x = window.event.clientX + document.documentElement.scrollLeft;
+        y = window.event.clientY + document.documentElement.scrollTop;
     }
-    return [x,y];
+
+    return [x, y];
 }
 
 function getScrollPosition() {
-    if (browser.isIE) {
-        var x = document.documentElement.scrollLeft;// + document.body.scrollLeft;
-        var y = document.documentElement.scrollTop;// + document.body.scrollTop;
+    var x = 0;
+    var y = 0;
+
+    if (window.scrollX && window.scrollY) {
+        x = window.scrollX;
+        y = window.scrollY;
     }
-    if (browser.isNS) {
-        var x = window.scrollX;// window.pageXOffset;
-        var y = window.scrollY;// window.pageYOffset;
+    else if (document.documentElement.scrollLeft &&
+             document.documentElement.scrollTop) {
+        x = document.documentElement.scrollLeft;
+        y = document.documentElement.scrollTop;
     }
-    return [x,y];
+
+    return [x, y];
 }
 
 function getWindowSize() {
-    if (browser.isIE) {
-        var x = document.documentElement.clientWidth;
-        var y = document.documentElement.clientHeight;
+    var x = 0;
+    var y = 0;
+
+    if (window.innerWidth && window.innerHeight) {
+        x = window.innerWidth;
+        y = window.innerHeight;
     }
-    if (browser.isNS) {
-        var x = window.innerWidth;
-        var y = window.innerHeight;
+    else if (document.documentElement.clientWidth &&
+             document.documentElement.clientHeight) {
+        x = document.documentElement.clientWidth;
+        y = document.documentElement.clientHeight;
     }
-    return [x,y];
-}
 
-// Determine browser and version.
-
-function Browser() {
-// blah, browser detect, but mouse-position stuff doesn't work any other way
-  var ua, s, i;
-
-  this.isIE    = false;
-  this.isNS    = false;
-  this.version = null;
-
-  ua = navigator.userAgent;
-
-  s = "MSIE";
-  if ((i = ua.indexOf(s)) >= 0) {
-    this.isIE = true;
-    this.version = parseFloat(ua.substr(i + s.length));
-    return;
-  }
-
-  s = "Netscape6/";
-  if ((i = ua.indexOf(s)) >= 0) {
-    this.isNS = true;
-    this.version = parseFloat(ua.substr(i + s.length));
-    return;
-  }
-
-  // Treat any other "Gecko" browser as NS 6.1.
-
-  s = "Gecko";
-  if ((i = ua.indexOf(s)) >= 0) {
-    this.isNS = true;
-    this.version = 6.1;
-    return;
-  }
+    return [x, y];
 }
 
 // IE does not support the Array.forEach() method... Try to approximate it
