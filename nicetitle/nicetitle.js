@@ -294,12 +294,13 @@ function getScrollPosition() {
     var x = 0;
     var y = 0;
 
-    if (window.scrollX && window.scrollY) {
+    if ((typeof(window.scrollX) != "undefined") &&
+        (typeof(window.scrollY) != "undefined")) {
         x = window.scrollX;
         y = window.scrollY;
     }
-    else if (document.documentElement.scrollLeft &&
-             document.documentElement.scrollTop) {
+    else if ((typeof(document.documentElement.scrollLeft) != "undefined") &&
+             (typeof(document.documentElement.scrollTop) != "undefined")) {
         x = document.documentElement.scrollLeft;
         y = document.documentElement.scrollTop;
     }
@@ -311,12 +312,13 @@ function getWindowSize() {
     var x = 0;
     var y = 0;
 
-    if (window.innerWidth && window.innerHeight) {
+    if ((typeof(window.innerWidth) != "undefined") &&
+        (typeof(window.innerHeight) != "undefined")) {
         x = window.innerWidth;
         y = window.innerHeight;
     }
-    else if (document.documentElement.clientWidth &&
-             document.documentElement.clientHeight) {
+    else if ((typeof(document.documentElement.clientWidth) != "undefined") &&
+             (typeof(document.documentElement.clientHeight) != "undefined")) {
         x = document.documentElement.clientWidth;
         y = document.documentElement.clientHeight;
     }
