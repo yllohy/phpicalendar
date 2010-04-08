@@ -59,7 +59,7 @@ function submitform(form, value) {
 	var action = temp[0];
 	values[0] = temp[1];
 
-	form.action = action;
+	form.setAttribute("action", action);
 
 	// Stuff the hidden form fields.
 	for (var i = 0; i < values.length; i++) {
