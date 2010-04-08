@@ -81,31 +81,31 @@
 					<input type="hidden" name="cpath" value="{CPATH}"/>
 					<input type="hidden" name="cal" value=""/>
 					<input type="hidden" name="getdate" value=""/>
-					<select name="action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_JUMPS}</select>
+					<select name="form_action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_JUMPS}</select>
 				</form>
 				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
 					<input type="hidden" name="cpath" value="{CPATH}"/>
 					<input type="hidden" name="cal" value=""/>
 					<input type="hidden" name="getdate" value=""/>
-					<select name="action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_ICALS}</select>
+					<select name="form_action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_ICALS}</select>
 				</form>
 				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
 					<input type="hidden" name="cpath" value="{CPATH}"/>
 					<input type="hidden" name="cal" value=""/>
 					<input type="hidden" name="getdate" value=""/>
-					<select name="action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_YEARS}</select>
+					<select name="form_action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_YEARS}</select>
 				</form>
 				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
 					<input type="hidden" name="cpath" value="{CPATH}"/>
 					<input type="hidden" name="cal" value=""/>
 					<input type="hidden" name="getdate" value=""/>
-					<select name="action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_MONTHS}</select>
+					<select name="form_action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_MONTHS}</select>
 				</form>
 				<form style="margin-bottom:0;" action="{CURRENT_VIEW}.php" method="get">
 					<input type="hidden" name="cpath" value="{CPATH}"/>
 					<input type="hidden" name="cal" value=""/>
 					<input type="hidden" name="getdate" value=""/>
-					<select name="action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_WEEKS}</select>
+					<select name="form_action" class="query_style" onchange="submitform(this.form, this.options[this.selectedIndex].value);">{LIST_WEEKS}</select>
 				</form>
 				<!-- switch show_search on -->
 				{SEARCH_BOX}

@@ -59,7 +59,12 @@ function submitform(form, value) {
 	var action = temp[0];
 	values[0] = temp[1];
 
-	form.setAttribute("action", action);
+	try {
+		form.setAttribute("action", action);
+	}
+	catch(e) {
+		form.action = action;
+	}
 
 	// Stuff the hidden form fields.
 	for (var i = 0; i < values.length; i++) {
@@ -68,7 +73,7 @@ function submitform(form, value) {
 	}
 
 	// Clear the select+option value.
-	var select = form.elements.namedItem("action")
+	var select = form.elements.namedItem("form_action")
 	select.options[select.selectedIndex].value = "";
 
 	form.submit();
