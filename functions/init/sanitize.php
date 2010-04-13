@@ -53,11 +53,13 @@ function chopToWordCount($string, $count) {
 function sanitizeForWeb($string) {
     $string = preg_replace('/<br\s*\/?>/', "\n", $string);
 
+    $string = str_replace('&#36;', '$', $string);
     $string = str_replace('&', '&amp;', $string);
     $string = str_replace('<', '&lt;', $string);
     $string = str_replace('>', '&gt;', $string);
     $string = str_replace('\'', '&#39;', $string);
     $string = str_replace('"', '&#34;', $string);
+    $string = str_replace('$', '&#36;', $string);
 
     $string = str_replace("\n", '<br />', $string);
     $string = str_replace("\t", ' &nbsp; &nbsp; ', $string);

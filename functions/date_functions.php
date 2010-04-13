@@ -222,12 +222,18 @@ function makeTitle($arr, $time) {
 */
 function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
 	global $cpath, $timeFormat, $dateFormat_week;
+
+	# Strip all dollar signs from printable array entries; regex functions will mutilate them
+	foreach ($arr as $key => $val) {
+		$arr[$key] = str_replace('$', '&#36;', $val);
+	}
+
 	$return = '';
-	$event_text = stripslashes(urldecode($arr["event_text"]));
+	$event_text = stripslashes(urldecode($arr['event_text']));
 	# build tooltip
 	$title = makeTitle($arr, $time);
 	# for iCal pseudo tag <http> comptability
-	if (ereg("<([[:alpha:]]+://)([^<>[:space:]]+)>",$event_text,$matches)) {
+	if (ereg('<([[:alpha:]]+://)([^<>[:space:]]+)>',$event_text,$matches)) {
 		$full_event_text = $matches[1] . $matches[2];
 		$event_text      = $matches[2];
 	} else {
@@ -238,12 +244,12 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 	if (!empty($link_class)) $link_class = ' class="'.$link_class.'"';
 
 	if (!empty($event_text)) {
-		$title = strip_tags(str_replace("<br />","\n",$title));
+		$title = strip_tags(str_replace('<br />',"\n",$title));
 		if ($lines > 0) {
 			$event_text = word_wrap($event_text, $length, $lines);
 		}
 
-		if ((!(ereg("([[:alpha:]]+://[^<>[:space:]]+)", $full_event_text, $res))) || ($arr['description'])) {
+		if ((!(ereg('([[:alpha:]]+://[^<>[:space:]]+)', $full_event_text, $res))) || ($arr['description'])) {
 			$escaped_date = addslashes($event_date);
 			$escaped_time = addslashes($time);
 			$escaped_uid  = addslashes($uid);
