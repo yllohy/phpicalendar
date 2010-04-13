@@ -459,10 +459,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							$organizer[] = array ('name' => stripslashes($name), 'email' => stripslashes($email));
 							break;
 						case 'LOCATION':
-							$data = str_replace("\\n", "<br />", $data);
-							$data = str_replace("\\t", "&nbsp;", $data);
-							$data = str_replace("\\r", "<br />", $data);
+							$data = str_replace('$', '&#36;', $data);
 							$data = stripslashes($data);
+							$data = htmlentities(urlencode($data));
 							$location = $data;
 							break;
 						case 'URL':
