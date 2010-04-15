@@ -110,7 +110,7 @@ function flatten_ol_blocks($event_date, $ol_blocks, $new_block_key) {
 
 // Builds $overlap_array structure, and updates event_overlap in $master_array for the given events.
 	// For a given date,
-	// 	- check to see if the event's already in a block, and if so, add it.
+	// - check to see if the event's already in a block, and if so, add it.
 	//		- make sure the new block doesn't overlap another block, and if so, merge the blocks.
 	// - check that there aren't any events we already passed that we should handle.
 	//		- "flatten" the structure again, merging the blocks.
@@ -182,7 +182,9 @@ function checkOverlap($event_date, $event_time, $uid) {
 			foreach ($time as $loop_event_key => $loop_event) {
 				// Make sure we haven't already dealt with the event, and we're not checking against ourself.
 				if ($loop_event['event_overlap'] == 0 && $loop_event_key != $uid) {
-					$loopDrawTimes = drawEventTimes($loop_event['event_start'], $loop_event['display_end']);
+					$loopDrawTimes = drawEventTimes($loop_event['event_start'], $loop_event['display_end'], ($loop_event['event_length'] >= (60*60*24)));
+					if ($event_time == "0000") $loopDrawTimes['draw_start'] = "0000";
+					if ($draw_end == "2400") $loopDrawTimes['draw_end'] = "2400";
 					if ($loopDrawTimes['draw_start'] < $drawTimes['draw_end'] && $loopDrawTimes['draw_end'] > $drawTimes['draw_start']) {
 						if ($loopDrawTimes['draw_start'] < $drawTimes['draw_start']) {
 							$block_start = $loopDrawTimes['draw_start'];

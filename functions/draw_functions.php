@@ -31,7 +31,12 @@ function drawEventTimes ($start, $end, $long_event = FALSE) {
 			$end_min = "00";
 		}
 	}
-	$draw_len = ($end_h * 60 + $end_min) - ($sta_h * 60 + $sta_min);
+	$sta = ($sta_h * 60 + $sta_min);
+	$end = ($end_h * 60 + $end_min);
+	if ($sta < $end)
+		$draw_len = $end - $sta;
+	else
+		$draw_len = $sta - $end;
 
 	return array ("draw_start" => ($sta_h . $sta_min), "draw_end" => ($end_h . $end_min), "draw_length" => $draw_len);
 }
