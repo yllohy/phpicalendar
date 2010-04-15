@@ -36,13 +36,14 @@ $start_week_time = strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_da
 
 
 // select for calendars
-$list_icals 	= display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED));
+$available		= availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
+$list_icals 	= display_ical_list($available);
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
-$list_icals_pick = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED), TRUE);
+$list_icals_pick = display_ical_list($available, TRUE);
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;

@@ -46,13 +46,14 @@ $thisday2 				= localizeDate($dateFormat_week_list, $unix_time);
 $num_of_events2 			= 0;
 
 // select for calendars
-$list_icals 	= display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED));
+$available		= availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
+$list_icals 	= display_ical_list($available);
 $list_years 	= list_years();
 $list_months 	= list_months();
 $list_weeks 	= list_weeks();
 $list_jumps 	= list_jumps();
 $list_calcolors = list_calcolors();
-$list_icals_pick = display_ical_list(availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED), TRUE);
+$list_icals_pick = display_ical_list($available, TRUE);
 
 // login/logout
 $is_logged_in = ($username != '' && !$invalid_login) ? true : false;
