@@ -4,28 +4,101 @@ require_once(BASE."functions/is_daylight.php");
 // functions for returning or comparing dates
 
 
-// get remote file last modification date (returns unix timestamp)
-function remote_filemtime($url) {
-	$fp = fopen($url, 'r');
-	if (!$fp) return 0;
-	$metadata = stream_get_meta_data($fp);
-	fclose($fp);
+/*
+ * Get remote file last modification date (returns unix timestamp)
+ * Supports HTTPS, HTTP basic authentication, and location: redirects
+ * FIXME: Basic auth should not be sent over unencrypted connections
+ * 	 unless an HTTP 401 Unauthorized is returned
+ */
+function remote_filemtime($url, $recurse = 0) {
+	// We hate infinite loops!
+	if (++$recurse > 5) return 0;
+	
+	// Caching the remote mtime is a Really Good Idea.
+	static $remote_files = array();
+	if (isset($remote_files[$url])) return $remote_files[$url];
 
-	$unixtime = 0;
-	foreach ($metadata['wrapper_data'] as $response) {
-		// case: redirection
-		// WARNING: does not handle relative redirection
-		if (substr(strtolower($response), 0, 10) == 'location: ') {
-			return GetRemoteLastModified(substr($response, 10));
-		}
-		// case: last-modified
-		else if (substr(strtolower($response), 0, 15) == 'last-modified: ') {
-			$unixtime = strtotime(substr($response, 15));
-			break;
+	$uri = parse_url($url);
+	$uri['proto'] = (
+		(isset($uri['proto']) && ($uri['proto'] == 'https')) ?
+		'ssl://' :
+		''
+	);
+	$uri['port'] = isset($uri['port']) ? $uri['port'] : 80;
+	$path = (
+		(isset($uri['path']) || isset($uri['query'])) ?
+		(@$uri['path'] . @$uri['query']) :
+		'/'
+	);
+	$auth = (
+		(isset($uri['user']) || isset($uri['pass'])) ?
+		('Authentication: Basic ' . base64_encode(@$uri['user'] . ':' . @$uri['pass']) . "\r\n") :
+		''
+	);
+
+	$handle = @fsockopen($uri['proto'] . $uri['host'], $uri['port']);
+	if (!$handle) {
+		$remote_files[$url] = 0;
+		return 0;
+	}
+
+	fputs($handle, "HEAD {$path} HTTP/1.1\r\nHost: {$uri['host']}\r\n{$auth}Connection: close\r\n\r\n");
+	$headers = array();
+	while (!feof($handle)) {
+		$line = trim(fgets($handle, 1024));
+		if (empty($line)) break;
+		$headers[] = $line;
+	}
+	fclose($handle);
+
+	$result = 0;
+	array_shift($headers);
+	foreach ($headers as $header) {
+		list($key, $value) = explode(':', $header, 2);
+		$value = trim($value);
+		
+		switch (strtolower(trim($key))) {
+			case 'location': // Redirect
+				$result = remote_filemtime(resolve_path($url, $value), $recurse);
+				break;
+			
+			case 'last-modified': // Got it!
+				$result = strtotime($value);
+				break;
 		}
 	}
 
-	return $unixtime;
+	$remote_files[$url] = $result;
+	return $result;
+}
+
+/*
+ * Resolve relative paths
+ * Utility function for remote_filemtime()
+ */
+function resolve_path($url, $rel_path) {
+	$uri = parse_url($url);
+
+	$uri['proto']	= (isset($uri['proto'])	? $uri['proto']			: 'http://');
+	$uri['port']	= (isset($uri['port'])	? (':' . $uri['port'])	: '');
+	$auth = (
+		(isset($uri['user']) || isset($uri['pass'])) ?
+		(urlencode(@$uri['user']) . ':' . urlencode(@$uri['pass']) . '@') :
+		''
+	);
+
+	if (parse_url($rel_path) === false) {
+		// Path is relative to this domain
+		$rel_path = str_replace('\\', '/', $rel_path);
+
+		if ($rel_path{0} == '/')
+			return $uri['proto'] . '://' . $auth . $uri['host'] . $uri['port'] . $rel_path;
+
+		return $uri['proto'] . '://' . $auth . $uri['host'] . $uri['port'] . $uri['path'] . '/' . $rel_path;
+	}
+
+	// Path is absolute
+	return $rel_path;
 }
 
 // takes iCalendar 2 day format and makes it into 3 characters
@@ -235,10 +308,10 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 	# for iCal pseudo tag <http> comptability
 	if (ereg('<([[:alpha:]]+://)([^<>[:space:]]+)>',$event_text,$matches)) {
 		$full_event_text = $matches[1] . $matches[2];
-		$event_text      = $matches[2];
+		$event_text = $matches[2];
 	} else {
 		$full_event_text = $event_text;
-		$event_text      = strip_tags($event_text, '<b><i><u><img>');
+		$event_text = strip_tags($event_text, '<b><i><u><img>');
 	}
 	
 	if (!empty($link_class)) $link_class = ' class="'.$link_class.'"';

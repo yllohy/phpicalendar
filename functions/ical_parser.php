@@ -8,37 +8,59 @@ include_once(BASE.'functions/timezones.php');
 include_once(BASE.'functions/parse/recur_functions.php');
 
 // reading the file if it's allowed
+$realcal_mtime = time();
 $parse_file = true;
-if ($phpiCal_config->save_parsed_cals == 'yes') {	
+if ($phpiCal_config->save_parsed_cals == 'yes') {
 	if (sizeof ($cal_filelist) > 1) {
+		// This is a special case for "all calendars combined"
 		$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$phpiCal_config->ALL_CALENDARS_COMBINED).'-'.$this_year;
 		if (file_exists($parsedcal)) {
 			$fd = fopen($parsedcal, 'r');
 			$contents = fread($fd, filesize($parsedcal));
 			fclose($fd);
 			$master_array = unserialize($contents);
-			$z=1;
 			$y=0;
+			// Check the calendars' last-modified time to determine if any need to be re-parsed
 			if (sizeof($master_array['-4']) == (sizeof($cal_filelist))) {
 				foreach ($master_array['-4'] as $temp_array) {
-					$mtime = $master_array['-4'][$z]['mtime'];
-					$fname = $master_array['-4'][$z]['filename'];
-					$wcalc = $master_array['-4'][$z]['webcal'];
+					$mtime = $temp_array['mtime'];
+					$fname = $temp_array['filename'];
+					$wcalc = $temp_array['webcal'];
+
+					if ($wcalc == 'no') {
+						/*
+						 * Getting local file mtime is "fairly cheap"
+						 * (disk I/O is expensive, but *much* cheaper than going to the network for remote files)
+						 */
+						$realcal_mtime = filemtime($fname);
+					}
+					else if ((time() - $mtime) >= $phpiCal_config->webcal_hours * 60 * 60) {
+						/*
+						 * We limit remote file mtime checks based on the magic webcal_hours config variable
+						 * This allows highly volatile web calendars to be cached for a period of time before
+						 * downloading them again
+						 */
+						$realcal_mtime = remote_filemtime($fname);
+					}
+					else {
+						// This is our fallback, for the case where webcal_hours is taking effect
+						$realcal_mtime = $mtime;
+					}
 					
-					if ($wcalc == 'no') $realcal_mtime = filemtime($fname);
-					else $realcal_mtime = remote_filemtime($fname);
-					
-					if ($mtime == $realcal_mtime) {
+					// If this calendar is up-to-date, the $y magic number will be incremented...
+					if ($mtime >= $realcal_mtime) {
 						$y++;
 					}
-					$z++;
 				}
+
 				foreach ($master_array['-3'] as $temp_array) {
 					if (isset($temp_array) && $temp_array !='') $caldisplaynames[] = $temp_array;
 				}
 
+				// And the $y magic number is used here to determine if all calendars are up-to-date
 				if ($y == sizeof($cal_filelist)) {
 					if ($master_array['-1'] == 'valid cal file') {
+						// At this point, all calendars are up-to-date, so we can simply used the pre-parsed data
 						$parse_file = false;
 						$calendar_name = $master_array['calendar_name'];
 						$calendar_tz = $master_array['calendar_tz'];
@@ -46,20 +68,25 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 				}
 			}
 		}
-		if ($parse_file == true) unset($master_array);
+		if ($parse_file == true) {
+			// We need to re-parse at least one calendar, so unset master_array
+			unset($master_array);
+		}
 	} else {
 		foreach ($cal_filelist as $filename) {
-			if (substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://') {
-				$realcal_mtime = remote_filemtime($filename);
-			}
-			else {
-				$realcal_mtime = filemtime($filename);
-			}
-
 			$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
 			if (file_exists($parsedcal)) {
 				$parsedcal_mtime = filemtime($parsedcal);
-				if ($realcal_mtime == $parsedcal_mtime) {
+
+				if (((time() - $parsedcal_mtime) >= $phpiCal_config->webcal_hours * 60 * 60) &&
+					(substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://')) {
+					$realcal_mtime = remote_filemtime($filename);
+				}
+				else {
+					$realcal_mtime = $parsedcal_mtime;
+				}
+
+				if ($parsedcal_mtime >= $realcal_mtime) {
 					$fd = fopen($parsedcal, 'r');
 					$contents = fread($fd, filesize($parsedcal));
 					fclose($fd);
@@ -95,15 +122,16 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 			$cal_httpsPrefix = str_replace(array('http://', 'webcal://'), 'https://', $filename);
 			$filename = $cal_httpPrefix;
 			$master_array['-4'][$calnumber]['webcal'] = 'yes';
-			$actual_mtime = @remote_filemtime($filename);
+			$actual_mtime = remote_filemtime($filename);
 		} else {
-			$actual_mtime = @filemtime($filename);
+			$actual_mtime = filemtime($filename);
 		}
 
-		include(BASE.'functions/parse/parse_tzs.php');
+		$is_std = false;
+		$is_daylight = false;
 
 		
-		$ifile = @fopen($filename, "r");
+		$ifile = @fopen($filename, 'r');
 		if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $filename));
 		$nextline = fgets($ifile, 1024);
 		#if (trim($nextline) != 'BEGIN:VCALENDAR') exit(error($lang['l_error_invalidcal'], $filename));
@@ -120,17 +148,55 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 		while (!feof($ifile)) {
 			$line = $nextline;
 			$nextline = fgets($ifile, 1024);
-			$nextline = ereg_replace("[\r\n]", "", $nextline);
+			$nextline = ereg_replace("[\r\n]", '', $nextline);
 			#handle continuation lines that start with either a space or a tab (MS Outlook)
-			while (isset($nextline{0}) && ($nextline{0} == " " || $nextline{0} == "\t")) { 
+			while (isset($nextline{0}) && ($nextline{0} == ' ' || $nextline{0} == "\t")) {
 				$line = $line . substr($nextline, 1);
 				$nextline = fgets($ifile, 1024);
-				$nextline = ereg_replace("[\r\n]", "", $nextline);
+				$nextline = ereg_replace("[\r\n]", '', $nextline);
 			}
-			$line = str_replace('\n',"\n",$line);
-			$line = str_replace('\t',"\t",$line);
+			$line = str_replace('\n', "\n", $line);
+			$line = str_replace('\t', "\t", $line);
 			$line = trim(stripslashes($line));
 			switch ($line) {
+				// Begin VTIMEZONE Parsing
+				//
+				case 'BEGIN:VTIMEZONE':
+					unset($tz_name, $offset_from, $offset_to, $tz_id);
+					break;
+				case 'BEGIN:STANDARD':
+					unset ($offset_s);
+					$is_std = true;
+					$is_daylight = false;
+					break;
+				case 'END:STANDARD':
+					$offset_s = $offset_to;
+					$is_std = false;
+					break;
+				case 'BEGIN:DAYLIGHT':
+					unset ($offset_d);
+					$is_daylight = true;
+					$is_std = false;
+					break;
+				case 'END:DAYLIGHT':
+					$offset_d = $offset_to;
+					$is_daylight = false;
+					break;
+				case 'END:VTIMEZONE':
+					if (!isset($offset_d) && isset($offset_s)) $offset_d = $offset_s;
+					$tz_array[$tz_id] = array(
+						0	=> @$offset_s,
+						1	=> @$offset_d,
+						'dt_start' => @$begin_daylight,
+						'st_start' => @$begin_std,
+						'st_name'	=> @$st_name,
+						'dt_name'	=> @$dt_name
+
+						); #echo "<pre>$tz_id"; print_r($tz_array[$tz_id]);echo"</pre>";
+					break;
+
+				// Begin VFREEBUSY/VEVENT Parsing
+				//
 				case 'BEGIN:VFREEBUSY':
 				case 'BEGIN:VEVENT':
 					// each of these vars were being set to an empty string
@@ -175,8 +241,11 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					break;
 				case 'END:VFREEBUSY':
 				case 'END:VEVENT':
-					include BASE."functions/parse/end_vevent.php";			
+					include BASE.'functions/parse/end_vevent.php';
 					break;
+
+				// Begin VTODO Parsing
+				//
 				case 'END:VTODO':
 					if (($vtodo_priority == '') && ($status == 'COMPLETED')) {
 						$vtodo_sort = 11;
@@ -233,6 +302,9 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					$class = '';
 					$description = '';
 					break;
+
+				// Begin VALARM Parsing
+				//
 				case 'BEGIN:VALARM':
 					$valarm_set = TRUE;
 					break;
@@ -251,7 +323,24 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 					if ($prop_pos !== false) $property = substr($property,0,$prop_pos);
 					
 					switch ($property) {
-						
+						// Start TZ Parsing
+						//
+						case 'TZID':
+							$tz_id = $data;
+							break;
+						case 'TZOFFSETFROM':
+							$offset_from = $data;
+							break;
+						case 'TZOFFSETTO':
+							$offset_to = $data;
+							break;
+						case 'TZNAME':
+							if ($is_std) $st_name = $data;
+							if ($is_daylight) $dt_name = $data;
+							break;
+						//
+						// End TZ Parsing
+
 						// Start VTODO Parsing
 						//
 						case 'DUE':
@@ -286,19 +375,26 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							$vtodo_categories = "$data";
 							break;
 						//
-						// End VTODO Parsing				
+						// End VTODO Parsing
 							
 						case 'DTSTART':
 							$datetime = extractDateTime($data, $property, $field);
 							$start_unixtime = $datetime[0];
 							$start_date = $datetime[1];
-							$start_time = $datetime[2];
-							$allday_start = $datetime[3];
-							$start_tz = $datetime[4];
-							preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
-							$vevent_start_date = $regs[1] . $regs[2] . $regs[3];
-							$day_offset = dayCompare($start_date, $vevent_start_date);
-							#echo date("Ymd Hi", $start_unixtime)." $start_date $start_time $vevent_start_date $day_offset<br>";
+							if ($is_std || $is_daylight) {
+								$year = substr($start_date, 0, 4);
+								if ($is_std) $begin_std[$year] = $data;
+								if ($is_daylight) $begin_daylight[$year] = $data;
+							}
+							else {
+								$start_time = $datetime[2];
+								$allday_start = $datetime[3];
+								$start_tz = $datetime[4];
+								preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
+								$vevent_start_date = $regs[1] . $regs[2] . $regs[3];
+								$day_offset = dayCompare($start_date, $vevent_start_date);
+								#echo date("Ymd Hi", $start_unixtime)." $start_date $start_time $vevent_start_date $day_offset<br>";
+							}
 							break;
 							
 						case 'DTEND':
@@ -310,7 +406,7 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							break;
 							
 						case 'EXDATE':
-							$data = split(",", $data);
+							$data = split(',', $data);
 							foreach ($data as $exdata) {
 								$exdata = str_replace('T', '', $exdata);
 								$exdata = str_replace('Z', '', $exdata);
@@ -424,11 +520,11 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							}
 							break;
 						case 'ATTENDEE':
-							$email		= preg_match("/mailto:(.*)/i", $data, $matches1);
-							$name		= preg_match("/CN=([^;]*)/i", $field, $matches2);
-							$rsvp 		= preg_match("/RSVP=([^;]*)/i", $field, $matches3);
-							$partstat	= preg_match("/PARTSTAT=([^;]*)/i", $field, $matches4);
-							$role		= preg_match("/ROLE=([^;]*)/i", $field, $matches5);
+							$email		= preg_match('/mailto:(.*)/i', $data, $matches1);
+							$name		= preg_match('/CN=([^;]*)/i', $field, $matches2);
+							$rsvp 		= preg_match('/RSVP=([^;]*)/i', $field, $matches3);
+							$partstat	= preg_match('/PARTSTAT=([^;]*)/i', $field, $matches4);
+							$role		= preg_match('/ROLE=([^;]*)/i', $field, $matches5);
 
 							$email		= ($email ? $matches1[1] : '');
 							$name		= ($name ? $matches2[1] : $email);
@@ -447,8 +543,8 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 												);
 							break;
 						case 'ORGANIZER':
-							$email		= preg_match("/mailto:(.*)/i", $data, $matches1);
-							$name		= preg_match("/CN=([^;]*)/i", $field, $matches2);
+							$email		= preg_match('/mailto:(.*)/i', $data, $matches1);
+							$name		= preg_match('/CN=([^;]*)/i', $field, $matches2);
 
 							$email		= ($email ? $matches1[1] : '');
 							$name		= ($name ? $matches2[1] : $email);
