@@ -93,6 +93,8 @@ Changes:
 		More ICS input sanitizing; prevent HTML/XSS injection
 	Bug fixes:
 		Webcal caching now works like local caching with save_parsed_cals
+		Performance improvements with remote calendars; reducing the number
+			of file reads/HTTP requests made for each calendar
 		Print view missing some events
 		Setting time format in preferences page
 		Default calendar selections in listbox picker
@@ -104,8 +106,10 @@ Changes:
 		Recurring events across multiple versions of PHP; thanks to Len and gueba!
 		Better handling of URLs and email addresses in event descriptions
 		Navigation forms breaking PHP transparent SID
+		Fix strange characters displayed in Locations with % characters
 	New features:
 		Event information displayed with Nice Titles
+			Fixes line breaks and some HTML in event tooltips
 		Attendee/organizer parsing and email address hyperlinking
 		Better display of tabs/line breaks in calendar events
 		Strip "blocked" protocols, added by some mail servers

@@ -63,7 +63,8 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 						// At this point, all calendars are up-to-date, so we can simply used the pre-parsed data
 						$parse_file = false;
 						$calendar_name = $master_array['calendar_name'];
-						$calendar_tz = $master_array['calendar_tz'];
+						if (isset($master_array['calendar_tz']))
+							$calendar_tz = $master_array['calendar_tz'];
 					}
 				}
 			}
@@ -94,7 +95,8 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 					if ($master_array['-1'] == 'valid cal file') {
 						$parse_file = false;
 						$calendar_name = $master_array['calendar_name'];
-						$calendar_tz = $master_array['calendar_tz'];
+						if (isset($master_array['calendar_tz']))
+							$calendar_tz = $master_array['calendar_tz'];
 					}
 				}
 			}
