@@ -85,7 +85,7 @@ function availableCalendars($username, $password, $cal_filename, $admin = false)
 			// The file process block below expects actual filenames. So
 			// we have to append '.ics' to the passed in calendar names.
 			foreach ($cal_filename_local as $filename) {
-				array_push($files, "$search_path/$filename".".ics");
+				array_push($files, "$search_path/$filename.ics");
 			}
 		}
 		
@@ -175,7 +175,13 @@ function getCalendarName($cal_path) {
 	}
 	
 	// At this point, just pull the name off the file.
-	return str_replace(".ics", '', basename($cal_path));
+	$name = str_replace(".ics", '', basename($cal_path));
+	if ((substr($cal_path, 0, 7) == 'http://') ||
+		(substr($cal_path, 0, 8) == 'https://') ||
+		(substr($cal_path, 0, 9) == 'webcal://')) {
+		$name = urldecode($name);
+	}
+	return $name;
 }
 
 // This function prints out the calendars available to the user, for
@@ -184,7 +190,7 @@ function getCalendarName($cal_path) {
 //
 // $cals	= The calendars (entire path, e.g. from availableCalendars).
 function display_ical_list($cals, $pick=FALSE) {
-	global $cal, $current_view, $getdate, $lang, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $list_webcals, $phpiCal_config;
+	global $cal, $current_view, $getdate, $lang, $calendar_lang, $all_cal_comb_lang, $cal_filelist, $cal_displaynames, $list_webcals, $phpiCal_config, $master_array;
 	// Print each calendar option.
 	$return = '';
 
@@ -194,18 +200,28 @@ function display_ical_list($cals, $pick=FALSE) {
 	foreach ($cals as $cal_tmp) {
 		// Format the calendar path for display.
 		//
-		// Only display the calendar name, replace all instances of "32" with " ",
-		// and remove the .ics suffix.
-		$cal_displayname_tmp = getCalendarName($cal_tmp);
-		#$cal_displayname_tmp = str_replace("32", " ", $cal_displayname_tmp);
-		#overwrite the display name if we already have a real name
-		if (is_numeric(array_search($cal_tmp, $cal_filelist))){
-			$cal_displayname_tmp = $cal_displaynames[array_search($cal_tmp,$cal_filelist)];
-		}else{
+		$cal_displayname_tmp = '';
+		$search_idx = array_search($cal_tmp, $cal_filelist);
+		if (is_numeric($search_idx)) {
+			$cal_displayname_tmp = $cal_displaynames[$search_idx];
+		}
+		else if ((substr($cal_tmp, 0, 7) == 'http://') ||
+			(substr($cal_tmp, 0, 8) == 'https://') ||
+			(substr($cal_tmp, 0, 9) == 'webcal://')) {
+			$cal_tmp2 = str_replace('webcal://', 'http://', $cal_tmp);
+			$cal_tmp2 = str_replace('https://',  'http://', $cal_tmp2);
+			$num = 1;
+			foreach ($master_array[-4] as $master_cal) {
+				if ($master_cal['filename'] == $cal_tmp2) {
+					$cal_displayname_tmp = $master_array[-3][$num];
+					break;
+				}
+				$num++;
+			}
+		}
+		else {
 			# pull the name from the $cal_tmp file
-			$cal_tmp2 = str_replace('webcal://','http://',$cal_tmp);
-
-			$ifile = @fopen($cal_tmp2, "r");
+			$ifile = @fopen($cal_tmp, 'r');
 			if ($ifile == FALSE) exit(error($lang['l_error_cantopen'], $cal_tmp));
 			while (!feof($ifile)) {
 				$line = fgets($ifile, 1024);
@@ -225,7 +241,13 @@ function display_ical_list($cals, $pick=FALSE) {
 				#stop reading if we find an event or timezone before there's a name
 				if ($line == "BEGIN:VTIMEZONE" ||$line == "BEGIN:VEVENT") break;
 			}
-
+			@fclose($ifile);
+		}
+		if (empty($cal_displayname_tmp)) {
+			// Only display the calendar name, replace all instances of "32" with " ",
+			// and remove the .ics suffix.
+			$cal_displayname_tmp = getCalendarName($cal_tmp);
+			#$cal_displayname_tmp = str_replace('32', ' ', $cal_displayname_tmp);
 		}
 
 		// If this is a webcal, add 'Webcal' to the display name.
