@@ -75,7 +75,7 @@ if ($phpiCal_config->save_parsed_cals == 'yes') {
 		}
 	} else {
 		foreach ($cal_filelist as $filename) {
-			$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$cal_filename).'-'.$this_year;
+			$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$filename).'-'.$this_year;
 			if (file_exists($parsedcal)) {
 				$parsedcal_mtime = filemtime($parsedcal);
 
