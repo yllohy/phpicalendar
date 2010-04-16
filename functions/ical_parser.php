@@ -11,7 +11,7 @@ include_once(BASE.'functions/parse/recur_functions.php');
 $realcal_mtime = time();
 $parse_file = true;
 if ($phpiCal_config->save_parsed_cals == 'yes') {
-	if (sizeof ($cal_filelist) > 1) {
+	if (count($cal_filelist) == count($all_calendars_combined)) {
 		// This is a special case for "all calendars combined"
 		$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$phpiCal_config->ALL_CALENDARS_COMBINED).'-'.$this_year;
 		if (file_exists($parsedcal)) {

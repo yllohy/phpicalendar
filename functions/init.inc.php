@@ -48,9 +48,11 @@ if (isset($_GET['cal']) && $_GET['cal'] !='') {
 	$cal_filenames[0] = $phpiCal_config->ALL_CALENDARS_COMBINED;
 }
 
+$all_calendars_combined = availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
+
 //load cal_filenames if $ALL_CALENDARS_COMBINED
 if ($cal_filenames[0] == $phpiCal_config->ALL_CALENDARS_COMBINED){
-	$cal_filenames = availableCalendars($username, $password, $phpiCal_config->ALL_CALENDARS_COMBINED);
+	$cal_filenames = $all_calendars_combined;
 }
 // Separate the calendar identifiers into web calendars and local
 // calendars.
