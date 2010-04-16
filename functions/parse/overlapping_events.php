@@ -138,11 +138,7 @@ function checkOverlap($event_date, $event_time, $uid) {
 	$event = $master_array[$event_date][$event_time][$uid];
 	// Copy out the array - we replace this at the end.
 	$ol_day_array = @$overlap_array[$event_date];
-	$draw_end = $event['event_end'];
-	if (isset($event['display_end'])) $draw_end = $event['display_end'];
-	$drawTimes = drawEventTimes($event['event_start'], $draw_end, ($event['event_length'] >= (60*60*24)));
-	if ($event_time == "0000") $drawTimes['draw_start'] = "0000";
-	if ($draw_end == "2400") $drawTimes['draw_end'] = "2400";
+	$drawTimes = drawEventTimes($event['display_start'], $event['display_end'], ($event['event_length'] >= (60*60*24)));
 
 	// Track if $event has been merged in, so we don't re-add the details to 'event' or 'overlapRanges' multiple times.
 	$already_merged_once = false;
@@ -182,9 +178,7 @@ function checkOverlap($event_date, $event_time, $uid) {
 			foreach ($time as $loop_event_key => $loop_event) {
 				// Make sure we haven't already dealt with the event, and we're not checking against ourself.
 				if ($loop_event['event_overlap'] == 0 && $loop_event_key != $uid) {
-					$loopDrawTimes = drawEventTimes($loop_event['event_start'], $loop_event['display_end'], ($loop_event['event_length'] >= (60*60*24)));
-					if ($event_time == "0000") $loopDrawTimes['draw_start'] = "0000";
-					if ($draw_end == "2400") $loopDrawTimes['draw_end'] = "2400";
+					$loopDrawTimes = drawEventTimes($loop_event['display_start'], $loop_event['display_end'], ($loop_event['event_length'] >= (60*60*24)));
 					if ($loopDrawTimes['draw_start'] < $drawTimes['draw_end'] && $loopDrawTimes['draw_end'] > $drawTimes['draw_start']) {
 						if ($loopDrawTimes['draw_start'] < $drawTimes['draw_start']) {
 							$block_start = $loopDrawTimes['draw_start'];

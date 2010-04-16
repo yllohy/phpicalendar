@@ -326,7 +326,8 @@ foreach($recur_data as $recur_data_unixtime) {
 			$master_array[$this_date_tmp][$time_key][$uid] = array (
 				'event_start' => $start_time,                	# hhmm
 				'event_end' => $end_time,                    	# hhmm
-				'display_end' => $display_end_tmp,            	# hhmm display_start is $time_key
+				'display_start' => $time_key,                   # hhmm
+				'display_end' => $display_end_tmp,            	# hhmm
 				'start_unixtime' => $start_unixtime_tmp,      	# start unixtime for this recurrence
 				'end_unixtime' => $end_unixtime_tmp,          	# end unixtime for this recurrence
 				'event_text' => $summary,                    	#
