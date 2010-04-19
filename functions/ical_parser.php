@@ -11,96 +11,67 @@ include_once(BASE.'functions/parse/recur_functions.php');
 $realcal_mtime = time();
 $parse_file = true;
 if ($phpiCal_config->save_parsed_cals == 'yes') {
-	if (count($cal_filelist) == count($all_calendars_combined)) {
-		// This is a special case for "all calendars combined"
-		$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$phpiCal_config->ALL_CALENDARS_COMBINED).'-'.$this_year;
-		if (file_exists($parsedcal)) {
-			$fd = fopen($parsedcal, 'r');
-			$contents = fread($fd, filesize($parsedcal));
-			fclose($fd);
-			$master_array = unserialize($contents);
-			$y=0;
-			// Check the calendars' last-modified time to determine if any need to be re-parsed
-			if (sizeof($master_array['-4']) == (sizeof($cal_filelist))) {
-				foreach ($master_array['-4'] as $temp_array) {
-					$mtime = $temp_array['mtime'];
-					$fname = $temp_array['filename'];
-					$wcalc = $temp_array['webcal'];
+	sort($cal_filelist);
+	$filename = sha1(implode(',', $cal_filelist));
+	$parsedcal = "{$phpiCal_config->tmp_dir}/parsedcal-{$filename}-{$this_year}";
+	if (file_exists($parsedcal)) {
+		$fd = fopen($parsedcal, 'r');
+		$contents = fread($fd, filesize($parsedcal));
+		fclose($fd);
+		$master_array = unserialize($contents);
+		$y=0;
+		// Check the calendars' last-modified time to determine if any need to be re-parsed
+		if (count($master_array['-4']) == count($cal_filelist)) {
+			foreach ($master_array['-4'] as $temp_array) {
+				$mtime = $temp_array['mtime'];
+				$fname = $temp_array['filename'];
+				$wcalc = $temp_array['webcal'];
 
-					if ($wcalc == 'no') {
-						/*
-						 * Getting local file mtime is "fairly cheap"
-						 * (disk I/O is expensive, but *much* cheaper than going to the network for remote files)
-						 */
-						$realcal_mtime = filemtime($fname);
-					}
-					else if ((time() - $mtime) >= $phpiCal_config->webcal_hours * 60 * 60) {
-						/*
-						 * We limit remote file mtime checks based on the magic webcal_hours config variable
-						 * This allows highly volatile web calendars to be cached for a period of time before
-						 * downloading them again
-						 */
-						$realcal_mtime = remote_filemtime($fname);
-					}
-					else {
-						// This is our fallback, for the case where webcal_hours is taking effect
-						$realcal_mtime = $mtime;
-					}
-					
-					// If this calendar is up-to-date, the $y magic number will be incremented...
-					if ($mtime >= $realcal_mtime) {
-						$y++;
-					}
+				if ($wcalc == 'no') {
+					/*
+					 * Getting local file mtime is "fairly cheap"
+					 * (disk I/O is expensive, but *much* cheaper than going to the network for remote files)
+					 */
+					$realcal_mtime = filemtime($fname);
 				}
-
-				foreach ($master_array['-3'] as $temp_array) {
-					if (isset($temp_array) && $temp_array !='') $caldisplaynames[] = $temp_array;
-				}
-
-				// And the $y magic number is used here to determine if all calendars are up-to-date
-				if ($y == sizeof($cal_filelist)) {
-					if ($master_array['-1'] == 'valid cal file') {
-						// At this point, all calendars are up-to-date, so we can simply used the pre-parsed data
-						$parse_file = false;
-						$calendar_name = $master_array['calendar_name'];
-						if (isset($master_array['calendar_tz']))
-							$calendar_tz = $master_array['calendar_tz'];
-					}
-				}
-			}
-		}
-		if ($parse_file == true) {
-			// We need to re-parse at least one calendar, so unset master_array
-			unset($master_array);
-		}
-	} else {
-		foreach ($cal_filelist as $filename) {
-			$parsedcal = $phpiCal_config->tmp_dir.'/parsedcal-'.urlencode($cpath.'::'.$filename).'-'.$this_year;
-			if (file_exists($parsedcal)) {
-				$parsedcal_mtime = filemtime($parsedcal);
-
-				if (((time() - $parsedcal_mtime) >= $phpiCal_config->webcal_hours * 60 * 60) &&
-					(substr($filename, 0, 7) == 'http://' || substr($filename, 0, 8) == 'https://' || substr($filename, 0, 9) == 'webcal://')) {
-					$realcal_mtime = remote_filemtime($filename);
+				else if ((time() - $mtime) >= $phpiCal_config->webcal_hours * 60 * 60) {
+					/*
+					 * We limit remote file mtime checks based on the magic webcal_hours config variable
+					 * This allows highly volatile web calendars to be cached for a period of time before
+					 * downloading them again
+					 */
+					$realcal_mtime = remote_filemtime($fname);
 				}
 				else {
-					$realcal_mtime = $parsedcal_mtime;
+					// This is our fallback, for the case where webcal_hours is taking effect
+					$realcal_mtime = $mtime;
 				}
+				
+				// If this calendar is up-to-date, the $y magic number will be incremented...
+				if ($mtime >= $realcal_mtime) {
+					$y++;
+				}
+			}
 
-				if ($parsedcal_mtime >= $realcal_mtime) {
-					$fd = fopen($parsedcal, 'r');
-					$contents = fread($fd, filesize($parsedcal));
-					fclose($fd);
-					$master_array = unserialize($contents);
-					if ($master_array['-1'] == 'valid cal file') {
-						$parse_file = false;
-						$calendar_name = $master_array['calendar_name'];
-						if (isset($master_array['calendar_tz']))
-							$calendar_tz = $master_array['calendar_tz'];
-					}
+			foreach ($master_array['-3'] as $temp_array) {
+				if (isset($temp_array) && $temp_array !='') $caldisplaynames[] = $temp_array;
+			}
+
+			// And the $y magic number is used here to determine if all calendars are up-to-date
+			if ($y == count($cal_filelist)) {
+				if ($master_array['-1'] == 'valid cal file') {
+					// At this point, all calendars are up-to-date, so we can simply used the pre-parsed data
+					$parse_file = false;
+					$calendar_name = $master_array['calendar_name'];
+					if (isset($master_array['calendar_tz']))
+						$calendar_tz = $master_array['calendar_tz'];
 				}
 			}
 		}
+	}
+	if ($parse_file == true) {
+		// We need to re-parse at least one calendar, so unset master_array
+		unset($master_array);
 	}
 }
 
@@ -601,7 +572,6 @@ if ($parse_file) {
 		if ($fd == FALSE) exit(error($lang['l_error_cache'], $filename));
 		@fwrite($fd, $write_me);
 		@fclose($fd);
-		@touch($parsedcal, $realcal_mtime);
 		@chmod($parsedcal, 0600); // 0640
 	}
 }
