@@ -33,7 +33,7 @@ class Page {
 
 				$cal_filename_tmp = getCalendarName($file);
 				$cal_tmp = urlencode($file);
-				$cal_displayname_tmp = str_replace("32", " ", $cal_filename_tmp);
+				$cal_displayname_tmp = str_replace('32', ' ', $cal_filename_tmp);
 
 				$delete_table .= '<td align="left"><input name="delete_calendar[]" value="'.$cal_tmp.'" type="checkbox" />'.$cal_displayname_tmp.'</td>';
 
@@ -41,7 +41,7 @@ class Page {
 			}
 			// Print remaining empty columns if necessary
 			$number_of_columns = count($filelist);
-			while (gettype($number_of_columns/$COLUMNS_TO_PRINT) != "integer") {
+			while (gettype($number_of_columns/$COLUMNS_TO_PRINT) != 'integer') {
 				$delete_table .= '<td>&nbsp;</td>';
 				$number_of_columns++;
 			}
@@ -56,12 +56,12 @@ class Page {
 
 	function draw_print($template_p) {
 		global $phpiCal_config, $getdate, $cal, $master_array, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
-		preg_match("!<\!-- loop events on -->(.*)<\!-- loop events off -->!Uis", $this->page, $match1);
-		preg_match("!<\!-- switch some_events on -->(.*)<\!-- loop events on -->!Uis", $this->page, $match3);
+		preg_match('!<\!-- loop events on -->(.*)<\!-- loop events off -->!Uis', $this->page, $match1);
+		preg_match('!<\!-- switch some_events on -->(.*)<\!-- loop events on -->!Uis', $this->page, $match3);
 		$loop_event		= trim($match1[1]);
 		$loop_day 		= trim($match3[1]);
-		$parse_month 	= date ("Ym", strtotime($getdate));
-		$parse_year 	= date ("Y", strtotime($getdate));
+		$parse_month 	= date ('Ym', strtotime($getdate));
+		$parse_year 	= date ('Y', strtotime($getdate));
 
 		$seen_events = array();
 		$final = '';
@@ -79,19 +79,19 @@ class Page {
 				$some_events = '';
 				foreach ($val as $cal_time => $new_val) {
 					foreach ($new_val as $new_key2 => $new_val2) {
-						if (isset($seen_events["$new_key2"]) && isset($new_val2['spans_day']) && $new_val2['spans_day'] == 1){
-							$new_val2['event_text'] .= " second instance of ".$new_key2;
+						if (isset($seen_events[$new_key2]) && isset($new_val2['spans_day']) && $new_val2['spans_day'] == 1){
+							$new_val2['event_text'] .= ' second instance of '.$new_key2;
 							continue;
 						}
-						$seen_events["$new_key2"] = 1;
+						$seen_events[$new_key2] = 1;
 						$day_events++;
 						if (isset($new_val2['event_text'])) {
 							$event_text 	= sanitizeForWeb(stripslashes(urldecode($new_val2['event_text'])));
 							$location 		= sanitizeForWeb(stripslashes(urldecode($new_val2['location'])));
 							$description 	= sanitizeForWeb(stripslashes(urldecode($new_val2['description'])));
 							if (!empty($description)) {
-								$description = ereg_replace("(blocked)?([[:alpha:]]+://([^<>&[:space:]]|&amp;)+[[:alnum:]/])", '<a target="_new" href="\2">\2</a>', $description);
-								$description = ereg_replace("(blocked)?(mailto:)?([[:alnum:]_.%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,4})", '<a href="mailto:\3">\3</a>', $description);
+								$description = ereg_replace('(blocked)?([[:alpha:]]+://([^<>&[:space:]]|&amp;)+[[:alnum:]/])', '<a target="_new" href="\2">\2</a>', $description);
+								$description = ereg_replace('(blocked)?(mailto:)?([[:alnum:]_.%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,4})', '<a href="mailto:\3">\3</a>', $description);
 							}
 
 							$event_start 	= $new_val2['event_start'];
@@ -105,7 +105,7 @@ class Page {
 								$event_start 	= date ($timeFormat, strtotime ($event_start));
 								$event_end 		= date ($timeFormat, strtotime ($event_end));
 								$event_start 	= $event_start .' - '.$event_end;
-								if (date("Ymd", $new_val2['start_unixtime']) != date("Ymd", $new_val2['end_unixtime'])) $event_start .= " ".localizeDate($dateFormat_day, $new_val2['end_unixtime']);
+								if (date('Ymd', $new_val2['start_unixtime']) != date('Ymd', $new_val2['end_unixtime'])) $event_start .= ' '.localizeDate($dateFormat_day, $new_val2['end_unixtime']);
 							}
 						}
 
@@ -143,13 +143,13 @@ class Page {
 	function draw_search($template_p) {
 		global $phpiCal_config, $getdate, $cal, $the_arr, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
 
-		preg_match("!<\!-- switch results on -->(.*)<\!-- switch results off -->!Uis", $this->page, $match1);
-		preg_match("!<\!-- switch recur on -->(.*)<\!-- switch recur off -->!Uis", $this->page, $match2);
-		preg_match("!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis", $this->page, $match3);
+		preg_match('!<\!-- switch results on -->(.*)<\!-- switch results off -->!Uis', $this->page, $match1);
+		preg_match('!<\!-- switch recur on -->(.*)<\!-- switch recur off -->!Uis', $this->page, $match2);
+		preg_match('!<\!-- switch exceptions on -->(.*)<\!-- switch exceptions off -->!Uis', $this->page, $match3);
 		$loop_event		= trim($match1[1]);
 		$loop_recur 	= trim($match2[1]);
 		$loop_except 	= trim($match3[1]);
-		$parse_month 	= date ("Ym", strtotime($getdate));
+		$parse_month 	= date ('Ym', strtotime($getdate));
 
 		$events_found = 0;
 		$some_events = '';
@@ -163,9 +163,9 @@ class Page {
 				$events_tmp = $loop_event;
 				$recur_tmp	= $loop_recur;
 				if ($val['event_text']) {
-					$event_text 	= stripslashes(urldecode($val['event_text']));
-					$description 	= stripslashes(urldecode($val['description']));
-					$location 		= stripslashes(urldecode($val['location']));
+					$event_text 	= sanitizeForWeb(stripslashes(urldecode($val['event_text'])));
+					$description 	= sanitizeForWeb(stripslashes(urldecode($val['description'])));
+					$location 		= sanitizeForWeb(stripslashes(urldecode($val['location'])));
 					$event_start 	= $val['event_start'];
 					$event_end 		= $val['event_end'];
 					if (isset($val['display_end'])) $event_end = $val['display_end'];
@@ -200,7 +200,7 @@ class Page {
 
 						$except_tmp = str_replace('{EVENT_START}', $except_event_start, $except_tmp);
 
-						$except_event_text 	= stripslashes(urldecode($except_val['event_text']));
+						$except_event_text 	= sanitizeForWeb(stripslashes(urldecode($except_val['event_text'])));
 						$except_tmp = str_replace('{EVENT_TEXT}', $except_event_text, $except_tmp);
 
 						#is there a recur in the exception?
@@ -262,7 +262,7 @@ class Page {
 		$thisdate  	= $start_week_time;
 		$swt	   	= $start_week_time;
 		for ($i=0;$i < $phpiCal_config->week_length;$i++) {
-			$thisday = date("Ymd", $thisdate);
+			$thisday = date('Ymd', $thisdate);
 			$nbrGridCols[$thisday] = 1;
 			if (isset($master_array[$thisday])) {
 				foreach($master_array[($thisday)] as $ovlKey => $ovlValue) {
@@ -280,15 +280,15 @@ class Page {
 		}
 		#echo "<pre>";print_r($nbrGridCols);
 		// Replaces the allday events
-		preg_match("!<\!-- loop allday row on -->(.*)<\!-- loop alldaysofweek on -->!Uis", $this->page, $match1);
+		preg_match('!<\!-- loop allday row on -->(.*)<\!-- loop alldaysofweek on -->!Uis', $this->page, $match1);
 		$loop_row_begin = trim($match1[1]); # <tr>etc
-		preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
-		preg_match("!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!Uis", $this->page, $match2);
-		preg_match("!<\!-- loop allday off -->(.*)<\!-- loop alldaysofweek off -->!Uis", $this->page, $match3);
+		preg_match('!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis', $this->page, $match1);
+		preg_match('!<\!-- loop alldaysofweek on -->(.*)<\!-- loop allday on -->!Uis', $this->page, $match2);
+		preg_match('!<\!-- loop allday off -->(.*)<\!-- loop alldaysofweek off -->!Uis', $this->page, $match3);
 		$loop_ad 	= trim($match1[1]); # one day cell
 		$loop_begin = trim($match2[1]); # <td>
 		$loop_end 	= trim($match3[1]); # </td>
-		preg_match("!<\!-- loop alldaysofweek off -->(.*)<\!-- loop allday row off -->!Uis", $this->page, $match3);
+		preg_match('!<\!-- loop alldaysofweek off -->(.*)<\!-- loop allday row off -->!Uis', $this->page, $match3);
 		$loop_row_end 	= trim($match3[1]); # </tr>
 		$allday_uids = array();
 		$allday_uid_dates = array();
@@ -336,15 +336,15 @@ class Page {
 					$day++;
 				}
 				unset ($ev);
-				$replace 	= str_replace('{COLSPAN}', "colspan=\"$colspan\"", $replace);
+				$replace 	= str_replace('{COLSPAN}', 'colspan="'.$colspan.'"', $replace);
 			}
-			$row .= "$replace $loop_row_end\n";
-			$weekreplace .= "$row\n";
+			$row .= $replace.' '.$loop_row_end."\n";
+			$weekreplace .= $row."\n";
 		}
 		$this->page = preg_replace('!<\!-- loop allday row on -->.*<\!-- loop allday row off -->!Uis', $weekreplace, $this->page);
 
 		// Replaces the daysofweek
-		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis", $this->page, $match1);
+		preg_match('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis', $this->page, $match1);
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$weekday_loop = '';
@@ -360,7 +360,7 @@ class Page {
 				$row2 = 'rowOn';
 				$row3 = 'rowOff';
 			}
-			$start_wt 		= strtotime("+1 day", $start_wt);
+			$start_wt 		= strtotime('+1 day', $start_wt);
 			$colspan		= 'colspan="'.$nbrGridCols[$daylink].'"';
 			$search			= array('{DAY}', '{DAYLINK}', '{ROW1}', '{ROW2}', '{ROW3}', '{COLSPAN}');
 			$replace		= array($weekday, $daylink, $row1, $row2, $row3, $colspan);
@@ -370,8 +370,8 @@ class Page {
 		$this->page = preg_replace('!<\!-- loop daysofweek on -->.*<\!-- loop daysofweek off -->!Uis', $weekday_loop, $this->page);
 
 		// Build the body
-		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!Uis", $this->page, $match2);
-		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!Uis", $this->page, $match3);
+		preg_match('!<\!-- loop row on -->(.*)<\!-- loop row off -->!Uis', $this->page, $match2);
+		preg_match('!<\!-- loop event on -->(.*)<\!-- loop event off -->!Uis', $this->page, $match3);
 		$loop_hours = trim($match2[1]);
 		$loop_event = trim($match3[1]);
 
@@ -392,7 +392,7 @@ class Page {
 			$key = mktime($regs_tmp[1],$regs_tmp[2],0,$this_month,$this_day,$this_year);
 			$key = date ($timeFormat, $key);
 
-			if (ereg("([0-9]{1,2}):00", $key)) {
+			if (ereg('([0-9]{1,2}):00', $key)) {
 				$even_row = '2';
 				# column of times colspan = 4 to cover navigation links at top
 				$weekdisplay .= '<tr>';
@@ -405,7 +405,7 @@ class Page {
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
 			} else {
 				$even_row = '';
-				if (ereg("([0-9]{1,2}):30", $key)) $even_row = '3';
+				if (ereg('([0-9]{1,2}):30', $key)) $even_row = '3';
 				# empty row for each gridLength, to the right of times and left of first weekday
 				$weekdisplay .= '<tr>';
 				$weekdisplay .= '<td bgcolor="#a1a5a9" width="1" height="' . $phpiCal_config->gridLength . '"></td>';
@@ -433,17 +433,17 @@ class Page {
 
 				// go through $this_time_array and fill the event_length array
 				foreach ($this_time_arr as $eventKey => $loopevent) {
-					$drawEvent = drawEventTimes ($cal_time, $loopevent["display_end"]);
+					$drawEvent = drawEventTimes ($cal_time, $loopevent['display_end']);
 					$j = 0;
 					while (isset($event_length[$thisday][$j])) {
-						if ($event_length[$thisday][$j]["state"] == "ended") {
-							$event_length[$thisday][$j] = array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+						if ($event_length[$thisday][$j]['state'] == 'ended') {
+							$event_length[$thisday][$j] = array ('length' => ($drawEvent['draw_length'] / $phpiCal_config->gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin');
 							break;
 						}
 						$j++;
 					}
 					if ($j == sizeof(@$event_length[$thisday])) {
-						$event_length[$thisday][] = array ("length" => ($drawEvent["draw_length"] / $phpiCal_config->gridLength), "key" => $eventKey, "overlap" => $loopevent["event_overlap"],"state" => "begin");
+						$event_length[$thisday][] = array ('length' => ($drawEvent['draw_length'] / $phpiCal_config->gridLength), 'key' => $eventKey, 'overlap' => $loopevent['event_overlap'],'state' => 'begin');
 					}
 				}
 				$class = ' class="weekborder'.$even_row.'"';
@@ -459,18 +459,18 @@ class Page {
 					// Used to "join" ended events, so the ended case below results in one colspan'd td instead of multiple tds.
 					$ended_counter = 0;
 					foreach($event_length[$thisday] as $i=>$el) {
-						$drawWidth = $nbrGridCols[$thisday] / ($el["overlap"] + 1);
+						$drawWidth = $nbrGridCols[$thisday] / ($el['overlap'] + 1);
 						$emptyWidth = $emptyWidth - $drawWidth;
-						switch ($el["state"]) {
-							case "begin":
+						switch ($el['state']) {
+							case 'begin':
 								if ($ended_counter) {
 									$tclass = $class;
 									if ($thisday == $getdate) $tclass = ' class="weekborder'.$even_row.' weektoday"';
 									$weekdisplay .= '<td colspan="' . $ended_counter . '"' . $tclass . '>&nbsp;</td>';
 									$ended_counter = 0;
 								}
-								$event_length[$thisday][$i]["state"] = "started";
- 								$uid = $event_length[$thisday][$i]["key"];
+								$event_length[$thisday][$i]['state'] = 'started';
+ 								$uid = $event_length[$thisday][$i]['key'];
  								$event_start 	= $this_time_arr[$uid]['start_unixtime'];
 								$event_start 	= date ($timeFormat, $event_start);
  								$event_calno  	= $this_time_arr[$uid]['calnumber'];
@@ -509,7 +509,7 @@ class Page {
 								// End event drawing
 
 								break;
-							case "started":
+							case 'started':
 								if ($ended_counter) {
 									$tclass = $class;
 									if ($thisday == $getdate) $tclass = ' class="weekborder'.$even_row.' weektoday"';
@@ -517,13 +517,13 @@ class Page {
 									$ended_counter = 0;
 								}
 								break;
-							case "ended":
+							case 'ended':
 								$ended_counter += $drawWidth;
 								break;
 						}
-						$event_length[$thisday][$i]["length"]--;
-						if ($event_length[$thisday][$i]["length"] == 0) {
-							$event_length[$thisday][$i]["state"] = "ended";
+						$event_length[$thisday][$i]['length']--;
+						if ($event_length[$thisday][$i]['length'] == 0) {
+							$event_length[$thisday][$i]['state'] = 'ended';
 						}
 					}
 
@@ -533,9 +533,9 @@ class Page {
 					if ($emptyWidth > 0) {
 						$tclass = $class;
 						if ($thisday == $getdate) $tclass = ' class="weekborder'.$even_row.' weektoday"';
-						$weekdisplay .= "<td colspan=\"" . $emptyWidth . "\"$tclass>&nbsp;</td>\n";
+						$weekdisplay .= '<td colspan="' . $emptyWidth . '"'.$tclass.'>&nbsp;</td>'."\n";
 					}
-					while (isset($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"]) && $event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]["state"] == "ended") {
+					while (isset($event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]['state']) && $event_length[$thisday][(sizeof($event_length[$thisday]) - 1)]['state'] == 'ended') {
 						array_pop($event_length[$thisday]);
 					}
 				}
@@ -553,7 +553,7 @@ class Page {
 		$weekday_loop = '';
 		$daydisplay = '';
 		if (is_array(@$master_array[$getdate]['-1'])) {
-			preg_match("!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis", $this->page, $match1);
+			preg_match('!<\!-- loop allday on -->(.*)<\!-- loop allday off -->!Uis', $this->page, $match1);
 			$loop_ad = trim($match1[1]);
 			foreach ($master_array[$getdate]['-1'] as $uid => $allday) {
 				$event_calno  	= $allday['calnumber'];
@@ -567,12 +567,12 @@ class Page {
 		$this->page = preg_replace('!<\!-- loop allday on -->.*<\!-- loop allday off -->!Uis', $replace, $this->page);
 
 		// Replaces the daysofweek
-		preg_match("!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis", $this->page, $match1);
+		preg_match('!<\!-- loop daysofweek on -->(.*)<\!-- loop daysofweek off -->!Uis', $this->page, $match1);
 		$loop_dof = trim($match1[1]);
 		$start_wt		 	= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		$start_day 			= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
 		for ($i=0; $i< $phpiCal_config->week_length; $i++) {
-			$day_num 		= date("w", $start_day);
+			$day_num 		= date('w', $start_day);
 			$daylink		= date('Ymd', $start_wt);
 			if ($current_view == 'day') {
 				$weekday 		= $daysofweek_lang[$day_num];
@@ -588,8 +588,8 @@ class Page {
 				$row2 = 'rowOn';
 				$row3 = 'rowOff';
 			}
-			$start_day 		= strtotime("+1 day", $start_day);
-			$start_wt 		= strtotime("+1 day", $start_wt);
+			$start_day 		= strtotime('+1 day', $start_day);
+			$start_wt 		= strtotime('+1 day', $start_wt);
 			$search			= array('{DAY}', '{DAYLINK}', '{ROW1}', '{ROW2}', '{ROW3}');
 			$replace		= array($weekday, $daylink, $row1, $row2, $row3);
 			$loop_tmp 		= str_replace($search, $replace, $loop_dof);
@@ -610,8 +610,8 @@ class Page {
 				}
 			}
 		}
-		preg_match("!<\!-- loop row on -->(.*)<\!-- loop row off -->!Uis", $this->page, $match2);
-		preg_match("!<\!-- loop event on -->(.*)<\!-- loop event off -->!Uis", $this->page, $match3);
+		preg_match('!<\!-- loop row on -->(.*)<\!-- loop row off -->!Uis', $this->page, $match2);
+		preg_match('!<\!-- loop event on -->(.*)<\!-- loop event off -->!Uis', $this->page, $match3);
 		$loop_hours = trim($match2[1]);
 		$loop_event = trim($match3[1]);
 
@@ -701,7 +701,7 @@ class Page {
 			}
 
 			if (sizeof($event_length) == 0) {
-				$daydisplay .= '<td colspan="' . $nbrGridCols . '"'.$class.'>&nbsp;</td>'."\n";
+				$daydisplay .= '<td colspan="' . $nbrGridCols . '"' . $class . '>&nbsp;</td>' . "\n";
 
 			} else {
 				$emptyWidth = $nbrGridCols;
@@ -713,7 +713,7 @@ class Page {
 					switch ($event_length[$i]['state']) {
 						case 'begin':
 						  if ($ended_counter) {
-							$daydisplay .= '<td colspan="' . $ended_counter . '"'.$class.'>&nbsp;</td>';
+							$daydisplay .= '<td colspan="' . $ended_counter . '"' . $class . '>&nbsp;</td>';
 							$ended_counter = 0;
 						  }
 						  $event_length[$i]['state'] = 'started';
@@ -738,7 +738,7 @@ class Page {
 								  $confirmed .= '<img src="images/longevent_mid.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;';
 							  }
 						  }
-						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_'.$event_calno.'">'."\n";
+						  $daydisplay .= '<td rowspan="' . $event_length[$i]['length'] . '" colspan="' . $drawWidth . '" align="left" valign="top" class="eventbg2_' . $event_calno . '">' . "\n";
 
 						  // Start drawing the event
 						  $event_temp  = $loop_event;
@@ -755,12 +755,12 @@ class Page {
 						  break;
 						case 'started':
 							if ($ended_counter) {
-								$daydisplay .= '<td colspan="' . $ended_counter . '"'.$class.'>&nbsp;</td>';
+								$daydisplay .= '<td colspan="' . $ended_counter . '"' . $class . '>&nbsp;</td>';
 								$ended_counter = 0;
 							}
 							break;
 						case 'ended':
-							$daydisplay .= '<td colspan="' . $drawWidth . '"' . $class . '>&nbsp;</td>'."\n";
+							$daydisplay .= '<td colspan="' . $drawWidth . '"' . $class . '>&nbsp;</td>' . "\n";
 							break;
 					}
 					$event_length[$i]['length']--;
@@ -773,7 +773,7 @@ class Page {
 				$emptyWidth += $ended_counter;
 				//fill empty space on the right
 				if ($emptyWidth > 0) {
-					$daydisplay .= '<td colspan="' . $emptyWidth . '"' . $class . '>&nbsp;</td>'."\n";
+					$daydisplay .= '<td colspan="' . $emptyWidth . '"' . $class . '>&nbsp;</td>' . "\n";
 				}
 				while (isset($event_length[(sizeof($event_length) - 1)]) && $event_length[(sizeof($event_length) - 1)]['state'] == 'ended') {
 					array_pop($event_length);
@@ -791,8 +791,8 @@ class Page {
 	function tomorrows_events() {
 		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
 
-		preg_match("!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!Uis", $this->page, $match1);
-		preg_match("!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!Uis", $this->page, $match2);
+		preg_match('!<\!-- switch t_allday on -->(.*)<\!-- switch t_allday off -->!Uis', $this->page, $match1);
+		preg_match('!<\!-- switch t_event on -->(.*)<\!-- switch t_event off -->!Uis', $this->page, $match2);
 		$loop_t_ad 	= trim($match1[1]);
 		$loop_t_e 	= trim($match2[1]);
 		$replace_ad	= '';
@@ -803,10 +803,9 @@ class Page {
 		if (isset($master_array[$next_day]) && is_array($master_array[$next_day]) && sizeof($master_array[$next_day]) > 0) {
 			foreach ($master_array[$next_day] as $cal_time => $event_times) {
 				foreach ($event_times as $uid => $val) {
-					$event_text = stripslashes(urldecode($val["event_text"]));
-					$event_text = strip_tags($event_text, '<b><i><u>');
-					if ($event_text != "") {
-						if (!isset($val["event_start"])) {
+					$event_text = sanitizeForWeb(stripslashes(urldecode($val['event_text'])));
+					if ($event_text != '') {
+						if (!isset($val['event_start'])) {
 							$return_adtmp = openevent($next_day, $cal_time, $uid, $val, $phpiCal_config->tomorrows_events_lines, 21, 'psf');
 							$replace_ad  .= str_replace('{T_ALLDAY}', $return_adtmp, $loop_t_ad);
 						} else {
@@ -830,9 +829,9 @@ class Page {
 	function get_vtodo() {
 		global $phpiCal_config, $getdate, $master_array, $next_day, $timeFormat, $tomorrows_events_lines;
 
-		preg_match("!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!Uis", $this->page, $match1);
-		preg_match("!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!Uis", $this->page, $match2);
-		preg_match("!<\!-- switch show_normal on -->(.*)<\!-- switch show_normal off -->!Uis", $this->page, $match3);
+		preg_match('!<\!-- switch show_completed on -->(.*)<\!-- switch show_completed off -->!Uis', $this->page, $match1);
+		preg_match('!<\!-- switch show_important on -->(.*)<\!-- switch show_important off -->!Uis', $this->page, $match2);
+		preg_match('!<\!-- switch show_normal on -->(.*)<\!-- switch show_normal off -->!Uis', $this->page, $match3);
 		$completed 	= trim($match1[1]);
 		$important 	= trim($match2[1]);
 		$normal 	= trim($match3[1]);
@@ -841,18 +840,18 @@ class Page {
 		if (is_array(@$master_array['-2'])) {
 			foreach ($master_array['-2'] as $vtodo_times) {
 				foreach ($vtodo_times as $val) {
-					$vtodo_text = stripslashes(urldecode($val["vtodo_text"]));
-					if ($vtodo_text != "") {
-						if (isset($val["description"])) {
-							$description 	= stripslashes(urldecode($val["description"]));
+					if (isset($val['vtodo_text']) && !empty($val['vtodo_text'])) {
+						$vtodo_text = sanitizeForWeb(stripslashes(urldecode($val['vtodo_text'])));
+						if (isset($val['description']) && !empty($val['description'])) {
+							$description 	= sanitizeForWeb(stripslashes(urldecode($val['description'])));
 						} else {
-							$description = "";
+							$description = '';
 						}
 						$completed_date = $val['completed_date'];
 						$event_calna 	= $val['calname'];
-						$status 		= $val["status"];
+						$status 		= $val['status'];
 						$priority 		= $val['priority'];
-						$start_date 	= $val["start_date"];
+						$start_date 	= $val['start_date'];
 						$due_date 		= $val['due_date'];
 						$vtodo_array 	= array(
 							'cal'			=> $event_calna,
@@ -864,17 +863,22 @@ class Page {
 							'status'		=> $status,
 							'vtodo_text' 	=> $vtodo_text);
 						$vtodo_array 	= base64_encode(urlencode(serialize($vtodo_array)));
-						$todo = "
-						<script language=\"Javascript\" type=\"text/javascript\"><!--
-						var todoData = new TodoData('$vtodo_array','$vtodo_text');
-						document.todo_popup_data[$todo_popup_data_index] = todoData;
-						// --></script>";
+						$todo_text		= str_replace('"', '\\"', $vtodo_text);
+						$todo = <<<HEREDOC
+<script language="Javascript" type="text/javascript">
+<!--
+var todoData = new TodoData("$vtodo_array", "$todo_text");
+document.todo_popup_data[$todo_popup_data_index] = todoData;
+// -->
+</script>
 
-						$todo .= '<a class="psf" title="'.@$title.'" href="#" onclick="openTodoInfo('.$todo_popup_data_index.'); return false;">';
+HEREDOC;
+
+						$todo .= '<a class="psf" title="' . @$title . '" href="#" onclick="openTodoInfo(' . $todo_popup_data_index . '); return false;">';
 						$todo_popup_data_index++;
 						$vtodo_array = $todo;
 
-						$vtodo_text 	= word_wrap(strip_tags(str_replace('<br />',' ',$vtodo_text), '<b><i><u>'), 21, $phpiCal_config->tomorrows_events_lines);
+						$vtodo_text 	= word_wrap(str_replace('<br />', ' ', $vtodo_text), 21, $phpiCal_config->tomorrows_events_lines);
 						$data 			= array ('{VTODO_TEXT}', '{VTODO_ARRAY}');
 						$rep			= array ($vtodo_text, $vtodo_array);
 
@@ -882,7 +886,7 @@ class Page {
 
 
 						$temp = '';
-						if ($status == 'COMPLETED' || ($val['completed_date'] !='' && $val['completed_time'] !='')) {
+						if ($status == 'COMPLETED' || ($val['completed_date'] != '' && $val['completed_time'] != '')) {
 							if ($phpiCal_config->show_completed == 'yes') {
 								$temp = $completed;
 							}
@@ -918,13 +922,13 @@ class Page {
 		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $dateFormat_month, $cal, $minical_view, $month_event_lines, $daysofweekreallyshort_lang, $daysofweekshort_lang, $daysofweek_lang, $timeFormat_small, $timeFormat;
 
 		$unique_colors = $phpiCal_config->unique_colors;
-		preg_match("!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!Uis", $template_p, $match1);
-		preg_match("!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!Uis", $template_p, $match2);
-		preg_match("!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!Uis", $template_p, $match3);
-		preg_match("!<\!-- switch istoday on -->(.*)<\!-- switch istoday off -->!Uis", $template_p, $match4);
-		preg_match("!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!Uis", $template_p, $match5);
-		preg_match("!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!Uis", $template_p, $match6);
-		preg_match("!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!Uis", $template_p, $match7);
+		preg_match('!<\!-- loop weekday on -->(.*)<\!-- loop weekday off -->!Uis', $template_p, $match1);
+		preg_match('!<\!-- loop monthdays on -->(.*)<\!-- loop monthdays off -->!Uis', $template_p, $match2);
+		preg_match('!<\!-- switch notthismonth on -->(.*)<\!-- switch notthismonth off -->!Uis', $template_p, $match3);
+		preg_match('!<\!-- switch istoday on -->(.*)<\!-- switch istoday off -->!Uis', $template_p, $match4);
+		preg_match('!<\!-- switch ismonth on -->(.*)<\!-- switch ismonth off -->!Uis', $template_p, $match5);
+		preg_match('!<\!-- loop monthweeks on -->(.*)<\!-- loop monthdays on -->!Uis', $template_p, $match6);
+		preg_match('!<\!-- loop monthdays off -->(.*)<\!-- loop monthweeks off -->!Uis', $template_p, $match7);
 
 		$loop_wd 			= trim($match1[1]);
 		$loop_md 			= trim($match2[1]);
@@ -935,19 +939,19 @@ class Page {
 		$endweek 			= trim($match7[1]);
 		if ($type != 'medium') {
 			$fake_getdate_time 	= strtotime($this_year.'-'.$this_month.'-15');
-			$fake_getdate_time	= strtotime("$offset month", $fake_getdate_time);
+			$fake_getdate_time	= strtotime($offset.' month', $fake_getdate_time);
 		} else {
 			$fake_getdate_time 	= strtotime($this_year.'-'.$offset.'-15');
 		}
 
-		$minical_month 		= date("m", $fake_getdate_time);
-		$minical_year 		= date("Y", $fake_getdate_time);
-		$first_of_month 	= $minical_year.$minical_month."01";
-		$first_of_year 		= $minical_year."0101";
+		$minical_month 		= date('m', $fake_getdate_time);
+		$minical_year 		= date('Y', $fake_getdate_time);
+		$first_of_month 	= $minical_year.$minical_month.'01';
+		$first_of_year 		= $minical_year.'0101';
 
 		// Add links in to the month/year views.
-		$dateFormat_month_local = str_replace("%B", "<a class=\"ps3\" href=\"month.php?cal=$cal&amp;getdate=$first_of_month\">%B</a>", $dateFormat_month);
-		$dateFormat_month_local = str_replace("%Y", "<a class=\"ps3\" href=\"year.php?cal=$cal&amp;getdate=$first_of_year\">%Y</a>", $dateFormat_month_local);
+		$dateFormat_month_local = str_replace('%B', '<a class="ps3" href="month.php?cal='.$cal.'&amp;getdate='.$first_of_month.'">%B</a>', $dateFormat_month);
+		$dateFormat_month_local = str_replace('%Y', '<a class="ps3" href="year.php?cal='.$cal.'&amp;getdate='.$first_of_year.'">%Y</a>', $dateFormat_month_local);
 
 		//$start_day 			= strtotime($phpiCal_config->week_start_day);
 		$start_day			= strtotime(dateOfWeek($getdate, $phpiCal_config->week_start_day));
@@ -965,9 +969,9 @@ class Page {
 		$weekday_loop = '';
 		$middle = '';
 		for ($i=0; $i< $phpiCal_config->week_length; $i++) {
-			$day_num 		= date("w", $start_day);
+			$day_num 		= date('w', $start_day);
 			$weekday 		= $langtype[$day_num];
-			$start_day 		= strtotime("+1 day", $start_day);
+			$start_day 		= strtotime('+1 day', $start_day);
 			$loop_tmp 		= str_replace('{LOOP_WEEKDAY}', $weekday, $loop_wd);
 			$weekday_loop  .= $loop_tmp;
 		}
@@ -980,10 +984,10 @@ class Page {
 			if ($i == 0) $middle .= $startweek; $i++;
 			#$temp_middle			= $loop_md;
 			$switch					= array('ALLDAY' => '', 'CAL' => $cal, 'MINICAL_VIEW' => $minical_view);
-			$check_month 			= date ("m", $start_day);
-			$daylink 				= date ("Ymd", $start_day);
-			$switch['DAY']	 		= date ("j", $start_day);
-			$switch['DAYLINK'] 		= date ("Ymd", $start_day);
+			$check_month 			= date ('m', $start_day);
+			$daylink 				= date ('Ymd', $start_day);
+			$switch['DAY']	 		= date ('j', $start_day);
+			$switch['DAYLINK'] 		= date ('Ymd', $start_day);
 			if ($check_month != $minical_month) {
 				$temp = $t_month[0];
 			} elseif ($daylink == $getdate) {
@@ -997,14 +1001,19 @@ class Page {
 					foreach ($master_array[$daylink] as $cal_time => $event_times) {
 						foreach ($event_times as $uid => $val) {
 							if (!isset($val['calnumber'])) continue;
+
+							if (($phpiCal_config->month_locations == 'yes') && isset($val['location']) && !empty($val['location'])) {
+								$location = '<br /><span style="font-size: 95%">' . sanitizeForWeb(stripslashes(urldecode($val['location']))) . '</span>';
+							}
+							else $location = '';
+
 							$event_calno 	= $val['calnumber'];
 							$event_calno	= (($event_calno - 1) % $unique_colors) + 1;
 							if ($cal_time == -1) {
 								if ($type == 'large') {
 									$switch['ALLDAY'] .= '<div class="V10"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
  									$switch['ALLDAY'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 15, 'psf');
- 									$switch['ALLDAY'] .= (isset($val['location']) && $val['location'] != '' && $phpiCal_config->month_locations == 'yes') ? $val['location']."<br />" : '';
-									$switch['ALLDAY'] .= '</div>';
+ 									$switch['ALLDAY'] .= $location.'</div>';
 								} else {
 									$switch['ALLDAY'] = '<img src="templates/'.$phpiCal_config->template.'/images/allday_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
@@ -1012,9 +1021,8 @@ class Page {
 								$start2		 = date($timeFormat_small, $val['start_unixtime']);
 								if ($type == 'large') {
 									$switch['EVENT'] .= '<div class="V9"><img src="templates/'.$phpiCal_config->template.'/images/monthdot_'.$event_calno.'.gif" alt="" width="9" height="9" border="0" />';
- 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 10, 'ps3', "<span style=\"font-weight: bold;\">$start2</span> ");
- 									$switch['EVENT'] .= (isset($val['location']) && $val['location'] != '' && $phpiCal_config->month_locations == 'yes') ? "<br />".$val['location']."<br />" : '';
-									$switch['EVENT'] .= '</div>';
+ 									$switch['EVENT'] .= openevent($daylink, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 10, 'ps3', '<span style="font-weight: bold;">'.$start2.'</span> ');
+ 									$switch['EVENT'] .= $location.'</div>';
 								} else {
 									$switch['EVENT'] = '<img src="templates/'.$phpiCal_config->template.'/images/event_dot.gif" alt=" " width="11" height="10" border="0" />';
 								}
@@ -1034,14 +1042,14 @@ class Page {
 			}
 			$middle .= $temp;
 
-			$start_day = strtotime("+1 day", $start_day);
+			$start_day = strtotime('+1 day', $start_day);
 			if ($i == $phpiCal_config->week_length) {
 				if ($phpiCal_config->week_length != 7) {
-					$start_day = strtotime("+".(7-$phpiCal_config->week_length)." day", $start_day);
+					$start_day = strtotime('+'.(7-$phpiCal_config->week_length).' day', $start_day);
 				}
 				$i = 0;
 				$middle .= $endweek;
-				$checkagain = date ("m", $start_day);
+				$checkagain = date ('m', $start_day);
 				if ($checkagain != $minical_month) $whole_month = FALSE;
 			}
 		} while ($whole_month == TRUE);
@@ -1065,8 +1073,8 @@ class Page {
 
 	function monthbottom() {
 		global $phpiCal_config, $getdate, $master_array, $this_year, $this_month, $cal, $timeFormat, $dateFormat_week_list, $lang;
-		preg_match("!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!Uis", $this->page, $match1);
-		preg_match("!<\!-- loop showbottomevents_even on -->(.*)<\!-- loop showbottomevents_even off -->!Uis", $this->page, $match2);
+		preg_match('!<\!-- loop showbottomevents_odd on -->(.*)<\!-- loop showbottomevents_odd off -->!Uis', $this->page, $match1);
+		preg_match('!<\!-- loop showbottomevents_even on -->(.*)<\!-- loop showbottomevents_even off -->!Uis', $this->page, $match2);
 
 		$loop[0] 	= trim($match1[1]);
 		$loop[1] 	= trim($match2[1]);
@@ -1091,15 +1099,15 @@ class Page {
 						if (!isset($val['event_start'])) {
 							$switch['START_TIME'] 	= $lang['l_all_day'];
 							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, $phpiCal_config->month_event_lines, 15, 'psf');
-							$switch['DESCRIPTION'] 	= urldecode($val['description']);
+							$switch['DESCRIPTION'] 	= sanitizeForWeb(stripslashes(urldecode($val['description'])));
 						} else {
 							$event_start = $val['start_unixtime'];
-							$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val["event_end"];
+							$event_end 	 = (isset($val['display_end'])) ? $val['display_end'] : $val['event_end'];
 							$event_start = date($timeFormat, $val['start_unixtime']);
 							$event_end   = date($timeFormat, $val['end_unixtime']);
 							$switch['START_TIME'] 	= $event_start . ' - ' . $event_end;
 							$switch['EVENT_TEXT'] 	= openevent($m_start, $cal_time, $uid, $val, 0, 15, 'psf');
-							$switch['DESCRIPTION'] 	= urldecode($val['description']);
+							$switch['DESCRIPTION'] 	= sanitizeForWeb(stripslashes(urldecode($val['description'])));
 						}
 
 						if ($switch['EVENT_TEXT'] != '') {
@@ -1115,7 +1123,7 @@ class Page {
 					}
 				}
 			}
-			$u_start 	 = strtotime("+1 day", $u_start);
+			$u_start 	 = strtotime('+1 day', $u_start);
 			$m_start 	 = date('Ymd', $u_start);
 			$check_month = date('m', $u_start);
 		#	unset ($switch);
@@ -1129,8 +1137,8 @@ class Page {
 		global $phpiCal_config;
 		if (!file_exists($file)){
 			#look for it in default if not found
-			$file = str_replace("templates/$phpiCal_config->template","templates/default",$file);
-			if (!file_exists($file)) die("Template file $file not found.");
+			$file = str_replace('templates/'.$phpiCal_config->template,'templates/default',$file);
+			if (!file_exists($file)) die('Template file '.$file.' not found.');
 		}
 		$this->page = join('', file($file));
 		return;
@@ -1138,10 +1146,10 @@ class Page {
 
 	function parse($file) {
 		global $phpiCal_config; $lang;
-		if (basename(dirname($file)) == "$phpiCal_config->template" || $file =='./functions/event.js'){
+		if (basename(dirname($file)) == $phpiCal_config->template || $file =='./functions/event.js'){
 			if (!is_file($file)){
 				#look for it in default if not found
-				$file = str_replace("templates/$phpiCal_config->template","templates/default",$file);
+				$file = str_replace('templates/'.$phpiCal_config->template,'templates/default',$file);
 			}
 			if (!is_file($file)){
 				exit(error($lang['l_error_path'], $file));
@@ -1229,7 +1237,7 @@ class Page {
 			$this->page = str_replace('{BASE}', BASE, $this->page);
 		}
 		if ($cpath){
-			$this->page = str_replace('&amp;getdate', "&amp;cpath=$cpath&amp;getdate", $this->page);
+			$this->page = str_replace('&amp;getdate', '&amp;cpath='.$cpath.'&amp;getdate', $this->page);
 		}
 		print($this->page);
 	}
