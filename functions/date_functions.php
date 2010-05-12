@@ -64,6 +64,7 @@ function remote_filemtime($url, $recurse = 0) {
 				$result = strtotime($value);
 				break;
 		}
+		if ($result) break;
 	}
 
 	$remote_files[$url] = $result;
@@ -75,8 +76,13 @@ function remote_filemtime($url, $recurse = 0) {
  * Utility function for remote_filemtime()
  */
 function resolve_path($url, $rel_path) {
-	$uri = parse_url($url);
+	if (parse_url($rel_path) !== FALSE) {
+		// Path is a URL
+		return $rel_path;
+	}
 
+	// Path is relative to this domain
+	$uri = parse_url($url);
 	$uri['proto']	= (isset($uri['proto'])	? $uri['proto']			: 'http://');
 	$uri['port']	= (isset($uri['port'])	? (':' . $uri['port'])	: '');
 	$auth = (
@@ -85,18 +91,14 @@ function resolve_path($url, $rel_path) {
 		''
 	);
 
-	if (parse_url($rel_path) === false) {
-		// Path is relative to this domain
-		$rel_path = str_replace('\\', '/', $rel_path);
-
-		if ($rel_path{0} == '/')
-			return $uri['proto'] . '://' . $auth . $uri['host'] . $uri['port'] . $rel_path;
-
-		return $uri['proto'] . '://' . $auth . $uri['host'] . $uri['port'] . $uri['path'] . '/' . $rel_path;
+	$rel_path = str_replace('\\', '/', $rel_path);
+	if ($rel_path{0} == '/') {
+		// Absolute path
+		return $uri['proto'] . '://' . $auth . $uri['host'] . $uri['port'] . $rel_path;
 	}
 
-	// Path is absolute
-	return $rel_path;
+	// Relative path
+	return $uri['proto'] . '://' . $auth . $uri['host'] . $uri['port'] . @$uri['path'] . '/' . $rel_path;
 }
 
 // takes iCalendar 2 day format and makes it into 3 characters
