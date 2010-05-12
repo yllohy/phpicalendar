@@ -25,11 +25,9 @@ function remote_filemtime($url, $recurse = 0) {
 		''
 	);
 	$uri['port'] = isset($uri['port']) ? $uri['port'] : 80;
-	$path = (
-		(isset($uri['path']) || isset($uri['query'])) ?
-		(@$uri['path'] . @$uri['query']) :
-		'/'
-	);
+	$uri['path'] = isset($uri['path']) ? $uri['path'] : '/';
+	$uri['query'] = isset($uri['query']) ? ('?' . $uri['query']) : '';
+	$path = $uri['path'] . $uri['query'];
 	$auth = (
 		(isset($uri['user']) || isset($uri['pass'])) ?
 		('Authentication: Basic ' . base64_encode(@$uri['user'] . ':' . @$uri['pass']) . "\r\n") :
