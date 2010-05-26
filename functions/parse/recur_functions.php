@@ -48,6 +48,9 @@ function add_recur($times,$freq=''){
 				&& $count >= 0
 			) $recur_data[] = $time;
 		}
+		else if (in_array($date, $except_dates)) {
+			$count--;
+		}
 	}
 #dump_times($recur_data);
 	return;

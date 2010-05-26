@@ -186,7 +186,7 @@ class Page {
 					if (!isset($val['exceptions'])) {
 					$events_tmp = preg_replace('!<\!-- switch exceptions on -->.*<\!-- switch exceptions off -->!Uis', '', $events_tmp);
 				}else{
-					$some_exceptions = "";
+					$some_exceptions = '';
 					foreach ($val['exceptions'] as $except_val){
 						$except_tmp	= $loop_except;
 
@@ -267,9 +267,9 @@ class Page {
 			if (isset($master_array[$thisday])) {
 				foreach($master_array[($thisday)] as $ovlKey => $ovlValue) {
 					# ovlKey is a time slot; $ovlValue is an array with key=uid
-					if ($ovlKey != "-1") {
+					if ($ovlKey != '-1') {
 						foreach($ovlValue as $ovl2Value) {
-							$nbrGridCols[$thisday] = kgv($nbrGridCols[$thisday], ($ovl2Value["event_overlap"] + 1));
+							$nbrGridCols[$thisday] = kgv($nbrGridCols[$thisday], ($ovl2Value['event_overlap'] + 1));
 						}
 					}
 				}
