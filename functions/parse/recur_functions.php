@@ -45,13 +45,10 @@ function add_recur($times, $freq = '') {
 			($date <= $until_date)) {
 			$count--;
 			if (($time >= $mArray_begin) &&
-				($time <= $mArray_end)
+				($time <= $mArray_end) &&
 				($count >= 0)) {
 				$recur_data[] = $time;
 			}
-		}
-		else if (in_array($date, $except_dates)) {
-			$count--;
 		}
 		else if (in_array($date, $except_dates)) {
 			$count--;
