@@ -5,7 +5,7 @@ include_once(BASE.'functions/init.inc.php');
 if ($phpiCal_config->printview_default == 'yes') {
 	$theview ="print.php";
 } else {
-	$check = array ('day', 'week', 'month', 'year');
+	$check = array ('day', 'week', 'month', 'year', 'agenda');
 	if (in_array($phpiCal_config->default_view, $check)) {
 		$theview = $phpiCal_config->default_view . '.php';
 	} else {

@@ -11,7 +11,7 @@ class Configs{
 // Define some magic strings.
 		$this->ALL_CALENDARS_COMBINED = 'all_calendars_combined971';
 		$this->template 				= 'default';		// Template support
-		$this->default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year'
+		$this->default_view 			= 'day';			// Default view for calendars = 'day', 'week', 'month', 'year', 'agenda'
 		$this->minical_view 			= 'current';		// Where do the mini-calendars go when clicked? = 'day', 'week', 'month', 'current'
 		$this->default_cal 				= $this->ALL_CALENDARS_COMBINED;		// Exact filename of calendar without .ics. Or set to $this->ALL_CALENDARS_COMBINED to open all calenders combined into one.
 		$this->language 				= 'English';		// Language support - 'English', 'Polish', 'German', 'French', 'Dutch', 'Danish', 'Italian', 'Japanese', 'Norwegian', 'Spanish', 'Swedish', 'Portuguese', 'Catalan', 'Traditional_Chinese', 'Esperanto', 'Korean'

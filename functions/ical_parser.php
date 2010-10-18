@@ -416,6 +416,11 @@ foreach ($cal_filelist as $cal_key=>$filename) {
 							$master_array['calendar_name'] = $actual_calname;
 								$cal_displaynames[$cal_key] = $actual_calname; #correct the default calname based on filename
 							break;
+						case 'X-WR-CALDESC':
+							$actual_caldesc = $data;
+							$master_array['calendar_desc'] = $actual_caldesc;
+								$cal_displaydescs[$cal_key] = $actual_caldesc; #correct the default caldesc based on filename
+							break;
 						case 'X-WR-TIMEZONE':
 							$calendar_tz = $data;
 							$master_array['calendar_tz'] = $calendar_tz;
@@ -513,7 +518,7 @@ if ($parse_file) {
 		// sort the sub (day) arrays so the times are in order
 		foreach (array_keys($master_array) as $k) {
 			if (isset($master_array[$k]) && is_array($master_array[$k])) {
-				ksort($master_array[$k]);
+				krsort($master_array[$k]);
 				reset($master_array[$k]);
 			}
 		}
@@ -542,6 +547,7 @@ if(in_array('US Holidays',$cal_displaynames)){
 }
 */
 $cal_displayname = urldecode(implode(', ', $cal_displaynames)); #reset this with the correct names
+$cal_displaydesc = urldecode(implode(', ', $cal_displaydescs)); #reset this with the correct descs
 $template_started = getmicrotime();
 
 

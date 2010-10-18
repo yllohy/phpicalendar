@@ -133,7 +133,7 @@ function dateOfWeek($Ymd, $day) {
 	return $ret;
 }
 
-// function to compare to dates in Ymd and return the number of weeks 
+// function to compare to dates in Ymd and return the number of weeks
 // that differ between them. requires dateOfWeek()
 function weekCompare($now, $then) {
 	global $week_start_day;
@@ -145,7 +145,7 @@ function weekCompare($now, $then) {
 	return $diff_weeks;
 }
 
-// function to compare to dates in Ymd and return the number of days 
+// function to compare to dates in Ymd and return the number of days
 // that differ between them.
 function dayCompare($now, $then) {
 	$seconds_now = strtotime($now);
@@ -154,11 +154,11 @@ function dayCompare($now, $then) {
 	$diff_minutes = $diff_seconds/60;
 	$diff_hours = $diff_minutes/60;
 	$diff_days = round($diff_hours/24);
-	
+
 	return $diff_days;
 }
 
-// function to compare to dates in Ymd and return the number of months 
+// function to compare to dates in Ymd and return the number of months
 // that differ between them.
 function monthCompare($now, $then) {
 	ereg ("([0-9]{4})([0-9]{2})([0-9]{2})", $now, $date_now);
@@ -194,21 +194,22 @@ function localizeDate($format, $timestamp) {
 	$year = date("Y", $timestamp);
 	$month = date("n", $timestamp)-1;
 	$day = date("j", $timestamp);
-	$dayofweek = date("w", $timestamp);	
+	$dayofweek = date("w", $timestamp);
 	$weeknumber = date("W", $timestamp);
- 	$replacements = array(
- 		'%Y' =>	$year,
- 		'%e' => $day,
- 		'%B' => $monthsofyear_lang[$month],
- 		'%b' => $monthsofyearshort_lang[$month],
- 		'%A' => $daysofweek_lang[$dayofweek],
- 		'%a' => $daysofweekshort_lang[$dayofweek],
- 		'%W' => $weeknumber,
- 		'%d' => sprintf("%02d", $day)
- 	);
- 	$date = str_replace(array_keys($replacements), array_values($replacements), $format);	
-	return $date;	
-	
+	$replacements = array(
+		'%Y' =>	$year,
+		'%e' => $day,
+		'%B' => $monthsofyear_lang[$month],
+		'%b' => $monthsofyearshort_lang[$month],
+		'%A' => $daysofweek_lang[$dayofweek],
+		'%a' => $daysofweekshort_lang[$dayofweek],
+		'%W' => $weeknumber,
+		'%d' => sprintf("%02d", $day),
+		'%m' => sprintf("%02d", $month+1)# $month is from 0 to 11
+	);
+	$date = str_replace(array_keys($replacements), array_values($replacements), $format);
+	return $date;
+
 }
 // calcOffset takes an offset (ie, -0500) and returns it in the number of seconds
 function calcOffset($offset_str) {
@@ -290,7 +291,7 @@ function makeTitle($arr, $time) {
 	$length is the length of one line
 	$link_class is a css class
 	$pre_text and $post_text are to add tags around the link text (e.g. <b> or<i>)
-	
+
 	$title is the tooltip for the link
 */
 function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $link_class = '', $pre_text = '', $post_text = '') {
@@ -313,7 +314,7 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 		$full_event_text = $event_text;
 		$event_text = strip_tags($event_text, '<b><i><u><img>');
 	}
-	
+
 	if (!empty($link_class)) $link_class = ' class="'.$link_class.'"';
 
 	if (!empty($event_text)) {
@@ -352,8 +353,8 @@ function openevent($event_date, $time, $uid, $arr, $lines = 0, $length = 0, $lin
 	$data		= A string representing a date-time per RFC2445.
 	$property	= The property being examined, e.g. DTSTART, DTEND.
 	$field		= The full field being examined, e.g. DTSTART;TZID=US/Pacific
-	
-See:http://phpicalendar.org/documentation/index.php/Property_Value_Data_Types#4.3.5___Date-Time	
+
+See:http://phpicalendar.org/documentation/index.php/Property_Value_Data_Types#4.3.5___Date-Time
 */
 function extractDateTime($data, $property, $field) {
 	global $tz_array, $phpiCal_config, $calendar_tz;
@@ -368,14 +369,14 @@ function extractDateTime($data, $property, $field) {
 	} elseif ($zulu_time) {
 		$tz_dt = 'GMT';
 	}
-	
+
 	// Extract date-only values.
 	if ((preg_match('/^'.$property.';VALUE=DATE:/i', $field)) || (ereg ('^([0-9]{4})([0-9]{2})([0-9]{2})$', $data)))  {
 		// Pull out the date value. Minimum year is 1970.
 		ereg ('([0-9]{4})([0-9]{2})([0-9]{2})', $data, $dt_check);
-		if ($dt_check[1] < 1970) { 
+		if ($dt_check[1] < 1970) {
 			$dt_check[1] = '1970';
-		}		
+		}
 		# convert to date-time
 		$data = $dt_check[1].$dt_check[2].$dt_check[3]."T000000";
 		$time = '';
@@ -385,7 +386,7 @@ function extractDateTime($data, $property, $field) {
 	// Pull out the date and time values. Minimum year is 1970.
 	preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})T{0,1}([0-9]{0,2})([0-9]{0,2})/', $data, $regs);
 	if (!isset ($regs[1])) return;
-	if ($regs[1] < 1970) { 
+	if ($regs[1] < 1970) {
 		$regs[1] = '1970';
 	}
 	$date = $regs[1] . $regs[2] . $regs[3];
@@ -407,7 +408,7 @@ function extractDateTime($data, $property, $field) {
 	#echo "offset_tmp $offset_tmp, server_offset_tmp $server_offset_tmp, $unixtime =".date("Ymd His",$unixtime)." $time<br>";
 	$date = date('Ymd', $unixtime);
 	if ($allday == '') $time = date('Hi', $unixtime);
-		
+
 	// Return the results.
 	return array($unixtime, $date, $time, $allday, $tz_dt);
 }

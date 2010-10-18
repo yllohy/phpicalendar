@@ -1,0 +1,46 @@
+BEGIN:VCALENDAR
+PRODID:-//Mozilla.org/NONSGML Mozilla Calendar V1.1//EN
+VERSION:2.0
+X-WR-CALDESC:This is a calendar that can be used to test the agenda view o
+ f PHPicalendar. Every week
+X-WR-CALDESC:John Doe and Jane Miles give example talks each Monday and Friday
+X-LIC-ERROR;X-LIC-ERRORTYPE=PROPERTY-PARSE-ERROR:Parse error in property n
+ ame: at 11
+X-WR-CALNAME:agenda_test
+X-WR-TIMEZONE:Europe/Paris
+BEGIN:VEVENT
+CREATED:20091006T181725Z
+LAST-MODIFIED:20101018T122624Z
+DTSTAMP:20101018T122624Z
+UID:KOrganizer-1543547939.852
+SUMMARY:Jane Miles - Friday Talk Without Description Text
+ORGANIZER;CN=Orga nizer:mailto:organizer@example.com
+RRULE:FREQ=WEEKLY;BYDAY=FR
+DTSTART:20091016T090000Z
+DTEND:20091016T110000Z
+TRANSP:OPAQUE
+LOCATION:Room 42
+SEQUENCE:1
+X-MOZ-GENERATION:1
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20091006T181635Z
+LAST-MODIFIED:20101018T122534Z
+DTSTAMP:20101018T122534Z
+UID:KOrganizer-546062779.549
+SUMMARY:John Doe - Title of his Monday Talk
+ORGANIZER;CN=Orga nizer:mailto:organizer@example.com
+RRULE:FREQ=WEEKLY;BYDAY=MO
+DTSTART:20091005T090000Z
+DTEND:20091005T110000Z
+SEQUENCE:1
+DESCRIPTION:This is an example event. The speaker \"John Doe\" gives a tal
+ k with title \"Title of his Talk\" every week on Monday.\n\nIn agenda view
+ \, PHPicalendar splits the string \"John Doe - Title of his Talk\" into th
+ e name and the title. The text written here provides more information abou
+ t the talk and is contained in the event description.
+TRANSP:OPAQUE
+X-MOZ-SEND-INVITATIONS:TRUE
+X-MOZ-GENERATION:2
+END:VEVENT
+END:VCALENDAR

@@ -140,6 +140,146 @@ class Page {
 		}
 	}
 
+	function draw_agenda($template_p) {
+		global $phpiCal_config, $getdate, $cal, $master_array, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
+		$parse_month 	= date ("Ym", strtotime($getdate));
+		$parse_year 	= date ("Y", strtotime($getdate));
+
+
+    // find the key (i.e. the date) of the next event
+    $now = strtotime ("now");
+    unset($next_event_key);
+
+    // we need the master_array to be sorted from newest to oldest
+    // event
+    $master_array=array_reverse($master_array,true);
+    foreach($master_array as $key => $val)
+    {
+      foreach ($val as $cal_time => $new_val)
+      {
+        foreach ($new_val as $new_key2 => $event)
+        {
+          $key_unixtime = $event['end_unixtime'];
+          if ($key_unixtime >= $now
+            && (!isset($next_event_key) || $key_unixtime < strtotime($next_event_key)))
+          {
+            $next_event_key=$key;
+            $next_event_time=$key_unixtime;
+          }
+        }
+      }
+    }
+    // now $next_event_key is the next date that contains an event
+
+    // partition the events into (past, next, future)
+    $agenda_events['future'] = array();
+    $agenda_events['next'] = array();
+    $agenda_events['past'] = array();
+    foreach($master_array as $key => $val)
+    {
+      if (($key >= $week_start) && ($key <= $week_end))
+      {
+        foreach ($val as $cal_time => $new_val)
+        {
+          foreach ($new_val as $new_key2 => $event)
+          {
+            if (!isset($next_event_key) || $next_event_time > $event['end_unixtime'])
+            {
+              array_push($agenda_events['past'], $event);
+            }
+            else if ($key == $next_event_key)
+            {
+              array_push($agenda_events['next'], $event);
+            }
+            else
+            {
+              array_push($agenda_events['future'], $event);
+            }
+          }
+        }
+      }
+    }
+    $agenda_events['future'] = array_reverse($agenda_events['future']);
+
+
+    // $relative_time is one of 'past' 'next' 'future'
+    foreach ($agenda_events as $relative_time => $events)
+    {
+      preg_match("!<\!-- loop events_$relative_time on -->(.*)<\!-- loop events_$relative_time off -->!Uis", $this->page, $match1);
+      preg_match("!<\!-- switch some_events_$relative_time on -->(.*)<\!-- loop events_$relative_time on -->!Uis", $this->page, $match3);
+      preg_match("!<\!-- loop events_$relative_time off -->(.*)<\!-- switch some_events_$relative_time off -->!Uis", $this->page, $match4);
+
+      $loop_event		= trim($match1[1]);
+
+      // output into events_$relative_time section starts with text
+      // between "switch" and "loop"
+      $final = trim($match3[1]);
+
+      foreach ($events as $event)
+      {
+        $events_tmp	= $loop_event;
+
+        $dayofmonth = localizeDate ($dateFormat_day, $event['end_unixtime']);
+
+        if (isset($event['event_text'])) {
+          $event_text 	= sanitizeForWeb(stripslashes(urldecode($event['event_text'])));
+          list($talk_speaker, $talk_title) = explode( ' - ' , $event_text, 2);
+          $location 		= sanitizeForWeb(stripslashes(urldecode($event['location'])));
+          $description 	= $event['description'];
+          $description 	= sanitizeForWeb(stripslashes(urldecode($event['description'])));
+          if (!empty($description)) {
+            $description = ereg_replace("(blocked)?([[:alpha:]]+://([^<>&[:space:]]|&amp;)+[[:alnum:]/])", '<a target="_new" href="\2">\2</a>', $description);
+            $description = ereg_replace("(blocked)?(mailto:)?([[:alnum:]_.%+-]+@[[:alnum:].-]+\.[[:alpha:]]{2,4})", '<a href="mailto:\3">\3</a>', $description);
+          }
+
+          $event_start 	= $event['event_start'];
+          $event_end 		= $event['event_end'];
+          if (isset($event['display_end'])) $event_end = $event['display_end'];
+          if ($cal_time == -1) {
+            $event_start = $lang['l_all_day'];
+            $event_start2 = '';
+            $event_end = '';
+          } else {
+            $event_start 	= date ($timeFormat, strtotime ($event_start));
+            $event_end 		= date ($timeFormat, strtotime ($event_end));
+            $event_start 	= $event_start .' - '.$event_end;
+            if (date("Ymd", $event['start_unixtime']) != date("Ymd", $event['end_unixtime'])) $event_start .= " ".localizeDate($dateFormat_day, $event['end_unixtime']);
+          }
+        }
+
+        if ($description == '') {
+          $events_tmp = preg_replace('!<\!-- switch description_events on -->.*<\!-- switch description_events off -->!Uis', '', $events_tmp);
+        }
+        if ($description == '') {
+          $events_tmp = preg_replace('!<\!-- switch event_has_nonempty_desc on -->(.*)<\!-- switch event_has_nonempty_desc off -->!is', '', $events_tmp);
+        } else {
+          $events_tmp = preg_replace('!<\!-- switch event_has_empty_desc on -->(.*)<\!-- switch event_has_empty_desc off -->!is', '', $events_tmp);
+        }
+
+        if ($location == '') {
+          $events_tmp = preg_replace('!<\!-- switch location_events on -->.*<\!-- switch location_events off -->!Uis', '', $events_tmp);
+        }
+
+        $search		= array('{DAYOFMONTH}', '{EVENT_START}', '{EVENT_TEXT}', '{EVENT_STATUS}', '{TALK_SPEAKER}', '{TALK_TITLE}', '{DESCRIPTION}', '{LOCATION}');
+        $replace	= array($dayofmonth, $event_start, $event_text,
+          $event_status, $talk_speaker, $talk_title, $description,
+          $location);
+        $events_tmp = str_replace($search, $replace, $events_tmp);
+        $final .= $events_tmp;
+      }
+
+      // Append text between loop off and switch off to the output
+      $final .= trim($match4[1]);
+
+      if (count($events) < 1) {
+        $this->page = preg_replace("!<\!-- switch some_events_$relative_time on -->.*<\!-- switch some_events_$relative_time off -->!Uis", '', $this->page);
+      } else {
+        $this->page = preg_replace("!<\!-- switch some_events_$relative_time on -->.*<\!-- switch some_events_$relative_time off -->!Uis", $final, $this->page);
+        $this->page = preg_replace("!<\!-- switch no_events_$relative_time on -->.*<\!-- switch no_events_$relative_time off -->!Uis", '', $this->page);
+      }
+    }
+  }
+
 	function draw_search($template_p) {
 		global $phpiCal_config, $getdate, $cal, $the_arr, $printview, $dateFormat_day, $timeFormat, $week_start, $week_end, $lang;
 
