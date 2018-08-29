@@ -270,6 +270,13 @@ function restrict_bysetpos($times, $freq = '') {
 	sort($times);
 	$new_times = array();
 	foreach ($bysetpos as $setpos) {
+		// For positive values, we need to adjust for
+		// Zero-Based Indexing.
+		$nSetPos = (int)$setpos;
+		if ($nSetPos > 0)
+		{
+			$nSetPos -= 1;
+		}
 		$new_times[] = implode('', array_slice($times, $setpos, 1));
 	}
 	return $new_times;
